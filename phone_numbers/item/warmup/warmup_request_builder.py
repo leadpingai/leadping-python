@@ -1,0 +1,113 @@
+from __future__ import annotations
+import datetime
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from kiota_abstractions.base_request_builder import BaseRequestBuilder
+from kiota_abstractions.base_request_configuration import RequestConfiguration
+from kiota_abstractions.default_query_parameters import QueryParameters
+from kiota_abstractions.get_path_parameters import get_path_parameters
+from kiota_abstractions.method import Method
+from kiota_abstractions.request_adapter import RequestAdapter
+from kiota_abstractions.request_information import RequestInformation
+from kiota_abstractions.request_option import RequestOption
+from kiota_abstractions.serialization import Parsable, ParsableFactory
+from typing import Any, Optional, TYPE_CHECKING, Union
+from warnings import warn
+
+if TYPE_CHECKING:
+    from ....models.phone_number_status_response import PhoneNumberStatusResponse
+    from ....models.problem_details import ProblemDetails
+
+class WarmupRequestBuilder(BaseRequestBuilder):
+    """
+    Builds and executes requests for operations under /phone-numbers/{phoneNumber-id}/warmup
+    """
+    def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
+        """
+        Instantiates a new WarmupRequestBuilder and sets the default values.
+        param path_parameters: The raw url or the url-template parameters for the request.
+        param request_adapter: The request adapter to use to execute the requests.
+        Returns: None
+        """
+        super().__init__(request_adapter, "{+baseurl}/phone-numbers/{phoneNumber%2Did}/warmup{?endDate*,startDate*,windowDays*}", path_parameters)
+    
+    async def get(self,request_configuration: Optional[RequestConfiguration[WarmupRequestBuilderGetQueryParameters]] = None) -> Optional[PhoneNumberStatusResponse]:
+        """
+        Returns warmup status for a phone number, including readiness, limits, and recent events used for delivery pacing.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: Optional[PhoneNumberStatusResponse]
+        """
+        request_info = self.to_get_request_information(
+            request_configuration
+        )
+        from ....models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "400": ProblemDetails,
+        }
+        if not self.request_adapter:
+            raise Exception("Http core is null") 
+        from ....models.phone_number_status_response import PhoneNumberStatusResponse
+
+        return await self.request_adapter.send_async(request_info, PhoneNumberStatusResponse, error_mapping)
+    
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[WarmupRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
+        """
+        Returns warmup status for a phone number, including readiness, limits, and recent events used for delivery pacing.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: RequestInformation
+        """
+        request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
+        request_info.configure(request_configuration)
+        request_info.headers.try_add("Accept", "application/json")
+        return request_info
+    
+    def with_url(self,raw_url: str) -> WarmupRequestBuilder:
+        """
+        Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
+        param raw_url: The raw URL to use for the request builder.
+        Returns: WarmupRequestBuilder
+        """
+        if raw_url is None:
+            raise TypeError("raw_url cannot be null.")
+        return WarmupRequestBuilder(self.request_adapter, raw_url)
+    
+    @dataclass
+    class WarmupRequestBuilderGetQueryParameters():
+        """
+        Returns warmup status for a phone number, including readiness, limits, and recent events used for delivery pacing.
+        """
+        def get_query_parameter(self,original_name: str) -> str:
+            """
+            Maps the query parameters names to their encoded names for the URI template parsing.
+            param original_name: The original query parameter name in the class.
+            Returns: str
+            """
+            if original_name is None:
+                raise TypeError("original_name cannot be null.")
+            if original_name == "end_date":
+                return "endDate"
+            if original_name == "start_date":
+                return "startDate"
+            if original_name == "window_days":
+                return "windowDays"
+            return original_name
+        
+        # The end date.
+        end_date: Optional[datetime.date] = None
+
+        # The start date.
+        start_date: Optional[datetime.date] = None
+
+        # The window days.
+        window_days: Optional[int] = None
+
+    
+    @dataclass
+    class WarmupRequestBuilderGetRequestConfiguration(RequestConfiguration[WarmupRequestBuilderGetQueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+

@@ -1,0 +1,25 @@
+from enum import Enum
+
+class EventTableRow_status(str, Enum):
+    Pending = "Pending",
+    InProgress = "InProgress",
+    Completed = "Completed",
+    Cancelled = "Cancelled",
+    Scheduled = "Scheduled",
+    Queued = "Queued",
+    Sending = "Sending",
+    Sent = "Sent",
+    Received = "Received",
+    Delivered = "Delivered",
+    Undeliverable = "Undeliverable",
+    OptedOut = "Opted out",
+    Blocked = "Blocked",
+    Initiated = "Initiated",
+    Ringing = "Ringing",
+    Active = "Active",
+    Ended = "Ended",
+    Missed = "Missed",
+    Voicemail = "Voicemail",
+    Failed = "Failed",
+    Canceled = "Canceled",
+

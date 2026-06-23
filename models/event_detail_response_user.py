@@ -1,0 +1,54 @@
+from __future__ import annotations
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from kiota_abstractions.serialization import Parsable, ParseNode, SerializationWriter
+from typing import Any, Optional, TYPE_CHECKING, Union
+
+if TYPE_CHECKING:
+    from .id_name_pair import IdNamePair
+
+from .id_name_pair import IdNamePair
+
+@dataclass
+class EventDetailResponse_user(IdNamePair, Parsable):
+    """
+    A minimal Record type with an (string), (string), and maximum JSON compatibility. The reason for this type (over something like KeyValuePair, dictionary) is because of JSON serialization support.
+    """
+    
+    @staticmethod
+    def create_from_discriminator_value(parse_node: ParseNode) -> EventDetailResponse_user:
+        """
+        Creates a new instance of the appropriate class based on discriminator value
+        param parse_node: The parse node to use to read the discriminator value and create the object
+        Returns: EventDetailResponse_user
+        """
+        if parse_node is None:
+            raise TypeError("parse_node cannot be null.")
+        return EventDetailResponse_user()
+    
+    def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
+        """
+        The deserialization information for the current model
+        Returns: dict[str, Callable[[ParseNode], None]]
+        """
+        from .id_name_pair import IdNamePair
+
+        from .id_name_pair import IdNamePair
+
+        fields: dict[str, Callable[[Any], None]] = {
+        }
+        super_fields = super().get_field_deserializers()
+        fields.update(super_fields)
+        return fields
+    
+    def serialize(self,writer: SerializationWriter) -> None:
+        """
+        Serializes information the current object
+        param writer: Serialization writer to use to serialize this model
+        Returns: None
+        """
+        if writer is None:
+            raise TypeError("writer cannot be null.")
+        super().serialize(writer)
+    
+

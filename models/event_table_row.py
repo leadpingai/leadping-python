@@ -1,0 +1,247 @@
+from __future__ import annotations
+import datetime
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
+from typing import Any, Optional, TYPE_CHECKING, Union
+
+if TYPE_CHECKING:
+    from .event_table_row_selection_reason import EventTableRow_selectionReason
+    from .event_table_row_status import EventTableRow_status
+    from .event_table_row_traffic_type import EventTableRow_trafficType
+    from .event_timeline_type import EventTimelineType
+
+@dataclass
+class EventTableRow(AdditionalDataHolder, Parsable):
+    """
+    API DTO containing event data used by Leadping API contracts.
+    """
+    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    additional_data: dict[str, Any] = field(default_factory=dict)
+
+    # The billingStatus property
+    billing_status: Optional[str] = None
+    # The blockedAt property
+    blocked_at: Optional[datetime.datetime] = None
+    # The campaignId property
+    campaign_id: Optional[str] = None
+    # The cancelReason property
+    cancel_reason: Optional[str] = None
+    # The canceledAt property
+    canceled_at: Optional[datetime.datetime] = None
+    # The complianceAction property
+    compliance_action: Optional[str] = None
+    # The conversationId property
+    conversation_id: Optional[str] = None
+    # The date and time for the created at value on this event.
+    created_at: Optional[datetime.datetime] = None
+    # The date and time for the created by value on this event.
+    created_by: Optional[str] = None
+    # The deliveredAt property
+    delivered_at: Optional[datetime.datetime] = None
+    # The human-readable description of this event.
+    description: Optional[str] = None
+    # The direction property
+    direction: Optional[str] = None
+    # The errorCode property
+    error_code: Optional[str] = None
+    # The eventCategory property
+    event_category: Optional[str] = None
+    # The event type classification for this event.
+    event_type: Optional[str] = None
+    # The failedAt property
+    failed_at: Optional[datetime.datetime] = None
+    # The fromPhoneNumber property
+    from_phone_number: Optional[str] = None
+    # The fromPhoneNumberId property
+    from_phone_number_id: Optional[str] = None
+    # The unique ID for this event.
+    id: Optional[str] = None
+    # The isWarmup property
+    is_warmup: Optional[bool] = None
+    # The leadId property
+    lead_id: Optional[str] = None
+    # The nextRetryAt property
+    next_retry_at: Optional[datetime.datetime] = None
+    # The outboundPhoneNumberId property
+    outbound_phone_number_id: Optional[str] = None
+    # The providerMessageId property
+    provider_message_id: Optional[str] = None
+    # The queuedAt property
+    queued_at: Optional[datetime.datetime] = None
+    # The receivedAt property
+    received_at: Optional[datetime.datetime] = None
+    # The relatedEntityId property
+    related_entity_id: Optional[str] = None
+    # The relatedEntityType property
+    related_entity_type: Optional[str] = None
+    # The retryCount property
+    retry_count: Optional[int] = None
+    # The scheduledFor property
+    scheduled_for: Optional[datetime.datetime] = None
+    # The scheduledReason property
+    scheduled_reason: Optional[str] = None
+    # Defines the supported Outgoing Number Selection Reason values.
+    selection_reason: Optional[EventTableRow_selectionReason] = None
+    # The sendingStartedAt property
+    sending_started_at: Optional[datetime.datetime] = None
+    # The sentAt property
+    sent_at: Optional[datetime.datetime] = None
+    # The sourceId property
+    source_id: Optional[str] = None
+    # Defines the supported Event timeline status values.
+    status: Optional[EventTableRow_status] = None
+    # The statusReason property
+    status_reason: Optional[str] = None
+    # The summary property
+    summary: Optional[str] = None
+    # The telnyxId property
+    telnyx_id: Optional[str] = None
+    # The tenDlcCampaignId property
+    ten_dlc_campaign_id: Optional[str] = None
+    # The timelineCategory property
+    timeline_category: Optional[str] = None
+    # Defines the supported Event timeline type values.
+    timeline_type: Optional[EventTimelineType] = None
+    # The toPhoneNumber property
+    to_phone_number: Optional[str] = None
+    # Defines the supported SMS Traffic Type values.
+    traffic_type: Optional[EventTableRow_trafficType] = None
+    # The undeliverableAt property
+    undeliverable_at: Optional[datetime.datetime] = None
+    # The wasManuallyOverridden property
+    was_manually_overridden: Optional[bool] = None
+    
+    @staticmethod
+    def create_from_discriminator_value(parse_node: ParseNode) -> EventTableRow:
+        """
+        Creates a new instance of the appropriate class based on discriminator value
+        param parse_node: The parse node to use to read the discriminator value and create the object
+        Returns: EventTableRow
+        """
+        if parse_node is None:
+            raise TypeError("parse_node cannot be null.")
+        return EventTableRow()
+    
+    def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
+        """
+        The deserialization information for the current model
+        Returns: dict[str, Callable[[ParseNode], None]]
+        """
+        from .event_table_row_selection_reason import EventTableRow_selectionReason
+        from .event_table_row_status import EventTableRow_status
+        from .event_table_row_traffic_type import EventTableRow_trafficType
+        from .event_timeline_type import EventTimelineType
+
+        from .event_table_row_selection_reason import EventTableRow_selectionReason
+        from .event_table_row_status import EventTableRow_status
+        from .event_table_row_traffic_type import EventTableRow_trafficType
+        from .event_timeline_type import EventTimelineType
+
+        fields: dict[str, Callable[[Any], None]] = {
+            "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
+            "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
+            "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
+            "cancelReason": lambda n : setattr(self, 'cancel_reason', n.get_str_value()),
+            "canceledAt": lambda n : setattr(self, 'canceled_at', n.get_datetime_value()),
+            "complianceAction": lambda n : setattr(self, 'compliance_action', n.get_str_value()),
+            "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
+            "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "createdBy": lambda n : setattr(self, 'created_by', n.get_str_value()),
+            "deliveredAt": lambda n : setattr(self, 'delivered_at', n.get_datetime_value()),
+            "description": lambda n : setattr(self, 'description', n.get_str_value()),
+            "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
+            "errorCode": lambda n : setattr(self, 'error_code', n.get_str_value()),
+            "eventCategory": lambda n : setattr(self, 'event_category', n.get_str_value()),
+            "eventType": lambda n : setattr(self, 'event_type', n.get_str_value()),
+            "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
+            "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
+            "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
+            "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isWarmup": lambda n : setattr(self, 'is_warmup', n.get_bool_value()),
+            "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
+            "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
+            "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
+            "providerMessageId": lambda n : setattr(self, 'provider_message_id', n.get_str_value()),
+            "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
+            "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
+            "relatedEntityId": lambda n : setattr(self, 'related_entity_id', n.get_str_value()),
+            "relatedEntityType": lambda n : setattr(self, 'related_entity_type', n.get_str_value()),
+            "retryCount": lambda n : setattr(self, 'retry_count', n.get_int_value()),
+            "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
+            "scheduledReason": lambda n : setattr(self, 'scheduled_reason', n.get_str_value()),
+            "selectionReason": lambda n : setattr(self, 'selection_reason', n.get_enum_value(EventTableRow_selectionReason)),
+            "sendingStartedAt": lambda n : setattr(self, 'sending_started_at', n.get_datetime_value()),
+            "sentAt": lambda n : setattr(self, 'sent_at', n.get_datetime_value()),
+            "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
+            "status": lambda n : setattr(self, 'status', n.get_enum_value(EventTableRow_status)),
+            "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
+            "summary": lambda n : setattr(self, 'summary', n.get_str_value()),
+            "telnyxId": lambda n : setattr(self, 'telnyx_id', n.get_str_value()),
+            "tenDlcCampaignId": lambda n : setattr(self, 'ten_dlc_campaign_id', n.get_str_value()),
+            "timelineCategory": lambda n : setattr(self, 'timeline_category', n.get_str_value()),
+            "timelineType": lambda n : setattr(self, 'timeline_type', n.get_enum_value(EventTimelineType)),
+            "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
+            "trafficType": lambda n : setattr(self, 'traffic_type', n.get_enum_value(EventTableRow_trafficType)),
+            "undeliverableAt": lambda n : setattr(self, 'undeliverable_at', n.get_datetime_value()),
+            "wasManuallyOverridden": lambda n : setattr(self, 'was_manually_overridden', n.get_bool_value()),
+        }
+        return fields
+    
+    def serialize(self,writer: SerializationWriter) -> None:
+        """
+        Serializes information the current object
+        param writer: Serialization writer to use to serialize this model
+        Returns: None
+        """
+        if writer is None:
+            raise TypeError("writer cannot be null.")
+        writer.write_str_value("billingStatus", self.billing_status)
+        writer.write_datetime_value("blockedAt", self.blocked_at)
+        writer.write_str_value("campaignId", self.campaign_id)
+        writer.write_str_value("cancelReason", self.cancel_reason)
+        writer.write_datetime_value("canceledAt", self.canceled_at)
+        writer.write_str_value("complianceAction", self.compliance_action)
+        writer.write_str_value("conversationId", self.conversation_id)
+        writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_str_value("createdBy", self.created_by)
+        writer.write_datetime_value("deliveredAt", self.delivered_at)
+        writer.write_str_value("description", self.description)
+        writer.write_str_value("direction", self.direction)
+        writer.write_str_value("errorCode", self.error_code)
+        writer.write_str_value("eventCategory", self.event_category)
+        writer.write_str_value("eventType", self.event_type)
+        writer.write_datetime_value("failedAt", self.failed_at)
+        writer.write_str_value("fromPhoneNumber", self.from_phone_number)
+        writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
+        writer.write_str_value("id", self.id)
+        writer.write_bool_value("isWarmup", self.is_warmup)
+        writer.write_str_value("leadId", self.lead_id)
+        writer.write_datetime_value("nextRetryAt", self.next_retry_at)
+        writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
+        writer.write_str_value("providerMessageId", self.provider_message_id)
+        writer.write_datetime_value("queuedAt", self.queued_at)
+        writer.write_datetime_value("receivedAt", self.received_at)
+        writer.write_str_value("relatedEntityId", self.related_entity_id)
+        writer.write_str_value("relatedEntityType", self.related_entity_type)
+        writer.write_int_value("retryCount", self.retry_count)
+        writer.write_datetime_value("scheduledFor", self.scheduled_for)
+        writer.write_str_value("scheduledReason", self.scheduled_reason)
+        writer.write_enum_value("selectionReason", self.selection_reason)
+        writer.write_datetime_value("sendingStartedAt", self.sending_started_at)
+        writer.write_datetime_value("sentAt", self.sent_at)
+        writer.write_str_value("sourceId", self.source_id)
+        writer.write_enum_value("status", self.status)
+        writer.write_str_value("statusReason", self.status_reason)
+        writer.write_str_value("summary", self.summary)
+        writer.write_str_value("telnyxId", self.telnyx_id)
+        writer.write_str_value("tenDlcCampaignId", self.ten_dlc_campaign_id)
+        writer.write_str_value("timelineCategory", self.timeline_category)
+        writer.write_enum_value("timelineType", self.timeline_type)
+        writer.write_str_value("toPhoneNumber", self.to_phone_number)
+        writer.write_enum_value("trafficType", self.traffic_type)
+        writer.write_datetime_value("undeliverableAt", self.undeliverable_at)
+        writer.write_bool_value("wasManuallyOverridden", self.was_manually_overridden)
+        writer.write_additional_data_value(self.additional_data)
+    
+

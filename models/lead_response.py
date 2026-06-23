@@ -1,0 +1,129 @@
+from __future__ import annotations
+import datetime
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
+from typing import Any, Optional, TYPE_CHECKING, Union
+
+if TYPE_CHECKING:
+    from .lead_contact import LeadContact
+    from .lead_metadata import LeadMetadata
+    from .lead_profile import LeadProfile
+    from .lead_response_admin_enablement_override import LeadResponse_adminEnablementOverride
+    from .lead_response_current_disposition import LeadResponse_currentDisposition
+    from .tag_summary import TagSummary
+
+@dataclass
+class LeadResponse(AdditionalDataHolder, Parsable):
+    """
+    API response containing lead data returned to callers.
+    """
+    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
+    additional_data: dict[str, Any] = field(default_factory=dict)
+
+    # The adminEnablementOverride property
+    admin_enablement_override: Optional[LeadResponse_adminEnablementOverride] = None
+    # The archiveNote property
+    archive_note: Optional[str] = None
+    # Defines why a lead was removed from the active working pipeline.
+    archive_reason: Optional[int] = None
+    # The archivedAt property
+    archived_at: Optional[datetime.datetime] = None
+    # The archivedByUserId property
+    archived_by_user_id: Optional[str] = None
+    # The contact value for this lead.
+    contact: Optional[LeadContact] = None
+    # The date and time when the entity was created.
+    created_at: Optional[datetime.datetime] = None
+    # Compact current disposition state stored directly on a lead and surfaced with conversation data.
+    current_disposition: Optional[LeadResponse_currentDisposition] = None
+    # The profile value for this lead.
+    customer: Optional[LeadProfile] = None
+    # The enabled property
+    enabled: Optional[bool] = None
+    # The unique identifier for the entity.
+    id: Optional[str] = None
+    # The isArchived property
+    is_archived: Optional[bool] = None
+    # Safe, non-secret metadata associated with this lead.
+    metadata: Optional[LeadMetadata] = None
+    # The date and time when the entity was last modified, if applicable.
+    modified_at: Optional[datetime.datetime] = None
+    # Tags currently assigned to this lead.
+    tags: Optional[list[TagSummary]] = None
+    
+    @staticmethod
+    def create_from_discriminator_value(parse_node: ParseNode) -> LeadResponse:
+        """
+        Creates a new instance of the appropriate class based on discriminator value
+        param parse_node: The parse node to use to read the discriminator value and create the object
+        Returns: LeadResponse
+        """
+        if parse_node is None:
+            raise TypeError("parse_node cannot be null.")
+        return LeadResponse()
+    
+    def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
+        """
+        The deserialization information for the current model
+        Returns: dict[str, Callable[[ParseNode], None]]
+        """
+        from .lead_contact import LeadContact
+        from .lead_metadata import LeadMetadata
+        from .lead_profile import LeadProfile
+        from .lead_response_admin_enablement_override import LeadResponse_adminEnablementOverride
+        from .lead_response_current_disposition import LeadResponse_currentDisposition
+        from .tag_summary import TagSummary
+
+        from .lead_contact import LeadContact
+        from .lead_metadata import LeadMetadata
+        from .lead_profile import LeadProfile
+        from .lead_response_admin_enablement_override import LeadResponse_adminEnablementOverride
+        from .lead_response_current_disposition import LeadResponse_currentDisposition
+        from .tag_summary import TagSummary
+
+        fields: dict[str, Callable[[Any], None]] = {
+            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(LeadResponse_adminEnablementOverride)),
+            "archiveNote": lambda n : setattr(self, 'archive_note', n.get_str_value()),
+            "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
+            "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
+            "archivedByUserId": lambda n : setattr(self, 'archived_by_user_id', n.get_str_value()),
+            "contact": lambda n : setattr(self, 'contact', n.get_object_value(LeadContact)),
+            "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "currentDisposition": lambda n : setattr(self, 'current_disposition', n.get_object_value(LeadResponse_currentDisposition)),
+            "customer": lambda n : setattr(self, 'customer', n.get_object_value(LeadProfile)),
+            "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
+            "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
+            "metadata": lambda n : setattr(self, 'metadata', n.get_object_value(LeadMetadata)),
+            "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
+            "tags": lambda n : setattr(self, 'tags', n.get_collection_of_object_values(TagSummary)),
+        }
+        return fields
+    
+    def serialize(self,writer: SerializationWriter) -> None:
+        """
+        Serializes information the current object
+        param writer: Serialization writer to use to serialize this model
+        Returns: None
+        """
+        if writer is None:
+            raise TypeError("writer cannot be null.")
+        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
+        writer.write_str_value("archiveNote", self.archive_note)
+        writer.write_int_value("archiveReason", self.archive_reason)
+        writer.write_datetime_value("archivedAt", self.archived_at)
+        writer.write_str_value("archivedByUserId", self.archived_by_user_id)
+        writer.write_object_value("contact", self.contact)
+        writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_object_value("currentDisposition", self.current_disposition)
+        writer.write_object_value("customer", self.customer)
+        writer.write_bool_value("enabled", self.enabled)
+        writer.write_str_value("id", self.id)
+        writer.write_bool_value("isArchived", self.is_archived)
+        writer.write_object_value("metadata", self.metadata)
+        writer.write_datetime_value("modifiedAt", self.modified_at)
+        writer.write_collection_of_object_values("tags", self.tags)
+        writer.write_additional_data_value(self.additional_data)
+    
+

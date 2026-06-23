@@ -1,0 +1,173 @@
+from __future__ import annotations
+from collections.abc import Callable
+from dataclasses import dataclass, field
+from kiota_abstractions.base_request_builder import BaseRequestBuilder
+from kiota_abstractions.base_request_configuration import RequestConfiguration
+from kiota_abstractions.default_query_parameters import QueryParameters
+from kiota_abstractions.get_path_parameters import get_path_parameters
+from kiota_abstractions.method import Method
+from kiota_abstractions.request_adapter import RequestAdapter
+from kiota_abstractions.request_information import RequestInformation
+from kiota_abstractions.request_option import RequestOption
+from kiota_abstractions.serialization import Parsable, ParsableFactory
+from typing import Any, Optional, TYPE_CHECKING, Union
+from warnings import warn
+
+if TYPE_CHECKING:
+    from ...models.problem_details import ProblemDetails
+    from ...models.source_request import SourceRequest
+    from ...models.source_response import SourceResponse
+    from .metrics.metrics_request_builder import MetricsRequestBuilder
+
+class SourcesItemRequestBuilder(BaseRequestBuilder):
+    """
+    Builds and executes requests for operations under /sources/{id}
+    """
+    def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
+        """
+        Instantiates a new SourcesItemRequestBuilder and sets the default values.
+        param path_parameters: The raw url or the url-template parameters for the request.
+        param request_adapter: The request adapter to use to execute the requests.
+        Returns: None
+        """
+        super().__init__(request_adapter, "{+baseurl}/sources/{id}", path_parameters)
+    
+    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> None:
+        """
+        Deletes a lead source from the current business so it can no longer accept or route newly captured leads.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: None
+        """
+        request_info = self.to_delete_request_information(
+            request_configuration
+        )
+        from ...models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "404": ProblemDetails,
+        }
+        if not self.request_adapter:
+            raise Exception("Http core is null") 
+        return await self.request_adapter.send_no_response_content_async(request_info, error_mapping)
+    
+    async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
+        """
+        Returns one lead source for the current business, including intake settings, credentials metadata, and routing context.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: Optional[SourceResponse]
+        """
+        request_info = self.to_get_request_information(
+            request_configuration
+        )
+        from ...models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "404": ProblemDetails,
+        }
+        if not self.request_adapter:
+            raise Exception("Http core is null") 
+        from ...models.source_response import SourceResponse
+
+        return await self.request_adapter.send_async(request_info, SourceResponse, error_mapping)
+    
+    async def put(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
+        """
+        Updates a lead source for the current business, changing intake settings, credentials, routing context, or active status.
+        param body: Request payload for source.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: Optional[SourceResponse]
+        """
+        if body is None:
+            raise TypeError("body cannot be null.")
+        request_info = self.to_put_request_information(
+            body, request_configuration
+        )
+        from ...models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "404": ProblemDetails,
+        }
+        if not self.request_adapter:
+            raise Exception("Http core is null") 
+        from ...models.source_response import SourceResponse
+
+        return await self.request_adapter.send_async(request_info, SourceResponse, error_mapping)
+    
+    def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+        """
+        Deletes a lead source from the current business so it can no longer accept or route newly captured leads.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: RequestInformation
+        """
+        request_info = RequestInformation(Method.DELETE, self.url_template, self.path_parameters)
+        request_info.configure(request_configuration)
+        request_info.headers.try_add("Accept", "application/json, text/plain;q=0.9")
+        return request_info
+    
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+        """
+        Returns one lead source for the current business, including intake settings, credentials metadata, and routing context.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: RequestInformation
+        """
+        request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
+        request_info.configure(request_configuration)
+        request_info.headers.try_add("Accept", "application/json")
+        return request_info
+    
+    def to_put_request_information(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+        """
+        Updates a lead source for the current business, changing intake settings, credentials, routing context, or active status.
+        param body: Request payload for source.
+        param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
+        Returns: RequestInformation
+        """
+        if body is None:
+            raise TypeError("body cannot be null.")
+        request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
+        request_info.configure(request_configuration)
+        request_info.headers.try_add("Accept", "application/json")
+        request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
+        return request_info
+    
+    def with_url(self,raw_url: str) -> SourcesItemRequestBuilder:
+        """
+        Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
+        param raw_url: The raw URL to use for the request builder.
+        Returns: SourcesItemRequestBuilder
+        """
+        if raw_url is None:
+            raise TypeError("raw_url cannot be null.")
+        return SourcesItemRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def metrics(self) -> MetricsRequestBuilder:
+        """
+        The metrics property
+        """
+        from .metrics.metrics_request_builder import MetricsRequestBuilder
+
+        return MetricsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @dataclass
+    class SourcesItemRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
+    class SourcesItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+    @dataclass
+    class SourcesItemRequestBuilderPutRequestConfiguration(RequestConfiguration[QueryParameters]):
+        """
+        Configuration for the request such as headers, query parameters, and middleware options.
+        """
+        warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
+    
+

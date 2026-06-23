@@ -1,0 +1,27 @@
+from enum import Enum
+
+class OutboundQueueItem_reasonCode(str, Enum):
+    Allowed = "allowed",
+    No_eligible_phone_number = "no_eligible_phone_number",
+    Ten_dlc_not_approved = "ten_dlc_not_approved",
+    Phone_number_daily_limit_reached = "phone_number_daily_limit_reached",
+    Phone_number_hourly_limit_reached = "phone_number_hourly_limit_reached",
+    Phone_number_minute_limit_reached = "phone_number_minute_limit_reached",
+    Business_daily_limit_reached = "business_daily_limit_reached",
+    Business_hourly_limit_reached = "business_hourly_limit_reached",
+    Business_minute_limit_reached = "business_minute_limit_reached",
+    Lead_daily_limit_reached = "lead_daily_limit_reached",
+    Lead_hourly_limit_reached = "lead_hourly_limit_reached",
+    Lead_recently_contacted = "lead_recently_contacted",
+    Lead_archived = "lead_archived",
+    Quiet_hours = "quiet_hours",
+    Wallet_insufficient = "wallet_insufficient",
+    Contact_opted_out = "contact_opted_out",
+    Imported_lead_requires_consent = "imported_lead_requires_consent",
+    Automation_bulk_import_disabled = "automation_bulk_import_disabled",
+    Number_cooling_down = "number_cooling_down",
+    Number_health_blocked = "number_health_blocked",
+    Provider_failure_backoff = "provider_failure_backoff",
+    Campaign_daily_limit_reached = "campaign_daily_limit_reached",
+    Reservation_unavailable = "reservation_unavailable",
+
