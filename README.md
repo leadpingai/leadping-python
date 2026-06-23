@@ -1,6 +1,6 @@
 # Leadping Python SDK
 
-Typed Python client for the Leadping API, generated from `leadpingai/openapi` with Kiota.
+Type-safe Python client for the Leadping API.
 
 ## Install
 
@@ -8,7 +8,7 @@ Typed Python client for the Leadping API, generated from `leadpingai/openapi` wi
 pip install leadping
 ```
 
-Use a Kiota request adapter, such as:
+The generated client uses a Kiota request adapter. Install the default HTTP adapter:
 
 ```bash
 pip install microsoft-kiota-http
@@ -20,16 +20,19 @@ pip install microsoft-kiota-http
 from leadping import LeadpingOpenApiClient
 
 adapter = create_leadping_request_adapter()
-adapter.base_url = "https://api.leadping.ai"
-
 client = LeadpingOpenApiClient(adapter)
+
 me = await client.users.me.get()
 ```
 
-`create_leadping_request_adapter` should return a Kiota request adapter configured with your Leadping authentication.
+`create_leadping_request_adapter` is application code. Configure it to send one of:
 
-## Notes
+- `Authorization: Bearer <token>`
+- `X-Leadping-Api-Key: <key>`
 
-- Generated code comes from `leadpingai/openapi`; update the OpenAPI spec instead of hand-editing generated files.
-- Package name: `leadping`
-- License: see `LICENSE`
+The client defaults to `https://api.leadping.ai` when the adapter does not already have a base URL.
+
+## Links
+
+- [API reference](https://leadping.ai/docs/api-reference)
+- [License](LICENSE)
