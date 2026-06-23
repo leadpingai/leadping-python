@@ -1,0 +1,92 @@
+name: Publish Python SDK
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Package version to publish, without a leading v.
+        required: true
+      prerelease:
+        description: Mark the GitHub release as a prerelease.
+        required: true
+        default: "false"
+        type: choice
+        options:
+          - "false"
+          - "true"
+
+permissions:
+  contents: write
+  id-token: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GIT__TOKEN || secrets.GH__TOKEN || github.token }}
+
+      - name: Prepare version
+        id: version
+        env:
+          VERSION_INPUT: ${{ inputs.version }}
+        run: |
+          set -euo pipefail
+
+          version="${VERSION_INPUT#v}"
+          if [[ ! "${version}" =~ ^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$ ]]; then
+            echo "::error::Version must look like 1.2.3 or 1.2.3-preview.1."
+            exit 1
+          fi
+
+          tag="v${version}"
+          if git ls-remote --exit-code --tags origin "refs/tags/${tag}" >/dev/null 2>&1; then
+            echo "::error::Tag ${tag} already exists."
+            exit 1
+          fi
+
+          echo "version=${version}" >> "${GITHUB_OUTPUT}"
+          echo "tag=${tag}" >> "${GITHUB_OUTPUT}"
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Build package
+        env:
+          PACKAGE_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          python -m pip install --upgrade pip build twine
+          python -m build
+          twine check dist/*
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GH__TOKEN || secrets.GIT__TOKEN || github.token }}
+          PRERELEASE: ${{ inputs.prerelease }}
+          TAG: ${{ steps.version.outputs.tag }}
+          GIT_EMAIL: ${{ secrets.GIT__EMAIL || 'support@leadping.ai' }}
+        run: |
+          set -euo pipefail
+
+          git config user.name "leadpingai-bot"
+          git config user.email "${GIT_EMAIL}"
+          git tag "${TAG}"
+          git push origin "${TAG}"
+
+          prerelease_flag=()
+          if [ "${PRERELEASE}" = "true" ]; then
+            prerelease_flag=(--prerelease)
+          fi
+
+          gh release create "${TAG}" dist/* \
+            --title "${TAG}" \
+            --notes "Generated Leadping Python SDK ${TAG}." \
+            "${prerelease_flag[@]}"
