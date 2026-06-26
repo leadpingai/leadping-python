@@ -1,3 +1,8 @@
+[![](https://img.shields.io/pypi/v/leadping.svg?style=for-the-badge)](https://pypi.org/project/leadping/)
+[![](https://img.shields.io/github/actions/workflow/status/leadpingai/leadping-python/publish.yml?style=for-the-badge)](https://github.com/leadpingai/leadping-python/actions/workflows/publish.yml)
+[![](https://img.shields.io/pepy/dt/leadping?style=for-the-badge)](https://pypi.org/project/leadping/)
+[![](https://img.shields.io/github/actions/workflow/status/leadpingai/leadping-python/codeql.yml?label=CodeQL&style=for-the-badge)](https://github.com/leadpingai/leadping-python/actions/workflows/codeql.yml)
+
 # Leadping Python SDK
 
 Type-safe Python client for the Leadping API.
