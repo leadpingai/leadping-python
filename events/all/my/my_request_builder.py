@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.base_request_builder import BaseRequestBuilder
@@ -29,7 +30,7 @@ class MyRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/events/all/my{?category*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/events/all/my{?category*,endAt*,startAt*}", path_parameters)
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfEventTableRow]:
         """
@@ -84,7 +85,27 @@ class MyRequestBuilder(BaseRequestBuilder):
         """
         Lists event records visible to the current user with paging, sorting, and filters across lead, SMS, call, and automation events.
         """
+        def get_query_parameter(self,original_name: str) -> str:
+            """
+            Maps the query parameters names to their encoded names for the URI template parsing.
+            param original_name: The original query parameter name in the class.
+            Returns: str
+            """
+            if original_name is None:
+                raise TypeError("original_name cannot be null.")
+            if original_name == "end_at":
+                return "endAt"
+            if original_name == "start_at":
+                return "startAt"
+            if original_name == "category":
+                return "category"
+            return original_name
+        
         category: Optional[str] = None
+
+        end_at: Optional[datetime.datetime] = None
+
+        start_at: Optional[datetime.datetime] = None
 
     
     @dataclass
