@@ -39,7 +39,7 @@ setup(
     long_description_content_type="text/markdown",
     url="https://github.com/leadpingai/leadping-python",
     author="Leadping",
-    license="Proprietary",
+    license="MIT",
     packages=discover_packages(),
     package_dir={"leadping": "."},
     cmdclass={"build_py": BuildPyWithoutSetupModule},
@@ -55,6 +55,7 @@ setup(
     classifiers=[
         "Development Status :: 4 - Beta",
         "Intended Audience :: Developers",
+        "License :: OSI Approved :: MIT License",
         "Programming Language :: Python :: 3",
         "Programming Language :: Python :: 3.10",
         "Programming Language :: Python :: 3.11",
