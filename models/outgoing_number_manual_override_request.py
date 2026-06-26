@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class OutgoingNumberManualOverrideRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for outgoing number manual override.
+    Request schema for the Leadping API outgoing number manual override request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The from phone number ID associated with this outgoing number manual override.
+    # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # The selection value for this outgoing number manual override.
+    # Selected outgoing number and selection rationale returned by Leadping.
     selection: Optional[OutgoingNumberSelectionRequest] = None
     
     @staticmethod

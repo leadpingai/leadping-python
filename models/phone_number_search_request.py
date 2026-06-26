@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberSearchRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for phone number search.
+    Request schema for the Leadping API phone number search request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The location value for this phone number search.
+    # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneNumberSearchRequest_location] = None
-    # The phone number associated with this phone number search.
+    # Phone number used by this phone number search request for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None
     
     @staticmethod

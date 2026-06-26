@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class CallEventTableRow_metadata(AdditionalDataHolder, Parsable):
     """
-    The metadata key-value data carried with this call event; values must be safe to expose in API responses.
+    Structured metadata used for attribution, integrations, and reporting on this call event table row.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

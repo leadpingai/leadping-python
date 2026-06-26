@@ -13,86 +13,86 @@ if TYPE_CHECKING:
 @dataclass
 class SmsResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing SMS data returned to callers.
+    Response schema for the Leadping API SMS message returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The current billing status for this SMS.
+    # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
-    # The date and time for the blocked at value on this SMS.
+    # UTC timestamp when Leadping blocked this communication.
     blocked_at: Optional[datetime.datetime] = None
-    # The campaign ID associated with this SMS.
+    # Messaging campaign identifier associated with this SMS message.
     campaign_id: Optional[str] = None
-    # The human-readable cancel reason explaining this SMS.
+    # Reason this delivery, run, or request was canceled.
     cancel_reason: Optional[str] = None
-    # The date and time for the canceled at value on this SMS.
+    # UTC timestamp when this delivery or workflow was canceled.
     canceled_at: Optional[datetime.datetime] = None
-    # The compliance action value for this SMS.
+    # Compliance action applied to this message, lead, or sender.
     compliance_action: Optional[str] = None
-    # The conversation ID associated with this SMS.
+    # Conversation ID that links this SMS message to the Leadping inbox thread.
     conversation_id: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The date and time for the delivered at value on this SMS.
+    # UTC timestamp when the provider confirmed delivery.
     delivered_at: Optional[datetime.datetime] = None
-    # The error code value for this SMS.
+    # Machine-readable error code returned while processing this SMS message.
     error_code: Optional[str] = None
-    # The error message value for this SMS.
+    # Human-readable error message returned while processing this SMS message.
     error_message: Optional[str] = None
-    # The date and time for the failed at value on this SMS.
+    # UTC timestamp when processing failed for this SMS message.
     failed_at: Optional[datetime.datetime] = None
-    # The phone number associated with this SMS.
+    # Sender phone number used for this communication.
     from_phone_number: Optional[str] = None
-    # The from phone number ID associated with this SMS.
+    # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # Whether this SMS is warmup.
+    # Indicates whether this SMS message is part of Leadping sender warmup traffic.
     is_warmup: Optional[bool] = None
-    # The lead ID associated with this SMS.
+    # Lead ID associated with the SMS conversation or outreach attempt.
     lead_id: Optional[str] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # The date and time for the next retry at value on this SMS.
+    # UTC timestamp when Leadping will retry this SMS message.
     next_retry_at: Optional[datetime.datetime] = None
-    # The outbound phone number ID associated with this SMS.
+    # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
-    # The provider message ID associated with this SMS.
+    # Provider message identifier for SMS delivery tracking and reconciliation.
     provider_message_id: Optional[str] = None
-    # The date and time for the queued at value on this SMS.
+    # UTC timestamp when Leadping queued this SMS message for processing.
     queued_at: Optional[datetime.datetime] = None
-    # The date and time for the received at value on this SMS.
+    # UTC timestamp when Leadping received this inbound event or message.
     received_at: Optional[datetime.datetime] = None
-    # The retry count for this SMS.
+    # Number of retry attempts already made for this SMS message.
     retry_count: Optional[int] = None
-    # The date and time for the scheduled for value on this SMS.
+    # UTC timestamp when Leadping is scheduled to send this SMS message.
     scheduled_for: Optional[datetime.datetime] = None
-    # The human-readable scheduled reason explaining this SMS.
+    # Reason Leadping scheduled this delivery for a later time.
     scheduled_reason: Optional[str] = None
     # Defines the supported Outgoing Number Selection Reason values.
     selection_reason: Optional[SmsResponse_selectionReason] = None
-    # The date and time for the sending started at value on this SMS.
+    # UTC timestamp when Leadping began sending this message.
     sending_started_at: Optional[datetime.datetime] = None
-    # The date and time for the sent at value on this SMS.
+    # UTC timestamp when Leadping sent this message to the provider.
     sent_at: Optional[datetime.datetime] = None
-    # The source ID associated with this SMS.
+    # Lead source ID used for attribution and sender selection on this SMS message.
     source_id: Optional[str] = None
     # Defines the supported SMS Message Status values.
     status: Optional[SmsResponse_status] = None
-    # The human-readable status reason explaining this SMS.
+    # Human-readable reason explaining the current status of this SMS message.
     status_reason: Optional[str] = None
-    # The Telnyx ID associated with this SMS.
+    # Telnyx identifier connected to this phone number, call, or SMS event.
     telnyx_id: Optional[str] = None
-    # The 10DLC campaign ID associated with this SMS.
+    # 10DLC campaign identifier associated with this sender or SMS event.
     ten_dlc_campaign_id: Optional[str] = None
-    # The text value for this SMS.
+    # Body text for the SMS message or communication represented by this SMS message.
     text: Optional[str] = None
     # Defines the supported SMS Traffic Type values.
     traffic_type: Optional[SmsResponse_trafficType] = None
-    # The date and time for the undeliverable at value on this SMS.
+    # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None
-    # Whether this SMS was manually overridden.
+    # Indicates whether a user manually overrode Leadping's automatic number selection for this SMS message.
     was_manually_overridden: Optional[bool] = None
     
     @staticmethod

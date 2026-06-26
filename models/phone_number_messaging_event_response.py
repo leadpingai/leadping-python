@@ -8,30 +8,30 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number messaging event data returned to callers.
+    Response schema for the Leadping API phone number messaging event returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the created at value on this phone number messaging event.
+    # UTC timestamp when this phone number messaging event was created.
     created_at: Optional[datetime.datetime] = None
-    # The direction value for this phone number messaging event.
+    # Communication direction for this phone number messaging event, such as inbound or outbound.
     direction: Optional[str] = None
-    # The event type classification for this phone number messaging event.
+    # Event type used to classify this timeline, SMS, call, or automation event.
     event_type: Optional[str] = None
-    # The phone number associated with this phone number messaging event.
+    # Sender phone number used for this communication.
     from_phone_number: Optional[str] = None
-    # The unique ID for this phone number messaging event.
+    # Unique Leadping identifier for this phone number messaging event.
     id: Optional[str] = None
-    # Whether this phone number messaging event is opt out.
+    # Indicates whether the recipient has opted out of further SMS communication.
     is_opt_out: Optional[bool] = None
-    # The human-readable label shown for this phone number messaging event.
+    # Short display label for this phone number messaging event, formatted for charts, filters, or list views.
     label: Optional[str] = None
-    # The current provider status for this phone number messaging event.
+    # Provider lifecycle or delivery status for this phone number messaging event.
     provider_status: Optional[str] = None
-    # The text preview value for this phone number messaging event.
+    # Short preview of the SMS or conversation text for this phone number messaging event.
     text_preview: Optional[str] = None
-    # The phone number associated with this phone number messaging event.
+    # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
     
     @staticmethod

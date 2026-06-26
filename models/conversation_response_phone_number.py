@@ -12,7 +12,7 @@ from .id_name_value import IdNameValue
 @dataclass
 class ConversationResponse_phoneNumber(IdNameValue, Parsable):
     """
-    The Leadping sender phone number associated with this conversation.
+    Phone number used by this conversation response for calls, SMS, lookup, or routing.
     """
     
     @staticmethod

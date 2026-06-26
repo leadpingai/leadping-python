@@ -13,22 +13,22 @@ if TYPE_CHECKING:
 @dataclass
 class LeadProfile(AdditionalDataHolder, Parsable):
     """
-    API DTO containing lead profile data used by Leadping API contracts.
+    Public Leadping API schema for lead demographic profile data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the birth date value on this lead profile.
+    # Lead birth date used for demographic matching and insurance intake workflows.
     birth_date: Optional[datetime.date] = None
     # Defines the supported Employment Type values.
     employment_type: Optional[LeadProfile_employmentType] = None
     # Represents a gender classification used for demographic or identification purposes.
     gender: Optional[LeadProfile_gender] = None
-    # Whether this lead profile has bankruptcy.
+    # Indicates whether the lead reported bankruptcy history.
     has_bankruptcy: Optional[bool] = None
-    # Whether this lead profile has medical condition.
+    # Indicates whether the lead reported a medical condition relevant to qualification.
     has_medical_condition: Optional[bool] = None
-    # Whether this lead profile is homeowner.
+    # Indicates whether the lead owns their home.
     is_homeowner: Optional[bool] = None
     # Defines the supported Marital Status Type values.
     marital_status: Optional[LeadProfile_maritalStatus] = None

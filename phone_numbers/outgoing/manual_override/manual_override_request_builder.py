@@ -34,7 +34,7 @@ class ManualOverrideRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OutgoingNumberManualOverrideRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OutgoingNumberSelectionResponse]:
         """
         Validates a manual outgoing-number override before use, checking ownership, destination, and delivery eligibility.
-        param body: Request payload for outgoing number manual override.
+        param body: Request schema for the Leadping API outgoing number manual override request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OutgoingNumberSelectionResponse]
         """
@@ -57,7 +57,7 @@ class ManualOverrideRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OutgoingNumberManualOverrideRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Validates a manual outgoing-number override before use, checking ownership, destination, and delivery eligibility.
-        param body: Request payload for outgoing number manual override.
+        param body: Request schema for the Leadping API outgoing number manual override request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -12,7 +12,7 @@ from .id_name_value import IdNameValue
 @dataclass
 class BusinessRequest_einDocument(IdNameValue, Parsable):
     """
-    The EIN document value for this business.
+    Uploaded EIN document reference used for business verification.
     """
     
     @staticmethod

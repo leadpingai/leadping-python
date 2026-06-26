@@ -13,40 +13,40 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for automation.
+    Request schema for the Leadping API automation configuration request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actions included with this automation.
+    # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[AutomationRequest_adminEnablementOverride] = None
-    # The business ID associated with this automation.
+    # Business ID that owns this automation configuration.
     business_id: Optional[str] = None
-    # The condition groups included with this automation.
+    # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
-    # The created by user ID associated with this automation.
+    # User ID of the person who created this automation configuration request.
     created_by_user_id: Optional[str] = None
-    # The human-readable description of this automation.
+    # Human-readable description that explains this automation configuration request to API users.
     description: Optional[str] = None
-    # Whether this automation is enabled.
+    # Indicates whether this automation configuration request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # Whether this automation is system managed.
+    # Indicates whether Leadping manages this automation configuration request automatically instead of a user.
     is_system_managed: Optional[bool] = None
-    # The management level value for this automation.
+    # Management level that controls whether Leadping or the business owns this automation setting.
     management_level: Optional[str] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The scope value for this automation.
+    # Scope that limits where this automation configuration request applies in Leadping.
     scope: Optional[str] = None
-    # The triggers included with this automation.
+    # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
-    # The version value for this automation.
+    # Version number for this automation configuration request schema or saved configuration.
     version: Optional[int] = None
-    # The visibility value for this automation.
+    # Visibility level that controls who can see this automation configuration request.
     visibility: Optional[str] = None
     
     @staticmethod

@@ -12,24 +12,24 @@ if TYPE_CHECKING:
 @dataclass
 class CurrentDispositionSummary(AdditionalDataHolder, Parsable):
     """
-    Compact current disposition state stored directly on a lead and surfaced with conversation data.
+    Summary schema for Leadping API current disposition summary data used in dashboards and reports.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
     # Controlled disposition categories used for reporting, automation, and analytics.
     category: Optional[CurrentDispositionSummary_category] = None
-    # The changedAt property
+    # UTC timestamp when the disposition last changed.
     changed_at: Optional[datetime.datetime] = None
-    # The changedByAutomationId property
+    # Automation ID that last changed the disposition.
     changed_by_automation_id: Optional[str] = None
-    # The changedByUserId property
+    # User ID of the person who last changed the disposition.
     changed_by_user_id: Optional[str] = None
-    # The displayName property
+    # Human-readable display name shown for this current disposition summary.
     display_name: Optional[str] = None
-    # The id property
+    # Unique Leadping identifier for this current disposition summary.
     id: Optional[str] = None
-    # The outcome property
+    # Current disposition outcome assigned to the lead.
     outcome: Optional[str] = None
     # Known sources that can change a lead's current disposition.
     source: Optional[CurrentDispositionSummary_source] = None

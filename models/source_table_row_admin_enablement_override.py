@@ -12,7 +12,7 @@ from .admin_enablement_override import AdminEnablementOverride
 @dataclass
 class SourceTableRow_adminEnablementOverride(AdminEnablementOverride, Parsable):
     """
-    The admin force enablement override on this source.
+    Admin override that can enable or disable this record independently of normal status checks.
     """
     
     @staticmethod

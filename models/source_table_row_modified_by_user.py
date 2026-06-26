@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class SourceTableRow_modifiedByUser(IdNamePair, Parsable):
     """
-    The user that most recently modified this source.
+    User summary for the person who last modified this lead source table row.
     """
     
     @staticmethod

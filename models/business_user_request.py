@@ -10,16 +10,16 @@ if TYPE_CHECKING:
 @dataclass
 class BusinessUserRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for business user.
+    Request schema for the Leadping API business user request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The email address associated with this business user.
+    # Email address for the person represented by this business user request.
     email: Optional[str] = None
-    # The role value for this business user.
+    # Business role assigned to the user.
     role: Optional[BusinessUserRole] = None
-    # The user ID associated with this business user.
+    # User ID to add, update, or remove from the business.
     user_id: Optional[str] = None
     
     @staticmethod

@@ -10,12 +10,12 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberSearchResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number search data returned to callers.
+    Response schema for the Leadping API phone number search response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The numbers included with this phone number search.
+    # Phone numbers returned or evaluated by this phone number search response.
     numbers: Optional[list[PhoneNumberSearchResult]] = None
     
     @staticmethod

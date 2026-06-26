@@ -12,7 +12,7 @@ from .current_disposition_summary import CurrentDispositionSummary
 @dataclass
 class LeadResponse_currentDisposition(CurrentDispositionSummary, Parsable):
     """
-    Compact current disposition state stored directly on a lead and surfaced with conversation data.
+    Current disposition summary that describes the lead outcome.
     """
     
     @staticmethod

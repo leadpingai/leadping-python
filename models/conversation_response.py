@@ -13,46 +13,46 @@ if TYPE_CHECKING:
 @dataclass
 class ConversationResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing conversation data returned to callers.
+    Response schema for the Leadping API conversation response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The active outbound phone number ID associated with this conversation.
+    # Phone number ID currently active for outbound delivery.
     active_outbound_phone_number_id: Optional[str] = None
     # Defines why a lead was removed from the active working pipeline.
     archive_reason: Optional[int] = None
-    # The archivedAt property
+    # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
-    # The current lifecycle disposition for the conversation's lead.
+    # Current disposition summary that describes the lead outcome.
     current_disposition: Optional[ConversationResponse_currentDisposition] = None
-    # The first name value for this conversation.
+    # First name of the lead, user, or contact represented by this conversation response.
     first_name: Optional[str] = None
-    # The unique ID for this conversation.
+    # Unique Leadping identifier for this conversation response.
     id: Optional[str] = None
     # The isArchived property
     is_archived: Optional[bool] = None
-    # Whether this conversation is unread.
+    # Indicates whether the current user has unread activity in the conversation.
     is_unread: Optional[bool] = None
-    # The date and time for the last event at value on this conversation.
+    # UTC timestamp when the most recent conversation event occurred.
     last_event_at: Optional[datetime.datetime] = None
-    # The date and time for the last name value on this conversation.
+    # Last name of the lead, user, or contact represented by this conversation response.
     last_name: Optional[str] = None
-    # The date and time for the last snippet value on this conversation.
+    # Most recent message preview shown for the conversation.
     last_snippet: Optional[str] = None
-    # The lead ID associated with this conversation.
+    # Lead ID associated with this inbox conversation.
     lead_id: Optional[str] = None
-    # The lead's primary contact phone number for this conversation.
+    # Lead's phone number used for conversation matching and outreach.
     lead_phone_number: Optional[str] = None
-    # The recommended next action for the inbox user.
+    # Recommended next step to move this conversation response forward.
     next_step: Optional[str] = None
-    # The outbound phone number override ID associated with this conversation.
+    # Phone number ID manually chosen to override automatic outbound selection.
     outbound_phone_number_override_id: Optional[str] = None
-    # The Leadping sender phone number associated with this conversation.
+    # Phone number used by this conversation response for calls, SMS, lookup, or routing.
     phone_number: Optional[ConversationResponse_phoneNumber] = None
     # Defines the customer-facing operational status for an inbox conversation.
     status: Optional[ConversationResponse_status] = None
-    # The human-readable reason explaining the current conversation status.
+    # Human-readable reason explaining the current status of this conversation response.
     status_reason: Optional[str] = None
     
     @staticmethod

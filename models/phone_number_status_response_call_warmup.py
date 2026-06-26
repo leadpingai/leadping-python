@@ -12,7 +12,7 @@ from .phone_number_warmup_status_response import PhoneNumberWarmupStatusResponse
 @dataclass
 class PhoneNumberStatusResponse_callWarmup(PhoneNumberWarmupStatusResponse, Parsable):
     """
-    The voice call warmup value for this phone number status.
+    Voice call warmup status for this phone number.
     """
     
     @staticmethod

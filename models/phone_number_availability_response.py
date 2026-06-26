@@ -10,18 +10,18 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberAvailabilityResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number availability data returned to callers.
+    Response schema for the Leadping API phone number availability result returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The ISO currency code for monetary values in this phone number availability.
+    # ISO currency code used for the monetary amounts in this phone number availability result.
     currency: Optional[str] = None
-    # Whether this phone number availability is available.
+    # Indicates whether this phone number is available for purchase or assignment.
     is_available: Optional[bool] = None
-    # The location value for this phone number availability.
+    # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneNumberAvailabilityResponse_location] = None
-    # The phone number associated with this phone number availability.
+    # Phone number used by this phone number availability result for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None
     
     @staticmethod

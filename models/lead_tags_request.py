@@ -7,16 +7,16 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class LeadTagsRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for adding or replacing tags on a lead.
+    Request schema for the Leadping API lead tag update request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Whether missing tag names should be created for the lead's business.
+    # Indicates whether Leadping should create missing records while processing the request.
     create_missing: Optional[bool] = None
-    # Existing tag ids to apply.
+    # Tag IDs assigned to or filtered against this lead.
     tag_ids: Optional[list[str]] = None
-    # Tag names to apply. Missing names may be created when CreateMissing is true.
+    # Tag names assigned to this lead when matching existing tags by name.
     tag_names: Optional[list[str]] = None
     
     @staticmethod

@@ -8,32 +8,32 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class TagResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing business tag data.
+    Response schema for the Leadping API tag response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The archivedAt property
+    # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
-    # The businessId property
+    # Business ID that owns this tag.
     business_id: Optional[str] = None
-    # The color property
+    # Hex color used to display this tag or status in Leadping clients.
     color: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The createdByUserId property
+    # User ID of the person who created this tag response.
     created_by_user_id: Optional[str] = None
-    # The description property
+    # Human-readable description that explains this tag response to API users.
     description: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The isArchived property
+    # Indicates whether this lead or record is archived.
     is_archived: Optional[bool] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # The name property
+    # Display name for this tag response in the Leadping API.
     name: Optional[str] = None
-    # The normalizedName property
+    # Normalized name used for case-insensitive tag matching and deduplication.
     normalized_name: Optional[str] = None
     
     @staticmethod

@@ -8,26 +8,26 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberTenDlcAssociation(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone number ten dlc association data used by Leadping API contracts.
+    Public Leadping API schema for phone number 10DLC association data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The current assignment status for this phone number 10DLC association.
+    # Provider assignment status for linking the phone number to a 10DLC campaign.
     assignment_status: Optional[str] = None
-    # The brand ID associated with this phone number 10DLC association.
+    # 10DLC brand identifier associated with this phone number or campaign.
     brand_id: Optional[str] = None
-    # The campaign ID associated with this phone number 10DLC association.
+    # Messaging campaign identifier associated with this phone number 10DLC association.
     campaign_id: Optional[str] = None
-    # The current campaign status for this phone number 10DLC association.
+    # 10DLC campaign status reported by the messaging provider.
     campaign_status: Optional[str] = None
-    # The human-readable failure reason explaining this phone number 10DLC association.
+    # Human-readable reason explaining why this phone number 10DLC association failed.
     failure_reason: Optional[str] = None
-    # The last provider event ID associated with this phone number 10DLC association.
+    # Most recent provider event identifier processed for this phone number 10DLC association.
     last_provider_event_id: Optional[str] = None
-    # The messaging profile ID associated with this phone number 10DLC association.
+    # Messaging profile identifier used for SMS routing with the provider.
     messaging_profile_id: Optional[str] = None
-    # The date and time for the status updated at value on this phone number 10DLC association.
+    # UTC timestamp when s ta tu su pd at e d occurred for this phone number 10DLC association.
     status_updated_at: Optional[datetime.datetime] = None
     
     @staticmethod

@@ -10,16 +10,16 @@ if TYPE_CHECKING:
 @dataclass
 class Phone(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone data used by Leadping API contracts.
+    Public Leadping API schema for lead phone number data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The lookup value for this phone.
+    # Phone lookup details returned by the provider or Leadping enrichment service.
     lookup: Optional[Phone_lookup] = None
-    # The number value for this phone.
+    # E.164 phone number exposed by this lead phone number.
     number: Optional[str] = None
-    # The type classification for this phone.
+    # Type classification used to route and interpret this lead phone number in the Leadping API.
     type: Optional[str] = None
     
     @staticmethod

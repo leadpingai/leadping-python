@@ -34,7 +34,7 @@ class SwitchRequestBuilder(BaseRequestBuilder):
     async def post(self,body: BusinessSwitchRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessResponse]:
         """
         Switches the authenticated user's active business context so subsequent lead, billing, and communication requests target that business.
-        param body: Request payload for business switch.
+        param body: Request schema for the Leadping API business switch request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[BusinessResponse]
         """
@@ -57,7 +57,7 @@ class SwitchRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: BusinessSwitchRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Switches the authenticated user's active business context so subsequent lead, billing, and communication requests target that business.
-        param body: Request payload for business switch.
+        param body: Request schema for the Leadping API business switch request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

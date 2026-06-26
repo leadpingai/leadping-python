@@ -23,36 +23,36 @@ if TYPE_CHECKING:
 @dataclass
 class BusinessResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing business data returned to callers.
+    Response schema for the Leadping API business profile response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The wallet balance owned by this business.
+    # Current wallet balance available to the business.
     account_balance: Optional[float] = None
-    # The activation value for this business.
+    # Business activation state covering site, billing, compliance, and telephony readiness.
     activation: Optional[BusinessResponse_activation] = None
-    # The postal address associated with this business.
+    # Postal address for the business, lead, or contact represented by this business profile response.
     address: Optional[BusinessResponse_address] = None
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[BusinessResponse_adminEnablementOverride] = None
-    # Whether auto refill is enabled for this business wallet.
+    # Indicates whether automatic wallet refill is enabled for the business.
     auto_refill_enabled: Optional[bool] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[BusinessResponse_billingPlan] = None
-    # The compliance policy value for this business.
+    # Compliance policy configuration for the business.
     compliance_policy: Optional[BusinessResponse_compliancePolicy] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The human-readable description of this business.
+    # Human-readable description that explains this business profile response to API users.
     description: Optional[str] = None
-    # The domain name associated with this business.
+    # Domain name connected to the business website or activation workflow.
     domain: Optional[str] = None
-    # The EIN value for this business.
+    # Employer Identification Number used for business and 10DLC verification.
     ein: Optional[str] = None
-    # The EIN document value for this business.
+    # Uploaded EIN document reference used for business verification.
     ein_document: Optional[BusinessResponse_einDocument] = None
-    # The enabled property
+    # Indicates whether this business profile response is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
@@ -60,27 +60,27 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The phone number associated with this business.
+    # Phone details for the lead, user, or business represented by this business profile response.
     phone: Optional[str] = None
-    # The phones included with this business.
+    # Phone numbers assigned to this business.
     phones: Optional[list[IdNameValue]] = None
-    # The secondary name value for this business.
+    # Alternate business name or DBA shown in Leadping.
     secondary_name: Optional[str] = None
     # Defines the supported Business Setup Step values.
     setup_step: Optional[BusinessResponse_setupStep] = None
-    # The website value for this business.
+    # Leadping website record connected to this business.
     site: Optional[BusinessResponse_site] = None
     # Defines the supported Business Status values.
     status: Optional[BusinessResponse_status] = None
-    # Stripe billing state owned by this business.
+    # Stripe customer and subscription state associated with this business or user.
     stripe_info: Optional[BusinessResponse_stripeInfo] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[BusinessResponse_subscriptionStatus] = None
-    # The user value for this business.
+    # User summary connected to this business profile response.
     user: Optional[BusinessResponse_user] = None
-    # The vertical value for this business.
+    # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None
-    # The website URL associated with this business.
+    # Business website URL used for compliance, brand review, and lead attribution.
     website: Optional[str] = None
     
     @staticmethod

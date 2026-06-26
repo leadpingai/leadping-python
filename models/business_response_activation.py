@@ -12,7 +12,7 @@ from .business_activation_state import BusinessActivationState
 @dataclass
 class BusinessResponse_activation(BusinessActivationState, Parsable):
     """
-    The activation value for this business.
+    Business activation state covering site, billing, compliance, and telephony readiness.
     """
     
     @staticmethod

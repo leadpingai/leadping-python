@@ -20,54 +20,54 @@ if TYPE_CHECKING:
 @dataclass
 class BusinessRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for business.
+    Request schema for the Leadping API business profile request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The activation value for this business.
+    # Business activation state covering site, billing, compliance, and telephony readiness.
     activation: Optional[BusinessRequest_activation] = None
-    # The postal address associated with this business.
+    # Postal address for the business, lead, or contact represented by this business profile request.
     address: Optional[BusinessRequest_address] = None
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[BusinessRequest_adminEnablementOverride] = None
-    # Whether auto refill is enabled for this business wallet.
+    # Indicates whether automatic wallet refill is enabled for the business.
     auto_refill_enabled: Optional[bool] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[BusinessRequest_billingPlan] = None
-    # The compliance policy value for this business.
+    # Compliance policy configuration for the business.
     compliance_policy: Optional[BusinessRequest_compliancePolicy] = None
-    # The human-readable description of this business.
+    # Human-readable description that explains this business profile request to API users.
     description: Optional[str] = None
-    # The EIN value for this business.
+    # Employer Identification Number used for business and 10DLC verification.
     ein: Optional[str] = None
-    # The EIN document value for this business.
+    # Uploaded EIN document reference used for business verification.
     ein_document: Optional[BusinessRequest_einDocument] = None
-    # The enabled property
+    # Indicates whether this business profile request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # Whether this business is younger than90.
+    # Indicates whether the business serves customers younger than 90, for compliance and underwriting context.
     is_younger_than90: Optional[bool] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The phone number associated with this business.
+    # Phone details for the lead, user, or business represented by this business profile request.
     phone: Optional[str] = None
-    # The phones included with this business.
+    # Phone numbers assigned to this business.
     phones: Optional[list[IdNameValue]] = None
-    # The secondary name value for this business.
+    # Alternate business name or DBA shown in Leadping.
     secondary_name: Optional[str] = None
     # Defines the supported Business Setup Step values.
     setup_step: Optional[BusinessRequest_setupStep] = None
     # Defines the supported Business Status values.
     status: Optional[BusinessRequest_status] = None
-    # Stripe billing state owned by this business.
+    # Stripe customer and subscription state associated with this business or user.
     stripe_info: Optional[BusinessRequest_stripeInfo] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[BusinessRequest_subscriptionStatus] = None
-    # The vertical value for this business.
+    # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None
-    # The website URL associated with this business.
+    # Business website URL used for compliance, brand review, and lead attribution.
     website: Optional[str] = None
     
     @staticmethod

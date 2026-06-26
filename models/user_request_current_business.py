@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class UserRequest_currentBusiness(IdNamePair, Parsable):
     """
-    The current business value for this user.
+    Business currently selected for the user session or profile.
     """
     
     @staticmethod

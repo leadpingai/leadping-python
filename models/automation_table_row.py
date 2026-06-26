@@ -13,56 +13,56 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation data used by Leadping API contracts.
+    List item schema for Leadping API automation table row results shown in searchable tables.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The action summary value for this automation.
+    # Human-readable summary of the automation action outcome.
     action_summary: Optional[str] = None
-    # The admin force enablement override on this automation.
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[AutomationTableRow_adminEnablementOverride] = None
-    # The business value for this automation.
+    # Business summary connected to this automation table row.
     business: Optional[AutomationTableRow_business] = None
-    # The business ID associated with this automation.
+    # Business ID that owns this automation.
     business_id: Optional[str] = None
-    # The condition summary value for this automation.
+    # Human-readable summary of the automation condition evaluation.
     condition_summary: Optional[str] = None
-    # The created by user ID associated with this automation.
+    # User ID of the person who created this automation table row.
     created_by_user_id: Optional[str] = None
-    # The human-readable description of this automation.
+    # Human-readable description that explains this automation table row to API users.
     description: Optional[str] = None
-    # Whether this automation is enabled.
+    # Indicates whether this automation table row is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The health summary value for this automation.
+    # Human-readable health summary for this automation table row.
     health_summary: Optional[str] = None
-    # The unique ID for this automation.
+    # Unique Leadping identifier for this automation table row.
     id: Optional[str] = None
-    # Whether this automation is system managed.
+    # Indicates whether Leadping manages this automation table row automatically instead of a user.
     is_system_managed: Optional[bool] = None
-    # The date and time for the last run at value on this automation.
+    # UTC timestamp when this automation last ran.
     last_run_at: Optional[datetime.datetime] = None
-    # The date and time for the last run error value on this automation.
+    # Most recent automation run error message, if the last run failed.
     last_run_error: Optional[str] = None
-    # The current last run status for this automation.
+    # Status from the most recent automation run.
     last_run_status: Optional[str] = None
-    # The management level value for this automation.
+    # Management level that controls whether Leadping or the business owns this automation setting.
     management_level: Optional[str] = None
-    # The date and time this automation was last modified.
+    # UTC timestamp when this automation table row was last modified.
     modified_at: Optional[datetime.datetime] = None
-    # The human-readable name shown for this automation.
+    # Display name for this automation table row in the Leadping API.
     name: Optional[str] = None
-    # The rule sentence value for this automation.
+    # Human-readable explanation of the automation rule being evaluated.
     rule_sentence: Optional[str] = None
-    # The scope value for this automation.
+    # Scope that limits where this automation table row applies in Leadping.
     scope: Optional[str] = None
-    # The trigger summary value for this automation.
+    # Human-readable summary of the automation trigger that started the workflow.
     trigger_summary: Optional[str] = None
-    # The primary trigger type label for this automation.
+    # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
-    # The user value for this automation.
+    # User summary connected to this automation table row.
     user: Optional[AutomationTableRow_user] = None
-    # The visibility value for this automation.
+    # Visibility level that controls who can see this automation table row.
     visibility: Optional[str] = None
     
     @staticmethod

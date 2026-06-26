@@ -34,7 +34,7 @@ class IsAvailableForPurchaseRequestBuilder(BaseRequestBuilder):
     async def post(self,body: PhoneNumberAvailabilityRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneNumberAvailabilityResponse]:
         """
         Checks whether a phone number can be purchased for the current business before creating or assigning it.
-        param body: Request payload for phone number availability.
+        param body: Request schema for checking phone number availability before purchase or assignment.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneNumberAvailabilityResponse]
         """
@@ -58,7 +58,7 @@ class IsAvailableForPurchaseRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: PhoneNumberAvailabilityRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Checks whether a phone number can be purchased for the current business before creating or assigning it.
-        param body: Request payload for phone number availability.
+        param body: Request schema for checking phone number availability before purchase or assignment.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

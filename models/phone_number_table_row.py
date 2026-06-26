@@ -15,66 +15,66 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone number data used by Leadping API contracts.
+    List item schema for Leadping API phone number table row results shown in searchable tables.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The admin force enablement override on this phone number.
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[PhoneNumberTableRow_adminEnablementOverride] = None
-    # The billing attribution value for this phone number.
+    # Billing attribution used to reconcile this phone number with subscription billing.
     billing_attribution: Optional[str] = None
-    # The business value for this phone number.
+    # Business summary connected to this phone number table row.
     business: Optional[str] = None
-    # The capabilities value for this phone number.
+    # SMS and voice capabilities available on this phone number.
     capabilities: Optional[str] = None
-    # Whether this phone number is enabled.
+    # Indicates whether this phone number table row is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # Defines the supported SMS Warmup Health State values.
     health_status: Optional[PhoneNumberTableRow_healthStatus] = None
-    # The unique ID for this phone number.
+    # Unique Leadping identifier for this phone number table row.
     id: Optional[str] = None
-    # Whether internal test only applies to this phone number.
+    # Indicates whether this record is restricted to internal Leadping testing.
     internal_test_only: Optional[bool] = None
-    # The current inventory state for this phone number.
+    # Leadping inventory state for this phone number.
     inventory_state: Optional[PhoneNumberInventoryState] = None
-    # Whether this phone number is messaging program approved.
+    # Indicates whether this phone number is approved for the configured messaging program.
     is_messaging_program_approved: Optional[bool] = None
-    # The location value for this phone number.
+    # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[str] = None
-    # The human-readable name shown for this phone number.
+    # Display name for this phone number table row in the Leadping API.
     name: Optional[str] = None
-    # The number value for this phone number.
+    # E.164 phone number exposed by this phone number table row.
     number: Optional[str] = None
-    # The ownership value for this phone number.
+    # Ownership classification for this phone number, such as Leadping-owned or customer-owned.
     ownership: Optional[str] = None
-    # The current provider lifecycle state for this phone number.
+    # Provider lifecycle state used to determine phone number readiness.
     provider_lifecycle_state: Optional[PhoneNumberProviderLifecycleState] = None
-    # The current provider reconciliation status for this phone number.
+    # Reconciliation status comparing Leadping data with provider data.
     provider_reconciliation_status: Optional[str] = None
-    # The current provider status for this phone number.
+    # Provider lifecycle or delivery status for this phone number table row.
     provider_status: Optional[str] = None
-    # The routing summary value for this phone number.
+    # Human-readable routing summary for this phone number.
     routing_summary: Optional[str] = None
-    # Whether this phone number is SMS ready.
+    # Indicates whether SMS messaging is ready for this business or phone number.
     sms_ready: Optional[bool] = None
-    # The current status for this phone number.
+    # Current lifecycle status for this phone number table row in the Leadping API.
     status: Optional[InternalPhoneNumberStatus] = None
-    # The 10DLC campaign ID associated with this phone number.
+    # 10DLC campaign identifier associated with this sender or SMS event.
     ten_dlc_campaign_id: Optional[str] = None
-    # The current 10DLC campaign status for this phone number.
+    # 10DLC campaign status associated with this sender or SMS event.
     ten_dlc_campaign_status: Optional[str] = None
-    # The type classification for this phone number.
+    # Type classification used to route and interpret this phone number table row in the Leadping API.
     type: Optional[str] = None
-    # The user value for this phone number.
+    # User summary connected to this phone number table row.
     user: Optional[str] = None
-    # Whether this phone number is voice ready.
+    # Indicates whether voice calling is ready for this business or phone number.
     voice_ready: Optional[bool] = None
-    # The warmup health score metric for this phone number.
+    # Numeric sender warmup health score used by Leadping to assess deliverability readiness.
     warmup_health_score: Optional[int] = None
-    # Whether warmup only applies to this phone number.
+    # Indicates whether this phone number should only be used for warmup traffic.
     warmup_only: Optional[bool] = None
-    # The warmup progress percent metric for this phone number.
+    # Percent complete for the SMS sender warmup plan.
     warmup_progress_percent: Optional[int] = None
     # Defines the supported SMS Warmup Health State values.
     warmup_state: Optional[PhoneNumberTableRow_warmupState] = None

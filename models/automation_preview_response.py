@@ -13,22 +13,22 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationPreviewResponse(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation preview response data.
+    Response schema for the Leadping API automation preview response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The action results included with this automation preview.
+    # Action preview results showing what the automation would do.
     action_results: Optional[list[AutomationPreviewActionResult]] = None
-    # The condition results included with this automation preview.
+    # Condition evaluation results returned by the automation preview.
     condition_results: Optional[list[AutomationPreviewConditionResult]] = None
-    # The sample payload key-value data carried with this automation preview; values must be safe to expose in API responses.
+    # Example payload clients can use to understand this automation preview response format.
     sample_payload: Optional[AutomationPreviewResponse_samplePayload] = None
-    # The trigger type classification for this automation preview.
+    # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
-    # The validation value for this automation preview.
+    # Validation result returned for the automation configuration.
     validation: Optional[AutomationValidationResult] = None
-    # The warnings included with this automation preview.
+    # Warnings returned for this automation preview response that do not necessarily block processing.
     warnings: Optional[list[str]] = None
     
     @staticmethod

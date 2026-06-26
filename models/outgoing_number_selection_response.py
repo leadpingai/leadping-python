@@ -12,38 +12,38 @@ if TYPE_CHECKING:
 @dataclass
 class OutgoingNumberSelectionResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing outgoing number selection data returned to callers.
+    Response schema for the Leadping API outgoing number selection response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The campaign ID associated with this outgoing number selection.
+    # Messaging campaign identifier associated with this outgoing number selection response.
     campaign_id: Optional[str] = None
-    # Whether the caller can send this outgoing number selection.
+    # Indicates whether Leadping can send outbound messages using this outgoing number selection response.
     can_send: Optional[bool] = None
-    # The display number value for this outgoing number selection.
+    # Human-readable phone number shown in Leadping UI and API responses.
     display_number: Optional[str] = None
-    # The eligible numbers included with this outgoing number selection.
+    # Phone numbers that are eligible to send the requested outbound message or call.
     eligible_numbers: Optional[list[EligibleOutgoingNumberResponse]] = None
-    # The health label value for this outgoing number selection.
+    # Short label describing the health state for display in dashboards.
     health_label: Optional[str] = None
     # Defines the supported SMS Warmup Health State values.
     health_status: Optional[OutgoingNumberSelectionResponse_healthStatus] = None
-    # The health warning value for this outgoing number selection.
+    # Warning text that explains a potential health or readiness issue.
     health_warning: Optional[str] = None
-    # The number value for this outgoing number selection.
+    # E.164 phone number exposed by this outgoing number selection response.
     number: Optional[str] = None
-    # The phone number ID associated with this outgoing number selection.
+    # Leadping phone number ID connected to this outgoing number selection response.
     phone_number_id: Optional[str] = None
-    # The reason label value for this outgoing number selection.
+    # Human-readable label for the reason code on this outgoing number selection response.
     reason_label: Optional[str] = None
     # Defines the supported Outgoing Number Selection Reason values.
     selection_reason: Optional[OutgoingNumberSelectionResponse_selectionReason] = None
-    # The setup message value for this outgoing number selection.
+    # Human-readable setup guidance shown for this outgoing number selection response.
     setup_message: Optional[str] = None
-    # The source ID associated with this outgoing number selection.
+    # Lead source ID considered when Leadping selected the outgoing phone number.
     source_id: Optional[str] = None
-    # Whether this outgoing number selection was manually overridden.
+    # Indicates whether a user manually overrode Leadping's automatic number selection for this outgoing number selection response.
     was_manually_overridden: Optional[bool] = None
     
     @staticmethod

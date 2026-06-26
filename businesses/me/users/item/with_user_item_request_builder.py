@@ -53,7 +53,7 @@ class WithUserItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: BusinessUserRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessUserResponse]:
         """
         Changes a user's role in the current business, updating access to lead, automation, billing, and admin workflows.
-        param body: Request payload for business user.
+        param body: Request schema for the Leadping API business user request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[BusinessUserResponse]
         """
@@ -88,7 +88,7 @@ class WithUserItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: BusinessUserRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Changes a user's role in the current business, updating access to lead, automation, billing, and admin workflows.
-        param body: Request payload for business user.
+        param body: Request schema for the Leadping API business user request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

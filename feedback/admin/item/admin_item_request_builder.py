@@ -54,7 +54,7 @@ class AdminItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: FeedbackAdminUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[FeedbackResponse]:
         """
         Updates admin triage fields on a feedback item, such as status, priority, notes, or reviewed metadata.
-        param body: Admin triage update request for product feedback.
+        param body: Request schema for the Leadping API feedback admin update request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[FeedbackResponse]
         """
@@ -89,7 +89,7 @@ class AdminItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: FeedbackAdminUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates admin triage fields on a feedback item, such as status, priority, notes, or reviewed metadata.
-        param body: Admin triage update request for product feedback.
+        param body: Request schema for the Leadping API feedback admin update request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

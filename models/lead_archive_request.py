@@ -7,14 +7,14 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class LeadArchiveRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for archiving a lead without deleting its history.
+    Request schema for the Leadping API lead archive request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Optional internal note explaining the archive decision.
+    # Optional archive note that gives additional context for why the lead was archived.
     note: Optional[str] = None
-    # Reason the lead should leave the active working pipeline.
+    # Human-readable reason supplied for this request or result.
     reason: Optional[int] = None
     
     @staticmethod

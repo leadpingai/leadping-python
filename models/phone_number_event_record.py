@@ -11,26 +11,26 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberEventRecord(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone number event record data used by Leadping API contracts.
+    History record schema for Leadping API phone number event record data exposed in automation and audit views.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actor ID associated with this phone number event record.
+    # Actor ID for the user, system, or integration that performed the action.
     actor_id: Optional[str] = None
-    # The actor name value for this phone number event record.
+    # Display name for the actor that performed the action.
     actor_name: Optional[str] = None
-    # The date and time for the created at value on this phone number event record.
+    # UTC timestamp when this phone number event record was created.
     created_at: Optional[datetime.datetime] = None
-    # The details value for this phone number event record.
+    # Additional human-readable details that explain this phone number event record.
     details: Optional[str] = None
-    # The unique ID for this phone number event record.
+    # Unique Leadping identifier for this phone number event record.
     id: Optional[str] = None
     # Leadping-owned inventory state for phone-number assignment and routing.
     state: Optional[PhoneNumberEventRecord_state] = None
-    # The title value for this phone number event record.
+    # Short title displayed for this phone number event record.
     title: Optional[str] = None
-    # The type classification for this phone number event record.
+    # Type classification used to route and interpret this phone number event record in the Leadping API.
     type: Optional[str] = None
     
     @staticmethod

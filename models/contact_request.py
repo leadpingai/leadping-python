@@ -7,18 +7,18 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class ContactRequest(AdditionalDataHolder, Parsable):
     """
-    Request model for submitting a contact form.
+    Request schema for the Leadping API contact form request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The email address associated with this contact.
+    # Email address for the person represented by this contact form request.
     email: Optional[str] = None
-    # The message value for this contact.
+    # Message text supplied by the user or returned by the Leadping API for this contact form request.
     message: Optional[str] = None
-    # The human-readable name shown for this contact.
+    # Display name for this contact form request in the Leadping API.
     name: Optional[str] = None
-    # The token supplied to authorize or complete this contact.
+    # Invitation or workflow token used to authorize this request.
     token: Optional[str] = None
     
     @staticmethod

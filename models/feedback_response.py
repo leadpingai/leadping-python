@@ -12,60 +12,60 @@ if TYPE_CHECKING:
 @dataclass
 class FeedbackResponse(AdditionalDataHolder, Parsable):
     """
-    Feedback item returned to admins and submitters.
+    Response schema for the Leadping API feedback item response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminNote property
+    # Internal admin note used to track feedback review or resolution.
     admin_note: Optional[str] = None
-    # The allowContact property
+    # Indicates whether the submitter permits Leadping support to contact them about the feedback.
     allow_contact: Optional[bool] = None
-    # The area property
+    # Product area or app section connected to this feedback item response.
     area: Optional[str] = None
-    # The businessId property
+    # Business ID connected to the feedback item, when the feedback came from a business workspace.
     business_id: Optional[str] = None
-    # The businessNameSnapshot property
+    # Business name snapshot captured when the user submitted the feedback.
     business_name_snapshot: Optional[str] = None
-    # The clientVersion property
+    # Client application version that submitted this feedback item response.
     client_version: Optional[str] = None
-    # The closedAt property
+    # UTC timestamp when this feedback item response was closed.
     closed_at: Optional[datetime.datetime] = None
-    # The closedByUserId property
+    # User ID of the person who closed this item.
     closed_by_user_id: Optional[str] = None
-    # The createdAt property
+    # UTC timestamp when this feedback item response was created.
     created_at: Optional[datetime.datetime] = None
-    # The duplicateOfFeedbackItemId property
+    # Feedback item ID that this item duplicates, when applicable.
     duplicate_of_feedback_item_id: Optional[str] = None
-    # The environment property
+    # Deployment environment where this feedback item response was captured or processed.
     environment: Optional[str] = None
-    # The externalIssueUrl property
+    # External issue tracker URL linked to this feedback item.
     external_issue_url: Optional[str] = None
-    # The id property
+    # Unique Leadping identifier for this feedback item response.
     id: Optional[str] = None
-    # The message property
+    # Message text supplied by the user or returned by the Leadping API for this feedback item response.
     message: Optional[str] = None
-    # The reviewedAt property
+    # UTC timestamp when an admin reviewed this feedback item response.
     reviewed_at: Optional[datetime.datetime] = None
-    # The reviewedByUserId property
+    # User ID of the admin who reviewed this item.
     reviewed_by_user_id: Optional[str] = None
-    # The route property
+    # Application route where this feedback item response originated or should direct the user.
     route: Optional[str] = None
-    # The serverVersion property
+    # Leadping API server version that processed this feedback item response.
     server_version: Optional[str] = None
-    # Defines admin triage statuses for durable product feedback.
+    # Current lifecycle status for this feedback item response in the Leadping API.
     status: Optional[FeedbackStatus] = None
-    # The subscriptionPlanSnapshot property
+    # Billing plan snapshot captured when the user submitted the feedback.
     subscription_plan_snapshot: Optional[str] = None
-    # Defines the type of product feedback submitted from inside Leadping.
+    # Type classification used to route and interpret this feedback item response in the Leadping API.
     type: Optional[FeedbackType] = None
-    # The userAgent property
+    # Browser or client user agent captured when this feedback item response was submitted.
     user_agent: Optional[str] = None
-    # The userDisplayNameSnapshot property
+    # User display name snapshot captured when the user submitted the feedback.
     user_display_name_snapshot: Optional[str] = None
-    # The userEmailSnapshot property
+    # User email snapshot captured when the user submitted the feedback.
     user_email_snapshot: Optional[str] = None
-    # The userId property
+    # User ID for the person who submitted the feedback.
     user_id: Optional[str] = None
     
     @staticmethod

@@ -12,7 +12,7 @@ from .coordinate import Coordinate
 @dataclass
 class LeadContact_coordinate(Coordinate, Parsable):
     """
-    The coordinate inferred for this lead contact.
+    Latitude and longitude coordinate for this lead contact profile.
     """
     
     @staticmethod

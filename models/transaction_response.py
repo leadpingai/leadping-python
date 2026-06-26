@@ -13,54 +13,54 @@ if TYPE_CHECKING:
 @dataclass
 class TransactionResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing transaction data returned to callers.
+    Response schema for the Leadping API billing transaction response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The account ID associated with this transaction.
+    # Leadping account identifier used for wallet and transaction reconciliation.
     account_id: Optional[str] = None
-    # The account name value for this transaction.
+    # Display name of the wallet or account used for this transaction.
     account_name: Optional[str] = None
-    # The monetary amount for this transaction.
+    # Monetary amount for this billing transaction or wallet operation.
     amount: Optional[float] = None
-    # The business ID associated with this transaction.
+    # Business ID charged or credited by this wallet transaction.
     business_id: Optional[str] = None
-    # The business name value for this transaction.
+    # Business display name shown for this wallet transaction.
     business_name: Optional[str] = None
-    # The correlation ID associated with this transaction.
+    # Correlation ID used to trace this workflow or request across Leadping services.
     correlation_id: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The date and time for the created by value on this transaction.
+    # Display name or identifier for the person or system that created this billing transaction response.
     created_by: Optional[str] = None
-    # The human-readable description of this transaction.
+    # Human-readable description that explains this billing transaction response to API users.
     description: Optional[str] = None
-    # The gateway ID associated with this transaction.
+    # Payment gateway identifier linked to this transaction.
     gateway_id: Optional[str] = None
-    # The current gateway status for this transaction.
+    # Payment gateway status returned for this transaction.
     gateway_status: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The lead ID associated with this transaction.
+    # Lead ID connected to this transaction when the charge came from lead activity.
     lead_id: Optional[str] = None
-    # The lead name value for this transaction.
+    # Lead display name shown for lead-related wallet transactions.
     lead_name: Optional[str] = None
-    # Provider and wallet audit metadata for this transaction.
+    # Structured metadata used for attribution, integrations, and reporting on this billing transaction response.
     metadata: Optional[TransactionResponse_metadata] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # The modified by value for this transaction.
+    # Display name or identifier for the person or system that last modified this billing transaction response.
     modified_by: Optional[str] = None
-    # The monetary net amount for this transaction.
+    # Net monetary amount after fees, credits, or adjustments.
     net_amount: Optional[float] = None
-    # The operator or customer notes recorded for this transaction.
+    # Additional billing notes that explain the transaction for admins or customers.
     notes: Optional[str] = None
-    # The payment method display value for this transaction.
+    # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
-    # The current transaction status for this transaction.
+    # Processing status for this wallet transaction.
     transaction_status: Optional[TransactionStatus] = None
-    # The transaction type classification for this transaction.
+    # Debit or credit classification for this wallet transaction.
     transaction_type: Optional[TransactionType] = None
     
     @staticmethod

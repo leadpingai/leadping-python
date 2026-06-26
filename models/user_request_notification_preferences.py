@@ -12,7 +12,7 @@ from .user_notification_preferences import UserNotificationPreferences
 @dataclass
 class UserRequest_notificationPreferences(UserNotificationPreferences, Parsable):
     """
-    The notification preferences value for this user.
+    Notification preferences configured for the user.
     """
     
     @staticmethod

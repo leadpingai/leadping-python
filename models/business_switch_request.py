@@ -7,12 +7,12 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class BusinessSwitchRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for business switch.
+    Request schema for the Leadping API business switch request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The business ID associated with this business switch.
+    # Business ID to switch into for the current Leadping session.
     business_id: Optional[str] = None
     
     @staticmethod

@@ -11,38 +11,38 @@ if TYPE_CHECKING:
 @dataclass
 class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing eligible outgoing number data returned to callers.
+    Response schema for the Leadping API eligible outgoing phone number returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The campaign ID associated with this eligible outgoing number.
+    # Messaging campaign identifier associated with this eligible outgoing phone number.
     campaign_id: Optional[str] = None
-    # Whether the caller can send this eligible outgoing number.
+    # Indicates whether Leadping can send outbound messages using this eligible outgoing phone number.
     can_send: Optional[bool] = None
-    # The display number value for this eligible outgoing number.
+    # Human-readable phone number shown in Leadping UI and API responses.
     display_number: Optional[str] = None
-    # The health label value for this eligible outgoing number.
+    # Short label describing the health state for display in dashboards.
     health_label: Optional[str] = None
     # Defines the supported SMS Warmup Health State values.
     health_status: Optional[EligibleOutgoingNumberResponse_healthStatus] = None
-    # The health warning value for this eligible outgoing number.
+    # Warning text that explains a potential health or readiness issue.
     health_warning: Optional[str] = None
-    # Whether this eligible outgoing number is selected.
+    # Indicates whether this eligible outgoing phone number was selected for the requested operation.
     is_selected: Optional[bool] = None
-    # The human-readable label shown for this eligible outgoing number.
+    # Short display label for this eligible outgoing phone number, formatted for charts, filters, or list views.
     label: Optional[str] = None
-    # The number value for this eligible outgoing number.
+    # E.164 phone number exposed by this eligible outgoing phone number.
     number: Optional[str] = None
-    # The phone number ID associated with this eligible outgoing number.
+    # Leadping phone number ID connected to this eligible outgoing phone number.
     phone_number_id: Optional[str] = None
-    # The reason label value for this eligible outgoing number.
+    # Human-readable label for the reason code on this eligible outgoing phone number.
     reason_label: Optional[str] = None
-    # The human-readable selection reason explaining this eligible outgoing number.
+    # Reason Leadping selected this outbound sender number.
     selection_reason: Optional[OutgoingNumberSelectionReason] = None
-    # The source ID associated with this eligible outgoing number.
+    # Lead source ID used to determine this phone number's outbound eligibility.
     source_id: Optional[str] = None
-    # The team ID associated with this eligible outgoing number.
+    # Team ID used to determine this phone number's outbound eligibility.
     team_id: Optional[str] = None
     
     @staticmethod

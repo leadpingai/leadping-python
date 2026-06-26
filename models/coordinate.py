@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class Coordinate(AdditionalDataHolder, Parsable):
     """
-    The coordinate inferred for this lead contact.
+    Latitude and longitude coordinate for this lead contact profile.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

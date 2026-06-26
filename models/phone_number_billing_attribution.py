@@ -7,22 +7,22 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberBillingAttribution(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone number billing attribution data used by Leadping API contracts.
+    Public Leadping API schema for phone number billing attribution data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The business ID associated with this phone number billing attribution.
+    # Business ID responsible for billing this phone number.
     business_id: Optional[str] = None
-    # The business name value for this phone number billing attribution.
+    # Business display name used in phone number billing records.
     business_name: Optional[str] = None
-    # The channel value for this phone number billing attribution.
+    # Communication channel used for this phone number billing attribution, such as SMS or voice.
     channel: Optional[str] = None
-    # The subscription item ID associated with this phone number billing attribution.
+    # Stripe subscription item identifier used for phone number billing.
     subscription_item_id: Optional[str] = None
-    # The user ID associated with this phone number billing attribution.
+    # User ID associated with phone number billing responsibility, when applicable.
     user_id: Optional[str] = None
-    # The user name value for this phone number billing attribution.
+    # Display name for the user connected to this phone number billing attribution.
     user_name: Optional[str] = None
     
     @staticmethod

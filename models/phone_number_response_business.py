@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class PhoneNumberResponse_business(IdNamePair, Parsable):
     """
-    The business value for this phone number.
+    Business summary connected to this phone number.
     """
     
     @staticmethod

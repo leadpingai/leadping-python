@@ -34,7 +34,7 @@ class NewRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OutgoingNumberSelectionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OutgoingNumberSelectionResponse]:
         """
         Selects an outgoing phone number for a new outbound lead message using destination, source, and delivery eligibility rules.
-        param body: Request payload for outgoing number selection.
+        param body: Request schema for the Leadping API outgoing number selection request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OutgoingNumberSelectionResponse]
         """
@@ -57,7 +57,7 @@ class NewRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OutgoingNumberSelectionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Selects an outgoing phone number for a new outbound lead message using destination, source, and delivery eligibility rules.
-        param body: Request payload for outgoing number selection.
+        param body: Request schema for the Leadping API outgoing number selection request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

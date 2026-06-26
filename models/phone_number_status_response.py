@@ -14,30 +14,30 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number status data returned to callers.
+    Response schema for the Leadping API phone number readiness status returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The voice call warmup value for this phone number status.
+    # Voice call warmup status for this phone number.
     call_warmup: Optional[PhoneNumberStatusResponse_callWarmup] = None
-    # The calls possible value for this phone number status.
+    # Indicates whether this phone number can currently place outbound calls.
     calls_possible: Optional[int] = None
-    # The messages possible value for this phone number status.
+    # Indicates whether this phone number can currently send SMS messages.
     messages_possible: Optional[int] = None
-    # The messages warmed value for this phone number status.
+    # Number of warmup SMS messages completed for this sender.
     messages_warmed: Optional[int] = None
-    # The number value for this phone number status.
+    # E.164 phone number exposed by this phone number readiness status.
     number: Optional[str] = None
-    # The opt out metrics value for this phone number status.
+    # Recent SMS opt-out metrics used to evaluate sender health and compliance risk.
     opt_out_metrics: Optional[PhoneNumberOptOutMetricsResponse] = None
-    # The recent events included with this phone number status.
+    # Recent workflow events returned for timeline and troubleshooting.
     recent_events: Optional[list[PhoneNumberMessagingEventResponse]] = None
-    # The SMS warmup value for this phone number status.
+    # SMS sender warmup status for this phone number.
     sms_warmup: Optional[PhoneNumberStatusResponse_smsWarmup] = None
-    # The traffic metrics value for this phone number status.
+    # Phone number traffic metrics for recent SMS and call activity.
     traffic_metrics: Optional[PhoneNumberTrafficMetricsResponse] = None
-    # The warmup calls made value for this phone number status.
+    # Number of voice warmup calls completed for this phone number.
     warmup_calls_made: Optional[int] = None
     
     @staticmethod

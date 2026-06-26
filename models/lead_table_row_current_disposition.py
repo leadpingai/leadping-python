@@ -12,7 +12,7 @@ from .current_disposition_summary import CurrentDispositionSummary
 @dataclass
 class LeadTableRow_currentDisposition(CurrentDispositionSummary, Parsable):
     """
-    The current lifecycle disposition for this lead.
+    Current disposition summary that describes the lead outcome.
     """
     
     @staticmethod

@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class SourceResponse_createdByUser(IdNamePair, Parsable):
     """
-    The user that created this source.
+    User summary for the person who created this lead source response.
     """
     
     @staticmethod

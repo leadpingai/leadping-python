@@ -11,18 +11,18 @@ if TYPE_CHECKING:
 @dataclass
 class FeedbackAdminUpdateRequest(AdditionalDataHolder, Parsable):
     """
-    Admin triage update request for product feedback.
+    Request schema for the Leadping API feedback admin update request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminNote property
+    # Internal admin note used to track feedback review or resolution.
     admin_note: Optional[str] = None
-    # The area property
+    # Product area or app section connected to this feedback admin update request.
     area: Optional[str] = None
-    # The duplicateOfFeedbackItemId property
+    # Feedback item ID that this item duplicates, when applicable.
     duplicate_of_feedback_item_id: Optional[str] = None
-    # The externalIssueUrl property
+    # External issue tracker URL linked to this feedback item.
     external_issue_url: Optional[str] = None
     # Defines admin triage statuses for durable product feedback.
     status: Optional[FeedbackAdminUpdateRequest_status] = None

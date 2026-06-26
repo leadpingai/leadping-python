@@ -12,56 +12,56 @@ if TYPE_CHECKING:
 @dataclass
 class CallEventTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing call event data used by Leadping API contracts.
+    List item schema for Leadping API call event table row results shown in searchable tables.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the answered at value on this call event.
+    # UTC timestamp when the call was answered.
     answered_at: Optional[datetime.datetime] = None
-    # The billing phone number ID associated with this call event.
+    # Phone number identifier used for billing reconciliation.
     billing_phone_number_id: Optional[str] = None
-    # The current billing status for this call event.
+    # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
-    # The business value for this call event.
+    # Business summary connected to this call event table row.
     business: Optional[str] = None
-    # The business ID associated with this call event.
+    # Business ID associated with this call event.
     business_id: Optional[str] = None
-    # The caller ID associated with this call event.
+    # Caller ID phone number presented during the outbound call.
     caller_id: Optional[str] = None
-    # The conversation ID associated with this call event.
+    # Conversation ID that links this call event table row to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The date and time for the created at value on this call event.
+    # UTC timestamp when this call event table row was created.
     created_at: Optional[datetime.datetime] = None
-    # The direction value for this call event.
+    # Communication direction for this call event table row, such as inbound or outbound.
     direction: Optional[str] = None
-    # The date and time for the ended at value on this call event.
+    # UTC timestamp when the call ended.
     ended_at: Optional[datetime.datetime] = None
-    # The phone number associated with this call event.
+    # Sender phone number used for this communication.
     from_phone_number: Optional[str] = None
-    # The from phone number ID associated with this call event.
+    # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # The unique ID for this call event.
+    # Unique Leadping identifier for this call event table row.
     id: Optional[str] = None
-    # The lead ID associated with this call event.
+    # Lead ID associated with this call event.
     lead_id: Optional[str] = None
-    # The metadata key-value data carried with this call event; values must be safe to expose in API responses.
+    # Structured metadata used for attribution, integrations, and reporting on this call event table row.
     metadata: Optional[CallEventTableRow_metadata] = None
-    # The current provider status for this call event.
+    # Provider lifecycle or delivery status for this call event table row.
     provider_status: Optional[str] = None
-    # The URL associated with this call event.
+    # URL for the call recording, when the provider makes one available.
     recording_url: Optional[str] = None
     # Defines the supported Phone Call Status values.
     status: Optional[CallEventTableRow_status] = None
-    # The human-readable status reason explaining this call event.
+    # Human-readable reason explaining the current status of this call event table row.
     status_reason: Optional[str] = None
-    # The Telnyx ID associated with this call event.
+    # Telnyx identifier connected to this phone number, call, or SMS event.
     telnyx_id: Optional[str] = None
-    # The phone number associated with this call event.
+    # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
-    # The user value for this call event.
+    # User summary connected to this call event table row.
     user: Optional[str] = None
-    # The user ID associated with this call event.
+    # User ID associated with the person or agent who initiated this call event.
     user_id: Optional[str] = None
     
     @staticmethod

@@ -25,118 +25,118 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number data returned to callers.
+    Response schema for the Leadping API phone number returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[PhoneNumberResponse_adminEnablementOverride] = None
-    # The billing value for this phone number.
+    # Billing attribution used to charge this phone number to the correct business and subscription item.
     billing: Optional[PhoneNumberBillingAttribution] = None
-    # The business value for this phone number.
+    # Business summary connected to this phone number.
     business: Optional[PhoneNumberResponse_business] = None
-    # Whether controlled internal voice call warmup is enabled for this phone number.
+    # Indicates whether controlled voice call warmup is enabled for this phone number.
     call_warmup_enabled: Optional[bool] = None
-    # The human-readable voice call warmup health reason for this phone number.
+    # Human-readable reason explaining voice call warmup health.
     call_warmup_health_reason: Optional[str] = None
-    # The next voice call warmup action time for this phone number.
+    # UTC timestamp when the next voice call warmup action is due for this phone number.
     call_warmup_next_action_at: Optional[datetime.datetime] = None
-    # The human-readable voice call warmup pause reason for this phone number.
+    # Human-readable reason voice call warmup is paused.
     call_warmup_pause_reason: Optional[str] = None
     # Defines the supported voice call warmup stages for a Leadping-managed phone number.
     call_warmup_stage: Optional[PhoneNumberResponse_callWarmupStage] = None
     # Defines the supported health states for controlled internal voice call warmup.
     call_warmup_state: Optional[PhoneNumberResponse_callWarmupState] = None
-    # The campaign ID associated with this phone number.
+    # Messaging campaign identifier associated with this phone number.
     campaign_id: Optional[str] = None
-    # The capabilities value for this phone number.
+    # SMS and voice capabilities available on this phone number.
     capabilities: Optional[PhoneNumberCapabilities] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # Whether this phone number is enabled.
+    # Indicates whether this phone number is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The events included with this phone number.
+    # Timeline events and provider events associated with this phone number.
     events: Optional[list[PhoneNumberEventRecord]] = None
-    # The human-readable health reason explaining this phone number.
+    # Human-readable reason explaining the current health status.
     health_reason: Optional[str] = None
     # Defines the supported SMS Warmup Health State values.
     health_status: Optional[PhoneNumberResponse_healthStatus] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The current inventory state for this phone number.
+    # Leadping inventory state for this phone number.
     inventory_state: Optional[PhoneNumberInventoryState] = None
-    # Whether this phone number is approved test destination.
+    # Indicates whether this phone number is approved for test messages or calls.
     is_approved_test_destination: Optional[bool] = None
-    # Whether this phone number is default.
+    # Indicates whether this phone number is the default sender for the business.
     is_default: Optional[bool] = None
-    # Whether this phone number is internal pool.
+    # Indicates whether this phone number belongs to an internal Leadping number pool.
     is_internal_pool: Optional[bool] = None
-    # Whether this phone number is messaging program approved.
+    # Indicates whether this phone number is approved for the configured messaging program.
     is_messaging_program_approved: Optional[bool] = None
-    # Whether this phone number is preferred.
+    # Indicates whether this phone number is preferred for outbound communication.
     is_preferred: Optional[bool] = None
-    # Whether this phone number is Leadping owned.
+    # Indicates whether Leadping provisions and manages this phone number.
     leadping_owned: Optional[bool] = None
-    # The location value for this phone number.
+    # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneNumberResponse_location] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The number value for this phone number.
+    # E.164 phone number exposed by this phone number.
     number: Optional[str] = None
-    # The provider value for this phone number.
+    # Telephony or payment provider connected to this phone number.
     provider: Optional[str] = None
-    # The provider error value for this phone number.
+    # Provider error message captured while syncing this phone number.
     provider_error: Optional[str] = None
-    # The provider order ID associated with this phone number.
+    # Provider order identifier returned during phone number provisioning.
     provider_order_id: Optional[str] = None
-    # The current provider order status for this phone number.
+    # Provider order status returned during phone number provisioning.
     provider_order_status: Optional[str] = None
-    # The provider phone number ID associated with this phone number.
+    # Provider phone number identifier used to reconcile Leadping inventory with Telnyx.
     provider_phone_number_id: Optional[str] = None
-    # The providerReleaseHoldStartsAt property
+    # UTC timestamp when the provider release hold starts for this phone number.
     provider_release_hold_starts_at: Optional[datetime.datetime] = None
-    # The providerReleaseReason property
+    # Reason supplied when requesting provider release of this phone number.
     provider_release_reason: Optional[str] = None
-    # The providerReleaseRequestedAt property
+    # UTC timestamp when release was requested for this provider phone number.
     provider_release_requested_at: Optional[datetime.datetime] = None
-    # The providerReleaseRequestedByName property
+    # Display name of the person who requested provider release of this phone number.
     provider_release_requested_by_name: Optional[str] = None
-    # The providerReleaseRequestedByUserId property
+    # User ID of the person who requested provider release of this phone number.
     provider_release_requested_by_user_id: Optional[str] = None
-    # The providerReleaseScheduledAt property
+    # UTC timestamp when provider release is scheduled for this phone number.
     provider_release_scheduled_at: Optional[datetime.datetime] = None
-    # The providerReleaseUnassignAtHoldStart property
+    # Indicates whether Leadping should unassign the phone number when the provider release hold starts.
     provider_release_unassign_at_hold_start: Optional[bool] = None
-    # The date and time for the provider released at value on this phone number.
+    # UTC timestamp when the provider released this phone number.
     provider_released_at: Optional[datetime.datetime] = None
-    # The current provider status for this phone number.
+    # Provider lifecycle or delivery status for this phone number.
     provider_status: Optional[str] = None
-    # The date and time for the provider synced at value on this phone number.
+    # UTC timestamp when Leadping last synchronized this phone number with the provider.
     provider_synced_at: Optional[datetime.datetime] = None
-    # The routing value for this phone number.
+    # Routing metadata that connects this phone number to teams, campaigns, and sources.
     routing: Optional[PhoneNumberRoutingMetadata] = None
-    # The source ID associated with this phone number.
+    # Lead source ID assigned to this phone number for attribution and routing.
     source_id: Optional[str] = None
-    # The current status for this phone number.
+    # Current lifecycle status for this phone number in the Leadping API.
     status: Optional[InternalPhoneNumberStatus] = None
-    # The team ID associated with this phone number.
+    # Team ID used to route calls and messages for this phone number.
     team_id: Optional[str] = None
-    # The 10DLC value for this phone number.
+    # 10DLC registration and campaign association for this phone number.
     ten_dlc: Optional[PhoneNumberTenDlcAssociation] = None
-    # The user value for this phone number.
+    # User summary connected to this phone number.
     user: Optional[PhoneNumberResponse_user] = None
-    # Whether warmup is enabled for this phone number.
+    # Indicates whether SMS sender warmup is enabled for this phone number.
     warmup_enabled: Optional[bool] = None
-    # The warmup health score metric for this phone number.
+    # Numeric sender warmup health score used by Leadping to assess deliverability readiness.
     warmup_health_score: Optional[int] = None
-    # The date and time for the warmup next action at value on this phone number.
+    # UTC timestamp when the next SMS warmup action is due for this phone number.
     warmup_next_action_at: Optional[datetime.datetime] = None
-    # The human-readable warmup pause reason explaining this phone number.
+    # Human-readable reason SMS sender warmup is paused.
     warmup_pause_reason: Optional[str] = None
-    # The warmup progress percent metric for this phone number.
+    # Percent complete for the SMS sender warmup plan.
     warmup_progress_percent: Optional[int] = None
     # Defines the supported SMS Warmup Health State values.
     warmup_state: Optional[PhoneNumberResponse_warmupState] = None

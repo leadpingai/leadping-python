@@ -10,24 +10,24 @@ if TYPE_CHECKING:
 @dataclass
 class OutgoingNumberSelectionRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for outgoing number selection.
+    Request schema for the Leadping API outgoing number selection request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The campaign ID associated with this outgoing number selection.
+    # Messaging campaign identifier associated with this outgoing number selection request.
     campaign_id: Optional[str] = None
     # Defines the supported Outgoing Number Channel values.
     channel: Optional[OutgoingNumberSelectionRequest_channel] = None
-    # The conversation ID associated with this outgoing number selection.
+    # Conversation ID that links this outgoing number selection request to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The lead ID associated with this outgoing number selection.
+    # Lead ID used to choose the best outgoing sender number.
     lead_id: Optional[str] = None
-    # The recipient phone number value for this outgoing number selection.
+    # Recipient phone number that receives the outbound message or call.
     recipient_phone_number: Optional[str] = None
-    # The source ID associated with this outgoing number selection.
+    # Lead source ID used to choose the best outgoing sender number.
     source_id: Optional[str] = None
-    # The team ID associated with this outgoing number selection.
+    # Team ID used to choose the best outgoing sender number.
     team_id: Optional[str] = None
     
     @staticmethod

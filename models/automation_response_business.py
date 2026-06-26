@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class AutomationResponse_business(IdNamePair, Parsable):
     """
-    The business value for this automation.
+    Business summary connected to this automation configuration response.
     """
     
     @staticmethod

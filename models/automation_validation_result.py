@@ -7,14 +7,14 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AutomationValidationResult(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation validation result data used by Leadping API contracts.
+    Result schema for the Leadping API automation validation result returned by lookup and validation endpoints.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The errors included with this automation validation result.
+    # Validation or processing errors returned for this automation validation result.
     errors: Optional[list[str]] = None
-    # The warnings included with this automation validation result.
+    # Warnings returned for this automation validation result that do not necessarily block processing.
     warnings: Optional[list[str]] = None
     
     @staticmethod

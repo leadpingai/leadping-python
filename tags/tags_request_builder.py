@@ -64,7 +64,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: TagRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[TagResponse]:
         """
         Creates a tag for the current business so leads can be segmented, filtered, routed, and reviewed by label.
-        param body: Request payload for creating or updating a business tag.
+        param body: Request schema for the Leadping API tag request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[TagResponse]
         """
@@ -98,7 +98,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: TagRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates a tag for the current business so leads can be segmented, filtered, routed, and reviewed by label.
-        param body: Request payload for creating or updating a business tag.
+        param body: Request schema for the Leadping API tag request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

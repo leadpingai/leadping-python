@@ -8,44 +8,44 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation action run record data used by Leadping API contracts.
+    History record schema for Leadping API automation action run record data exposed in automation and audit views.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The action ID associated with this automation action run record.
+    # Automation action ID executed or evaluated by this automation action run record.
     action_id: Optional[str] = None
-    # The action type classification for this automation action run record.
+    # Automation action type, such as send SMS or create task.
     action_type: Optional[str] = None
-    # The automation run ID associated with this automation action run record.
+    # Automation run ID connected to this action or event record.
     automation_run_id: Optional[str] = None
-    # The date and time for the completed at value on this automation action run record.
+    # UTC timestamp when processing completed for this automation action run record.
     completed_at: Optional[datetime.datetime] = None
-    # The connection key value for this automation action run record.
+    # Stable integration connection key used by this automation action.
     connection_key: Optional[str] = None
-    # The error value for this automation action run record.
+    # Error text returned while processing this automation action run record.
     error: Optional[str] = None
-    # The execution key value for this automation action run record.
+    # Idempotency key used to identify a unique automation workflow execution.
     execution_key: Optional[str] = None
-    # The date and time when this action failed.
+    # UTC timestamp when processing failed for this automation action run record.
     failed_at: Optional[datetime.datetime] = None
-    # The failure code value for this automation action run record.
+    # Machine-readable failure code for troubleshooting this automation action run record.
     failure_code: Optional[str] = None
-    # The unique ID for this automation action run record.
+    # Unique Leadping identifier for this automation action run record.
     id: Optional[str] = None
-    # The date and time when this action will retry, if retrying is scheduled.
+    # UTC timestamp when Leadping will retry this automation action run record.
     next_retry_at: Optional[datetime.datetime] = None
-    # The order value for this automation action run record.
+    # Sort order used to evaluate or display this automation action run record.
     order: Optional[int] = None
-    # The output value for this automation action run record.
+    # Generated output returned by this automation action run record.
     output: Optional[str] = None
-    # The processing attempts value for this automation action run record.
+    # Number of processing attempts made for this workflow or delivery request.
     processing_attempts: Optional[int] = None
-    # The date and time when this action was scheduled to run, if it is delayed.
+    # UTC timestamp when this automation action run record was scheduled.
     scheduled_at: Optional[datetime.datetime] = None
-    # The date and time for the started at value on this automation action run record.
+    # UTC timestamp when processing started for this automation action run record.
     started_at: Optional[datetime.datetime] = None
-    # The current status for this automation action run record.
+    # Current lifecycle status for this automation action run record in the Leadping API.
     status: Optional[str] = None
     
     @staticmethod

@@ -10,16 +10,16 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationConditionGroup(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation condition group data used by Leadping API contracts.
+    Public Leadping API schema for automation condition group data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The conditions included with this automation condition group.
+    # Automation conditions evaluated before an action or workflow runs.
     conditions: Optional[list[AutomationCondition]] = None
-    # The unique ID for this automation condition group.
+    # Unique Leadping identifier for this automation condition group.
     id: Optional[str] = None
-    # The mode value for this automation condition group.
+    # Execution mode that controls how this automation condition group is evaluated.
     mode: Optional[str] = None
     
     @staticmethod

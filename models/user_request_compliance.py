@@ -12,7 +12,7 @@ from .user_compliance import UserCompliance
 @dataclass
 class UserRequest_compliance(UserCompliance, Parsable):
     """
-    The compliance value for this user.
+    User compliance settings and attestations captured for Leadping account review.
     """
     
     @staticmethod

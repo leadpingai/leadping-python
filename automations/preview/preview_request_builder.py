@@ -34,7 +34,7 @@ class PreviewRequestBuilder(BaseRequestBuilder):
     async def post(self,body: AutomationPreviewRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationPreviewResponse]:
         """
         Previews automation execution for a sample lead, showing matched steps and messages without creating follow-up events.
-        param body: API DTO containing automation preview data used by Leadping API contracts.
+        param body: Request schema for the Leadping API automation preview request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationPreviewResponse]
         """
@@ -57,7 +57,7 @@ class PreviewRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: AutomationPreviewRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Previews automation execution for a sample lead, showing matched steps and messages without creating follow-up events.
-        param body: API DTO containing automation preview data used by Leadping API contracts.
+        param body: Request schema for the Leadping API automation preview request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -12,7 +12,7 @@ from .street_address import StreetAddress
 @dataclass
 class LeadContact_streetAddress(StreetAddress, Parsable):
     """
-    The street address value for this lead contact.
+    Postal street address for the lead contact profile.
     """
     
     @staticmethod

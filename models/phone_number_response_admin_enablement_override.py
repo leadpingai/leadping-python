@@ -11,6 +11,9 @@ from .admin_enablement_override import AdminEnablementOverride
 
 @dataclass
 class PhoneNumberResponse_adminEnablementOverride(AdminEnablementOverride, Parsable):
+    """
+    Admin override that can enable or disable this record independently of normal status checks.
+    """
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberResponse_adminEnablementOverride:

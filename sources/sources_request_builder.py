@@ -50,7 +50,7 @@ class SourcesRequestBuilder(BaseRequestBuilder):
     async def post(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
         """
         Creates a lead source for the current business, storing intake credentials and routing context for captured external leads.
-        param body: Request payload for source.
+        param body: Request schema for the Leadping API lead source request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SourceResponse]
         """
@@ -73,7 +73,7 @@ class SourcesRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates a lead source for the current business, storing intake credentials and routing context for captured external leads.
-        param body: Request payload for source.
+        param body: Request schema for the Leadping API lead source request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

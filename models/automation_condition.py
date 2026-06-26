@@ -10,20 +10,20 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationCondition(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation condition data used by Leadping API contracts.
+    Public Leadping API schema for automation condition data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The unique ID for this automation condition.
+    # Unique Leadping identifier for this automation condition.
     id: Optional[str] = None
-    # Whether this automation condition is enabled.
+    # Indicates whether this automation condition is active and allowed to run.
     is_enabled: Optional[bool] = None
-    # The operator value for this automation condition.
+    # Automation comparison operator used by this condition.
     operator: Optional[str] = None
-    # The settings key-value data carried with this automation condition; values must be safe to expose in API responses.
+    # Key-value settings that configure how this automation condition behaves.
     settings: Optional[AutomationCondition_settings] = None
-    # The type classification for this automation condition.
+    # Type classification used to route and interpret this automation condition in the Leadping API.
     type: Optional[str] = None
     
     @staticmethod

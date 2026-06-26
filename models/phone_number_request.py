@@ -10,22 +10,22 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for phone number.
+    Request schema for the Leadping API phone number update request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[PhoneNumberRequest_adminEnablementOverride] = None
-    # The business ID associated with this phone number.
+    # Business ID that owns the phone number being created or updated.
     business_id: Optional[str] = None
-    # Whether this phone number is enabled.
+    # Indicates whether this phone number update request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The number value for this phone number.
+    # E.164 phone number exposed by this phone number update request.
     number: Optional[str] = None
     
     @staticmethod

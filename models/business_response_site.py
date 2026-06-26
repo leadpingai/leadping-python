@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class BusinessResponse_site(IdNamePair, Parsable):
     """
-    The website value for this business.
+    Leadping website record connected to this business.
     """
     
     @staticmethod

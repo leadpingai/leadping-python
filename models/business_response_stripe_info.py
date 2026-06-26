@@ -12,7 +12,7 @@ from .business_stripe_info import BusinessStripeInfo
 @dataclass
 class BusinessResponse_stripeInfo(BusinessStripeInfo, Parsable):
     """
-    Stripe billing state owned by this business.
+    Stripe customer and subscription state associated with this business or user.
     """
     
     @staticmethod

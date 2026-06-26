@@ -51,7 +51,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[LeadsRequestBuilderPostQueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Creates a source-authenticated lead captured outside Leadping, starting follow-up, routing, and automation from structured lead data.
-        param body: Request payload for lead.
+        param body: Request schema for the Leadping API lead request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -77,7 +77,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[LeadsRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Creates a source-authenticated lead captured outside Leadping, starting follow-up, routing, and automation from structured lead data.
-        param body: Request payload for lead.
+        param body: Request schema for the Leadping API lead request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

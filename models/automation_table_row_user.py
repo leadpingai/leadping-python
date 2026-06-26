@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class AutomationTableRow_user(IdNamePair, Parsable):
     """
-    The user value for this automation.
+    User summary connected to this automation table row.
     """
     
     @staticmethod

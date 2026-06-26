@@ -7,28 +7,28 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberRoutingMetadata(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone number routing metadata data used by Leadping API contracts.
+    Public Leadping API schema for phone number routing metadata data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The campaign ID associated with this phone number routing metadata.
+    # Messaging campaign identifier associated with this phone number routing metadata.
     campaign_id: Optional[str] = None
-    # Whether internal test only applies to this phone number routing metadata.
+    # Indicates whether this record is restricted to internal Leadping testing.
     internal_test_only: Optional[bool] = None
-    # The messaging profile ID associated with this phone number routing metadata.
+    # Messaging profile identifier used for SMS routing with the provider.
     messaging_profile_id: Optional[str] = None
-    # Whether SMS is enabled for this phone number routing metadata.
+    # Indicates whether the phone number can be used for SMS messaging.
     sms_enabled: Optional[bool] = None
-    # The source ID associated with this phone number routing metadata.
+    # Lead source ID assigned to this phone number for attribution and routing.
     source_id: Optional[str] = None
-    # The team ID associated with this phone number routing metadata.
+    # Team ID used to route calls and messages for this phone number.
     team_id: Optional[str] = None
-    # The voice connection ID associated with this phone number routing metadata.
+    # Leadping v oi ce co nn ec ti o n ID that links this phone number routing metadata to the related record.
     voice_connection_id: Optional[str] = None
-    # Whether voice is enabled for this phone number routing metadata.
+    # Indicates whether the phone number can be used for voice calls.
     voice_enabled: Optional[bool] = None
-    # Whether warmup only applies to this phone number routing metadata.
+    # Indicates whether this phone number should only be used for warmup traffic.
     warmup_only: Optional[bool] = None
     
     @staticmethod

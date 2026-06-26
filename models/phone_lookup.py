@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneLookup(AdditionalDataHolder, Parsable):
     """
-    Represents phone information retrieved from a phone number lookup
+    Public Leadping API schema for phone lookup result data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -24,15 +24,15 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # Gets or sets id.
     id: Optional[str] = None
-    # Whether this phone lookup is valid.
+    # Indicates whether this phone lookup result passed validation.
     is_valid: Optional[bool] = None
     # An enumerator describing phone line types
     line_type: Optional[PhoneLookup_lineType] = None
-    # The location value for this phone lookup.
+    # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneLookup_location] = None
     # Gets or sets modified at.
     modified_at: Optional[datetime.datetime] = None
-    # The number value for this phone lookup.
+    # E.164 phone number exposed by this phone lookup result.
     number: Optional[str] = None
     
     @staticmethod

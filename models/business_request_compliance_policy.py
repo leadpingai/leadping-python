@@ -12,7 +12,7 @@ from .business_compliance_policy import BusinessCompliancePolicy
 @dataclass
 class BusinessRequest_compliancePolicy(BusinessCompliancePolicy, Parsable):
     """
-    The compliance policy value for this business.
+    Compliance policy configuration for the business.
     """
     
     @staticmethod

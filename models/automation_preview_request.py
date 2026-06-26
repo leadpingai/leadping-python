@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationPreviewRequest(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation preview data used by Leadping API contracts.
+    Request schema for the Leadping API automation preview request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The automation value for this automation preview.
+    # Automation configuration to evaluate without executing live actions.
     automation: Optional[AutomationRequestSnapshot] = None
-    # The trigger type classification for this automation preview.
+    # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
     
     @staticmethod

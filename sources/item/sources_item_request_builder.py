@@ -73,7 +73,7 @@ class SourcesItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
         """
         Updates a lead source for the current business, changing intake settings, credentials, routing context, or active status.
-        param body: Request payload for source.
+        param body: Request schema for the Leadping API lead source request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SourceResponse]
         """
@@ -118,7 +118,7 @@ class SourcesItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates a lead source for the current business, changing intake settings, credentials, routing context, or active status.
-        param body: Request payload for source.
+        param body: Request schema for the Leadping API lead source request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -12,36 +12,36 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation request snapshot data used by Leadping API contracts.
+    Public Leadping API schema for automation request snapshot data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actions included with this automation request snapshot.
+    # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # The business ID associated with this automation request snapshot.
+    # Business ID captured when the automation request snapshot was created.
     business_id: Optional[str] = None
-    # The condition groups included with this automation request snapshot.
+    # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
-    # The created by user ID associated with this automation request snapshot.
+    # User ID of the person who created this automation request snapshot.
     created_by_user_id: Optional[str] = None
-    # The human-readable description of this automation request snapshot.
+    # Human-readable description that explains this automation request snapshot to API users.
     description: Optional[str] = None
-    # Whether this automation request snapshot is enabled.
+    # Indicates whether this automation request snapshot is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique ID for this automation request snapshot.
+    # Unique Leadping identifier for this automation request snapshot.
     id: Optional[str] = None
-    # Whether this automation request snapshot is system managed.
+    # Indicates whether Leadping manages this automation request snapshot automatically instead of a user.
     is_system_managed: Optional[bool] = None
-    # The management level value for this automation request snapshot.
+    # Management level that controls whether Leadping or the business owns this automation setting.
     management_level: Optional[str] = None
-    # The human-readable name shown for this automation request snapshot.
+    # Display name for this automation request snapshot in the Leadping API.
     name: Optional[str] = None
-    # The scope value for this automation request snapshot.
+    # Scope that limits where this automation request snapshot applies in Leadping.
     scope: Optional[str] = None
-    # The triggers included with this automation request snapshot.
+    # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
-    # The visibility value for this automation request snapshot.
+    # Visibility level that controls who can see this automation request snapshot.
     visibility: Optional[str] = None
     
     @staticmethod

@@ -13,48 +13,48 @@ if TYPE_CHECKING:
 @dataclass
 class SendSmsRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for send SMS.
+    Request schema for the Leadping API SMS send request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The automation ID responsible for this SMS, if applicable.
+    # Automation ID connected to this workflow, run, or event.
     automation_id: Optional[str] = None
-    # The campaign ID associated with this SMS.
+    # Messaging campaign identifier associated with this SMS send request.
     campaign_id: Optional[str] = None
-    # The conversation ID associated with this SMS.
+    # Conversation ID that links this SMS send request to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The from phone number ID associated with this SMS.
+    # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # Whether required consent is known for this outbound SMS.
+    # Indicates whether the lead has the consent required for compliant outreach.
     has_required_consent: Optional[bool] = None
-    # The import batch ID responsible for this SMS, if applicable.
+    # Bulk import batch ID that created or updated this lead.
     import_batch_id: Optional[str] = None
-    # Whether this SMS is automated.
+    # Indicates whether automation created or triggered this SMS send request.
     is_automated: Optional[bool] = None
-    # Whether this SMS is for an imported lead.
+    # Indicates whether this record originated from a bulk import rather than a real-time lead source.
     is_imported_lead: Optional[bool] = None
-    # The outbound delivery request ID assigned by delivery control.
+    # Outbound delivery request ID connected to this decision or attempt.
     outbound_delivery_request_id: Optional[str] = None
-    # Optional idempotency key for retry-safe outbound delivery control.
+    # Idempotency key used to prevent duplicate outbound delivery.
     outbound_idempotency_key: Optional[str] = None
     # Defines priority classes used when pacing outbound delivery.
     outbound_priority: Optional[SendSmsRequest_outboundPriority] = None
-    # The outbound reservation ID assigned by delivery control.
+    # Outbound reservation ID used to throttle and track delivery capacity.
     outbound_reservation_id: Optional[str] = None
     # Defines the source that requested outbound delivery.
     outbound_source: Optional[SendSmsRequest_outboundSource] = None
-    # The date and time for the scheduled for value on this SMS.
+    # UTC timestamp when Leadping should send the SMS message.
     scheduled_for: Optional[datetime.datetime] = None
     # Defines the supported Outgoing Number Selection Reason values.
     selection_reason: Optional[SendSmsRequest_selectionReason] = None
-    # The SMS event ID associated with this SMS.
+    # Existing SMS event ID to reuse or update when retrying a send request.
     sms_event_id: Optional[str] = None
-    # The source ID associated with this SMS.
+    # Lead source ID used for attribution and sender selection.
     source_id: Optional[str] = None
-    # The text value for this SMS.
+    # Body text for the SMS message or communication represented by this SMS send request.
     text: Optional[str] = None
-    # Whether this SMS was manually overridden.
+    # Indicates whether a user manually overrode Leadping's automatic number selection for this SMS send request.
     was_manually_overridden: Optional[bool] = None
     
     @staticmethod

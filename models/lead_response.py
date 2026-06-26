@@ -16,40 +16,40 @@ if TYPE_CHECKING:
 @dataclass
 class LeadResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing lead data returned to callers.
+    Response schema for the Leadping API lead response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[LeadResponse_adminEnablementOverride] = None
-    # The archiveNote property
+    # Optional note explaining why the lead was archived.
     archive_note: Optional[str] = None
     # Defines why a lead was removed from the active working pipeline.
     archive_reason: Optional[int] = None
-    # The archivedAt property
+    # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
-    # The archivedByUserId property
+    # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
-    # The contact value for this lead.
+    # Contact details for the lead or customer represented by this lead response.
     contact: Optional[LeadContact] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # Compact current disposition state stored directly on a lead and surfaced with conversation data.
+    # Current disposition summary that describes the lead outcome.
     current_disposition: Optional[LeadResponse_currentDisposition] = None
-    # The profile value for this lead.
+    # Demographic profile details for the lead represented by this lead response.
     customer: Optional[LeadProfile] = None
-    # The enabled property
+    # Indicates whether this lead response is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
     # The isArchived property
     is_archived: Optional[bool] = None
-    # Safe, non-secret metadata associated with this lead.
+    # Structured metadata used for attribution, integrations, and reporting on this lead response.
     metadata: Optional[LeadMetadata] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # Tags currently assigned to this lead.
+    # Tags currently attached to this lead, source, or record.
     tags: Optional[list[TagSummary]] = None
     
     @staticmethod

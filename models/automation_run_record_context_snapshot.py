@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AutomationRunRecord_contextSnapshot(AdditionalDataHolder, Parsable):
     """
-    The context snapshot key-value data carried with this automation run record; values must be safe to expose in API responses.
+    Snapshot of request context captured when this automation run record was created.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

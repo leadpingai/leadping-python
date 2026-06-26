@@ -17,56 +17,56 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing automation data returned to callers.
+    Response schema for the Leadping API automation configuration response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actions included with this automation.
+    # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[AutomationResponse_adminEnablementOverride] = None
-    # The business value for this automation.
+    # Business summary connected to this automation configuration response.
     business: Optional[AutomationResponse_business] = None
-    # The business ID associated with this automation.
+    # Business ID that owns this automation.
     business_id: Optional[str] = None
-    # The condition groups included with this automation.
+    # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The created by user ID associated with this automation.
+    # User ID of the person who created this automation configuration response.
     created_by_user_id: Optional[str] = None
-    # The human-readable description of this automation.
+    # Human-readable description that explains this automation configuration response to API users.
     description: Optional[str] = None
-    # Whether this automation is enabled.
+    # Indicates whether this automation configuration response is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # Whether this automation is system managed.
+    # Indicates whether Leadping manages this automation configuration response automatically instead of a user.
     is_system_managed: Optional[bool] = None
-    # The date and time for the last run at value on this automation.
+    # UTC timestamp when this automation last ran.
     last_run_at: Optional[datetime.datetime] = None
-    # The date and time for the last run error value on this automation.
+    # Most recent automation run error message, if the last run failed.
     last_run_error: Optional[str] = None
-    # The current last run status for this automation.
+    # Status from the most recent automation run.
     last_run_status: Optional[str] = None
-    # The management level value for this automation.
+    # Management level that controls whether Leadping or the business owns this automation setting.
     management_level: Optional[str] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The recent runs included with this automation.
+    # Recent automation runs returned for history and troubleshooting.
     recent_runs: Optional[list[AutomationRunRecord]] = None
-    # The scope value for this automation.
+    # Scope that limits where this automation configuration response applies in Leadping.
     scope: Optional[str] = None
-    # The triggers included with this automation.
+    # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
-    # The user value for this automation.
+    # User summary connected to this automation configuration response.
     user: Optional[AutomationResponse_user] = None
-    # The version value for this automation.
+    # Version number for this automation configuration response schema or saved configuration.
     version: Optional[int] = None
-    # The visibility value for this automation.
+    # Visibility level that controls who can see this automation configuration response.
     visibility: Optional[str] = None
     
     @staticmethod

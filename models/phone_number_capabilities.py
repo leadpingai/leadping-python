@@ -7,18 +7,18 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberCapabilities(AdditionalDataHolder, Parsable):
     """
-    API DTO containing phone number capabilities data used by Leadping API contracts.
+    Public Leadping API schema for phone number capabilities data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Whether SMS applies to this phone number capabilities.
+    # SMS readiness details for this phone number or business.
     sms: Optional[bool] = None
-    # Whether testing applies to this phone number capabilities.
+    # Indicates whether the request should run in test mode.
     testing: Optional[bool] = None
-    # Whether voice applies to this phone number capabilities.
+    # Voice readiness details for this phone number or business.
     voice: Optional[bool] = None
-    # Whether warmup applies to this phone number capabilities.
+    # Warmup status data for this sender or phone number.
     warmup: Optional[bool] = None
     
     @staticmethod

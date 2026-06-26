@@ -7,20 +7,20 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AutomationPreviewActionResult(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation preview action result data used by Leadping API contracts.
+    Result schema for the Leadping API automation preview action result returned by lookup and validation endpoints.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The action ID associated with this automation preview action result.
+    # Automation action ID executed or evaluated by this automation preview action result.
     action_id: Optional[str] = None
-    # The rendered output value for this automation preview action result.
+    # Rendered preview output produced by this automation preview action result.
     rendered_output: Optional[str] = None
-    # The summary value for this automation preview action result.
+    # Short human-readable summary of this automation preview action result for lists, timelines, and notifications.
     summary: Optional[str] = None
-    # The warnings included with this automation preview action result.
+    # Warnings returned for this automation preview action result that do not necessarily block processing.
     warnings: Optional[list[str]] = None
-    # Whether this automation preview action result would have side effect.
+    # Indicates whether the automation preview would perform an external action if executed live.
     would_have_side_effect: Optional[bool] = None
     
     @staticmethod

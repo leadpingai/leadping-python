@@ -58,7 +58,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     async def put(self,body: BusinessRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessResponse]:
         """
         Updates the authenticated user's current business profile, including contact, settings, and communication configuration.
-        param body: Request payload for business.
+        param body: Request schema for the Leadping API business profile request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[BusinessResponse]
         """
@@ -92,7 +92,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: BusinessRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates the authenticated user's current business profile, including contact, settings, and communication configuration.
-        param body: Request payload for business.
+        param body: Request schema for the Leadping API business profile request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

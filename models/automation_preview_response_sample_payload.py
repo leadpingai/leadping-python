@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AutomationPreviewResponse_samplePayload(AdditionalDataHolder, Parsable):
     """
-    The sample payload key-value data carried with this automation preview; values must be safe to expose in API responses.
+    Example payload clients can use to understand this automation preview response format.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

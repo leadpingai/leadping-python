@@ -13,26 +13,26 @@ if TYPE_CHECKING:
 @dataclass
 class LeadRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for lead.
+    Request schema for the Leadping API lead request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[LeadRequest_adminEnablementOverride] = None
-    # The contact value for this lead.
+    # Contact details for the lead or customer represented by this lead request.
     contact: Optional[LeadContact] = None
-    # The profile value for this lead.
+    # Demographic profile details for the lead represented by this lead request.
     customer: Optional[LeadProfile] = None
-    # The enabled property
+    # Indicates whether this lead request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # Safe, non-secret metadata associated with this lead.
+    # Structured metadata used for attribution, integrations, and reporting on this lead request.
     metadata: Optional[LeadMetadata] = None
-    # Existing business tag ids to apply when the lead is created.
+    # Tag IDs assigned to or filtered against this lead.
     tag_ids: Optional[list[str]] = None
-    # Business tag names to apply when the lead is created. Missing names are created safely by lead creation flows.
+    # Tag names assigned to this lead when matching existing tags by name.
     tag_names: Optional[list[str]] = None
     
     @staticmethod

@@ -12,7 +12,7 @@ from .current_disposition_summary import CurrentDispositionSummary
 @dataclass
 class ConversationResponse_currentDisposition(CurrentDispositionSummary, Parsable):
     """
-    The current lifecycle disposition for the conversation's lead.
+    Current disposition summary that describes the lead outcome.
     """
     
     @staticmethod

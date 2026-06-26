@@ -14,102 +14,102 @@ if TYPE_CHECKING:
 @dataclass
 class EventTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing event data used by Leadping API contracts.
+    List item schema for Leadping API event timeline table row results shown in searchable tables.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The billingStatus property
+    # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
-    # The blockedAt property
+    # UTC timestamp when Leadping blocked this communication.
     blocked_at: Optional[datetime.datetime] = None
-    # The campaignId property
+    # Messaging campaign identifier associated with this event timeline table row.
     campaign_id: Optional[str] = None
-    # The cancelReason property
+    # Reason this delivery, run, or request was canceled.
     cancel_reason: Optional[str] = None
-    # The canceledAt property
+    # UTC timestamp when this delivery or workflow was canceled.
     canceled_at: Optional[datetime.datetime] = None
-    # The complianceAction property
+    # Compliance action applied to this message, lead, or sender.
     compliance_action: Optional[str] = None
-    # The conversationId property
+    # Conversation ID that links this event timeline table row to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The date and time for the created at value on this event.
+    # UTC timestamp when this event timeline table row was created.
     created_at: Optional[datetime.datetime] = None
-    # The date and time for the created by value on this event.
+    # Display name or identifier for the person or system that created this event timeline table row.
     created_by: Optional[str] = None
-    # The deliveredAt property
+    # UTC timestamp when the provider confirmed delivery.
     delivered_at: Optional[datetime.datetime] = None
-    # The human-readable description of this event.
+    # Human-readable description that explains this event timeline table row to API users.
     description: Optional[str] = None
-    # The direction property
+    # Communication direction for this event timeline table row, such as inbound or outbound.
     direction: Optional[str] = None
-    # The errorCode property
+    # Machine-readable error code returned while processing this event timeline table row.
     error_code: Optional[str] = None
-    # The eventCategory property
+    # High-level category used to group this Leadping event.
     event_category: Optional[str] = None
-    # The event type classification for this event.
+    # Event type used to classify this timeline, SMS, call, or automation event.
     event_type: Optional[str] = None
-    # The failedAt property
+    # UTC timestamp when processing failed for this event timeline table row.
     failed_at: Optional[datetime.datetime] = None
-    # The fromPhoneNumber property
+    # Sender phone number used for this communication.
     from_phone_number: Optional[str] = None
-    # The fromPhoneNumberId property
+    # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # The unique ID for this event.
+    # Unique Leadping identifier for this event timeline table row.
     id: Optional[str] = None
-    # The isWarmup property
+    # Indicates whether this event timeline table row is part of Leadping sender warmup traffic.
     is_warmup: Optional[bool] = None
-    # The leadId property
+    # Lead ID associated with this timeline event.
     lead_id: Optional[str] = None
-    # The nextRetryAt property
+    # UTC timestamp when Leadping will retry this event timeline table row.
     next_retry_at: Optional[datetime.datetime] = None
-    # The outboundPhoneNumberId property
+    # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
-    # The providerMessageId property
+    # Provider message identifier for SMS delivery tracking and reconciliation.
     provider_message_id: Optional[str] = None
-    # The queuedAt property
+    # UTC timestamp when Leadping queued this event timeline table row for processing.
     queued_at: Optional[datetime.datetime] = None
-    # The receivedAt property
+    # UTC timestamp when Leadping received this inbound event or message.
     received_at: Optional[datetime.datetime] = None
-    # The relatedEntityId property
+    # Related entity ID connected to this event or notification.
     related_entity_id: Optional[str] = None
-    # The relatedEntityType property
+    # Related entity type connected to this event or notification.
     related_entity_type: Optional[str] = None
-    # The retryCount property
+    # Number of retry attempts already made for this event timeline table row.
     retry_count: Optional[int] = None
-    # The scheduledFor property
+    # UTC timestamp when the related delivery or workflow action is scheduled to run.
     scheduled_for: Optional[datetime.datetime] = None
-    # The scheduledReason property
+    # Reason Leadping scheduled this delivery for a later time.
     scheduled_reason: Optional[str] = None
     # Defines the supported Outgoing Number Selection Reason values.
     selection_reason: Optional[EventTableRow_selectionReason] = None
-    # The sendingStartedAt property
+    # UTC timestamp when Leadping began sending this message.
     sending_started_at: Optional[datetime.datetime] = None
-    # The sentAt property
+    # UTC timestamp when Leadping sent this message to the provider.
     sent_at: Optional[datetime.datetime] = None
-    # The sourceId property
+    # Lead source ID used for event attribution.
     source_id: Optional[str] = None
     # Defines the supported Event timeline status values.
     status: Optional[EventTableRow_status] = None
-    # The statusReason property
+    # Human-readable reason explaining the current status of this event timeline table row.
     status_reason: Optional[str] = None
-    # The summary property
+    # Short human-readable summary of this event timeline table row for lists, timelines, and notifications.
     summary: Optional[str] = None
-    # The telnyxId property
+    # Telnyx identifier connected to this phone number, call, or SMS event.
     telnyx_id: Optional[str] = None
-    # The tenDlcCampaignId property
+    # 10DLC campaign identifier associated with this sender or SMS event.
     ten_dlc_campaign_id: Optional[str] = None
-    # The timelineCategory property
+    # Timeline category used to group events for display and filtering.
     timeline_category: Optional[str] = None
-    # Defines the supported Event timeline type values.
+    # Timeline type used to render this event in Leadping activity feeds.
     timeline_type: Optional[EventTimelineType] = None
-    # The toPhoneNumber property
+    # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
     # Defines the supported SMS Traffic Type values.
     traffic_type: Optional[EventTableRow_trafficType] = None
-    # The undeliverableAt property
+    # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None
-    # The wasManuallyOverridden property
+    # Indicates whether a user manually overrode Leadping's automatic number selection for this event timeline table row.
     was_manually_overridden: Optional[bool] = None
     
     @staticmethod

@@ -13,74 +13,74 @@ if TYPE_CHECKING:
 @dataclass
 class EventDetailResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing event detail data returned to callers.
+    Response schema for the Leadping API event detail response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The blockedAt property
+    # UTC timestamp when Leadping blocked this communication.
     blocked_at: Optional[datetime.datetime] = None
-    # The canceledAt property
+    # UTC timestamp when this delivery or workflow was canceled.
     canceled_at: Optional[datetime.datetime] = None
-    # The conversationId property
+    # Conversation ID that links this event detail response to the Leadping inbox thread.
     conversation_id: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The deliveredAt property
+    # UTC timestamp when the provider confirmed delivery.
     delivered_at: Optional[datetime.datetime] = None
-    # The human-readable description of this event detail.
+    # Human-readable description that explains this event detail response to API users.
     description: Optional[str] = None
-    # The direction property
+    # Communication direction for this event detail response, such as inbound or outbound.
     direction: Optional[str] = None
-    # The eventCategory property
+    # High-level category used to group this Leadping event.
     event_category: Optional[str] = None
-    # The event type classification for this event detail.
+    # Event type used to classify this timeline, SMS, call, or automation event.
     event_type: Optional[str] = None
-    # The failedAt property
+    # UTC timestamp when processing failed for this event detail response.
     failed_at: Optional[datetime.datetime] = None
-    # The fromPhoneNumber property
+    # Sender phone number used for this communication.
     from_phone_number: Optional[str] = None
-    # The fromPhoneNumberId property
+    # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The lead ID associated with this event detail.
+    # Lead ID associated with this event detail record.
     lead_id: Optional[str] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # The outboundPhoneNumberId property
+    # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
-    # The providerMessageId property
+    # Provider message identifier for SMS delivery tracking and reconciliation.
     provider_message_id: Optional[str] = None
-    # The queuedAt property
+    # UTC timestamp when Leadping queued this event detail response for processing.
     queued_at: Optional[datetime.datetime] = None
-    # The receivedAt property
+    # UTC timestamp when Leadping received this inbound event or message.
     received_at: Optional[datetime.datetime] = None
-    # The scheduledFor property
+    # UTC timestamp when the related delivery or workflow action is scheduled to run.
     scheduled_for: Optional[datetime.datetime] = None
-    # The secondary event type classification for this event detail.
+    # Secondary event type used for additional event classification.
     secondary_event_type: Optional[str] = None
-    # The sendingStartedAt property
+    # UTC timestamp when Leadping began sending this message.
     sending_started_at: Optional[datetime.datetime] = None
-    # The sentAt property
+    # UTC timestamp when Leadping sent this message to the provider.
     sent_at: Optional[datetime.datetime] = None
     # Defines the supported Event status values.
     status: Optional[EventDetailResponse_status] = None
-    # The statusReason property
+    # Human-readable reason explaining the current status of this event detail response.
     status_reason: Optional[str] = None
-    # The summary property
+    # Short human-readable summary of this event detail response for lists, timelines, and notifications.
     summary: Optional[str] = None
-    # The timelineCategory property
+    # Timeline category used to group events for display and filtering.
     timeline_category: Optional[str] = None
     # Defines the supported Event timeline type values.
     timeline_type: Optional[EventDetailResponse_timelineType] = None
-    # The toPhoneNumber property
+    # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
-    # The undeliverableAt property
+    # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None
-    # A minimal Record type with an (string), (string), and maximum JSON compatibility. The reason for this type (over something like KeyValuePair, dictionary) is because of JSON serialization support.
+    # User summary connected to this event detail response.
     user: Optional[EventDetailResponse_user] = None
-    # The user ID associated with this event detail.
+    # User ID associated with the activity that created this event.
     user_id: Optional[str] = None
     
     @staticmethod

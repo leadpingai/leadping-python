@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class UserRequest_business(IdNamePair, Parsable):
     """
-    The business value for this user.
+    Business summary connected to this user profile request.
     """
     
     @staticmethod

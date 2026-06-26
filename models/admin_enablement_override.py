@@ -7,6 +7,9 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class AdminEnablementOverride(AdditionalDataHolder, Parsable):
+    """
+    Admin override that can enable or disable this record independently of normal status checks.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 

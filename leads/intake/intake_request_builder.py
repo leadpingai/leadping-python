@@ -57,7 +57,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
     async def post(self,body: LeadIntakeRequest, request_configuration: Optional[RequestConfiguration[IntakeRequestBuilderPostQueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Creates a source-authenticated lead from a flat intake payload, capturing contact fields, metadata, and automation-ready lead details.
-        param body: Request payload for lead intake.
+        param body: Request schema for the Leadping API lead intake request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -93,7 +93,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: LeadIntakeRequest, request_configuration: Optional[RequestConfiguration[IntakeRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Creates a source-authenticated lead from a flat intake payload, capturing contact fields, metadata, and automation-ready lead details.
-        param body: Request payload for lead intake.
+        param body: Request schema for the Leadping API lead intake request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -198,106 +198,106 @@ class IntakeRequestBuilder(BaseRequestBuilder):
                 return "Zip"
             return original_name
         
-        # The address1 value for this lead intake.
+        # First street address line submitted by the lead intake source.
         address1: Optional[str] = None
 
-        # The address2 value for this lead intake.
+        # Second street address line submitted by the lead intake source.
         address2: Optional[str] = None
 
-        # The date and time for the birth date value on this lead intake.
+        # Lead birth date used for demographic matching and insurance intake workflows.
         birth_date: Optional[datetime.date] = None
 
-        # The city value for this lead intake.
+        # City for the lead or business postal address.
         city: Optional[str] = None
 
-        # The date and time for the date of birth value on this lead intake.
+        # Lead date of birth supplied by intake sources and normalized into the lead profile.
         date_of_birth: Optional[datetime.date] = None
 
-        # The direct post price value for this lead intake.
+        # Direct-post price supplied by the lead source during intake.
         direct_post_price: Optional[float] = None
 
-        # The email address associated with this lead intake.
+        # Email address for the person represented by this lead intake request.
         email: Optional[str] = None
 
-        # The external ID associated with this lead intake.
+        # External system identifier used to reconcile this lead intake request across integrations.
         external_id: Optional[str] = None
 
-        # The first name value for this lead intake.
+        # First name of the lead, user, or contact represented by this lead intake request.
         first_name: Optional[str] = None
 
-        # The gender value for this lead intake.
+        # Lead gender supplied by intake sources and normalized when possible.
         gender: Optional[str] = None
 
-        # The landing page value for this lead intake.
+        # Landing page URL where the lead submitted their information.
         landing_page: Optional[str] = None
 
-        # The date and time for the last name value on this lead intake.
+        # Last name of the lead, user, or contact represented by this lead intake request.
         last_name: Optional[str] = None
 
-        # The phone number associated with this lead intake.
+        # Phone details for the lead, user, or business represented by this lead intake request.
         phone: Optional[str] = None
 
-        # The phone type classification for this lead intake.
+        # Source-provided phone type, such as mobile, landline, or VoIP, used during lead intake normalization.
         phone_type: Optional[str] = None
 
-        # The postal code value for this lead intake.
+        # Postal code for the lead or business address.
         postal_code: Optional[str] = None
 
-        # The monetary price for this lead intake.
+        # Lead price or transaction price supplied to the Leadping API.
         price: Optional[float] = None
 
-        # The product value for this lead intake.
+        # Product or offer associated with the lead or source.
         product: Optional[str] = None
 
-        # The referrer value for this lead intake.
+        # Referring page or traffic source that sent the lead into Leadping.
         referrer: Optional[str] = None
 
-        # The seller lead ID associated with this lead intake.
+        # Seller-provided lead identifier used to deduplicate and reconcile lead delivery.
         seller_lead_id: Optional[str] = None
 
-        # The seller lead identifier value for this lead intake.
+        # Alternate seller-provided lead identifier used during intake normalization.
         seller_lead_identifier: Optional[str] = None
 
         # The Leadping source key supplied as a query string parameter.
         source_key: Optional[str] = None
 
-        # The source metadata key-value data carried with this lead intake; values must be safe to expose in API responses.
+        # Source-provided key-value metadata retained for lead attribution and integration troubleshooting.
         source_metadata: Optional[str] = None
 
-        # The current state for this lead intake.
+        # State, province, or region for the lead or business postal address.
         state: Optional[str] = None
 
-        # The sub ID associated with this lead intake.
+        # Affiliate or publisher sub ID captured for lead attribution.
         sub_id: Optional[str] = None
 
-        # Existing business tag ids to assign as part of intake.
+        # Tag IDs assigned to or filtered against this lead.
         tag_ids: Optional[list[str]] = None
 
-        # Business tag names to assign as part of intake.
+        # Tag names assigned to this lead when matching existing tags by name.
         tag_names: Optional[list[str]] = None
 
-        # The URL associated with this lead intake.
+        # TrustedForm certificate URL used as proof of consumer consent.
         trusted_form_url: Optional[str] = None
 
-        # The utm campaign value for this lead intake.
+        # UTM campaign parameter captured for lead attribution reporting.
         utm_campaign: Optional[str] = None
 
-        # The utm content value for this lead intake.
+        # UTM content parameter captured for lead attribution reporting.
         utm_content: Optional[str] = None
 
-        # The utm medium value for this lead intake.
+        # UTM medium parameter captured for lead attribution reporting.
         utm_medium: Optional[str] = None
 
-        # The utm source value for this lead intake.
+        # UTM source parameter captured for lead attribution reporting.
         utm_source: Optional[str] = None
 
-        # The utm term value for this lead intake.
+        # UTM term parameter captured for lead attribution reporting.
         utm_term: Optional[str] = None
 
-        # The vertical value for this lead intake.
+        # Industry vertical used for lead routing, compliance review, and reporting.
         vertical: Optional[str] = None
 
-        # The zip value for this lead intake.
+        # ZIP code submitted by the lead intake source.
         zip: Optional[str] = None
 
     

@@ -12,46 +12,46 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationRunRecord(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation run record data used by Leadping API contracts.
+    History record schema for Leadping API automation run record data exposed in automation and audit views.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actions included with this automation run record.
+    # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationActionRunRecord]] = None
-    # The automation ID associated with this automation run record.
+    # Automation ID connected to this workflow, run, or event.
     automation_id: Optional[str] = None
-    # The business ID associated with this automation run record.
+    # Business ID that owns this automation run.
     business_id: Optional[str] = None
-    # The date and time for the completed at value on this automation run record.
+    # UTC timestamp when processing completed for this automation run record.
     completed_at: Optional[datetime.datetime] = None
-    # The context snapshot key-value data carried with this automation run record; values must be safe to expose in API responses.
+    # Snapshot of request context captured when this automation run record was created.
     context_snapshot: Optional[AutomationRunRecord_contextSnapshot] = None
-    # The error value for this automation run record.
+    # Error text returned while processing this automation run record.
     error: Optional[str] = None
-    # The execution key value for this automation run record.
+    # Idempotency key used to identify a unique automation workflow execution.
     execution_key: Optional[str] = None
-    # The execution mode value for this automation run record.
+    # Execution mode used for automation preview or live workflow processing.
     execution_mode: Optional[str] = None
-    # The failure code value for this automation run record.
+    # Machine-readable failure code for troubleshooting this automation run record.
     failure_code: Optional[str] = None
-    # The unique ID for this automation run record.
+    # Unique Leadping identifier for this automation run record.
     id: Optional[str] = None
-    # The date and time for the last attempt at value on this automation run record.
+    # UTC timestamp when Leadping last attempted to process this automation run.
     last_attempt_at: Optional[datetime.datetime] = None
-    # The lead ID associated with this automation run record when the run is lead-scoped.
+    # Lead ID that triggered this automation run, when the run is lead-based.
     lead_id: Optional[str] = None
-    # The processing attempts value for this automation run record.
+    # Number of processing attempts made for this workflow or delivery request.
     processing_attempts: Optional[int] = None
-    # The human-readable skipped reason explaining this automation run record.
+    # Human-readable reason explaining why Leadping skipped this automation run.
     skipped_reason: Optional[str] = None
-    # The source event ID associated with this automation run record.
+    # Source event ID that triggered this workflow or outbound delivery.
     source_event_id: Optional[str] = None
-    # The date and time for the started at value on this automation run record.
+    # UTC timestamp when processing started for this automation run record.
     started_at: Optional[datetime.datetime] = None
-    # The current status for this automation run record.
+    # Current lifecycle status for this automation run record in the Leadping API.
     status: Optional[str] = None
-    # The trigger type classification for this automation run record.
+    # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
     
     @staticmethod

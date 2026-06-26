@@ -7,18 +7,18 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class TagRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for creating or updating a business tag.
+    Request schema for the Leadping API tag request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Optional palette token used for compact tag display.
+    # Hex color used to display this tag or status in Leadping clients.
     color: Optional[str] = None
-    # Optional internal description for the tag.
+    # Human-readable description that explains this tag request to API users.
     description: Optional[str] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # The business-facing tag name.
+    # Display name for this tag request in the Leadping API.
     name: Optional[str] = None
     
     @staticmethod

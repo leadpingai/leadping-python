@@ -7,18 +7,18 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class TagSummary(AdditionalDataHolder, Parsable):
     """
-    Compact tag data safe to embed on tagged entities.
+    Summary schema for Leadping API tag summary data used in dashboards and reports.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The color property
+    # Hex color used to display this tag or status in Leadping clients.
     color: Optional[str] = None
-    # The id property
+    # Unique Leadping identifier for this tag summary.
     id: Optional[str] = None
-    # The name property
+    # Display name for this tag summary in the Leadping API.
     name: Optional[str] = None
-    # The normalizedName property
+    # Normalized name used for case-insensitive tag matching and deduplication.
     normalized_name: Optional[str] = None
     
     @staticmethod

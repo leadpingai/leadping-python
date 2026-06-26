@@ -65,7 +65,7 @@ class UsersRequestBuilder(BaseRequestBuilder):
     async def post(self,body: BusinessUserRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessUserResponse]:
         """
         Adds an existing user to the current business with the requested role for shared lead communication and account access.
-        param body: Request payload for business user.
+        param body: Request schema for the Leadping API business user request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[BusinessUserResponse]
         """
@@ -100,7 +100,7 @@ class UsersRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: BusinessUserRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Adds an existing user to the current business with the requested role for shared lead communication and account access.
-        param body: Request payload for business user.
+        param body: Request schema for the Leadping API business user request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

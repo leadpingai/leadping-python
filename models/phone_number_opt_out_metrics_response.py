@@ -8,20 +8,20 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberOptOutMetricsResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number opt out metrics data returned to callers.
+    Response schema for the Leadping API phone number opt-out metrics response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The distinct contacted count for this phone number opt out metrics.
+    # Number of distinct recipients contacted during this metrics window.
     distinct_contacted_count: Optional[int] = None
-    # The opt out count for this phone number opt out metrics.
+    # Number of recipients who opted out during this metrics window.
     opt_out_count: Optional[int] = None
-    # The opt out rate percent metric for this phone number opt out metrics.
+    # Percentage of contacted recipients who opted out during this metrics window.
     opt_out_rate_percent: Optional[float] = None
-    # The date and time for the window days value on this phone number opt out metrics.
+    # Number of days included in the metrics reporting window.
     window_days: Optional[int] = None
-    # The date and time for the window started at value on this phone number opt out metrics.
+    # UTC timestamp when the metrics reporting window starts.
     window_started_at: Optional[datetime.datetime] = None
     
     @staticmethod

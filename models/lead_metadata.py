@@ -11,74 +11,74 @@ if TYPE_CHECKING:
 @dataclass
 class LeadMetadata(AdditionalDataHolder, Parsable):
     """
-    Metadata related to the origin, context, and attribution of a submitted lead.
+    Public Leadping API schema for lead attribution metadata data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The assigned phone number ID associated with this lead metadata.
+    # Phone number ID assigned to the lead, business, or source.
     assigned_phone_number_id: Optional[str] = None
-    # The business ID associated with this lead metadata.
+    # Business ID that owns this lead's attribution metadata.
     business_id: Optional[str] = None
-    # The human-readable compliance blocked reason explaining this lead metadata.
+    # Reason Leadping blocked this operation for compliance.
     compliance_blocked_reason: Optional[str] = None
-    # The current compliance status for this lead metadata.
+    # Compliance status used to decide whether Leadping can send messages.
     compliance_status: Optional[str] = None
-    # The date and time for the created at value on this lead metadata.
+    # UTC timestamp when this lead attribution metadata was created.
     created_at: Optional[datetime.datetime] = None
-    # The external ID associated with this lead metadata.
+    # External system identifier used to reconcile this lead attribution metadata across integrations.
     external_id: Optional[str] = None
-    # The import batch ID associated with this lead.
+    # Bulk import batch ID that created or updated this lead.
     import_batch_id: Optional[str] = None
-    # The IP address value for this lead metadata.
+    # IP address captured with the request for audit and compliance review.
     ip_address: Optional[str] = None
-    # Whether the lead was imported rather than received as a fresh inbound lead.
+    # Indicates whether this lead was imported rather than captured through a live source.
     is_imported: Optional[bool] = None
-    # The landing page value for this lead metadata.
+    # Landing page URL where the lead submitted their information.
     landing_page: Optional[str] = None
-    # The lead origin used by outbound pacing and automation safeguards.
+    # System or workflow that created this event.
     origin: Optional[str] = None
-    # The product value for this lead metadata.
+    # Product or offer associated with the lead or source.
     product: Optional[str] = None
-    # The pub ID associated with this lead metadata.
+    # Publisher ID supplied by the lead source for attribution.
     pub_id: Optional[str] = None
-    # The referrer value for this lead metadata.
+    # Referring page or traffic source that sent the lead into Leadping.
     referrer: Optional[str] = None
-    # The seller lead ID associated with this lead metadata.
+    # Seller-provided lead identifier used to deduplicate and reconcile lead delivery.
     seller_lead_id: Optional[str] = None
-    # The SMS consent phone number value for this lead metadata.
+    # Phone number where SMS consent was captured or evaluated.
     sms_consent_phone_number: Optional[str] = None
-    # The current SMS consent status for this lead metadata.
+    # Current SMS consent status recorded for this lead.
     sms_consent_status: Optional[str] = None
-    # The date and time for the SMS help requested at value on this lead metadata.
+    # UTC timestamp when the lead requested SMS help instructions.
     sms_help_requested_at: Optional[datetime.datetime] = None
-    # The date and time for the SMS opt in at value on this lead metadata.
+    # UTC timestamp when the lead opted in to SMS communication.
     sms_opt_in_at: Optional[datetime.datetime] = None
-    # The date and time for the SMS opt out at value on this lead metadata.
+    # UTC timestamp when the lead opted out of SMS communication.
     sms_opt_out_at: Optional[datetime.datetime] = None
-    # Whether SMS opted out applies to this lead metadata.
+    # Indicates whether the lead has opted out of SMS communication.
     sms_opted_out: Optional[bool] = None
-    # The source metadata key-value data carried with this lead metadata; values must be safe to expose in API responses.
+    # Source-provided key-value metadata retained for lead attribution and integration troubleshooting.
     source_metadata: Optional[LeadMetadata_sourceMetadata] = None
-    # The sub ID associated with this lead metadata.
+    # Affiliate or publisher sub ID captured for lead attribution.
     sub_id: Optional[str] = None
-    # The URL associated with this lead metadata.
+    # TrustedForm certificate URL used as proof of consumer consent.
     trusted_form_url: Optional[str] = None
-    # The user agent value for this lead metadata.
+    # Browser or client user agent captured when this lead attribution metadata was submitted.
     user_agent: Optional[str] = None
-    # The user ID associated with this lead metadata.
+    # User ID associated with this lead's attribution metadata.
     user_id: Optional[str] = None
-    # The utm campaign value for this lead metadata.
+    # UTM campaign parameter captured for lead attribution reporting.
     utm_campaign: Optional[str] = None
-    # The utm content value for this lead metadata.
+    # UTM content parameter captured for lead attribution reporting.
     utm_content: Optional[str] = None
-    # The utm medium value for this lead metadata.
+    # UTM medium parameter captured for lead attribution reporting.
     utm_medium: Optional[str] = None
-    # The utm source value for this lead metadata.
+    # UTM source parameter captured for lead attribution reporting.
     utm_source: Optional[str] = None
-    # The utm term value for this lead metadata.
+    # UTM term parameter captured for lead attribution reporting.
     utm_term: Optional[str] = None
-    # The vertical value for this lead metadata.
+    # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None
     
     @staticmethod

@@ -12,7 +12,7 @@ from .sms_warmup_status_response import SmsWarmupStatusResponse
 @dataclass
 class PhoneNumberStatusResponse_smsWarmup(SmsWarmupStatusResponse, Parsable):
     """
-    The SMS warmup value for this phone number status.
+    SMS sender warmup status for this phone number.
     """
     
     @staticmethod

@@ -72,7 +72,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: AutomationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationResponse]:
         """
         Updates an automation for current-business leads, changing triggers, message steps, routing, or active follow-up settings.
-        param body: Request payload for automation.
+        param body: Request schema for the Leadping API automation configuration request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationResponse]
         """
@@ -118,7 +118,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: AutomationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates an automation for current-business leads, changing triggers, message steps, routing, or active follow-up settings.
-        param body: Request payload for automation.
+        param body: Request schema for the Leadping API automation configuration request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

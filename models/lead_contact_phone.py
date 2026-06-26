@@ -12,7 +12,7 @@ from .phone import Phone
 @dataclass
 class LeadContact_phone(Phone, Parsable):
     """
-    The phone number associated with this lead contact.
+    Phone details for the lead, user, or business represented by this lead contact profile.
     """
     
     @staticmethod

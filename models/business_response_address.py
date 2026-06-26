@@ -12,7 +12,7 @@ from .street_address import StreetAddress
 @dataclass
 class BusinessResponse_address(StreetAddress, Parsable):
     """
-    The postal address associated with this business.
+    Postal address for the business, lead, or contact represented by this business profile response.
     """
     
     @staticmethod

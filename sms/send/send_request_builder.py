@@ -34,7 +34,7 @@ class SendRequestBuilder(BaseRequestBuilder):
     async def post(self,body: SendSmsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SmsResponse]:
         """
         Sends an SMS message to a lead or phone number, applying current-business sender selection, scheduling, and delivery rules.
-        param body: Request payload for send SMS.
+        param body: Request schema for the Leadping API SMS send request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SmsResponse]
         """
@@ -58,7 +58,7 @@ class SendRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: SendSmsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Sends an SMS message to a lead or phone number, applying current-business sender selection, scheduling, and delivery rules.
-        param body: Request payload for send SMS.
+        param body: Request schema for the Leadping API SMS send request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class SourceResponse_business(IdNamePair, Parsable):
     """
-    The business value for this source.
+    Business summary connected to this lead source response.
     """
     
     @staticmethod

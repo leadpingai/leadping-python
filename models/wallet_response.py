@@ -12,22 +12,22 @@ if TYPE_CHECKING:
 @dataclass
 class WalletResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing wallet data returned to callers.
+    Response schema for the Leadping API billing wallet response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the balance calculated at value on this wallet.
+    # UTC timestamp when Leadping last calculated the wallet balance.
     balance_calculated_at: Optional[datetime.datetime] = None
-    # The businessId property
+    # Business ID that owns this wallet balance or credit.
     business_id: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Defines the lifecycle state for a wallet credit lot.
     credit_status: Optional[WalletResponse_creditStatus] = None
-    # The currency property
+    # ISO currency code used for the monetary amounts in this billing wallet response.
     currency: Optional[str] = None
-    # The expiresAt property
+    # UTC timestamp when the wallet credit expires.
     expires_at: Optional[datetime.datetime] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
@@ -35,19 +35,19 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The nextCreditExpirationAt property
+    # UTC timestamp when the next wallet credit amount expires.
     next_credit_expiration_at: Optional[datetime.datetime] = None
-    # The originalTransactionId property
+    # Original wallet transaction ID referenced by a reversal, refund, or adjustment.
     original_transaction_id: Optional[str] = None
-    # The purchasedAt property
+    # UTC timestamp when the wallet credit was purchased.
     purchased_at: Optional[datetime.datetime] = None
     # Defines the source that created a wallet credit lot.
     source_type: Optional[WalletResponse_sourceType] = None
-    # The stripeChargeId property
+    # Stripe charge identifier linked to this billing transaction.
     stripe_charge_id: Optional[str] = None
-    # The stripeInvoiceId property
+    # Stripe invoice identifier linked to this billing transaction.
     stripe_invoice_id: Optional[str] = None
-    # The stripePaymentIntentId property
+    # Stripe payment intent identifier linked to this billing transaction.
     stripe_payment_intent_id: Optional[str] = None
     
     @staticmethod

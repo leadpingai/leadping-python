@@ -12,24 +12,24 @@ if TYPE_CHECKING:
 @dataclass
 class LeadContact(AdditionalDataHolder, Parsable):
     """
-    API DTO containing lead contact data used by Leadping API contracts.
+    Public Leadping API schema for lead contact profile data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The coordinate inferred for this lead contact.
+    # Latitude and longitude coordinate for this lead contact profile.
     coordinate: Optional[LeadContact_coordinate] = None
-    # The email address associated with this lead contact.
+    # Email address for the person represented by this lead contact profile.
     email: Optional[str] = None
-    # The first name value for this lead contact.
+    # First name of the lead, user, or contact represented by this lead contact profile.
     first_name: Optional[str] = None
-    # The date and time for the last name value on this lead contact.
+    # Last name of the lead, user, or contact represented by this lead contact profile.
     last_name: Optional[str] = None
-    # The phone number associated with this lead contact.
+    # Phone details for the lead, user, or business represented by this lead contact profile.
     phone: Optional[LeadContact_phone] = None
-    # The street address value for this lead contact.
+    # Postal street address for the lead contact profile.
     street_address: Optional[LeadContact_streetAddress] = None
-    # The IANA time zone identifier inferred for this lead contact.
+    # IANA or Windows time zone identifier used for local scheduling and reporting.
     time_zone_id: Optional[str] = None
     
     @staticmethod

@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberSearchResult(AdditionalDataHolder, Parsable):
     """
-    API response containing phone number search result data returned to callers.
+    Result schema for the Leadping API phone number search result returned by lookup and validation endpoints.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The location value for this phone number search result.
+    # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneNumberSearchResult_location] = None
-    # The number value for this phone number search result.
+    # E.164 phone number exposed by this phone number search result.
     number: Optional[str] = None
     
     @staticmethod

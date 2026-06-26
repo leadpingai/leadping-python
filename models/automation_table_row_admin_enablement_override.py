@@ -12,7 +12,7 @@ from .admin_enablement_override import AdminEnablementOverride
 @dataclass
 class AutomationTableRow_adminEnablementOverride(AdminEnablementOverride, Parsable):
     """
-    The admin force enablement override on this automation.
+    Admin override that can enable or disable this record independently of normal status checks.
     """
     
     @staticmethod

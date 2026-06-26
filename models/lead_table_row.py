@@ -13,50 +13,50 @@ if TYPE_CHECKING:
 @dataclass
 class LeadTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing lead data used by Leadping API contracts.
+    List item schema for Leadping API lead table row results shown in searchable tables.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The admin force enablement override on this lead.
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[LeadTableRow_adminEnablementOverride] = None
     # Defines why a lead was removed from the active working pipeline.
     archive_reason: Optional[int] = None
-    # The date and time this lead left the active pipeline.
+    # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
-    # The user who archived the lead, if available.
+    # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
-    # The business ID associated with this lead.
+    # Business ID that owns this lead.
     business_id: Optional[str] = None
-    # The business name value for this lead.
+    # Business display name shown for this lead.
     business_name: Optional[str] = None
-    # The date and time for the created at value on this lead.
+    # UTC timestamp when this lead table row was created.
     created_at: Optional[datetime.datetime] = None
-    # The current lifecycle disposition for this lead.
+    # Current disposition summary that describes the lead outcome.
     current_disposition: Optional[LeadTableRow_currentDisposition] = None
-    # The email address associated with this lead.
+    # Email address for the person represented by this lead table row.
     email: Optional[str] = None
-    # Whether this lead is enabled.
+    # Indicates whether this lead table row is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The first name value for this lead.
+    # First name of the lead, user, or contact represented by this lead table row.
     first_name: Optional[str] = None
-    # The unique ID for this lead.
+    # Unique Leadping identifier for this lead table row.
     id: Optional[str] = None
     # Whether this lead is archived.
     is_archived: Optional[bool] = None
-    # The date and time for the last name value on this lead.
+    # Last name of the lead, user, or contact represented by this lead table row.
     last_name: Optional[str] = None
-    # The phone number associated with this lead.
+    # Phone details for the lead, user, or business represented by this lead table row.
     phone: Optional[str] = None
-    # The source ID associated with this lead.
+    # Lead source ID that created or supplied this lead.
     source_id: Optional[str] = None
-    # The source name value for this lead.
+    # Lead source display name shown for this lead.
     source_name: Optional[str] = None
-    # The current status for this lead.
+    # Current lifecycle status for this lead table row in the Leadping API.
     status: Optional[str] = None
-    # The status tone value for this lead.
+    # Presentation tone that helps clients style the current status of this lead table row.
     status_tone: Optional[str] = None
-    # Compact tags assigned to the lead.
+    # Tags currently attached to this lead, source, or record.
     tags: Optional[list[TagSummary]] = None
     
     @staticmethod

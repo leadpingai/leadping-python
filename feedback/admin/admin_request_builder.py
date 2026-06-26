@@ -114,22 +114,31 @@ class AdminRequestBuilder(BaseRequestBuilder):
                 return "Type"
             return original_name
         
+        # Product area or app section connected to this feedback admin query request.
         area: Optional[str] = None
 
+        # Business ID used to filter feedback items for admin review.
         business_id: Optional[str] = None
 
+        # Pagination token used to request the next page of Leadping API results.
         continuation_token: Optional[str] = None
 
+        # End of the created-at date range filter for Leadping API results.
         created_end: Optional[datetime.datetime] = None
 
+        # Start of the created-at date range filter for Leadping API results.
         created_start: Optional[datetime.datetime] = None
 
+        # Maximum number of results requested for this Leadping API page.
         page_size: Optional[int] = None
 
+        # Search text used to filter Leadping API results.
         search: Optional[str] = None
 
+        # Current lifecycle status for this feedback admin query request in the Leadping API.
         status: Optional[str] = None
 
+        # Type classification used to route and interpret this feedback admin query request in the Leadping API.
         type: Optional[str] = None
 
     

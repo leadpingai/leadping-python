@@ -10,20 +10,20 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationTrigger(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation trigger data used by Leadping API contracts.
+    Public Leadping API schema for automation trigger data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The human-readable display name shown for this automation trigger.
+    # Human-readable display name shown for this automation trigger.
     display_name: Optional[str] = None
-    # The unique ID for this automation trigger.
+    # Unique Leadping identifier for this automation trigger.
     id: Optional[str] = None
-    # Whether this automation trigger is enabled.
+    # Indicates whether this automation trigger is active and allowed to run.
     is_enabled: Optional[bool] = None
-    # The settings key-value data carried with this automation trigger; values must be safe to expose in API responses.
+    # Key-value settings that configure how this automation trigger behaves.
     settings: Optional[AutomationTrigger_settings] = None
-    # The type classification for this automation trigger.
+    # Type classification used to route and interpret this automation trigger in the Leadping API.
     type: Optional[str] = None
     
     @staticmethod

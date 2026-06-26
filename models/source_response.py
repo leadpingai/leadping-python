@@ -16,54 +16,54 @@ if TYPE_CHECKING:
 @dataclass
 class SourceResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing source data returned to callers.
+    Response schema for the Leadping API lead source response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[SourceResponse_adminEnablementOverride] = None
-    # The allowed products included with this source.
+    # Product allowlist used to accept or route leads from this source.
     allowed_products: Optional[list[str]] = None
-    # The allowed states included with this source.
+    # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # The date and time for the API key issued at value on this source.
+    # UTC timestamp when Leadping issued the source API key.
     api_key_issued_at: Optional[datetime.datetime] = None
-    # The API key preview value for this source.
+    # Masked preview of the source API key for display without exposing the secret.
     api_key_preview: Optional[str] = None
-    # The business value for this source.
+    # Business summary connected to this lead source response.
     business: Optional[SourceResponse_business] = None
-    # Whether this source is compliance approved.
+    # Indicates whether the business or sender passed compliance review.
     compliance_approved: Optional[bool] = None
-    # The compliance notes value for this source.
+    # Compliance notes captured for admin review.
     compliance_notes: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The user that created this source.
+    # User summary for the person who created this lead source response.
     created_by_user: Optional[SourceResponse_createdByUser] = None
-    # Tag ids applied automatically to leads created from this source.
+    # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
-    # Tags applied automatically to leads created from this source.
+    # Default tag summaries automatically applied to leads from this source.
     default_tags: Optional[list[TagSummary]] = None
-    # The human-readable description of this source.
+    # Human-readable description that explains this lead source response to API users.
     description: Optional[str] = None
-    # Whether this source is enabled.
+    # Indicates whether this lead source response is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The date and time when this source first accepted a lead.
+    # UTC timestamp when this source first delivered a lead to Leadping.
     first_lead_received_at: Optional[datetime.datetime] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The date and time when this source most recently accepted a lead.
+    # UTC timestamp when this source most recently delivered a lead to Leadping.
     last_lead_received_at: Optional[datetime.datetime] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # The user that most recently modified this source.
+    # User summary for the person who last modified this lead source response.
     modified_by_user: Optional[SourceResponse_modifiedByUser] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # Whether this source requires TrustedForm.
+    # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
-    # The user value for this source.
+    # User summary connected to this lead source response.
     user: Optional[SourceResponse_user] = None
     
     @staticmethod

@@ -10,20 +10,20 @@ if TYPE_CHECKING:
 @dataclass
 class FeedbackCreateRequest(AdditionalDataHolder, Parsable):
     """
-    User-facing request for product feedback capture.
+    Request schema for the Leadping API feedback creation request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The allowContact property
+    # Indicates whether the submitter permits Leadping support to contact them about the feedback.
     allow_contact: Optional[bool] = None
-    # The area property
+    # Product area or app section connected to this feedback creation request.
     area: Optional[str] = None
-    # The clientVersion property
+    # Client application version that submitted this feedback creation request.
     client_version: Optional[str] = None
-    # The message property
+    # Message text supplied by the user or returned by the Leadping API for this feedback creation request.
     message: Optional[str] = None
-    # The route property
+    # Application route where this feedback creation request originated or should direct the user.
     route: Optional[str] = None
     # Defines the type of product feedback submitted from inside Leadping.
     type: Optional[FeedbackCreateRequest_type] = None

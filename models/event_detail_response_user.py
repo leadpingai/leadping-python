@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class EventDetailResponse_user(IdNamePair, Parsable):
     """
-    A minimal Record type with an (string), (string), and maximum JSON compatibility. The reason for this type (over something like KeyValuePair, dictionary) is because of JSON serialization support.
+    User summary connected to this event detail response.
     """
     
     @staticmethod

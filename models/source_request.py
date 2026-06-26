@@ -10,38 +10,38 @@ if TYPE_CHECKING:
 @dataclass
 class SourceRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for source.
+    Request schema for the Leadping API lead source request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The adminEnablementOverride property
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[SourceRequest_adminEnablementOverride] = None
-    # The allowed products included with this source.
+    # Product allowlist used to accept or route leads from this source.
     allowed_products: Optional[list[str]] = None
-    # The allowed states included with this source.
+    # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # The business ID associated with this source.
+    # Business ID that owns or will own this lead source.
     business_id: Optional[str] = None
-    # Whether this source is compliance approved.
+    # Indicates whether the business or sender passed compliance review.
     compliance_approved: Optional[bool] = None
-    # The compliance notes value for this source.
+    # Compliance notes captured for admin review.
     compliance_notes: Optional[str] = None
-    # Tag ids applied automatically to leads created from this source.
+    # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
-    # Tag names applied automatically to leads created from this source, creating missing tags when allowed by the caller.
+    # Tag names automatically assigned to leads created by this source.
     default_tag_names: Optional[list[str]] = None
-    # The human-readable description of this source.
+    # Human-readable description that explains this lead source request to API users.
     description: Optional[str] = None
-    # Whether this source is enabled.
+    # Indicates whether this lead source request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # Whether regenerate API key applies to this source.
+    # Indicates whether Leadping should issue a new API key for this source.
     regenerate_api_key: Optional[bool] = None
-    # Whether this source requires TrustedForm.
+    # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     
     @staticmethod

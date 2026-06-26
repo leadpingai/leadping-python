@@ -16,58 +16,58 @@ if TYPE_CHECKING:
 @dataclass
 class SourceTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing source data used by Leadping API contracts.
+    List item schema for Leadping API lead source table row results shown in searchable tables.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The admin force enablement override on this source.
+    # Admin override that can enable or disable this record independently of normal status checks.
     admin_enablement_override: Optional[SourceTableRow_adminEnablementOverride] = None
-    # The allowed products included with this source.
+    # Product allowlist used to accept or route leads from this source.
     allowed_products: Optional[list[str]] = None
-    # The allowed states included with this source.
+    # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # The date and time when the API key was issued.
+    # UTC timestamp when Leadping issued the source API key.
     api_key_issued_at: Optional[datetime.datetime] = None
-    # The date and time this source API key was last used.
+    # UTC timestamp when the source API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
-    # The API key preview value for this source.
+    # Masked preview of the source API key for display without exposing the secret.
     api_key_preview: Optional[str] = None
-    # The total number of tracked uses for this source API key.
+    # Total number of authenticated requests made with this source API key.
     api_key_total_uses: Optional[int] = None
-    # The business value for this source.
+    # Business summary connected to this lead source table row.
     business: Optional[SourceTableRow_business] = None
-    # The business ID associated with this source.
+    # Business ID that owns this lead source.
     business_id: Optional[str] = None
-    # Whether this source is compliance approved.
+    # Indicates whether the business or sender passed compliance review.
     compliance_approved: Optional[bool] = None
-    # The date and time for the created at value on this source.
+    # UTC timestamp when this lead source table row was created.
     created_at: Optional[datetime.datetime] = None
-    # The user that created this source.
+    # User summary for the person who created this lead source table row.
     created_by_user: Optional[SourceTableRow_createdByUser] = None
-    # Tag ids applied automatically to leads created from this source.
+    # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
-    # Tags applied automatically to leads created from this source.
+    # Default tag summaries automatically applied to leads from this source.
     default_tags: Optional[list[TagSummary]] = None
-    # The human-readable description of this source.
+    # Human-readable description that explains this lead source table row to API users.
     description: Optional[str] = None
-    # Whether this source is enabled.
+    # Indicates whether this lead source table row is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The date and time when this source first accepted a lead.
+    # UTC timestamp when this source first delivered a lead to Leadping.
     first_lead_received_at: Optional[datetime.datetime] = None
-    # The unique ID for this source.
+    # Unique Leadping identifier for this lead source table row.
     id: Optional[str] = None
-    # The date and time when this source most recently accepted a lead.
+    # UTC timestamp when this source most recently delivered a lead to Leadping.
     last_lead_received_at: Optional[datetime.datetime] = None
-    # The date and time for the modified at value on this source.
+    # UTC timestamp when this lead source table row was last modified.
     modified_at: Optional[datetime.datetime] = None
-    # The user that most recently modified this source.
+    # User summary for the person who last modified this lead source table row.
     modified_by_user: Optional[SourceTableRow_modifiedByUser] = None
-    # The human-readable name shown for this source.
+    # Display name for this lead source table row in the Leadping API.
     name: Optional[str] = None
-    # Whether this source requires TrustedForm.
+    # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
-    # The user value for this source.
+    # User summary connected to this lead source table row.
     user: Optional[SourceTableRow_user] = None
     
     @staticmethod

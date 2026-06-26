@@ -7,16 +7,16 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AutomationPreviewConditionResult(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation preview condition result data used by Leadping API contracts.
+    Result schema for the Leadping API automation preview condition result returned by lookup and validation endpoints.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The condition ID associated with this automation preview condition result.
+    # Automation condition ID evaluated by this preview result.
     condition_id: Optional[str] = None
-    # Whether this automation preview condition result is passed.
+    # Indicates whether this automation preview condition result passed the preview or validation check.
     passed: Optional[bool] = None
-    # The summary value for this automation preview condition result.
+    # Short human-readable summary of this automation preview condition result for lists, timelines, and notifications.
     summary: Optional[str] = None
     
     @staticmethod

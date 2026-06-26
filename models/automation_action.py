@@ -10,20 +10,20 @@ if TYPE_CHECKING:
 @dataclass
 class AutomationAction(AdditionalDataHolder, Parsable):
     """
-    API DTO containing automation action data used by Leadping API contracts.
+    Public Leadping API schema for automation action data.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The unique ID for this automation action.
+    # Unique Leadping identifier for this automation action.
     id: Optional[str] = None
-    # Whether this automation action is enabled.
+    # Indicates whether this automation action is active and allowed to run.
     is_enabled: Optional[bool] = None
-    # The order value for this automation action.
+    # Sort order used to evaluate or display this automation action.
     order: Optional[int] = None
-    # The settings key-value data carried with this automation action; values must be safe to expose in API responses.
+    # Key-value settings that configure how this automation action behaves.
     settings: Optional[AutomationAction_settings] = None
-    # The type classification for this automation action.
+    # Type classification used to route and interpret this automation action in the Leadping API.
     type: Optional[str] = None
     
     @staticmethod

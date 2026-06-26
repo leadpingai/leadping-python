@@ -34,7 +34,7 @@ class ContactRequestBuilder(BaseRequestBuilder):
     async def post(self,body: ContactRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[ContactResponse]:
         """
         Submits a public contact request to Leadping support, capturing sender details and message content without requiring authentication.
-        param body: Request model for submitting a contact form.
+        param body: Request schema for the Leadping API contact form request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[ContactResponse]
         """
@@ -57,7 +57,7 @@ class ContactRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: ContactRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Submits a public contact request to Leadping support, capturing sender details and message content without requiring authentication.
-        param body: Request model for submitting a contact form.
+        param body: Request schema for the Leadping API contact form request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

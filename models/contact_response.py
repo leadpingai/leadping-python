@@ -7,12 +7,12 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class ContactResponse(AdditionalDataHolder, Parsable):
     """
-    Response model for contact form submissions.
+    Response schema for the Leadping API contact form response returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The message value for this contact.
+    # Message text supplied by the user or returned by the Leadping API for this contact form response.
     message: Optional[str] = None
     
     @staticmethod

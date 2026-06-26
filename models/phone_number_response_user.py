@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class PhoneNumberResponse_user(IdNamePair, Parsable):
     """
-    The user value for this phone number.
+    User summary connected to this phone number.
     """
     
     @staticmethod

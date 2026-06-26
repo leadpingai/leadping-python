@@ -16,34 +16,34 @@ if TYPE_CHECKING:
 @dataclass
 class UserRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for user.
+    Request schema for the Leadping API user profile request, including the fields clients can send.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
     # Defines the supported Billing Plan values.
     billing_plan: Optional[UserRequest_billingPlan] = None
-    # The business value for this user.
+    # Business summary connected to this user profile request.
     business: Optional[UserRequest_business] = None
-    # The compliance value for this user.
+    # User compliance settings and attestations captured for Leadping account review.
     compliance: Optional[UserRequest_compliance] = None
-    # The current business value for this user.
+    # Business currently selected for the user session or profile.
     current_business: Optional[UserRequest_currentBusiness] = None
-    # The email address associated with this user.
+    # Email address for the person represented by this user profile request.
     email: Optional[str] = None
-    # The first name value for this user.
+    # First name of the lead, user, or contact represented by this user profile request.
     first_name: Optional[str] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # The date and time for the last name value on this user.
+    # Last name of the lead, user, or contact represented by this user profile request.
     last_name: Optional[str] = None
-    # The Leadping mobile device preferences for this user.
+    # Mobile notification preferences configured for the user.
     mobile_device_preferences: Optional[list[MobileDevicePreferences]] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The notification preferences value for this user.
+    # Notification preferences configured for the user.
     notification_preferences: Optional[UserRequest_notificationPreferences] = None
-    # The phone number associated with this user.
+    # Phone details for the lead, user, or business represented by this user profile request.
     phone: Optional[str] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[UserRequest_subscriptionStatus] = None
