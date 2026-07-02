@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from .business_request_activation import BusinessRequest_activation
     from .business_request_address import BusinessRequest_address
     from .business_request_admin_enablement_override import BusinessRequest_adminEnablementOverride
+    from .business_request_billing_address import BusinessRequest_billingAddress
     from .business_request_billing_plan import BusinessRequest_billingPlan
     from .business_request_compliance_policy import BusinessRequest_compliancePolicy
     from .business_request_ein_document import BusinessRequest_einDocument
@@ -33,6 +34,10 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
     admin_enablement_override: Optional[BusinessRequest_adminEnablementOverride] = None
     # Indicates whether automatic wallet refill is enabled for the business.
     auto_refill_enabled: Optional[bool] = None
+    # Postal address used for invoices, receipts, and payment processor billing records.
+    billing_address: Optional[BusinessRequest_billingAddress] = None
+    # Name used for invoices, receipts, and payment processor billing records.
+    billing_name: Optional[str] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[BusinessRequest_billingPlan] = None
     # Compliance policy configuration for the business.
@@ -89,6 +94,7 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
         from .business_request_activation import BusinessRequest_activation
         from .business_request_address import BusinessRequest_address
         from .business_request_admin_enablement_override import BusinessRequest_adminEnablementOverride
+        from .business_request_billing_address import BusinessRequest_billingAddress
         from .business_request_billing_plan import BusinessRequest_billingPlan
         from .business_request_compliance_policy import BusinessRequest_compliancePolicy
         from .business_request_ein_document import BusinessRequest_einDocument
@@ -101,6 +107,7 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
         from .business_request_activation import BusinessRequest_activation
         from .business_request_address import BusinessRequest_address
         from .business_request_admin_enablement_override import BusinessRequest_adminEnablementOverride
+        from .business_request_billing_address import BusinessRequest_billingAddress
         from .business_request_billing_plan import BusinessRequest_billingPlan
         from .business_request_compliance_policy import BusinessRequest_compliancePolicy
         from .business_request_ein_document import BusinessRequest_einDocument
@@ -115,6 +122,8 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
             "address": lambda n : setattr(self, 'address', n.get_object_value(BusinessRequest_address)),
             "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(BusinessRequest_adminEnablementOverride)),
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
+            "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(BusinessRequest_billingAddress)),
+            "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessRequest_billingPlan)),
             "compliancePolicy": lambda n : setattr(self, 'compliance_policy', n.get_object_value(BusinessRequest_compliancePolicy)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -148,6 +157,8 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
         writer.write_object_value("address", self.address)
         writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
+        writer.write_object_value("billingAddress", self.billing_address)
+        writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_object_value("compliancePolicy", self.compliance_policy)
         writer.write_str_value("description", self.description)

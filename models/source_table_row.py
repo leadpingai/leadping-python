@@ -27,8 +27,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # UTC timestamp when Leadping issued the source API key.
-    api_key_issued_at: Optional[datetime.datetime] = None
     # UTC timestamp when the source API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
     # Masked preview of the source API key for display without exposing the secret.
@@ -104,7 +102,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(SourceTableRow_adminEnablementOverride)),
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
-            "apiKeyIssuedAt": lambda n : setattr(self, 'api_key_issued_at', n.get_datetime_value()),
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
@@ -139,7 +136,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
-        writer.write_datetime_value("apiKeyIssuedAt", self.api_key_issued_at)
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)

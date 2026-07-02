@@ -33,7 +33,7 @@ class MetricsRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[MetricsRequestBuilderGetQueryParameters]] = None) -> Optional[SourceMetricsResponse]:
         """
-        The source lead creation metrics.
+        Returns lead creation metrics for one business intake source, including accepted, rejected, duplicate, validation, and recent activity counts for monitoring.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SourceMetricsResponse]
         """
@@ -53,7 +53,7 @@ class MetricsRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[MetricsRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        The source lead creation metrics.
+        Returns lead creation metrics for one business intake source, including accepted, rejected, duplicate, validation, and recent activity counts for monitoring.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -75,7 +75,7 @@ class MetricsRequestBuilder(BaseRequestBuilder):
     @dataclass
     class MetricsRequestBuilderGetQueryParameters():
         """
-        The source lead creation metrics.
+        Returns lead creation metrics for one business intake source, including accepted, rejected, duplicate, validation, and recent activity counts for monitoring.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """

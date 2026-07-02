@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from .business_response_activation import BusinessResponse_activation
     from .business_response_address import BusinessResponse_address
     from .business_response_admin_enablement_override import BusinessResponse_adminEnablementOverride
+    from .business_response_billing_address import BusinessResponse_billingAddress
     from .business_response_billing_plan import BusinessResponse_billingPlan
     from .business_response_compliance_policy import BusinessResponse_compliancePolicy
     from .business_response_ein_document import BusinessResponse_einDocument
@@ -38,6 +39,10 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     admin_enablement_override: Optional[BusinessResponse_adminEnablementOverride] = None
     # Indicates whether automatic wallet refill is enabled for the business.
     auto_refill_enabled: Optional[bool] = None
+    # Postal address used for invoices, receipts, and payment processor billing records.
+    billing_address: Optional[BusinessResponse_billingAddress] = None
+    # Name used for invoices, receipts, and payment processor billing records.
+    billing_name: Optional[str] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[BusinessResponse_billingPlan] = None
     # Compliance policy configuration for the business.
@@ -102,6 +107,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_activation import BusinessResponse_activation
         from .business_response_address import BusinessResponse_address
         from .business_response_admin_enablement_override import BusinessResponse_adminEnablementOverride
+        from .business_response_billing_address import BusinessResponse_billingAddress
         from .business_response_billing_plan import BusinessResponse_billingPlan
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
         from .business_response_ein_document import BusinessResponse_einDocument
@@ -116,6 +122,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_activation import BusinessResponse_activation
         from .business_response_address import BusinessResponse_address
         from .business_response_admin_enablement_override import BusinessResponse_adminEnablementOverride
+        from .business_response_billing_address import BusinessResponse_billingAddress
         from .business_response_billing_plan import BusinessResponse_billingPlan
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
         from .business_response_ein_document import BusinessResponse_einDocument
@@ -133,6 +140,8 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "address": lambda n : setattr(self, 'address', n.get_object_value(BusinessResponse_address)),
             "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(BusinessResponse_adminEnablementOverride)),
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
+            "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(BusinessResponse_billingAddress)),
+            "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessResponse_billingPlan)),
             "compliancePolicy": lambda n : setattr(self, 'compliance_policy', n.get_object_value(BusinessResponse_compliancePolicy)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -171,6 +180,8 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("address", self.address)
         writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
+        writer.write_object_value("billingAddress", self.billing_address)
+        writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_object_value("compliancePolicy", self.compliance_policy)
         writer.write_datetime_value("createdAt", self.created_at)

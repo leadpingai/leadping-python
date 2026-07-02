@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from .phone_number_messaging_event_response import PhoneNumberMessagingEventResponse
     from .phone_number_opt_out_metrics_response import PhoneNumberOptOutMetricsResponse
     from .phone_number_status_response_call_warmup import PhoneNumberStatusResponse_callWarmup
+    from .phone_number_status_response_outbound_capacity import PhoneNumberStatusResponse_outboundCapacity
     from .phone_number_status_response_sms_warmup import PhoneNumberStatusResponse_smsWarmup
     from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
 
@@ -31,6 +32,8 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     number: Optional[str] = None
     # Recent SMS opt-out metrics used to evaluate sender health and compliance risk.
     opt_out_metrics: Optional[PhoneNumberOptOutMetricsResponse] = None
+    # Current outbound SMS and voice capacity for this phone number.
+    outbound_capacity: Optional[PhoneNumberStatusResponse_outboundCapacity] = None
     # Recent workflow events returned for timeline and troubleshooting.
     recent_events: Optional[list[PhoneNumberMessagingEventResponse]] = None
     # SMS sender warmup status for this phone number.
@@ -59,12 +62,14 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
         from .phone_number_messaging_event_response import PhoneNumberMessagingEventResponse
         from .phone_number_opt_out_metrics_response import PhoneNumberOptOutMetricsResponse
         from .phone_number_status_response_call_warmup import PhoneNumberStatusResponse_callWarmup
+        from .phone_number_status_response_outbound_capacity import PhoneNumberStatusResponse_outboundCapacity
         from .phone_number_status_response_sms_warmup import PhoneNumberStatusResponse_smsWarmup
         from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
 
         from .phone_number_messaging_event_response import PhoneNumberMessagingEventResponse
         from .phone_number_opt_out_metrics_response import PhoneNumberOptOutMetricsResponse
         from .phone_number_status_response_call_warmup import PhoneNumberStatusResponse_callWarmup
+        from .phone_number_status_response_outbound_capacity import PhoneNumberStatusResponse_outboundCapacity
         from .phone_number_status_response_sms_warmup import PhoneNumberStatusResponse_smsWarmup
         from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
 
@@ -75,6 +80,7 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
             "messagesWarmed": lambda n : setattr(self, 'messages_warmed', n.get_int_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "optOutMetrics": lambda n : setattr(self, 'opt_out_metrics', n.get_object_value(PhoneNumberOptOutMetricsResponse)),
+            "outboundCapacity": lambda n : setattr(self, 'outbound_capacity', n.get_object_value(PhoneNumberStatusResponse_outboundCapacity)),
             "recentEvents": lambda n : setattr(self, 'recent_events', n.get_collection_of_object_values(PhoneNumberMessagingEventResponse)),
             "smsWarmup": lambda n : setattr(self, 'sms_warmup', n.get_object_value(PhoneNumberStatusResponse_smsWarmup)),
             "trafficMetrics": lambda n : setattr(self, 'traffic_metrics', n.get_object_value(PhoneNumberTrafficMetricsResponse)),
@@ -96,6 +102,7 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("messagesWarmed", self.messages_warmed)
         writer.write_str_value("number", self.number)
         writer.write_object_value("optOutMetrics", self.opt_out_metrics)
+        writer.write_object_value("outboundCapacity", self.outbound_capacity)
         writer.write_collection_of_object_values("recentEvents", self.recent_events)
         writer.write_object_value("smsWarmup", self.sms_warmup)
         writer.write_object_value("trafficMetrics", self.traffic_metrics)

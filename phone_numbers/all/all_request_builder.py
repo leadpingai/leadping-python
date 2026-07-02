@@ -6,7 +6,7 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .my.my_request_builder import MyRequestBuilder
+    from .business.business_request_builder import BusinessRequestBuilder
 
 class AllRequestBuilder(BaseRequestBuilder):
     """
@@ -22,12 +22,12 @@ class AllRequestBuilder(BaseRequestBuilder):
         super().__init__(request_adapter, "{+baseurl}/phone-numbers/all", path_parameters)
     
     @property
-    def my(self) -> MyRequestBuilder:
+    def business(self) -> BusinessRequestBuilder:
         """
-        The my property
+        The business property
         """
-        from .my.my_request_builder import MyRequestBuilder
+        from .business.business_request_builder import BusinessRequestBuilder
 
-        return MyRequestBuilder(self.request_adapter, self.path_parameters)
+        return BusinessRequestBuilder(self.request_adapter, self.path_parameters)
     
 

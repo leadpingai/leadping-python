@@ -18,10 +18,30 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     phone_number: Optional[str] = None
     # The phoneNumberId property
     phone_number_id: Optional[str] = None
+    # The smsLimitThisHour property
+    sms_limit_this_hour: Optional[int] = None
+    # The smsLimitToday property
+    sms_limit_today: Optional[int] = None
+    # The smsRemainingThisHour property
+    sms_remaining_this_hour: Optional[int] = None
     # The smsRemainingToday property
     sms_remaining_today: Optional[int] = None
+    # The smsUsedThisHour property
+    sms_used_this_hour: Optional[int] = None
+    # The smsUsedToday property
+    sms_used_today: Optional[int] = None
+    # The voiceLimitThisHour property
+    voice_limit_this_hour: Optional[int] = None
+    # The voiceLimitToday property
+    voice_limit_today: Optional[int] = None
+    # The voiceRemainingThisHour property
+    voice_remaining_this_hour: Optional[int] = None
     # The voiceRemainingToday property
     voice_remaining_today: Optional[int] = None
+    # The voiceUsedThisHour property
+    voice_used_this_hour: Optional[int] = None
+    # The voiceUsedToday property
+    voice_used_today: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> OutboundPhoneNumberCapacity:
@@ -47,8 +67,18 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberOutboundHealthStatus)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
+            "smsLimitThisHour": lambda n : setattr(self, 'sms_limit_this_hour', n.get_int_value()),
+            "smsLimitToday": lambda n : setattr(self, 'sms_limit_today', n.get_int_value()),
+            "smsRemainingThisHour": lambda n : setattr(self, 'sms_remaining_this_hour', n.get_int_value()),
             "smsRemainingToday": lambda n : setattr(self, 'sms_remaining_today', n.get_int_value()),
+            "smsUsedThisHour": lambda n : setattr(self, 'sms_used_this_hour', n.get_int_value()),
+            "smsUsedToday": lambda n : setattr(self, 'sms_used_today', n.get_int_value()),
+            "voiceLimitThisHour": lambda n : setattr(self, 'voice_limit_this_hour', n.get_int_value()),
+            "voiceLimitToday": lambda n : setattr(self, 'voice_limit_today', n.get_int_value()),
+            "voiceRemainingThisHour": lambda n : setattr(self, 'voice_remaining_this_hour', n.get_int_value()),
             "voiceRemainingToday": lambda n : setattr(self, 'voice_remaining_today', n.get_int_value()),
+            "voiceUsedThisHour": lambda n : setattr(self, 'voice_used_this_hour', n.get_int_value()),
+            "voiceUsedToday": lambda n : setattr(self, 'voice_used_today', n.get_int_value()),
         }
         return fields
     
@@ -63,8 +93,18 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         writer.write_enum_value("healthStatus", self.health_status)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
+        writer.write_int_value("smsLimitThisHour", self.sms_limit_this_hour)
+        writer.write_int_value("smsLimitToday", self.sms_limit_today)
+        writer.write_int_value("smsRemainingThisHour", self.sms_remaining_this_hour)
         writer.write_int_value("smsRemainingToday", self.sms_remaining_today)
+        writer.write_int_value("smsUsedThisHour", self.sms_used_this_hour)
+        writer.write_int_value("smsUsedToday", self.sms_used_today)
+        writer.write_int_value("voiceLimitThisHour", self.voice_limit_this_hour)
+        writer.write_int_value("voiceLimitToday", self.voice_limit_today)
+        writer.write_int_value("voiceRemainingThisHour", self.voice_remaining_this_hour)
         writer.write_int_value("voiceRemainingToday", self.voice_remaining_today)
+        writer.write_int_value("voiceUsedThisHour", self.voice_used_this_hour)
+        writer.write_int_value("voiceUsedToday", self.voice_used_today)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.base_request_builder import BaseRequestBuilder
@@ -29,9 +30,9 @@ class WithBusinessItemRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/events/businesses/{businessId}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/events/businesses/{businessId}{?endAt*,startAt*}", path_parameters)
     
-    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfEventTableRow]:
+    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[WithBusinessItemRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfEventTableRow]:
         """
         Lists event records for a business with paging and filters so admins can review lead communication and automation events.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
@@ -54,7 +55,7 @@ class WithBusinessItemRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, PagedResultOfEventTableRow, error_mapping)
     
-    def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[WithBusinessItemRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Lists event records for a business with paging and filters so admins can review lead communication and automation events.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
@@ -80,7 +81,31 @@ class WithBusinessItemRequestBuilder(BaseRequestBuilder):
         return WithBusinessItemRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class WithBusinessItemRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class WithBusinessItemRequestBuilderPostQueryParameters():
+        """
+        Lists event records for a business with paging and filters so admins can review lead communication and automation events.
+        """
+        def get_query_parameter(self,original_name: str) -> str:
+            """
+            Maps the query parameters names to their encoded names for the URI template parsing.
+            param original_name: The original query parameter name in the class.
+            Returns: str
+            """
+            if original_name is None:
+                raise TypeError("original_name cannot be null.")
+            if original_name == "end_at":
+                return "endAt"
+            if original_name == "start_at":
+                return "startAt"
+            return original_name
+        
+        end_at: Optional[datetime.datetime] = None
+
+        start_at: Optional[datetime.datetime] = None
+
+    
+    @dataclass
+    class WithBusinessItemRequestBuilderPostRequestConfiguration(RequestConfiguration[WithBusinessItemRequestBuilderPostQueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

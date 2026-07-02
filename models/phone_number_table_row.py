@@ -9,6 +9,8 @@ if TYPE_CHECKING:
     from .phone_number_inventory_state import PhoneNumberInventoryState
     from .phone_number_provider_lifecycle_state import PhoneNumberProviderLifecycleState
     from .phone_number_table_row_admin_enablement_override import PhoneNumberTableRow_adminEnablementOverride
+    from .phone_number_table_row_call_warmup_stage import PhoneNumberTableRow_callWarmupStage
+    from .phone_number_table_row_call_warmup_state import PhoneNumberTableRow_callWarmupState
     from .phone_number_table_row_health_status import PhoneNumberTableRow_healthStatus
     from .phone_number_table_row_warmup_state import PhoneNumberTableRow_warmupState
 
@@ -26,6 +28,14 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     billing_attribution: Optional[str] = None
     # Business summary connected to this phone number table row.
     business: Optional[str] = None
+    # Unique Leadping business identifier connected to this phone number table row.
+    business_id: Optional[str] = None
+    # Indicates whether controlled voice call warmup is enabled for this phone number.
+    call_warmup_enabled: Optional[bool] = None
+    # Defines the supported voice call warmup stages for a Leadping-managed phone number.
+    call_warmup_stage: Optional[PhoneNumberTableRow_callWarmupStage] = None
+    # Defines the supported health states for controlled internal voice call warmup.
+    call_warmup_state: Optional[PhoneNumberTableRow_callWarmupState] = None
     # SMS and voice capabilities available on this phone number.
     capabilities: Optional[str] = None
     # Indicates whether this phone number table row is active and available in the Leadping API.
@@ -99,6 +109,8 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         from .phone_number_inventory_state import PhoneNumberInventoryState
         from .phone_number_provider_lifecycle_state import PhoneNumberProviderLifecycleState
         from .phone_number_table_row_admin_enablement_override import PhoneNumberTableRow_adminEnablementOverride
+        from .phone_number_table_row_call_warmup_stage import PhoneNumberTableRow_callWarmupStage
+        from .phone_number_table_row_call_warmup_state import PhoneNumberTableRow_callWarmupState
         from .phone_number_table_row_health_status import PhoneNumberTableRow_healthStatus
         from .phone_number_table_row_warmup_state import PhoneNumberTableRow_warmupState
 
@@ -106,6 +118,8 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         from .phone_number_inventory_state import PhoneNumberInventoryState
         from .phone_number_provider_lifecycle_state import PhoneNumberProviderLifecycleState
         from .phone_number_table_row_admin_enablement_override import PhoneNumberTableRow_adminEnablementOverride
+        from .phone_number_table_row_call_warmup_stage import PhoneNumberTableRow_callWarmupStage
+        from .phone_number_table_row_call_warmup_state import PhoneNumberTableRow_callWarmupState
         from .phone_number_table_row_health_status import PhoneNumberTableRow_healthStatus
         from .phone_number_table_row_warmup_state import PhoneNumberTableRow_warmupState
 
@@ -113,6 +127,10 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
             "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(PhoneNumberTableRow_adminEnablementOverride)),
             "billingAttribution": lambda n : setattr(self, 'billing_attribution', n.get_str_value()),
             "business": lambda n : setattr(self, 'business', n.get_str_value()),
+            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
+            "callWarmupEnabled": lambda n : setattr(self, 'call_warmup_enabled', n.get_bool_value()),
+            "callWarmupStage": lambda n : setattr(self, 'call_warmup_stage', n.get_enum_value(PhoneNumberTableRow_callWarmupStage)),
+            "callWarmupState": lambda n : setattr(self, 'call_warmup_state', n.get_enum_value(PhoneNumberTableRow_callWarmupState)),
             "capabilities": lambda n : setattr(self, 'capabilities', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberTableRow_healthStatus)),
@@ -153,6 +171,10 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_str_value("billingAttribution", self.billing_attribution)
         writer.write_str_value("business", self.business)
+        writer.write_str_value("businessId", self.business_id)
+        writer.write_bool_value("callWarmupEnabled", self.call_warmup_enabled)
+        writer.write_enum_value("callWarmupStage", self.call_warmup_stage)
+        writer.write_enum_value("callWarmupState", self.call_warmup_state)
         writer.write_str_value("capabilities", self.capabilities)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_enum_value("healthStatus", self.health_status)
