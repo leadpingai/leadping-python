@@ -134,7 +134,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
                 return "sourceKey"
             return original_name
         
-        # The Leadping source key supplied as a query string parameter.
+        # The Leadping source key supplied as a query string parameter, or omitted when supplied as Authorization: Bearer lp_src_...
         source_key: Optional[str] = None
 
     

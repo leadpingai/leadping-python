@@ -258,7 +258,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         # Alternate seller-provided lead identifier used during intake normalization.
         seller_lead_identifier: Optional[str] = None
 
-        # The Leadping source key supplied as a query string parameter.
+        # The Leadping source key supplied as a query string parameter, or omitted when supplied as Authorization: Bearer lp_src_...
         source_key: Optional[str] = None
 
         # Source-provided key-value metadata retained for lead attribution and integration troubleshooting.
@@ -325,7 +325,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
                 return "sourceKey"
             return original_name
         
-        # The Leadping source key supplied as a query string parameter.
+        # The Leadping source key supplied as a query string parameter, or omitted when supplied as Authorization: Bearer lp_src_...
         source_key: Optional[str] = None
 
     
