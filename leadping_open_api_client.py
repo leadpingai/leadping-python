@@ -27,11 +27,14 @@ if TYPE_CHECKING:
     from .notifications.notifications_request_builder import NotificationsRequestBuilder
     from .outbound.outbound_request_builder import OutboundRequestBuilder
     from .payment_methods.payment_methods_request_builder import PaymentMethodsRequestBuilder
+    from .phone_call.phone_call_request_builder import PhoneCallRequestBuilder
     from .phone_numbers.phone_numbers_request_builder import PhoneNumbersRequestBuilder
     from .reports.reports_request_builder import ReportsRequestBuilder
     from .sms.sms_request_builder import SmsRequestBuilder
     from .sources.sources_request_builder import SourcesRequestBuilder
+    from .suppressions.suppressions_request_builder import SuppressionsRequestBuilder
     from .tags.tags_request_builder import TagsRequestBuilder
+    from .telephony.telephony_request_builder import TelephonyRequestBuilder
     from .transactions.transactions_request_builder import TransactionsRequestBuilder
     from .usage.usage_request_builder import UsageRequestBuilder
     from .users.users_request_builder import UsersRequestBuilder
@@ -170,6 +173,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         return PaymentMethodsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
+    def phone_call(self) -> PhoneCallRequestBuilder:
+        """
+        The phoneCall property
+        """
+        from .phone_call.phone_call_request_builder import PhoneCallRequestBuilder
+
+        return PhoneCallRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
     def phone_numbers(self) -> PhoneNumbersRequestBuilder:
         """
         The phoneNumbers property
@@ -206,6 +218,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         return SourcesRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
+    def suppressions(self) -> SuppressionsRequestBuilder:
+        """
+        The suppressions property
+        """
+        from .suppressions.suppressions_request_builder import SuppressionsRequestBuilder
+
+        return SuppressionsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
     def tags(self) -> TagsRequestBuilder:
         """
         The tags property
@@ -213,6 +234,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .tags.tags_request_builder import TagsRequestBuilder
 
         return TagsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def telephony(self) -> TelephonyRequestBuilder:
+        """
+        The telephony property
+        """
+        from .telephony.telephony_request_builder import TelephonyRequestBuilder
+
+        return TelephonyRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def transactions(self) -> TransactionsRequestBuilder:
