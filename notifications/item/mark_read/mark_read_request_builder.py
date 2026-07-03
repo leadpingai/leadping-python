@@ -42,6 +42,7 @@ class MarkReadRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
+            "401": ProblemDetails,
             "404": ProblemDetails,
             "500": ProblemDetails,
         }

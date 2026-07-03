@@ -44,6 +44,7 @@ class OverrideRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
+            "401": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -67,6 +68,7 @@ class OverrideRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
+            "401": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 

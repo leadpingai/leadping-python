@@ -19,6 +19,10 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Display name for the person or system that created this event timeline table row.
+    actor_display_name: Optional[str] = None
+    # User ID for the person or system that created this event timeline table row.
+    actor_user_id: Optional[str] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -139,6 +143,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         from .event_timeline_type import EventTimelineType
 
         fields: dict[str, Callable[[Any], None]] = {
+            "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
+            "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
@@ -196,6 +202,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("actorDisplayName", self.actor_display_name)
+        writer.write_str_value("actorUserId", self.actor_user_id)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("campaignId", self.campaign_id)

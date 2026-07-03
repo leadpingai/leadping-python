@@ -14,6 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
+    from ....models.problem_details import ProblemDetails
     from ....models.user_data_export_response import UserDataExportResponse
 
 class MyRequestBuilder(BaseRequestBuilder):
@@ -38,11 +39,16 @@ class MyRequestBuilder(BaseRequestBuilder):
         request_info = self.to_post_request_information(
             request_configuration
         )
+        from ....models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ....models.user_data_export_response import UserDataExportResponse
 
-        return await self.request_adapter.send_async(request_info, UserDataExportResponse, None)
+        return await self.request_adapter.send_async(request_info, UserDataExportResponse, error_mapping)
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

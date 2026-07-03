@@ -58,6 +58,8 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     status_tone: Optional[str] = None
     # Tags currently attached to this lead, source, or record.
     tags: Optional[list[TagSummary]] = None
+    # UTC timestamp when this lead table row was last updated.
+    updated_at: Optional[datetime.datetime] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> LeadTableRow:
@@ -104,6 +106,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "statusTone": lambda n : setattr(self, 'status_tone', n.get_str_value()),
             "tags": lambda n : setattr(self, 'tags', n.get_collection_of_object_values(TagSummary)),
+            "updatedAt": lambda n : setattr(self, 'updated_at', n.get_datetime_value()),
         }
         return fields
     
@@ -135,6 +138,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("status", self.status)
         writer.write_str_value("statusTone", self.status_tone)
         writer.write_collection_of_object_values("tags", self.tags)
+        writer.write_datetime_value("updatedAt", self.updated_at)
         writer.write_additional_data_value(self.additional_data)
     
 

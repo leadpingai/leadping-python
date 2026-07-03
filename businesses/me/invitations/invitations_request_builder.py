@@ -56,11 +56,16 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
+        from ....models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ....models.business_invitation_table_row import BusinessInvitationTableRow
 
-        return await self.request_adapter.send_collection_async(request_info, BusinessInvitationTableRow, None)
+        return await self.request_adapter.send_collection_async(request_info, BusinessInvitationTableRow, error_mapping)
     
     async def post(self,body: BusinessInvitationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessInvitationResponse]:
         """
@@ -78,6 +83,7 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
+            "401": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 

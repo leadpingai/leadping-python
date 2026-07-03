@@ -15,6 +15,7 @@ from warnings import warn
 
 if TYPE_CHECKING:
     from ....models.paged_result_of_usage_ledger_table_row import PagedResultOfUsageLedgerTableRow
+    from ....models.problem_details import ProblemDetails
     from ....models.request_data_options import RequestDataOptions
 
 class MyRequestBuilder(BaseRequestBuilder):
@@ -42,11 +43,16 @@ class MyRequestBuilder(BaseRequestBuilder):
         request_info = self.to_post_request_information(
             body, request_configuration
         )
+        from ....models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ....models.paged_result_of_usage_ledger_table_row import PagedResultOfUsageLedgerTableRow
 
-        return await self.request_adapter.send_async(request_info, PagedResultOfUsageLedgerTableRow, None)
+        return await self.request_adapter.send_async(request_info, PagedResultOfUsageLedgerTableRow, error_mapping)
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

@@ -6,6 +6,7 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .api_keys.api_keys_request_builder import ApiKeysRequestBuilder
     from .invitations.invitations_request_builder import InvitationsRequestBuilder
     from .me.me_request_builder import MeRequestBuilder
 
@@ -21,6 +22,15 @@ class BusinessesRequestBuilder(BaseRequestBuilder):
         Returns: None
         """
         super().__init__(request_adapter, "{+baseurl}/businesses", path_parameters)
+    
+    @property
+    def api_keys(self) -> ApiKeysRequestBuilder:
+        """
+        The apiKeys property
+        """
+        from .api_keys.api_keys_request_builder import ApiKeysRequestBuilder
+
+        return ApiKeysRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def invitations(self) -> InvitationsRequestBuilder:
