@@ -33,7 +33,7 @@ class ReleaseRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionEntryResponse]:
         """
-        Returns the suppression entry response.
+        Releases an active Leadping suppression entry so a recipient can be contacted again, returning the updated suppression record when available.
         param body: Request payload for suppression entry.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SuppressionEntryResponse]
@@ -57,7 +57,7 @@ class ReleaseRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the suppression entry response.
+        Releases an active Leadping suppression entry so a recipient can be contacted again, returning the updated suppression record when available.
         param body: Request payload for suppression entry.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

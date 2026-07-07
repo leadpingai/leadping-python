@@ -35,7 +35,7 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionEntryResponse]:
         """
-        The suppression entry response was created successfully.
+        Creates or reactivates a Leadping suppression entry that blocks future outreach to a recipient across the selected communication channel.
         param body: Request payload for suppression entry.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SuppressionEntryResponse]
@@ -59,7 +59,7 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        The suppression entry response was created successfully.
+        Creates or reactivates a Leadping suppression entry that blocks future outreach to a recipient across the selected communication channel.
         param body: Request payload for suppression entry.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

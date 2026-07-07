@@ -32,7 +32,7 @@ class HangupRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneCallResponse]:
         """
-        Returns the call details with a 200 status code.
+        Ends an active Leadping phone call by call ID and returns the updated call record, including status and provider routing details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneCallResponse]
         """
@@ -54,7 +54,7 @@ class HangupRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the call details with a 200 status code.
+        Ends an active Leadping phone call by call ID and returns the updated call record, including status and provider routing details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

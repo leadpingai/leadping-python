@@ -33,7 +33,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfBusinessTableRow]:
         """
-        Returns a paged result of current-business API keys.
+        Retrieves a paged list of API keys owned by the caller's current Leadping business, with support for filtering, sorting, and pagination.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfBusinessTableRow]
@@ -57,7 +57,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns a paged result of current-business API keys.
+        Retrieves a paged list of API keys owned by the caller's current Leadping business, with support for filtering, sorting, and pagination.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

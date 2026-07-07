@@ -32,7 +32,7 @@ class TransferRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[TransferRequestBuilderPostQueryParameters]] = None) -> Optional[PhoneCallResponse]:
         """
-        Returns the call details with a 200 status code.
+        Transfers an active Leadping phone call to a new phone number and returns the updated call record with status and routing details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneCallResponse]
         """
@@ -54,7 +54,7 @@ class TransferRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[TransferRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
-        Returns the call details with a 200 status code.
+        Transfers an active Leadping phone call to a new phone number and returns the updated call record with status and routing details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -76,7 +76,7 @@ class TransferRequestBuilder(BaseRequestBuilder):
     @dataclass
     class TransferRequestBuilderPostQueryParameters():
         """
-        Returns the call details with a 200 status code.
+        Transfers an active Leadping phone call to a new phone number and returns the updated call record with status and routing details.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """

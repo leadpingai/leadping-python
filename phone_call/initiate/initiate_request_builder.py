@@ -33,7 +33,7 @@ class InitiateRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: InitiateCallRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneCallResponse]:
         """
-        Returns the call details with a 200 status code.
+        Starts an outbound Leadping phone call for an authenticated user and returns the provider call identifiers, status, and routing details.
         param body: Request schema for the Leadping API phone call initiation request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneCallResponse]
@@ -57,7 +57,7 @@ class InitiateRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: InitiateCallRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the call details with a 200 status code.
+        Starts an outbound Leadping phone call for an authenticated user and returns the provider call identifiers, status, and routing details.
         param body: Request schema for the Leadping API phone call initiation request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

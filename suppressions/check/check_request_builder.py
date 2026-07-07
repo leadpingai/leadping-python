@@ -33,7 +33,7 @@ class CheckRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionCheckResult]:
         """
-        Returns the suppression check result.
+        Checks whether a recipient is blocked by an active Leadping suppression entry before sending messages or placing calls through the selected channel.
         param body: Request payload for suppression entry.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SuppressionCheckResult]
@@ -57,7 +57,7 @@ class CheckRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the suppression check result.
+        Checks whether a recipient is blocked by an active Leadping suppression entry before sending messages or placing calls through the selected channel.
         param body: Request payload for suppression entry.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
