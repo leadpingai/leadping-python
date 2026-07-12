@@ -9,7 +9,6 @@ if TYPE_CHECKING:
     from .mobile_device_preferences import MobileDevicePreferences
     from .user_identity import UserIdentity
     from .user_response_billing_plan import UserResponse_billingPlan
-    from .user_response_business import UserResponse_business
     from .user_response_compliance import UserResponse_compliance
     from .user_response_current_business import UserResponse_currentBusiness
     from .user_response_notification_preferences import UserResponse_notificationPreferences
@@ -26,8 +25,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
 
     # Defines the supported Billing Plan values.
     billing_plan: Optional[UserResponse_billingPlan] = None
-    # The business value for this user.
-    business: Optional[UserResponse_business] = None
     # The compliance value for this user.
     compliance: Optional[UserResponse_compliance] = None
     # The date and time when the entity was created.
@@ -64,7 +61,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     personal_data_deletion_status: Optional[str] = None
     # The phone number associated with this user.
     phone: Optional[str] = None
-    # The Stripe info value for this user.
+    # Stripe state for the user's currently selected business.
     stripe_info: Optional[UserResponse_stripeInfo] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[UserResponse_subscriptionStatus] = None
@@ -88,7 +85,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .mobile_device_preferences import MobileDevicePreferences
         from .user_identity import UserIdentity
         from .user_response_billing_plan import UserResponse_billingPlan
-        from .user_response_business import UserResponse_business
         from .user_response_compliance import UserResponse_compliance
         from .user_response_current_business import UserResponse_currentBusiness
         from .user_response_notification_preferences import UserResponse_notificationPreferences
@@ -98,7 +94,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .mobile_device_preferences import MobileDevicePreferences
         from .user_identity import UserIdentity
         from .user_response_billing_plan import UserResponse_billingPlan
-        from .user_response_business import UserResponse_business
         from .user_response_compliance import UserResponse_compliance
         from .user_response_current_business import UserResponse_currentBusiness
         from .user_response_notification_preferences import UserResponse_notificationPreferences
@@ -107,7 +102,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(UserResponse_billingPlan)),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(UserResponse_business)),
             "compliance": lambda n : setattr(self, 'compliance', n.get_object_value(UserResponse_compliance)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "currentBusiness": lambda n : setattr(self, 'current_business', n.get_object_value(UserResponse_currentBusiness)),
@@ -140,7 +134,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("billingPlan", self.billing_plan)
-        writer.write_object_value("business", self.business)
         writer.write_object_value("compliance", self.compliance)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("currentBusiness", self.current_business)

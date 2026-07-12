@@ -14,80 +14,66 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ..models.problem_details import ProblemDetails
-    from ..models.stripe_payment_method_response import StripePaymentMethodResponse
-    from .item.payment_methods_item_request_builder import PaymentMethodsItemRequestBuilder
+    from ....models.problem_details import ProblemDetails
+    from ....models.stripe_payment_method_response import StripePaymentMethodResponse
 
-class PaymentMethodsRequestBuilder(BaseRequestBuilder):
+class DefaultRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /payment-methods
+    Builds and executes requests for operations under /payment-methods/{id}/default
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new PaymentMethodsRequestBuilder and sets the default values.
+        Instantiates a new DefaultRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/payment-methods", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/payment-methods/{id}/default", path_parameters)
     
-    def by_id(self,id: str) -> PaymentMethodsItemRequestBuilder:
+    async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[StripePaymentMethodResponse]:
         """
-        Gets an item from the leadping.paymentMethods.item collection
-        param id: The ID of the payment method to retrieve.
-        Returns: PaymentMethodsItemRequestBuilder
-        """
-        if id is None:
-            raise TypeError("id cannot be null.")
-        from .item.payment_methods_item_request_builder import PaymentMethodsItemRequestBuilder
-
-        url_tpl_params = get_path_parameters(self.path_parameters)
-        url_tpl_params["id"] = id
-        return PaymentMethodsItemRequestBuilder(self.request_adapter, url_tpl_params)
-    
-    async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[StripePaymentMethodResponse]]:
-        """
-        Gets all cards attached to the current business billing customer.
+        Makes a card the default payment method for the current business.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[list[StripePaymentMethodResponse]]
+        Returns: Optional[StripePaymentMethodResponse]
         """
-        request_info = self.to_get_request_information(
+        request_info = self.to_post_request_information(
             request_configuration
         )
-        from ..models.problem_details import ProblemDetails
+        from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
+            "400": ProblemDetails,
             "401": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ..models.stripe_payment_method_response import StripePaymentMethodResponse
+        from ....models.stripe_payment_method_response import StripePaymentMethodResponse
 
-        return await self.request_adapter.send_collection_async(request_info, StripePaymentMethodResponse, error_mapping)
+        return await self.request_adapter.send_async(request_info, StripePaymentMethodResponse, error_mapping)
     
-    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Gets all cards attached to the current business billing customer.
+        Makes a card the default payment method for the current business.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
-        request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
+        request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def with_url(self,raw_url: str) -> PaymentMethodsRequestBuilder:
+    def with_url(self,raw_url: str) -> DefaultRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: PaymentMethodsRequestBuilder
+        Returns: DefaultRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return PaymentMethodsRequestBuilder(self.request_adapter, raw_url)
+        return DefaultRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class PaymentMethodsRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class DefaultRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

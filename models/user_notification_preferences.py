@@ -12,16 +12,28 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The automationFailedEmailEnabled property
+    automation_failed_email_enabled: Optional[bool] = None
     # Whether automation failed notifications are enabled for this user notification preferences.
     automation_failed_enabled: Optional[bool] = None
+    # The automationFailedSmsEnabled property
+    automation_failed_sms_enabled: Optional[bool] = None
     # Whether billing email is enabled for this user notification preferences.
     billing_email_enabled: Optional[bool] = None
     # Whether billing SMS is enabled for this user notification preferences.
     billing_sms_enabled: Optional[bool] = None
+    # The lowWalletBalanceEmailEnabled property
+    low_wallet_balance_email_enabled: Optional[bool] = None
     # Whether low wallet balance notifications are enabled for this user notification preferences.
     low_wallet_balance_enabled: Optional[bool] = None
+    # The lowWalletBalanceSmsEnabled property
+    low_wallet_balance_sms_enabled: Optional[bool] = None
+    # The missedCallEmailEnabled property
+    missed_call_email_enabled: Optional[bool] = None
     # Whether missed call notifications are enabled for this user notification preferences.
     missed_call_enabled: Optional[bool] = None
+    # The missedCallSmsEnabled property
+    missed_call_sms_enabled: Optional[bool] = None
     # Whether new lead email is enabled for this user notification preferences.
     new_lead_email_enabled: Optional[bool] = None
     # Whether new lead notifications are enabled for this user notification preferences.
@@ -30,12 +42,22 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     new_lead_sms_enabled: Optional[bool] = None
     # Whether payment failed notifications are enabled for this user notification preferences.
     payment_failed_enabled: Optional[bool] = None
+    # The paymentFailedSmsEnabled property
+    payment_failed_sms_enabled: Optional[bool] = None
+    # The subscriptionRenewingEmailEnabled property
+    subscription_renewing_email_enabled: Optional[bool] = None
     # Whether subscription renewing notifications are enabled for this user notification preferences.
     subscription_renewing_enabled: Optional[bool] = None
+    # The subscriptionRenewingSmsEnabled property
+    subscription_renewing_sms_enabled: Optional[bool] = None
     # Whether 10DLC status notifications are enabled for this user notification preferences.
     ten_dlc_status_enabled: Optional[bool] = None
+    # The unreadSmsEmailEnabled property
+    unread_sms_email_enabled: Optional[bool] = None
     # Whether unread SMS notifications are enabled for this user notification preferences.
     unread_sms_enabled: Optional[bool] = None
+    # The unreadSmsSmsEnabled property
+    unread_sms_sms_enabled: Optional[bool] = None
     # Whether usage limit hit notifications are enabled for this user notification preferences.
     usage_limit_hit_enabled: Optional[bool] = None
     
@@ -56,18 +78,29 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "automationFailedEmailEnabled": lambda n : setattr(self, 'automation_failed_email_enabled', n.get_bool_value()),
             "automationFailedEnabled": lambda n : setattr(self, 'automation_failed_enabled', n.get_bool_value()),
+            "automationFailedSmsEnabled": lambda n : setattr(self, 'automation_failed_sms_enabled', n.get_bool_value()),
             "billingEmailEnabled": lambda n : setattr(self, 'billing_email_enabled', n.get_bool_value()),
             "billingSmsEnabled": lambda n : setattr(self, 'billing_sms_enabled', n.get_bool_value()),
+            "lowWalletBalanceEmailEnabled": lambda n : setattr(self, 'low_wallet_balance_email_enabled', n.get_bool_value()),
             "lowWalletBalanceEnabled": lambda n : setattr(self, 'low_wallet_balance_enabled', n.get_bool_value()),
+            "lowWalletBalanceSmsEnabled": lambda n : setattr(self, 'low_wallet_balance_sms_enabled', n.get_bool_value()),
+            "missedCallEmailEnabled": lambda n : setattr(self, 'missed_call_email_enabled', n.get_bool_value()),
             "missedCallEnabled": lambda n : setattr(self, 'missed_call_enabled', n.get_bool_value()),
+            "missedCallSmsEnabled": lambda n : setattr(self, 'missed_call_sms_enabled', n.get_bool_value()),
             "newLeadEmailEnabled": lambda n : setattr(self, 'new_lead_email_enabled', n.get_bool_value()),
             "newLeadEnabled": lambda n : setattr(self, 'new_lead_enabled', n.get_bool_value()),
             "newLeadSmsEnabled": lambda n : setattr(self, 'new_lead_sms_enabled', n.get_bool_value()),
             "paymentFailedEnabled": lambda n : setattr(self, 'payment_failed_enabled', n.get_bool_value()),
+            "paymentFailedSmsEnabled": lambda n : setattr(self, 'payment_failed_sms_enabled', n.get_bool_value()),
+            "subscriptionRenewingEmailEnabled": lambda n : setattr(self, 'subscription_renewing_email_enabled', n.get_bool_value()),
             "subscriptionRenewingEnabled": lambda n : setattr(self, 'subscription_renewing_enabled', n.get_bool_value()),
+            "subscriptionRenewingSmsEnabled": lambda n : setattr(self, 'subscription_renewing_sms_enabled', n.get_bool_value()),
             "tenDlcStatusEnabled": lambda n : setattr(self, 'ten_dlc_status_enabled', n.get_bool_value()),
+            "unreadSmsEmailEnabled": lambda n : setattr(self, 'unread_sms_email_enabled', n.get_bool_value()),
             "unreadSmsEnabled": lambda n : setattr(self, 'unread_sms_enabled', n.get_bool_value()),
+            "unreadSmsSmsEnabled": lambda n : setattr(self, 'unread_sms_sms_enabled', n.get_bool_value()),
             "usageLimitHitEnabled": lambda n : setattr(self, 'usage_limit_hit_enabled', n.get_bool_value()),
         }
         return fields
@@ -80,18 +113,29 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_bool_value("automationFailedEmailEnabled", self.automation_failed_email_enabled)
         writer.write_bool_value("automationFailedEnabled", self.automation_failed_enabled)
+        writer.write_bool_value("automationFailedSmsEnabled", self.automation_failed_sms_enabled)
         writer.write_bool_value("billingEmailEnabled", self.billing_email_enabled)
         writer.write_bool_value("billingSmsEnabled", self.billing_sms_enabled)
+        writer.write_bool_value("lowWalletBalanceEmailEnabled", self.low_wallet_balance_email_enabled)
         writer.write_bool_value("lowWalletBalanceEnabled", self.low_wallet_balance_enabled)
+        writer.write_bool_value("lowWalletBalanceSmsEnabled", self.low_wallet_balance_sms_enabled)
+        writer.write_bool_value("missedCallEmailEnabled", self.missed_call_email_enabled)
         writer.write_bool_value("missedCallEnabled", self.missed_call_enabled)
+        writer.write_bool_value("missedCallSmsEnabled", self.missed_call_sms_enabled)
         writer.write_bool_value("newLeadEmailEnabled", self.new_lead_email_enabled)
         writer.write_bool_value("newLeadEnabled", self.new_lead_enabled)
         writer.write_bool_value("newLeadSmsEnabled", self.new_lead_sms_enabled)
         writer.write_bool_value("paymentFailedEnabled", self.payment_failed_enabled)
+        writer.write_bool_value("paymentFailedSmsEnabled", self.payment_failed_sms_enabled)
+        writer.write_bool_value("subscriptionRenewingEmailEnabled", self.subscription_renewing_email_enabled)
         writer.write_bool_value("subscriptionRenewingEnabled", self.subscription_renewing_enabled)
+        writer.write_bool_value("subscriptionRenewingSmsEnabled", self.subscription_renewing_sms_enabled)
         writer.write_bool_value("tenDlcStatusEnabled", self.ten_dlc_status_enabled)
+        writer.write_bool_value("unreadSmsEmailEnabled", self.unread_sms_email_enabled)
         writer.write_bool_value("unreadSmsEnabled", self.unread_sms_enabled)
+        writer.write_bool_value("unreadSmsSmsEnabled", self.unread_sms_sms_enabled)
         writer.write_bool_value("usageLimitHitEnabled", self.usage_limit_hit_enabled)
         writer.write_additional_data_value(self.additional_data)
     

@@ -16,6 +16,7 @@ from warnings import warn
 if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from ...models.stripe_payment_method_response import StripePaymentMethodResponse
+    from .default.default_request_builder import DefaultRequestBuilder
 
 class PaymentMethodsItemRequestBuilder(BaseRequestBuilder):
     """
@@ -103,6 +104,15 @@ class PaymentMethodsItemRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return PaymentMethodsItemRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def default(self) -> DefaultRequestBuilder:
+        """
+        The default property
+        """
+        from .default.default_request_builder import DefaultRequestBuilder
+
+        return DefaultRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class PaymentMethodsItemRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):

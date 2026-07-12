@@ -27,7 +27,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # Masked preview of the source API key for display without exposing the secret.
+    # Masked preview of the source API key for compact display.
     api_key_preview: Optional[str] = None
     # Business summary connected to this lead source response.
     business: Optional[SourceResponse_business] = None

@@ -5,12 +5,12 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .user_subscription_cancellation_info import UserSubscriptionCancellationInfo
+    from .business_subscription_cancellation_info import BusinessSubscriptionCancellationInfo
 
-from .user_subscription_cancellation_info import UserSubscriptionCancellationInfo
+from .business_subscription_cancellation_info import BusinessSubscriptionCancellationInfo
 
 @dataclass
-class BusinessStripeInfo_cancellation(UserSubscriptionCancellationInfo, Parsable):
+class BusinessStripeInfo_cancellation(BusinessSubscriptionCancellationInfo, Parsable):
     """
     Captured subscription cancellation feedback for retention and churn analysis.
     """
@@ -31,9 +31,9 @@ class BusinessStripeInfo_cancellation(UserSubscriptionCancellationInfo, Parsable
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .user_subscription_cancellation_info import UserSubscriptionCancellationInfo
+        from .business_subscription_cancellation_info import BusinessSubscriptionCancellationInfo
 
-        from .user_subscription_cancellation_info import UserSubscriptionCancellationInfo
+        from .business_subscription_cancellation_info import BusinessSubscriptionCancellationInfo
 
         fields: dict[str, Callable[[Any], None]] = {
         }

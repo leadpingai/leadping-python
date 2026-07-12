@@ -19,6 +19,8 @@ class Phone(AdditionalDataHolder, Parsable):
     lookup: Optional[Phone_lookup] = None
     # E.164 phone number exposed by this lead phone number.
     number: Optional[str] = None
+    # Identifier of the canonical phone identity stored by Leadping.
+    phone_identity_id: Optional[str] = None
     # Type classification used to route and interpret this lead phone number in the Leadping API.
     type: Optional[str] = None
     
@@ -45,6 +47,7 @@ class Phone(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "lookup": lambda n : setattr(self, 'lookup', n.get_object_value(Phone_lookup)),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
+            "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
         }
         return fields
@@ -59,6 +62,7 @@ class Phone(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_object_value("lookup", self.lookup)
         writer.write_str_value("number", self.number)
+        writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_str_value("type", self.type)
         writer.write_additional_data_value(self.additional_data)
     

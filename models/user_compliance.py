@@ -25,10 +25,6 @@ class UserCompliance(AdditionalDataHolder, Parsable):
     accepted_terms: Optional[bool] = None
     # Whether the user accepted subscription for this user compliance.
     accepted_to_subscription: Optional[bool] = None
-    # The licensed products included with this user compliance.
-    licensed_products: Optional[list[str]] = None
-    # The licensed states included with this user compliance.
-    licensed_states: Optional[list[str]] = None
     # The TrustedForm certificates included with this user compliance.
     trusted_form_certificates: Optional[list[TrustedFormCertificate]] = None
     
@@ -58,8 +54,6 @@ class UserCompliance(AdditionalDataHolder, Parsable):
             "acceptedSms": lambda n : setattr(self, 'accepted_sms', n.get_bool_value()),
             "acceptedTerms": lambda n : setattr(self, 'accepted_terms', n.get_bool_value()),
             "acceptedToSubscription": lambda n : setattr(self, 'accepted_to_subscription', n.get_bool_value()),
-            "licensedProducts": lambda n : setattr(self, 'licensed_products', n.get_collection_of_primitive_values(str)),
-            "licensedStates": lambda n : setattr(self, 'licensed_states', n.get_collection_of_primitive_values(str)),
             "trustedFormCertificates": lambda n : setattr(self, 'trusted_form_certificates', n.get_collection_of_object_values(TrustedFormCertificate)),
         }
         return fields
@@ -77,8 +71,6 @@ class UserCompliance(AdditionalDataHolder, Parsable):
         writer.write_bool_value("acceptedSms", self.accepted_sms)
         writer.write_bool_value("acceptedTerms", self.accepted_terms)
         writer.write_bool_value("acceptedToSubscription", self.accepted_to_subscription)
-        writer.write_collection_of_primitive_values("licensedProducts", self.licensed_products)
-        writer.write_collection_of_primitive_values("licensedStates", self.licensed_states)
         writer.write_collection_of_object_values("trustedFormCertificates", self.trusted_form_certificates)
         writer.write_additional_data_value(self.additional_data)
     

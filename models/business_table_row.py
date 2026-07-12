@@ -8,8 +8,10 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .business_table_row_activation_status import BusinessTableRow_activationStatus
     from .business_table_row_admin_enablement_override import BusinessTableRow_adminEnablementOverride
+    from .business_table_row_billing_plan import BusinessTableRow_billingPlan
     from .business_table_row_setup_step import BusinessTableRow_setupStep
     from .business_table_row_status import BusinessTableRow_status
+    from .business_table_row_subscription_status import BusinessTableRow_subscriptionStatus
     from .business_table_row_ten_dlc_status import BusinessTableRow_tenDlcStatus
     from .business_table_row_website_status import BusinessTableRow_websiteStatus
 
@@ -37,6 +39,8 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     api_key_preview: Optional[str] = None
     # The total number of tracked uses for this business API key.
     api_key_total_uses: Optional[int] = None
+    # Defines the supported Billing Plan values.
+    billing_plan: Optional[BusinessTableRow_billingPlan] = None
     # The business ID that owns this row when the row represents a child business resource.
     business_id: Optional[str] = None
     # The business name that owns this row when the row represents a child business resource.
@@ -47,18 +51,26 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # The industry value for this business.
     industry: Optional[str] = None
+    # The lastSubscriptionEventAt property
+    last_subscription_event_at: Optional[datetime.datetime] = None
     # The date and time for the modified at value on this business.
     modified_at: Optional[datetime.datetime] = None
     # The human-readable name shown for this business.
     name: Optional[str] = None
     # Whether needs admin review applies to this business.
     needs_admin_review: Optional[bool] = None
+    # The paymentFailedAt property
+    payment_failed_at: Optional[datetime.datetime] = None
     # The phone number associated with this business.
     phone: Optional[str] = None
     # Defines the supported Business Setup Step values.
     setup_step: Optional[BusinessTableRow_setupStep] = None
     # Defines the supported Business Status values.
     status: Optional[BusinessTableRow_status] = None
+    # The subscriptionCancelAt property
+    subscription_cancel_at: Optional[datetime.datetime] = None
+    # Defines the supported Subscription Status values.
+    subscription_status: Optional[BusinessTableRow_subscriptionStatus] = None
     # Defines the supported 10DLC Application Status values.
     ten_dlc_status: Optional[BusinessTableRow_tenDlcStatus] = None
     # The user count for this business.
@@ -90,15 +102,19 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         """
         from .business_table_row_activation_status import BusinessTableRow_activationStatus
         from .business_table_row_admin_enablement_override import BusinessTableRow_adminEnablementOverride
+        from .business_table_row_billing_plan import BusinessTableRow_billingPlan
         from .business_table_row_setup_step import BusinessTableRow_setupStep
         from .business_table_row_status import BusinessTableRow_status
+        from .business_table_row_subscription_status import BusinessTableRow_subscriptionStatus
         from .business_table_row_ten_dlc_status import BusinessTableRow_tenDlcStatus
         from .business_table_row_website_status import BusinessTableRow_websiteStatus
 
         from .business_table_row_activation_status import BusinessTableRow_activationStatus
         from .business_table_row_admin_enablement_override import BusinessTableRow_adminEnablementOverride
+        from .business_table_row_billing_plan import BusinessTableRow_billingPlan
         from .business_table_row_setup_step import BusinessTableRow_setupStep
         from .business_table_row_status import BusinessTableRow_status
+        from .business_table_row_subscription_status import BusinessTableRow_subscriptionStatus
         from .business_table_row_ten_dlc_status import BusinessTableRow_tenDlcStatus
         from .business_table_row_website_status import BusinessTableRow_websiteStatus
 
@@ -111,17 +127,22 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
+            "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessTableRow_billingPlan)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "industry": lambda n : setattr(self, 'industry', n.get_str_value()),
+            "lastSubscriptionEventAt": lambda n : setattr(self, 'last_subscription_event_at', n.get_datetime_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "needsAdminReview": lambda n : setattr(self, 'needs_admin_review', n.get_bool_value()),
+            "paymentFailedAt": lambda n : setattr(self, 'payment_failed_at', n.get_datetime_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "setupStep": lambda n : setattr(self, 'setup_step', n.get_enum_value(BusinessTableRow_setupStep)),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(BusinessTableRow_status)),
+            "subscriptionCancelAt": lambda n : setattr(self, 'subscription_cancel_at', n.get_datetime_value()),
+            "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(BusinessTableRow_subscriptionStatus)),
             "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(BusinessTableRow_tenDlcStatus)),
             "userCount": lambda n : setattr(self, 'user_count', n.get_int_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
@@ -147,17 +168,22 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
+        writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("businessName", self.business_name)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_str_value("industry", self.industry)
+        writer.write_datetime_value("lastSubscriptionEventAt", self.last_subscription_event_at)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_bool_value("needsAdminReview", self.needs_admin_review)
+        writer.write_datetime_value("paymentFailedAt", self.payment_failed_at)
         writer.write_str_value("phone", self.phone)
         writer.write_enum_value("setupStep", self.setup_step)
         writer.write_enum_value("status", self.status)
+        writer.write_datetime_value("subscriptionCancelAt", self.subscription_cancel_at)
+        writer.write_enum_value("subscriptionStatus", self.subscription_status)
         writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
         writer.write_int_value("userCount", self.user_count)
         writer.write_str_value("userId", self.user_id)

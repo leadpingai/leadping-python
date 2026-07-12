@@ -29,7 +29,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     allowed_states: Optional[list[str]] = None
     # UTC timestamp when the source API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
-    # Masked preview of the source API key for display without exposing the secret.
+    # Masked preview of the source API key for compact display.
     api_key_preview: Optional[str] = None
     # Total number of authenticated requests made with this source API key.
     api_key_total_uses: Optional[int] = None

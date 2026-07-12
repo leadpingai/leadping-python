@@ -6,7 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
-class UserSubscriptionCancellationInfo(AdditionalDataHolder, Parsable):
+class BusinessSubscriptionCancellationInfo(AdditionalDataHolder, Parsable):
     """
     Captured subscription cancellation feedback for retention and churn analysis.
     """
@@ -33,15 +33,15 @@ class UserSubscriptionCancellationInfo(AdditionalDataHolder, Parsable):
     technical_issues: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> UserSubscriptionCancellationInfo:
+    def create_from_discriminator_value(parse_node: ParseNode) -> BusinessSubscriptionCancellationInfo:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: UserSubscriptionCancellationInfo
+        Returns: BusinessSubscriptionCancellationInfo
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return UserSubscriptionCancellationInfo()
+        return BusinessSubscriptionCancellationInfo()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """

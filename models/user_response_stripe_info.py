@@ -5,14 +5,14 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .user_stripe_info import UserStripeInfo
+    from .business_stripe_info import BusinessStripeInfo
 
-from .user_stripe_info import UserStripeInfo
+from .business_stripe_info import BusinessStripeInfo
 
 @dataclass
-class UserResponse_stripeInfo(UserStripeInfo, Parsable):
+class UserResponse_stripeInfo(BusinessStripeInfo, Parsable):
     """
-    The Stripe info value for this user.
+    Stripe state for the user's currently selected business.
     """
     
     @staticmethod
@@ -31,9 +31,9 @@ class UserResponse_stripeInfo(UserStripeInfo, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .user_stripe_info import UserStripeInfo
+        from .business_stripe_info import BusinessStripeInfo
 
-        from .user_stripe_info import UserStripeInfo
+        from .business_stripe_info import BusinessStripeInfo
 
         fields: dict[str, Callable[[Any], None]] = {
         }

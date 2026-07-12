@@ -24,6 +24,8 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
     activation_summary: Optional[str] = None
     # Defines the supported Business Status values.
     business_status: Optional[BusinessSwitchOption_businessStatus] = None
+    # Whether the business has a default billing payment method.
+    has_payment_method: Optional[bool] = None
     # The unique ID for this business switch option.
     id: Optional[str] = None
     # Whether this business switch option is current.
@@ -67,6 +69,7 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
             "activationStatus": lambda n : setattr(self, 'activation_status', n.get_enum_value(BusinessSwitchOption_activationStatus)),
             "activationSummary": lambda n : setattr(self, 'activation_summary', n.get_str_value()),
             "businessStatus": lambda n : setattr(self, 'business_status', n.get_enum_value(BusinessSwitchOption_businessStatus)),
+            "hasPaymentMethod": lambda n : setattr(self, 'has_payment_method', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isCurrent": lambda n : setattr(self, 'is_current', n.get_bool_value()),
             "lastUsedAt": lambda n : setattr(self, 'last_used_at', n.get_datetime_value()),
@@ -88,6 +91,7 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
         writer.write_enum_value("activationStatus", self.activation_status)
         writer.write_str_value("activationSummary", self.activation_summary)
         writer.write_enum_value("businessStatus", self.business_status)
+        writer.write_bool_value("hasPaymentMethod", self.has_payment_method)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isCurrent", self.is_current)
         writer.write_datetime_value("lastUsedAt", self.last_used_at)
