@@ -32,7 +32,7 @@ class DefaultRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[StripePaymentMethodResponse]:
         """
-        Makes a card the default payment method for the current business.
+        Set default payment method
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[StripePaymentMethodResponse]
         """
@@ -53,7 +53,7 @@ class DefaultRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Makes a card the default payment method for the current business.
+        Set default payment method
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

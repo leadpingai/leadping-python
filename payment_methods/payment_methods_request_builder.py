@@ -47,7 +47,7 @@ class PaymentMethodsRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[StripePaymentMethodResponse]]:
         """
-        Gets all cards attached to the current business billing customer.
+        List payment methods
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[StripePaymentMethodResponse]]
         """
@@ -67,7 +67,7 @@ class PaymentMethodsRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Gets all cards attached to the current business billing customer.
+        List payment methods
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
