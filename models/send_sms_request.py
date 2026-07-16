@@ -5,11 +5,6 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
-if TYPE_CHECKING:
-    from .send_sms_request_outbound_priority import SendSmsRequest_outboundPriority
-    from .send_sms_request_outbound_source import SendSmsRequest_outboundSource
-    from .send_sms_request_selection_reason import SendSmsRequest_selectionReason
-
 @dataclass
 class SendSmsRequest(AdditionalDataHolder, Parsable):
     """
@@ -18,36 +13,16 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Automation ID connected to this workflow, run, or event.
-    automation_id: Optional[str] = None
     # Messaging campaign identifier associated with this SMS send request.
     campaign_id: Optional[str] = None
     # Conversation ID that links this SMS send request to the Leadping inbox thread.
     conversation_id: Optional[str] = None
     # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # Indicates whether the lead has the consent required for compliant outreach.
-    has_required_consent: Optional[bool] = None
-    # Bulk import batch ID that created or updated this lead.
-    import_batch_id: Optional[str] = None
-    # Indicates whether automation created or triggered this SMS send request.
-    is_automated: Optional[bool] = None
-    # Indicates whether this record originated from a bulk import rather than a real-time lead source.
-    is_imported_lead: Optional[bool] = None
-    # Outbound delivery request ID connected to this decision or attempt.
-    outbound_delivery_request_id: Optional[str] = None
     # Idempotency key used to prevent duplicate outbound delivery.
     outbound_idempotency_key: Optional[str] = None
-    # Defines priority classes used when pacing outbound delivery.
-    outbound_priority: Optional[SendSmsRequest_outboundPriority] = None
-    # Outbound reservation ID used to throttle and track delivery capacity.
-    outbound_reservation_id: Optional[str] = None
-    # Defines the source that requested outbound delivery.
-    outbound_source: Optional[SendSmsRequest_outboundSource] = None
     # UTC timestamp when Leadping should send the SMS message.
     scheduled_for: Optional[datetime.datetime] = None
-    # Defines the supported Outgoing Number Selection Reason values.
-    selection_reason: Optional[SendSmsRequest_selectionReason] = None
     # Existing SMS event ID to reuse or update when retrying a send request.
     sms_event_id: Optional[str] = None
     # Lead source ID used for attribution and sender selection.
@@ -73,30 +48,12 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .send_sms_request_outbound_priority import SendSmsRequest_outboundPriority
-        from .send_sms_request_outbound_source import SendSmsRequest_outboundSource
-        from .send_sms_request_selection_reason import SendSmsRequest_selectionReason
-
-        from .send_sms_request_outbound_priority import SendSmsRequest_outboundPriority
-        from .send_sms_request_outbound_source import SendSmsRequest_outboundSource
-        from .send_sms_request_selection_reason import SendSmsRequest_selectionReason
-
         fields: dict[str, Callable[[Any], None]] = {
-            "automationId": lambda n : setattr(self, 'automation_id', n.get_str_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
-            "hasRequiredConsent": lambda n : setattr(self, 'has_required_consent', n.get_bool_value()),
-            "importBatchId": lambda n : setattr(self, 'import_batch_id', n.get_str_value()),
-            "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
-            "isImportedLead": lambda n : setattr(self, 'is_imported_lead', n.get_bool_value()),
-            "outboundDeliveryRequestId": lambda n : setattr(self, 'outbound_delivery_request_id', n.get_str_value()),
             "outboundIdempotencyKey": lambda n : setattr(self, 'outbound_idempotency_key', n.get_str_value()),
-            "outboundPriority": lambda n : setattr(self, 'outbound_priority', n.get_enum_value(SendSmsRequest_outboundPriority)),
-            "outboundReservationId": lambda n : setattr(self, 'outbound_reservation_id', n.get_str_value()),
-            "outboundSource": lambda n : setattr(self, 'outbound_source', n.get_enum_value(SendSmsRequest_outboundSource)),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
-            "selectionReason": lambda n : setattr(self, 'selection_reason', n.get_enum_value(SendSmsRequest_selectionReason)),
             "smsEventId": lambda n : setattr(self, 'sms_event_id', n.get_str_value()),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "text": lambda n : setattr(self, 'text', n.get_str_value()),
@@ -112,21 +69,11 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("automationId", self.automation_id)
         writer.write_str_value("campaignId", self.campaign_id)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
-        writer.write_bool_value("hasRequiredConsent", self.has_required_consent)
-        writer.write_str_value("importBatchId", self.import_batch_id)
-        writer.write_bool_value("isAutomated", self.is_automated)
-        writer.write_bool_value("isImportedLead", self.is_imported_lead)
-        writer.write_str_value("outboundDeliveryRequestId", self.outbound_delivery_request_id)
         writer.write_str_value("outboundIdempotencyKey", self.outbound_idempotency_key)
-        writer.write_enum_value("outboundPriority", self.outbound_priority)
-        writer.write_str_value("outboundReservationId", self.outbound_reservation_id)
-        writer.write_enum_value("outboundSource", self.outbound_source)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)
-        writer.write_enum_value("selectionReason", self.selection_reason)
         writer.write_str_value("smsEventId", self.sms_event_id)
         writer.write_str_value("sourceId", self.source_id)
         writer.write_str_value("text", self.text)

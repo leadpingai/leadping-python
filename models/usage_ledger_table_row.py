@@ -26,8 +26,6 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     business_name: Optional[str] = None
     # The channel value for this usage ledger.
     channel: Optional[UsageChannel] = None
-    # The correlation ID associated with this usage ledger.
-    correlation_id: Optional[str] = None
     # The date and time for the created at value on this usage ledger.
     created_at: Optional[datetime.datetime] = None
     # The monetary customer charge amount for this usage ledger.
@@ -36,12 +34,8 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # The unique ID for this usage ledger.
     id: Optional[str] = None
-    # The idempotency key value for this usage ledger.
-    idempotency_key: Optional[str] = None
     # Whether this usage ledger is billable.
     is_billable: Optional[bool] = None
-    # Whether this usage ledger is internal.
-    is_internal: Optional[bool] = None
     # The lead ID associated with this usage ledger.
     lead_id: Optional[str] = None
     # The lead name value for this usage ledger.
@@ -52,8 +46,6 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     phone_number_id: Optional[str] = None
     # The quantity value for this usage ledger.
     quantity: Optional[float] = None
-    # The source event ID associated with this usage ledger.
-    source_event_id: Optional[str] = None
     # The current status for this usage ledger.
     status: Optional[UsageRecordStatus] = None
     # The unit price value for this usage ledger.
@@ -92,20 +84,16 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
             "channel": lambda n : setattr(self, 'channel', n.get_enum_value(UsageChannel)),
-            "correlationId": lambda n : setattr(self, 'correlation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "idempotencyKey": lambda n : setattr(self, 'idempotency_key', n.get_str_value()),
             "isBillable": lambda n : setattr(self, 'is_billable', n.get_bool_value()),
-            "isInternal": lambda n : setattr(self, 'is_internal', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
             "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
-            "sourceEventId": lambda n : setattr(self, 'source_event_id', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageRecordStatus)),
             "unitPrice": lambda n : setattr(self, 'unit_price', n.get_float_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
@@ -125,20 +113,16 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("businessName", self.business_name)
         writer.write_enum_value("channel", self.channel)
-        writer.write_str_value("correlationId", self.correlation_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_float_value("customerChargeAmount", self.customer_charge_amount)
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
-        writer.write_str_value("idempotencyKey", self.idempotency_key)
         writer.write_bool_value("isBillable", self.is_billable)
-        writer.write_bool_value("isInternal", self.is_internal)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("leadName", self.lead_name)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
         writer.write_float_value("quantity", self.quantity)
-        writer.write_str_value("sourceEventId", self.source_event_id)
         writer.write_enum_value("status", self.status)
         writer.write_float_value("unitPrice", self.unit_price)
         writer.write_str_value("userId", self.user_id)

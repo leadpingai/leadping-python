@@ -58,8 +58,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether automation created or triggered this SMS event table row.
     is_automated: Optional[bool] = None
-    # Indicates whether this SMS event table row is part of Leadping sender warmup traffic.
-    is_warmup: Optional[bool] = None
     # Lead ID associated with this SMS event.
     lead_id: Optional[str] = None
     # Lead display name shown for this SMS event.
@@ -68,8 +66,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     outbound_phone_number_id: Optional[str] = None
     # Defines the source that requested outbound delivery.
     outbound_source: Optional[SmsEventTableRow_outboundSource] = None
-    # Provider message identifier for SMS delivery tracking and reconciliation.
-    provider_message_id: Optional[str] = None
     # UTC timestamp when Leadping queued this SMS event table row for processing.
     queued_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping received this inbound event or message.
@@ -88,10 +84,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     status: Optional[SmsEventTableRow_status] = None
     # Human-readable reason explaining the current status of this SMS event table row.
     status_reason: Optional[str] = None
-    # Telnyx identifier connected to this phone number, call, or SMS event.
-    telnyx_id: Optional[str] = None
-    # 10DLC campaign identifier associated with this sender or SMS event.
-    ten_dlc_campaign_id: Optional[str] = None
     # Body text for the SMS message or communication represented by this SMS event table row.
     text: Optional[str] = None
     # Recipient phone number used for this communication.
@@ -150,12 +142,10 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
-            "isWarmup": lambda n : setattr(self, 'is_warmup', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "outboundSource": lambda n : setattr(self, 'outbound_source', n.get_enum_value(SmsEventTableRow_outboundSource)),
-            "providerMessageId": lambda n : setattr(self, 'provider_message_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
@@ -165,8 +155,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "sentAt": lambda n : setattr(self, 'sent_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(SmsEventTableRow_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
-            "telnyxId": lambda n : setattr(self, 'telnyx_id', n.get_str_value()),
-            "tenDlcCampaignId": lambda n : setattr(self, 'ten_dlc_campaign_id', n.get_str_value()),
             "text": lambda n : setattr(self, 'text', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
             "trafficType": lambda n : setattr(self, 'traffic_type', n.get_enum_value(SmsEventTableRow_trafficType)),
@@ -204,12 +192,10 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isAutomated", self.is_automated)
-        writer.write_bool_value("isWarmup", self.is_warmup)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("leadName", self.lead_name)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_enum_value("outboundSource", self.outbound_source)
-        writer.write_str_value("providerMessageId", self.provider_message_id)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("receivedAt", self.received_at)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)
@@ -219,8 +205,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("sentAt", self.sent_at)
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
-        writer.write_str_value("telnyxId", self.telnyx_id)
-        writer.write_str_value("tenDlcCampaignId", self.ten_dlc_campaign_id)
         writer.write_str_value("text", self.text)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
         writer.write_enum_value("trafficType", self.traffic_type)

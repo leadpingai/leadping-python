@@ -10,22 +10,25 @@ if TYPE_CHECKING:
 
 @dataclass
 class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
+    """
+    Automation health associated with this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The automationCount property
+    # Total number of automation records represented by this Leadping customer automation health.
     automation_count: Optional[int] = None
-    # The enabledCount property
+    # Total number of enabled records represented by this Leadping customer automation health.
     enabled_count: Optional[int] = None
-    # The executions property
+    # Number of executions represented by this Leadping customer automation health.
     executions: Optional[int] = None
-    # The failingAutomations property
+    # Collection of failing automations included with this Leadping customer automation health.
     failing_automations: Optional[list[CustomerFailingAutomation]] = None
-    # The failureCount property
+    # Total number of failure records represented by this Leadping customer automation health.
     failure_count: Optional[int] = None
-    # The lastFailure property
+    # Last failure associated with this Leadping customer automation health.
     last_failure: Optional[CustomerAutomationHealth_lastFailure] = None
-    # The successCount property
+    # Total number of success records represented by this Leadping customer automation health.
     success_count: Optional[int] = None
     
     @staticmethod

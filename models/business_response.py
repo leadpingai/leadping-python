@@ -8,7 +8,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .business_response_activation import BusinessResponse_activation
     from .business_response_address import BusinessResponse_address
-    from .business_response_admin_enablement_override import BusinessResponse_adminEnablementOverride
     from .business_response_billing_address import BusinessResponse_billingAddress
     from .business_response_billing_plan import BusinessResponse_billingPlan
     from .business_response_compliance_policy import BusinessResponse_compliancePolicy
@@ -16,7 +15,6 @@ if TYPE_CHECKING:
     from .business_response_setup_step import BusinessResponse_setupStep
     from .business_response_site import BusinessResponse_site
     from .business_response_status import BusinessResponse_status
-    from .business_response_stripe_info import BusinessResponse_stripeInfo
     from .business_response_subscription_status import BusinessResponse_subscriptionStatus
     from .business_response_user import BusinessResponse_user
     from .id_name_value import IdNameValue
@@ -35,8 +33,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     activation: Optional[BusinessResponse_activation] = None
     # Postal address for the business, lead, or contact represented by this business profile response.
     address: Optional[BusinessResponse_address] = None
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[BusinessResponse_adminEnablementOverride] = None
     # Indicates whether automatic wallet refill is enabled for the business.
     auto_refill_enabled: Optional[bool] = None
     # Postal address used for invoices, receipts, and payment processor billing records.
@@ -77,8 +73,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     site: Optional[BusinessResponse_site] = None
     # Defines the supported Business Status values.
     status: Optional[BusinessResponse_status] = None
-    # Stripe customer and subscription state associated with this business or user.
-    stripe_info: Optional[BusinessResponse_stripeInfo] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[BusinessResponse_subscriptionStatus] = None
     # User summary connected to this business profile response.
@@ -106,7 +100,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         """
         from .business_response_activation import BusinessResponse_activation
         from .business_response_address import BusinessResponse_address
-        from .business_response_admin_enablement_override import BusinessResponse_adminEnablementOverride
         from .business_response_billing_address import BusinessResponse_billingAddress
         from .business_response_billing_plan import BusinessResponse_billingPlan
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
@@ -114,14 +107,12 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_setup_step import BusinessResponse_setupStep
         from .business_response_site import BusinessResponse_site
         from .business_response_status import BusinessResponse_status
-        from .business_response_stripe_info import BusinessResponse_stripeInfo
         from .business_response_subscription_status import BusinessResponse_subscriptionStatus
         from .business_response_user import BusinessResponse_user
         from .id_name_value import IdNameValue
 
         from .business_response_activation import BusinessResponse_activation
         from .business_response_address import BusinessResponse_address
-        from .business_response_admin_enablement_override import BusinessResponse_adminEnablementOverride
         from .business_response_billing_address import BusinessResponse_billingAddress
         from .business_response_billing_plan import BusinessResponse_billingPlan
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
@@ -129,7 +120,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_setup_step import BusinessResponse_setupStep
         from .business_response_site import BusinessResponse_site
         from .business_response_status import BusinessResponse_status
-        from .business_response_stripe_info import BusinessResponse_stripeInfo
         from .business_response_subscription_status import BusinessResponse_subscriptionStatus
         from .business_response_user import BusinessResponse_user
         from .id_name_value import IdNameValue
@@ -138,7 +128,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "accountBalance": lambda n : setattr(self, 'account_balance', n.get_float_value()),
             "activation": lambda n : setattr(self, 'activation', n.get_object_value(BusinessResponse_activation)),
             "address": lambda n : setattr(self, 'address', n.get_object_value(BusinessResponse_address)),
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(BusinessResponse_adminEnablementOverride)),
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(BusinessResponse_billingAddress)),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
@@ -159,7 +148,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "setupStep": lambda n : setattr(self, 'setup_step', n.get_enum_value(BusinessResponse_setupStep)),
             "site": lambda n : setattr(self, 'site', n.get_object_value(BusinessResponse_site)),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(BusinessResponse_status)),
-            "stripeInfo": lambda n : setattr(self, 'stripe_info', n.get_object_value(BusinessResponse_stripeInfo)),
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(BusinessResponse_subscriptionStatus)),
             "user": lambda n : setattr(self, 'user', n.get_object_value(BusinessResponse_user)),
             "vertical": lambda n : setattr(self, 'vertical', n.get_str_value()),
@@ -178,7 +166,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_float_value("accountBalance", self.account_balance)
         writer.write_object_value("activation", self.activation)
         writer.write_object_value("address", self.address)
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingName", self.billing_name)
@@ -199,7 +186,6 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_enum_value("setupStep", self.setup_step)
         writer.write_object_value("site", self.site)
         writer.write_enum_value("status", self.status)
-        writer.write_object_value("stripeInfo", self.stripe_info)
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
         writer.write_object_value("user", self.user)
         writer.write_str_value("vertical", self.vertical)

@@ -14,33 +14,33 @@ class UserDataExportResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The completedAt property
+    # Date and time when the user data export completed.
     completed_at: Optional[datetime.datetime] = None
-    # The contentType property
+    # Media type of the generated file or response content.
     content_type: Optional[str] = None
-    # The downloadCount property
+    # Total number of download records represented by this Leadping user data export.
     download_count: Optional[int] = None
-    # The downloadUrl property
+    # Temporary URL for downloading the completed Leadping data export.
     download_url: Optional[str] = None
-    # The expiresAt property
+    # Date and time when the user data export expires.
     expires_at: Optional[datetime.datetime] = None
-    # The failedAt property
+    # Date and time when the user data export failed.
     failed_at: Optional[datetime.datetime] = None
-    # The fileName property
+    # Human-readable file name associated with this Leadping user data export.
     file_name: Optional[str] = None
-    # The files property
+    # Collection of files included with this Leadping user data export.
     files: Optional[list[UserDataExportFile]] = None
-    # The id property
+    # Unique Leadping identifier for the user data export.
     id: Optional[str] = None
-    # The maxDownloadCount property
+    # Total number of max download records represented by this Leadping user data export.
     max_download_count: Optional[int] = None
-    # The message property
+    # Human-readable message for this Leadping user data export.
     message: Optional[str] = None
-    # The requestedAt property
+    # Date and time when the user data export was requested.
     requested_at: Optional[datetime.datetime] = None
-    # The startedAt property
+    # Date and time when the user data export started.
     started_at: Optional[datetime.datetime] = None
-    # Defines the supported user data export statuses values.
+    # Current status for this Leadping user data export.
     status: Optional[UserDataExportStatuses] = None
     
     @staticmethod

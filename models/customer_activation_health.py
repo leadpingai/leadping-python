@@ -9,12 +9,15 @@ if TYPE_CHECKING:
 
 @dataclass
 class CustomerActivationHealth(AdditionalDataHolder, Parsable):
+    """
+    Activation health associated with this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The items property
+    # Collection of items included with this Leadping customer activation health.
     items: Optional[list[CustomerActivationHealthItem]] = None
-    # The overallStatus property
+    # Current overall status for this Leadping customer activation health.
     overall_status: Optional[str] = None
     
     @staticmethod

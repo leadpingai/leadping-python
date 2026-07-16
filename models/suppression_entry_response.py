@@ -28,8 +28,6 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     normalized_email: Optional[str] = None
     # The phone number associated with this ion entry.
     normalized_phone_number: Optional[str] = None
-    # The provider event ID associated with this ion entry.
-    provider_event_id: Optional[str] = None
     # The human-readable reason explaining this ion entry.
     reason: Optional[str] = None
     # The recipient identifier value for this ion entry.
@@ -38,8 +36,6 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     released_at: Optional[datetime.datetime] = None
     # The source value for this ion entry.
     source: Optional[str] = None
-    # The source event ID associated with this ion entry.
-    source_event_id: Optional[str] = None
     # The current status for this ion entry.
     status: Optional[str] = None
     # The date and time for the suppressed at value on this ion entry.
@@ -72,12 +68,10 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "normalizedEmail": lambda n : setattr(self, 'normalized_email', n.get_str_value()),
             "normalizedPhoneNumber": lambda n : setattr(self, 'normalized_phone_number', n.get_str_value()),
-            "providerEventId": lambda n : setattr(self, 'provider_event_id', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
             "recipientIdentifier": lambda n : setattr(self, 'recipient_identifier', n.get_str_value()),
             "releasedAt": lambda n : setattr(self, 'released_at', n.get_datetime_value()),
             "source": lambda n : setattr(self, 'source', n.get_str_value()),
-            "sourceEventId": lambda n : setattr(self, 'source_event_id', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "suppressedAt": lambda n : setattr(self, 'suppressed_at', n.get_datetime_value()),
         }
@@ -97,12 +91,10 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_str_value("normalizedEmail", self.normalized_email)
         writer.write_str_value("normalizedPhoneNumber", self.normalized_phone_number)
-        writer.write_str_value("providerEventId", self.provider_event_id)
         writer.write_str_value("reason", self.reason)
         writer.write_str_value("recipientIdentifier", self.recipient_identifier)
         writer.write_datetime_value("releasedAt", self.released_at)
         writer.write_str_value("source", self.source)
-        writer.write_str_value("sourceEventId", self.source_event_id)
         writer.write_str_value("status", self.status)
         writer.write_datetime_value("suppressedAt", self.suppressed_at)
         writer.write_additional_data_value(self.additional_data)

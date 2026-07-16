@@ -1,11 +1,11 @@
 from enum import Enum
 
-class PhoneNumberWarmupHealthStatus(str, Enum):
+class PhoneNumberWarmup_healthStatus(str, Enum):
     NotStarted = "Not Started",
-    NotEligible = "Not Eligible",
     Warming = "Warming",
-    Warmed = "Warmed",
-    Paused = "Paused",
+    Healthy = "Healthy",
     NeedsAttention = "Needs Attention",
+    Paused = "Paused",
     Blocked = "Blocked",
+    Ready = "Ready",
 

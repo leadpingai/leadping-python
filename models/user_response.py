@@ -12,7 +12,6 @@ if TYPE_CHECKING:
     from .user_response_compliance import UserResponse_compliance
     from .user_response_current_business import UserResponse_currentBusiness
     from .user_response_notification_preferences import UserResponse_notificationPreferences
-    from .user_response_stripe_info import UserResponse_stripeInfo
     from .user_response_subscription_status import UserResponse_subscriptionStatus
 
 @dataclass
@@ -61,8 +60,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
     personal_data_deletion_status: Optional[str] = None
     # The phone number associated with this user.
     phone: Optional[str] = None
-    # Stripe state for the user's currently selected business.
-    stripe_info: Optional[UserResponse_stripeInfo] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[UserResponse_subscriptionStatus] = None
     
@@ -88,7 +85,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_compliance import UserResponse_compliance
         from .user_response_current_business import UserResponse_currentBusiness
         from .user_response_notification_preferences import UserResponse_notificationPreferences
-        from .user_response_stripe_info import UserResponse_stripeInfo
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
         from .mobile_device_preferences import MobileDevicePreferences
@@ -97,7 +93,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_compliance import UserResponse_compliance
         from .user_response_current_business import UserResponse_currentBusiness
         from .user_response_notification_preferences import UserResponse_notificationPreferences
-        from .user_response_stripe_info import UserResponse_stripeInfo
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -120,7 +115,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
             "personalDataDeletionRequestedAt": lambda n : setattr(self, 'personal_data_deletion_requested_at', n.get_datetime_value()),
             "personalDataDeletionStatus": lambda n : setattr(self, 'personal_data_deletion_status', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
-            "stripeInfo": lambda n : setattr(self, 'stripe_info', n.get_object_value(UserResponse_stripeInfo)),
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(UserResponse_subscriptionStatus)),
         }
         return fields
@@ -152,7 +146,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("personalDataDeletionRequestedAt", self.personal_data_deletion_requested_at)
         writer.write_str_value("personalDataDeletionStatus", self.personal_data_deletion_status)
         writer.write_str_value("phone", self.phone)
-        writer.write_object_value("stripeInfo", self.stripe_info)
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
         writer.write_additional_data_value(self.additional_data)
     

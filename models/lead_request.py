@@ -8,7 +8,6 @@ if TYPE_CHECKING:
     from .lead_contact import LeadContact
     from .lead_metadata import LeadMetadata
     from .lead_profile import LeadProfile
-    from .lead_request_admin_enablement_override import LeadRequest_adminEnablementOverride
 
 @dataclass
 class LeadRequest(AdditionalDataHolder, Parsable):
@@ -18,8 +17,6 @@ class LeadRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[LeadRequest_adminEnablementOverride] = None
     # Contact details for the lead or customer represented by this lead request.
     contact: Optional[LeadContact] = None
     # Demographic profile details for the lead represented by this lead request.
@@ -54,15 +51,12 @@ class LeadRequest(AdditionalDataHolder, Parsable):
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
-        from .lead_request_admin_enablement_override import LeadRequest_adminEnablementOverride
 
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
-        from .lead_request_admin_enablement_override import LeadRequest_adminEnablementOverride
 
         fields: dict[str, Callable[[Any], None]] = {
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(LeadRequest_adminEnablementOverride)),
             "contact": lambda n : setattr(self, 'contact', n.get_object_value(LeadContact)),
             "customer": lambda n : setattr(self, 'customer', n.get_object_value(LeadProfile)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
@@ -81,7 +75,6 @@ class LeadRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_object_value("contact", self.contact)
         writer.write_object_value("customer", self.customer)
         writer.write_bool_value("enabled", self.enabled)

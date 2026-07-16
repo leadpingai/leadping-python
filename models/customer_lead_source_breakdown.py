@@ -9,11 +9,11 @@ class CustomerLeadSourceBreakdown(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The leads property
+    # Number of leads represented by this Leadping customer lead source breakdown.
     leads: Optional[int] = None
-    # The percent property
+    # Percent expressed as a percentage.
     percent: Optional[float] = None
-    # The source property
+    # Source classification for this Leadping customer lead source breakdown.
     source: Optional[str] = None
     
     @staticmethod

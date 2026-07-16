@@ -21,25 +21,25 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The activationHealth property
+    # Activation health associated with this Leadping customer analytics.
     activation_health: Optional[CustomerActivationHealth] = None
-    # The automationHealth property
+    # Automation health associated with this Leadping customer analytics.
     automation_health: Optional[CustomerAutomationHealth] = None
-    # The communicationUsage property
+    # Communication usage associated with this Leadping customer analytics.
     communication_usage: Optional[CustomerCommunicationUsage] = None
-    # The generatedAt property
+    # Date and time when this Leadping customer analytics was generated.
     generated_at: Optional[datetime.datetime] = None
-    # The leadSources property
+    # Collection of lead sources included with this Leadping customer analytics.
     lead_sources: Optional[list[CustomerLeadSourceBreakdown]] = None
-    # The leadTrend property
+    # Lead trend associated with this Leadping customer analytics.
     lead_trend: Optional[CustomerLeadTrend] = None
-    # The needsAttention property
+    # Date and time when this Leadping customer analytics was needs attention.
     needs_attention: Optional[list[CustomerNeedsAttentionItem]] = None
-    # The range property
+    # Range associated with this Leadping customer analytics.
     range: Optional[AnalyticsDateRange] = None
-    # The responseMetrics property
+    # Response metrics associated with this Leadping customer analytics.
     response_metrics: Optional[CustomerResponseMetrics] = None
-    # The summary property
+    # Human-readable summary for this Leadping customer analytics.
     summary: Optional[CustomerAnalyticsSummary] = None
     
     @staticmethod

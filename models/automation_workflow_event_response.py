@@ -13,25 +13,23 @@ class AutomationWorkflowEventResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actionId property
+    # Unique identifier of the action associated with this Leadping automation workflow event.
     action_id: Optional[str] = None
-    # The adminDiagnostics property
-    admin_diagnostics: Optional[str] = None
-    # The eventType property
+    # Event type classification for this Leadping automation workflow event.
     event_type: Optional[str] = None
-    # The id property
+    # Unique Leadping identifier for the automation workflow event.
     id: Optional[str] = None
-    # The occurredAt property
+    # Date and time when the automation workflow event event occurred.
     occurred_at: Optional[datetime.datetime] = None
-    # The reasonCode property
+    # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow event.
     reason_code: Optional[str] = None
-    # The status property
+    # Current status for this Leadping automation workflow event.
     status: Optional[str] = None
-    # The statusDisplay property
+    # Human-readable status display for this Leadping automation workflow event.
     status_display: Optional[str] = None
-    # The stepId property
+    # Unique identifier of the step associated with this Leadping automation workflow event.
     step_id: Optional[str] = None
-    # The summary property
+    # Human-readable summary for this Leadping automation workflow event.
     summary: Optional[str] = None
     
     @staticmethod
@@ -52,7 +50,6 @@ class AutomationWorkflowEventResponse(AdditionalDataHolder, Parsable):
         """
         fields: dict[str, Callable[[Any], None]] = {
             "actionId": lambda n : setattr(self, 'action_id', n.get_str_value()),
-            "adminDiagnostics": lambda n : setattr(self, 'admin_diagnostics', n.get_str_value()),
             "eventType": lambda n : setattr(self, 'event_type', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "occurredAt": lambda n : setattr(self, 'occurred_at', n.get_datetime_value()),
@@ -73,7 +70,6 @@ class AutomationWorkflowEventResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actionId", self.action_id)
-        writer.write_str_value("adminDiagnostics", self.admin_diagnostics)
         writer.write_str_value("eventType", self.event_type)
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("occurredAt", self.occurred_at)

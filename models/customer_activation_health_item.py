@@ -9,15 +9,15 @@ class CustomerActivationHealthItem(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actionHref property
+    # Relative URL for the recommended follow-up action.
     action_href: Optional[str] = None
-    # The detail property
+    # Human-readable detail for this Leadping customer activation health item.
     detail: Optional[str] = None
-    # The key property
+    # Key associated with this Leadping customer activation health item.
     key: Optional[str] = None
-    # The label property
+    # Human-readable label for this Leadping customer activation health item.
     label: Optional[str] = None
-    # The status property
+    # Current status for this Leadping customer activation health item.
     status: Optional[str] = None
     
     @staticmethod

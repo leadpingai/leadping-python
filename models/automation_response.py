@@ -8,7 +8,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .automation_action import AutomationAction
     from .automation_condition_group import AutomationConditionGroup
-    from .automation_response_admin_enablement_override import AutomationResponse_adminEnablementOverride
     from .automation_response_business import AutomationResponse_business
     from .automation_response_user import AutomationResponse_user
     from .automation_run_record import AutomationRunRecord
@@ -24,8 +23,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
 
     # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[AutomationResponse_adminEnablementOverride] = None
     # Business summary connected to this automation configuration response.
     business: Optional[AutomationResponse_business] = None
     # Business ID that owns this automation.
@@ -46,8 +43,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     is_system_managed: Optional[bool] = None
     # UTC timestamp when this automation last ran.
     last_run_at: Optional[datetime.datetime] = None
-    # Most recent automation run error message, if the last run failed.
-    last_run_error: Optional[str] = None
     # Status from the most recent automation run.
     last_run_status: Optional[str] = None
     # Management level that controls whether Leadping or the business owns this automation setting.
@@ -87,7 +82,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         """
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
-        from .automation_response_admin_enablement_override import AutomationResponse_adminEnablementOverride
         from .automation_response_business import AutomationResponse_business
         from .automation_response_user import AutomationResponse_user
         from .automation_run_record import AutomationRunRecord
@@ -95,7 +89,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
 
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
-        from .automation_response_admin_enablement_override import AutomationResponse_adminEnablementOverride
         from .automation_response_business import AutomationResponse_business
         from .automation_response_user import AutomationResponse_user
         from .automation_run_record import AutomationRunRecord
@@ -103,7 +96,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationAction)),
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(AutomationResponse_adminEnablementOverride)),
             "business": lambda n : setattr(self, 'business', n.get_object_value(AutomationResponse_business)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionGroups": lambda n : setattr(self, 'condition_groups', n.get_collection_of_object_values(AutomationConditionGroup)),
@@ -114,7 +106,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isSystemManaged": lambda n : setattr(self, 'is_system_managed', n.get_bool_value()),
             "lastRunAt": lambda n : setattr(self, 'last_run_at', n.get_datetime_value()),
-            "lastRunError": lambda n : setattr(self, 'last_run_error', n.get_str_value()),
             "lastRunStatus": lambda n : setattr(self, 'last_run_status', n.get_str_value()),
             "managementLevel": lambda n : setattr(self, 'management_level', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
@@ -137,7 +128,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_object_value("business", self.business)
         writer.write_str_value("businessId", self.business_id)
         writer.write_collection_of_object_values("conditionGroups", self.condition_groups)
@@ -148,7 +138,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isSystemManaged", self.is_system_managed)
         writer.write_datetime_value("lastRunAt", self.last_run_at)
-        writer.write_str_value("lastRunError", self.last_run_error)
         writer.write_str_value("lastRunStatus", self.last_run_status)
         writer.write_str_value("managementLevel", self.management_level)
         writer.write_datetime_value("modifiedAt", self.modified_at)

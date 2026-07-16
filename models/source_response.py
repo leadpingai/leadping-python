@@ -6,7 +6,6 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .source_response_admin_enablement_override import SourceResponse_adminEnablementOverride
     from .source_response_business import SourceResponse_business
     from .source_response_created_by_user import SourceResponse_createdByUser
     from .source_response_modified_by_user import SourceResponse_modifiedByUser
@@ -21,8 +20,6 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[SourceResponse_adminEnablementOverride] = None
     # Product allowlist used to accept or route leads from this source.
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
@@ -33,8 +30,6 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     business: Optional[SourceResponse_business] = None
     # Indicates whether the business or sender passed compliance review.
     compliance_approved: Optional[bool] = None
-    # Compliance notes captured for admin review.
-    compliance_notes: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # User summary for the person who created this lead source response.
@@ -80,14 +75,12 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .source_response_admin_enablement_override import SourceResponse_adminEnablementOverride
         from .source_response_business import SourceResponse_business
         from .source_response_created_by_user import SourceResponse_createdByUser
         from .source_response_modified_by_user import SourceResponse_modifiedByUser
         from .source_response_user import SourceResponse_user
         from .tag_summary import TagSummary
 
-        from .source_response_admin_enablement_override import SourceResponse_adminEnablementOverride
         from .source_response_business import SourceResponse_business
         from .source_response_created_by_user import SourceResponse_createdByUser
         from .source_response_modified_by_user import SourceResponse_modifiedByUser
@@ -95,13 +88,11 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(SourceResponse_adminEnablementOverride)),
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "business": lambda n : setattr(self, 'business', n.get_object_value(SourceResponse_business)),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
-            "complianceNotes": lambda n : setattr(self, 'compliance_notes', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "createdByUser": lambda n : setattr(self, 'created_by_user', n.get_object_value(SourceResponse_createdByUser)),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
@@ -127,13 +118,11 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_object_value("business", self.business)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
-        writer.write_str_value("complianceNotes", self.compliance_notes)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("createdByUser", self.created_by_user)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)

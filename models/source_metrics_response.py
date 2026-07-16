@@ -14,13 +14,13 @@ class SourceMetricsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The generatedAt property
+    # Date and time when the source metrics was generated.
     generated_at: Optional[datetime.datetime] = None
-    # The points property
+    # Collection of points included with this Leadping source metrics.
     points: Optional[list[AnalyticsTrendPointOfint]] = None
-    # The range property
+    # Range associated with this Leadping source metrics.
     range: Optional[AnalyticsDateRange] = None
-    # The totalLeads property
+    # Total number of leads records represented by this Leadping source metrics.
     total_leads: Optional[int] = None
     
     @staticmethod

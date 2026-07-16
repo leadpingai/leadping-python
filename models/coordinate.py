@@ -12,9 +12,9 @@ class Coordinate(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The latitude property
+    # Latitude of the geographic coordinate in decimal degrees, from -90 through 90.
     latitude: Optional[float] = None
-    # The longitude property
+    # Longitude of the geographic coordinate in decimal degrees, from -180 through 180.
     longitude: Optional[float] = None
     
     @staticmethod

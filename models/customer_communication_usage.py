@@ -9,28 +9,31 @@ if TYPE_CHECKING:
 
 @dataclass
 class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
+    """
+    Communication usage associated with this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The answeredCalls property
+    # Number of calls answered during the reporting period.
     answered_calls: Optional[int] = None
-    # The callMinutes property
+    # Total connected call duration, in minutes, during the reporting period.
     call_minutes: Optional[float] = None
-    # The callsPlaced property
+    # Number of outbound calls placed during the reporting period.
     calls_placed: Optional[int] = None
-    # The callsReceived property
+    # Number of inbound calls received during the reporting period.
     calls_received: Optional[int] = None
-    # The failedOrBlockedSms property
+    # Number of SMS messages that failed or were blocked during the reporting period.
     failed_or_blocked_sms: Optional[int] = None
-    # The missedCalls property
+    # Number of calls missed during the reporting period.
     missed_calls: Optional[int] = None
-    # The smsReceived property
+    # Number of SMS messages received during the reporting period.
     sms_received: Optional[int] = None
-    # The smsSent property
+    # Number of SMS messages sent during the reporting period.
     sms_sent: Optional[int] = None
-    # The trend property
+    # Collection of trend included with this Leadping customer communication usage.
     trend: Optional[list[CustomerCommunicationUsagePoint]] = None
-    # The usageSpend property
+    # Usage spend represented by this Leadping customer communication usage.
     usage_spend: Optional[float] = None
     
     @staticmethod

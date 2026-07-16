@@ -27,8 +27,6 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
     is_opt_out: Optional[bool] = None
     # Short display label for this phone number messaging event, formatted for charts, filters, or list views.
     label: Optional[str] = None
-    # Provider lifecycle or delivery status for this phone number messaging event.
-    provider_status: Optional[str] = None
     # Short preview of the SMS or conversation text for this phone number messaging event.
     text_preview: Optional[str] = None
     # Recipient phone number used for this communication.
@@ -58,7 +56,6 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isOptOut": lambda n : setattr(self, 'is_opt_out', n.get_bool_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
-            "providerStatus": lambda n : setattr(self, 'provider_status', n.get_str_value()),
             "textPreview": lambda n : setattr(self, 'text_preview', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
         }
@@ -79,7 +76,6 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isOptOut", self.is_opt_out)
         writer.write_str_value("label", self.label)
-        writer.write_str_value("providerStatus", self.provider_status)
         writer.write_str_value("textPreview", self.text_preview)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
         writer.write_additional_data_value(self.additional_data)

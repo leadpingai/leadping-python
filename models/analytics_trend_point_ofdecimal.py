@@ -10,13 +10,13 @@ class AnalyticsTrendPointOfdecimal(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The endAt property
+    # Date and time when this Leadping analytics trend point was end.
     end_at: Optional[datetime.datetime] = None
-    # The label property
+    # Human-readable label for this Leadping analytics trend point.
     label: Optional[str] = None
-    # The startAt property
+    # Date and time when this Leadping analytics trend point was start.
     start_at: Optional[datetime.datetime] = None
-    # The value property
+    # Value associated with this Leadping analytics trend point.
     value: Optional[float] = None
     
     @staticmethod

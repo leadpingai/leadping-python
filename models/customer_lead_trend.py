@@ -10,14 +10,17 @@ if TYPE_CHECKING:
 
 @dataclass
 class CustomerLeadTrend(AdditionalDataHolder, Parsable):
+    """
+    Lead trend associated with this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The comparison property
+    # Date and time when this Leadping customer lead trend was comparison.
     comparison: Optional[AnalyticsComparison] = None
-    # The points property
+    # Collection of points included with this Leadping customer lead trend.
     points: Optional[list[AnalyticsTrendPointOfint]] = None
-    # The total property
+    # Total number of total records represented by this Leadping customer lead trend.
     total: Optional[int] = None
     
     @staticmethod

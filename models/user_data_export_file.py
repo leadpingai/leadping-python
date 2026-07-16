@@ -9,13 +9,13 @@ class UserDataExportFile(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The category property
+    # Category classification for this Leadping user data export file.
     category: Optional[str] = None
-    # The contentType property
+    # Media type of the generated file or response content.
     content_type: Optional[str] = None
-    # The fileName property
+    # Human-readable file name associated with this Leadping user data export file.
     file_name: Optional[str] = None
-    # The rowCount property
+    # Total number of row records represented by this Leadping user data export file.
     row_count: Optional[int] = None
     
     @staticmethod

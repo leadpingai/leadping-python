@@ -1,6 +1,6 @@
 from enum import Enum
 
-class PhoneNumberTableRow_healthStatus(str, Enum):
+class PhoneNumberWarmup_state(str, Enum):
     NotStarted = "Not Started",
     Warming = "Warming",
     Healthy = "Healthy",

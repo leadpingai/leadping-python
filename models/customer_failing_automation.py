@@ -7,16 +7,19 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class CustomerFailingAutomation(AdditionalDataHolder, Parsable):
+    """
+    Last failure associated with this Leadping customer automation health.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The automationId property
+    # Unique identifier of the automation associated with this Leadping customer failing automation.
     automation_id: Optional[str] = None
-    # The error property
+    # Error associated with this Leadping customer failing automation.
     error: Optional[str] = None
-    # The failedAt property
+    # Date and time when the customer failing automation failed.
     failed_at: Optional[datetime.datetime] = None
-    # The name property
+    # Human-readable name of the customer failing automation.
     name: Optional[str] = None
     
     @staticmethod

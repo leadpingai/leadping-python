@@ -4,9 +4,6 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
-if TYPE_CHECKING:
-    from .phone_number_request_admin_enablement_override import PhoneNumberRequest_adminEnablementOverride
-
 @dataclass
 class PhoneNumberRequest(AdditionalDataHolder, Parsable):
     """
@@ -15,8 +12,6 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[PhoneNumberRequest_adminEnablementOverride] = None
     # Business ID that owns the phone number being created or updated.
     business_id: Optional[str] = None
     # Indicates whether this phone number update request is active and available in the Leadping API.
@@ -44,12 +39,7 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .phone_number_request_admin_enablement_override import PhoneNumberRequest_adminEnablementOverride
-
-        from .phone_number_request_admin_enablement_override import PhoneNumberRequest_adminEnablementOverride
-
         fields: dict[str, Callable[[Any], None]] = {
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(PhoneNumberRequest_adminEnablementOverride)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -66,7 +56,6 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_str_value("businessId", self.business_id)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)

@@ -7,14 +7,17 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class AnalyticsDateRange(AdditionalDataHolder, Parsable):
+    """
+    Range associated with this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The bucketSize property
+    # Bucket size associated with this Leadping analytics date range.
     bucket_size: Optional[int] = None
-    # The endAt property
+    # Date and time when this Leadping analytics date range was end.
     end_at: Optional[datetime.datetime] = None
-    # The startAt property
+    # Date and time when this Leadping analytics date range was start.
     start_at: Optional[datetime.datetime] = None
     
     @staticmethod

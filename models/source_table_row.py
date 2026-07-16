@@ -6,7 +6,6 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .source_table_row_admin_enablement_override import SourceTableRow_adminEnablementOverride
     from .source_table_row_business import SourceTableRow_business
     from .source_table_row_created_by_user import SourceTableRow_createdByUser
     from .source_table_row_modified_by_user import SourceTableRow_modifiedByUser
@@ -21,8 +20,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[SourceTableRow_adminEnablementOverride] = None
     # Product allowlist used to accept or route leads from this source.
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
@@ -84,14 +81,12 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .source_table_row_admin_enablement_override import SourceTableRow_adminEnablementOverride
         from .source_table_row_business import SourceTableRow_business
         from .source_table_row_created_by_user import SourceTableRow_createdByUser
         from .source_table_row_modified_by_user import SourceTableRow_modifiedByUser
         from .source_table_row_user import SourceTableRow_user
         from .tag_summary import TagSummary
 
-        from .source_table_row_admin_enablement_override import SourceTableRow_adminEnablementOverride
         from .source_table_row_business import SourceTableRow_business
         from .source_table_row_created_by_user import SourceTableRow_createdByUser
         from .source_table_row_modified_by_user import SourceTableRow_modifiedByUser
@@ -99,7 +94,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(SourceTableRow_adminEnablementOverride)),
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
@@ -133,7 +127,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)

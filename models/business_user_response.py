@@ -31,10 +31,6 @@ class BusinessUserResponse(AdditionalDataHolder, Parsable):
     license_billing_status: Optional[str] = None
     # The renewal date used for this user's license proration.
     license_renewal_date: Optional[datetime.datetime] = None
-    # The Stripe subscription ID containing this user's business license item.
-    license_stripe_subscription_id: Optional[str] = None
-    # The Stripe subscription item ID used for business user licenses.
-    license_stripe_subscription_item_id: Optional[str] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
@@ -80,8 +76,6 @@ class BusinessUserResponse(AdditionalDataHolder, Parsable):
             "lastUsedAt": lambda n : setattr(self, 'last_used_at', n.get_datetime_value()),
             "licenseBillingStatus": lambda n : setattr(self, 'license_billing_status', n.get_str_value()),
             "licenseRenewalDate": lambda n : setattr(self, 'license_renewal_date', n.get_datetime_value()),
-            "licenseStripeSubscriptionId": lambda n : setattr(self, 'license_stripe_subscription_id', n.get_str_value()),
-            "licenseStripeSubscriptionItemId": lambda n : setattr(self, 'license_stripe_subscription_item_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "removedAt": lambda n : setattr(self, 'removed_at', n.get_datetime_value()),
@@ -107,8 +101,6 @@ class BusinessUserResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("lastUsedAt", self.last_used_at)
         writer.write_str_value("licenseBillingStatus", self.license_billing_status)
         writer.write_datetime_value("licenseRenewalDate", self.license_renewal_date)
-        writer.write_str_value("licenseStripeSubscriptionId", self.license_stripe_subscription_id)
-        writer.write_str_value("licenseStripeSubscriptionItemId", self.license_stripe_subscription_item_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_datetime_value("removedAt", self.removed_at)

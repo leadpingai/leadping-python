@@ -17,7 +17,6 @@ if TYPE_CHECKING:
     from ..models.feedback_create_request import FeedbackCreateRequest
     from ..models.feedback_response import FeedbackResponse
     from ..models.problem_details import ProblemDetails
-    from .admin.admin_request_builder import AdminRequestBuilder
 
 class FeedbackRequestBuilder(BaseRequestBuilder):
     """
@@ -80,15 +79,6 @@ class FeedbackRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return FeedbackRequestBuilder(self.request_adapter, raw_url)
-    
-    @property
-    def admin(self) -> AdminRequestBuilder:
-        """
-        The admin property
-        """
-        from .admin.admin_request_builder import AdminRequestBuilder
-
-        return AdminRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class FeedbackRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):

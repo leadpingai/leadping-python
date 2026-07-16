@@ -7,7 +7,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .business_table_row_activation_status import BusinessTableRow_activationStatus
-    from .business_table_row_admin_enablement_override import BusinessTableRow_adminEnablementOverride
     from .business_table_row_billing_plan import BusinessTableRow_billingPlan
     from .business_table_row_setup_step import BusinessTableRow_setupStep
     from .business_table_row_status import BusinessTableRow_status
@@ -25,8 +24,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
 
     # Defines the supported Customer Activation Status values.
     activation_status: Optional[BusinessTableRow_activationStatus] = None
-    # The admin force enablement override on this business.
-    admin_enablement_override: Optional[BusinessTableRow_adminEnablementOverride] = None
     # The date and time this business API key expires, or null when it has no expiration.
     api_key_expires_at: Optional[datetime.datetime] = None
     # The date and time this business API key was first used.
@@ -51,7 +48,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # The industry value for this business.
     industry: Optional[str] = None
-    # The lastSubscriptionEventAt property
+    # Date and time when this Leadping business table row was last subscription event.
     last_subscription_event_at: Optional[datetime.datetime] = None
     # The date and time for the modified at value on this business.
     modified_at: Optional[datetime.datetime] = None
@@ -59,7 +56,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Whether needs admin review applies to this business.
     needs_admin_review: Optional[bool] = None
-    # The paymentFailedAt property
+    # Date and time when this Leadping business table row was payment failed.
     payment_failed_at: Optional[datetime.datetime] = None
     # The phone number associated with this business.
     phone: Optional[str] = None
@@ -67,7 +64,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     setup_step: Optional[BusinessTableRow_setupStep] = None
     # Defines the supported Business Status values.
     status: Optional[BusinessTableRow_status] = None
-    # The subscriptionCancelAt property
+    # Date and time when this Leadping business table row was subscription cancel.
     subscription_cancel_at: Optional[datetime.datetime] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[BusinessTableRow_subscriptionStatus] = None
@@ -101,7 +98,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .business_table_row_activation_status import BusinessTableRow_activationStatus
-        from .business_table_row_admin_enablement_override import BusinessTableRow_adminEnablementOverride
         from .business_table_row_billing_plan import BusinessTableRow_billingPlan
         from .business_table_row_setup_step import BusinessTableRow_setupStep
         from .business_table_row_status import BusinessTableRow_status
@@ -110,7 +106,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         from .business_table_row_website_status import BusinessTableRow_websiteStatus
 
         from .business_table_row_activation_status import BusinessTableRow_activationStatus
-        from .business_table_row_admin_enablement_override import BusinessTableRow_adminEnablementOverride
         from .business_table_row_billing_plan import BusinessTableRow_billingPlan
         from .business_table_row_setup_step import BusinessTableRow_setupStep
         from .business_table_row_status import BusinessTableRow_status
@@ -120,7 +115,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "activationStatus": lambda n : setattr(self, 'activation_status', n.get_enum_value(BusinessTableRow_activationStatus)),
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(BusinessTableRow_adminEnablementOverride)),
             "apiKeyExpiresAt": lambda n : setattr(self, 'api_key_expires_at', n.get_datetime_value()),
             "apiKeyFirstUsedAt": lambda n : setattr(self, 'api_key_first_used_at', n.get_datetime_value()),
             "apiKeyIssuedAt": lambda n : setattr(self, 'api_key_issued_at', n.get_datetime_value()),
@@ -161,7 +155,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("activationStatus", self.activation_status)
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_datetime_value("apiKeyExpiresAt", self.api_key_expires_at)
         writer.write_datetime_value("apiKeyFirstUsedAt", self.api_key_first_used_at)
         writer.write_datetime_value("apiKeyIssuedAt", self.api_key_issued_at)

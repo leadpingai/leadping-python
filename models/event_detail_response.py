@@ -50,8 +50,6 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
-    # Provider message identifier for SMS delivery tracking and reconciliation.
-    provider_message_id: Optional[str] = None
     # UTC timestamp when Leadping queued this event detail response for processing.
     queued_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping received this inbound event or message.
@@ -124,7 +122,6 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
-            "providerMessageId": lambda n : setattr(self, 'provider_message_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
@@ -167,7 +164,6 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("leadId", self.lead_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
-        writer.write_str_value("providerMessageId", self.provider_message_id)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("receivedAt", self.received_at)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)

@@ -12,8 +12,6 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Whether this usage counter is only shown to admins.
-    admin_only: Optional[bool] = None
     # The stable key for this usage counter.
     key: Optional[str] = None
     # The human-readable label for this usage counter.
@@ -42,7 +40,6 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "adminOnly": lambda n : setattr(self, 'admin_only', n.get_bool_value()),
             "key": lambda n : setattr(self, 'key', n.get_str_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
             "sortOrder": lambda n : setattr(self, 'sort_order', n.get_int_value()),
@@ -59,7 +56,6 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_bool_value("adminOnly", self.admin_only)
         writer.write_str_value("key", self.key)
         writer.write_str_value("label", self.label)
         writer.write_int_value("sortOrder", self.sort_order)

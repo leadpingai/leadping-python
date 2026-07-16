@@ -6,7 +6,6 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .automation_table_row_admin_enablement_override import AutomationTableRow_adminEnablementOverride
     from .automation_table_row_business import AutomationTableRow_business
     from .automation_table_row_user import AutomationTableRow_user
 
@@ -20,8 +19,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
 
     # Human-readable summary of the automation action outcome.
     action_summary: Optional[str] = None
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[AutomationTableRow_adminEnablementOverride] = None
     # Business summary connected to this automation table row.
     business: Optional[AutomationTableRow_business] = None
     # Business ID that owns this automation.
@@ -42,8 +39,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     is_system_managed: Optional[bool] = None
     # UTC timestamp when this automation last ran.
     last_run_at: Optional[datetime.datetime] = None
-    # Most recent automation run error message, if the last run failed.
-    last_run_error: Optional[str] = None
     # Status from the most recent automation run.
     last_run_status: Optional[str] = None
     # Management level that controls whether Leadping or the business owns this automation setting.
@@ -81,17 +76,14 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .automation_table_row_admin_enablement_override import AutomationTableRow_adminEnablementOverride
         from .automation_table_row_business import AutomationTableRow_business
         from .automation_table_row_user import AutomationTableRow_user
 
-        from .automation_table_row_admin_enablement_override import AutomationTableRow_adminEnablementOverride
         from .automation_table_row_business import AutomationTableRow_business
         from .automation_table_row_user import AutomationTableRow_user
 
         fields: dict[str, Callable[[Any], None]] = {
             "actionSummary": lambda n : setattr(self, 'action_summary', n.get_str_value()),
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(AutomationTableRow_adminEnablementOverride)),
             "business": lambda n : setattr(self, 'business', n.get_object_value(AutomationTableRow_business)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionSummary": lambda n : setattr(self, 'condition_summary', n.get_str_value()),
@@ -102,7 +94,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isSystemManaged": lambda n : setattr(self, 'is_system_managed', n.get_bool_value()),
             "lastRunAt": lambda n : setattr(self, 'last_run_at', n.get_datetime_value()),
-            "lastRunError": lambda n : setattr(self, 'last_run_error', n.get_str_value()),
             "lastRunStatus": lambda n : setattr(self, 'last_run_status', n.get_str_value()),
             "managementLevel": lambda n : setattr(self, 'management_level', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
@@ -125,7 +116,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actionSummary", self.action_summary)
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_object_value("business", self.business)
         writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("conditionSummary", self.condition_summary)
@@ -136,7 +126,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isSystemManaged", self.is_system_managed)
         writer.write_datetime_value("lastRunAt", self.last_run_at)
-        writer.write_str_value("lastRunError", self.last_run_error)
         writer.write_str_value("lastRunStatus", self.last_run_status)
         writer.write_str_value("managementLevel", self.management_level)
         writer.write_datetime_value("modifiedAt", self.modified_at)

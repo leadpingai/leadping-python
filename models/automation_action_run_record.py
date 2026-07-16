@@ -21,12 +21,6 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
     automation_run_id: Optional[str] = None
     # UTC timestamp when processing completed for this automation action run record.
     completed_at: Optional[datetime.datetime] = None
-    # Stable integration connection key used by this automation action.
-    connection_key: Optional[str] = None
-    # Error text returned while processing this automation action run record.
-    error: Optional[str] = None
-    # Idempotency key used to identify a unique automation workflow execution.
-    execution_key: Optional[str] = None
     # UTC timestamp when processing failed for this automation action run record.
     failed_at: Optional[datetime.datetime] = None
     # Machine-readable failure code for troubleshooting this automation action run record.
@@ -37,8 +31,6 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
     next_retry_at: Optional[datetime.datetime] = None
     # Sort order used to evaluate or display this automation action run record.
     order: Optional[int] = None
-    # Generated output returned by this automation action run record.
-    output: Optional[str] = None
     # Number of processing attempts made for this workflow or delivery request.
     processing_attempts: Optional[int] = None
     # UTC timestamp when this automation action run record was scheduled.
@@ -69,15 +61,11 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
             "actionType": lambda n : setattr(self, 'action_type', n.get_str_value()),
             "automationRunId": lambda n : setattr(self, 'automation_run_id', n.get_str_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
-            "connectionKey": lambda n : setattr(self, 'connection_key', n.get_str_value()),
-            "error": lambda n : setattr(self, 'error', n.get_str_value()),
-            "executionKey": lambda n : setattr(self, 'execution_key', n.get_str_value()),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "failureCode": lambda n : setattr(self, 'failure_code', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
             "order": lambda n : setattr(self, 'order', n.get_int_value()),
-            "output": lambda n : setattr(self, 'output', n.get_str_value()),
             "processingAttempts": lambda n : setattr(self, 'processing_attempts', n.get_int_value()),
             "scheduledAt": lambda n : setattr(self, 'scheduled_at', n.get_datetime_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
@@ -97,15 +85,11 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
         writer.write_str_value("actionType", self.action_type)
         writer.write_str_value("automationRunId", self.automation_run_id)
         writer.write_datetime_value("completedAt", self.completed_at)
-        writer.write_str_value("connectionKey", self.connection_key)
-        writer.write_str_value("error", self.error)
-        writer.write_str_value("executionKey", self.execution_key)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("failureCode", self.failure_code)
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
         writer.write_int_value("order", self.order)
-        writer.write_str_value("output", self.output)
         writer.write_int_value("processingAttempts", self.processing_attempts)
         writer.write_datetime_value("scheduledAt", self.scheduled_at)
         writer.write_datetime_value("startedAt", self.started_at)

@@ -20,16 +20,12 @@ class SuppressionEntryAudit(AdditionalDataHolder, Parsable):
     actor_id: Optional[str] = None
     # The unique ID for this ion entry audit.
     id: Optional[str] = None
-    # The provider event ID associated with this ion entry audit.
-    provider_event_id: Optional[str] = None
     # The human-readable reason explaining this ion entry audit.
     reason: Optional[str] = None
     # The safe metadata key-value data carried with this ion entry audit; values must be safe to expose in API responses.
     safe_metadata: Optional[SuppressionEntryAudit_safeMetadata] = None
     # The source value for this ion entry audit.
     source: Optional[str] = None
-    # The source event ID associated with this ion entry audit.
-    source_event_id: Optional[str] = None
     # The current status for this ion entry audit.
     status: Optional[str] = None
     # The date and time for the timestamp value on this ion entry audit.
@@ -58,11 +54,9 @@ class SuppressionEntryAudit(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actorId": lambda n : setattr(self, 'actor_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "providerEventId": lambda n : setattr(self, 'provider_event_id', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
             "safeMetadata": lambda n : setattr(self, 'safe_metadata', n.get_object_value(SuppressionEntryAudit_safeMetadata)),
             "source": lambda n : setattr(self, 'source', n.get_str_value()),
-            "sourceEventId": lambda n : setattr(self, 'source_event_id', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "timestamp": lambda n : setattr(self, 'timestamp', n.get_datetime_value()),
         }
@@ -78,11 +72,9 @@ class SuppressionEntryAudit(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actorId", self.actor_id)
         writer.write_str_value("id", self.id)
-        writer.write_str_value("providerEventId", self.provider_event_id)
         writer.write_str_value("reason", self.reason)
         writer.write_object_value("safeMetadata", self.safe_metadata)
         writer.write_str_value("source", self.source)
-        writer.write_str_value("sourceEventId", self.source_event_id)
         writer.write_str_value("status", self.status)
         writer.write_datetime_value("timestamp", self.timestamp)
         writer.write_additional_data_value(self.additional_data)

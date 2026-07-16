@@ -1,6 +1,6 @@
 from enum import Enum
 
-class PhoneLookup_carrierType(str, Enum):
+class PhoneLookupCarrier_type(str, Enum):
     FixedLine = "FixedLine",
     Mobile = "Mobile",
     Voip = "Voip",

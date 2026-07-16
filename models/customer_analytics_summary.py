@@ -9,38 +9,41 @@ if TYPE_CHECKING:
 
 @dataclass
 class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
+    """
+    Human-readable summary for this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The billingStatus property
+    # Current billing status for this Leadping customer analytics summary.
     billing_status: Optional[str] = None
-    # The callMinutes property
+    # Total connected call duration, in minutes, during the reporting period.
     call_minutes: Optional[float] = None
-    # The callsPlaced property
+    # Number of outbound calls placed during the reporting period.
     calls_placed: Optional[int] = None
-    # The callsReceived property
+    # Number of inbound calls received during the reporting period.
     calls_received: Optional[int] = None
-    # The leads property
+    # Number of leads represented by this Leadping customer analytics summary.
     leads: Optional[int] = None
-    # The leadsComparison property
+    # Date and time when this Leadping customer analytics summary was leads comparison.
     leads_comparison: Optional[AnalyticsComparison] = None
-    # The missedCalls property
+    # Number of calls missed during the reporting period.
     missed_calls: Optional[int] = None
-    # The missedLeads property
+    # Number of missed leads represented by this Leadping customer analytics summary.
     missed_leads: Optional[int] = None
-    # The respondedWithinFiveMinutesPercent property
+    # Responded within five minutes percent expressed as a percentage.
     responded_within_five_minutes_percent: Optional[float] = None
-    # The smsReceived property
+    # Number of SMS messages received during the reporting period.
     sms_received: Optional[int] = None
-    # The smsSent property
+    # Number of SMS messages sent during the reporting period.
     sms_sent: Optional[int] = None
-    # The unreadMessages property
+    # Number of unread messages represented by this Leadping customer analytics summary.
     unread_messages: Optional[int] = None
-    # The usageSpend property
+    # Usage spend represented by this Leadping customer analytics summary.
     usage_spend: Optional[float] = None
-    # The walletBalance property
+    # Wallet balance represented by this Leadping customer analytics summary.
     wallet_balance: Optional[float] = None
-    # The walletStatus property
+    # Current wallet status for this Leadping customer analytics summary.
     wallet_status: Optional[str] = None
     
     @staticmethod

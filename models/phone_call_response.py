@@ -6,7 +6,6 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .phone_call_response_metadata import PhoneCallResponse_metadata
     from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
     from .phone_call_status import PhoneCallStatus
 
@@ -42,8 +41,6 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Lead ID associated with the call conversation or outreach attempt.
     lead_id: Optional[str] = None
-    # Structured metadata used for attribution, integrations, and reporting on this phone call.
-    metadata: Optional[PhoneCallResponse_metadata] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # Phone number used by this phone call for calls, SMS, lookup, or routing.
@@ -83,11 +80,9 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .phone_call_response_metadata import PhoneCallResponse_metadata
         from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
         from .phone_call_status import PhoneCallStatus
 
-        from .phone_call_response_metadata import PhoneCallResponse_metadata
         from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
         from .phone_call_status import PhoneCallStatus
 
@@ -104,7 +99,6 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
-            "metadata": lambda n : setattr(self, 'metadata', n.get_object_value(PhoneCallResponse_metadata)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
@@ -139,7 +133,6 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_str_value("leadId", self.lead_id)
-        writer.write_object_value("metadata", self.metadata)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_datetime_value("queuedAt", self.queued_at)

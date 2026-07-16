@@ -4,9 +4,6 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
-if TYPE_CHECKING:
-    from .source_request_admin_enablement_override import SourceRequest_adminEnablementOverride
-
 @dataclass
 class SourceRequest(AdditionalDataHolder, Parsable):
     """
@@ -15,18 +12,10 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[SourceRequest_adminEnablementOverride] = None
     # Product allowlist used to accept or route leads from this source.
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # Business ID that owns or will own this lead source.
-    business_id: Optional[str] = None
-    # Indicates whether the business or sender passed compliance review.
-    compliance_approved: Optional[bool] = None
-    # Compliance notes captured for admin review.
-    compliance_notes: Optional[str] = None
     # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
     # Tag names automatically assigned to leads created by this source.
@@ -60,17 +49,9 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .source_request_admin_enablement_override import SourceRequest_adminEnablementOverride
-
-        from .source_request_admin_enablement_override import SourceRequest_adminEnablementOverride
-
         fields: dict[str, Callable[[Any], None]] = {
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(SourceRequest_adminEnablementOverride)),
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
-            "complianceNotes": lambda n : setattr(self, 'compliance_notes', n.get_str_value()),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
             "defaultTagNames": lambda n : setattr(self, 'default_tag_names', n.get_collection_of_primitive_values(str)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -90,12 +71,8 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
-        writer.write_str_value("businessId", self.business_id)
-        writer.write_bool_value("complianceApproved", self.compliance_approved)
-        writer.write_str_value("complianceNotes", self.compliance_notes)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)
         writer.write_collection_of_primitive_values("defaultTagNames", self.default_tag_names)
         writer.write_str_value("description", self.description)

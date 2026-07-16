@@ -12,27 +12,27 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The automationFailedEmailEnabled property
+    # Indicates whether automation failed email functionality is enabled for this Leadping user notification preferences.
     automation_failed_email_enabled: Optional[bool] = None
     # Whether automation failed notifications are enabled for this user notification preferences.
     automation_failed_enabled: Optional[bool] = None
-    # The automationFailedSmsEnabled property
+    # Indicates whether automation failed SMS functionality is enabled for this Leadping user notification preferences.
     automation_failed_sms_enabled: Optional[bool] = None
     # Whether billing email is enabled for this user notification preferences.
     billing_email_enabled: Optional[bool] = None
     # Whether billing SMS is enabled for this user notification preferences.
     billing_sms_enabled: Optional[bool] = None
-    # The lowWalletBalanceEmailEnabled property
+    # Indicates whether low wallet balance email functionality is enabled for this Leadping user notification preferences.
     low_wallet_balance_email_enabled: Optional[bool] = None
     # Whether low wallet balance notifications are enabled for this user notification preferences.
     low_wallet_balance_enabled: Optional[bool] = None
-    # The lowWalletBalanceSmsEnabled property
+    # Indicates whether low wallet balance SMS functionality is enabled for this Leadping user notification preferences.
     low_wallet_balance_sms_enabled: Optional[bool] = None
-    # The missedCallEmailEnabled property
+    # Indicates whether missed call email functionality is enabled for this Leadping user notification preferences.
     missed_call_email_enabled: Optional[bool] = None
     # Whether missed call notifications are enabled for this user notification preferences.
     missed_call_enabled: Optional[bool] = None
-    # The missedCallSmsEnabled property
+    # Indicates whether missed call SMS functionality is enabled for this Leadping user notification preferences.
     missed_call_sms_enabled: Optional[bool] = None
     # Whether new lead email is enabled for this user notification preferences.
     new_lead_email_enabled: Optional[bool] = None
@@ -42,21 +42,21 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     new_lead_sms_enabled: Optional[bool] = None
     # Whether payment failed notifications are enabled for this user notification preferences.
     payment_failed_enabled: Optional[bool] = None
-    # The paymentFailedSmsEnabled property
+    # Indicates whether payment failed SMS functionality is enabled for this Leadping user notification preferences.
     payment_failed_sms_enabled: Optional[bool] = None
-    # The subscriptionRenewingEmailEnabled property
+    # Indicates whether subscription renewing email functionality is enabled for this Leadping user notification preferences.
     subscription_renewing_email_enabled: Optional[bool] = None
     # Whether subscription renewing notifications are enabled for this user notification preferences.
     subscription_renewing_enabled: Optional[bool] = None
-    # The subscriptionRenewingSmsEnabled property
+    # Indicates whether subscription renewing SMS functionality is enabled for this Leadping user notification preferences.
     subscription_renewing_sms_enabled: Optional[bool] = None
     # Whether 10DLC status notifications are enabled for this user notification preferences.
     ten_dlc_status_enabled: Optional[bool] = None
-    # The unreadSmsEmailEnabled property
+    # Indicates whether unread SMS email functionality is enabled for this Leadping user notification preferences.
     unread_sms_email_enabled: Optional[bool] = None
     # Whether unread SMS notifications are enabled for this user notification preferences.
     unread_sms_enabled: Optional[bool] = None
-    # The unreadSmsSmsEnabled property
+    # Indicates whether unread SMS SMS functionality is enabled for this Leadping user notification preferences.
     unread_sms_sms_enabled: Optional[bool] = None
     # Whether usage limit hit notifications are enabled for this user notification preferences.
     usage_limit_hit_enabled: Optional[bool] = None

@@ -23,10 +23,6 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
     channel: Optional[UsageChannel] = None
     # The monetary customer charge amount for this usage summary line.
     customer_charge_amount: Optional[float] = None
-    # The monetary internal cost amount for this usage summary line.
-    internal_cost_amount: Optional[float] = None
-    # The monetary provider cost amount for this usage summary line.
-    provider_cost_amount: Optional[float] = None
     # The quantity value for this usage summary line.
     quantity: Optional[float] = None
     # The record count for this usage summary line.
@@ -62,8 +58,6 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(BillableUnit)),
             "channel": lambda n : setattr(self, 'channel', n.get_enum_value(UsageChannel)),
             "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
-            "internalCostAmount": lambda n : setattr(self, 'internal_cost_amount', n.get_float_value()),
-            "providerCostAmount": lambda n : setattr(self, 'provider_cost_amount', n.get_float_value()),
             "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
             "recordCount": lambda n : setattr(self, 'record_count', n.get_int_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageRecordStatus)),
@@ -81,8 +75,6 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
         writer.write_enum_value("billableUnit", self.billable_unit)
         writer.write_enum_value("channel", self.channel)
         writer.write_float_value("customerChargeAmount", self.customer_charge_amount)
-        writer.write_float_value("internalCostAmount", self.internal_cost_amount)
-        writer.write_float_value("providerCostAmount", self.provider_cost_amount)
         writer.write_float_value("quantity", self.quantity)
         writer.write_int_value("recordCount", self.record_count)
         writer.write_enum_value("status", self.status)

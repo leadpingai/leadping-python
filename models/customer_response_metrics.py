@@ -9,20 +9,23 @@ if TYPE_CHECKING:
 
 @dataclass
 class CustomerResponseMetrics(AdditionalDataHolder, Parsable):
+    """
+    Response metrics associated with this Leadping customer analytics.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The averageMinutesTrend property
+    # Collection of average minutes trend included with this Leadping customer response metrics.
     average_minutes_trend: Optional[list[AnalyticsTrendPointOfdecimal]] = None
-    # The missedCalls property
+    # Number of calls missed during the reporting period.
     missed_calls: Optional[int] = None
-    # The respondedLeads property
+    # Number of responded leads represented by this Leadping customer response metrics.
     responded_leads: Optional[int] = None
-    # The respondedWithinFiveMinutesPercent property
+    # Responded within five minutes percent expressed as a percentage.
     responded_within_five_minutes_percent: Optional[float] = None
-    # The unreadMessages property
+    # Number of unread messages represented by this Leadping customer response metrics.
     unread_messages: Optional[int] = None
-    # The unrespondedLeads property
+    # Number of unresponded leads represented by this Leadping customer response metrics.
     unresponded_leads: Optional[int] = None
     
     @staticmethod

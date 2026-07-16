@@ -61,16 +61,12 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Unique Leadping identifier for this event timeline table row.
     id: Optional[str] = None
-    # Indicates whether this event timeline table row is part of Leadping sender warmup traffic.
-    is_warmup: Optional[bool] = None
     # Lead ID associated with this timeline event.
     lead_id: Optional[str] = None
     # UTC timestamp when Leadping will retry this event timeline table row.
     next_retry_at: Optional[datetime.datetime] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
-    # Provider message identifier for SMS delivery tracking and reconciliation.
-    provider_message_id: Optional[str] = None
     # UTC timestamp when Leadping queued this event timeline table row for processing.
     queued_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping received this inbound event or message.
@@ -99,10 +95,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     status_reason: Optional[str] = None
     # Short human-readable summary of this event timeline table row for lists, timelines, and notifications.
     summary: Optional[str] = None
-    # Telnyx identifier connected to this phone number, call, or SMS event.
-    telnyx_id: Optional[str] = None
-    # 10DLC campaign identifier associated with this sender or SMS event.
-    ten_dlc_campaign_id: Optional[str] = None
     # Timeline category used to group events for display and filtering.
     timeline_category: Optional[str] = None
     # Timeline type used to render this event in Leadping activity feeds.
@@ -164,11 +156,9 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "isWarmup": lambda n : setattr(self, 'is_warmup', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
-            "providerMessageId": lambda n : setattr(self, 'provider_message_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
             "relatedEntityId": lambda n : setattr(self, 'related_entity_id', n.get_str_value()),
@@ -183,8 +173,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "status": lambda n : setattr(self, 'status', n.get_enum_value(EventTableRow_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
             "summary": lambda n : setattr(self, 'summary', n.get_str_value()),
-            "telnyxId": lambda n : setattr(self, 'telnyx_id', n.get_str_value()),
-            "tenDlcCampaignId": lambda n : setattr(self, 'ten_dlc_campaign_id', n.get_str_value()),
             "timelineCategory": lambda n : setattr(self, 'timeline_category', n.get_str_value()),
             "timelineType": lambda n : setattr(self, 'timeline_type', n.get_enum_value(EventTimelineType)),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
@@ -223,11 +211,9 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
-        writer.write_bool_value("isWarmup", self.is_warmup)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
-        writer.write_str_value("providerMessageId", self.provider_message_id)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("receivedAt", self.received_at)
         writer.write_str_value("relatedEntityId", self.related_entity_id)
@@ -242,8 +228,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
         writer.write_str_value("summary", self.summary)
-        writer.write_str_value("telnyxId", self.telnyx_id)
-        writer.write_str_value("tenDlcCampaignId", self.ten_dlc_campaign_id)
         writer.write_str_value("timelineCategory", self.timeline_category)
         writer.write_enum_value("timelineType", self.timeline_type)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)

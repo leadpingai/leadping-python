@@ -10,13 +10,13 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The detail property
+    # Human-readable explanation specific to this occurrence of the problem.
     detail: Optional[str] = None
-    # The instance property
+    # URI reference that identifies this specific occurrence of the problem.
     instance: Optional[str] = None
-    # The title property
+    # Short, human-readable summary of the problem.
     title: Optional[str] = None
-    # The type property
+    # URI reference that identifies the problem type.
     type: Optional[str] = None
     
     @staticmethod

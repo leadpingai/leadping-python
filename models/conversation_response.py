@@ -30,7 +30,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Unique Leadping identifier for this conversation response.
     id: Optional[str] = None
-    # The isArchived property
+    # Indicates whether the Leadping conversation has been archived.
     is_archived: Optional[bool] = None
     # Indicates whether the current user has unread activity in the conversation.
     is_unread: Optional[bool] = None

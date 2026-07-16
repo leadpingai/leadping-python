@@ -15,9 +15,9 @@ class AutomationWorkflowStatusResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The leadId property
+    # Unique identifier of the lead associated with this Leadping automation workflow status.
     lead_id: Optional[str] = None
-    # The runs property
+    # Collection of runs included with this Leadping automation workflow status.
     runs: Optional[list[AutomationWorkflowRunResponse]] = None
     
     @staticmethod

@@ -12,35 +12,35 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Defines phone-number outbound health states used by pacing.
+    # Current health status for this Leadping outbound phone number capacity.
     health_status: Optional[PhoneNumberOutboundHealthStatus] = None
-    # The phoneNumber property
+    # Phone number associated with this Leadping outbound phone number capacity.
     phone_number: Optional[str] = None
-    # The phoneNumberId property
+    # Unique identifier of the phone number associated with this Leadping outbound phone number capacity.
     phone_number_id: Optional[str] = None
-    # The smsLimitThisHour property
+    # Number of SMS limit this hour represented by this Leadping outbound phone number capacity.
     sms_limit_this_hour: Optional[int] = None
-    # The smsLimitToday property
+    # Number of SMS limit today represented by this Leadping outbound phone number capacity.
     sms_limit_today: Optional[int] = None
-    # The smsRemainingThisHour property
+    # SMS remaining this hour for the applicable messaging or voice capacity window.
     sms_remaining_this_hour: Optional[int] = None
-    # The smsRemainingToday property
+    # SMS remaining today for the applicable messaging or voice capacity window.
     sms_remaining_today: Optional[int] = None
-    # The smsUsedThisHour property
+    # SMS used this hour for the applicable messaging or voice capacity window.
     sms_used_this_hour: Optional[int] = None
-    # The smsUsedToday property
+    # SMS used today for the applicable messaging or voice capacity window.
     sms_used_today: Optional[int] = None
-    # The voiceLimitThisHour property
+    # Voice limit this hour associated with this Leadping outbound phone number capacity.
     voice_limit_this_hour: Optional[int] = None
-    # The voiceLimitToday property
+    # Voice limit today associated with this Leadping outbound phone number capacity.
     voice_limit_today: Optional[int] = None
-    # The voiceRemainingThisHour property
+    # Voice remaining this hour for the applicable messaging or voice capacity window.
     voice_remaining_this_hour: Optional[int] = None
-    # The voiceRemainingToday property
+    # Voice remaining today for the applicable messaging or voice capacity window.
     voice_remaining_today: Optional[int] = None
-    # The voiceUsedThisHour property
+    # Voice used this hour for the applicable messaging or voice capacity window.
     voice_used_this_hour: Optional[int] = None
-    # The voiceUsedToday property
+    # Voice used today for the applicable messaging or voice capacity window.
     voice_used_today: Optional[int] = None
     
     @staticmethod

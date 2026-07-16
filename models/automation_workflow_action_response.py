@@ -13,43 +13,41 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actionType property
+    # Action type classification for this Leadping automation workflow action.
     action_type: Optional[str] = None
-    # The actionTypeDisplay property
+    # Human-readable action type display for this Leadping automation workflow action.
     action_type_display: Optional[str] = None
-    # The adminDiagnostics property
-    admin_diagnostics: Optional[str] = None
-    # The completedAt property
+    # Date and time when the automation workflow action completed.
     completed_at: Optional[datetime.datetime] = None
-    # The failedAt property
+    # Date and time when the automation workflow action failed.
     failed_at: Optional[datetime.datetime] = None
-    # The failureCode property
+    # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow action.
     failure_code: Optional[str] = None
-    # The id property
+    # Unique Leadping identifier for the automation workflow action.
     id: Optional[str] = None
-    # The nextRetryAt property
+    # Date and time when the next retry is scheduled.
     next_retry_at: Optional[datetime.datetime] = None
-    # The retryCount property
+    # Total number of retry records represented by this Leadping automation workflow action.
     retry_count: Optional[int] = None
-    # The safeReason property
+    # Safe reason associated with this Leadping automation workflow action.
     safe_reason: Optional[str] = None
-    # The scheduledAt property
+    # Date and time when the automation workflow action was scheduled.
     scheduled_at: Optional[datetime.datetime] = None
-    # The skippedAt property
+    # Date and time when the workflow action was skipped.
     skipped_at: Optional[datetime.datetime] = None
-    # The startedAt property
+    # Date and time when the automation workflow action started.
     started_at: Optional[datetime.datetime] = None
-    # The status property
+    # Current status for this Leadping automation workflow action.
     status: Optional[str] = None
-    # The statusDisplay property
+    # Human-readable status display for this Leadping automation workflow action.
     status_display: Optional[str] = None
-    # The stepDisplayName property
+    # Human-readable step display name associated with this Leadping automation workflow action.
     step_display_name: Optional[str] = None
-    # The stepId property
+    # Unique identifier of the step associated with this Leadping automation workflow action.
     step_id: Optional[str] = None
-    # The stepOrder property
+    # Step order associated with this Leadping automation workflow action.
     step_order: Optional[int] = None
-    # The userSummary property
+    # Human-readable user summary for this Leadping automation workflow action.
     user_summary: Optional[str] = None
     
     @staticmethod
@@ -71,7 +69,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actionType": lambda n : setattr(self, 'action_type', n.get_str_value()),
             "actionTypeDisplay": lambda n : setattr(self, 'action_type_display', n.get_str_value()),
-            "adminDiagnostics": lambda n : setattr(self, 'admin_diagnostics', n.get_str_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "failureCode": lambda n : setattr(self, 'failure_code', n.get_str_value()),
@@ -101,7 +98,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actionType", self.action_type)
         writer.write_str_value("actionTypeDisplay", self.action_type_display)
-        writer.write_str_value("adminDiagnostics", self.admin_diagnostics)
         writer.write_datetime_value("completedAt", self.completed_at)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("failureCode", self.failure_code)

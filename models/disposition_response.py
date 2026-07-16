@@ -31,11 +31,11 @@ class DispositionResponse(AdditionalDataHolder, Parsable):
     category: Optional[DispositionResponse_category] = None
     # Known sources that can change a lead's current disposition.
     change_source: Optional[DispositionResponse_changeSource] = None
-    # The changedAt property
+    # Date and time when the disposition change occurred.
     changed_at: Optional[datetime.datetime] = None
-    # The changedByAutomationId property
+    # Unique identifier of the automation that changed the disposition, when applicable.
     changed_by_automation_id: Optional[str] = None
-    # The changedByUserId property
+    # Unique identifier of the Leadping user who made the change.
     changed_by_user_id: Optional[str] = None
     # The date and time for the created at value on this disposition.
     created_at: Optional[datetime.datetime] = None
@@ -47,15 +47,15 @@ class DispositionResponse(AdditionalDataHolder, Parsable):
     is_missed_call_follow_up: Optional[bool] = None
     # The lead ID associated with this disposition.
     lead_id: Optional[str] = None
-    # The newDispositionId property
+    # Unique identifier of the new disposition associated with this Leadping disposition.
     new_disposition_id: Optional[str] = None
     # The operator or customer notes recorded for this disposition.
     notes: Optional[str] = None
-    # The oldDispositionId property
+    # Unique identifier of the old disposition associated with this Leadping disposition.
     old_disposition_id: Optional[str] = None
-    # The oldDispositionOutcome property
+    # Old disposition outcome associated with this Leadping disposition.
     old_disposition_outcome: Optional[str] = None
-    # The oldDispositionType property
+    # Old disposition type classification for this Leadping disposition.
     old_disposition_type: Optional[str] = None
     # The outcome value for this disposition.
     outcome: Optional[str] = None

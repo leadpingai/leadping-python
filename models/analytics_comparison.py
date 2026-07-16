@@ -6,14 +6,17 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class AnalyticsComparison(AdditionalDataHolder, Parsable):
+    """
+    Date and time when this Leadping customer analytics summary was leads comparison.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The current property
+    # Metric value for the current reporting period.
     current: Optional[float] = None
-    # The direction property
+    # Direction classification for this Leadping analytics comparison.
     direction: Optional[str] = None
-    # The previous property
+    # Metric value for the preceding comparison period.
     previous: Optional[float] = None
     
     @staticmethod

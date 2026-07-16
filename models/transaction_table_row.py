@@ -17,8 +17,6 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Leadping account identifier used for wallet and transaction reconciliation.
-    account_id: Optional[str] = None
     # Display name of the wallet or account used for this transaction.
     account_name: Optional[str] = None
     # Monetary amount for this billing transaction or wallet operation.
@@ -29,8 +27,6 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     business_name: Optional[str] = None
     # UTC timestamp when this billing transaction table row was created.
     created_at: Optional[datetime.datetime] = None
-    # Display name or identifier for the person or system that created this billing transaction table row.
-    created_by: Optional[str] = None
     # Human-readable description that explains this billing transaction table row to API users.
     description: Optional[str] = None
     # Unique Leadping identifier for this billing transaction table row.
@@ -71,13 +67,11 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         from .transaction_type import TransactionType
 
         fields: dict[str, Callable[[Any], None]] = {
-            "accountId": lambda n : setattr(self, 'account_id', n.get_str_value()),
             "accountName": lambda n : setattr(self, 'account_name', n.get_str_value()),
             "amount": lambda n : setattr(self, 'amount', n.get_float_value()),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
-            "createdBy": lambda n : setattr(self, 'created_by', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
@@ -97,13 +91,11 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("accountId", self.account_id)
         writer.write_str_value("accountName", self.account_name)
         writer.write_float_value("amount", self.amount)
         writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("businessName", self.business_name)
         writer.write_datetime_value("createdAt", self.created_at)
-        writer.write_str_value("createdBy", self.created_by)
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
         writer.write_str_value("leadId", self.lead_id)

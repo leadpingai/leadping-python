@@ -29,11 +29,11 @@ class DispositionExportRow(AdditionalDataHolder, Parsable):
     category: Optional[DispositionExportRow_category] = None
     # Known sources that can change a lead's current disposition.
     change_source: Optional[DispositionExportRow_changeSource] = None
-    # The changedAt property
+    # Date and time when the disposition change occurred.
     changed_at: Optional[datetime.datetime] = None
-    # The changedByAutomationId property
+    # Unique identifier of the automation that changed the disposition, when applicable.
     changed_by_automation_id: Optional[str] = None
-    # The changedByUserId property
+    # Unique identifier of the Leadping user who made the change.
     changed_by_user_id: Optional[str] = None
     # The date and time for the created at value on this disposition export row.
     created_at: Optional[datetime.datetime] = None
@@ -45,19 +45,19 @@ class DispositionExportRow(AdditionalDataHolder, Parsable):
     is_missed_call_follow_up: Optional[bool] = None
     # The lead ID associated with this disposition export row.
     lead_id: Optional[str] = None
-    # The newDispositionId property
+    # Unique identifier of the new disposition associated with this Leadping disposition export row.
     new_disposition_id: Optional[str] = None
     # The operator or customer notes recorded for this disposition export row.
     notes: Optional[str] = None
-    # The oldDispositionId property
+    # Unique identifier of the old disposition associated with this Leadping disposition export row.
     old_disposition_id: Optional[str] = None
-    # The oldDispositionOutcome property
+    # Old disposition outcome associated with this Leadping disposition export row.
     old_disposition_outcome: Optional[str] = None
-    # The oldDispositionType property
+    # Old disposition type classification for this Leadping disposition export row.
     old_disposition_type: Optional[str] = None
     # The outcome value for this disposition export row.
     outcome: Optional[str] = None
-    # The reason property
+    # Human-readable explanation for the current disposition export row outcome.
     reason: Optional[str] = None
     # The related call event ID associated with this disposition export row.
     related_call_event_id: Optional[str] = None

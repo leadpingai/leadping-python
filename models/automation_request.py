@@ -7,7 +7,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .automation_action import AutomationAction
     from .automation_condition_group import AutomationConditionGroup
-    from .automation_request_admin_enablement_override import AutomationRequest_adminEnablementOverride
     from .automation_trigger import AutomationTrigger
 
 @dataclass
@@ -20,24 +19,14 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
 
     # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[AutomationRequest_adminEnablementOverride] = None
-    # Business ID that owns this automation configuration.
-    business_id: Optional[str] = None
     # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
-    # User ID of the person who created this automation configuration request.
-    created_by_user_id: Optional[str] = None
     # Human-readable description that explains this automation configuration request to API users.
     description: Optional[str] = None
     # Indicates whether this automation configuration request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # Indicates whether Leadping manages this automation configuration request automatically instead of a user.
-    is_system_managed: Optional[bool] = None
-    # Management level that controls whether Leadping or the business owns this automation setting.
-    management_level: Optional[str] = None
     # The display name for the entity.
     name: Optional[str] = None
     # Scope that limits where this automation configuration request applies in Leadping.
@@ -67,25 +56,18 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
         """
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
-        from .automation_request_admin_enablement_override import AutomationRequest_adminEnablementOverride
         from .automation_trigger import AutomationTrigger
 
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
-        from .automation_request_admin_enablement_override import AutomationRequest_adminEnablementOverride
         from .automation_trigger import AutomationTrigger
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationAction)),
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(AutomationRequest_adminEnablementOverride)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionGroups": lambda n : setattr(self, 'condition_groups', n.get_collection_of_object_values(AutomationConditionGroup)),
-            "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "isSystemManaged": lambda n : setattr(self, 'is_system_managed', n.get_bool_value()),
-            "managementLevel": lambda n : setattr(self, 'management_level', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
@@ -103,15 +85,10 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_collection_of_object_values("conditionGroups", self.condition_groups)
-        writer.write_str_value("createdByUserId", self.created_by_user_id)
         writer.write_str_value("description", self.description)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
-        writer.write_bool_value("isSystemManaged", self.is_system_managed)
-        writer.write_str_value("managementLevel", self.management_level)
         writer.write_str_value("name", self.name)
         writer.write_str_value("scope", self.scope)
         writer.write_collection_of_object_values("triggers", self.triggers)

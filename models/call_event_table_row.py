@@ -6,7 +6,6 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .call_event_table_row_metadata import CallEventTableRow_metadata
     from .call_event_table_row_status import CallEventTableRow_status
 
 @dataclass
@@ -19,8 +18,6 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
 
     # UTC timestamp when the call was answered.
     answered_at: Optional[datetime.datetime] = None
-    # Phone number identifier used for billing reconciliation.
-    billing_phone_number_id: Optional[str] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # Business summary connected to this call event table row.
@@ -45,18 +42,12 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Lead ID associated with this call event.
     lead_id: Optional[str] = None
-    # Structured metadata used for attribution, integrations, and reporting on this call event table row.
-    metadata: Optional[CallEventTableRow_metadata] = None
-    # Provider lifecycle or delivery status for this call event table row.
-    provider_status: Optional[str] = None
     # URL for the call recording, when the provider makes one available.
     recording_url: Optional[str] = None
     # Defines the supported Phone Call Status values.
     status: Optional[CallEventTableRow_status] = None
     # Human-readable reason explaining the current status of this call event table row.
     status_reason: Optional[str] = None
-    # Telnyx identifier connected to this phone number, call, or SMS event.
-    telnyx_id: Optional[str] = None
     # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
     # User summary connected to this call event table row.
@@ -80,15 +71,12 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .call_event_table_row_metadata import CallEventTableRow_metadata
         from .call_event_table_row_status import CallEventTableRow_status
 
-        from .call_event_table_row_metadata import CallEventTableRow_metadata
         from .call_event_table_row_status import CallEventTableRow_status
 
         fields: dict[str, Callable[[Any], None]] = {
             "answeredAt": lambda n : setattr(self, 'answered_at', n.get_datetime_value()),
-            "billingPhoneNumberId": lambda n : setattr(self, 'billing_phone_number_id', n.get_str_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "business": lambda n : setattr(self, 'business', n.get_str_value()),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
@@ -101,12 +89,9 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
-            "metadata": lambda n : setattr(self, 'metadata', n.get_object_value(CallEventTableRow_metadata)),
-            "providerStatus": lambda n : setattr(self, 'provider_status', n.get_str_value()),
             "recordingUrl": lambda n : setattr(self, 'recording_url', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(CallEventTableRow_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
-            "telnyxId": lambda n : setattr(self, 'telnyx_id', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
             "user": lambda n : setattr(self, 'user', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
@@ -122,7 +107,6 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("answeredAt", self.answered_at)
-        writer.write_str_value("billingPhoneNumberId", self.billing_phone_number_id)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_str_value("business", self.business)
         writer.write_str_value("businessId", self.business_id)
@@ -135,12 +119,9 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_str_value("leadId", self.lead_id)
-        writer.write_object_value("metadata", self.metadata)
-        writer.write_str_value("providerStatus", self.provider_status)
         writer.write_str_value("recordingUrl", self.recording_url)
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
-        writer.write_str_value("telnyxId", self.telnyx_id)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
         writer.write_str_value("user", self.user)
         writer.write_str_value("userId", self.user_id)

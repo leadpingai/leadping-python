@@ -9,15 +9,15 @@ class CustomerNeedsAttentionItem(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actionHref property
+    # Relative URL for the recommended follow-up action.
     action_href: Optional[str] = None
-    # The actionText property
+    # Action text associated with this Leadping customer needs attention item.
     action_text: Optional[str] = None
-    # The detail property
+    # Human-readable detail for this Leadping customer needs attention item.
     detail: Optional[str] = None
-    # The severity property
+    # Severity associated with this Leadping customer needs attention item.
     severity: Optional[str] = None
-    # The title property
+    # Human-readable title for this Leadping customer needs attention item.
     title: Optional[str] = None
     
     @staticmethod

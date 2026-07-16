@@ -11,6 +11,9 @@ from .customer_failing_automation import CustomerFailingAutomation
 
 @dataclass
 class CustomerAutomationHealth_lastFailure(CustomerFailingAutomation, Parsable):
+    """
+    Last failure associated with this Leadping customer automation health.
+    """
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CustomerAutomationHealth_lastFailure:

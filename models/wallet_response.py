@@ -43,12 +43,6 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     purchased_at: Optional[datetime.datetime] = None
     # Defines the source that created a wallet credit lot.
     source_type: Optional[WalletResponse_sourceType] = None
-    # Stripe charge identifier linked to this billing transaction.
-    stripe_charge_id: Optional[str] = None
-    # Stripe invoice identifier linked to this billing transaction.
-    stripe_invoice_id: Optional[str] = None
-    # Stripe payment intent identifier linked to this billing transaction.
-    stripe_payment_intent_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> WalletResponse:
@@ -86,9 +80,6 @@ class WalletResponse(AdditionalDataHolder, Parsable):
             "originalTransactionId": lambda n : setattr(self, 'original_transaction_id', n.get_str_value()),
             "purchasedAt": lambda n : setattr(self, 'purchased_at', n.get_datetime_value()),
             "sourceType": lambda n : setattr(self, 'source_type', n.get_enum_value(WalletResponse_sourceType)),
-            "stripeChargeId": lambda n : setattr(self, 'stripe_charge_id', n.get_str_value()),
-            "stripeInvoiceId": lambda n : setattr(self, 'stripe_invoice_id', n.get_str_value()),
-            "stripePaymentIntentId": lambda n : setattr(self, 'stripe_payment_intent_id', n.get_str_value()),
         }
         return fields
     
@@ -113,9 +104,6 @@ class WalletResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("originalTransactionId", self.original_transaction_id)
         writer.write_datetime_value("purchasedAt", self.purchased_at)
         writer.write_enum_value("sourceType", self.source_type)
-        writer.write_str_value("stripeChargeId", self.stripe_charge_id)
-        writer.write_str_value("stripeInvoiceId", self.stripe_invoice_id)
-        writer.write_str_value("stripePaymentIntentId", self.stripe_payment_intent_id)
         writer.write_additional_data_value(self.additional_data)
     
 

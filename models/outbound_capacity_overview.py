@@ -13,23 +13,23 @@ class OutboundCapacityOverview(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The blockedCount property
+    # Total number of blocked records represented by this Leadping outbound capacity overview.
     blocked_count: Optional[int] = None
-    # The coolingPhoneNumbers property
+    # Number of cooling phone numbers represented by this Leadping outbound capacity overview.
     cooling_phone_numbers: Optional[int] = None
-    # The healthyPhoneNumbers property
+    # Number of healthy phone numbers represented by this Leadping outbound capacity overview.
     healthy_phone_numbers: Optional[int] = None
-    # The limitedPhoneNumbers property
+    # Number of limited phone numbers represented by this Leadping outbound capacity overview.
     limited_phone_numbers: Optional[int] = None
-    # The phoneNumbers property
+    # Collection of phone numbers included with this Leadping outbound capacity overview.
     phone_numbers: Optional[list[OutboundPhoneNumberCapacity]] = None
-    # The recentDecisions property
+    # Collection of recent decisions included with this Leadping outbound capacity overview.
     recent_decisions: Optional[list[OutboundQueueItem]] = None
-    # The scheduledCount property
+    # Total number of scheduled records represented by this Leadping outbound capacity overview.
     scheduled_count: Optional[int] = None
-    # The smsCapacityRemainingToday property
+    # SMS capacity remaining today for the applicable messaging or voice capacity window.
     sms_capacity_remaining_today: Optional[int] = None
-    # The voiceCapacityRemainingToday property
+    # Voice capacity remaining today for the applicable messaging or voice capacity window.
     voice_capacity_remaining_today: Optional[int] = None
     
     @staticmethod

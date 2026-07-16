@@ -9,7 +9,6 @@ if TYPE_CHECKING:
     from .lead_contact import LeadContact
     from .lead_metadata import LeadMetadata
     from .lead_profile import LeadProfile
-    from .lead_response_admin_enablement_override import LeadResponse_adminEnablementOverride
     from .lead_response_current_disposition import LeadResponse_currentDisposition
     from .tag_summary import TagSummary
 
@@ -21,8 +20,6 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Admin override that can enable or disable this record independently of normal status checks.
-    admin_enablement_override: Optional[LeadResponse_adminEnablementOverride] = None
     # Optional note explaining why the lead was archived.
     archive_note: Optional[str] = None
     # Defines why a lead was removed from the active working pipeline.
@@ -43,7 +40,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The isArchived property
+    # Indicates whether the lead has been archived in Leadping.
     is_archived: Optional[bool] = None
     # Structured metadata used for attribution, integrations, and reporting on this lead response.
     metadata: Optional[LeadMetadata] = None
@@ -71,19 +68,16 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
-        from .lead_response_admin_enablement_override import LeadResponse_adminEnablementOverride
         from .lead_response_current_disposition import LeadResponse_currentDisposition
         from .tag_summary import TagSummary
 
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
-        from .lead_response_admin_enablement_override import LeadResponse_adminEnablementOverride
         from .lead_response_current_disposition import LeadResponse_currentDisposition
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
-            "adminEnablementOverride": lambda n : setattr(self, 'admin_enablement_override', n.get_object_value(LeadResponse_adminEnablementOverride)),
             "archiveNote": lambda n : setattr(self, 'archive_note', n.get_str_value()),
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
@@ -109,7 +103,6 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("adminEnablementOverride", self.admin_enablement_override)
         writer.write_str_value("archiveNote", self.archive_note)
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)

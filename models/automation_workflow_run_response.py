@@ -17,69 +17,61 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actions property
+    # Collection of actions included with this Leadping automation workflow run.
     actions: Optional[list[AutomationWorkflowActionResponse]] = None
-    # The automationId property
+    # Unique identifier of the automation associated with this Leadping automation workflow run.
     automation_id: Optional[str] = None
-    # The automationName property
+    # Human-readable automation name associated with this Leadping automation workflow run.
     automation_name: Optional[str] = None
-    # The businessId property
+    # Unique identifier of the business associated with this Leadping automation workflow run.
     business_id: Optional[str] = None
-    # The cancelledAt property
+    # Date and time when the automation workflow run was cancelled.
     cancelled_at: Optional[datetime.datetime] = None
-    # The completedAt property
+    # Date and time when the automation workflow run completed.
     completed_at: Optional[datetime.datetime] = None
-    # The correlationId property
-    correlation_id: Optional[str] = None
-    # The currentStepId property
+    # Unique identifier of the current step associated with this Leadping automation workflow run.
     current_step_id: Optional[str] = None
-    # The currentStepName property
+    # Human-readable current step name associated with this Leadping automation workflow run.
     current_step_name: Optional[str] = None
-    # The events property
+    # Collection of events included with this Leadping automation workflow run.
     events: Optional[list[AutomationWorkflowEventResponse]] = None
-    # The executionKey property
-    execution_key: Optional[str] = None
-    # The failedAt property
+    # Date and time when the automation workflow run failed.
     failed_at: Optional[datetime.datetime] = None
-    # The id property
+    # Unique Leadping identifier for the automation workflow run.
     id: Optional[str] = None
-    # The internalErrorDetails property
-    internal_error_details: Optional[str] = None
-    # The lastActionSummary property
+    # Human-readable last action summary for this Leadping automation workflow run.
     last_action_summary: Optional[str] = None
-    # The lastErrorCode property
+    # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow run.
     last_error_code: Optional[str] = None
-    # The lastErrorMessage property
+    # Human-readable last error message for this Leadping automation workflow run.
     last_error_message: Optional[str] = None
-    # The lastExecutionAt property
+    # Date and time of the most recent execution for this Leadping automation workflow run.
     last_execution_at: Optional[datetime.datetime] = None
-    # The leadId property
+    # Unique identifier of the lead associated with this Leadping automation workflow run.
     lead_id: Optional[str] = None
-    # The maxRetryCount property
+    # Total number of max retry records represented by this Leadping automation workflow run.
     max_retry_count: Optional[int] = None
-    # The nextExecutionAt property
+    # Date and time when the next execution is scheduled.
     next_execution_at: Optional[datetime.datetime] = None
-    # The nextRetryAt property
+    # Date and time when the next retry is scheduled.
     next_retry_at: Optional[datetime.datetime] = None
-    # The retryCount property
+    # Total number of retry records represented by this Leadping automation workflow run.
     retry_count: Optional[int] = None
-    # The skipReasonCode property
+    # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow run.
     skip_reason_code: Optional[str] = None
-    # The skipReasonDisplay property
+    # Human-readable skip reason display for this Leadping automation workflow run.
     skip_reason_display: Optional[str] = None
-    # The sourceEventId property
-    source_event_id: Optional[str] = None
-    # The startedAt property
+    # Date and time when the automation workflow run started.
     started_at: Optional[datetime.datetime] = None
-    # The status property
+    # Current status for this Leadping automation workflow run.
     status: Optional[str] = None
-    # The statusDisplay property
+    # Human-readable status display for this Leadping automation workflow run.
     status_display: Optional[str] = None
-    # The triggerDisplay property
+    # Human-readable trigger display for this Leadping automation workflow run.
     trigger_display: Optional[str] = None
-    # The triggerType property
+    # Trigger type classification for this Leadping automation workflow run.
     trigger_type: Optional[str] = None
-    # The updatedAt property
+    # Date and time when the automation workflow run was last updated.
     updated_at: Optional[datetime.datetime] = None
     
     @staticmethod
@@ -111,14 +103,11 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "cancelledAt": lambda n : setattr(self, 'cancelled_at', n.get_datetime_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
-            "correlationId": lambda n : setattr(self, 'correlation_id', n.get_str_value()),
             "currentStepId": lambda n : setattr(self, 'current_step_id', n.get_str_value()),
             "currentStepName": lambda n : setattr(self, 'current_step_name', n.get_str_value()),
             "events": lambda n : setattr(self, 'events', n.get_collection_of_object_values(AutomationWorkflowEventResponse)),
-            "executionKey": lambda n : setattr(self, 'execution_key', n.get_str_value()),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "internalErrorDetails": lambda n : setattr(self, 'internal_error_details', n.get_str_value()),
             "lastActionSummary": lambda n : setattr(self, 'last_action_summary', n.get_str_value()),
             "lastErrorCode": lambda n : setattr(self, 'last_error_code', n.get_str_value()),
             "lastErrorMessage": lambda n : setattr(self, 'last_error_message', n.get_str_value()),
@@ -130,7 +119,6 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
             "retryCount": lambda n : setattr(self, 'retry_count', n.get_int_value()),
             "skipReasonCode": lambda n : setattr(self, 'skip_reason_code', n.get_str_value()),
             "skipReasonDisplay": lambda n : setattr(self, 'skip_reason_display', n.get_str_value()),
-            "sourceEventId": lambda n : setattr(self, 'source_event_id', n.get_str_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "statusDisplay": lambda n : setattr(self, 'status_display', n.get_str_value()),
@@ -154,14 +142,11 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("businessId", self.business_id)
         writer.write_datetime_value("cancelledAt", self.cancelled_at)
         writer.write_datetime_value("completedAt", self.completed_at)
-        writer.write_str_value("correlationId", self.correlation_id)
         writer.write_str_value("currentStepId", self.current_step_id)
         writer.write_str_value("currentStepName", self.current_step_name)
         writer.write_collection_of_object_values("events", self.events)
-        writer.write_str_value("executionKey", self.execution_key)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("id", self.id)
-        writer.write_str_value("internalErrorDetails", self.internal_error_details)
         writer.write_str_value("lastActionSummary", self.last_action_summary)
         writer.write_str_value("lastErrorCode", self.last_error_code)
         writer.write_str_value("lastErrorMessage", self.last_error_message)
@@ -173,7 +158,6 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("retryCount", self.retry_count)
         writer.write_str_value("skipReasonCode", self.skip_reason_code)
         writer.write_str_value("skipReasonDisplay", self.skip_reason_display)
-        writer.write_str_value("sourceEventId", self.source_event_id)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_str_value("status", self.status)
         writer.write_str_value("statusDisplay", self.status_display)

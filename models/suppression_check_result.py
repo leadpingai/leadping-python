@@ -13,8 +13,6 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The human-readable admin reason explaining this ion check result.
-    admin_reason: Optional[str] = None
     # Whether this ion check result allows ed.
     allowed: Optional[bool] = None
     # The business ID associated with this ion check result.
@@ -53,7 +51,6 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "adminReason": lambda n : setattr(self, 'admin_reason', n.get_str_value()),
             "allowed": lambda n : setattr(self, 'allowed', n.get_bool_value()),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "channel": lambda n : setattr(self, 'channel', n.get_str_value()),
@@ -75,7 +72,6 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("adminReason", self.admin_reason)
         writer.write_bool_value("allowed", self.allowed)
         writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("channel", self.channel)

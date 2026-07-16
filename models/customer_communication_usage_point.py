@@ -10,21 +10,21 @@ class CustomerCommunicationUsagePoint(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The callMinutes property
+    # Total connected call duration, in minutes, during the reporting period.
     call_minutes: Optional[float] = None
-    # The calls property
+    # Number of calls represented by this Leadping customer communication usage point.
     calls: Optional[int] = None
-    # The endAt property
+    # Date and time when this Leadping customer communication usage point was end.
     end_at: Optional[datetime.datetime] = None
-    # The label property
+    # Human-readable label for this Leadping customer communication usage point.
     label: Optional[str] = None
-    # The smsReceived property
+    # Number of SMS messages received during the reporting period.
     sms_received: Optional[int] = None
-    # The smsSent property
+    # Number of SMS messages sent during the reporting period.
     sms_sent: Optional[int] = None
-    # The spend property
+    # Spend represented by this Leadping customer communication usage point.
     spend: Optional[float] = None
-    # The startAt property
+    # Date and time when this Leadping customer communication usage point was start.
     start_at: Optional[datetime.datetime] = None
     
     @staticmethod
