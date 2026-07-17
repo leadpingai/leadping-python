@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .activation_timeline_event_actor import ActivationTimelineEvent_actor
+
 @dataclass
 class ActivationTimelineEvent(AdditionalDataHolder, Parsable):
     """
@@ -13,8 +16,8 @@ class ActivationTimelineEvent(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actor name value for this activation timeline event.
-    actor_name: Optional[str] = None
+    # The ID and name for this actor.
+    actor: Optional[ActivationTimelineEvent_actor] = None
     # The date and time for the created at value on this activation timeline event.
     created_at: Optional[datetime.datetime] = None
     # The details value for this activation timeline event.
@@ -46,8 +49,12 @@ class ActivationTimelineEvent(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .activation_timeline_event_actor import ActivationTimelineEvent_actor
+
+        from .activation_timeline_event_actor import ActivationTimelineEvent_actor
+
         fields: dict[str, Callable[[Any], None]] = {
-            "actorName": lambda n : setattr(self, 'actor_name', n.get_str_value()),
+            "actor": lambda n : setattr(self, 'actor', n.get_object_value(ActivationTimelineEvent_actor)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "details": lambda n : setattr(self, 'details', n.get_str_value()),
             "failureReason": lambda n : setattr(self, 'failure_reason', n.get_str_value()),
@@ -66,7 +73,7 @@ class ActivationTimelineEvent(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("actorName", self.actor_name)
+        writer.write_object_value("actor", self.actor)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("details", self.details)
         writer.write_str_value("failureReason", self.failure_reason)

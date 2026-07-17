@@ -6,6 +6,8 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .transaction_response_business import TransactionResponse_business
+    from .transaction_response_lead import TransactionResponse_lead
     from .transaction_status import TransactionStatus
     from .transaction_type import TransactionType
 
@@ -17,14 +19,10 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Display name of the wallet or account used for this transaction.
-    account_name: Optional[str] = None
     # Monetary amount for this billing transaction or wallet operation.
     amount: Optional[float] = None
-    # Business ID charged or credited by this wallet transaction.
-    business_id: Optional[str] = None
-    # Business display name shown for this wallet transaction.
-    business_name: Optional[str] = None
+    # The ID and name for this business.
+    business: Optional[TransactionResponse_business] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction response to API users.
@@ -33,10 +31,8 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     gateway_status: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # Lead ID connected to this transaction when the charge came from lead activity.
-    lead_id: Optional[str] = None
-    # Lead display name shown for lead-related wallet transactions.
-    lead_name: Optional[str] = None
+    # The ID and name for this lead.
+    lead: Optional[TransactionResponse_lead] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # Net monetary amount after fees, credits, or adjustments.
@@ -66,23 +62,24 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .transaction_response_business import TransactionResponse_business
+        from .transaction_response_lead import TransactionResponse_lead
         from .transaction_status import TransactionStatus
         from .transaction_type import TransactionType
 
+        from .transaction_response_business import TransactionResponse_business
+        from .transaction_response_lead import TransactionResponse_lead
         from .transaction_status import TransactionStatus
         from .transaction_type import TransactionType
 
         fields: dict[str, Callable[[Any], None]] = {
-            "accountName": lambda n : setattr(self, 'account_name', n.get_str_value()),
             "amount": lambda n : setattr(self, 'amount', n.get_float_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
+            "business": lambda n : setattr(self, 'business', n.get_object_value(TransactionResponse_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "gatewayStatus": lambda n : setattr(self, 'gateway_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
-            "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
+            "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionResponse_lead)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
@@ -100,16 +97,13 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("accountName", self.account_name)
         writer.write_float_value("amount", self.amount)
-        writer.write_str_value("businessId", self.business_id)
-        writer.write_str_value("businessName", self.business_name)
+        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
         writer.write_str_value("gatewayStatus", self.gateway_status)
         writer.write_str_value("id", self.id)
-        writer.write_str_value("leadId", self.lead_id)
-        writer.write_str_value("leadName", self.lead_name)
+        writer.write_object_value("lead", self.lead)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("notes", self.notes)

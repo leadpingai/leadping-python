@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .business_user_role import BusinessUserRole
+    from .id_name_pair import IdNamePair
 
 @dataclass
 class BusinessUserTableRow(AdditionalDataHolder, Parsable):
@@ -26,12 +27,10 @@ class BusinessUserTableRow(AdditionalDataHolder, Parsable):
     license_renewal_date: Optional[datetime.datetime] = None
     # The role value for this business user.
     role: Optional[BusinessUserRole] = None
+    # The ID and name for this user.
+    user: Optional[IdNamePair] = None
     # The user email value for this business user.
     user_email: Optional[str] = None
-    # The user ID associated with this business user.
-    user_id: Optional[str] = None
-    # The user name value for this business user.
-    user_name: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> BusinessUserTableRow:
@@ -50,8 +49,10 @@ class BusinessUserTableRow(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .business_user_role import BusinessUserRole
+        from .id_name_pair import IdNamePair
 
         from .business_user_role import BusinessUserRole
+        from .id_name_pair import IdNamePair
 
         fields: dict[str, Callable[[Any], None]] = {
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -59,9 +60,8 @@ class BusinessUserTableRow(AdditionalDataHolder, Parsable):
             "licenseBillingStatus": lambda n : setattr(self, 'license_billing_status', n.get_str_value()),
             "licenseRenewalDate": lambda n : setattr(self, 'license_renewal_date', n.get_datetime_value()),
             "role": lambda n : setattr(self, 'role', n.get_enum_value(BusinessUserRole)),
+            "user": lambda n : setattr(self, 'user', n.get_object_value(IdNamePair)),
             "userEmail": lambda n : setattr(self, 'user_email', n.get_str_value()),
-            "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
-            "userName": lambda n : setattr(self, 'user_name', n.get_str_value()),
         }
         return fields
     
@@ -78,9 +78,8 @@ class BusinessUserTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("licenseBillingStatus", self.license_billing_status)
         writer.write_datetime_value("licenseRenewalDate", self.license_renewal_date)
         writer.write_enum_value("role", self.role)
+        writer.write_object_value("user", self.user)
         writer.write_str_value("userEmail", self.user_email)
-        writer.write_str_value("userId", self.user_id)
-        writer.write_str_value("userName", self.user_name)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -5,35 +5,35 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .phone_lookup import PhoneLookup
+    from .id_name_pair import IdNamePair
 
-from .phone_lookup import PhoneLookup
+from .id_name_pair import IdNamePair
 
 @dataclass
-class Phone_lookup(PhoneLookup, Parsable):
+class UsageLedgerTableRow_user(IdNamePair, Parsable):
     """
-    Phone lookup details returned by the provider or Leadping enrichment service.
+    The ID and name for this user.
     """
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> Phone_lookup:
+    def create_from_discriminator_value(parse_node: ParseNode) -> UsageLedgerTableRow_user:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: Phone_lookup
+        Returns: UsageLedgerTableRow_user
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return Phone_lookup()
+        return UsageLedgerTableRow_user()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .phone_lookup import PhoneLookup
+        from .id_name_pair import IdNamePair
 
-        from .phone_lookup import PhoneLookup
+        from .id_name_pair import IdNamePair
 
         fields: dict[str, Callable[[Any], None]] = {
         }

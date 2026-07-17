@@ -1,46 +1,44 @@
 from __future__ import annotations
 from collections.abc import Callable
 from dataclasses import dataclass, field
-from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
+from kiota_abstractions.serialization import Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .telephony_login_request_device import TelephonyLoginRequest_device
+    from .id_name_pair import IdNamePair
+
+from .id_name_pair import IdNamePair
 
 @dataclass
-class TelephonyLoginRequest(AdditionalDataHolder, Parsable):
+class BusinessTableRow_business(IdNamePair, Parsable):
     """
-    Request model for telephony login token generation.
+    The ID and name for this business.
     """
-    # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
-    additional_data: dict[str, Any] = field(default_factory=dict)
-
-    # The ID and name for this device.
-    device: Optional[TelephonyLoginRequest_device] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> TelephonyLoginRequest:
+    def create_from_discriminator_value(parse_node: ParseNode) -> BusinessTableRow_business:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: TelephonyLoginRequest
+        Returns: BusinessTableRow_business
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return TelephonyLoginRequest()
+        return BusinessTableRow_business()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .telephony_login_request_device import TelephonyLoginRequest_device
+        from .id_name_pair import IdNamePair
 
-        from .telephony_login_request_device import TelephonyLoginRequest_device
+        from .id_name_pair import IdNamePair
 
         fields: dict[str, Callable[[Any], None]] = {
-            "device": lambda n : setattr(self, 'device', n.get_object_value(TelephonyLoginRequest_device)),
         }
+        super_fields = super().get_field_deserializers()
+        fields.update(super_fields)
         return fields
     
     def serialize(self,writer: SerializationWriter) -> None:
@@ -51,7 +49,6 @@ class TelephonyLoginRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("device", self.device)
-        writer.write_additional_data_value(self.additional_data)
+        super().serialize(writer)
     
 

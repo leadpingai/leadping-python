@@ -7,7 +7,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .phone_number_response_business import PhoneNumberResponse_business
-    from .phone_number_response_location import PhoneNumberResponse_location
     from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
     from .phone_number_warmup import PhoneNumberWarmup
 
@@ -29,14 +28,14 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether Leadping provisions and manages this phone number.
     leadping_owned: Optional[bool] = None
-    # Geographic location metadata for the phone number, lead, or lookup result.
-    location: Optional[PhoneNumberResponse_location] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number.
     number: Optional[str] = None
+    # Identifier of the canonical phone identity for this number.
+    phone_identity_id: Optional[str] = None
     # Routing metadata that connects this phone number to teams, campaigns, and sources.
     routing: Optional[PhoneNumberRoutingMetadata] = None
     # SMS and voice warmup state for this phone number.
@@ -59,12 +58,10 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .phone_number_response_business import PhoneNumberResponse_business
-        from .phone_number_response_location import PhoneNumberResponse_location
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
         from .phone_number_warmup import PhoneNumberWarmup
 
         from .phone_number_response_business import PhoneNumberResponse_business
-        from .phone_number_response_location import PhoneNumberResponse_location
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
         from .phone_number_warmup import PhoneNumberWarmup
 
@@ -74,10 +71,10 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "leadpingOwned": lambda n : setattr(self, 'leadping_owned', n.get_bool_value()),
-            "location": lambda n : setattr(self, 'location', n.get_object_value(PhoneNumberResponse_location)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
+            "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "routing": lambda n : setattr(self, 'routing', n.get_object_value(PhoneNumberRoutingMetadata)),
             "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberWarmup)),
         }
@@ -96,10 +93,10 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("leadpingOwned", self.leadping_owned)
-        writer.write_object_value("location", self.location)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
+        writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_object_value("routing", self.routing)
         writer.write_object_value("warmup", self.warmup)
         writer.write_additional_data_value(self.additional_data)

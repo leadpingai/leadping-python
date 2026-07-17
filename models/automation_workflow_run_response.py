@@ -8,6 +8,8 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .automation_workflow_action_response import AutomationWorkflowActionResponse
     from .automation_workflow_event_response import AutomationWorkflowEventResponse
+    from .automation_workflow_run_response_automation import AutomationWorkflowRunResponse_automation
+    from .automation_workflow_run_response_current_step import AutomationWorkflowRunResponse_currentStep
 
 @dataclass
 class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
@@ -19,20 +21,16 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
 
     # Collection of actions included with this Leadping automation workflow run.
     actions: Optional[list[AutomationWorkflowActionResponse]] = None
-    # Unique identifier of the automation associated with this Leadping automation workflow run.
-    automation_id: Optional[str] = None
-    # Human-readable automation name associated with this Leadping automation workflow run.
-    automation_name: Optional[str] = None
+    # The ID and name for this automation.
+    automation: Optional[AutomationWorkflowRunResponse_automation] = None
     # Unique identifier of the business associated with this Leadping automation workflow run.
     business_id: Optional[str] = None
     # Date and time when the automation workflow run was cancelled.
     cancelled_at: Optional[datetime.datetime] = None
     # Date and time when the automation workflow run completed.
     completed_at: Optional[datetime.datetime] = None
-    # Unique identifier of the current step associated with this Leadping automation workflow run.
-    current_step_id: Optional[str] = None
-    # Human-readable current step name associated with this Leadping automation workflow run.
-    current_step_name: Optional[str] = None
+    # The ID and name for this currentStep.
+    current_step: Optional[AutomationWorkflowRunResponse_currentStep] = None
     # Collection of events included with this Leadping automation workflow run.
     events: Optional[list[AutomationWorkflowEventResponse]] = None
     # Date and time when the automation workflow run failed.
@@ -92,19 +90,21 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         """
         from .automation_workflow_action_response import AutomationWorkflowActionResponse
         from .automation_workflow_event_response import AutomationWorkflowEventResponse
+        from .automation_workflow_run_response_automation import AutomationWorkflowRunResponse_automation
+        from .automation_workflow_run_response_current_step import AutomationWorkflowRunResponse_currentStep
 
         from .automation_workflow_action_response import AutomationWorkflowActionResponse
         from .automation_workflow_event_response import AutomationWorkflowEventResponse
+        from .automation_workflow_run_response_automation import AutomationWorkflowRunResponse_automation
+        from .automation_workflow_run_response_current_step import AutomationWorkflowRunResponse_currentStep
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationWorkflowActionResponse)),
-            "automationId": lambda n : setattr(self, 'automation_id', n.get_str_value()),
-            "automationName": lambda n : setattr(self, 'automation_name', n.get_str_value()),
+            "automation": lambda n : setattr(self, 'automation', n.get_object_value(AutomationWorkflowRunResponse_automation)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "cancelledAt": lambda n : setattr(self, 'cancelled_at', n.get_datetime_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
-            "currentStepId": lambda n : setattr(self, 'current_step_id', n.get_str_value()),
-            "currentStepName": lambda n : setattr(self, 'current_step_name', n.get_str_value()),
+            "currentStep": lambda n : setattr(self, 'current_step', n.get_object_value(AutomationWorkflowRunResponse_currentStep)),
             "events": lambda n : setattr(self, 'events', n.get_collection_of_object_values(AutomationWorkflowEventResponse)),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -137,13 +137,11 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
-        writer.write_str_value("automationId", self.automation_id)
-        writer.write_str_value("automationName", self.automation_name)
+        writer.write_object_value("automation", self.automation)
         writer.write_str_value("businessId", self.business_id)
         writer.write_datetime_value("cancelledAt", self.cancelled_at)
         writer.write_datetime_value("completedAt", self.completed_at)
-        writer.write_str_value("currentStepId", self.current_step_id)
-        writer.write_str_value("currentStepName", self.current_step_name)
+        writer.write_object_value("currentStep", self.current_step)
         writer.write_collection_of_object_values("events", self.events)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("id", self.id)

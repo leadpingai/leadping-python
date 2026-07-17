@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .id_name_pair import IdNamePair
     from .sms_event_table_row_outbound_source import SmsEventTableRow_outboundSource
     from .sms_event_table_row_status import SmsEventTableRow_status
     from .sms_event_table_row_traffic_type import SmsEventTableRow_trafficType
@@ -58,10 +59,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether automation created or triggered this SMS event table row.
     is_automated: Optional[bool] = None
-    # Lead ID associated with this SMS event.
-    lead_id: Optional[str] = None
-    # Lead display name shown for this SMS event.
-    lead_name: Optional[str] = None
+    # The ID and name for this lead.
+    lead: Optional[IdNamePair] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
     # Defines the source that requested outbound delivery.
@@ -113,10 +112,12 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .id_name_pair import IdNamePair
         from .sms_event_table_row_outbound_source import SmsEventTableRow_outboundSource
         from .sms_event_table_row_status import SmsEventTableRow_status
         from .sms_event_table_row_traffic_type import SmsEventTableRow_trafficType
 
+        from .id_name_pair import IdNamePair
         from .sms_event_table_row_outbound_source import SmsEventTableRow_outboundSource
         from .sms_event_table_row_status import SmsEventTableRow_status
         from .sms_event_table_row_traffic_type import SmsEventTableRow_trafficType
@@ -142,8 +143,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
-            "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
-            "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
+            "lead": lambda n : setattr(self, 'lead', n.get_object_value(IdNamePair)),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "outboundSource": lambda n : setattr(self, 'outbound_source', n.get_enum_value(SmsEventTableRow_outboundSource)),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
@@ -192,8 +192,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isAutomated", self.is_automated)
-        writer.write_str_value("leadId", self.lead_id)
-        writer.write_str_value("leadName", self.lead_name)
+        writer.write_object_value("lead", self.lead)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_enum_value("outboundSource", self.outbound_source)
         writer.write_datetime_value("queuedAt", self.queued_at)

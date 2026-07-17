@@ -7,6 +7,8 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .transaction_status import TransactionStatus
+    from .transaction_table_row_business import TransactionTableRow_business
+    from .transaction_table_row_lead import TransactionTableRow_lead
     from .transaction_type import TransactionType
 
 @dataclass
@@ -17,24 +19,18 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Display name of the wallet or account used for this transaction.
-    account_name: Optional[str] = None
     # Monetary amount for this billing transaction or wallet operation.
     amount: Optional[float] = None
-    # Business ID charged or credited by this wallet transaction.
-    business_id: Optional[str] = None
-    # Business display name shown for this wallet transaction.
-    business_name: Optional[str] = None
+    # The ID and name for this business.
+    business: Optional[TransactionTableRow_business] = None
     # UTC timestamp when this billing transaction table row was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction table row to API users.
     description: Optional[str] = None
     # Unique Leadping identifier for this billing transaction table row.
     id: Optional[str] = None
-    # Lead ID connected to this transaction when the charge came from lead activity.
-    lead_id: Optional[str] = None
-    # Lead display name shown for lead-related wallet transactions.
-    lead_name: Optional[str] = None
+    # The ID and name for this lead.
+    lead: Optional[TransactionTableRow_lead] = None
     # Net monetary amount after fees, credits, or adjustments.
     net_amount: Optional[float] = None
     # Masked or human-readable payment method shown for this transaction.
@@ -61,21 +57,22 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .transaction_status import TransactionStatus
+        from .transaction_table_row_business import TransactionTableRow_business
+        from .transaction_table_row_lead import TransactionTableRow_lead
         from .transaction_type import TransactionType
 
         from .transaction_status import TransactionStatus
+        from .transaction_table_row_business import TransactionTableRow_business
+        from .transaction_table_row_lead import TransactionTableRow_lead
         from .transaction_type import TransactionType
 
         fields: dict[str, Callable[[Any], None]] = {
-            "accountName": lambda n : setattr(self, 'account_name', n.get_str_value()),
             "amount": lambda n : setattr(self, 'amount', n.get_float_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
+            "business": lambda n : setattr(self, 'business', n.get_object_value(TransactionTableRow_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
-            "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
+            "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionTableRow_lead)),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
             "transactionStatus": lambda n : setattr(self, 'transaction_status', n.get_enum_value(TransactionStatus)),
@@ -91,15 +88,12 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("accountName", self.account_name)
         writer.write_float_value("amount", self.amount)
-        writer.write_str_value("businessId", self.business_id)
-        writer.write_str_value("businessName", self.business_name)
+        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
-        writer.write_str_value("leadId", self.lead_id)
-        writer.write_str_value("leadName", self.lead_name)
+        writer.write_object_value("lead", self.lead)
         writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
         writer.write_enum_value("transactionStatus", self.transaction_status)

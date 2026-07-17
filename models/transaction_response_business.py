@@ -5,35 +5,35 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .phone_lookup_carrier import PhoneLookupCarrier
+    from .id_name_pair import IdNamePair
 
-from .phone_lookup_carrier import PhoneLookupCarrier
+from .id_name_pair import IdNamePair
 
 @dataclass
-class PhoneLookup_carrier(PhoneLookupCarrier, Parsable):
+class TransactionResponse_business(IdNamePair, Parsable):
     """
-    Complete carrier metadata reported for this phone number.
+    The ID and name for this business.
     """
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> PhoneLookup_carrier:
+    def create_from_discriminator_value(parse_node: ParseNode) -> TransactionResponse_business:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: PhoneLookup_carrier
+        Returns: TransactionResponse_business
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return PhoneLookup_carrier()
+        return TransactionResponse_business()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .phone_lookup_carrier import PhoneLookupCarrier
+        from .id_name_pair import IdNamePair
 
-        from .phone_lookup_carrier import PhoneLookupCarrier
+        from .id_name_pair import IdNamePair
 
         fields: dict[str, Callable[[Any], None]] = {
         }

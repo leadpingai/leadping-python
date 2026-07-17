@@ -5,35 +5,35 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .phone_number_location import PhoneNumberLocation
+    from .id_name_pair import IdNamePair
 
-from .phone_number_location import PhoneNumberLocation
+from .id_name_pair import IdNamePair
 
 @dataclass
-class PhoneNumberResponse_location(PhoneNumberLocation, Parsable):
+class UsageLedgerTableRow_business(IdNamePair, Parsable):
     """
-    Geographic location metadata for the phone number, lead, or lookup result.
+    The ID and name for this business.
     """
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberResponse_location:
+    def create_from_discriminator_value(parse_node: ParseNode) -> UsageLedgerTableRow_business:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: PhoneNumberResponse_location
+        Returns: UsageLedgerTableRow_business
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return PhoneNumberResponse_location()
+        return UsageLedgerTableRow_business()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .phone_number_location import PhoneNumberLocation
+        from .id_name_pair import IdNamePair
 
-        from .phone_number_location import PhoneNumberLocation
+        from .id_name_pair import IdNamePair
 
         fields: dict[str, Callable[[Any], None]] = {
         }

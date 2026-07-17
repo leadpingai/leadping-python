@@ -8,6 +8,9 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .billable_unit import BillableUnit
     from .usage_channel import UsageChannel
+    from .usage_ledger_table_row_business import UsageLedgerTableRow_business
+    from .usage_ledger_table_row_lead import UsageLedgerTableRow_lead
+    from .usage_ledger_table_row_user import UsageLedgerTableRow_user
     from .usage_record_status import UsageRecordStatus
 
 @dataclass
@@ -20,10 +23,8 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
 
     # The billable unit value for this usage ledger.
     billable_unit: Optional[BillableUnit] = None
-    # The business ID associated with this usage ledger.
-    business_id: Optional[str] = None
-    # The business name value for this usage ledger.
-    business_name: Optional[str] = None
+    # The ID and name for this business.
+    business: Optional[UsageLedgerTableRow_business] = None
     # The channel value for this usage ledger.
     channel: Optional[UsageChannel] = None
     # The date and time for the created at value on this usage ledger.
@@ -36,10 +37,8 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this usage ledger is billable.
     is_billable: Optional[bool] = None
-    # The lead ID associated with this usage ledger.
-    lead_id: Optional[str] = None
-    # The lead name value for this usage ledger.
-    lead_name: Optional[str] = None
+    # The ID and name for this lead.
+    lead: Optional[UsageLedgerTableRow_lead] = None
     # The phone number associated with this usage ledger.
     phone_number: Optional[str] = None
     # The phone number ID associated with this usage ledger.
@@ -50,10 +49,8 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     status: Optional[UsageRecordStatus] = None
     # The unit price value for this usage ledger.
     unit_price: Optional[float] = None
-    # The user ID associated with this usage ledger.
-    user_id: Optional[str] = None
-    # The user name value for this usage ledger.
-    user_name: Optional[str] = None
+    # The ID and name for this user.
+    user: Optional[UsageLedgerTableRow_user] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UsageLedgerTableRow:
@@ -73,31 +70,34 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         """
         from .billable_unit import BillableUnit
         from .usage_channel import UsageChannel
+        from .usage_ledger_table_row_business import UsageLedgerTableRow_business
+        from .usage_ledger_table_row_lead import UsageLedgerTableRow_lead
+        from .usage_ledger_table_row_user import UsageLedgerTableRow_user
         from .usage_record_status import UsageRecordStatus
 
         from .billable_unit import BillableUnit
         from .usage_channel import UsageChannel
+        from .usage_ledger_table_row_business import UsageLedgerTableRow_business
+        from .usage_ledger_table_row_lead import UsageLedgerTableRow_lead
+        from .usage_ledger_table_row_user import UsageLedgerTableRow_user
         from .usage_record_status import UsageRecordStatus
 
         fields: dict[str, Callable[[Any], None]] = {
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(BillableUnit)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
+            "business": lambda n : setattr(self, 'business', n.get_object_value(UsageLedgerTableRow_business)),
             "channel": lambda n : setattr(self, 'channel', n.get_enum_value(UsageChannel)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isBillable": lambda n : setattr(self, 'is_billable', n.get_bool_value()),
-            "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
-            "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
+            "lead": lambda n : setattr(self, 'lead', n.get_object_value(UsageLedgerTableRow_lead)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
             "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageRecordStatus)),
             "unitPrice": lambda n : setattr(self, 'unit_price', n.get_float_value()),
-            "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
-            "userName": lambda n : setattr(self, 'user_name', n.get_str_value()),
+            "user": lambda n : setattr(self, 'user', n.get_object_value(UsageLedgerTableRow_user)),
         }
         return fields
     
@@ -110,23 +110,20 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("billableUnit", self.billable_unit)
-        writer.write_str_value("businessId", self.business_id)
-        writer.write_str_value("businessName", self.business_name)
+        writer.write_object_value("business", self.business)
         writer.write_enum_value("channel", self.channel)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_float_value("customerChargeAmount", self.customer_charge_amount)
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isBillable", self.is_billable)
-        writer.write_str_value("leadId", self.lead_id)
-        writer.write_str_value("leadName", self.lead_name)
+        writer.write_object_value("lead", self.lead)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
         writer.write_float_value("quantity", self.quantity)
         writer.write_enum_value("status", self.status)
         writer.write_float_value("unitPrice", self.unit_price)
-        writer.write_str_value("userId", self.user_id)
-        writer.write_str_value("userName", self.user_name)
+        writer.write_object_value("user", self.user)
         writer.write_additional_data_value(self.additional_data)
     
 

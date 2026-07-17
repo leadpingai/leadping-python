@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .business_invitation_status import BusinessInvitationStatus
     from .business_user_role import BusinessUserRole
+    from .id_name_pair import IdNamePair
 
 @dataclass
 class BusinessInvitationResponse(AdditionalDataHolder, Parsable):
@@ -19,10 +20,8 @@ class BusinessInvitationResponse(AdditionalDataHolder, Parsable):
 
     # The date and time for the accepted at value on this business invitation.
     accepted_at: Optional[datetime.datetime] = None
-    # The business ID associated with this business invitation.
-    business_id: Optional[str] = None
-    # The business name value for this business invitation.
-    business_name: Optional[str] = None
+    # The ID and name for this business.
+    business: Optional[IdNamePair] = None
     # The date and time for the created at value on this business invitation.
     created_at: Optional[datetime.datetime] = None
     # The email address associated with this business invitation.
@@ -72,14 +71,15 @@ class BusinessInvitationResponse(AdditionalDataHolder, Parsable):
         """
         from .business_invitation_status import BusinessInvitationStatus
         from .business_user_role import BusinessUserRole
+        from .id_name_pair import IdNamePair
 
         from .business_invitation_status import BusinessInvitationStatus
         from .business_user_role import BusinessUserRole
+        from .id_name_pair import IdNamePair
 
         fields: dict[str, Callable[[Any], None]] = {
             "acceptedAt": lambda n : setattr(self, 'accepted_at', n.get_datetime_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
+            "business": lambda n : setattr(self, 'business', n.get_object_value(IdNamePair)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "expiresAt": lambda n : setattr(self, 'expires_at', n.get_datetime_value()),
@@ -107,8 +107,7 @@ class BusinessInvitationResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("acceptedAt", self.accepted_at)
-        writer.write_str_value("businessId", self.business_id)
-        writer.write_str_value("businessName", self.business_name)
+        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("email", self.email)
         writer.write_datetime_value("expiresAt", self.expires_at)

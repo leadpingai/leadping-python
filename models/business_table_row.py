@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .business_table_row_activation_status import BusinessTableRow_activationStatus
     from .business_table_row_billing_plan import BusinessTableRow_billingPlan
+    from .business_table_row_business import BusinessTableRow_business
     from .business_table_row_setup_step import BusinessTableRow_setupStep
     from .business_table_row_status import BusinessTableRow_status
     from .business_table_row_subscription_status import BusinessTableRow_subscriptionStatus
@@ -38,10 +39,8 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     api_key_total_uses: Optional[int] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[BusinessTableRow_billingPlan] = None
-    # The business ID that owns this row when the row represents a child business resource.
-    business_id: Optional[str] = None
-    # The business name that owns this row when the row represents a child business resource.
-    business_name: Optional[str] = None
+    # The ID and name for this business.
+    business: Optional[BusinessTableRow_business] = None
     # Whether this business is enabled.
     enabled: Optional[bool] = None
     # The unique ID for this business.
@@ -72,10 +71,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     ten_dlc_status: Optional[BusinessTableRow_tenDlcStatus] = None
     # The user count for this business.
     user_count: Optional[int] = None
-    # The user ID value for this business.
-    user_id: Optional[str] = None
-    # The user name value for this business.
-    user_name: Optional[str] = None
     # The website URL associated with this business.
     website: Optional[str] = None
     # Defines the supported Website Lifecycle Status values.
@@ -99,6 +94,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         """
         from .business_table_row_activation_status import BusinessTableRow_activationStatus
         from .business_table_row_billing_plan import BusinessTableRow_billingPlan
+        from .business_table_row_business import BusinessTableRow_business
         from .business_table_row_setup_step import BusinessTableRow_setupStep
         from .business_table_row_status import BusinessTableRow_status
         from .business_table_row_subscription_status import BusinessTableRow_subscriptionStatus
@@ -107,6 +103,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
 
         from .business_table_row_activation_status import BusinessTableRow_activationStatus
         from .business_table_row_billing_plan import BusinessTableRow_billingPlan
+        from .business_table_row_business import BusinessTableRow_business
         from .business_table_row_setup_step import BusinessTableRow_setupStep
         from .business_table_row_status import BusinessTableRow_status
         from .business_table_row_subscription_status import BusinessTableRow_subscriptionStatus
@@ -122,8 +119,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessTableRow_billingPlan)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
+            "business": lambda n : setattr(self, 'business', n.get_object_value(BusinessTableRow_business)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "industry": lambda n : setattr(self, 'industry', n.get_str_value()),
@@ -139,8 +135,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(BusinessTableRow_subscriptionStatus)),
             "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(BusinessTableRow_tenDlcStatus)),
             "userCount": lambda n : setattr(self, 'user_count', n.get_int_value()),
-            "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
-            "userName": lambda n : setattr(self, 'user_name', n.get_str_value()),
             "website": lambda n : setattr(self, 'website', n.get_str_value()),
             "websiteStatus": lambda n : setattr(self, 'website_status', n.get_enum_value(BusinessTableRow_websiteStatus)),
         }
@@ -162,8 +156,7 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
         writer.write_enum_value("billingPlan", self.billing_plan)
-        writer.write_str_value("businessId", self.business_id)
-        writer.write_str_value("businessName", self.business_name)
+        writer.write_object_value("business", self.business)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_str_value("industry", self.industry)
@@ -179,8 +172,6 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
         writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
         writer.write_int_value("userCount", self.user_count)
-        writer.write_str_value("userId", self.user_id)
-        writer.write_str_value("userName", self.user_name)
         writer.write_str_value("website", self.website)
         writer.write_enum_value("websiteStatus", self.website_status)
         writer.write_additional_data_value(self.additional_data)
