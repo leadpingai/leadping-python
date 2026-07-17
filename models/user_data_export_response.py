@@ -11,6 +11,9 @@ if TYPE_CHECKING:
 
 @dataclass
 class UserDataExportResponse(AdditionalDataHolder, Parsable):
+    """
+    Response model containing user data export data returned by the Leadping API.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 

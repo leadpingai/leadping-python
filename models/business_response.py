@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .business_response_address import BusinessResponse_address
     from .business_response_billing_address import BusinessResponse_billingAddress
     from .business_response_billing_plan import BusinessResponse_billingPlan
+    from .business_response_billing_state import BusinessResponse_billingState
     from .business_response_compliance_policy import BusinessResponse_compliancePolicy
     from .business_response_ein_document import BusinessResponse_einDocument
     from .business_response_setup_step import BusinessResponse_setupStep
@@ -41,6 +42,8 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     billing_name: Optional[str] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[BusinessResponse_billingPlan] = None
+    # Customer-safe billing state for this business.
+    billing_state: Optional[BusinessResponse_billingState] = None
     # Compliance policy configuration for the business.
     compliance_policy: Optional[BusinessResponse_compliancePolicy] = None
     # The date and time when the entity was created.
@@ -102,6 +105,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_address import BusinessResponse_address
         from .business_response_billing_address import BusinessResponse_billingAddress
         from .business_response_billing_plan import BusinessResponse_billingPlan
+        from .business_response_billing_state import BusinessResponse_billingState
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
         from .business_response_ein_document import BusinessResponse_einDocument
         from .business_response_setup_step import BusinessResponse_setupStep
@@ -115,6 +119,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_address import BusinessResponse_address
         from .business_response_billing_address import BusinessResponse_billingAddress
         from .business_response_billing_plan import BusinessResponse_billingPlan
+        from .business_response_billing_state import BusinessResponse_billingState
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
         from .business_response_ein_document import BusinessResponse_einDocument
         from .business_response_setup_step import BusinessResponse_setupStep
@@ -132,6 +137,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(BusinessResponse_billingAddress)),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessResponse_billingPlan)),
+            "billingState": lambda n : setattr(self, 'billing_state', n.get_object_value(BusinessResponse_billingState)),
             "compliancePolicy": lambda n : setattr(self, 'compliance_policy', n.get_object_value(BusinessResponse_compliancePolicy)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -170,6 +176,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)
+        writer.write_object_value("billingState", self.billing_state)
         writer.write_object_value("compliancePolicy", self.compliance_policy)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)

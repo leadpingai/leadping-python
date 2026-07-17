@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
     """
-    Communication usage associated with this Leadping customer analytics.
+    Represents customer communication usage data exposed by Leadping analytics.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
