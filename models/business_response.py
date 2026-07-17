@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from .business_response_billing_state import BusinessResponse_billingState
     from .business_response_compliance_policy import BusinessResponse_compliancePolicy
     from .business_response_ein_document import BusinessResponse_einDocument
+    from .business_response_setup_status import BusinessResponse_setupStatus
     from .business_response_setup_step import BusinessResponse_setupStep
     from .business_response_site import BusinessResponse_site
     from .business_response_status import BusinessResponse_status
@@ -70,6 +71,8 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     phones: Optional[list[IdNameValue]] = None
     # Alternate business name or DBA shown in Leadping.
     secondary_name: Optional[str] = None
+    # Defines the supported User Setup Status values.
+    setup_status: Optional[BusinessResponse_setupStatus] = None
     # Defines the supported Business Setup Step values.
     setup_step: Optional[BusinessResponse_setupStep] = None
     # Leadping website record connected to this business.
@@ -108,6 +111,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_billing_state import BusinessResponse_billingState
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
         from .business_response_ein_document import BusinessResponse_einDocument
+        from .business_response_setup_status import BusinessResponse_setupStatus
         from .business_response_setup_step import BusinessResponse_setupStep
         from .business_response_site import BusinessResponse_site
         from .business_response_status import BusinessResponse_status
@@ -122,6 +126,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         from .business_response_billing_state import BusinessResponse_billingState
         from .business_response_compliance_policy import BusinessResponse_compliancePolicy
         from .business_response_ein_document import BusinessResponse_einDocument
+        from .business_response_setup_status import BusinessResponse_setupStatus
         from .business_response_setup_step import BusinessResponse_setupStep
         from .business_response_site import BusinessResponse_site
         from .business_response_status import BusinessResponse_status
@@ -151,6 +156,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "phones": lambda n : setattr(self, 'phones', n.get_collection_of_object_values(IdNameValue)),
             "secondaryName": lambda n : setattr(self, 'secondary_name', n.get_str_value()),
+            "setupStatus": lambda n : setattr(self, 'setup_status', n.get_enum_value(BusinessResponse_setupStatus)),
             "setupStep": lambda n : setattr(self, 'setup_step', n.get_enum_value(BusinessResponse_setupStep)),
             "site": lambda n : setattr(self, 'site', n.get_object_value(BusinessResponse_site)),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(BusinessResponse_status)),
@@ -190,6 +196,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("phone", self.phone)
         writer.write_collection_of_object_values("phones", self.phones)
         writer.write_str_value("secondaryName", self.secondary_name)
+        writer.write_enum_value("setupStatus", self.setup_status)
         writer.write_enum_value("setupStep", self.setup_step)
         writer.write_object_value("site", self.site)
         writer.write_enum_value("status", self.status)
