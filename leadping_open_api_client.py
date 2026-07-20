@@ -24,6 +24,7 @@ if TYPE_CHECKING:
     from .events.events_request_builder import EventsRequestBuilder
     from .feedback.feedback_request_builder import FeedbackRequestBuilder
     from .leads.leads_request_builder import LeadsRequestBuilder
+    from .lead_statuses.lead_statuses_request_builder import LeadStatusesRequestBuilder
     from .notifications.notifications_request_builder import NotificationsRequestBuilder
     from .outbound.outbound_request_builder import OutboundRequestBuilder
     from .payment_methods.payment_methods_request_builder import PaymentMethodsRequestBuilder
@@ -135,6 +136,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .feedback.feedback_request_builder import FeedbackRequestBuilder
 
         return FeedbackRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def lead_statuses(self) -> LeadStatusesRequestBuilder:
+        """
+        The leadStatuses property
+        """
+        from .lead_statuses.lead_statuses_request_builder import LeadStatusesRequestBuilder
+
+        return LeadStatusesRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def leads(self) -> LeadsRequestBuilder:

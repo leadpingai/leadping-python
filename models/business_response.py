@@ -45,6 +45,8 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     billing_plan: Optional[BusinessResponse_billingPlan] = None
     # Customer-safe billing state for this business.
     billing_state: Optional[BusinessResponse_billingState] = None
+    # Tax identifier printed on billing documents. This may differ from the business verification EIN.
+    billing_tax_id: Optional[str] = None
     # Compliance policy configuration for the business.
     compliance_policy: Optional[BusinessResponse_compliancePolicy] = None
     # The date and time when the entity was created.
@@ -143,6 +145,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessResponse_billingPlan)),
             "billingState": lambda n : setattr(self, 'billing_state', n.get_object_value(BusinessResponse_billingState)),
+            "billingTaxId": lambda n : setattr(self, 'billing_tax_id', n.get_str_value()),
             "compliancePolicy": lambda n : setattr(self, 'compliance_policy', n.get_object_value(BusinessResponse_compliancePolicy)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -183,6 +186,7 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_object_value("billingState", self.billing_state)
+        writer.write_str_value("billingTaxId", self.billing_tax_id)
         writer.write_object_value("compliancePolicy", self.compliance_policy)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)

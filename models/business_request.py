@@ -28,6 +28,8 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
     billing_address: Optional[BusinessRequest_billingAddress] = None
     # Name used for invoices, receipts, and payment processor billing records.
     billing_name: Optional[str] = None
+    # Tax identifier printed on billing documents. This may differ from the business verification EIN.
+    billing_tax_id: Optional[str] = None
     # Compliance policy configuration for the business.
     compliance_policy: Optional[BusinessRequest_compliancePolicy] = None
     # Human-readable description that explains this business profile request to API users.
@@ -92,6 +94,7 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(BusinessRequest_billingAddress)),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
+            "billingTaxId": lambda n : setattr(self, 'billing_tax_id', n.get_str_value()),
             "compliancePolicy": lambda n : setattr(self, 'compliance_policy', n.get_object_value(BusinessRequest_compliancePolicy)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "ein": lambda n : setattr(self, 'ein', n.get_str_value()),
@@ -121,6 +124,7 @@ class BusinessRequest(AdditionalDataHolder, Parsable):
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingName", self.billing_name)
+        writer.write_str_value("billingTaxId", self.billing_tax_id)
         writer.write_object_value("compliancePolicy", self.compliance_policy)
         writer.write_str_value("description", self.description)
         writer.write_str_value("ein", self.ein)

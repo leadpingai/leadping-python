@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .business_billing_state_dunning import BusinessBillingState_dunning
+    from .business_billing_state_pending_billing_plan import BusinessBillingState_pendingBillingPlan
 
 @dataclass
 class BusinessBillingState(AdditionalDataHolder, Parsable):
@@ -16,6 +17,8 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Date and time when the scheduled billing plan change takes effect.
+    billing_plan_change_effective_at: Optional[datetime.datetime] = None
     # Gets or sets when the active subscription is scheduled to cancel.
     cancel_at: Optional[datetime.datetime] = None
     # Gets or sets the customer-safe payment recovery state for the business.
@@ -28,6 +31,10 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
     last_payment_method_event_at: Optional[datetime.datetime] = None
     # Gets or sets when Leadping last processed a subscription event for the business.
     last_subscription_event_at: Optional[datetime.datetime] = None
+    # Defines the supported Billing Plan values.
+    pending_billing_plan: Optional[BusinessBillingState_pendingBillingPlan] = None
+    # Current plan renewal date.
+    plan_renewal_at: Optional[datetime.datetime] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> BusinessBillingState:
@@ -46,16 +53,21 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .business_billing_state_dunning import BusinessBillingState_dunning
+        from .business_billing_state_pending_billing_plan import BusinessBillingState_pendingBillingPlan
 
         from .business_billing_state_dunning import BusinessBillingState_dunning
+        from .business_billing_state_pending_billing_plan import BusinessBillingState_pendingBillingPlan
 
         fields: dict[str, Callable[[Any], None]] = {
+            "billingPlanChangeEffectiveAt": lambda n : setattr(self, 'billing_plan_change_effective_at', n.get_datetime_value()),
             "cancelAt": lambda n : setattr(self, 'cancel_at', n.get_datetime_value()),
             "dunning": lambda n : setattr(self, 'dunning', n.get_object_value(BusinessBillingState_dunning)),
             "hasPaymentMethod": lambda n : setattr(self, 'has_payment_method', n.get_bool_value()),
             "hasStripeCustomer": lambda n : setattr(self, 'has_stripe_customer', n.get_bool_value()),
             "lastPaymentMethodEventAt": lambda n : setattr(self, 'last_payment_method_event_at', n.get_datetime_value()),
             "lastSubscriptionEventAt": lambda n : setattr(self, 'last_subscription_event_at', n.get_datetime_value()),
+            "pendingBillingPlan": lambda n : setattr(self, 'pending_billing_plan', n.get_enum_value(BusinessBillingState_pendingBillingPlan)),
+            "planRenewalAt": lambda n : setattr(self, 'plan_renewal_at', n.get_datetime_value()),
         }
         return fields
     
@@ -67,12 +79,15 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_datetime_value("billingPlanChangeEffectiveAt", self.billing_plan_change_effective_at)
         writer.write_datetime_value("cancelAt", self.cancel_at)
         writer.write_object_value("dunning", self.dunning)
         writer.write_bool_value("hasPaymentMethod", self.has_payment_method)
         writer.write_bool_value("hasStripeCustomer", self.has_stripe_customer)
         writer.write_datetime_value("lastPaymentMethodEventAt", self.last_payment_method_event_at)
         writer.write_datetime_value("lastSubscriptionEventAt", self.last_subscription_event_at)
+        writer.write_enum_value("pendingBillingPlan", self.pending_billing_plan)
+        writer.write_datetime_value("planRenewalAt", self.plan_renewal_at)
         writer.write_additional_data_value(self.additional_data)
     
 
