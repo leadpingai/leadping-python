@@ -14,54 +14,45 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ...models.stripe_invoice_response import StripeInvoiceResponse
-    from .item.with_invoice_item_request_builder import WithInvoiceItemRequestBuilder
+    from .....models.invoice_pdf_access_response import InvoicePdfAccessResponse
+    from .....models.problem_details import ProblemDetails
 
-class InvoicesRequestBuilder(BaseRequestBuilder):
+class PdfAccessRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /payment-methods/invoices
+    Builds and executes requests for operations under /payment-methods/invoices/{invoiceId}/pdf-access
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new InvoicesRequestBuilder and sets the default values.
+        Instantiates a new PdfAccessRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/payment-methods/invoices", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/payment-methods/invoices/{invoiceId}/pdf-access{?download*}", path_parameters)
     
-    def by_invoice_id(self,invoice_id: str) -> WithInvoiceItemRequestBuilder:
+    async def get(self,request_configuration: Optional[RequestConfiguration[PdfAccessRequestBuilderGetQueryParameters]] = None) -> Optional[InvoicePdfAccessResponse]:
         """
-        Gets an item from the leadping.paymentMethods.invoices.item collection
-        param invoice_id: Unique identifier of the item
-        Returns: WithInvoiceItemRequestBuilder
-        """
-        if invoice_id is None:
-            raise TypeError("invoice_id cannot be null.")
-        from .item.with_invoice_item_request_builder import WithInvoiceItemRequestBuilder
-
-        url_tpl_params = get_path_parameters(self.path_parameters)
-        url_tpl_params["invoiceId"] = invoice_id
-        return WithInvoiceItemRequestBuilder(self.request_adapter, url_tpl_params)
-    
-    async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[StripeInvoiceResponse]]:
-        """
-        Returns the current business's Stripe invoices with their amounts, payment status, billing period, and hosted invoice details.
+        Creates a short-lived URL for viewing or downloading a private invoice PDF.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[list[StripeInvoiceResponse]]
+        Returns: Optional[InvoicePdfAccessResponse]
         """
         request_info = self.to_get_request_information(
             request_configuration
         )
+        from .....models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "404": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ...models.stripe_invoice_response import StripeInvoiceResponse
+        from .....models.invoice_pdf_access_response import InvoicePdfAccessResponse
 
-        return await self.request_adapter.send_collection_async(request_info, StripeInvoiceResponse, None)
+        return await self.request_adapter.send_async(request_info, InvoicePdfAccessResponse, error_mapping)
     
-    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[PdfAccessRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Returns the current business's Stripe invoices with their amounts, payment status, billing period, and hosted invoice details.
+        Creates a short-lived URL for viewing or downloading a private invoice PDF.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -70,18 +61,26 @@ class InvoicesRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def with_url(self,raw_url: str) -> InvoicesRequestBuilder:
+    def with_url(self,raw_url: str) -> PdfAccessRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: InvoicesRequestBuilder
+        Returns: PdfAccessRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return InvoicesRequestBuilder(self.request_adapter, raw_url)
+        return PdfAccessRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class InvoicesRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class PdfAccessRequestBuilderGetQueryParameters():
+        """
+        Creates a short-lived URL for viewing or downloading a private invoice PDF.
+        """
+        download: Optional[bool] = None
+
+    
+    @dataclass
+    class PdfAccessRequestBuilderGetRequestConfiguration(RequestConfiguration[PdfAccessRequestBuilderGetQueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

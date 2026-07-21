@@ -14,32 +14,36 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ....models.problem_details import ProblemDetails
-    from ....models.stripe_payment_method_response import StripePaymentMethodResponse
+    from .....models.business_response import BusinessResponse
+    from .....models.problem_details import ProblemDetails
+    from .....models.ten_dlc_notes_request import TenDlcNotesRequest
 
-class DefaultRequestBuilder(BaseRequestBuilder):
+class NotesRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /payment-methods/{id}/default
+    Builds and executes requests for operations under /businesses/me/10dlc/notes
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new DefaultRequestBuilder and sets the default values.
+        Instantiates a new NotesRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/payment-methods/{id}/default", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/businesses/me/10dlc/notes", path_parameters)
     
-    async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[StripePaymentMethodResponse]:
+    async def put(self,body: TenDlcNotesRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessResponse]:
         """
-        Sets a payment method as the default for the current business's future invoices and billing activity.
+        Updates the shared 10DLC notes for the current business.
+        param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[StripePaymentMethodResponse]
+        Returns: Optional[BusinessResponse]
         """
-        request_info = self.to_post_request_information(
-            request_configuration
+        if body is None:
+            raise TypeError("body cannot be null.")
+        request_info = self.to_put_request_information(
+            body, request_configuration
         )
-        from ....models.problem_details import ProblemDetails
+        from .....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
@@ -47,33 +51,37 @@ class DefaultRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ....models.stripe_payment_method_response import StripePaymentMethodResponse
+        from .....models.business_response import BusinessResponse
 
-        return await self.request_adapter.send_async(request_info, StripePaymentMethodResponse, error_mapping)
+        return await self.request_adapter.send_async(request_info, BusinessResponse, error_mapping)
     
-    def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_put_request_information(self,body: TenDlcNotesRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Sets a payment method as the default for the current business's future invoices and billing activity.
+        Updates the shared 10DLC notes for the current business.
+        param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
-        request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
+        if body is None:
+            raise TypeError("body cannot be null.")
+        request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "application/json")
+        request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     
-    def with_url(self,raw_url: str) -> DefaultRequestBuilder:
+    def with_url(self,raw_url: str) -> NotesRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: DefaultRequestBuilder
+        Returns: NotesRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return DefaultRequestBuilder(self.request_adapter, raw_url)
+        return NotesRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class DefaultRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class NotesRequestBuilderPutRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

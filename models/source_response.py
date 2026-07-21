@@ -24,6 +24,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
+    # Source API key used to authenticate inbound lead delivery to Leadping. Unlike a business API key, this value remains available to authorized source users.
+    api_key: Optional[str] = None
     # Masked preview of the source API key for compact display.
     api_key_preview: Optional[str] = None
     # Business summary connected to this lead source response.
@@ -90,6 +92,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
+            "apiKey": lambda n : setattr(self, 'api_key', n.get_str_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "business": lambda n : setattr(self, 'business', n.get_object_value(SourceResponse_business)),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
@@ -120,6 +123,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
+        writer.write_str_value("apiKey", self.api_key)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_object_value("business", self.business)
         writer.write_bool_value("complianceApproved", self.compliance_approved)

@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.base_request_builder import BaseRequestBuilder
@@ -29,9 +30,9 @@ class MeRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/notifications/me", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/notifications/me{?endAt*,startAt*}", path_parameters)
     
-    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfNotificationTableRow]:
+    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MeRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfNotificationTableRow]:
         """
         Lists current-user notifications with paging, sorting, and filters for operational alerts, announcements, and follow-up updates.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
@@ -56,7 +57,7 @@ class MeRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, PagedResultOfNotificationTableRow, error_mapping)
     
-    def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MeRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Lists current-user notifications with paging, sorting, and filters for operational alerts, announcements, and follow-up updates.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
@@ -82,7 +83,33 @@ class MeRequestBuilder(BaseRequestBuilder):
         return MeRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class MeRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class MeRequestBuilderPostQueryParameters():
+        """
+        Lists current-user notifications with paging, sorting, and filters for operational alerts, announcements, and follow-up updates.
+        """
+        def get_query_parameter(self,original_name: str) -> str:
+            """
+            Maps the query parameters names to their encoded names for the URI template parsing.
+            param original_name: The original query parameter name in the class.
+            Returns: str
+            """
+            if original_name is None:
+                raise TypeError("original_name cannot be null.")
+            if original_name == "end_at":
+                return "endAt"
+            if original_name == "start_at":
+                return "startAt"
+            return original_name
+        
+        # Exclusive end of the created date range.
+        end_at: Optional[datetime.datetime] = None
+
+        # Inclusive beginning of the created date range.
+        start_at: Optional[datetime.datetime] = None
+
+    
+    @dataclass
+    class MeRequestBuilderPostRequestConfiguration(RequestConfiguration[MeRequestBuilderPostQueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

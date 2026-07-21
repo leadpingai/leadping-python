@@ -28,7 +28,7 @@ class NotificationsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> NotificationsItemRequestBuilder:
         """
         Gets an item from the leadping.notifications.item collection
-        param id: The ID of the notification to mark as read.
+        param id: The notification ID.
         Returns: NotificationsItemRequestBuilder
         """
         if id is None:

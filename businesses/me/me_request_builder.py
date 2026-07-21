@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from ...models.business_response import BusinessResponse
     from ...models.problem_details import ProblemDetails
     from .invitations.invitations_request_builder import InvitationsRequestBuilder
+    from .one_zerodlc.one_zerodlc_request_builder import OneZerodlcRequestBuilder
     from .options.options_request_builder import OptionsRequestBuilder
     from .switch.switch_request_builder import SwitchRequestBuilder
     from .users.users_request_builder import UsersRequestBuilder
@@ -58,7 +59,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: BusinessRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessResponse]:
         """
-        Creates a business owned by the current user and selects it as their active business.
+        Creates a business account for the authenticated user, assigns them as its owner, and makes it their active business context.
         param body: Request schema for the Leadping API business profile request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[BusinessResponse]
@@ -117,7 +118,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: BusinessRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Creates a business owned by the current user and selects it as their active business.
+        Creates a business account for the authenticated user, assigns them as its owner, and makes it their active business context.
         param body: Request schema for the Leadping API business profile request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
@@ -163,6 +164,15 @@ class MeRequestBuilder(BaseRequestBuilder):
         from .invitations.invitations_request_builder import InvitationsRequestBuilder
 
         return InvitationsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def one_zerodlc(self) -> OneZerodlcRequestBuilder:
+        """
+        The OneZerodlc property
+        """
+        from .one_zerodlc.one_zerodlc_request_builder import OneZerodlcRequestBuilder
+
+        return OneZerodlcRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def options_path(self) -> OptionsRequestBuilder:

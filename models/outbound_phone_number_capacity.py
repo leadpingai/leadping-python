@@ -15,6 +15,8 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Indicates whether Leadping successfully calculated capacity for this phone number.
+    capacity_available: Optional[bool] = None
     # Current health status for this Leadping outbound phone number capacity.
     health_status: Optional[PhoneNumberOutboundHealthStatus] = None
     # Phone number associated with this Leadping outbound phone number capacity.
@@ -67,6 +69,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         from .phone_number_outbound_health_status import PhoneNumberOutboundHealthStatus
 
         fields: dict[str, Callable[[Any], None]] = {
+            "capacityAvailable": lambda n : setattr(self, 'capacity_available', n.get_bool_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberOutboundHealthStatus)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
@@ -93,6 +96,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_bool_value("capacityAvailable", self.capacity_available)
         writer.write_enum_value("healthStatus", self.health_status)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)

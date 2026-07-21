@@ -16,6 +16,8 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
+    # Source API key used to authenticate inbound lead delivery to Leadping.
+    api_key: Optional[str] = None
     # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
     # Tag names automatically assigned to leads created by this source.
@@ -52,6 +54,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
+            "apiKey": lambda n : setattr(self, 'api_key', n.get_str_value()),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
             "defaultTagNames": lambda n : setattr(self, 'default_tag_names', n.get_collection_of_primitive_values(str)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -73,6 +76,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
+        writer.write_str_value("apiKey", self.api_key)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)
         writer.write_collection_of_primitive_values("defaultTagNames", self.default_tag_names)
         writer.write_str_value("description", self.description)
