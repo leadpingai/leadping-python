@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API phone number readiness status returned to authenticated clients.
+    Response schema for the Leadping API phone number warmup status returned to authenticated clients.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -23,7 +23,7 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     calls_possible: Optional[int] = None
     # Indicates whether this phone number can currently send SMS messages.
     messages_possible: Optional[int] = None
-    # E.164 phone number exposed by this phone number readiness status.
+    # E.164 phone number exposed by this phone number warmup status.
     number: Optional[str] = None
     # Recent SMS opt-out metrics used to evaluate sender health and compliance risk.
     opt_out_metrics: Optional[PhoneNumberOptOutMetricsResponse] = None
@@ -31,7 +31,7 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     outbound_capacity: Optional[PhoneNumberStatusResponse_outboundCapacity] = None
     # Recent workflow events returned for timeline and troubleshooting.
     recent_events: Optional[list[PhoneNumberMessagingEventResponse]] = None
-    # SMS sender warmup status for this phone number.
+    # SMS warmup status for this phone number.
     sms_warmup: Optional[PhoneNumberStatusResponse_smsWarmup] = None
     # Phone number traffic metrics for recent SMS and call activity.
     traffic_metrics: Optional[PhoneNumberTrafficMetricsResponse] = None

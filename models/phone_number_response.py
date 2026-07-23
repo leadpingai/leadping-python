@@ -6,9 +6,9 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .phone_number_readiness import PhoneNumberReadiness
     from .phone_number_response_business import PhoneNumberResponse_business
     from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
-    from .phone_number_warmup import PhoneNumberWarmup
 
 @dataclass
 class PhoneNumberResponse(AdditionalDataHolder, Parsable):
@@ -38,8 +38,8 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     phone_identity_id: Optional[str] = None
     # Routing metadata that connects this phone number to teams, campaigns, and sources.
     routing: Optional[PhoneNumberRoutingMetadata] = None
-    # SMS and voice warmup state for this phone number.
-    warmup: Optional[PhoneNumberWarmup] = None
+    # SMS and call warmup for this phone number.
+    warmup: Optional[PhoneNumberReadiness] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberResponse:
@@ -57,13 +57,13 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .phone_number_readiness import PhoneNumberReadiness
         from .phone_number_response_business import PhoneNumberResponse_business
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
-        from .phone_number_warmup import PhoneNumberWarmup
 
+        from .phone_number_readiness import PhoneNumberReadiness
         from .phone_number_response_business import PhoneNumberResponse_business
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
-        from .phone_number_warmup import PhoneNumberWarmup
 
         fields: dict[str, Callable[[Any], None]] = {
             "business": lambda n : setattr(self, 'business', n.get_object_value(PhoneNumberResponse_business)),
@@ -76,7 +76,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "routing": lambda n : setattr(self, 'routing', n.get_object_value(PhoneNumberRoutingMetadata)),
-            "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberWarmup)),
+            "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberReadiness)),
         }
         return fields
     

@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
@@ -23,6 +24,10 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     phone_number: Optional[str] = None
     # Unique identifier of the phone number associated with this Leadping outbound phone number capacity.
     phone_number_id: Optional[str] = None
+    # Next midnight Eastern time, when SMS daily capacity resets.
+    sms_daily_resets_at: Optional[datetime.datetime] = None
+    # Start of the next Eastern time hour, when SMS hourly capacity resets.
+    sms_hourly_resets_at: Optional[datetime.datetime] = None
     # Number of SMS limit this hour represented by this Leadping outbound phone number capacity.
     sms_limit_this_hour: Optional[int] = None
     # Number of SMS limit today represented by this Leadping outbound phone number capacity.
@@ -35,6 +40,10 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     sms_used_this_hour: Optional[int] = None
     # SMS used today for the applicable messaging or voice capacity window.
     sms_used_today: Optional[int] = None
+    # Next midnight Eastern time, when voice daily capacity resets.
+    voice_daily_resets_at: Optional[datetime.datetime] = None
+    # Start of the next Eastern time hour, when voice hourly capacity resets.
+    voice_hourly_resets_at: Optional[datetime.datetime] = None
     # Voice limit this hour associated with this Leadping outbound phone number capacity.
     voice_limit_this_hour: Optional[int] = None
     # Voice limit today associated with this Leadping outbound phone number capacity.
@@ -73,12 +82,16 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberOutboundHealthStatus)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
+            "smsDailyResetsAt": lambda n : setattr(self, 'sms_daily_resets_at', n.get_datetime_value()),
+            "smsHourlyResetsAt": lambda n : setattr(self, 'sms_hourly_resets_at', n.get_datetime_value()),
             "smsLimitThisHour": lambda n : setattr(self, 'sms_limit_this_hour', n.get_int_value()),
             "smsLimitToday": lambda n : setattr(self, 'sms_limit_today', n.get_int_value()),
             "smsRemainingThisHour": lambda n : setattr(self, 'sms_remaining_this_hour', n.get_int_value()),
             "smsRemainingToday": lambda n : setattr(self, 'sms_remaining_today', n.get_int_value()),
             "smsUsedThisHour": lambda n : setattr(self, 'sms_used_this_hour', n.get_int_value()),
             "smsUsedToday": lambda n : setattr(self, 'sms_used_today', n.get_int_value()),
+            "voiceDailyResetsAt": lambda n : setattr(self, 'voice_daily_resets_at', n.get_datetime_value()),
+            "voiceHourlyResetsAt": lambda n : setattr(self, 'voice_hourly_resets_at', n.get_datetime_value()),
             "voiceLimitThisHour": lambda n : setattr(self, 'voice_limit_this_hour', n.get_int_value()),
             "voiceLimitToday": lambda n : setattr(self, 'voice_limit_today', n.get_int_value()),
             "voiceRemainingThisHour": lambda n : setattr(self, 'voice_remaining_this_hour', n.get_int_value()),
@@ -100,12 +113,16 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         writer.write_enum_value("healthStatus", self.health_status)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
+        writer.write_datetime_value("smsDailyResetsAt", self.sms_daily_resets_at)
+        writer.write_datetime_value("smsHourlyResetsAt", self.sms_hourly_resets_at)
         writer.write_int_value("smsLimitThisHour", self.sms_limit_this_hour)
         writer.write_int_value("smsLimitToday", self.sms_limit_today)
         writer.write_int_value("smsRemainingThisHour", self.sms_remaining_this_hour)
         writer.write_int_value("smsRemainingToday", self.sms_remaining_today)
         writer.write_int_value("smsUsedThisHour", self.sms_used_this_hour)
         writer.write_int_value("smsUsedToday", self.sms_used_today)
+        writer.write_datetime_value("voiceDailyResetsAt", self.voice_daily_resets_at)
+        writer.write_datetime_value("voiceHourlyResetsAt", self.voice_hourly_resets_at)
         writer.write_int_value("voiceLimitThisHour", self.voice_limit_this_hour)
         writer.write_int_value("voiceLimitToday", self.voice_limit_today)
         writer.write_int_value("voiceRemainingThisHour", self.voice_remaining_this_hour)

@@ -33,7 +33,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[StatusRequestBuilderGetQueryParameters]] = None) -> Optional[PhoneNumberStatusResponse]:
         """
-        Returns provider and Leadping status for a phone number, including messaging readiness, assignments, and verification state.
+        Returns provider and Leadping status for a phone number, including messaging warmup, assignments, and verification state.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneNumberStatusResponse]
         """
@@ -55,7 +55,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[StatusRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Returns provider and Leadping status for a phone number, including messaging readiness, assignments, and verification state.
+        Returns provider and Leadping status for a phone number, including messaging warmup, assignments, and verification state.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -77,7 +77,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     @dataclass
     class StatusRequestBuilderGetQueryParameters():
         """
-        Returns provider and Leadping status for a phone number, including messaging readiness, assignments, and verification state.
+        Returns provider and Leadping status for a phone number, including messaging warmup, assignments, and verification state.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """

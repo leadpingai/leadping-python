@@ -24,7 +24,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     display_number: Optional[str] = None
     # Short label describing the health state for display in dashboards.
     health_label: Optional[str] = None
-    # Defines the supported SMS Warmup Health State values.
+    # Defines the supported SMS readiness health assessments.
     health_status: Optional[EligibleOutgoingNumberResponse_healthStatus] = None
     # Warning text that explains a potential health or readiness issue.
     health_warning: Optional[str] = None

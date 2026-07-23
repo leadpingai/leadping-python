@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .business_switch_option_activation_status import BusinessSwitchOption_activationStatus
     from .business_switch_option_business_status import BusinessSwitchOption_businessStatus
+    from .business_switch_option_ten_dlc_status import BusinessSwitchOption_tenDlcStatus
     from .business_user_role import BusinessUserRole
 
 @dataclass
@@ -40,6 +41,8 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
     ready_for_customer_traffic: Optional[bool] = None
     # The role value for this business switch option.
     role: Optional[BusinessUserRole] = None
+    # Defines the supported 10DLC Application Status values.
+    ten_dlc_status: Optional[BusinessSwitchOption_tenDlcStatus] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> BusinessSwitchOption:
@@ -59,10 +62,12 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
         """
         from .business_switch_option_activation_status import BusinessSwitchOption_activationStatus
         from .business_switch_option_business_status import BusinessSwitchOption_businessStatus
+        from .business_switch_option_ten_dlc_status import BusinessSwitchOption_tenDlcStatus
         from .business_user_role import BusinessUserRole
 
         from .business_switch_option_activation_status import BusinessSwitchOption_activationStatus
         from .business_switch_option_business_status import BusinessSwitchOption_businessStatus
+        from .business_switch_option_ten_dlc_status import BusinessSwitchOption_tenDlcStatus
         from .business_user_role import BusinessUserRole
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -77,6 +82,7 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
             "needsAdminReview": lambda n : setattr(self, 'needs_admin_review', n.get_bool_value()),
             "readyForCustomerTraffic": lambda n : setattr(self, 'ready_for_customer_traffic', n.get_bool_value()),
             "role": lambda n : setattr(self, 'role', n.get_enum_value(BusinessUserRole)),
+            "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(BusinessSwitchOption_tenDlcStatus)),
         }
         return fields
     
@@ -99,6 +105,7 @@ class BusinessSwitchOption(AdditionalDataHolder, Parsable):
         writer.write_bool_value("needsAdminReview", self.needs_admin_review)
         writer.write_bool_value("readyForCustomerTraffic", self.ready_for_customer_traffic)
         writer.write_enum_value("role", self.role)
+        writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
         writer.write_additional_data_value(self.additional_data)
     
 

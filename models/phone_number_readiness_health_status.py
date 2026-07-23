@@ -1,6 +1,6 @@
 from enum import Enum
 
-class OutgoingNumberSelectionResponse_healthStatus(str, Enum):
+class PhoneNumberReadiness_healthStatus(str, Enum):
     NotEvaluated = "Not Evaluated",
     Evaluating = "Evaluating",
     Healthy = "Healthy",

@@ -5,14 +5,14 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .sms_warmup_status_response import SmsWarmupStatusResponse
+    from .sms_readiness_status_response import SmsReadinessStatusResponse
 
-from .sms_warmup_status_response import SmsWarmupStatusResponse
+from .sms_readiness_status_response import SmsReadinessStatusResponse
 
 @dataclass
-class PhoneNumberStatusResponse_smsWarmup(SmsWarmupStatusResponse, Parsable):
+class PhoneNumberStatusResponse_smsWarmup(SmsReadinessStatusResponse, Parsable):
     """
-    SMS sender warmup status for this phone number.
+    SMS warmup status for this phone number.
     """
     
     @staticmethod
@@ -31,9 +31,9 @@ class PhoneNumberStatusResponse_smsWarmup(SmsWarmupStatusResponse, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .sms_warmup_status_response import SmsWarmupStatusResponse
+        from .sms_readiness_status_response import SmsReadinessStatusResponse
 
-        from .sms_warmup_status_response import SmsWarmupStatusResponse
+        from .sms_readiness_status_response import SmsReadinessStatusResponse
 
         fields: dict[str, Callable[[Any], None]] = {
         }

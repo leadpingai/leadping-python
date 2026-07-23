@@ -5,7 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .phone_number_warmup import PhoneNumberWarmup
+    from .phone_number_readiness import PhoneNumberReadiness
 
 @dataclass
 class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
@@ -23,7 +23,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # Unique Leadping identifier for this phone number table row.
     id: Optional[str] = None
-    # Display name for this phone number table row in the Leadping API.
+    # Optional display label for this phone number table row in the Leadping API.
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number table row.
     number: Optional[str] = None
@@ -40,7 +40,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     # Indicates whether voice calling is ready for this business or phone number.
     voice_ready: Optional[bool] = None
     # Warmup state for this phone number.
-    warmup: Optional[PhoneNumberWarmup] = None
+    warmup: Optional[PhoneNumberReadiness] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberTableRow:
@@ -58,9 +58,9 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .phone_number_warmup import PhoneNumberWarmup
+        from .phone_number_readiness import PhoneNumberReadiness
 
-        from .phone_number_warmup import PhoneNumberWarmup
+        from .phone_number_readiness import PhoneNumberReadiness
 
         fields: dict[str, Callable[[Any], None]] = {
             "business": lambda n : setattr(self, 'business', n.get_str_value()),
@@ -75,7 +75,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
             "tenDlcCampaignStatus": lambda n : setattr(self, 'ten_dlc_campaign_status', n.get_str_value()),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
             "voiceReady": lambda n : setattr(self, 'voice_ready', n.get_bool_value()),
-            "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberWarmup)),
+            "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberReadiness)),
         }
         return fields
     
