@@ -45,7 +45,7 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusResponse]:
         """
-        Updates the name, color, and display order of a lead status owned by the current business.
+        Updates the name, color, and display order of a lead status owned by the current business so pipeline stages remain clear and consistently organized.
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadStatusResponse]
@@ -74,7 +74,7 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates the name, color, and display order of a lead status owned by the current business.
+        Updates the name, color, and display order of a lead status owned by the current business so pipeline stages remain clear and consistently organized.
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
