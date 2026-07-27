@@ -84,6 +84,8 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
     telephony_ready_at: Optional[datetime.datetime] = None
     # The current telephony status for this business activation state.
     telephony_status: Optional[ActivationTelephonyStatus] = None
+    # Identifier of the first-class 10DLC application entity for this business.
+    ten_dlc_application_id: Optional[str] = None
     # The 10DLC draft value for this business activation state.
     ten_dlc_draft: Optional[BusinessActivationState_tenDlcDraft] = None
     # The current 10DLC status for this business activation state.
@@ -167,6 +169,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
             "telephonyProvisioningStartedAt": lambda n : setattr(self, 'telephony_provisioning_started_at', n.get_datetime_value()),
             "telephonyReadyAt": lambda n : setattr(self, 'telephony_ready_at', n.get_datetime_value()),
             "telephonyStatus": lambda n : setattr(self, 'telephony_status', n.get_enum_value(ActivationTelephonyStatus)),
+            "tenDlcApplicationId": lambda n : setattr(self, 'ten_dlc_application_id', n.get_str_value()),
             "tenDlcDraft": lambda n : setattr(self, 'ten_dlc_draft', n.get_object_value(BusinessActivationState_tenDlcDraft)),
             "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(TenDlcApplicationStatus)),
             "updatedAt": lambda n : setattr(self, 'updated_at', n.get_datetime_value()),
@@ -213,6 +216,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("telephonyProvisioningStartedAt", self.telephony_provisioning_started_at)
         writer.write_datetime_value("telephonyReadyAt", self.telephony_ready_at)
         writer.write_enum_value("telephonyStatus", self.telephony_status)
+        writer.write_str_value("tenDlcApplicationId", self.ten_dlc_application_id)
         writer.write_object_value("tenDlcDraft", self.ten_dlc_draft)
         writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
         writer.write_datetime_value("updatedAt", self.updated_at)

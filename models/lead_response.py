@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .lead_metadata import LeadMetadata
     from .lead_profile import LeadProfile
     from .lead_response_current_disposition import LeadResponse_currentDisposition
+    from .lead_response_phone_identity import LeadResponse_phoneIdentity
     from .tag_summary import TagSummary
 
 @dataclass
@@ -46,6 +47,8 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     metadata: Optional[LeadMetadata] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
+    # Canonical phone identity and provider lookup details for this lead.
+    phone_identity: Optional[LeadResponse_phoneIdentity] = None
     # Tags currently attached to this lead, source, or record.
     tags: Optional[list[TagSummary]] = None
     
@@ -69,12 +72,14 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
         from .lead_response_current_disposition import LeadResponse_currentDisposition
+        from .lead_response_phone_identity import LeadResponse_phoneIdentity
         from .tag_summary import TagSummary
 
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
         from .lead_response_current_disposition import LeadResponse_currentDisposition
+        from .lead_response_phone_identity import LeadResponse_phoneIdentity
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -91,6 +96,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "metadata": lambda n : setattr(self, 'metadata', n.get_object_value(LeadMetadata)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
+            "phoneIdentity": lambda n : setattr(self, 'phone_identity', n.get_object_value(LeadResponse_phoneIdentity)),
             "tags": lambda n : setattr(self, 'tags', n.get_collection_of_object_values(TagSummary)),
         }
         return fields
@@ -116,6 +122,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_object_value("metadata", self.metadata)
         writer.write_datetime_value("modifiedAt", self.modified_at)
+        writer.write_object_value("phoneIdentity", self.phone_identity)
         writer.write_collection_of_object_values("tags", self.tags)
         writer.write_additional_data_value(self.additional_data)
     

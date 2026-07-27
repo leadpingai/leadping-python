@@ -20,6 +20,8 @@ class PhoneNumberRoutingMetadata(AdditionalDataHolder, Parsable):
     source_id: Optional[str] = None
     # Team ID used to route calls and messages for this phone number.
     team_id: Optional[str] = None
+    # Leadping 10DLC application entity associated with this phone number.
+    ten_dlc_application_id: Optional[str] = None
     # Indicates whether the phone number can be used for voice calls.
     voice_enabled: Optional[bool] = None
     
@@ -44,6 +46,7 @@ class PhoneNumberRoutingMetadata(AdditionalDataHolder, Parsable):
             "smsEnabled": lambda n : setattr(self, 'sms_enabled', n.get_bool_value()),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "teamId": lambda n : setattr(self, 'team_id', n.get_str_value()),
+            "tenDlcApplicationId": lambda n : setattr(self, 'ten_dlc_application_id', n.get_str_value()),
             "voiceEnabled": lambda n : setattr(self, 'voice_enabled', n.get_bool_value()),
         }
         return fields
@@ -60,6 +63,7 @@ class PhoneNumberRoutingMetadata(AdditionalDataHolder, Parsable):
         writer.write_bool_value("smsEnabled", self.sms_enabled)
         writer.write_str_value("sourceId", self.source_id)
         writer.write_str_value("teamId", self.team_id)
+        writer.write_str_value("tenDlcApplicationId", self.ten_dlc_application_id)
         writer.write_bool_value("voiceEnabled", self.voice_enabled)
         writer.write_additional_data_value(self.additional_data)
     

@@ -65,6 +65,8 @@ class UserResponse(AdditionalDataHolder, Parsable):
     phone: Optional[str] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[UserResponse_subscriptionStatus] = None
+    # IANA time zone identifier used when displaying dates and times for this user.
+    time_zone_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UserResponse:
@@ -122,6 +124,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
             "personalDataDeletionStatus": lambda n : setattr(self, 'personal_data_deletion_status', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(UserResponse_subscriptionStatus)),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
         }
         return fields
     
@@ -154,6 +157,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("personalDataDeletionStatus", self.personal_data_deletion_status)
         writer.write_str_value("phone", self.phone)
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_additional_data_value(self.additional_data)
     
 

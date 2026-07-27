@@ -41,6 +41,8 @@ class UserRequest(AdditionalDataHolder, Parsable):
     notification_preferences: Optional[UserRequest_notificationPreferences] = None
     # Phone details for the lead, user, or business represented by this user profile request.
     phone: Optional[str] = None
+    # IANA time zone identifier used when displaying dates and times for this user.
+    time_zone_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UserRequest:
@@ -82,6 +84,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "notificationPreferences": lambda n : setattr(self, 'notification_preferences', n.get_object_value(UserRequest_notificationPreferences)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
         }
         return fields
     
@@ -104,6 +107,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("name", self.name)
         writer.write_object_value("notificationPreferences", self.notification_preferences)
         writer.write_str_value("phone", self.phone)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_additional_data_value(self.additional_data)
     
 

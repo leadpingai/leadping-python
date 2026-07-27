@@ -5,6 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .phone_number_readiness_call_stage import PhoneNumberReadiness_callStage
     from .phone_number_readiness_health_status import PhoneNumberReadiness_healthStatus
     from .phone_number_readiness_state import PhoneNumberReadiness_state
 
@@ -16,6 +17,8 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Defines the supported voice call warmup stages for a Leadping-managed phone number.
+    call_stage: Optional[PhoneNumberReadiness_callStage] = None
     # Indicates whether phone number warmup is enabled in Leadping.
     enabled: Optional[bool] = None
     # Current warmup health score used to assess phone number warmup.
@@ -43,13 +46,16 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .phone_number_readiness_call_stage import PhoneNumberReadiness_callStage
         from .phone_number_readiness_health_status import PhoneNumberReadiness_healthStatus
         from .phone_number_readiness_state import PhoneNumberReadiness_state
 
+        from .phone_number_readiness_call_stage import PhoneNumberReadiness_callStage
         from .phone_number_readiness_health_status import PhoneNumberReadiness_healthStatus
         from .phone_number_readiness_state import PhoneNumberReadiness_state
 
         fields: dict[str, Callable[[Any], None]] = {
+            "callStage": lambda n : setattr(self, 'call_stage', n.get_enum_value(PhoneNumberReadiness_callStage)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "healthScore": lambda n : setattr(self, 'health_score', n.get_int_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberReadiness_healthStatus)),
@@ -66,6 +72,7 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_enum_value("callStage", self.call_stage)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_int_value("healthScore", self.health_score)
         writer.write_enum_value("healthStatus", self.health_status)

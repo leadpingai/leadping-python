@@ -21,6 +21,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
 
     # Display name for the person or system that created this event timeline table row.
     actor_display_name: Optional[str] = None
+    # Email address for the person who created this event timeline table row.
+    actor_email: Optional[str] = None
     # User ID for the person or system that created this event timeline table row.
     actor_user_id: Optional[str] = None
     # Billing state for this communication, charge, or transaction.
@@ -136,6 +138,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
+            "actorEmail": lambda n : setattr(self, 'actor_email', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
@@ -191,6 +194,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actorDisplayName", self.actor_display_name)
+        writer.write_str_value("actorEmail", self.actor_email)
         writer.write_str_value("actorUserId", self.actor_user_id)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
