@@ -17,7 +17,6 @@ if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from ...models.user_request import UserRequest
     from ...models.user_response import UserResponse
-    from .last_login.last_login_request_builder import LastLoginRequestBuilder
     from .paymentmethod.paymentmethod_request_builder import PaymentmethodRequestBuilder
 
 class MeRequestBuilder(BaseRequestBuilder):
@@ -113,15 +112,6 @@ class MeRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return MeRequestBuilder(self.request_adapter, raw_url)
-    
-    @property
-    def last_login(self) -> LastLoginRequestBuilder:
-        """
-        The lastLogin property
-        """
-        from .last_login.last_login_request_builder import LastLoginRequestBuilder
-
-        return LastLoginRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def paymentmethod(self) -> PaymentmethodRequestBuilder:

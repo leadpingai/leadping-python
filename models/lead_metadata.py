@@ -26,6 +26,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     compliance_status: Optional[str] = None
     # UTC timestamp when this lead attribution metadata was created.
     created_at: Optional[datetime.datetime] = None
+    # Direct-post price supplied by the lead source during intake.
+    direct_post_price: Optional[float] = None
     # External system identifier used to reconcile this lead attribution metadata across integrations.
     external_id: Optional[str] = None
     # Bulk import batch ID that created or updated this lead.
@@ -38,6 +40,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     landing_page: Optional[str] = None
     # System or workflow that created this event.
     origin: Optional[str] = None
+    # Lead price or transaction price supplied to the Leadping API.
+    price: Optional[float] = None
     # Product or offer associated with the lead or source.
     product: Optional[str] = None
     # Publisher ID supplied by the lead source for attribution.
@@ -62,6 +66,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     source_metadata: Optional[LeadMetadata_sourceMetadata] = None
     # Affiliate or publisher sub ID captured for lead attribution.
     sub_id: Optional[str] = None
+    # UTC timestamp when Leadping last successfully validated the TrustedForm certificate URL.
+    trusted_form_checked_at: Optional[datetime.datetime] = None
     # TrustedForm certificate URL used as proof of consumer consent.
     trusted_form_url: Optional[str] = None
     # Browser or client user agent captured when this lead attribution metadata was submitted.
@@ -107,12 +113,14 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "complianceBlockedReason": lambda n : setattr(self, 'compliance_blocked_reason', n.get_str_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
             "importBatchId": lambda n : setattr(self, 'import_batch_id', n.get_str_value()),
             "ipAddress": lambda n : setattr(self, 'ip_address', n.get_str_value()),
             "isImported": lambda n : setattr(self, 'is_imported', n.get_bool_value()),
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
             "origin": lambda n : setattr(self, 'origin', n.get_str_value()),
+            "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "product": lambda n : setattr(self, 'product', n.get_str_value()),
             "pubId": lambda n : setattr(self, 'pub_id', n.get_str_value()),
             "referrer": lambda n : setattr(self, 'referrer', n.get_str_value()),
@@ -125,6 +133,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "smsOptedOut": lambda n : setattr(self, 'sms_opted_out', n.get_bool_value()),
             "sourceMetadata": lambda n : setattr(self, 'source_metadata', n.get_object_value(LeadMetadata_sourceMetadata)),
             "subId": lambda n : setattr(self, 'sub_id', n.get_str_value()),
+            "trustedFormCheckedAt": lambda n : setattr(self, 'trusted_form_checked_at', n.get_datetime_value()),
             "trustedFormUrl": lambda n : setattr(self, 'trusted_form_url', n.get_str_value()),
             "userAgent": lambda n : setattr(self, 'user_agent', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
@@ -150,12 +159,14 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("complianceBlockedReason", self.compliance_blocked_reason)
         writer.write_str_value("complianceStatus", self.compliance_status)
         writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("externalId", self.external_id)
         writer.write_str_value("importBatchId", self.import_batch_id)
         writer.write_str_value("ipAddress", self.ip_address)
         writer.write_bool_value("isImported", self.is_imported)
         writer.write_str_value("landingPage", self.landing_page)
         writer.write_str_value("origin", self.origin)
+        writer.write_float_value("price", self.price)
         writer.write_str_value("product", self.product)
         writer.write_str_value("pubId", self.pub_id)
         writer.write_str_value("referrer", self.referrer)
@@ -168,6 +179,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_bool_value("smsOptedOut", self.sms_opted_out)
         writer.write_object_value("sourceMetadata", self.source_metadata)
         writer.write_str_value("subId", self.sub_id)
+        writer.write_datetime_value("trustedFormCheckedAt", self.trusted_form_checked_at)
         writer.write_str_value("trustedFormUrl", self.trusted_form_url)
         writer.write_str_value("userAgent", self.user_agent)
         writer.write_str_value("userId", self.user_id)

@@ -34,7 +34,7 @@ class NotesRequestBuilder(BaseRequestBuilder):
     async def put(self,body: TenDlcNotesRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[BusinessResponse]:
         """
         Updates the shared 10DLC registration notes for the current business, keeping carrier review context and messaging compliance details current.
-        param body: The request body
+        param body: Updates the internal notes associated with a 10DLC application.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[BusinessResponse]
         """
@@ -58,7 +58,7 @@ class NotesRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: TenDlcNotesRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates the shared 10DLC registration notes for the current business, keeping carrier review context and messaging compliance details current.
-        param body: The request body
+        param body: Updates the internal notes associated with a 10DLC application.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

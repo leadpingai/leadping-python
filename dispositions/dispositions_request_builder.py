@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ..models.disposition_request import DispositionRequest
     from ..models.disposition_response import DispositionResponse
     from ..models.problem_details import ProblemDetails
+    from .all.all_request_builder import AllRequestBuilder
     from .item.dispositions_item_request_builder import DispositionsItemRequestBuilder
     from .lead.lead_request_builder import LeadRequestBuilder
 
@@ -96,6 +97,15 @@ class DispositionsRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return DispositionsRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def all(self) -> AllRequestBuilder:
+        """
+        The all property
+        """
+        from .all.all_request_builder import AllRequestBuilder
+
+        return AllRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def lead(self) -> LeadRequestBuilder:

@@ -38,6 +38,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     is_unread: Optional[bool] = None
     # UTC timestamp when the most recent conversation event occurred.
     last_event_at: Optional[datetime.datetime] = None
+    # Indicates that the most recent conversation activity is an internal note.
+    last_event_is_internal_note: Optional[bool] = None
     # Last name of the lead, user, or contact represented by this conversation response.
     last_name: Optional[str] = None
     # Most recent message preview shown for the conversation.
@@ -92,6 +94,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "isUnread": lambda n : setattr(self, 'is_unread', n.get_bool_value()),
             "lastEventAt": lambda n : setattr(self, 'last_event_at', n.get_datetime_value()),
+            "lastEventIsInternalNote": lambda n : setattr(self, 'last_event_is_internal_note', n.get_bool_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "lastSnippet": lambda n : setattr(self, 'last_snippet', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
@@ -122,6 +125,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_bool_value("isUnread", self.is_unread)
         writer.write_datetime_value("lastEventAt", self.last_event_at)
+        writer.write_bool_value("lastEventIsInternalNote", self.last_event_is_internal_note)
         writer.write_str_value("lastName", self.last_name)
         writer.write_str_value("lastSnippet", self.last_snippet)
         writer.write_str_value("leadId", self.lead_id)

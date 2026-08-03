@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .item.with_sms_event_item_request_builder import WithSmsEventItemRequestBuilder
+    from .media.media_request_builder import MediaRequestBuilder
     from .send.send_request_builder import SendRequestBuilder
 
 class SmsRequestBuilder(BaseRequestBuilder):
@@ -35,6 +36,15 @@ class SmsRequestBuilder(BaseRequestBuilder):
         url_tpl_params = get_path_parameters(self.path_parameters)
         url_tpl_params["smsEventId"] = sms_event_id
         return WithSmsEventItemRequestBuilder(self.request_adapter, url_tpl_params)
+    
+    @property
+    def media(self) -> MediaRequestBuilder:
+        """
+        The media property
+        """
+        from .media.media_request_builder import MediaRequestBuilder
+
+        return MediaRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def send(self) -> SendRequestBuilder:

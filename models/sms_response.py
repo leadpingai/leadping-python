@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .message_media_attachment import MessageMediaAttachment
     from .sms_response_selection_reason import SmsResponse_selectionReason
     from .sms_response_status import SmsResponse_status
     from .sms_response_traffic_type import SmsResponse_trafficType
@@ -18,6 +19,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Monetary amount billed for this Leadping communication or transaction.
+    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -50,6 +53,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Lead ID associated with the SMS conversation or outreach attempt.
     lead_id: Optional[str] = None
+    # Media attached to this message. A non-empty collection identifies an MMS message.
+    media: Optional[list[MessageMediaAttachment]] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping will retry this SMS message.
@@ -103,15 +108,18 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .message_media_attachment import MessageMediaAttachment
         from .sms_response_selection_reason import SmsResponse_selectionReason
         from .sms_response_status import SmsResponse_status
         from .sms_response_traffic_type import SmsResponse_trafficType
 
+        from .message_media_attachment import MessageMediaAttachment
         from .sms_response_selection_reason import SmsResponse_selectionReason
         from .sms_response_status import SmsResponse_status
         from .sms_response_traffic_type import SmsResponse_trafficType
 
         fields: dict[str, Callable[[Any], None]] = {
+            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
@@ -128,6 +136,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
+            "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
@@ -157,6 +166,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("campaignId", self.campaign_id)
@@ -173,6 +183,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_str_value("leadId", self.lead_id)
+        writer.write_collection_of_object_values("media", self.media)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)

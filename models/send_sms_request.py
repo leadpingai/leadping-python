@@ -19,6 +19,8 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
     conversation_id: Optional[str] = None
     # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
+    # Public HTTPS media URLs to attach. Supplying at least one URL sends the message as MMS.
+    media_urls: Optional[list[str]] = None
     # Idempotency key used to prevent duplicate outbound delivery.
     outbound_idempotency_key: Optional[str] = None
     # UTC timestamp when Leadping should send the SMS message.
@@ -52,6 +54,7 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
+            "mediaUrls": lambda n : setattr(self, 'media_urls', n.get_collection_of_primitive_values(str)),
             "outboundIdempotencyKey": lambda n : setattr(self, 'outbound_idempotency_key', n.get_str_value()),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
             "smsEventId": lambda n : setattr(self, 'sms_event_id', n.get_str_value()),
@@ -72,6 +75,7 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("campaignId", self.campaign_id)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
+        writer.write_collection_of_primitive_values("mediaUrls", self.media_urls)
         writer.write_str_value("outboundIdempotencyKey", self.outbound_idempotency_key)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)
         writer.write_str_value("smsEventId", self.sms_event_id)

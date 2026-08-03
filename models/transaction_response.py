@@ -6,6 +6,8 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .transaction_response_billable_unit import TransactionResponse_billableUnit
+    from .transaction_response_billing_channel import TransactionResponse_billingChannel
     from .transaction_response_business import TransactionResponse_business
     from .transaction_response_lead import TransactionResponse_lead
     from .transaction_status import TransactionStatus
@@ -21,12 +23,20 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
 
     # Monetary amount for this billing transaction or wallet operation.
     amount: Optional[float] = None
+    # Defines the supported Billable Unit values.
+    billable_unit: Optional[TransactionResponse_billableUnit] = None
+    # The billedAmount property
+    billed_amount: Optional[float] = None
+    # Defines the supported Usage Channel values.
+    billing_channel: Optional[TransactionResponse_billingChannel] = None
     # The ID and name for this business.
     business: Optional[TransactionResponse_business] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction response to API users.
     description: Optional[str] = None
+    # Payment gateway fee amount charged for the wallet transaction.
+    gateway_fee_amount: Optional[float] = None
     # Payment gateway status returned for this transaction.
     gateway_status: Optional[str] = None
     # The unique identifier for the entity.
@@ -41,6 +51,8 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     notes: Optional[str] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
+    # Leadping platform fee amount included in the transaction.
+    platform_fee_amount: Optional[float] = None
     # Processing status for this wallet transaction.
     transaction_status: Optional[TransactionStatus] = None
     # Debit or credit classification for this wallet transaction.
@@ -62,11 +74,15 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .transaction_response_billable_unit import TransactionResponse_billableUnit
+        from .transaction_response_billing_channel import TransactionResponse_billingChannel
         from .transaction_response_business import TransactionResponse_business
         from .transaction_response_lead import TransactionResponse_lead
         from .transaction_status import TransactionStatus
         from .transaction_type import TransactionType
 
+        from .transaction_response_billable_unit import TransactionResponse_billableUnit
+        from .transaction_response_billing_channel import TransactionResponse_billingChannel
         from .transaction_response_business import TransactionResponse_business
         from .transaction_response_lead import TransactionResponse_lead
         from .transaction_status import TransactionStatus
@@ -74,9 +90,13 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "amount": lambda n : setattr(self, 'amount', n.get_float_value()),
+            "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(TransactionResponse_billableUnit)),
+            "billedAmount": lambda n : setattr(self, 'billed_amount', n.get_float_value()),
+            "billingChannel": lambda n : setattr(self, 'billing_channel', n.get_enum_value(TransactionResponse_billingChannel)),
             "business": lambda n : setattr(self, 'business', n.get_object_value(TransactionResponse_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
+            "gatewayFeeAmount": lambda n : setattr(self, 'gateway_fee_amount', n.get_float_value()),
             "gatewayStatus": lambda n : setattr(self, 'gateway_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionResponse_lead)),
@@ -84,6 +104,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
+            "platformFeeAmount": lambda n : setattr(self, 'platform_fee_amount', n.get_float_value()),
             "transactionStatus": lambda n : setattr(self, 'transaction_status', n.get_enum_value(TransactionStatus)),
             "transactionType": lambda n : setattr(self, 'transaction_type', n.get_enum_value(TransactionType)),
         }
@@ -98,9 +119,13 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_float_value("amount", self.amount)
+        writer.write_enum_value("billableUnit", self.billable_unit)
+        writer.write_float_value("billedAmount", self.billed_amount)
+        writer.write_enum_value("billingChannel", self.billing_channel)
         writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
+        writer.write_float_value("gatewayFeeAmount", self.gateway_fee_amount)
         writer.write_str_value("gatewayStatus", self.gateway_status)
         writer.write_str_value("id", self.id)
         writer.write_object_value("lead", self.lead)
@@ -108,6 +133,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("notes", self.notes)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
+        writer.write_float_value("platformFeeAmount", self.platform_fee_amount)
         writer.write_enum_value("transactionStatus", self.transaction_status)
         writer.write_enum_value("transactionType", self.transaction_type)
         writer.write_additional_data_value(self.additional_data)

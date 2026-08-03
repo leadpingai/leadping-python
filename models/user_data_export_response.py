@@ -41,6 +41,8 @@ class UserDataExportResponse(AdditionalDataHolder, Parsable):
     message: Optional[str] = None
     # Date and time when the user data export was requested.
     requested_at: Optional[datetime.datetime] = None
+    # File size in bytes.
+    size_bytes: Optional[int] = None
     # Date and time when the user data export started.
     started_at: Optional[datetime.datetime] = None
     # Current status for this Leadping user data export.
@@ -81,6 +83,7 @@ class UserDataExportResponse(AdditionalDataHolder, Parsable):
             "maxDownloadCount": lambda n : setattr(self, 'max_download_count', n.get_int_value()),
             "message": lambda n : setattr(self, 'message', n.get_str_value()),
             "requestedAt": lambda n : setattr(self, 'requested_at', n.get_datetime_value()),
+            "sizeBytes": lambda n : setattr(self, 'size_bytes', n.get_int_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(UserDataExportStatuses)),
         }
@@ -106,6 +109,7 @@ class UserDataExportResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("maxDownloadCount", self.max_download_count)
         writer.write_str_value("message", self.message)
         writer.write_datetime_value("requestedAt", self.requested_at)
+        writer.write_int_value("sizeBytes", self.size_bytes)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_enum_value("status", self.status)
         writer.write_additional_data_value(self.additional_data)

@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ..models.contact_request import ContactRequest
     from ..models.contact_response import ContactResponse
     from ..models.problem_details import ProblemDetails
+    from .website.website_request_builder import WebsiteRequestBuilder
 
 class ContactRequestBuilder(BaseRequestBuilder):
     """
@@ -78,6 +79,15 @@ class ContactRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return ContactRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def website(self) -> WebsiteRequestBuilder:
+        """
+        The website property
+        """
+        from .website.website_request_builder import WebsiteRequestBuilder
+
+        return WebsiteRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class ContactRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):

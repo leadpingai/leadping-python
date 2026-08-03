@@ -34,7 +34,7 @@ class UsageSummaryResponse(AdditionalDataHolder, Parsable):
     # The date and time for the period start value on this usage summary.
     period_start: Optional[datetime.datetime] = None
     # The usage record count for this usage summary.
-    usage_record_count: Optional[int] = None
+    transaction_count: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UsageSummaryResponse:
@@ -67,7 +67,7 @@ class UsageSummaryResponse(AdditionalDataHolder, Parsable):
             "pendingInvoiceCount": lambda n : setattr(self, 'pending_invoice_count', n.get_int_value()),
             "periodEnd": lambda n : setattr(self, 'period_end', n.get_datetime_value()),
             "periodStart": lambda n : setattr(self, 'period_start', n.get_datetime_value()),
-            "usageRecordCount": lambda n : setattr(self, 'usage_record_count', n.get_int_value()),
+            "transactionCount": lambda n : setattr(self, 'transaction_count', n.get_int_value()),
         }
         return fields
     
@@ -87,7 +87,7 @@ class UsageSummaryResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("pendingInvoiceCount", self.pending_invoice_count)
         writer.write_datetime_value("periodEnd", self.period_end)
         writer.write_datetime_value("periodStart", self.period_start)
-        writer.write_int_value("usageRecordCount", self.usage_record_count)
+        writer.write_int_value("transactionCount", self.transaction_count)
         writer.write_additional_data_value(self.additional_data)
     
 

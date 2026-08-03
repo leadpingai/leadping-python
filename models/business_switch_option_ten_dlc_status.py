@@ -3,7 +3,7 @@ from enum import Enum
 class BusinessSwitchOption_tenDlcStatus(str, Enum):
     NotStarted = "NotStarted",
     DraftGenerated = "DraftGenerated",
-    DraftNeedsAdminReview = "DraftNeedsAdminReview",
+    DraftIncomplete = "DraftIncomplete",
     ReadyToSubmit = "ReadyToSubmit",
     Submitted = "Submitted",
     PendingTelnyxReview = "PendingTelnyxReview",

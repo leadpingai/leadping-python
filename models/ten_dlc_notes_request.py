@@ -6,10 +6,13 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class TenDlcNotesRequest(AdditionalDataHolder, Parsable):
+    """
+    Updates the internal notes associated with a 10DLC application.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The notes property
+    # Notes to store with the 10DLC application, or null to clear them.
     notes: Optional[str] = None
     
     @staticmethod

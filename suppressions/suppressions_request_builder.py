@@ -17,7 +17,9 @@ if TYPE_CHECKING:
     from ..models.problem_details import ProblemDetails
     from ..models.suppression_entry_request import SuppressionEntryRequest
     from ..models.suppression_entry_response import SuppressionEntryResponse
+    from .all.all_request_builder import AllRequestBuilder
     from .check.check_request_builder import CheckRequestBuilder
+    from .item.suppressions_item_request_builder import SuppressionsItemRequestBuilder
     from .release.release_request_builder import ReleaseRequestBuilder
 
 class SuppressionsRequestBuilder(BaseRequestBuilder):
@@ -32,6 +34,20 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
         Returns: None
         """
         super().__init__(request_adapter, "{+baseurl}/suppressions", path_parameters)
+    
+    def by_id(self,id: str) -> SuppressionsItemRequestBuilder:
+        """
+        Gets an item from the leadping.suppressions.item collection
+        param id: Unique identifier of the item
+        Returns: SuppressionsItemRequestBuilder
+        """
+        if id is None:
+            raise TypeError("id cannot be null.")
+        from .item.suppressions_item_request_builder import SuppressionsItemRequestBuilder
+
+        url_tpl_params = get_path_parameters(self.path_parameters)
+        url_tpl_params["id"] = id
+        return SuppressionsItemRequestBuilder(self.request_adapter, url_tpl_params)
     
     async def post(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionEntryResponse]:
         """
@@ -81,6 +97,15 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return SuppressionsRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def all(self) -> AllRequestBuilder:
+        """
+        The all property
+        """
+        from .all.all_request_builder import AllRequestBuilder
+
+        return AllRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def check(self) -> CheckRequestBuilder:

@@ -15,8 +15,12 @@ class CustomerResponseMetrics(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Average minutes measured in minutes.
+    average_minutes: Optional[float] = None
     # Collection of average minutes trend included with this Leadping customer response metrics.
     average_minutes_trend: Optional[list[AnalyticsTrendPointOfdecimal]] = None
+    # Median minutes measured in minutes.
+    median_minutes: Optional[float] = None
     # Number of calls missed during the reporting period.
     missed_calls: Optional[int] = None
     # Number of responded leads represented by this Leadping customer response metrics.
@@ -49,7 +53,9 @@ class CustomerResponseMetrics(AdditionalDataHolder, Parsable):
         from .analytics_trend_point_ofdecimal import AnalyticsTrendPointOfdecimal
 
         fields: dict[str, Callable[[Any], None]] = {
+            "averageMinutes": lambda n : setattr(self, 'average_minutes', n.get_float_value()),
             "averageMinutesTrend": lambda n : setattr(self, 'average_minutes_trend', n.get_collection_of_object_values(AnalyticsTrendPointOfdecimal)),
+            "medianMinutes": lambda n : setattr(self, 'median_minutes', n.get_float_value()),
             "missedCalls": lambda n : setattr(self, 'missed_calls', n.get_int_value()),
             "respondedLeads": lambda n : setattr(self, 'responded_leads', n.get_int_value()),
             "respondedWithinFiveMinutesPercent": lambda n : setattr(self, 'responded_within_five_minutes_percent', n.get_float_value()),
@@ -66,7 +72,9 @@ class CustomerResponseMetrics(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("averageMinutes", self.average_minutes)
         writer.write_collection_of_object_values("averageMinutesTrend", self.average_minutes_trend)
+        writer.write_float_value("medianMinutes", self.median_minutes)
         writer.write_int_value("missedCalls", self.missed_calls)
         writer.write_int_value("respondedLeads", self.responded_leads)
         writer.write_float_value("respondedWithinFiveMinutesPercent", self.responded_within_five_minutes_percent)

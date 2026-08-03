@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .ten_dlc_registration_status import TenDlcRegistrationStatus
+
 @dataclass
 class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     """
@@ -13,6 +16,10 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The current provider review status for the submitted brand.
+    brand_status: Optional[TenDlcRegistrationStatus] = None
+    # The current provider review status for the submitted campaign.
+    campaign_status: Optional[TenDlcRegistrationStatus] = None
     # The company name value for this 10DLC application draft.
     company_name: Optional[str] = None
     # The compliance warnings included with this 10DLC application draft.
@@ -25,6 +32,8 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     contact_phone: Optional[str] = None
     # The EIN value for this 10DLC application draft.
     ein: Optional[str] = None
+    # The expected monthly volume value for this 10DLC application draft.
+    expected_monthly_volume: Optional[int] = None
     # The industry value for this 10DLC application draft.
     industry: Optional[str] = None
     # The date and time for the last submitted at value on this 10DLC application draft.
@@ -72,13 +81,20 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .ten_dlc_registration_status import TenDlcRegistrationStatus
+
+        from .ten_dlc_registration_status import TenDlcRegistrationStatus
+
         fields: dict[str, Callable[[Any], None]] = {
+            "brandStatus": lambda n : setattr(self, 'brand_status', n.get_enum_value(TenDlcRegistrationStatus)),
+            "campaignStatus": lambda n : setattr(self, 'campaign_status', n.get_enum_value(TenDlcRegistrationStatus)),
             "companyName": lambda n : setattr(self, 'company_name', n.get_str_value()),
             "complianceWarnings": lambda n : setattr(self, 'compliance_warnings', n.get_collection_of_primitive_values(str)),
             "contactEmail": lambda n : setattr(self, 'contact_email', n.get_str_value()),
             "contactName": lambda n : setattr(self, 'contact_name', n.get_str_value()),
             "contactPhone": lambda n : setattr(self, 'contact_phone', n.get_str_value()),
             "ein": lambda n : setattr(self, 'ein', n.get_str_value()),
+            "expectedMonthlyVolume": lambda n : setattr(self, 'expected_monthly_volume', n.get_int_value()),
             "industry": lambda n : setattr(self, 'industry', n.get_str_value()),
             "lastSubmittedAt": lambda n : setattr(self, 'last_submitted_at', n.get_datetime_value()),
             "leadSource": lambda n : setattr(self, 'lead_source', n.get_str_value()),
@@ -105,12 +121,15 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_enum_value("brandStatus", self.brand_status)
+        writer.write_enum_value("campaignStatus", self.campaign_status)
         writer.write_str_value("companyName", self.company_name)
         writer.write_collection_of_primitive_values("complianceWarnings", self.compliance_warnings)
         writer.write_str_value("contactEmail", self.contact_email)
         writer.write_str_value("contactName", self.contact_name)
         writer.write_str_value("contactPhone", self.contact_phone)
         writer.write_str_value("ein", self.ein)
+        writer.write_int_value("expectedMonthlyVolume", self.expected_monthly_volume)
         writer.write_str_value("industry", self.industry)
         writer.write_datetime_value("lastSubmittedAt", self.last_submitted_at)
         writer.write_str_value("leadSource", self.lead_source)

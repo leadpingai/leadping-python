@@ -63,7 +63,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     async def post(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusResponse]:
         """
         Creates a reusable lead status for the current business to categorize, organize, and track leads consistently throughout its sales and follow-up workflow.
-        param body: The request body
+        param body: Defines the editable values used to create or update a lead status.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadStatusResponse]
         """
@@ -92,7 +92,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates a reusable lead status for the current business to categorize, organize, and track leads consistently throughout its sales and follow-up workflow.
-        param body: The request body
+        param body: Defines the editable values used to create or update a lead status.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -100,7 +100,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
             raise TypeError("body cannot be null.")
         request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/json, text/plain;q=0.9")
+        request_info.headers.try_add("Accept", "text/plain;q=0.9")
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     

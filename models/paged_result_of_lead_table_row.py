@@ -21,6 +21,8 @@ class PagedResultOfLeadTableRow(AdditionalDataHolder, Parsable):
     items: Optional[list[LeadTableRow]] = None
     # The number of items returned per page in the response. This may reflect the client's requested page size, or a server-defined default or limit.
     page_size: Optional[int] = None
+    # The total number of items that match the query across all pages. May be null if the count is not computed or not applicable (e.g., in continuation-based pagination).
+    total_count: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PagedResultOfLeadTableRow:
@@ -46,6 +48,7 @@ class PagedResultOfLeadTableRow(AdditionalDataHolder, Parsable):
             "continuationToken": lambda n : setattr(self, 'continuation_token', n.get_str_value()),
             "items": lambda n : setattr(self, 'items', n.get_collection_of_object_values(LeadTableRow)),
             "pageSize": lambda n : setattr(self, 'page_size', n.get_int_value()),
+            "totalCount": lambda n : setattr(self, 'total_count', n.get_int_value()),
         }
         return fields
     
@@ -60,6 +63,7 @@ class PagedResultOfLeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("continuationToken", self.continuation_token)
         writer.write_collection_of_object_values("items", self.items)
         writer.write_int_value("pageSize", self.page_size)
+        writer.write_int_value("totalCount", self.total_count)
         writer.write_additional_data_value(self.additional_data)
     
 

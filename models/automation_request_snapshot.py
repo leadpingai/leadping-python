@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .automation_action import AutomationAction
     from .automation_condition_group import AutomationConditionGroup
+    from .automation_connection import AutomationConnection
     from .automation_trigger import AutomationTrigger
 
 @dataclass
@@ -23,6 +24,8 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
     business_id: Optional[str] = None
     # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
+    # Directed connections between nodes in this automation graph.
+    connections: Optional[list[AutomationConnection]] = None
     # User ID of the person who created this automation request snapshot.
     created_by_user_id: Optional[str] = None
     # Human-readable description that explains this automation request snapshot to API users.
@@ -62,16 +65,19 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
         """
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
+        from .automation_connection import AutomationConnection
         from .automation_trigger import AutomationTrigger
 
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
+        from .automation_connection import AutomationConnection
         from .automation_trigger import AutomationTrigger
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationAction)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionGroups": lambda n : setattr(self, 'condition_groups', n.get_collection_of_object_values(AutomationConditionGroup)),
+            "connections": lambda n : setattr(self, 'connections', n.get_collection_of_object_values(AutomationConnection)),
             "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
@@ -96,6 +102,7 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("actions", self.actions)
         writer.write_str_value("businessId", self.business_id)
         writer.write_collection_of_object_values("conditionGroups", self.condition_groups)
+        writer.write_collection_of_object_values("connections", self.connections)
         writer.write_str_value("createdByUserId", self.created_by_user_id)
         writer.write_str_value("description", self.description)
         writer.write_bool_value("enabled", self.enabled)

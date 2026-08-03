@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .id_name_pair import IdNamePair
+    from .message_media_attachment import MessageMediaAttachment
     from .sms_event_table_row_outbound_source import SmsEventTableRow_outboundSource
     from .sms_event_table_row_status import SmsEventTableRow_status
     from .sms_event_table_row_traffic_type import SmsEventTableRow_trafficType
@@ -23,6 +24,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     actor_display_name: Optional[str] = None
     # User ID for the actor that performed the action.
     actor_user_id: Optional[str] = None
+    # Monetary amount billed for this Leadping communication or transaction.
+    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -61,6 +64,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     is_automated: Optional[bool] = None
     # The ID and name for this lead.
     lead: Optional[IdNamePair] = None
+    # Media attached to this SMS/MMS event.
+    media: Optional[list[MessageMediaAttachment]] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
     # Defines the source that requested outbound delivery.
@@ -113,11 +118,13 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .id_name_pair import IdNamePair
+        from .message_media_attachment import MessageMediaAttachment
         from .sms_event_table_row_outbound_source import SmsEventTableRow_outboundSource
         from .sms_event_table_row_status import SmsEventTableRow_status
         from .sms_event_table_row_traffic_type import SmsEventTableRow_trafficType
 
         from .id_name_pair import IdNamePair
+        from .message_media_attachment import MessageMediaAttachment
         from .sms_event_table_row_outbound_source import SmsEventTableRow_outboundSource
         from .sms_event_table_row_status import SmsEventTableRow_status
         from .sms_event_table_row_traffic_type import SmsEventTableRow_trafficType
@@ -125,6 +132,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
+            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "business": lambda n : setattr(self, 'business', n.get_str_value()),
@@ -144,6 +152,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(IdNamePair)),
+            "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "outboundSource": lambda n : setattr(self, 'outbound_source', n.get_enum_value(SmsEventTableRow_outboundSource)),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
@@ -174,6 +183,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actorDisplayName", self.actor_display_name)
         writer.write_str_value("actorUserId", self.actor_user_id)
+        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("business", self.business)
@@ -193,6 +203,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isAutomated", self.is_automated)
         writer.write_object_value("lead", self.lead)
+        writer.write_collection_of_object_values("media", self.media)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_enum_value("outboundSource", self.outbound_source)
         writer.write_datetime_value("queuedAt", self.queued_at)

@@ -23,6 +23,8 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The account balance value for this business.
+    account_balance: Optional[float] = None
     # Defines the supported Customer Activation Status values.
     activation_status: Optional[BusinessTableRow_activationStatus] = None
     # The date and time this business API key expires, or null when it has no expiration.
@@ -33,6 +35,8 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
     api_key_issued_at: Optional[datetime.datetime] = None
     # The date and time this business API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
+    # WorkOS permission slugs granted to this business API key.
+    api_key_permissions: Optional[list[str]] = None
     # The masked API key preview owned by this business.
     api_key_preview: Optional[str] = None
     # The total number of tracked uses for this business API key.
@@ -111,11 +115,13 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         from .business_table_row_website_status import BusinessTableRow_websiteStatus
 
         fields: dict[str, Callable[[Any], None]] = {
+            "accountBalance": lambda n : setattr(self, 'account_balance', n.get_float_value()),
             "activationStatus": lambda n : setattr(self, 'activation_status', n.get_enum_value(BusinessTableRow_activationStatus)),
             "apiKeyExpiresAt": lambda n : setattr(self, 'api_key_expires_at', n.get_datetime_value()),
             "apiKeyFirstUsedAt": lambda n : setattr(self, 'api_key_first_used_at', n.get_datetime_value()),
             "apiKeyIssuedAt": lambda n : setattr(self, 'api_key_issued_at', n.get_datetime_value()),
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
+            "apiKeyPermissions": lambda n : setattr(self, 'api_key_permissions', n.get_collection_of_primitive_values(str)),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessTableRow_billingPlan)),
@@ -148,11 +154,13 @@ class BusinessTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("accountBalance", self.account_balance)
         writer.write_enum_value("activationStatus", self.activation_status)
         writer.write_datetime_value("apiKeyExpiresAt", self.api_key_expires_at)
         writer.write_datetime_value("apiKeyFirstUsedAt", self.api_key_first_used_at)
         writer.write_datetime_value("apiKeyIssuedAt", self.api_key_issued_at)
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
+        writer.write_collection_of_primitive_values("apiKeyPermissions", self.api_key_permissions)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
         writer.write_enum_value("billingPlan", self.billing_plan)

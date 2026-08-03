@@ -13,6 +13,7 @@ if TYPE_CHECKING:
     from .activation_subscription_status import ActivationSubscriptionStatus
     from .activation_telephony_status import ActivationTelephonyStatus
     from .activation_timeline_event import ActivationTimelineEvent
+    from .business_activation_state_domain_search_stage import BusinessActivationState_domainSearchStage
     from .business_activation_state_ten_dlc_draft import BusinessActivationState_tenDlcDraft
     from .customer_activation_status import CustomerActivationStatus
     from .ten_dlc_application_status import TenDlcApplicationStatus
@@ -28,6 +29,8 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
 
     # The date and time for the activated at value on this business activation state.
     activated_at: Optional[datetime.datetime] = None
+    # The number of registrar-verified domains found by the current search.
+    available_domain_count: Optional[int] = None
     # The current billing subscription status for this business activation state.
     billing_subscription_status: Optional[ActivationSubscriptionStatus] = None
     # The business description value for this business activation state.
@@ -44,6 +47,16 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
     domain_approved_at: Optional[datetime.datetime] = None
     # The domain options included with this business activation state.
     domain_options: Optional[list[ActivationDomainOption]] = None
+    # The date and time the selected domain was purchased.
+    domain_purchased_at: Optional[datetime.datetime] = None
+    # The current domain generation attempt.
+    domain_search_attempt: Optional[int] = None
+    # Identifies the active domain search run.
+    domain_search_id: Optional[str] = None
+    # Defines the stages of a domain search.
+    domain_search_stage: Optional[BusinessActivationState_domainSearchStage] = None
+    # The last time domain search progress changed.
+    domain_search_updated_at: Optional[datetime.datetime] = None
     # The events included with this business activation state.
     events: Optional[list[ActivationTimelineEvent]] = None
     # The date and time for the failed at value on this business activation state.
@@ -92,6 +105,8 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
     ten_dlc_status: Optional[TenDlcApplicationStatus] = None
     # The date and time for the updated at value on this business activation state.
     updated_at: Optional[datetime.datetime] = None
+    # The latest persisted website generation progress message.
+    website_generation_result: Optional[str] = None
     # The website needs value for this business activation state.
     website_needs: Optional[str] = None
     # The current website status for this business activation state.
@@ -122,6 +137,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
         from .activation_subscription_status import ActivationSubscriptionStatus
         from .activation_telephony_status import ActivationTelephonyStatus
         from .activation_timeline_event import ActivationTimelineEvent
+        from .business_activation_state_domain_search_stage import BusinessActivationState_domainSearchStage
         from .business_activation_state_ten_dlc_draft import BusinessActivationState_tenDlcDraft
         from .customer_activation_status import CustomerActivationStatus
         from .ten_dlc_application_status import TenDlcApplicationStatus
@@ -134,6 +150,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
         from .activation_subscription_status import ActivationSubscriptionStatus
         from .activation_telephony_status import ActivationTelephonyStatus
         from .activation_timeline_event import ActivationTimelineEvent
+        from .business_activation_state_domain_search_stage import BusinessActivationState_domainSearchStage
         from .business_activation_state_ten_dlc_draft import BusinessActivationState_tenDlcDraft
         from .customer_activation_status import CustomerActivationStatus
         from .ten_dlc_application_status import TenDlcApplicationStatus
@@ -141,6 +158,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "activatedAt": lambda n : setattr(self, 'activated_at', n.get_datetime_value()),
+            "availableDomainCount": lambda n : setattr(self, 'available_domain_count', n.get_int_value()),
             "billingSubscriptionStatus": lambda n : setattr(self, 'billing_subscription_status', n.get_enum_value(ActivationSubscriptionStatus)),
             "businessDescription": lambda n : setattr(self, 'business_description', n.get_str_value()),
             "complianceNotes": lambda n : setattr(self, 'compliance_notes', n.get_str_value()),
@@ -149,6 +167,11 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
             "customerFacingStatus": lambda n : setattr(self, 'customer_facing_status', n.get_str_value()),
             "domainApprovedAt": lambda n : setattr(self, 'domain_approved_at', n.get_datetime_value()),
             "domainOptions": lambda n : setattr(self, 'domain_options', n.get_collection_of_object_values(ActivationDomainOption)),
+            "domainPurchasedAt": lambda n : setattr(self, 'domain_purchased_at', n.get_datetime_value()),
+            "domainSearchAttempt": lambda n : setattr(self, 'domain_search_attempt', n.get_int_value()),
+            "domainSearchId": lambda n : setattr(self, 'domain_search_id', n.get_str_value()),
+            "domainSearchStage": lambda n : setattr(self, 'domain_search_stage', n.get_enum_value(BusinessActivationState_domainSearchStage)),
+            "domainSearchUpdatedAt": lambda n : setattr(self, 'domain_search_updated_at', n.get_datetime_value()),
             "events": lambda n : setattr(self, 'events', n.get_collection_of_object_values(ActivationTimelineEvent)),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "industry": lambda n : setattr(self, 'industry', n.get_str_value()),
@@ -173,6 +196,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
             "tenDlcDraft": lambda n : setattr(self, 'ten_dlc_draft', n.get_object_value(BusinessActivationState_tenDlcDraft)),
             "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(TenDlcApplicationStatus)),
             "updatedAt": lambda n : setattr(self, 'updated_at', n.get_datetime_value()),
+            "websiteGenerationResult": lambda n : setattr(self, 'website_generation_result', n.get_str_value()),
             "websiteNeeds": lambda n : setattr(self, 'website_needs', n.get_str_value()),
             "websiteStatus": lambda n : setattr(self, 'website_status', n.get_enum_value(WebsiteLifecycleStatus)),
             "websiteUrl": lambda n : setattr(self, 'website_url', n.get_str_value()),
@@ -188,6 +212,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("activatedAt", self.activated_at)
+        writer.write_int_value("availableDomainCount", self.available_domain_count)
         writer.write_enum_value("billingSubscriptionStatus", self.billing_subscription_status)
         writer.write_str_value("businessDescription", self.business_description)
         writer.write_str_value("complianceNotes", self.compliance_notes)
@@ -196,6 +221,11 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
         writer.write_str_value("customerFacingStatus", self.customer_facing_status)
         writer.write_datetime_value("domainApprovedAt", self.domain_approved_at)
         writer.write_collection_of_object_values("domainOptions", self.domain_options)
+        writer.write_datetime_value("domainPurchasedAt", self.domain_purchased_at)
+        writer.write_int_value("domainSearchAttempt", self.domain_search_attempt)
+        writer.write_str_value("domainSearchId", self.domain_search_id)
+        writer.write_enum_value("domainSearchStage", self.domain_search_stage)
+        writer.write_datetime_value("domainSearchUpdatedAt", self.domain_search_updated_at)
         writer.write_collection_of_object_values("events", self.events)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("industry", self.industry)
@@ -220,6 +250,7 @@ class BusinessActivationState(AdditionalDataHolder, Parsable):
         writer.write_object_value("tenDlcDraft", self.ten_dlc_draft)
         writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
         writer.write_datetime_value("updatedAt", self.updated_at)
+        writer.write_str_value("websiteGenerationResult", self.website_generation_result)
         writer.write_str_value("websiteNeeds", self.website_needs)
         writer.write_enum_value("websiteStatus", self.website_status)
         writer.write_str_value("websiteUrl", self.website_url)

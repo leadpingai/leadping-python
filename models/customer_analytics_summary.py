@@ -15,6 +15,8 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Average time, in minutes, before a lead receives a response.
+    average_response_minutes: Optional[float] = None
     # Current billing status for this Leadping customer analytics summary.
     billing_status: Optional[str] = None
     # Total connected call duration, in minutes, during the reporting period.
@@ -27,6 +29,8 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
     leads: Optional[int] = None
     # Date and time when this Leadping customer analytics summary was leads comparison.
     leads_comparison: Optional[AnalyticsComparison] = None
+    # Median response minutes measured in minutes.
+    median_response_minutes: Optional[float] = None
     # Number of calls missed during the reporting period.
     missed_calls: Optional[int] = None
     # Number of missed leads represented by this Leadping customer analytics summary.
@@ -67,12 +71,14 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
         from .analytics_comparison import AnalyticsComparison
 
         fields: dict[str, Callable[[Any], None]] = {
+            "averageResponseMinutes": lambda n : setattr(self, 'average_response_minutes', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "callMinutes": lambda n : setattr(self, 'call_minutes', n.get_float_value()),
             "callsPlaced": lambda n : setattr(self, 'calls_placed', n.get_int_value()),
             "callsReceived": lambda n : setattr(self, 'calls_received', n.get_int_value()),
             "leads": lambda n : setattr(self, 'leads', n.get_int_value()),
             "leadsComparison": lambda n : setattr(self, 'leads_comparison', n.get_object_value(AnalyticsComparison)),
+            "medianResponseMinutes": lambda n : setattr(self, 'median_response_minutes', n.get_float_value()),
             "missedCalls": lambda n : setattr(self, 'missed_calls', n.get_int_value()),
             "missedLeads": lambda n : setattr(self, 'missed_leads', n.get_int_value()),
             "respondedWithinFiveMinutesPercent": lambda n : setattr(self, 'responded_within_five_minutes_percent', n.get_float_value()),
@@ -93,12 +99,14 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("averageResponseMinutes", self.average_response_minutes)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_float_value("callMinutes", self.call_minutes)
         writer.write_int_value("callsPlaced", self.calls_placed)
         writer.write_int_value("callsReceived", self.calls_received)
         writer.write_int_value("leads", self.leads)
         writer.write_object_value("leadsComparison", self.leads_comparison)
+        writer.write_float_value("medianResponseMinutes", self.median_response_minutes)
         writer.write_int_value("missedCalls", self.missed_calls)
         writer.write_int_value("missedLeads", self.missed_leads)
         writer.write_float_value("respondedWithinFiveMinutesPercent", self.responded_within_five_minutes_percent)

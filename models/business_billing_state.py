@@ -19,6 +19,10 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
 
     # Date and time when the scheduled billing plan change takes effect.
     billing_plan_change_effective_at: Optional[datetime.datetime] = None
+    # Gets or sets the number of user licenses currently assigned by the business.
+    business_user_assigned_quantity: Optional[int] = None
+    # Gets or sets the number of user licenses included in the business subscription.
+    business_user_quantity: Optional[int] = None
     # Gets or sets when the active subscription is scheduled to cancel.
     cancel_at: Optional[datetime.datetime] = None
     # Gets or sets the customer-safe payment recovery state for the business.
@@ -33,6 +37,10 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
     last_subscription_event_at: Optional[datetime.datetime] = None
     # Defines the supported Billing Plan values.
     pending_billing_plan: Optional[BusinessBillingState_pendingBillingPlan] = None
+    # Gets or sets the number of phone numbers included in the business subscription.
+    phone_number_quantity: Optional[int] = None
+    # Start of the current plan billing period.
+    plan_period_start_at: Optional[datetime.datetime] = None
     # Current plan renewal date.
     plan_renewal_at: Optional[datetime.datetime] = None
     
@@ -60,6 +68,8 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "billingPlanChangeEffectiveAt": lambda n : setattr(self, 'billing_plan_change_effective_at', n.get_datetime_value()),
+            "businessUserAssignedQuantity": lambda n : setattr(self, 'business_user_assigned_quantity', n.get_int_value()),
+            "businessUserQuantity": lambda n : setattr(self, 'business_user_quantity', n.get_int_value()),
             "cancelAt": lambda n : setattr(self, 'cancel_at', n.get_datetime_value()),
             "dunning": lambda n : setattr(self, 'dunning', n.get_object_value(BusinessBillingState_dunning)),
             "hasPaymentMethod": lambda n : setattr(self, 'has_payment_method', n.get_bool_value()),
@@ -67,6 +77,8 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
             "lastPaymentMethodEventAt": lambda n : setattr(self, 'last_payment_method_event_at', n.get_datetime_value()),
             "lastSubscriptionEventAt": lambda n : setattr(self, 'last_subscription_event_at', n.get_datetime_value()),
             "pendingBillingPlan": lambda n : setattr(self, 'pending_billing_plan', n.get_enum_value(BusinessBillingState_pendingBillingPlan)),
+            "phoneNumberQuantity": lambda n : setattr(self, 'phone_number_quantity', n.get_int_value()),
+            "planPeriodStartAt": lambda n : setattr(self, 'plan_period_start_at', n.get_datetime_value()),
             "planRenewalAt": lambda n : setattr(self, 'plan_renewal_at', n.get_datetime_value()),
         }
         return fields
@@ -80,6 +92,8 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("billingPlanChangeEffectiveAt", self.billing_plan_change_effective_at)
+        writer.write_int_value("businessUserAssignedQuantity", self.business_user_assigned_quantity)
+        writer.write_int_value("businessUserQuantity", self.business_user_quantity)
         writer.write_datetime_value("cancelAt", self.cancel_at)
         writer.write_object_value("dunning", self.dunning)
         writer.write_bool_value("hasPaymentMethod", self.has_payment_method)
@@ -87,6 +101,8 @@ class BusinessBillingState(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("lastPaymentMethodEventAt", self.last_payment_method_event_at)
         writer.write_datetime_value("lastSubscriptionEventAt", self.last_subscription_event_at)
         writer.write_enum_value("pendingBillingPlan", self.pending_billing_plan)
+        writer.write_int_value("phoneNumberQuantity", self.phone_number_quantity)
+        writer.write_datetime_value("planPeriodStartAt", self.plan_period_start_at)
         writer.write_datetime_value("planRenewalAt", self.plan_renewal_at)
         writer.write_additional_data_value(self.additional_data)
     

@@ -1,6 +1,6 @@
 from enum import Enum
 
-class UsageRecordStatus(str, Enum):
+class UsageStatus(str, Enum):
     Recorded = "recorded",
     Rated = "rated",
     Pending_invoice = "pending_invoice",

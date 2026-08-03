@@ -17,6 +17,12 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Amount of wallet credit purchased in this deposit.
+    amount_purchased: Optional[float] = None
+    # Amount of wallet credit still available for future usage.
+    amount_remaining: Optional[float] = None
+    # Wallet or account balance after this transaction is applied.
+    balance: Optional[float] = None
     # UTC timestamp when Leadping last calculated the wallet balance.
     balance_calculated_at: Optional[datetime.datetime] = None
     # Business ID that owns this wallet balance or credit.
@@ -27,6 +33,8 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     credit_status: Optional[WalletResponse_creditStatus] = None
     # ISO currency code used for the monetary amounts in this billing wallet response.
     currency: Optional[str] = None
+    # Amount of wallet credit that has expired.
+    expired_credit_amount: Optional[float] = None
     # UTC timestamp when the wallet credit expires.
     expires_at: Optional[datetime.datetime] = None
     # The unique identifier for the entity.
@@ -37,6 +45,8 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # UTC timestamp when the next wallet credit amount expires.
     next_credit_expiration_at: Optional[datetime.datetime] = None
+    # Amount of wallet credit scheduled to expire next.
+    next_expiring_credit_amount: Optional[float] = None
     # Original wallet transaction ID referenced by a reversal, refund, or adjustment.
     original_transaction_id: Optional[str] = None
     # UTC timestamp when the wallet credit was purchased.
@@ -67,16 +77,21 @@ class WalletResponse(AdditionalDataHolder, Parsable):
         from .wallet_response_source_type import WalletResponse_sourceType
 
         fields: dict[str, Callable[[Any], None]] = {
+            "amountPurchased": lambda n : setattr(self, 'amount_purchased', n.get_float_value()),
+            "amountRemaining": lambda n : setattr(self, 'amount_remaining', n.get_float_value()),
+            "balance": lambda n : setattr(self, 'balance', n.get_float_value()),
             "balanceCalculatedAt": lambda n : setattr(self, 'balance_calculated_at', n.get_datetime_value()),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "creditStatus": lambda n : setattr(self, 'credit_status', n.get_enum_value(WalletResponse_creditStatus)),
             "currency": lambda n : setattr(self, 'currency', n.get_str_value()),
+            "expiredCreditAmount": lambda n : setattr(self, 'expired_credit_amount', n.get_float_value()),
             "expiresAt": lambda n : setattr(self, 'expires_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "nextCreditExpirationAt": lambda n : setattr(self, 'next_credit_expiration_at', n.get_datetime_value()),
+            "nextExpiringCreditAmount": lambda n : setattr(self, 'next_expiring_credit_amount', n.get_float_value()),
             "originalTransactionId": lambda n : setattr(self, 'original_transaction_id', n.get_str_value()),
             "purchasedAt": lambda n : setattr(self, 'purchased_at', n.get_datetime_value()),
             "sourceType": lambda n : setattr(self, 'source_type', n.get_enum_value(WalletResponse_sourceType)),
@@ -91,16 +106,21 @@ class WalletResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("amountPurchased", self.amount_purchased)
+        writer.write_float_value("amountRemaining", self.amount_remaining)
+        writer.write_float_value("balance", self.balance)
         writer.write_datetime_value("balanceCalculatedAt", self.balance_calculated_at)
         writer.write_str_value("businessId", self.business_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_enum_value("creditStatus", self.credit_status)
         writer.write_str_value("currency", self.currency)
+        writer.write_float_value("expiredCreditAmount", self.expired_credit_amount)
         writer.write_datetime_value("expiresAt", self.expires_at)
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_datetime_value("nextCreditExpirationAt", self.next_credit_expiration_at)
+        writer.write_float_value("nextExpiringCreditAmount", self.next_expiring_credit_amount)
         writer.write_str_value("originalTransactionId", self.original_transaction_id)
         writer.write_datetime_value("purchasedAt", self.purchased_at)
         writer.write_enum_value("sourceType", self.source_type)

@@ -10,24 +10,27 @@ if TYPE_CHECKING:
 
 @dataclass
 class LeadStatusResponse(AdditionalDataHolder, Parsable):
+    """
+    Represents a configurable status that can be assigned to leads.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The businessId property
+    # Identifier of the business that owns the lead status.
     business_id: Optional[str] = None
-    # Controlled disposition categories used for reporting, automation, and analytics.
+    # Disposition category represented by the lead status.
     category: Optional[DispositionCategory] = None
-    # The color property
+    # Display color assigned to the lead status.
     color: Optional[str] = None
-    # The id property
+    # Unique identifier for the lead status.
     id: Optional[str] = None
-    # The isArchived property
+    # Indicates whether the lead status has been archived.
     is_archived: Optional[bool] = None
-    # The modifiedAt property
+    # Date and time when the lead status was last modified.
     modified_at: Optional[datetime.datetime] = None
-    # The name property
+    # Display name of the lead status.
     name: Optional[str] = None
-    # The sortOrder property
+    # Relative display order of the lead status.
     sort_order: Optional[int] = None
     
     @staticmethod

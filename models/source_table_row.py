@@ -38,6 +38,8 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     business_id: Optional[str] = None
     # Indicates whether the business or sender passed compliance review.
     compliance_approved: Optional[bool] = None
+    # Configured cost charged when this source creates a billable lead.
+    cost_per_lead: Optional[float] = None
     # UTC timestamp when this lead source table row was created.
     created_at: Optional[datetime.datetime] = None
     # User summary for the person who created this lead source table row.
@@ -105,6 +107,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             "business": lambda n : setattr(self, 'business', n.get_object_value(SourceTableRow_business)),
             "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
+            "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "createdByUser": lambda n : setattr(self, 'created_by_user', n.get_object_value(SourceTableRow_createdByUser)),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
@@ -139,6 +142,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         writer.write_object_value("business", self.business)
         writer.write_str_value("businessId", self.business_id)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
+        writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("createdByUser", self.created_by_user)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)

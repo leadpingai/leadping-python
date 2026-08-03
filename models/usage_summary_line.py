@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .billable_unit import BillableUnit
     from .usage_channel import UsageChannel
-    from .usage_record_status import UsageRecordStatus
+    from .usage_status import UsageStatus
 
 @dataclass
 class UsageSummaryLine(AdditionalDataHolder, Parsable):
@@ -28,7 +28,7 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
     # The record count for this usage summary line.
     record_count: Optional[int] = None
     # The current status for this usage summary line.
-    status: Optional[UsageRecordStatus] = None
+    status: Optional[UsageStatus] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UsageSummaryLine:
@@ -48,11 +48,11 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
         """
         from .billable_unit import BillableUnit
         from .usage_channel import UsageChannel
-        from .usage_record_status import UsageRecordStatus
+        from .usage_status import UsageStatus
 
         from .billable_unit import BillableUnit
         from .usage_channel import UsageChannel
-        from .usage_record_status import UsageRecordStatus
+        from .usage_status import UsageStatus
 
         fields: dict[str, Callable[[Any], None]] = {
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(BillableUnit)),
@@ -60,7 +60,7 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
             "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
             "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
             "recordCount": lambda n : setattr(self, 'record_count', n.get_int_value()),
-            "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageRecordStatus)),
+            "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageStatus)),
         }
         return fields
     

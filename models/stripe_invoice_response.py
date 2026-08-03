@@ -13,17 +13,17 @@ class StripeInvoiceResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The amount property
+    # Total invoice amount in the invoice currency.
     amount: Optional[float] = None
-    # The createdAt property
+    # Date and time when the invoice was created.
     created_at: Optional[datetime.datetime] = None
-    # The hasPdf property
+    # Indicates whether a downloadable PDF is available for the invoice.
     has_pdf: Optional[bool] = None
-    # The id property
+    # Provider identifier for the invoice.
     id: Optional[str] = None
-    # The number property
+    # Human-readable invoice number, when assigned.
     number: Optional[str] = None
-    # The status property
+    # Current provider-reported invoice status.
     status: Optional[str] = None
     
     @staticmethod

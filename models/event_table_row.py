@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .event_table_row_status import EventTableRow_status
     from .event_table_row_traffic_type import EventTableRow_trafficType
     from .event_timeline_type import EventTimelineType
+    from .message_media_attachment import MessageMediaAttachment
 
 @dataclass
 class EventTableRow(AdditionalDataHolder, Parsable):
@@ -25,6 +26,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     actor_email: Optional[str] = None
     # User ID for the person or system that created this event timeline table row.
     actor_user_id: Optional[str] = None
+    # Monetary amount billed for this Leadping communication or transaction.
+    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -65,6 +68,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Lead ID associated with this timeline event.
     lead_id: Optional[str] = None
+    # Media attached to an MMS timeline event.
+    media: Optional[list[MessageMediaAttachment]] = None
     # UTC timestamp when Leadping will retry this event timeline table row.
     next_retry_at: Optional[datetime.datetime] = None
     # Phone number ID selected for outbound delivery.
@@ -130,16 +135,19 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         from .event_table_row_status import EventTableRow_status
         from .event_table_row_traffic_type import EventTableRow_trafficType
         from .event_timeline_type import EventTimelineType
+        from .message_media_attachment import MessageMediaAttachment
 
         from .event_table_row_selection_reason import EventTableRow_selectionReason
         from .event_table_row_status import EventTableRow_status
         from .event_table_row_traffic_type import EventTableRow_trafficType
         from .event_timeline_type import EventTimelineType
+        from .message_media_attachment import MessageMediaAttachment
 
         fields: dict[str, Callable[[Any], None]] = {
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
             "actorEmail": lambda n : setattr(self, 'actor_email', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
+            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
@@ -160,6 +168,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
+            "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
@@ -196,6 +205,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("actorDisplayName", self.actor_display_name)
         writer.write_str_value("actorEmail", self.actor_email)
         writer.write_str_value("actorUserId", self.actor_user_id)
+        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("campaignId", self.campaign_id)
@@ -216,6 +226,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_str_value("leadId", self.lead_id)
+        writer.write_collection_of_object_values("media", self.media)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_datetime_value("queuedAt", self.queued_at)

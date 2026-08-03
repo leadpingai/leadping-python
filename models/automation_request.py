@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .automation_action import AutomationAction
     from .automation_condition_group import AutomationConditionGroup
+    from .automation_connection import AutomationConnection
     from .automation_trigger import AutomationTrigger
 
 @dataclass
@@ -21,6 +22,8 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
     actions: Optional[list[AutomationAction]] = None
     # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
+    # Directed connections between nodes in this automation graph.
+    connections: Optional[list[AutomationConnection]] = None
     # Human-readable description that explains this automation configuration request to API users.
     description: Optional[str] = None
     # Indicates whether this automation configuration request is active and available in the Leadping API.
@@ -56,15 +59,18 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
         """
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
+        from .automation_connection import AutomationConnection
         from .automation_trigger import AutomationTrigger
 
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
+        from .automation_connection import AutomationConnection
         from .automation_trigger import AutomationTrigger
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationAction)),
             "conditionGroups": lambda n : setattr(self, 'condition_groups', n.get_collection_of_object_values(AutomationConditionGroup)),
+            "connections": lambda n : setattr(self, 'connections', n.get_collection_of_object_values(AutomationConnection)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -86,6 +92,7 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
         writer.write_collection_of_object_values("conditionGroups", self.condition_groups)
+        writer.write_collection_of_object_values("connections", self.connections)
         writer.write_str_value("description", self.description)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)

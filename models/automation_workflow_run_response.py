@@ -31,6 +31,8 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     completed_at: Optional[datetime.datetime] = None
     # The ID and name for this currentStep.
     current_step: Optional[AutomationWorkflowRunResponse_currentStep] = None
+    # Current step order associated with this Leadping automation workflow run.
+    current_step_order: Optional[int] = None
     # Collection of events included with this Leadping automation workflow run.
     events: Optional[list[AutomationWorkflowEventResponse]] = None
     # Date and time when the automation workflow run failed.
@@ -105,6 +107,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
             "cancelledAt": lambda n : setattr(self, 'cancelled_at', n.get_datetime_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
             "currentStep": lambda n : setattr(self, 'current_step', n.get_object_value(AutomationWorkflowRunResponse_currentStep)),
+            "currentStepOrder": lambda n : setattr(self, 'current_step_order', n.get_int_value()),
             "events": lambda n : setattr(self, 'events', n.get_collection_of_object_values(AutomationWorkflowEventResponse)),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -142,6 +145,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("cancelledAt", self.cancelled_at)
         writer.write_datetime_value("completedAt", self.completed_at)
         writer.write_object_value("currentStep", self.current_step)
+        writer.write_int_value("currentStepOrder", self.current_step_order)
         writer.write_collection_of_object_values("events", self.events)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("id", self.id)

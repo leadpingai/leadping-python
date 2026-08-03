@@ -14,6 +14,8 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
     detail: Optional[str] = None
     # URI reference that identifies this specific occurrence of the problem.
     instance: Optional[str] = None
+    # HTTP status code returned for the problem.
+    status: Optional[int] = None
     # Short, human-readable summary of the problem.
     title: Optional[str] = None
     # URI reference that identifies the problem type.
@@ -38,6 +40,7 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "detail": lambda n : setattr(self, 'detail', n.get_str_value()),
             "instance": lambda n : setattr(self, 'instance', n.get_str_value()),
+            "status": lambda n : setattr(self, 'status', n.get_int_value()),
             "title": lambda n : setattr(self, 'title', n.get_str_value()),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
         }
@@ -53,6 +56,7 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("detail", self.detail)
         writer.write_str_value("instance", self.instance)
+        writer.write_int_value("status", self.status)
         writer.write_str_value("title", self.title)
         writer.write_str_value("type", self.type)
         writer.write_additional_data_value(self.additional_data)

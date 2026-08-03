@@ -45,6 +45,8 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     last_name: Optional[str] = None
     # Phone details for the lead, user, or business represented by this lead table row.
     phone: Optional[str] = None
+    # Lead price or transaction price supplied to the Leadping API.
+    price: Optional[float] = None
     # The ID and name for this source.
     source: Optional[LeadTableRow_source] = None
     # Current lifecycle status for this lead table row in the Leadping API.
@@ -96,6 +98,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
+            "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "source": lambda n : setattr(self, 'source', n.get_object_value(LeadTableRow_source)),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "statusTone": lambda n : setattr(self, 'status_tone', n.get_str_value()),
@@ -125,6 +128,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_str_value("lastName", self.last_name)
         writer.write_str_value("phone", self.phone)
+        writer.write_float_value("price", self.price)
         writer.write_object_value("source", self.source)
         writer.write_str_value("status", self.status)
         writer.write_str_value("statusTone", self.status_tone)

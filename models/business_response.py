@@ -35,8 +35,12 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
     activation: Optional[BusinessResponse_activation] = None
     # Postal address for the business, lead, or contact represented by this business profile response.
     address: Optional[BusinessResponse_address] = None
+    # Wallet refill amount charged when automatic refill is triggered.
+    auto_refill_amount: Optional[float] = None
     # Indicates whether automatic wallet refill is enabled for the business.
     auto_refill_enabled: Optional[bool] = None
+    # Wallet balance threshold that triggers automatic refill.
+    auto_refill_trigger: Optional[float] = None
     # Postal address used for invoices, receipts, and payment processor billing records.
     billing_address: Optional[BusinessResponse_billingAddress] = None
     # Name used for invoices, receipts, and payment processor billing records.
@@ -140,7 +144,9 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
             "accountBalance": lambda n : setattr(self, 'account_balance', n.get_float_value()),
             "activation": lambda n : setattr(self, 'activation', n.get_object_value(BusinessResponse_activation)),
             "address": lambda n : setattr(self, 'address', n.get_object_value(BusinessResponse_address)),
+            "autoRefillAmount": lambda n : setattr(self, 'auto_refill_amount', n.get_float_value()),
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
+            "autoRefillTrigger": lambda n : setattr(self, 'auto_refill_trigger', n.get_float_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(BusinessResponse_billingAddress)),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BusinessResponse_billingPlan)),
@@ -181,7 +187,9 @@ class BusinessResponse(AdditionalDataHolder, Parsable):
         writer.write_float_value("accountBalance", self.account_balance)
         writer.write_object_value("activation", self.activation)
         writer.write_object_value("address", self.address)
+        writer.write_float_value("autoRefillAmount", self.auto_refill_amount)
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
+        writer.write_float_value("autoRefillTrigger", self.auto_refill_trigger)
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)
