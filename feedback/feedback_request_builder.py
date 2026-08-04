@@ -33,7 +33,7 @@ class FeedbackRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: FeedbackCreateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[FeedbackResponse]:
         """
-        Creates product feedback for the current business, capturing category, message, and context for operator review.
+        Creates product feedback for the current organization, capturing category, message, and context for operator review.
         param body: Request schema for the Leadping API feedback creation request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[FeedbackResponse]
@@ -57,7 +57,7 @@ class FeedbackRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: FeedbackCreateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Creates product feedback for the current business, capturing category, message, and context for operator review.
+        Creates product feedback for the current organization, capturing category, message, and context for operator review.
         param body: Request schema for the Leadping API feedback creation request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

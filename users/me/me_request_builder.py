@@ -34,7 +34,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[UserResponse]:
         """
-        Returns the current user's profile, roles, business context, billing state, and compliance settings for portal sessions.
+        Returns the current user's profile, roles, organization context, billing state, and compliance settings for portal sessions.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[UserResponse]
         """
@@ -55,7 +55,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: UserRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[UserResponse]:
         """
-        Updates the current user's profile fields, contact details, preferences, or business context used across Leadping.
+        Updates the current user's profile fields, contact details, preferences, or organization context used across Leadping.
         param body: Request schema for the Leadping API user profile request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[UserResponse]
@@ -79,7 +79,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the current user's profile, roles, business context, billing state, and compliance settings for portal sessions.
+        Returns the current user's profile, roles, organization context, billing state, and compliance settings for portal sessions.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -90,7 +90,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: UserRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates the current user's profile fields, contact details, preferences, or business context used across Leadping.
+        Updates the current user's profile fields, contact details, preferences, or organization context used across Leadping.
         param body: Request schema for the Leadping API user profile request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

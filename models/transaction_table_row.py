@@ -9,8 +9,8 @@ if TYPE_CHECKING:
     from .transaction_status import TransactionStatus
     from .transaction_table_row_billable_unit import TransactionTableRow_billableUnit
     from .transaction_table_row_billing_channel import TransactionTableRow_billingChannel
-    from .transaction_table_row_business import TransactionTableRow_business
     from .transaction_table_row_lead import TransactionTableRow_lead
+    from .transaction_table_row_organization import TransactionTableRow_organization
     from .transaction_type import TransactionType
 
 @dataclass
@@ -29,8 +29,6 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     billed_amount: Optional[float] = None
     # Defines the supported Usage Channel values.
     billing_channel: Optional[TransactionTableRow_billingChannel] = None
-    # The ID and name for this business.
-    business: Optional[TransactionTableRow_business] = None
     # UTC timestamp when this billing transaction table row was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction table row to API users.
@@ -41,6 +39,8 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     lead: Optional[TransactionTableRow_lead] = None
     # Net monetary amount after fees, credits, or adjustments.
     net_amount: Optional[float] = None
+    # The ID and name for this organization.
+    organization: Optional[TransactionTableRow_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
     # The pricingVersion property
@@ -77,15 +77,15 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         from .transaction_status import TransactionStatus
         from .transaction_table_row_billable_unit import TransactionTableRow_billableUnit
         from .transaction_table_row_billing_channel import TransactionTableRow_billingChannel
-        from .transaction_table_row_business import TransactionTableRow_business
         from .transaction_table_row_lead import TransactionTableRow_lead
+        from .transaction_table_row_organization import TransactionTableRow_organization
         from .transaction_type import TransactionType
 
         from .transaction_status import TransactionStatus
         from .transaction_table_row_billable_unit import TransactionTableRow_billableUnit
         from .transaction_table_row_billing_channel import TransactionTableRow_billingChannel
-        from .transaction_table_row_business import TransactionTableRow_business
         from .transaction_table_row_lead import TransactionTableRow_lead
+        from .transaction_table_row_organization import TransactionTableRow_organization
         from .transaction_type import TransactionType
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -93,12 +93,12 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(TransactionTableRow_billableUnit)),
             "billedAmount": lambda n : setattr(self, 'billed_amount', n.get_float_value()),
             "billingChannel": lambda n : setattr(self, 'billing_channel', n.get_enum_value(TransactionTableRow_billingChannel)),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(TransactionTableRow_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionTableRow_lead)),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(TransactionTableRow_organization)),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
             "pricingVersion": lambda n : setattr(self, 'pricing_version', n.get_str_value()),
             "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
@@ -122,12 +122,12 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         writer.write_enum_value("billableUnit", self.billable_unit)
         writer.write_float_value("billedAmount", self.billed_amount)
         writer.write_enum_value("billingChannel", self.billing_channel)
-        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
         writer.write_object_value("lead", self.lead)
         writer.write_float_value("netAmount", self.net_amount)
+        writer.write_object_value("organization", self.organization)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
         writer.write_str_value("pricingVersion", self.pricing_version)
         writer.write_float_value("quantity", self.quantity)

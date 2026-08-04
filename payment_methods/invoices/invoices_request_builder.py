@@ -46,7 +46,7 @@ class InvoicesRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[StripeInvoiceResponse]]:
         """
-        Returns the current business's Stripe invoices with their amounts, payment status, billing period, and hosted invoice details.
+        Returns the current organization's Stripe invoices with their amounts, payment status, billing period, and hosted invoice details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[StripeInvoiceResponse]]
         """
@@ -61,7 +61,7 @@ class InvoicesRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the current business's Stripe invoices with their amounts, payment status, billing period, and hosted invoice details.
+        Returns the current organization's Stripe invoices with their amounts, payment status, billing period, and hosted invoice details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

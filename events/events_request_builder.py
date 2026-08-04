@@ -7,11 +7,11 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .all.all_request_builder import AllRequestBuilder
-    from .businesses.businesses_request_builder import BusinessesRequestBuilder
     from .calls.calls_request_builder import CallsRequestBuilder
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
     from .item.with_event_item_request_builder import WithEventItemRequestBuilder
     from .leads.leads_request_builder import LeadsRequestBuilder
+    from .organizations.organizations_request_builder import OrganizationsRequestBuilder
     from .sms.sms_request_builder import SmsRequestBuilder
 
 class EventsRequestBuilder(BaseRequestBuilder):
@@ -51,15 +51,6 @@ class EventsRequestBuilder(BaseRequestBuilder):
         return AllRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def businesses(self) -> BusinessesRequestBuilder:
-        """
-        The businesses property
-        """
-        from .businesses.businesses_request_builder import BusinessesRequestBuilder
-
-        return BusinessesRequestBuilder(self.request_adapter, self.path_parameters)
-    
-    @property
     def calls(self) -> CallsRequestBuilder:
         """
         The calls property
@@ -85,6 +76,15 @@ class EventsRequestBuilder(BaseRequestBuilder):
         from .leads.leads_request_builder import LeadsRequestBuilder
 
         return LeadsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def organizations(self) -> OrganizationsRequestBuilder:
+        """
+        The organizations property
+        """
+        from .organizations.organizations_request_builder import OrganizationsRequestBuilder
+
+        return OrganizationsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def sms(self) -> SmsRequestBuilder:

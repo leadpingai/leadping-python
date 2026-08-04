@@ -26,6 +26,10 @@ class PhoneNumberTrafficMetricsResponse(AdditionalDataHolder, Parsable):
     call_placed_count: Optional[int] = None
     # Number of connected outbound calls shorter than 30 seconds during this metrics window.
     call_short_count: Optional[int] = None
+    # Number of MMS messages that failed during this metrics window.
+    mms_failed_count: Optional[int] = None
+    # Number of MMS messages sent during this metrics window.
+    mms_sent_count: Optional[int] = None
     # Number of SMS messages that failed during this metrics window.
     sms_failed_count: Optional[int] = None
     # Number of SMS messages sent during this metrics window.
@@ -63,6 +67,8 @@ class PhoneNumberTrafficMetricsResponse(AdditionalDataHolder, Parsable):
             "callInvalidNumberCount": lambda n : setattr(self, 'call_invalid_number_count', n.get_int_value()),
             "callPlacedCount": lambda n : setattr(self, 'call_placed_count', n.get_int_value()),
             "callShortCount": lambda n : setattr(self, 'call_short_count', n.get_int_value()),
+            "mmsFailedCount": lambda n : setattr(self, 'mms_failed_count', n.get_int_value()),
+            "mmsSentCount": lambda n : setattr(self, 'mms_sent_count', n.get_int_value()),
             "smsFailedCount": lambda n : setattr(self, 'sms_failed_count', n.get_int_value()),
             "smsSentCount": lambda n : setattr(self, 'sms_sent_count', n.get_int_value()),
             "trend": lambda n : setattr(self, 'trend', n.get_collection_of_object_values(PhoneNumberTrafficTrendPoint)),
@@ -84,6 +90,8 @@ class PhoneNumberTrafficMetricsResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("callInvalidNumberCount", self.call_invalid_number_count)
         writer.write_int_value("callPlacedCount", self.call_placed_count)
         writer.write_int_value("callShortCount", self.call_short_count)
+        writer.write_int_value("mmsFailedCount", self.mms_failed_count)
+        writer.write_int_value("mmsSentCount", self.mms_sent_count)
         writer.write_int_value("smsFailedCount", self.sms_failed_count)
         writer.write_int_value("smsSentCount", self.sms_sent_count)
         writer.write_collection_of_object_values("trend", self.trend)

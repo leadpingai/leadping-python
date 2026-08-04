@@ -33,7 +33,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfUsageLedgerTableRow]:
         """
-        Lists current-business usage ledger entries with paging, sorting, and filters for messaging, billing, and wallet review.
+        Lists current-organization usage ledger entries with paging, sorting, and filters for messaging, billing, and wallet review.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfUsageLedgerTableRow]
@@ -56,7 +56,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Lists current-business usage ledger entries with paging, sorting, and filters for messaging, billing, and wallet review.
+        Lists current-organization usage ledger entries with paging, sorting, and filters for messaging, billing, and wallet review.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

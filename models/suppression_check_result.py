@@ -15,8 +15,6 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
 
     # Whether this ion check result allows ed.
     allowed: Optional[bool] = None
-    # The business ID associated with this ion check result.
-    business_id: Optional[str] = None
     # The channel value for this ion check result.
     channel: Optional[str] = None
     # The human-readable customer reason explaining this ion check result.
@@ -25,6 +23,8 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
     normalized_email: Optional[str] = None
     # The phone number associated with this ion check result.
     normalized_phone_number: Optional[str] = None
+    # The organization ID associated with this ion check result.
+    organization_id: Optional[str] = None
     # The recipient identifier value for this ion check result.
     recipient_identifier: Optional[str] = None
     # The source value on the active suppression entry that blocked this check.
@@ -52,11 +52,11 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
         """
         fields: dict[str, Callable[[Any], None]] = {
             "allowed": lambda n : setattr(self, 'allowed', n.get_bool_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "channel": lambda n : setattr(self, 'channel', n.get_str_value()),
             "customerReason": lambda n : setattr(self, 'customer_reason', n.get_str_value()),
             "normalizedEmail": lambda n : setattr(self, 'normalized_email', n.get_str_value()),
             "normalizedPhoneNumber": lambda n : setattr(self, 'normalized_phone_number', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "recipientIdentifier": lambda n : setattr(self, 'recipient_identifier', n.get_str_value()),
             "source": lambda n : setattr(self, 'source', n.get_str_value()),
             "suppressedAt": lambda n : setattr(self, 'suppressed_at', n.get_datetime_value()),
@@ -73,11 +73,11 @@ class SuppressionCheckResult(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_bool_value("allowed", self.allowed)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("channel", self.channel)
         writer.write_str_value("customerReason", self.customer_reason)
         writer.write_str_value("normalizedEmail", self.normalized_email)
         writer.write_str_value("normalizedPhoneNumber", self.normalized_phone_number)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("recipientIdentifier", self.recipient_identifier)
         writer.write_str_value("source", self.source)
         writer.write_datetime_value("suppressedAt", self.suppressed_at)

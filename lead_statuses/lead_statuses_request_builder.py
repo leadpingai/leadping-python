@@ -47,7 +47,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[LeadStatusResponse]]:
         """
-        Lists the current business's active lead statuses for organizing and tracking leads through the sales workflow.
+        Lists the current organization's active lead statuses for organizing and tracking leads through the sales workflow.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[LeadStatusResponse]]
         """
@@ -62,7 +62,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusResponse]:
         """
-        Creates a reusable lead status for the current business to categorize, organize, and track leads consistently throughout its sales and follow-up workflow.
+        Creates a reusable lead status for the current organization to categorize, organize, and track leads consistently throughout its sales and follow-up workflow.
         param body: Defines the editable values used to create or update a lead status.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadStatusResponse]
@@ -80,7 +80,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Lists the current business's active lead statuses for organizing and tracking leads through the sales workflow.
+        Lists the current organization's active lead statuses for organizing and tracking leads through the sales workflow.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -91,7 +91,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Creates a reusable lead status for the current business to categorize, organize, and track leads consistently throughout its sales and follow-up workflow.
+        Creates a reusable lead status for the current organization to categorize, organize, and track leads consistently throughout its sales and follow-up workflow.
         param body: Defines the editable values used to create or update a lead status.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

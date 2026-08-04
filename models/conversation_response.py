@@ -6,7 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .conversation_response_current_disposition import ConversationResponse_currentDisposition
+    from .conversation_response_current_lead_status import ConversationResponse_currentLeadStatus
     from .conversation_response_phone_number import ConversationResponse_phoneNumber
     from .conversation_response_status import ConversationResponse_status
 
@@ -24,8 +24,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archive_reason: Optional[int] = None
     # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
-    # Current disposition summary that describes the lead outcome.
-    current_disposition: Optional[ConversationResponse_currentDisposition] = None
+    # Current lead status change summary that describes the lead outcome.
+    current_lead_status: Optional[ConversationResponse_currentLeadStatus] = None
     # Email address used to resolve the lead's avatar when available.
     email: Optional[str] = None
     # First name of the lead, user, or contact represented by this conversation response.
@@ -75,11 +75,11 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .conversation_response_current_disposition import ConversationResponse_currentDisposition
+        from .conversation_response_current_lead_status import ConversationResponse_currentLeadStatus
         from .conversation_response_phone_number import ConversationResponse_phoneNumber
         from .conversation_response_status import ConversationResponse_status
 
-        from .conversation_response_current_disposition import ConversationResponse_currentDisposition
+        from .conversation_response_current_lead_status import ConversationResponse_currentLeadStatus
         from .conversation_response_phone_number import ConversationResponse_phoneNumber
         from .conversation_response_status import ConversationResponse_status
 
@@ -87,7 +87,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "activeOutboundPhoneNumberId": lambda n : setattr(self, 'active_outbound_phone_number_id', n.get_str_value()),
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
-            "currentDisposition": lambda n : setattr(self, 'current_disposition', n.get_object_value(ConversationResponse_currentDisposition)),
+            "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(ConversationResponse_currentLeadStatus)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -118,7 +118,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("activeOutboundPhoneNumberId", self.active_outbound_phone_number_id)
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
-        writer.write_object_value("currentDisposition", self.current_disposition)
+        writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)

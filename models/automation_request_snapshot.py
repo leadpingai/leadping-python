@@ -20,8 +20,6 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
 
     # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # Business ID captured when the automation request snapshot was created.
-    business_id: Optional[str] = None
     # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
     # Directed connections between nodes in this automation graph.
@@ -36,10 +34,12 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether Leadping manages this automation request snapshot automatically instead of a user.
     is_system_managed: Optional[bool] = None
-    # Management level that controls whether Leadping or the business owns this automation setting.
+    # Management level that controls whether Leadping or the organization owns this automation setting.
     management_level: Optional[str] = None
     # Display name for this automation request snapshot in the Leadping API.
     name: Optional[str] = None
+    # Organization ID captured when the automation request snapshot was created.
+    organization_id: Optional[str] = None
     # Scope that limits where this automation request snapshot applies in Leadping.
     scope: Optional[str] = None
     # Automation triggers that can start this workflow.
@@ -75,7 +75,6 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationAction)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionGroups": lambda n : setattr(self, 'condition_groups', n.get_collection_of_object_values(AutomationConditionGroup)),
             "connections": lambda n : setattr(self, 'connections', n.get_collection_of_object_values(AutomationConnection)),
             "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
@@ -85,6 +84,7 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
             "isSystemManaged": lambda n : setattr(self, 'is_system_managed', n.get_bool_value()),
             "managementLevel": lambda n : setattr(self, 'management_level', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
             "visibility": lambda n : setattr(self, 'visibility', n.get_str_value()),
@@ -100,7 +100,6 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_collection_of_object_values("conditionGroups", self.condition_groups)
         writer.write_collection_of_object_values("connections", self.connections)
         writer.write_str_value("createdByUserId", self.created_by_user_id)
@@ -110,6 +109,7 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isSystemManaged", self.is_system_managed)
         writer.write_str_value("managementLevel", self.management_level)
         writer.write_str_value("name", self.name)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("scope", self.scope)
         writer.write_collection_of_object_values("triggers", self.triggers)
         writer.write_str_value("visibility", self.visibility)

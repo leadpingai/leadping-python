@@ -6,8 +6,8 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .lead_table_row_business import LeadTableRow_business
-    from .lead_table_row_current_disposition import LeadTableRow_currentDisposition
+    from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
+    from .lead_table_row_organization import LeadTableRow_organization
     from .lead_table_row_source import LeadTableRow_source
     from .tag_summary import TagSummary
 
@@ -25,12 +25,10 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
-    # The ID and name for this business.
-    business: Optional[LeadTableRow_business] = None
     # UTC timestamp when this lead table row was created.
     created_at: Optional[datetime.datetime] = None
-    # Current disposition summary that describes the lead outcome.
-    current_disposition: Optional[LeadTableRow_currentDisposition] = None
+    # Current lead status change summary that describes the lead outcome.
+    current_lead_status: Optional[LeadTableRow_currentLeadStatus] = None
     # Email address for the person represented by this lead table row.
     email: Optional[str] = None
     # Indicates whether this lead table row is active and available in the Leadping API.
@@ -43,7 +41,9 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     is_archived: Optional[bool] = None
     # Last name of the lead, user, or contact represented by this lead table row.
     last_name: Optional[str] = None
-    # Phone details for the lead, user, or business represented by this lead table row.
+    # The ID and name for this organization.
+    organization: Optional[LeadTableRow_organization] = None
+    # Phone details for the lead, user, or organization represented by this lead table row.
     phone: Optional[str] = None
     # Lead price or transaction price supplied to the Leadping API.
     price: Optional[float] = None
@@ -74,13 +74,13 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .lead_table_row_business import LeadTableRow_business
-        from .lead_table_row_current_disposition import LeadTableRow_currentDisposition
+        from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
+        from .lead_table_row_organization import LeadTableRow_organization
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
-        from .lead_table_row_business import LeadTableRow_business
-        from .lead_table_row_current_disposition import LeadTableRow_currentDisposition
+        from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
+        from .lead_table_row_organization import LeadTableRow_organization
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
@@ -88,15 +88,15 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
             "archivedByUserId": lambda n : setattr(self, 'archived_by_user_id', n.get_str_value()),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(LeadTableRow_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
-            "currentDisposition": lambda n : setattr(self, 'current_disposition', n.get_object_value(LeadTableRow_currentDisposition)),
+            "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(LeadTableRow_currentLeadStatus)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(LeadTableRow_organization)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "source": lambda n : setattr(self, 'source', n.get_object_value(LeadTableRow_source)),
@@ -118,15 +118,15 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
         writer.write_str_value("archivedByUserId", self.archived_by_user_id)
-        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
-        writer.write_object_value("currentDisposition", self.current_disposition)
+        writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_str_value("email", self.email)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_str_value("lastName", self.last_name)
+        writer.write_object_value("organization", self.organization)
         writer.write_str_value("phone", self.phone)
         writer.write_float_value("price", self.price)
         writer.write_object_value("source", self.source)

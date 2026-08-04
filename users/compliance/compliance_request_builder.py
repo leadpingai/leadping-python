@@ -33,7 +33,7 @@ class ComplianceRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: ComplianceUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[UserResponse]:
         """
-        Updates current-user compliance settings used for messaging eligibility, billing readiness, and business account setup.
+        Updates current-user compliance settings used for messaging eligibility, billing readiness, and organization account setup.
         param body: Request payload for compliance update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[UserResponse]
@@ -57,7 +57,7 @@ class ComplianceRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: ComplianceUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates current-user compliance settings used for messaging eligibility, billing readiness, and business account setup.
+        Updates current-user compliance settings used for messaging eligibility, billing readiness, and organization account setup.
         param body: Request payload for compliance update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

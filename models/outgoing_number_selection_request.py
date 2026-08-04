@@ -27,7 +27,7 @@ class OutgoingNumberSelectionRequest(AdditionalDataHolder, Parsable):
     recipient_phone_number: Optional[str] = None
     # Lead source ID used to choose the best outgoing sender number.
     source_id: Optional[str] = None
-    # Team ID used to choose the best outgoing sender number.
+    # Organization ID used to choose the best outgoing sender number.
     team_id: Optional[str] = None
     
     @staticmethod

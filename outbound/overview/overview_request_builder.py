@@ -32,7 +32,7 @@ class OverviewRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OutboundCapacityOverview]:
         """
-        Returns current-business outbound capacity, scheduled work, and pacing decisions used to control lead communication delivery.
+        Returns current-organization outbound capacity, scheduled work, and pacing decisions used to control lead communication delivery.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OutboundCapacityOverview]
         """
@@ -52,7 +52,7 @@ class OverviewRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns current-business outbound capacity, scheduled work, and pacing decisions used to control lead communication delivery.
+        Returns current-organization outbound capacity, scheduled work, and pacing decisions used to control lead communication delivery.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

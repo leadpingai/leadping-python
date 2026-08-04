@@ -17,15 +17,15 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .analytics.analytics_request_builder import AnalyticsRequestBuilder
     from .automations.automations_request_builder import AutomationsRequestBuilder
-    from .businesses.businesses_request_builder import BusinessesRequestBuilder
     from .contact.contact_request_builder import ContactRequestBuilder
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
-    from .dispositions.dispositions_request_builder import DispositionsRequestBuilder
     from .events.events_request_builder import EventsRequestBuilder
     from .feedback.feedback_request_builder import FeedbackRequestBuilder
     from .leads.leads_request_builder import LeadsRequestBuilder
     from .lead_statuses.lead_statuses_request_builder import LeadStatusesRequestBuilder
+    from .lead_status_changes.lead_status_changes_request_builder import LeadStatusChangesRequestBuilder
     from .notifications.notifications_request_builder import NotificationsRequestBuilder
+    from .organizations.organizations_request_builder import OrganizationsRequestBuilder
     from .outbound.outbound_request_builder import OutboundRequestBuilder
     from .payment_methods.payment_methods_request_builder import PaymentMethodsRequestBuilder
     from .phone_call.phone_call_request_builder import PhoneCallRequestBuilder
@@ -84,15 +84,6 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         return AutomationsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def businesses(self) -> BusinessesRequestBuilder:
-        """
-        The businesses property
-        """
-        from .businesses.businesses_request_builder import BusinessesRequestBuilder
-
-        return BusinessesRequestBuilder(self.request_adapter, self.path_parameters)
-    
-    @property
     def contact(self) -> ContactRequestBuilder:
         """
         The contact property
@@ -111,15 +102,6 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         return ConversationsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
-    def dispositions(self) -> DispositionsRequestBuilder:
-        """
-        The dispositions property
-        """
-        from .dispositions.dispositions_request_builder import DispositionsRequestBuilder
-
-        return DispositionsRequestBuilder(self.request_adapter, self.path_parameters)
-    
-    @property
     def events(self) -> EventsRequestBuilder:
         """
         The events property
@@ -136,6 +118,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .feedback.feedback_request_builder import FeedbackRequestBuilder
 
         return FeedbackRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def lead_status_changes(self) -> LeadStatusChangesRequestBuilder:
+        """
+        The leadStatusChanges property
+        """
+        from .lead_status_changes.lead_status_changes_request_builder import LeadStatusChangesRequestBuilder
+
+        return LeadStatusChangesRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def lead_statuses(self) -> LeadStatusesRequestBuilder:
@@ -163,6 +154,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .notifications.notifications_request_builder import NotificationsRequestBuilder
 
         return NotificationsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def organizations(self) -> OrganizationsRequestBuilder:
+        """
+        The organizations property
+        """
+        from .organizations.organizations_request_builder import OrganizationsRequestBuilder
+
+        return OrganizationsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def outbound(self) -> OutboundRequestBuilder:

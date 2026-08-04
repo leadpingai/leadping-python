@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from .lead_contact import LeadContact
     from .lead_metadata import LeadMetadata
     from .lead_profile import LeadProfile
-    from .lead_response_current_disposition import LeadResponse_currentDisposition
+    from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
     from .lead_response_phone_identity import LeadResponse_phoneIdentity
     from .tag_summary import TagSummary
 
@@ -33,8 +33,8 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     contact: Optional[LeadContact] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # Current disposition summary that describes the lead outcome.
-    current_disposition: Optional[LeadResponse_currentDisposition] = None
+    # Current lead status change summary that describes the lead outcome.
+    current_lead_status: Optional[LeadResponse_currentLeadStatus] = None
     # Demographic profile details for the lead represented by this lead response.
     customer: Optional[LeadProfile] = None
     # Indicates whether this lead response is active and available in the Leadping API.
@@ -71,14 +71,14 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
-        from .lead_response_current_disposition import LeadResponse_currentDisposition
+        from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
         from .lead_response_phone_identity import LeadResponse_phoneIdentity
         from .tag_summary import TagSummary
 
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
-        from .lead_response_current_disposition import LeadResponse_currentDisposition
+        from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
         from .lead_response_phone_identity import LeadResponse_phoneIdentity
         from .tag_summary import TagSummary
 
@@ -89,7 +89,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
             "archivedByUserId": lambda n : setattr(self, 'archived_by_user_id', n.get_str_value()),
             "contact": lambda n : setattr(self, 'contact', n.get_object_value(LeadContact)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
-            "currentDisposition": lambda n : setattr(self, 'current_disposition', n.get_object_value(LeadResponse_currentDisposition)),
+            "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(LeadResponse_currentLeadStatus)),
             "customer": lambda n : setattr(self, 'customer', n.get_object_value(LeadProfile)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -115,7 +115,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("archivedByUserId", self.archived_by_user_id)
         writer.write_object_value("contact", self.contact)
         writer.write_datetime_value("createdAt", self.created_at)
-        writer.write_object_value("currentDisposition", self.current_disposition)
+        writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_object_value("customer", self.customer)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)

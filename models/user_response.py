@@ -11,7 +11,7 @@ if TYPE_CHECKING:
     from .user_response_billing_plan import UserResponse_billingPlan
     from .user_response_billing_state import UserResponse_billingState
     from .user_response_compliance import UserResponse_compliance
-    from .user_response_current_business import UserResponse_currentBusiness
+    from .user_response_current_organization import UserResponse_currentOrganization
     from .user_response_notification_preferences import UserResponse_notificationPreferences
     from .user_response_subscription_status import UserResponse_subscriptionStatus
 
@@ -25,14 +25,14 @@ class UserResponse(AdditionalDataHolder, Parsable):
 
     # Defines the supported Billing Plan values.
     billing_plan: Optional[UserResponse_billingPlan] = None
-    # Customer-safe billing state for the user's currently selected business.
+    # Customer-safe billing state for the user's currently selected organization.
     billing_state: Optional[UserResponse_billingState] = None
     # The compliance value for this user.
     compliance: Optional[UserResponse_compliance] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The current business value for this user.
-    current_business: Optional[UserResponse_currentBusiness] = None
+    # The current organization value for this user.
+    current_organization: Optional[UserResponse_currentOrganization] = None
     # The email address associated with this user.
     email: Optional[str] = None
     # The first name value for this user.
@@ -89,7 +89,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_billing_plan import UserResponse_billingPlan
         from .user_response_billing_state import UserResponse_billingState
         from .user_response_compliance import UserResponse_compliance
-        from .user_response_current_business import UserResponse_currentBusiness
+        from .user_response_current_organization import UserResponse_currentOrganization
         from .user_response_notification_preferences import UserResponse_notificationPreferences
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
@@ -98,7 +98,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_billing_plan import UserResponse_billingPlan
         from .user_response_billing_state import UserResponse_billingState
         from .user_response_compliance import UserResponse_compliance
-        from .user_response_current_business import UserResponse_currentBusiness
+        from .user_response_current_organization import UserResponse_currentOrganization
         from .user_response_notification_preferences import UserResponse_notificationPreferences
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
@@ -107,7 +107,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
             "billingState": lambda n : setattr(self, 'billing_state', n.get_object_value(UserResponse_billingState)),
             "compliance": lambda n : setattr(self, 'compliance', n.get_object_value(UserResponse_compliance)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
-            "currentBusiness": lambda n : setattr(self, 'current_business', n.get_object_value(UserResponse_currentBusiness)),
+            "currentOrganization": lambda n : setattr(self, 'current_organization', n.get_object_value(UserResponse_currentOrganization)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -140,7 +140,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("billingState", self.billing_state)
         writer.write_object_value("compliance", self.compliance)
         writer.write_datetime_value("createdAt", self.created_at)
-        writer.write_object_value("currentBusiness", self.current_business)
+        writer.write_object_value("currentOrganization", self.current_organization)
         writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)

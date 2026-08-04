@@ -33,7 +33,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Deletes an automation for the current business so it no longer schedules follow-up or routing work for captured leads.
+        Deletes an automation for the current organization so it no longer schedules follow-up or routing work for captured leads.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
@@ -52,7 +52,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationResponse]:
         """
-        Returns one automation for the current business, including trigger criteria, message steps, routing settings, and enabled state.
+        Returns one automation for the current organization, including trigger criteria, message steps, routing settings, and enabled state.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationResponse]
         """
@@ -73,7 +73,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: AutomationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationResponse]:
         """
-        Updates an automation for current-business leads, changing triggers, message steps, routing, or active follow-up settings.
+        Updates an automation for current-organization leads, changing triggers, message steps, routing, or active follow-up settings.
         param body: Request schema for the Leadping API automation configuration request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationResponse]
@@ -98,7 +98,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Deletes an automation for the current business so it no longer schedules follow-up or routing work for captured leads.
+        Deletes an automation for the current organization so it no longer schedules follow-up or routing work for captured leads.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -109,7 +109,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns one automation for the current business, including trigger criteria, message steps, routing settings, and enabled state.
+        Returns one automation for the current organization, including trigger criteria, message steps, routing settings, and enabled state.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -120,7 +120,7 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: AutomationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates an automation for current-business leads, changing triggers, message steps, routing, or active follow-up settings.
+        Updates an automation for current-organization leads, changing triggers, message steps, routing, or active follow-up settings.
         param body: Request schema for the Leadping API automation configuration request, including the fields clients can send.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

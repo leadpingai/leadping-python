@@ -18,7 +18,7 @@ class PhoneNumberRoutingMetadata(AdditionalDataHolder, Parsable):
     sms_enabled: Optional[bool] = None
     # Lead source ID assigned to this phone number for attribution and routing.
     source_id: Optional[str] = None
-    # Team ID used to route calls and messages for this phone number.
+    # Organization ID used to route calls and messages for this phone number.
     team_id: Optional[str] = None
     # Leadping 10DLC application entity associated with this phone number.
     ten_dlc_application_id: Optional[str] = None

@@ -8,8 +8,8 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .transaction_response_billable_unit import TransactionResponse_billableUnit
     from .transaction_response_billing_channel import TransactionResponse_billingChannel
-    from .transaction_response_business import TransactionResponse_business
     from .transaction_response_lead import TransactionResponse_lead
+    from .transaction_response_organization import TransactionResponse_organization
     from .transaction_status import TransactionStatus
     from .transaction_type import TransactionType
 
@@ -29,8 +29,6 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     billed_amount: Optional[float] = None
     # Defines the supported Usage Channel values.
     billing_channel: Optional[TransactionResponse_billingChannel] = None
-    # The ID and name for this business.
-    business: Optional[TransactionResponse_business] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction response to API users.
@@ -49,6 +47,8 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     net_amount: Optional[float] = None
     # Additional billing notes that explain the transaction for admins or customers.
     notes: Optional[str] = None
+    # The ID and name for this organization.
+    organization: Optional[TransactionResponse_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
     # Leadping platform fee amount included in the transaction.
@@ -76,15 +76,15 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         """
         from .transaction_response_billable_unit import TransactionResponse_billableUnit
         from .transaction_response_billing_channel import TransactionResponse_billingChannel
-        from .transaction_response_business import TransactionResponse_business
         from .transaction_response_lead import TransactionResponse_lead
+        from .transaction_response_organization import TransactionResponse_organization
         from .transaction_status import TransactionStatus
         from .transaction_type import TransactionType
 
         from .transaction_response_billable_unit import TransactionResponse_billableUnit
         from .transaction_response_billing_channel import TransactionResponse_billingChannel
-        from .transaction_response_business import TransactionResponse_business
         from .transaction_response_lead import TransactionResponse_lead
+        from .transaction_response_organization import TransactionResponse_organization
         from .transaction_status import TransactionStatus
         from .transaction_type import TransactionType
 
@@ -93,7 +93,6 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(TransactionResponse_billableUnit)),
             "billedAmount": lambda n : setattr(self, 'billed_amount', n.get_float_value()),
             "billingChannel": lambda n : setattr(self, 'billing_channel', n.get_enum_value(TransactionResponse_billingChannel)),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(TransactionResponse_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "gatewayFeeAmount": lambda n : setattr(self, 'gateway_fee_amount', n.get_float_value()),
@@ -103,6 +102,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(TransactionResponse_organization)),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
             "platformFeeAmount": lambda n : setattr(self, 'platform_fee_amount', n.get_float_value()),
             "transactionStatus": lambda n : setattr(self, 'transaction_status', n.get_enum_value(TransactionStatus)),
@@ -122,7 +122,6 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_enum_value("billableUnit", self.billable_unit)
         writer.write_float_value("billedAmount", self.billed_amount)
         writer.write_enum_value("billingChannel", self.billing_channel)
-        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
         writer.write_float_value("gatewayFeeAmount", self.gateway_fee_amount)
@@ -132,6 +131,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("notes", self.notes)
+        writer.write_object_value("organization", self.organization)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
         writer.write_float_value("platformFeeAmount", self.platform_fee_amount)
         writer.write_enum_value("transactionStatus", self.transaction_status)

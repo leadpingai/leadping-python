@@ -30,10 +30,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
     blocked_at: Optional[datetime.datetime] = None
-    # Business summary connected to this SMS event table row.
-    business: Optional[str] = None
-    # Business display name shown for this SMS event.
-    business_name: Optional[str] = None
     # Reason this delivery, run, or request was canceled.
     cancel_reason: Optional[str] = None
     # UTC timestamp when this delivery or workflow was canceled.
@@ -66,6 +62,10 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     lead: Optional[IdNamePair] = None
     # Media attached to this SMS/MMS event.
     media: Optional[list[MessageMediaAttachment]] = None
+    # Organization summary connected to this SMS event table row.
+    organization: Optional[str] = None
+    # Organization display name shown for this SMS event.
+    organization_name: Optional[str] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
     # Defines the source that requested outbound delivery.
@@ -135,8 +135,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
-            "business": lambda n : setattr(self, 'business', n.get_str_value()),
-            "businessName": lambda n : setattr(self, 'business_name', n.get_str_value()),
             "cancelReason": lambda n : setattr(self, 'cancel_reason', n.get_str_value()),
             "canceledAt": lambda n : setattr(self, 'canceled_at', n.get_datetime_value()),
             "complianceAction": lambda n : setattr(self, 'compliance_action', n.get_str_value()),
@@ -153,6 +151,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(IdNamePair)),
             "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
+            "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
+            "organizationName": lambda n : setattr(self, 'organization_name', n.get_str_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "outboundSource": lambda n : setattr(self, 'outbound_source', n.get_enum_value(SmsEventTableRow_outboundSource)),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
@@ -186,8 +186,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
-        writer.write_str_value("business", self.business)
-        writer.write_str_value("businessName", self.business_name)
         writer.write_str_value("cancelReason", self.cancel_reason)
         writer.write_datetime_value("canceledAt", self.canceled_at)
         writer.write_str_value("complianceAction", self.compliance_action)
@@ -204,6 +202,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isAutomated", self.is_automated)
         writer.write_object_value("lead", self.lead)
         writer.write_collection_of_object_values("media", self.media)
+        writer.write_str_value("organization", self.organization)
+        writer.write_str_value("organizationName", self.organization_name)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_enum_value("outboundSource", self.outbound_source)
         writer.write_datetime_value("queuedAt", self.queued_at)

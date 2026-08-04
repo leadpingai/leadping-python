@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 class WorkflowStatusRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /leads/{id}/workflow-status
+    Builds and executes requests for operations under /leads/{-id}/workflow-status
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -28,11 +28,11 @@ class WorkflowStatusRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/leads/{id}/workflow-status", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/leads/{%2Did}/workflow-status", path_parameters)
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationWorkflowStatusResponse]:
         """
-        Returns automation workflow status for one lead, including active runs, paused state, and follow-up progress for the current business.
+        Returns automation workflow status for one lead, including active runs, paused state, and follow-up progress for the current organization.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationWorkflowStatusResponse]
         """
@@ -53,7 +53,7 @@ class WorkflowStatusRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns automation workflow status for one lead, including active runs, paused state, and follow-up progress for the current business.
+        Returns automation workflow status for one lead, including active runs, paused state, and follow-up progress for the current organization.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

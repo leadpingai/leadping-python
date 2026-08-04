@@ -20,8 +20,6 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
     actions: Optional[list[AutomationActionRunRecord]] = None
     # Automation ID connected to this workflow, run, or event.
     automation_id: Optional[str] = None
-    # Business ID that owns this automation run.
-    business_id: Optional[str] = None
     # UTC timestamp when processing completed for this automation run record.
     completed_at: Optional[datetime.datetime] = None
     # Execution mode used for automation preview or live workflow processing.
@@ -34,6 +32,8 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
     last_attempt_at: Optional[datetime.datetime] = None
     # Lead ID that triggered this automation run, when the run is lead-based.
     lead_id: Optional[str] = None
+    # Organization ID that owns this automation run.
+    organization_id: Optional[str] = None
     # Number of processing attempts made for this workflow or delivery request.
     processing_attempts: Optional[int] = None
     # Human-readable reason explaining why Leadping skipped this automation run.
@@ -68,13 +68,13 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationActionRunRecord)),
             "automationId": lambda n : setattr(self, 'automation_id', n.get_str_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
             "executionMode": lambda n : setattr(self, 'execution_mode', n.get_str_value()),
             "failureCode": lambda n : setattr(self, 'failure_code', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastAttemptAt": lambda n : setattr(self, 'last_attempt_at', n.get_datetime_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "processingAttempts": lambda n : setattr(self, 'processing_attempts', n.get_int_value()),
             "skippedReason": lambda n : setattr(self, 'skipped_reason', n.get_str_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
@@ -93,13 +93,13 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
         writer.write_str_value("automationId", self.automation_id)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_datetime_value("completedAt", self.completed_at)
         writer.write_str_value("executionMode", self.execution_mode)
         writer.write_str_value("failureCode", self.failure_code)
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("lastAttemptAt", self.last_attempt_at)
         writer.write_str_value("leadId", self.lead_id)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_int_value("processingAttempts", self.processing_attempts)
         writer.write_str_value("skippedReason", self.skipped_reason)
         writer.write_datetime_value("startedAt", self.started_at)

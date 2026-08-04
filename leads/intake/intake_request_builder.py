@@ -207,7 +207,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         # Lead birth date used for demographic matching and insurance intake workflows.
         birth_date: Optional[datetime.date] = None
 
-        # City for the lead or business postal address.
+        # City for the lead or organization postal address.
         city: Optional[str] = None
 
         # Lead date of birth supplied by intake sources and normalized into the lead profile.
@@ -234,13 +234,13 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         # Last name of the lead, user, or contact represented by this lead intake request.
         last_name: Optional[str] = None
 
-        # Phone details for the lead, user, or business represented by this lead intake request.
+        # Phone details for the lead, user, or organization represented by this lead intake request.
         phone: Optional[str] = None
 
         # Source-provided phone type, such as mobile, landline, or VoIP, used during lead intake normalization.
         phone_type: Optional[str] = None
 
-        # Postal code for the lead or business address.
+        # Postal code for the lead or organization address.
         postal_code: Optional[str] = None
 
         # Lead price or transaction price supplied to the Leadping API.
@@ -264,7 +264,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         # Source-provided key-value metadata retained for lead attribution and integration troubleshooting.
         source_metadata: Optional[str] = None
 
-        # State, province, or region for the lead or business postal address.
+        # State, province, or region for the lead or organization postal address.
         state: Optional[str] = None
 
         # Affiliate or publisher sub ID captured for lead attribution.

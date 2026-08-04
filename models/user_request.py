@@ -8,7 +8,7 @@ if TYPE_CHECKING:
     from .mobile_device_preferences import MobileDevicePreferences
     from .user_request_billing_plan import UserRequest_billingPlan
     from .user_request_compliance import UserRequest_compliance
-    from .user_request_current_business import UserRequest_currentBusiness
+    from .user_request_current_organization import UserRequest_currentOrganization
     from .user_request_notification_preferences import UserRequest_notificationPreferences
 
 @dataclass
@@ -23,8 +23,8 @@ class UserRequest(AdditionalDataHolder, Parsable):
     billing_plan: Optional[UserRequest_billingPlan] = None
     # User compliance settings and attestations captured for Leadping account review.
     compliance: Optional[UserRequest_compliance] = None
-    # Business currently selected for the user session or profile.
-    current_business: Optional[UserRequest_currentBusiness] = None
+    # Organization currently selected for the user session or profile.
+    current_organization: Optional[UserRequest_currentOrganization] = None
     # Email address for the person represented by this user profile request.
     email: Optional[str] = None
     # First name of the lead, user, or contact represented by this user profile request.
@@ -39,7 +39,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Notification preferences configured for the user.
     notification_preferences: Optional[UserRequest_notificationPreferences] = None
-    # Phone details for the lead, user, or business represented by this user profile request.
+    # Phone details for the lead, user, or organization represented by this user profile request.
     phone: Optional[str] = None
     # IANA time zone identifier used when displaying dates and times for this user.
     time_zone_id: Optional[str] = None
@@ -63,19 +63,19 @@ class UserRequest(AdditionalDataHolder, Parsable):
         from .mobile_device_preferences import MobileDevicePreferences
         from .user_request_billing_plan import UserRequest_billingPlan
         from .user_request_compliance import UserRequest_compliance
-        from .user_request_current_business import UserRequest_currentBusiness
+        from .user_request_current_organization import UserRequest_currentOrganization
         from .user_request_notification_preferences import UserRequest_notificationPreferences
 
         from .mobile_device_preferences import MobileDevicePreferences
         from .user_request_billing_plan import UserRequest_billingPlan
         from .user_request_compliance import UserRequest_compliance
-        from .user_request_current_business import UserRequest_currentBusiness
+        from .user_request_current_organization import UserRequest_currentOrganization
         from .user_request_notification_preferences import UserRequest_notificationPreferences
 
         fields: dict[str, Callable[[Any], None]] = {
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(UserRequest_billingPlan)),
             "compliance": lambda n : setattr(self, 'compliance', n.get_object_value(UserRequest_compliance)),
-            "currentBusiness": lambda n : setattr(self, 'current_business', n.get_object_value(UserRequest_currentBusiness)),
+            "currentOrganization": lambda n : setattr(self, 'current_organization', n.get_object_value(UserRequest_currentOrganization)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -98,7 +98,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_object_value("compliance", self.compliance)
-        writer.write_object_value("currentBusiness", self.current_business)
+        writer.write_object_value("currentOrganization", self.current_organization)
         writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)

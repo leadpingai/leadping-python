@@ -19,7 +19,7 @@ if TYPE_CHECKING:
     from ..models.problem_details import ProblemDetails
     from .all.all_request_builder import AllRequestBuilder
     from .intake.intake_request_builder import IntakeRequestBuilder
-    from .item.leads_item_request_builder import LeadsItemRequestBuilder
+    from .item.item_request_builder import ItemRequestBuilder
 
 class LeadsRequestBuilder(BaseRequestBuilder):
     """
@@ -34,19 +34,19 @@ class LeadsRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/leads{?sourceKey*}", path_parameters)
     
-    def by_id(self,id: str) -> LeadsItemRequestBuilder:
+    def by_id(self,id: str) -> ItemRequestBuilder:
         """
         Gets an item from the leadping.leads.item collection
         param id: The ID of the lead to retrieve.
-        Returns: LeadsItemRequestBuilder
+        Returns: ItemRequestBuilder
         """
         if id is None:
             raise TypeError("id cannot be null.")
-        from .item.leads_item_request_builder import LeadsItemRequestBuilder
+        from .item.item_request_builder import ItemRequestBuilder
 
         url_tpl_params = get_path_parameters(self.path_parameters)
-        url_tpl_params["id"] = id
-        return LeadsItemRequestBuilder(self.request_adapter, url_tpl_params)
+        url_tpl_params["%2Did"] = id
+        return ItemRequestBuilder(self.request_adapter, url_tpl_params)
     
     async def post(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[LeadsRequestBuilderPostQueryParameters]] = None) -> Optional[LeadResponse]:
         """

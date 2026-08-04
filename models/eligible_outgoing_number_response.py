@@ -42,7 +42,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     selection_reason: Optional[OutgoingNumberSelectionReason] = None
     # Lead source ID used to determine this phone number's outbound eligibility.
     source_id: Optional[str] = None
-    # Team ID used to determine this phone number's outbound eligibility.
+    # Organization ID used to determine this phone number's outbound eligibility.
     team_id: Optional[str] = None
     
     @staticmethod

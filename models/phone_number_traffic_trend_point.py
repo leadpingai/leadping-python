@@ -21,6 +21,10 @@ class PhoneNumberTrafficTrendPoint(AdditionalDataHolder, Parsable):
     end_at: Optional[datetime.datetime] = None
     # Short display label for this phone number traffic trend bucket, formatted for charts, filters, or list views.
     label: Optional[str] = None
+    # Number of MMS messages that failed during this metrics window.
+    mms_failed_count: Optional[int] = None
+    # Number of MMS messages sent during this metrics window.
+    mms_sent_count: Optional[int] = None
     # Number of SMS messages that failed during this metrics window.
     sms_failed_count: Optional[int] = None
     # Number of SMS messages sent during this metrics window.
@@ -49,6 +53,8 @@ class PhoneNumberTrafficTrendPoint(AdditionalDataHolder, Parsable):
             "callPlacedCount": lambda n : setattr(self, 'call_placed_count', n.get_int_value()),
             "endAt": lambda n : setattr(self, 'end_at', n.get_datetime_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
+            "mmsFailedCount": lambda n : setattr(self, 'mms_failed_count', n.get_int_value()),
+            "mmsSentCount": lambda n : setattr(self, 'mms_sent_count', n.get_int_value()),
             "smsFailedCount": lambda n : setattr(self, 'sms_failed_count', n.get_int_value()),
             "smsSentCount": lambda n : setattr(self, 'sms_sent_count', n.get_int_value()),
             "startAt": lambda n : setattr(self, 'start_at', n.get_datetime_value()),
@@ -67,6 +73,8 @@ class PhoneNumberTrafficTrendPoint(AdditionalDataHolder, Parsable):
         writer.write_int_value("callPlacedCount", self.call_placed_count)
         writer.write_datetime_value("endAt", self.end_at)
         writer.write_str_value("label", self.label)
+        writer.write_int_value("mmsFailedCount", self.mms_failed_count)
+        writer.write_int_value("mmsSentCount", self.mms_sent_count)
         writer.write_int_value("smsFailedCount", self.sms_failed_count)
         writer.write_int_value("smsSentCount", self.sms_sent_count)
         writer.write_datetime_value("startAt", self.start_at)

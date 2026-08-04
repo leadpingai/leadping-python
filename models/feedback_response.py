@@ -21,8 +21,6 @@ class FeedbackResponse(AdditionalDataHolder, Parsable):
     allow_contact: Optional[bool] = None
     # Product area or app section connected to this feedback item response.
     area: Optional[str] = None
-    # Business ID connected to the feedback item, when the feedback came from a business workspace.
-    business_id: Optional[str] = None
     # Client application version that submitted this feedback item response.
     client_version: Optional[str] = None
     # UTC timestamp when this feedback item response was created.
@@ -31,6 +29,8 @@ class FeedbackResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Message text supplied by the user or returned by the Leadping API for this feedback item response.
     message: Optional[str] = None
+    # Organization ID connected to the feedback item, when the feedback came from an organization workspace.
+    organization_id: Optional[str] = None
     # Application route where this feedback item response originated or should direct the user.
     route: Optional[str] = None
     # Current lifecycle status for this feedback item response in the Leadping API.
@@ -65,11 +65,11 @@ class FeedbackResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "allowContact": lambda n : setattr(self, 'allow_contact', n.get_bool_value()),
             "area": lambda n : setattr(self, 'area', n.get_str_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "clientVersion": lambda n : setattr(self, 'client_version', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "message": lambda n : setattr(self, 'message', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "route": lambda n : setattr(self, 'route', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(FeedbackStatus)),
             "type": lambda n : setattr(self, 'type', n.get_enum_value(FeedbackType)),
@@ -87,11 +87,11 @@ class FeedbackResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_bool_value("allowContact", self.allow_contact)
         writer.write_str_value("area", self.area)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("clientVersion", self.client_version)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("id", self.id)
         writer.write_str_value("message", self.message)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("route", self.route)
         writer.write_enum_value("status", self.status)
         writer.write_enum_value("type", self.type)

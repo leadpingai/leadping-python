@@ -32,7 +32,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[WalletResponse]:
         """
-        Returns the current business wallet, including balance and funding status used for communication delivery and billing.
+        Returns the current organization wallet, including balance and funding status used for communication delivery and billing.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[WalletResponse]
         """
@@ -54,7 +54,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the current business wallet, including balance and funding status used for communication delivery and billing.
+        Returns the current organization wallet, including balance and funding status used for communication delivery and billing.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

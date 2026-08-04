@@ -25,8 +25,6 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     balance: Optional[float] = None
     # UTC timestamp when Leadping last calculated the wallet balance.
     balance_calculated_at: Optional[datetime.datetime] = None
-    # Business ID that owns this wallet balance or credit.
-    business_id: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Defines the lifecycle state for a wallet credit lot.
@@ -47,6 +45,8 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     next_credit_expiration_at: Optional[datetime.datetime] = None
     # Amount of wallet credit scheduled to expire next.
     next_expiring_credit_amount: Optional[float] = None
+    # Organization ID that owns this wallet balance or credit.
+    organization_id: Optional[str] = None
     # Original wallet transaction ID referenced by a reversal, refund, or adjustment.
     original_transaction_id: Optional[str] = None
     # UTC timestamp when the wallet credit was purchased.
@@ -81,7 +81,6 @@ class WalletResponse(AdditionalDataHolder, Parsable):
             "amountRemaining": lambda n : setattr(self, 'amount_remaining', n.get_float_value()),
             "balance": lambda n : setattr(self, 'balance', n.get_float_value()),
             "balanceCalculatedAt": lambda n : setattr(self, 'balance_calculated_at', n.get_datetime_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "creditStatus": lambda n : setattr(self, 'credit_status', n.get_enum_value(WalletResponse_creditStatus)),
             "currency": lambda n : setattr(self, 'currency', n.get_str_value()),
@@ -92,6 +91,7 @@ class WalletResponse(AdditionalDataHolder, Parsable):
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "nextCreditExpirationAt": lambda n : setattr(self, 'next_credit_expiration_at', n.get_datetime_value()),
             "nextExpiringCreditAmount": lambda n : setattr(self, 'next_expiring_credit_amount', n.get_float_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "originalTransactionId": lambda n : setattr(self, 'original_transaction_id', n.get_str_value()),
             "purchasedAt": lambda n : setattr(self, 'purchased_at', n.get_datetime_value()),
             "sourceType": lambda n : setattr(self, 'source_type', n.get_enum_value(WalletResponse_sourceType)),
@@ -110,7 +110,6 @@ class WalletResponse(AdditionalDataHolder, Parsable):
         writer.write_float_value("amountRemaining", self.amount_remaining)
         writer.write_float_value("balance", self.balance)
         writer.write_datetime_value("balanceCalculatedAt", self.balance_calculated_at)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_enum_value("creditStatus", self.credit_status)
         writer.write_str_value("currency", self.currency)
@@ -121,6 +120,7 @@ class WalletResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("name", self.name)
         writer.write_datetime_value("nextCreditExpirationAt", self.next_credit_expiration_at)
         writer.write_float_value("nextExpiringCreditAmount", self.next_expiring_credit_amount)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("originalTransactionId", self.original_transaction_id)
         writer.write_datetime_value("purchasedAt", self.purchased_at)
         writer.write_enum_value("sourceType", self.source_type)

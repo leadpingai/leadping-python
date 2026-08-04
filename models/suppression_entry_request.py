@@ -12,12 +12,12 @@ class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The business ID associated with this ion entry.
-    business_id: Optional[str] = None
     # The channel value for this ion entry.
     channel: Optional[str] = None
     # The email address associated with this ion entry.
     email: Optional[str] = None
+    # The organization ID associated with this ion entry.
+    organization_id: Optional[str] = None
     # The phone number associated with this ion entry.
     phone_number: Optional[str] = None
     # The human-readable reason explaining this ion entry.
@@ -42,9 +42,9 @@ class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "channel": lambda n : setattr(self, 'channel', n.get_str_value()),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
             "recipientIdentifier": lambda n : setattr(self, 'recipient_identifier', n.get_str_value()),
@@ -59,9 +59,9 @@ class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("channel", self.channel)
         writer.write_str_value("email", self.email)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("reason", self.reason)
         writer.write_str_value("recipientIdentifier", self.recipient_identifier)

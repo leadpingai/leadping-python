@@ -8,8 +8,8 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .billable_unit import BillableUnit
     from .usage_channel import UsageChannel
-    from .usage_ledger_table_row_business import UsageLedgerTableRow_business
     from .usage_ledger_table_row_lead import UsageLedgerTableRow_lead
+    from .usage_ledger_table_row_organization import UsageLedgerTableRow_organization
     from .usage_ledger_table_row_user import UsageLedgerTableRow_user
     from .usage_status import UsageStatus
 
@@ -25,8 +25,6 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     billable_seconds: Optional[int] = None
     # The billable unit value for this usage ledger.
     billable_unit: Optional[BillableUnit] = None
-    # The ID and name for this business.
-    business: Optional[UsageLedgerTableRow_business] = None
     # The channel value for this usage ledger.
     channel: Optional[UsageChannel] = None
     # The date and time for the created at value on this usage ledger.
@@ -43,6 +41,8 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     is_billable: Optional[bool] = None
     # The ID and name for this lead.
     lead: Optional[UsageLedgerTableRow_lead] = None
+    # The ID and name for this organization.
+    organization: Optional[UsageLedgerTableRow_organization] = None
     # The phone number associated with this usage ledger.
     phone_number: Optional[str] = None
     # The phone number ID associated with this usage ledger.
@@ -76,22 +76,21 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         """
         from .billable_unit import BillableUnit
         from .usage_channel import UsageChannel
-        from .usage_ledger_table_row_business import UsageLedgerTableRow_business
         from .usage_ledger_table_row_lead import UsageLedgerTableRow_lead
+        from .usage_ledger_table_row_organization import UsageLedgerTableRow_organization
         from .usage_ledger_table_row_user import UsageLedgerTableRow_user
         from .usage_status import UsageStatus
 
         from .billable_unit import BillableUnit
         from .usage_channel import UsageChannel
-        from .usage_ledger_table_row_business import UsageLedgerTableRow_business
         from .usage_ledger_table_row_lead import UsageLedgerTableRow_lead
+        from .usage_ledger_table_row_organization import UsageLedgerTableRow_organization
         from .usage_ledger_table_row_user import UsageLedgerTableRow_user
         from .usage_status import UsageStatus
 
         fields: dict[str, Callable[[Any], None]] = {
             "billableSeconds": lambda n : setattr(self, 'billable_seconds', n.get_int_value()),
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(BillableUnit)),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(UsageLedgerTableRow_business)),
             "channel": lambda n : setattr(self, 'channel', n.get_enum_value(UsageChannel)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
@@ -100,6 +99,7 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isBillable": lambda n : setattr(self, 'is_billable', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(UsageLedgerTableRow_lead)),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(UsageLedgerTableRow_organization)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
             "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
@@ -120,7 +120,6 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_int_value("billableSeconds", self.billable_seconds)
         writer.write_enum_value("billableUnit", self.billable_unit)
-        writer.write_object_value("business", self.business)
         writer.write_enum_value("channel", self.channel)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_float_value("customerChargeAmount", self.customer_charge_amount)
@@ -129,6 +128,7 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isBillable", self.is_billable)
         writer.write_object_value("lead", self.lead)
+        writer.write_object_value("organization", self.organization)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
         writer.write_float_value("quantity", self.quantity)

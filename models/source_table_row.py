@@ -6,9 +6,9 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .source_table_row_business import SourceTableRow_business
     from .source_table_row_created_by_user import SourceTableRow_createdByUser
     from .source_table_row_modified_by_user import SourceTableRow_modifiedByUser
+    from .source_table_row_organization import SourceTableRow_organization
     from .source_table_row_user import SourceTableRow_user
     from .tag_summary import TagSummary
 
@@ -24,7 +24,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # Source API key used to authenticate inbound lead delivery to Leadping. Unlike a business API key, this value remains available to authorized source users.
+    # Source API key used to authenticate inbound lead delivery to Leadping. Unlike an organization API key, this value remains available to authorized source users.
     api_key: Optional[str] = None
     # UTC timestamp when the source API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
@@ -32,11 +32,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     api_key_preview: Optional[str] = None
     # Total number of authenticated requests made with this source API key.
     api_key_total_uses: Optional[int] = None
-    # Business summary connected to this lead source table row.
-    business: Optional[SourceTableRow_business] = None
-    # Business ID that owns this lead source.
-    business_id: Optional[str] = None
-    # Indicates whether the business or sender passed compliance review.
+    # Indicates whether the organization or sender passed compliance review.
     compliance_approved: Optional[bool] = None
     # Configured cost charged when this source creates a billable lead.
     cost_per_lead: Optional[float] = None
@@ -64,6 +60,10 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     modified_by_user: Optional[SourceTableRow_modifiedByUser] = None
     # Display name for this lead source table row in the Leadping API.
     name: Optional[str] = None
+    # Organization summary connected to this lead source table row.
+    organization: Optional[SourceTableRow_organization] = None
+    # Organization ID that owns this lead source.
+    organization_id: Optional[str] = None
     # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     # User summary connected to this lead source table row.
@@ -85,15 +85,15 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .source_table_row_business import SourceTableRow_business
         from .source_table_row_created_by_user import SourceTableRow_createdByUser
         from .source_table_row_modified_by_user import SourceTableRow_modifiedByUser
+        from .source_table_row_organization import SourceTableRow_organization
         from .source_table_row_user import SourceTableRow_user
         from .tag_summary import TagSummary
 
-        from .source_table_row_business import SourceTableRow_business
         from .source_table_row_created_by_user import SourceTableRow_createdByUser
         from .source_table_row_modified_by_user import SourceTableRow_modifiedByUser
+        from .source_table_row_organization import SourceTableRow_organization
         from .source_table_row_user import SourceTableRow_user
         from .tag_summary import TagSummary
 
@@ -104,8 +104,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(SourceTableRow_business)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -120,6 +118,8 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "modifiedByUser": lambda n : setattr(self, 'modified_by_user', n.get_object_value(SourceTableRow_modifiedByUser)),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(SourceTableRow_organization)),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "requiresTrustedForm": lambda n : setattr(self, 'requires_trusted_form', n.get_bool_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(SourceTableRow_user)),
         }
@@ -139,8 +139,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
-        writer.write_object_value("business", self.business)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_datetime_value("createdAt", self.created_at)
@@ -155,6 +153,8 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("modifiedByUser", self.modified_by_user)
         writer.write_str_value("name", self.name)
+        writer.write_object_value("organization", self.organization)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_bool_value("requiresTrustedForm", self.requires_trusted_form)
         writer.write_object_value("user", self.user)
         writer.write_additional_data_value(self.additional_data)

@@ -33,7 +33,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfSuppressionEntryResponse]:
         """
-        Get all for current business
+        Get all for current organization
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfSuppressionEntryResponse]
@@ -56,7 +56,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Get all for current business
+        Get all for current organization
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

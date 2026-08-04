@@ -18,8 +18,6 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
 
     # The audit included with this ion entry.
     audit: Optional[list[SuppressionEntryAudit]] = None
-    # The business ID associated with this ion entry.
-    business_id: Optional[str] = None
     # The channel value for this ion entry.
     channel: Optional[str] = None
     # The unique ID for this ion entry.
@@ -28,6 +26,8 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     normalized_email: Optional[str] = None
     # The phone number associated with this ion entry.
     normalized_phone_number: Optional[str] = None
+    # The organization ID associated with this ion entry.
+    organization_id: Optional[str] = None
     # The human-readable reason explaining this ion entry.
     reason: Optional[str] = None
     # The recipient identifier value for this ion entry.
@@ -63,11 +63,11 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "audit": lambda n : setattr(self, 'audit', n.get_collection_of_object_values(SuppressionEntryAudit)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "channel": lambda n : setattr(self, 'channel', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "normalizedEmail": lambda n : setattr(self, 'normalized_email', n.get_str_value()),
             "normalizedPhoneNumber": lambda n : setattr(self, 'normalized_phone_number', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
             "recipientIdentifier": lambda n : setattr(self, 'recipient_identifier', n.get_str_value()),
             "releasedAt": lambda n : setattr(self, 'released_at', n.get_datetime_value()),
@@ -86,11 +86,11 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("audit", self.audit)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("channel", self.channel)
         writer.write_str_value("id", self.id)
         writer.write_str_value("normalizedEmail", self.normalized_email)
         writer.write_str_value("normalizedPhoneNumber", self.normalized_phone_number)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("reason", self.reason)
         writer.write_str_value("recipientIdentifier", self.recipient_identifier)
         writer.write_datetime_value("releasedAt", self.released_at)

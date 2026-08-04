@@ -35,7 +35,7 @@ class PhoneNumberItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> None:
         """
-        Deletes a phone number from the current business when it should no longer be used for lead communication.
+        Deletes a phone number from the current organization when it should no longer be used for lead communication.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: None
         """
@@ -103,7 +103,7 @@ class PhoneNumberItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Deletes a phone number from the current business when it should no longer be used for lead communication.
+        Deletes a phone number from the current organization when it should no longer be used for lead communication.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

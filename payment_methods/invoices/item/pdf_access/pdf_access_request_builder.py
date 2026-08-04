@@ -32,7 +32,7 @@ class PdfAccessRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[PdfAccessRequestBuilderGetQueryParameters]] = None) -> Optional[InvoicePdfAccessResponse]:
         """
-        Creates a short-lived, secure URL that lets the current business view or download a private Stripe invoice PDF without exposing a permanent file link.
+        Creates a short-lived, secure URL that lets the current organization view or download a private Stripe invoice PDF without exposing a permanent file link.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[InvoicePdfAccessResponse]
         """
@@ -52,7 +52,7 @@ class PdfAccessRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[PdfAccessRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Creates a short-lived, secure URL that lets the current business view or download a private Stripe invoice PDF without exposing a permanent file link.
+        Creates a short-lived, secure URL that lets the current organization view or download a private Stripe invoice PDF without exposing a permanent file link.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -74,7 +74,7 @@ class PdfAccessRequestBuilder(BaseRequestBuilder):
     @dataclass
     class PdfAccessRequestBuilderGetQueryParameters():
         """
-        Creates a short-lived, secure URL that lets the current business view or download a private Stripe invoice PDF without exposing a permanent file link.
+        Creates a short-lived, secure URL that lets the current organization view or download a private Stripe invoice PDF without exposing a permanent file link.
         """
         download: Optional[bool] = None
 

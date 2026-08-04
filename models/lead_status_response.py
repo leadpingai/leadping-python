@@ -6,7 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .disposition_category import DispositionCategory
+    from .lead_status_category import LeadStatusCategory
 
 @dataclass
 class LeadStatusResponse(AdditionalDataHolder, Parsable):
@@ -16,10 +16,8 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Identifier of the business that owns the lead status.
-    business_id: Optional[str] = None
-    # Disposition category represented by the lead status.
-    category: Optional[DispositionCategory] = None
+    # LeadStatusChange category represented by the lead status.
+    category: Optional[LeadStatusCategory] = None
     # Display color assigned to the lead status.
     color: Optional[str] = None
     # Unique identifier for the lead status.
@@ -30,6 +28,8 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Display name of the lead status.
     name: Optional[str] = None
+    # Identifier of the organization that owns the lead status.
+    organization_id: Optional[str] = None
     # Relative display order of the lead status.
     sort_order: Optional[int] = None
     
@@ -49,18 +49,18 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .disposition_category import DispositionCategory
+        from .lead_status_category import LeadStatusCategory
 
-        from .disposition_category import DispositionCategory
+        from .lead_status_category import LeadStatusCategory
 
         fields: dict[str, Callable[[Any], None]] = {
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
-            "category": lambda n : setattr(self, 'category', n.get_enum_value(DispositionCategory)),
+            "category": lambda n : setattr(self, 'category', n.get_enum_value(LeadStatusCategory)),
             "color": lambda n : setattr(self, 'color', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "sortOrder": lambda n : setattr(self, 'sort_order', n.get_int_value()),
         }
         return fields
@@ -73,13 +73,13 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("businessId", self.business_id)
         writer.write_enum_value("category", self.category)
         writer.write_str_value("color", self.color)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_int_value("sortOrder", self.sort_order)
         writer.write_additional_data_value(self.additional_data)
     

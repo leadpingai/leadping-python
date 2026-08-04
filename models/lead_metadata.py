@@ -16,10 +16,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Phone number ID assigned to the lead, business, or source.
+    # Phone number ID assigned to the lead, organization, or source.
     assigned_phone_number_id: Optional[str] = None
-    # Business ID that owns this lead's attribution metadata.
-    business_id: Optional[str] = None
     # Reason Leadping blocked this operation for compliance.
     compliance_blocked_reason: Optional[str] = None
     # Compliance status used to decide whether Leadping can send messages.
@@ -38,6 +36,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     is_imported: Optional[bool] = None
     # Landing page URL where the lead submitted their information.
     landing_page: Optional[str] = None
+    # Organization ID that owns this lead's attribution metadata.
+    organization_id: Optional[str] = None
     # System or workflow that created this event.
     origin: Optional[str] = None
     # Lead price or transaction price supplied to the Leadping API.
@@ -109,7 +109,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "assignedPhoneNumberId": lambda n : setattr(self, 'assigned_phone_number_id', n.get_str_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "complianceBlockedReason": lambda n : setattr(self, 'compliance_blocked_reason', n.get_str_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -119,6 +118,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "ipAddress": lambda n : setattr(self, 'ip_address', n.get_str_value()),
             "isImported": lambda n : setattr(self, 'is_imported', n.get_bool_value()),
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "origin": lambda n : setattr(self, 'origin', n.get_str_value()),
             "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "product": lambda n : setattr(self, 'product', n.get_str_value()),
@@ -155,7 +155,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("assignedPhoneNumberId", self.assigned_phone_number_id)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("complianceBlockedReason", self.compliance_blocked_reason)
         writer.write_str_value("complianceStatus", self.compliance_status)
         writer.write_datetime_value("createdAt", self.created_at)
@@ -165,6 +164,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("ipAddress", self.ip_address)
         writer.write_bool_value("isImported", self.is_imported)
         writer.write_str_value("landingPage", self.landing_page)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("origin", self.origin)
         writer.write_float_value("price", self.price)
         writer.write_str_value("product", self.product)

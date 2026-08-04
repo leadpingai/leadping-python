@@ -7,7 +7,7 @@ class EventTimelineType(str, Enum):
     Call = "Call",
     Voicemail = "Voicemail",
     Note = "Note",
-    Disposition = "Disposition",
+    LeadStatusChange = "LeadStatusChange",
     LeadCreated = "LeadCreated",
     LeadUpdated = "LeadUpdated",
     Notification = "Notification",

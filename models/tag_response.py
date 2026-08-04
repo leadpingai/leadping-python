@@ -15,8 +15,6 @@ class TagResponse(AdditionalDataHolder, Parsable):
 
     # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
-    # Business ID that owns this tag.
-    business_id: Optional[str] = None
     # Hex color used to display this tag or status in Leadping clients.
     color: Optional[str] = None
     # The date and time when the entity was created.
@@ -35,6 +33,8 @@ class TagResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Normalized name used for case-insensitive tag matching and deduplication.
     normalized_name: Optional[str] = None
+    # Organization ID that owns this tag.
+    organization_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> TagResponse:
@@ -54,7 +54,6 @@ class TagResponse(AdditionalDataHolder, Parsable):
         """
         fields: dict[str, Callable[[Any], None]] = {
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "color": lambda n : setattr(self, 'color', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
@@ -64,6 +63,7 @@ class TagResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "normalizedName": lambda n : setattr(self, 'normalized_name', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
         }
         return fields
     
@@ -76,7 +76,6 @@ class TagResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("archivedAt", self.archived_at)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("color", self.color)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("createdByUserId", self.created_by_user_id)
@@ -86,6 +85,7 @@ class TagResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("normalizedName", self.normalized_name)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_additional_data_value(self.additional_data)
     
 

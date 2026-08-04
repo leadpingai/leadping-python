@@ -20,7 +20,7 @@ if TYPE_CHECKING:
 
 class ArchiveRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /leads/{id}/archive
+    Builds and executes requests for operations under /leads/{-id}/archive
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -29,7 +29,7 @@ class ArchiveRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/leads/{id}/archive", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/leads/{%2Did}/archive", path_parameters)
     
     async def post(self,body: ArchivePostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """

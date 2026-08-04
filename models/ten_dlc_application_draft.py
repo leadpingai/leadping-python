@@ -34,7 +34,7 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     ein: Optional[str] = None
     # The expected monthly volume value for this 10DLC application draft.
     expected_monthly_volume: Optional[int] = None
-    # The industry value for this 10DLC application draft.
+    # The Telnyx brand vertical for this 10DLC application draft. The JSON name is retained for backward compatibility.
     industry: Optional[str] = None
     # The date and time for the last submitted at value on this 10DLC application draft.
     last_submitted_at: Optional[datetime.datetime] = None

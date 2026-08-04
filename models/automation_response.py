@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from .automation_action import AutomationAction
     from .automation_condition_group import AutomationConditionGroup
     from .automation_connection import AutomationConnection
-    from .automation_response_business import AutomationResponse_business
+    from .automation_response_organization import AutomationResponse_organization
     from .automation_response_user import AutomationResponse_user
     from .automation_run_record import AutomationRunRecord
     from .automation_trigger import AutomationTrigger
@@ -24,10 +24,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
 
     # Automation actions configured or returned for this workflow.
     actions: Optional[list[AutomationAction]] = None
-    # Business summary connected to this automation configuration response.
-    business: Optional[AutomationResponse_business] = None
-    # Business ID that owns this automation.
-    business_id: Optional[str] = None
     # Grouped automation conditions used to decide whether this workflow should run.
     condition_groups: Optional[list[AutomationConditionGroup]] = None
     # Directed connections between nodes in this automation graph.
@@ -48,12 +44,16 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     last_run_at: Optional[datetime.datetime] = None
     # Status from the most recent automation run.
     last_run_status: Optional[str] = None
-    # Management level that controls whether Leadping or the business owns this automation setting.
+    # Management level that controls whether Leadping or the organization owns this automation setting.
     management_level: Optional[str] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
+    # Organization summary connected to this automation configuration response.
+    organization: Optional[AutomationResponse_organization] = None
+    # Organization ID that owns this automation.
+    organization_id: Optional[str] = None
     # Recent automation runs returned for history and troubleshooting.
     recent_runs: Optional[list[AutomationRunRecord]] = None
     # Scope that limits where this automation configuration response applies in Leadping.
@@ -86,7 +86,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
         from .automation_connection import AutomationConnection
-        from .automation_response_business import AutomationResponse_business
+        from .automation_response_organization import AutomationResponse_organization
         from .automation_response_user import AutomationResponse_user
         from .automation_run_record import AutomationRunRecord
         from .automation_trigger import AutomationTrigger
@@ -94,15 +94,13 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         from .automation_action import AutomationAction
         from .automation_condition_group import AutomationConditionGroup
         from .automation_connection import AutomationConnection
-        from .automation_response_business import AutomationResponse_business
+        from .automation_response_organization import AutomationResponse_organization
         from .automation_response_user import AutomationResponse_user
         from .automation_run_record import AutomationRunRecord
         from .automation_trigger import AutomationTrigger
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationAction)),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(AutomationResponse_business)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionGroups": lambda n : setattr(self, 'condition_groups', n.get_collection_of_object_values(AutomationConditionGroup)),
             "connections": lambda n : setattr(self, 'connections', n.get_collection_of_object_values(AutomationConnection)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -116,6 +114,8 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
             "managementLevel": lambda n : setattr(self, 'management_level', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(AutomationResponse_organization)),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "recentRuns": lambda n : setattr(self, 'recent_runs', n.get_collection_of_object_values(AutomationRunRecord)),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
@@ -134,8 +134,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
-        writer.write_object_value("business", self.business)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_collection_of_object_values("conditionGroups", self.condition_groups)
         writer.write_collection_of_object_values("connections", self.connections)
         writer.write_datetime_value("createdAt", self.created_at)
@@ -149,6 +147,8 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("managementLevel", self.management_level)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
+        writer.write_object_value("organization", self.organization)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_collection_of_object_values("recentRuns", self.recent_runs)
         writer.write_str_value("scope", self.scope)
         writer.write_collection_of_object_values("triggers", self.triggers)

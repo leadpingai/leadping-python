@@ -6,9 +6,9 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .source_response_business import SourceResponse_business
     from .source_response_created_by_user import SourceResponse_createdByUser
     from .source_response_modified_by_user import SourceResponse_modifiedByUser
+    from .source_response_organization import SourceResponse_organization
     from .source_response_user import SourceResponse_user
     from .tag_summary import TagSummary
 
@@ -24,13 +24,11 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # Source API key used to authenticate inbound lead delivery to Leadping. Unlike a business API key, this value remains available to authorized source users.
+    # Source API key used to authenticate inbound lead delivery to Leadping. Unlike an organization API key, this value remains available to authorized source users.
     api_key: Optional[str] = None
     # Masked preview of the source API key for compact display.
     api_key_preview: Optional[str] = None
-    # Business summary connected to this lead source response.
-    business: Optional[SourceResponse_business] = None
-    # Indicates whether the business or sender passed compliance review.
+    # Indicates whether the organization or sender passed compliance review.
     compliance_approved: Optional[bool] = None
     # Configured cost charged when this source creates a billable lead.
     cost_per_lead: Optional[float] = None
@@ -58,6 +56,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     modified_by_user: Optional[SourceResponse_modifiedByUser] = None
     # The display name for the entity.
     name: Optional[str] = None
+    # Organization summary connected to this lead source response.
+    organization: Optional[SourceResponse_organization] = None
     # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     # User summary connected to this lead source response.
@@ -79,15 +79,15 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .source_response_business import SourceResponse_business
         from .source_response_created_by_user import SourceResponse_createdByUser
         from .source_response_modified_by_user import SourceResponse_modifiedByUser
+        from .source_response_organization import SourceResponse_organization
         from .source_response_user import SourceResponse_user
         from .tag_summary import TagSummary
 
-        from .source_response_business import SourceResponse_business
         from .source_response_created_by_user import SourceResponse_createdByUser
         from .source_response_modified_by_user import SourceResponse_modifiedByUser
+        from .source_response_organization import SourceResponse_organization
         from .source_response_user import SourceResponse_user
         from .tag_summary import TagSummary
 
@@ -96,7 +96,6 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "apiKey": lambda n : setattr(self, 'api_key', n.get_str_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(SourceResponse_business)),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -111,6 +110,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "modifiedByUser": lambda n : setattr(self, 'modified_by_user', n.get_object_value(SourceResponse_modifiedByUser)),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(SourceResponse_organization)),
             "requiresTrustedForm": lambda n : setattr(self, 'requires_trusted_form', n.get_bool_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(SourceResponse_user)),
         }
@@ -128,7 +128,6 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_str_value("apiKey", self.api_key)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
-        writer.write_object_value("business", self.business)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_datetime_value("createdAt", self.created_at)
@@ -143,6 +142,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("modifiedByUser", self.modified_by_user)
         writer.write_str_value("name", self.name)
+        writer.write_object_value("organization", self.organization)
         writer.write_bool_value("requiresTrustedForm", self.requires_trusted_form)
         writer.write_object_value("user", self.user)
         writer.write_additional_data_value(self.additional_data)

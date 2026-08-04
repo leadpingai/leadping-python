@@ -5,14 +5,14 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .business_billing_state import BusinessBillingState
+    from .organization_billing_state import OrganizationBillingState
 
-from .business_billing_state import BusinessBillingState
+from .organization_billing_state import OrganizationBillingState
 
 @dataclass
-class UserResponse_billingState(BusinessBillingState, Parsable):
+class UserResponse_billingState(OrganizationBillingState, Parsable):
     """
-    Customer-safe billing state for the user's currently selected business.
+    Customer-safe billing state for the user's currently selected organization.
     """
     
     @staticmethod
@@ -31,9 +31,9 @@ class UserResponse_billingState(BusinessBillingState, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .business_billing_state import BusinessBillingState
+        from .organization_billing_state import OrganizationBillingState
 
-        from .business_billing_state import BusinessBillingState
+        from .organization_billing_state import OrganizationBillingState
 
         fields: dict[str, Callable[[Any], None]] = {
         }

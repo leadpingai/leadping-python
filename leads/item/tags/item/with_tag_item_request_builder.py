@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 class WithTagItemRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /leads/{id}/tags/{tagId}
+    Builds and executes requests for operations under /leads/{-id}/tags/{tagId}
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -28,11 +28,11 @@ class WithTagItemRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/leads/{id}/tags/{tagId}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/leads/{%2Did}/tags/{tagId}", path_parameters)
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
-        Removes one current-business tag from a lead while leaving the lead record, other tags, and communication history intact.
+        Removes one current-organization tag from a lead while leaving the lead record, other tags, and communication history intact.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -53,7 +53,7 @@ class WithTagItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Removes one current-business tag from a lead while leaving the lead record, other tags, and communication history intact.
+        Removes one current-organization tag from a lead while leaving the lead record, other tags, and communication history intact.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

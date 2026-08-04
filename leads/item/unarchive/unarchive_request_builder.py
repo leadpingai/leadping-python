@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 class UnarchiveRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /leads/{id}/unarchive
+    Builds and executes requests for operations under /leads/{-id}/unarchive
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -28,7 +28,7 @@ class UnarchiveRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/leads/{id}/unarchive", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/leads/{%2Did}/unarchive", path_parameters)
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """

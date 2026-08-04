@@ -6,7 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .automation_table_row_business import AutomationTableRow_business
+    from .automation_table_row_organization import AutomationTableRow_organization
     from .automation_table_row_user import AutomationTableRow_user
 
 @dataclass
@@ -19,10 +19,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
 
     # Human-readable summary of the automation action outcome.
     action_summary: Optional[str] = None
-    # Business summary connected to this automation table row.
-    business: Optional[AutomationTableRow_business] = None
-    # Business ID that owns this automation.
-    business_id: Optional[str] = None
     # Human-readable summary of the automation condition evaluation.
     condition_summary: Optional[str] = None
     # User ID of the person who created this automation table row.
@@ -41,12 +37,16 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     last_run_at: Optional[datetime.datetime] = None
     # Status from the most recent automation run.
     last_run_status: Optional[str] = None
-    # Management level that controls whether Leadping or the business owns this automation setting.
+    # Management level that controls whether Leadping or the organization owns this automation setting.
     management_level: Optional[str] = None
     # UTC timestamp when this automation table row was last modified.
     modified_at: Optional[datetime.datetime] = None
     # Display name for this automation table row in the Leadping API.
     name: Optional[str] = None
+    # Organization summary connected to this automation table row.
+    organization: Optional[AutomationTableRow_organization] = None
+    # Organization ID that owns this automation.
+    organization_id: Optional[str] = None
     # Human-readable explanation of the automation rule being evaluated.
     rule_sentence: Optional[str] = None
     # Scope that limits where this automation table row applies in Leadping.
@@ -76,16 +76,14 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .automation_table_row_business import AutomationTableRow_business
+        from .automation_table_row_organization import AutomationTableRow_organization
         from .automation_table_row_user import AutomationTableRow_user
 
-        from .automation_table_row_business import AutomationTableRow_business
+        from .automation_table_row_organization import AutomationTableRow_organization
         from .automation_table_row_user import AutomationTableRow_user
 
         fields: dict[str, Callable[[Any], None]] = {
             "actionSummary": lambda n : setattr(self, 'action_summary', n.get_str_value()),
-            "business": lambda n : setattr(self, 'business', n.get_object_value(AutomationTableRow_business)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "conditionSummary": lambda n : setattr(self, 'condition_summary', n.get_str_value()),
             "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -98,6 +96,8 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
             "managementLevel": lambda n : setattr(self, 'management_level', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(AutomationTableRow_organization)),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "ruleSentence": lambda n : setattr(self, 'rule_sentence', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
             "triggerSummary": lambda n : setattr(self, 'trigger_summary', n.get_str_value()),
@@ -116,8 +116,6 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actionSummary", self.action_summary)
-        writer.write_object_value("business", self.business)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_str_value("conditionSummary", self.condition_summary)
         writer.write_str_value("createdByUserId", self.created_by_user_id)
         writer.write_str_value("description", self.description)
@@ -130,6 +128,8 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("managementLevel", self.management_level)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
+        writer.write_object_value("organization", self.organization)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("ruleSentence", self.rule_sentence)
         writer.write_str_value("scope", self.scope)
         writer.write_str_value("triggerSummary", self.trigger_summary)

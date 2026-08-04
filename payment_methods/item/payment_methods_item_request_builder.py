@@ -53,7 +53,7 @@ class PaymentMethodsItemRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[StripePaymentMethodResponse]:
         """
-        Returns one payment method for the current user or business, including card metadata used for billing management.
+        Returns one payment method for the current user or organization, including card metadata used for billing management.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[StripePaymentMethodResponse]
         """
@@ -86,7 +86,7 @@ class PaymentMethodsItemRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns one payment method for the current user or business, including card metadata used for billing management.
+        Returns one payment method for the current user or organization, including card metadata used for billing management.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

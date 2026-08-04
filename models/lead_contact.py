@@ -25,7 +25,7 @@ class LeadContact(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Last name of the lead, user, or contact represented by this lead contact profile.
     last_name: Optional[str] = None
-    # Phone details for the lead, user, or business represented by this lead contact profile.
+    # Phone details for the lead, user, or organization represented by this lead contact profile.
     phone: Optional[LeadContact_phone] = None
     # Postal street address for the lead contact profile.
     street_address: Optional[LeadContact_streetAddress] = None

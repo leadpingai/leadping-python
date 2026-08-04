@@ -29,7 +29,7 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
     country_code: Optional[str] = None
     # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[str] = None
-    # State, province, or region for the lead or business postal address.
+    # State, province, or region for the lead or organization postal address.
     state: Optional[str] = None
     # IANA or Windows time zone identifier used for local scheduling and reporting.
     time_zone_id: Optional[str] = None

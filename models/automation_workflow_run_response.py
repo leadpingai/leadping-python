@@ -23,8 +23,6 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     actions: Optional[list[AutomationWorkflowActionResponse]] = None
     # The ID and name for this automation.
     automation: Optional[AutomationWorkflowRunResponse_automation] = None
-    # Unique identifier of the business associated with this Leadping automation workflow run.
-    business_id: Optional[str] = None
     # Date and time when the automation workflow run was cancelled.
     cancelled_at: Optional[datetime.datetime] = None
     # Date and time when the automation workflow run completed.
@@ -55,6 +53,8 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     next_execution_at: Optional[datetime.datetime] = None
     # Date and time when the next retry is scheduled.
     next_retry_at: Optional[datetime.datetime] = None
+    # Unique identifier of the organization associated with this Leadping automation workflow run.
+    organization_id: Optional[str] = None
     # Total number of retry records represented by this Leadping automation workflow run.
     retry_count: Optional[int] = None
     # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow run.
@@ -103,7 +103,6 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationWorkflowActionResponse)),
             "automation": lambda n : setattr(self, 'automation', n.get_object_value(AutomationWorkflowRunResponse_automation)),
-            "businessId": lambda n : setattr(self, 'business_id', n.get_str_value()),
             "cancelledAt": lambda n : setattr(self, 'cancelled_at', n.get_datetime_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
             "currentStep": lambda n : setattr(self, 'current_step', n.get_object_value(AutomationWorkflowRunResponse_currentStep)),
@@ -119,6 +118,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
             "maxRetryCount": lambda n : setattr(self, 'max_retry_count', n.get_int_value()),
             "nextExecutionAt": lambda n : setattr(self, 'next_execution_at', n.get_datetime_value()),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "retryCount": lambda n : setattr(self, 'retry_count', n.get_int_value()),
             "skipReasonCode": lambda n : setattr(self, 'skip_reason_code', n.get_str_value()),
             "skipReasonDisplay": lambda n : setattr(self, 'skip_reason_display', n.get_str_value()),
@@ -141,7 +141,6 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
         writer.write_object_value("automation", self.automation)
-        writer.write_str_value("businessId", self.business_id)
         writer.write_datetime_value("cancelledAt", self.cancelled_at)
         writer.write_datetime_value("completedAt", self.completed_at)
         writer.write_object_value("currentStep", self.current_step)
@@ -157,6 +156,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("maxRetryCount", self.max_retry_count)
         writer.write_datetime_value("nextExecutionAt", self.next_execution_at)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_int_value("retryCount", self.retry_count)
         writer.write_str_value("skipReasonCode", self.skip_reason_code)
         writer.write_str_value("skipReasonDisplay", self.skip_reason_display)

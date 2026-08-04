@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .phone_number_readiness import PhoneNumberReadiness
-    from .phone_number_response_business import PhoneNumberResponse_business
+    from .phone_number_response_organization import PhoneNumberResponse_organization
     from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
 
 @dataclass
@@ -18,8 +18,6 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Business summary connected to this phone number.
-    business: Optional[PhoneNumberResponse_business] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Indicates whether this phone number is active and available in the Leadping API.
@@ -34,6 +32,8 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number.
     number: Optional[str] = None
+    # Organization summary connected to this phone number.
+    organization: Optional[PhoneNumberResponse_organization] = None
     # Identifier of the canonical phone identity for this number.
     phone_identity_id: Optional[str] = None
     # Routing metadata that connects this phone number to teams, campaigns, and sources.
@@ -58,15 +58,14 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .phone_number_readiness import PhoneNumberReadiness
-        from .phone_number_response_business import PhoneNumberResponse_business
+        from .phone_number_response_organization import PhoneNumberResponse_organization
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
 
         from .phone_number_readiness import PhoneNumberReadiness
-        from .phone_number_response_business import PhoneNumberResponse_business
+        from .phone_number_response_organization import PhoneNumberResponse_organization
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
 
         fields: dict[str, Callable[[Any], None]] = {
-            "business": lambda n : setattr(self, 'business', n.get_object_value(PhoneNumberResponse_business)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -74,6 +73,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
+            "organization": lambda n : setattr(self, 'organization', n.get_object_value(PhoneNumberResponse_organization)),
             "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "routing": lambda n : setattr(self, 'routing', n.get_object_value(PhoneNumberRoutingMetadata)),
             "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberReadiness)),
@@ -88,7 +88,6 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_object_value("business", self.business)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
@@ -96,6 +95,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
+        writer.write_object_value("organization", self.organization)
         writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_object_value("routing", self.routing)
         writer.write_object_value("warmup", self.warmup)

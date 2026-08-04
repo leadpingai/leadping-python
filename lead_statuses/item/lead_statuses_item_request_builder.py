@@ -32,7 +32,7 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Archives a lead status for the current business so it is unavailable for new assignments while existing lead history is preserved.
+        Archives a lead status for the current organization so it is unavailable for new assignments while existing lead history is preserved.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
@@ -45,7 +45,7 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusResponse]:
         """
-        Updates the name, color, and display order of a lead status owned by the current business so pipeline stages remain clear and consistently organized.
+        Updates the name, color, and display order of a lead status owned by the current organization so pipeline stages remain clear and consistently organized.
         param body: Defines the editable values used to create or update a lead status.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadStatusResponse]
@@ -63,7 +63,7 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Archives a lead status for the current business so it is unavailable for new assignments while existing lead history is preserved.
+        Archives a lead status for the current organization so it is unavailable for new assignments while existing lead history is preserved.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -74,7 +74,7 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates the name, color, and display order of a lead status owned by the current business so pipeline stages remain clear and consistently organized.
+        Updates the name, color, and display order of a lead status owned by the current organization so pipeline stages remain clear and consistently organized.
         param body: Defines the editable values used to create or update a lead status.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
