@@ -17,6 +17,8 @@ class LeadContact(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Optional profile image URL for the contact. Clients fall back to Gravatarand then initials when this value is not supplied.
+    avatar_url: Optional[str] = None
     # Latitude and longitude coordinate for this lead contact profile.
     coordinate: Optional[LeadContact_coordinate] = None
     # Email address for the person represented by this lead contact profile.
@@ -57,6 +59,7 @@ class LeadContact(AdditionalDataHolder, Parsable):
         from .lead_contact_street_address import LeadContact_streetAddress
 
         fields: dict[str, Callable[[Any], None]] = {
+            "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
             "coordinate": lambda n : setattr(self, 'coordinate', n.get_object_value(LeadContact_coordinate)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
@@ -75,6 +78,7 @@ class LeadContact(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("avatarUrl", self.avatar_url)
         writer.write_object_value("coordinate", self.coordinate)
         writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)

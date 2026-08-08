@@ -24,6 +24,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archive_reason: Optional[int] = None
     # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
+    # Optional profile image URL explicitly associated with the lead.
+    avatar_url: Optional[str] = None
     # Current lead status change summary that describes the lead outcome.
     current_lead_status: Optional[ConversationResponse_currentLeadStatus] = None
     # Email address used to resolve the lead's avatar when available.
@@ -87,6 +89,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "activeOutboundPhoneNumberId": lambda n : setattr(self, 'active_outbound_phone_number_id', n.get_str_value()),
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
+            "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
             "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(ConversationResponse_currentLeadStatus)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
@@ -118,6 +121,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("activeOutboundPhoneNumberId", self.active_outbound_phone_number_id)
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
+        writer.write_str_value("avatarUrl", self.avatar_url)
         writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)
