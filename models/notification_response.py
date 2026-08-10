@@ -37,6 +37,8 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # The priority value for this notification.
     priority: Optional[NotificationPriority] = None
+    # Whether this notification should also be delivered as a device push notification.
+    push_enabled: Optional[bool] = None
     # The date and time for the read at value on this notification.
     read_at: Optional[datetime.datetime] = None
     # The related entity ID associated with this notification.
@@ -81,6 +83,7 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "priority": lambda n : setattr(self, 'priority', n.get_enum_value(NotificationPriority)),
+            "pushEnabled": lambda n : setattr(self, 'push_enabled', n.get_bool_value()),
             "readAt": lambda n : setattr(self, 'read_at', n.get_datetime_value()),
             "relatedEntityId": lambda n : setattr(self, 'related_entity_id', n.get_str_value()),
             "relatedEntityType": lambda n : setattr(self, 'related_entity_type', n.get_str_value()),
@@ -107,6 +110,7 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_enum_value("priority", self.priority)
+        writer.write_bool_value("pushEnabled", self.push_enabled)
         writer.write_datetime_value("readAt", self.read_at)
         writer.write_str_value("relatedEntityId", self.related_entity_id)
         writer.write_str_value("relatedEntityType", self.related_entity_type)

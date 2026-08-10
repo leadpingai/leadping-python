@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .item.notifications_item_request_builder import NotificationsItemRequestBuilder
     from .mark_all_read.mark_all_read_request_builder import MarkAllReadRequestBuilder
     from .me.me_request_builder import MeRequestBuilder
+    from .push.push_request_builder import PushRequestBuilder
     from .unread_count.unread_count_request_builder import UnreadCountRequestBuilder
 
 class NotificationsRequestBuilder(BaseRequestBuilder):
@@ -65,6 +66,15 @@ class NotificationsRequestBuilder(BaseRequestBuilder):
         from .me.me_request_builder import MeRequestBuilder
 
         return MeRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def push(self) -> PushRequestBuilder:
+        """
+        The push property
+        """
+        from .push.push_request_builder import PushRequestBuilder
+
+        return PushRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def unread_count(self) -> UnreadCountRequestBuilder:
