@@ -24,8 +24,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     actor_display_name: Optional[str] = None
     # User ID for the actor that performed the action.
     actor_user_id: Optional[str] = None
-    # Monetary amount billed for this Leadping communication or transaction.
-    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -132,7 +130,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
-            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "cancelReason": lambda n : setattr(self, 'cancel_reason', n.get_str_value()),
@@ -183,7 +180,6 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actorDisplayName", self.actor_display_name)
         writer.write_str_value("actorUserId", self.actor_user_id)
-        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("cancelReason", self.cancel_reason)

@@ -24,8 +24,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     compliance_status: Optional[str] = None
     # UTC timestamp when this lead attribution metadata was created.
     created_at: Optional[datetime.datetime] = None
-    # Direct-post price supplied by the lead source during intake.
-    direct_post_price: Optional[float] = None
     # External system identifier used to reconcile this lead attribution metadata across integrations.
     external_id: Optional[str] = None
     # Bulk import batch ID that created or updated this lead.
@@ -40,8 +38,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # System or workflow that created this event.
     origin: Optional[str] = None
-    # Lead price or transaction price supplied to the Leadping API.
-    price: Optional[float] = None
     # Product or offer associated with the lead or source.
     product: Optional[str] = None
     # Publisher ID supplied by the lead source for attribution.
@@ -112,7 +108,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "complianceBlockedReason": lambda n : setattr(self, 'compliance_blocked_reason', n.get_str_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
-            "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
             "importBatchId": lambda n : setattr(self, 'import_batch_id', n.get_str_value()),
             "ipAddress": lambda n : setattr(self, 'ip_address', n.get_str_value()),
@@ -120,7 +115,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "origin": lambda n : setattr(self, 'origin', n.get_str_value()),
-            "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "product": lambda n : setattr(self, 'product', n.get_str_value()),
             "pubId": lambda n : setattr(self, 'pub_id', n.get_str_value()),
             "referrer": lambda n : setattr(self, 'referrer', n.get_str_value()),
@@ -158,7 +152,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("complianceBlockedReason", self.compliance_blocked_reason)
         writer.write_str_value("complianceStatus", self.compliance_status)
         writer.write_datetime_value("createdAt", self.created_at)
-        writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("externalId", self.external_id)
         writer.write_str_value("importBatchId", self.import_batch_id)
         writer.write_str_value("ipAddress", self.ip_address)
@@ -166,7 +159,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("landingPage", self.landing_page)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("origin", self.origin)
-        writer.write_float_value("price", self.price)
         writer.write_str_value("product", self.product)
         writer.write_str_value("pubId", self.pub_id)
         writer.write_str_value("referrer", self.referrer)

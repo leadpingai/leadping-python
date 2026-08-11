@@ -21,20 +21,14 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Monetary amount for this billing transaction or wallet operation.
-    amount: Optional[float] = None
     # Defines the supported Billable Unit values.
     billable_unit: Optional[TransactionResponse_billableUnit] = None
-    # Customer-facing amount billed for the transaction.
-    billed_amount: Optional[float] = None
     # Defines the supported Usage Channel values.
     billing_channel: Optional[TransactionResponse_billingChannel] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction response to API users.
     description: Optional[str] = None
-    # Payment gateway fee amount charged for the wallet transaction.
-    gateway_fee_amount: Optional[float] = None
     # Payment gateway status returned for this transaction.
     gateway_status: Optional[str] = None
     # The unique identifier for the entity.
@@ -43,16 +37,12 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     lead: Optional[TransactionResponse_lead] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
-    # Net monetary amount after fees, credits, or adjustments.
-    net_amount: Optional[float] = None
     # Additional billing notes that explain the transaction for admins or customers.
     notes: Optional[str] = None
     # Identifier and display name of the related organization.
     organization: Optional[TransactionResponse_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
-    # Leadping platform fee amount included in the transaction.
-    platform_fee_amount: Optional[float] = None
     # Processing status for this wallet transaction.
     transaction_status: Optional[TransactionStatus] = None
     # Debit or credit classification for this wallet transaction.
@@ -89,22 +79,17 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         from .transaction_type import TransactionType
 
         fields: dict[str, Callable[[Any], None]] = {
-            "amount": lambda n : setattr(self, 'amount', n.get_float_value()),
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(TransactionResponse_billableUnit)),
-            "billedAmount": lambda n : setattr(self, 'billed_amount', n.get_float_value()),
             "billingChannel": lambda n : setattr(self, 'billing_channel', n.get_enum_value(TransactionResponse_billingChannel)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
-            "gatewayFeeAmount": lambda n : setattr(self, 'gateway_fee_amount', n.get_float_value()),
             "gatewayStatus": lambda n : setattr(self, 'gateway_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionResponse_lead)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
-            "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(TransactionResponse_organization)),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
-            "platformFeeAmount": lambda n : setattr(self, 'platform_fee_amount', n.get_float_value()),
             "transactionStatus": lambda n : setattr(self, 'transaction_status', n.get_enum_value(TransactionStatus)),
             "transactionType": lambda n : setattr(self, 'transaction_type', n.get_enum_value(TransactionType)),
         }
@@ -118,22 +103,17 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_float_value("amount", self.amount)
         writer.write_enum_value("billableUnit", self.billable_unit)
-        writer.write_float_value("billedAmount", self.billed_amount)
         writer.write_enum_value("billingChannel", self.billing_channel)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
-        writer.write_float_value("gatewayFeeAmount", self.gateway_fee_amount)
         writer.write_str_value("gatewayStatus", self.gateway_status)
         writer.write_str_value("id", self.id)
         writer.write_object_value("lead", self.lead)
         writer.write_datetime_value("modifiedAt", self.modified_at)
-        writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("notes", self.notes)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
-        writer.write_float_value("platformFeeAmount", self.platform_fee_amount)
         writer.write_enum_value("transactionStatus", self.transaction_status)
         writer.write_enum_value("transactionType", self.transaction_type)
         writer.write_additional_data_value(self.additional_data)

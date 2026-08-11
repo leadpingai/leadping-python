@@ -23,8 +23,6 @@ class PhoneNumberAvailabilityResponse(AdditionalDataHolder, Parsable):
     location: Optional[PhoneNumberAvailabilityResponse_location] = None
     # Phone number used by this phone number availability result for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None
-    # Lead price or transaction price supplied to the Leadping API.
-    price: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberAvailabilityResponse:
@@ -51,7 +49,6 @@ class PhoneNumberAvailabilityResponse(AdditionalDataHolder, Parsable):
             "isAvailable": lambda n : setattr(self, 'is_available', n.get_bool_value()),
             "location": lambda n : setattr(self, 'location', n.get_object_value(PhoneNumberAvailabilityResponse_location)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
-            "price": lambda n : setattr(self, 'price', n.get_float_value()),
         }
         return fields
     
@@ -67,7 +64,6 @@ class PhoneNumberAvailabilityResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isAvailable", self.is_available)
         writer.write_object_value("location", self.location)
         writer.write_str_value("phoneNumber", self.phone_number)
-        writer.write_float_value("price", self.price)
         writer.write_additional_data_value(self.additional_data)
     
 

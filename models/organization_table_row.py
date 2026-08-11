@@ -23,8 +23,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Account balance for this organization.
-    account_balance: Optional[float] = None
     # Defines the supported Customer Activation Status values.
     activation_status: Optional[OrganizationTableRow_activationStatus] = None
     # The date and time this organization API key expires, or null when it has no expiration.
@@ -39,8 +37,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
     api_key_permissions: Optional[list[str]] = None
     # The masked API key preview owned by this organization.
     api_key_preview: Optional[str] = None
-    # The total number of tracked uses for this organization API key.
-    api_key_total_uses: Optional[int] = None
     # Defines the supported Billing Plan values.
     billing_plan: Optional[OrganizationTableRow_billingPlan] = None
     # Whether this organization is enabled.
@@ -73,8 +69,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
     subscription_status: Optional[OrganizationTableRow_subscriptionStatus] = None
     # Defines the supported 10DLC Application Status values.
     ten_dlc_status: Optional[OrganizationTableRow_tenDlcStatus] = None
-    # The user count for this organization.
-    user_count: Optional[int] = None
     # The website URL associated with this organization.
     website: Optional[str] = None
     # Defines the supported Website Lifecycle Status values.
@@ -115,7 +109,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
         from .organization_table_row_website_status import OrganizationTableRow_websiteStatus
 
         fields: dict[str, Callable[[Any], None]] = {
-            "accountBalance": lambda n : setattr(self, 'account_balance', n.get_float_value()),
             "activationStatus": lambda n : setattr(self, 'activation_status', n.get_enum_value(OrganizationTableRow_activationStatus)),
             "apiKeyExpiresAt": lambda n : setattr(self, 'api_key_expires_at', n.get_datetime_value()),
             "apiKeyFirstUsedAt": lambda n : setattr(self, 'api_key_first_used_at', n.get_datetime_value()),
@@ -123,7 +116,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPermissions": lambda n : setattr(self, 'api_key_permissions', n.get_collection_of_primitive_values(str)),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
-            "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(OrganizationTableRow_billingPlan)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -140,7 +132,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
             "subscriptionCancelAt": lambda n : setattr(self, 'subscription_cancel_at', n.get_datetime_value()),
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(OrganizationTableRow_subscriptionStatus)),
             "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(OrganizationTableRow_tenDlcStatus)),
-            "userCount": lambda n : setattr(self, 'user_count', n.get_int_value()),
             "website": lambda n : setattr(self, 'website', n.get_str_value()),
             "websiteStatus": lambda n : setattr(self, 'website_status', n.get_enum_value(OrganizationTableRow_websiteStatus)),
         }
@@ -154,7 +145,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_float_value("accountBalance", self.account_balance)
         writer.write_enum_value("activationStatus", self.activation_status)
         writer.write_datetime_value("apiKeyExpiresAt", self.api_key_expires_at)
         writer.write_datetime_value("apiKeyFirstUsedAt", self.api_key_first_used_at)
@@ -162,7 +152,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_collection_of_primitive_values("apiKeyPermissions", self.api_key_permissions)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
-        writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
@@ -179,7 +168,6 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("subscriptionCancelAt", self.subscription_cancel_at)
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
         writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
-        writer.write_int_value("userCount", self.user_count)
         writer.write_str_value("website", self.website)
         writer.write_enum_value("websiteStatus", self.website_status)
         writer.write_additional_data_value(self.additional_data)

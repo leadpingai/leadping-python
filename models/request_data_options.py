@@ -25,8 +25,6 @@ class RequestDataOptions(AdditionalDataHolder, Parsable):
     include_count: Optional[bool] = None
     # List of sort instructions, in priority order.
     order_by: Optional[list[OrderByOption]] = None
-    # Maximum items to return in one page
-    page_size: Optional[int] = None
     # Advanced range-based filters (e.g., Price > 50 and Price <= 200).
     range_filters: Optional[list[RangeFilter]] = None
     # The search term to filter results (applied to ).
@@ -63,7 +61,6 @@ class RequestDataOptions(AdditionalDataHolder, Parsable):
             "filters": lambda n : setattr(self, 'filters', n.get_collection_of_object_values(ExactMatchFilter)),
             "includeCount": lambda n : setattr(self, 'include_count', n.get_bool_value()),
             "orderBy": lambda n : setattr(self, 'order_by', n.get_collection_of_object_values(OrderByOption)),
-            "pageSize": lambda n : setattr(self, 'page_size', n.get_int_value()),
             "rangeFilters": lambda n : setattr(self, 'range_filters', n.get_collection_of_object_values(RangeFilter)),
             "search": lambda n : setattr(self, 'search', n.get_str_value()),
             "searchFields": lambda n : setattr(self, 'search_fields', n.get_collection_of_primitive_values(str)),
@@ -82,7 +79,6 @@ class RequestDataOptions(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("filters", self.filters)
         writer.write_bool_value("includeCount", self.include_count)
         writer.write_collection_of_object_values("orderBy", self.order_by)
-        writer.write_int_value("pageSize", self.page_size)
         writer.write_collection_of_object_values("rangeFilters", self.range_filters)
         writer.write_str_value("search", self.search)
         writer.write_collection_of_primitive_values("searchFields", self.search_fields)

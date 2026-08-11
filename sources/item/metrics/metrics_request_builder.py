@@ -95,7 +95,7 @@ class MetricsRequestBuilder(BaseRequestBuilder):
             return original_name
         
         # Optional rolling day count when explicit dates are not provided.
-        days: Optional[int] = None
+        days: Optional[str] = None
 
         # Optional end date/time for the metric range.
         end_at: Optional[datetime.datetime] = None

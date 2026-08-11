@@ -26,8 +26,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     actor_email: Optional[str] = None
     # User ID for the person or system that created this event timeline table row.
     actor_user_id: Optional[str] = None
-    # Monetary amount billed for this Leadping communication or transaction.
-    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -82,8 +80,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     related_entity_id: Optional[str] = None
     # Related entity type connected to this event or notification.
     related_entity_type: Optional[str] = None
-    # Number of retry attempts already made for this event timeline table row.
-    retry_count: Optional[int] = None
     # UTC timestamp when the related delivery or workflow action is scheduled to run.
     scheduled_for: Optional[datetime.datetime] = None
     # Reason Leadping scheduled this delivery for a later time.
@@ -147,7 +143,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
             "actorEmail": lambda n : setattr(self, 'actor_email', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
-            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
@@ -175,7 +170,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
             "relatedEntityId": lambda n : setattr(self, 'related_entity_id', n.get_str_value()),
             "relatedEntityType": lambda n : setattr(self, 'related_entity_type', n.get_str_value()),
-            "retryCount": lambda n : setattr(self, 'retry_count', n.get_int_value()),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
             "scheduledReason": lambda n : setattr(self, 'scheduled_reason', n.get_str_value()),
             "selectionReason": lambda n : setattr(self, 'selection_reason', n.get_enum_value(EventTableRow_selectionReason)),
@@ -205,7 +199,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("actorDisplayName", self.actor_display_name)
         writer.write_str_value("actorEmail", self.actor_email)
         writer.write_str_value("actorUserId", self.actor_user_id)
-        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("campaignId", self.campaign_id)
@@ -233,7 +226,6 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("receivedAt", self.received_at)
         writer.write_str_value("relatedEntityId", self.related_entity_id)
         writer.write_str_value("relatedEntityType", self.related_entity_type)
-        writer.write_int_value("retryCount", self.retry_count)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)
         writer.write_str_value("scheduledReason", self.scheduled_reason)
         writer.write_enum_value("selectionReason", self.selection_reason)

@@ -19,8 +19,6 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
 
     # UTC timestamp when the call was answered.
     answered_at: Optional[datetime.datetime] = None
-    # Monetary amount billed for this Leadping communication or transaction.
-    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # Caller ID phone number presented during the outbound call.
@@ -33,8 +31,6 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # Communication direction for this phone call, such as inbound or outbound.
     direction: Optional[str] = None
-    # Call duration in seconds.
-    duration_seconds: Optional[int] = None
     # UTC timestamp when the call ended.
     ended_at: Optional[datetime.datetime] = None
     # Sender phone number used for this communication.
@@ -92,14 +88,12 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "answeredAt": lambda n : setattr(self, 'answered_at', n.get_datetime_value()),
-            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "callerId": lambda n : setattr(self, 'caller_id', n.get_str_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
-            "durationSeconds": lambda n : setattr(self, 'duration_seconds', n.get_int_value()),
             "endedAt": lambda n : setattr(self, 'ended_at', n.get_datetime_value()),
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
@@ -128,14 +122,12 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("answeredAt", self.answered_at)
-        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_str_value("callerId", self.caller_id)
         writer.write_str_value("campaignId", self.campaign_id)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("direction", self.direction)
-        writer.write_int_value("durationSeconds", self.duration_seconds)
         writer.write_datetime_value("endedAt", self.ended_at)
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)

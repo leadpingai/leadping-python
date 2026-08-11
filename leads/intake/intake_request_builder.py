@@ -214,7 +214,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         date_of_birth: Optional[datetime.date] = None
 
         # Direct-post price supplied by the lead source during intake.
-        direct_post_price: Optional[float] = None
+        direct_post_price: Optional[str] = None
 
         # Email address for the person represented by this lead intake request.
         email: Optional[str] = None
@@ -244,7 +244,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         postal_code: Optional[str] = None
 
         # Lead price or transaction price supplied to the Leadping API.
-        price: Optional[float] = None
+        price: Optional[str] = None
 
         # Product or offer associated with the lead or source.
         product: Optional[str] = None

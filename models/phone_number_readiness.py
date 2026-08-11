@@ -21,12 +21,8 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
     call_stage: Optional[PhoneNumberReadiness_callStage] = None
     # Indicates whether phone number warmup is enabled in Leadping.
     enabled: Optional[bool] = None
-    # Current warmup health score used to assess phone number warmup.
-    health_score: Optional[int] = None
     # Defines the supported SMS readiness health assessments.
     health_status: Optional[PhoneNumberReadiness_healthStatus] = None
-    # Warmup completion percentage, from 0 through 100.
-    progress_percent: Optional[int] = None
     # Defines the supported SMS readiness states.
     state: Optional[PhoneNumberReadiness_state] = None
     
@@ -57,9 +53,7 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "callStage": lambda n : setattr(self, 'call_stage', n.get_enum_value(PhoneNumberReadiness_callStage)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
-            "healthScore": lambda n : setattr(self, 'health_score', n.get_int_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberReadiness_healthStatus)),
-            "progressPercent": lambda n : setattr(self, 'progress_percent', n.get_int_value()),
             "state": lambda n : setattr(self, 'state', n.get_enum_value(PhoneNumberReadiness_state)),
         }
         return fields
@@ -74,9 +68,7 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("callStage", self.call_stage)
         writer.write_bool_value("enabled", self.enabled)
-        writer.write_int_value("healthScore", self.health_score)
         writer.write_enum_value("healthStatus", self.health_status)
-        writer.write_int_value("progressPercent", self.progress_percent)
         writer.write_enum_value("state", self.state)
         writer.write_additional_data_value(self.additional_data)
     

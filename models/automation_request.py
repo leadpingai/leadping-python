@@ -36,8 +36,6 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
     scope: Optional[str] = None
     # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
-    # Version number for this automation configuration request schema or saved configuration.
-    version: Optional[int] = None
     # Visibility level that controls who can see this automation configuration request.
     visibility: Optional[str] = None
     
@@ -77,7 +75,6 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
-            "version": lambda n : setattr(self, 'version', n.get_int_value()),
             "visibility": lambda n : setattr(self, 'visibility', n.get_str_value()),
         }
         return fields
@@ -99,7 +96,6 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("name", self.name)
         writer.write_str_value("scope", self.scope)
         writer.write_collection_of_object_values("triggers", self.triggers)
-        writer.write_int_value("version", self.version)
         writer.write_str_value("visibility", self.visibility)
         writer.write_additional_data_value(self.additional_data)
     

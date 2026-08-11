@@ -30,8 +30,6 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Identifier of the organization that owns the lead status.
     organization_id: Optional[str] = None
-    # Relative display order of the lead status.
-    sort_order: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> LeadStatusResponse:
@@ -61,7 +59,6 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
-            "sortOrder": lambda n : setattr(self, 'sort_order', n.get_int_value()),
         }
         return fields
     
@@ -80,7 +77,6 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("organizationId", self.organization_id)
-        writer.write_int_value("sortOrder", self.sort_order)
         writer.write_additional_data_value(self.additional_data)
     
 

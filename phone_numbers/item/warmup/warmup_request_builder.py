@@ -101,7 +101,7 @@ class WarmupRequestBuilder(BaseRequestBuilder):
         start_date: Optional[datetime.date] = None
 
         # The window days.
-        window_days: Optional[int] = None
+        window_days: Optional[str] = None
 
     
     @dataclass

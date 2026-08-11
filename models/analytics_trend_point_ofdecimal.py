@@ -19,8 +19,6 @@ class AnalyticsTrendPointOfdecimal(AdditionalDataHolder, Parsable):
     label: Optional[str] = None
     # Date and time when this Leadping analytics trend point was start.
     start_at: Optional[datetime.datetime] = None
-    # Value associated with this Leadping analytics trend point.
-    value: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> AnalyticsTrendPointOfdecimal:
@@ -42,7 +40,6 @@ class AnalyticsTrendPointOfdecimal(AdditionalDataHolder, Parsable):
             "endAt": lambda n : setattr(self, 'end_at', n.get_datetime_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
             "startAt": lambda n : setattr(self, 'start_at', n.get_datetime_value()),
-            "value": lambda n : setattr(self, 'value', n.get_float_value()),
         }
         return fields
     
@@ -57,7 +54,6 @@ class AnalyticsTrendPointOfdecimal(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("endAt", self.end_at)
         writer.write_str_value("label", self.label)
         writer.write_datetime_value("startAt", self.start_at)
-        writer.write_float_value("value", self.value)
         writer.write_additional_data_value(self.additional_data)
     
 

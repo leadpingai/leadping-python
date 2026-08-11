@@ -29,11 +29,11 @@ class MarkAllReadRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/notifications/mark-all-read", path_parameters)
     
-    async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[int]:
+    async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
         """
         Marks all notifications for the current user as read and returns the number updated for notification center refreshes.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[int]
+        Returns: bytes
         """
         request_info = self.to_post_request_information(
             request_configuration
@@ -47,7 +47,7 @@ class MarkAllReadRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_primitive_async(request_info, "int", error_mapping)
+        return await self.request_adapter.send_primitive_async(request_info, "bytes", error_mapping)
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

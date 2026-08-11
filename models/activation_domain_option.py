@@ -16,8 +16,6 @@ class ActivationDomainOption(AdditionalDataHolder, Parsable):
     availability_status: Optional[str] = None
     # The domain name associated with this activation domain option.
     domain_name: Optional[str] = None
-    # Estimated annual cost for this activation domain option.
-    estimated_annual_cost: Optional[float] = None
     # Industry relevance for this activation domain option.
     industry_relevance: Optional[str] = None
     # Whether this activation domain option is recommended.
@@ -46,7 +44,6 @@ class ActivationDomainOption(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "availabilityStatus": lambda n : setattr(self, 'availability_status', n.get_str_value()),
             "domainName": lambda n : setattr(self, 'domain_name', n.get_str_value()),
-            "estimatedAnnualCost": lambda n : setattr(self, 'estimated_annual_cost', n.get_float_value()),
             "industryRelevance": lambda n : setattr(self, 'industry_relevance', n.get_str_value()),
             "recommended": lambda n : setattr(self, 'recommended', n.get_bool_value()),
             "trustConcerns": lambda n : setattr(self, 'trust_concerns', n.get_str_value()),
@@ -64,7 +61,6 @@ class ActivationDomainOption(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("availabilityStatus", self.availability_status)
         writer.write_str_value("domainName", self.domain_name)
-        writer.write_float_value("estimatedAnnualCost", self.estimated_annual_cost)
         writer.write_str_value("industryRelevance", self.industry_relevance)
         writer.write_bool_value("recommended", self.recommended)
         writer.write_str_value("trustConcerns", self.trust_concerns)

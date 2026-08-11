@@ -18,8 +18,6 @@ class MessageMediaAttachment(AdditionalDataHolder, Parsable):
     file_name: Optional[str] = None
     # SHA-256 digest of the media content, when available.
     sha256: Optional[str] = None
-    # Size of the media attachment in bytes.
-    size: Optional[int] = None
     # URL from which the media attachment can be retrieved.
     url: Optional[str] = None
     
@@ -43,7 +41,6 @@ class MessageMediaAttachment(AdditionalDataHolder, Parsable):
             "contentType": lambda n : setattr(self, 'content_type', n.get_str_value()),
             "fileName": lambda n : setattr(self, 'file_name', n.get_str_value()),
             "sha256": lambda n : setattr(self, 'sha256', n.get_str_value()),
-            "size": lambda n : setattr(self, 'size', n.get_int_value()),
             "url": lambda n : setattr(self, 'url', n.get_str_value()),
         }
         return fields
@@ -59,7 +56,6 @@ class MessageMediaAttachment(AdditionalDataHolder, Parsable):
         writer.write_str_value("contentType", self.content_type)
         writer.write_str_value("fileName", self.file_name)
         writer.write_str_value("sha256", self.sha256)
-        writer.write_int_value("size", self.size)
         writer.write_str_value("url", self.url)
         writer.write_additional_data_value(self.additional_data)
     

@@ -13,14 +13,6 @@ class PhoneNumberOptOutMetricsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Number of distinct recipients contacted during this metrics window.
-    distinct_contacted_count: Optional[int] = None
-    # Number of recipients who opted out during this metrics window.
-    opt_out_count: Optional[int] = None
-    # Percentage of contacted recipients who opted out during this metrics window.
-    opt_out_rate_percent: Optional[float] = None
-    # Number of days included in the metrics reporting window.
-    window_days: Optional[int] = None
     # UTC timestamp when the metrics reporting window starts.
     window_started_at: Optional[datetime.datetime] = None
     
@@ -41,10 +33,6 @@ class PhoneNumberOptOutMetricsResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "distinctContactedCount": lambda n : setattr(self, 'distinct_contacted_count', n.get_int_value()),
-            "optOutCount": lambda n : setattr(self, 'opt_out_count', n.get_int_value()),
-            "optOutRatePercent": lambda n : setattr(self, 'opt_out_rate_percent', n.get_float_value()),
-            "windowDays": lambda n : setattr(self, 'window_days', n.get_int_value()),
             "windowStartedAt": lambda n : setattr(self, 'window_started_at', n.get_datetime_value()),
         }
         return fields
@@ -57,10 +45,6 @@ class PhoneNumberOptOutMetricsResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_int_value("distinctContactedCount", self.distinct_contacted_count)
-        writer.write_int_value("optOutCount", self.opt_out_count)
-        writer.write_float_value("optOutRatePercent", self.opt_out_rate_percent)
-        writer.write_int_value("windowDays", self.window_days)
         writer.write_datetime_value("windowStartedAt", self.window_started_at)
         writer.write_additional_data_value(self.additional_data)
     

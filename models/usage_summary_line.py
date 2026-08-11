@@ -21,12 +21,6 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
     billable_unit: Optional[BillableUnit] = None
     # Channel for this usage summary line.
     channel: Optional[UsageChannel] = None
-    # The monetary customer charge amount for this usage summary line.
-    customer_charge_amount: Optional[float] = None
-    # Quantity for this usage summary line.
-    quantity: Optional[float] = None
-    # The record count for this usage summary line.
-    record_count: Optional[int] = None
     # The current status for this usage summary line.
     status: Optional[UsageStatus] = None
     
@@ -57,9 +51,6 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(BillableUnit)),
             "channel": lambda n : setattr(self, 'channel', n.get_enum_value(UsageChannel)),
-            "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
-            "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
-            "recordCount": lambda n : setattr(self, 'record_count', n.get_int_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageStatus)),
         }
         return fields
@@ -74,9 +65,6 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("billableUnit", self.billable_unit)
         writer.write_enum_value("channel", self.channel)
-        writer.write_float_value("customerChargeAmount", self.customer_charge_amount)
-        writer.write_float_value("quantity", self.quantity)
-        writer.write_int_value("recordCount", self.record_count)
         writer.write_enum_value("status", self.status)
         writer.write_additional_data_value(self.additional_data)
     

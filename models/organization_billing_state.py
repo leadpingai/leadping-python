@@ -31,14 +31,8 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
     last_payment_method_event_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping last processed a subscription event for the organization.
     last_subscription_event_at: Optional[datetime.datetime] = None
-    # Number of user licenses currently assigned to organization members.
-    organization_member_assigned_quantity: Optional[int] = None
-    # Number of user licenses included in the organization's subscription plan.
-    organization_member_quantity: Optional[int] = None
     # Defines the supported Billing Plan values.
     pending_billing_plan: Optional[OrganizationBillingState_pendingBillingPlan] = None
-    # Number of phone numbers included in the organization's subscription plan.
-    phone_number_quantity: Optional[int] = None
     # Start of the current plan billing period.
     plan_period_start_at: Optional[datetime.datetime] = None
     # Current plan renewal date.
@@ -74,10 +68,7 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
             "hasStripeCustomer": lambda n : setattr(self, 'has_stripe_customer', n.get_bool_value()),
             "lastPaymentMethodEventAt": lambda n : setattr(self, 'last_payment_method_event_at', n.get_datetime_value()),
             "lastSubscriptionEventAt": lambda n : setattr(self, 'last_subscription_event_at', n.get_datetime_value()),
-            "organizationMemberAssignedQuantity": lambda n : setattr(self, 'organization_member_assigned_quantity', n.get_int_value()),
-            "organizationMemberQuantity": lambda n : setattr(self, 'organization_member_quantity', n.get_int_value()),
             "pendingBillingPlan": lambda n : setattr(self, 'pending_billing_plan', n.get_enum_value(OrganizationBillingState_pendingBillingPlan)),
-            "phoneNumberQuantity": lambda n : setattr(self, 'phone_number_quantity', n.get_int_value()),
             "planPeriodStartAt": lambda n : setattr(self, 'plan_period_start_at', n.get_datetime_value()),
             "planRenewalAt": lambda n : setattr(self, 'plan_renewal_at', n.get_datetime_value()),
         }
@@ -98,10 +89,7 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
         writer.write_bool_value("hasStripeCustomer", self.has_stripe_customer)
         writer.write_datetime_value("lastPaymentMethodEventAt", self.last_payment_method_event_at)
         writer.write_datetime_value("lastSubscriptionEventAt", self.last_subscription_event_at)
-        writer.write_int_value("organizationMemberAssignedQuantity", self.organization_member_assigned_quantity)
-        writer.write_int_value("organizationMemberQuantity", self.organization_member_quantity)
         writer.write_enum_value("pendingBillingPlan", self.pending_billing_plan)
-        writer.write_int_value("phoneNumberQuantity", self.phone_number_quantity)
         writer.write_datetime_value("planPeriodStartAt", self.plan_period_start_at)
         writer.write_datetime_value("planRenewalAt", self.plan_renewal_at)
         writer.write_additional_data_value(self.additional_data)

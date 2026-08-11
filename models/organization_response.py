@@ -29,18 +29,12 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Current wallet balance available to the organization.
-    account_balance: Optional[float] = None
     # Organization activation state covering site, billing, compliance, and telephony readiness.
     activation: Optional[OrganizationResponse_activation] = None
     # Postal address for the organization, lead, or contact represented by this organization profile response.
     address: Optional[OrganizationResponse_address] = None
-    # Wallet refill amount charged when automatic refill is triggered.
-    auto_refill_amount: Optional[float] = None
     # Indicates whether automatic wallet refill is enabled for the organization.
     auto_refill_enabled: Optional[bool] = None
-    # Wallet balance threshold that triggers automatic refill.
-    auto_refill_trigger: Optional[float] = None
     # Postal address used for invoices, receipts, and payment processor billing records.
     billing_address: Optional[OrganizationResponse_billingAddress] = None
     # Name used for invoices, receipts, and payment processor billing records.
@@ -141,12 +135,9 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         from .organization_response_user import OrganizationResponse_user
 
         fields: dict[str, Callable[[Any], None]] = {
-            "accountBalance": lambda n : setattr(self, 'account_balance', n.get_float_value()),
             "activation": lambda n : setattr(self, 'activation', n.get_object_value(OrganizationResponse_activation)),
             "address": lambda n : setattr(self, 'address', n.get_object_value(OrganizationResponse_address)),
-            "autoRefillAmount": lambda n : setattr(self, 'auto_refill_amount', n.get_float_value()),
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
-            "autoRefillTrigger": lambda n : setattr(self, 'auto_refill_trigger', n.get_float_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(OrganizationResponse_billingAddress)),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(OrganizationResponse_billingPlan)),
@@ -184,12 +175,9 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_float_value("accountBalance", self.account_balance)
         writer.write_object_value("activation", self.activation)
         writer.write_object_value("address", self.address)
-        writer.write_float_value("autoRefillAmount", self.auto_refill_amount)
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
-        writer.write_float_value("autoRefillTrigger", self.auto_refill_trigger)
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)

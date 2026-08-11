@@ -32,8 +32,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     contact_phone: Optional[str] = None
     # EIN for this 10DLC application draft.
     ein: Optional[str] = None
-    # Expected monthly volume for this 10DLC application draft.
-    expected_monthly_volume: Optional[int] = None
     # The Telnyx brand vertical for this 10DLC application draft. The JSON name is retained for backward compatibility.
     industry: Optional[str] = None
     # UTC timestamp for last submitted at on this 10DLC application draft.
@@ -58,8 +56,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     use_case: Optional[str] = None
     # Use case description for this 10DLC application draft.
     use_case_description: Optional[str] = None
-    # Version for this 10DLC application draft.
-    version: Optional[int] = None
     # Public business website URL submitted to carriers during brand review.
     website_url: Optional[str] = None
     
@@ -92,7 +88,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
             "contactName": lambda n : setattr(self, 'contact_name', n.get_str_value()),
             "contactPhone": lambda n : setattr(self, 'contact_phone', n.get_str_value()),
             "ein": lambda n : setattr(self, 'ein', n.get_str_value()),
-            "expectedMonthlyVolume": lambda n : setattr(self, 'expected_monthly_volume', n.get_int_value()),
             "industry": lambda n : setattr(self, 'industry', n.get_str_value()),
             "lastSubmittedAt": lambda n : setattr(self, 'last_submitted_at', n.get_datetime_value()),
             "messageExamples": lambda n : setattr(self, 'message_examples', n.get_collection_of_primitive_values(str)),
@@ -105,7 +100,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
             "updatedAt": lambda n : setattr(self, 'updated_at', n.get_datetime_value()),
             "useCase": lambda n : setattr(self, 'use_case', n.get_str_value()),
             "useCaseDescription": lambda n : setattr(self, 'use_case_description', n.get_str_value()),
-            "version": lambda n : setattr(self, 'version', n.get_int_value()),
             "websiteUrl": lambda n : setattr(self, 'website_url', n.get_str_value()),
         }
         return fields
@@ -126,7 +120,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
         writer.write_str_value("contactName", self.contact_name)
         writer.write_str_value("contactPhone", self.contact_phone)
         writer.write_str_value("ein", self.ein)
-        writer.write_int_value("expectedMonthlyVolume", self.expected_monthly_volume)
         writer.write_str_value("industry", self.industry)
         writer.write_datetime_value("lastSubmittedAt", self.last_submitted_at)
         writer.write_collection_of_primitive_values("messageExamples", self.message_examples)
@@ -139,7 +132,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("updatedAt", self.updated_at)
         writer.write_str_value("useCase", self.use_case)
         writer.write_str_value("useCaseDescription", self.use_case_description)
-        writer.write_int_value("version", self.version)
         writer.write_str_value("websiteUrl", self.website_url)
         writer.write_additional_data_value(self.additional_data)
     

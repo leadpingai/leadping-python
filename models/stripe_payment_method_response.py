@@ -17,10 +17,6 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
     brand: Optional[str] = None
     # UTC timestamp for created at on this Stripe payment method.
     created_at: Optional[datetime.datetime] = None
-    # Two-digit month when the card expires.
-    exp_month: Optional[int] = None
-    # Four-digit year when the card expires.
-    exp_year: Optional[int] = None
     # Unique Leadping identifier for this Stripe payment method.
     id: Optional[str] = None
     # Whether this Stripe payment method is default.
@@ -47,8 +43,6 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "brand": lambda n : setattr(self, 'brand', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
-            "expMonth": lambda n : setattr(self, 'exp_month', n.get_int_value()),
-            "expYear": lambda n : setattr(self, 'exp_year', n.get_int_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDefault": lambda n : setattr(self, 'is_default', n.get_bool_value()),
             "last4": lambda n : setattr(self, 'last4', n.get_str_value()),
@@ -65,8 +59,6 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("brand", self.brand)
         writer.write_datetime_value("createdAt", self.created_at)
-        writer.write_int_value("expMonth", self.exp_month)
-        writer.write_int_value("expYear", self.exp_year)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDefault", self.is_default)
         writer.write_str_value("last4", self.last4)

@@ -27,8 +27,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Date and time when the next retry is scheduled.
     next_retry_at: Optional[datetime.datetime] = None
-    # Total number of retry records represented by this Leadping automation workflow action.
-    retry_count: Optional[int] = None
     # Safe reason associated with this Leadping automation workflow action.
     safe_reason: Optional[str] = None
     # Date and time when the automation workflow action was scheduled.
@@ -45,8 +43,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
     step_display_name: Optional[str] = None
     # Unique identifier of the step associated with this Leadping automation workflow action.
     step_id: Optional[str] = None
-    # Step order associated with this Leadping automation workflow action.
-    step_order: Optional[int] = None
     # Human-readable user summary for this Leadping automation workflow action.
     user_summary: Optional[str] = None
     
@@ -74,7 +70,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
             "failureCode": lambda n : setattr(self, 'failure_code', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
-            "retryCount": lambda n : setattr(self, 'retry_count', n.get_int_value()),
             "safeReason": lambda n : setattr(self, 'safe_reason', n.get_str_value()),
             "scheduledAt": lambda n : setattr(self, 'scheduled_at', n.get_datetime_value()),
             "skippedAt": lambda n : setattr(self, 'skipped_at', n.get_datetime_value()),
@@ -83,7 +78,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
             "statusDisplay": lambda n : setattr(self, 'status_display', n.get_str_value()),
             "stepDisplayName": lambda n : setattr(self, 'step_display_name', n.get_str_value()),
             "stepId": lambda n : setattr(self, 'step_id', n.get_str_value()),
-            "stepOrder": lambda n : setattr(self, 'step_order', n.get_int_value()),
             "userSummary": lambda n : setattr(self, 'user_summary', n.get_str_value()),
         }
         return fields
@@ -103,7 +97,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("failureCode", self.failure_code)
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
-        writer.write_int_value("retryCount", self.retry_count)
         writer.write_str_value("safeReason", self.safe_reason)
         writer.write_datetime_value("scheduledAt", self.scheduled_at)
         writer.write_datetime_value("skippedAt", self.skipped_at)
@@ -112,7 +105,6 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("statusDisplay", self.status_display)
         writer.write_str_value("stepDisplayName", self.step_display_name)
         writer.write_str_value("stepId", self.step_id)
-        writer.write_int_value("stepOrder", self.step_order)
         writer.write_str_value("userSummary", self.user_summary)
         writer.write_additional_data_value(self.additional_data)
     

@@ -20,8 +20,6 @@ class MediaPostRequestBody(AdditionalDataHolder, Parsable):
     file_name: Optional[str] = None
     # The Headers property
     headers: Optional[MediaPostRequestBody_Headers] = None
-    # The Length property
-    length: Optional[int] = None
     # The Name property
     name: Optional[str] = None
     
@@ -50,7 +48,6 @@ class MediaPostRequestBody(AdditionalDataHolder, Parsable):
             "ContentType": lambda n : setattr(self, 'content_type', n.get_str_value()),
             "FileName": lambda n : setattr(self, 'file_name', n.get_str_value()),
             "Headers": lambda n : setattr(self, 'headers', n.get_object_value(MediaPostRequestBody_Headers)),
-            "Length": lambda n : setattr(self, 'length', n.get_int_value()),
             "Name": lambda n : setattr(self, 'name', n.get_str_value()),
         }
         return fields
@@ -67,7 +64,6 @@ class MediaPostRequestBody(AdditionalDataHolder, Parsable):
         writer.write_str_value("ContentType", self.content_type)
         writer.write_str_value("FileName", self.file_name)
         writer.write_object_value("Headers", self.headers)
-        writer.write_int_value("Length", self.length)
         writer.write_str_value("Name", self.name)
         writer.write_additional_data_value(self.additional_data)
     

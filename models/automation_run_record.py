@@ -34,8 +34,6 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
     lead_id: Optional[str] = None
     # Organization ID that owns this automation run.
     organization_id: Optional[str] = None
-    # Number of processing attempts made for this workflow or delivery request.
-    processing_attempts: Optional[int] = None
     # Human-readable reason explaining why Leadping skipped this automation run.
     skipped_reason: Optional[str] = None
     # UTC timestamp when processing started for this automation run record.
@@ -75,7 +73,6 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
             "lastAttemptAt": lambda n : setattr(self, 'last_attempt_at', n.get_datetime_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
-            "processingAttempts": lambda n : setattr(self, 'processing_attempts', n.get_int_value()),
             "skippedReason": lambda n : setattr(self, 'skipped_reason', n.get_str_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
@@ -100,7 +97,6 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("lastAttemptAt", self.last_attempt_at)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("organizationId", self.organization_id)
-        writer.write_int_value("processingAttempts", self.processing_attempts)
         writer.write_str_value("skippedReason", self.skipped_reason)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_str_value("status", self.status)

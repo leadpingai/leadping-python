@@ -12,14 +12,8 @@ class AnalyticsComparison(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Percentage change between the current and previous reporting periods.
-    change_percent: Optional[float] = None
-    # Metric value for the current reporting period.
-    current: Optional[float] = None
     # Direction classification for this Leadping analytics comparison.
     direction: Optional[str] = None
-    # Metric value for the preceding comparison period.
-    previous: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> AnalyticsComparison:
@@ -38,10 +32,7 @@ class AnalyticsComparison(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "changePercent": lambda n : setattr(self, 'change_percent', n.get_float_value()),
-            "current": lambda n : setattr(self, 'current', n.get_float_value()),
             "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
-            "previous": lambda n : setattr(self, 'previous', n.get_float_value()),
         }
         return fields
     
@@ -53,10 +44,7 @@ class AnalyticsComparison(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_float_value("changePercent", self.change_percent)
-        writer.write_float_value("current", self.current)
         writer.write_str_value("direction", self.direction)
-        writer.write_float_value("previous", self.previous)
         writer.write_additional_data_value(self.additional_data)
     
 
