@@ -18,12 +18,16 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
 
     # Indicates whether Leadping successfully calculated capacity for this phone number.
     capacity_available: Optional[bool] = None
+    # Human-readable reason for the current phone-number health state.
+    health_reason: Optional[str] = None
     # Current health status for this Leadping outbound phone number capacity.
     health_status: Optional[PhoneNumberOutboundHealthStatus] = None
     # Phone number associated with this Leadping outbound phone number capacity.
     phone_number: Optional[str] = None
     # Unique identifier of the phone number associated with this Leadping outbound phone number capacity.
     phone_number_id: Optional[str] = None
+    # Indicates whether this phone number has an approved 10DLC messaging campaign assignment.
+    sms_approved: Optional[bool] = None
     # Next midnight Eastern time, when SMS daily capacity resets.
     sms_daily_resets_at: Optional[datetime.datetime] = None
     # Start of the next Eastern time hour, when SMS hourly capacity resets.
@@ -36,6 +40,8 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     sms_limit_today: Optional[int] = None
     # The next time SMS capacity becomes available in the rolling minute window.
     sms_minutely_resets_at: Optional[datetime.datetime] = None
+    # Indicates whether SMS limits for this phone number are still ramping up.
+    sms_ramping: Optional[bool] = None
     # SMS remaining this hour for the applicable messaging or voice capacity window.
     sms_remaining_this_hour: Optional[int] = None
     # SMS remaining in the current rolling minute.
@@ -60,6 +66,8 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     voice_limit_today: Optional[int] = None
     # The next time voice capacity becomes available in the rolling minute window.
     voice_minutely_resets_at: Optional[datetime.datetime] = None
+    # Indicates whether call limits for this phone number are still ramping up.
+    voice_ramping: Optional[bool] = None
     # Voice remaining this hour for the applicable messaging or voice capacity window.
     voice_remaining_this_hour: Optional[int] = None
     # Voice remaining in the current rolling minute.
@@ -95,15 +103,18 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "capacityAvailable": lambda n : setattr(self, 'capacity_available', n.get_bool_value()),
+            "healthReason": lambda n : setattr(self, 'health_reason', n.get_str_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberOutboundHealthStatus)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
+            "smsApproved": lambda n : setattr(self, 'sms_approved', n.get_bool_value()),
             "smsDailyResetsAt": lambda n : setattr(self, 'sms_daily_resets_at', n.get_datetime_value()),
             "smsHourlyResetsAt": lambda n : setattr(self, 'sms_hourly_resets_at', n.get_datetime_value()),
             "smsLimitThisHour": lambda n : setattr(self, 'sms_limit_this_hour', n.get_int_value()),
             "smsLimitThisMinute": lambda n : setattr(self, 'sms_limit_this_minute', n.get_int_value()),
             "smsLimitToday": lambda n : setattr(self, 'sms_limit_today', n.get_int_value()),
             "smsMinutelyResetsAt": lambda n : setattr(self, 'sms_minutely_resets_at', n.get_datetime_value()),
+            "smsRamping": lambda n : setattr(self, 'sms_ramping', n.get_bool_value()),
             "smsRemainingThisHour": lambda n : setattr(self, 'sms_remaining_this_hour', n.get_int_value()),
             "smsRemainingThisMinute": lambda n : setattr(self, 'sms_remaining_this_minute', n.get_int_value()),
             "smsRemainingToday": lambda n : setattr(self, 'sms_remaining_today', n.get_int_value()),
@@ -116,6 +127,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
             "voiceLimitThisMinute": lambda n : setattr(self, 'voice_limit_this_minute', n.get_int_value()),
             "voiceLimitToday": lambda n : setattr(self, 'voice_limit_today', n.get_int_value()),
             "voiceMinutelyResetsAt": lambda n : setattr(self, 'voice_minutely_resets_at', n.get_datetime_value()),
+            "voiceRamping": lambda n : setattr(self, 'voice_ramping', n.get_bool_value()),
             "voiceRemainingThisHour": lambda n : setattr(self, 'voice_remaining_this_hour', n.get_int_value()),
             "voiceRemainingThisMinute": lambda n : setattr(self, 'voice_remaining_this_minute', n.get_int_value()),
             "voiceRemainingToday": lambda n : setattr(self, 'voice_remaining_today', n.get_int_value()),
@@ -134,15 +146,18 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_bool_value("capacityAvailable", self.capacity_available)
+        writer.write_str_value("healthReason", self.health_reason)
         writer.write_enum_value("healthStatus", self.health_status)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
+        writer.write_bool_value("smsApproved", self.sms_approved)
         writer.write_datetime_value("smsDailyResetsAt", self.sms_daily_resets_at)
         writer.write_datetime_value("smsHourlyResetsAt", self.sms_hourly_resets_at)
         writer.write_int_value("smsLimitThisHour", self.sms_limit_this_hour)
         writer.write_int_value("smsLimitThisMinute", self.sms_limit_this_minute)
         writer.write_int_value("smsLimitToday", self.sms_limit_today)
         writer.write_datetime_value("smsMinutelyResetsAt", self.sms_minutely_resets_at)
+        writer.write_bool_value("smsRamping", self.sms_ramping)
         writer.write_int_value("smsRemainingThisHour", self.sms_remaining_this_hour)
         writer.write_int_value("smsRemainingThisMinute", self.sms_remaining_this_minute)
         writer.write_int_value("smsRemainingToday", self.sms_remaining_today)
@@ -155,6 +170,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         writer.write_int_value("voiceLimitThisMinute", self.voice_limit_this_minute)
         writer.write_int_value("voiceLimitToday", self.voice_limit_today)
         writer.write_datetime_value("voiceMinutelyResetsAt", self.voice_minutely_resets_at)
+        writer.write_bool_value("voiceRamping", self.voice_ramping)
         writer.write_int_value("voiceRemainingThisHour", self.voice_remaining_this_hour)
         writer.write_int_value("voiceRemainingThisMinute", self.voice_remaining_this_minute)
         writer.write_int_value("voiceRemainingToday", self.voice_remaining_today)

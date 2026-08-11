@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 @dataclass
 class SourceTableRow(AdditionalDataHolder, Parsable):
     """
-    List item schema for Leadping API lead source table row results shown in searchable tables.
+    Summarizes lead source data in paginated and searchable results.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

@@ -34,7 +34,7 @@ class ArchiveRequestBuilder(BaseRequestBuilder):
     async def post(self,body: ArchivePostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Archives a lead without deleting history, removing it from active pipeline views while preserving communication and event records.
-        param body: Request schema for the Leadping API lead archive request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead archive.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -59,7 +59,7 @@ class ArchiveRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: ArchivePostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Archives a lead without deleting history, removing it from active pipeline views while preserving communication and event records.
-        param body: Request schema for the Leadping API lead archive request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead archive.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -70,7 +70,7 @@ class MembersRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OrganizationMemberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationMemberResponse]:
         """
         Adds an existing user to the current organization with the requested role for shared lead communication and account access.
-        param body: Request schema for the Leadping API organization user request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization user.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationMemberResponse]
         """
@@ -106,7 +106,7 @@ class MembersRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OrganizationMemberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Adds an existing user to the current organization with the requested role for shared lead communication and account access.
-        param body: Request schema for the Leadping API organization user request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization user.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -13,20 +13,20 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationInvitationResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing organization invitation data returned to callers.
+    Describes organization invitation data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the accepted at value on this organization invitation.
+    # UTC timestamp for accepted at on this organization invitation.
     accepted_at: Optional[datetime.datetime] = None
-    # The date and time for the created at value on this organization invitation.
+    # UTC timestamp for created at on this organization invitation.
     created_at: Optional[datetime.datetime] = None
     # The email address associated with this organization invitation.
     email: Optional[str] = None
-    # The date and time for the expires at value on this organization invitation.
+    # UTC timestamp for expires at on this organization invitation.
     expires_at: Optional[datetime.datetime] = None
-    # The unique ID for this organization invitation.
+    # Unique Leadping identifier for this organization invitation.
     id: Optional[str] = None
     # The date and time this invitation's paid license was created.
     license_activated_at: Optional[datetime.datetime] = None
@@ -38,19 +38,19 @@ class OrganizationInvitationResponse(AdditionalDataHolder, Parsable):
     license_released_at: Optional[datetime.datetime] = None
     # The renewal date used for proration of this license.
     license_renewal_date: Optional[datetime.datetime] = None
-    # The ID and name for this organization.
+    # Identifier and display name of the related organization.
     organization: Optional[IdNamePair] = None
-    # The date and time for the resent at value on this organization invitation.
+    # UTC timestamp for resent at on this organization invitation.
     resent_at: Optional[datetime.datetime] = None
-    # The date and time for the revoked at value on this organization invitation.
+    # UTC timestamp for revoked at on this organization invitation.
     revoked_at: Optional[datetime.datetime] = None
-    # The role value for this organization invitation.
+    # Role for this organization invitation.
     role: Optional[OrganizationMemberRole] = None
-    # The safe message value for this organization invitation.
+    # Safe message for this organization invitation.
     safe_message: Optional[str] = None
     # The human-readable send failure reason explaining this organization invitation.
     send_failure_reason: Optional[str] = None
-    # The date and time for the sent at value on this organization invitation.
+    # UTC timestamp for sent at on this organization invitation.
     sent_at: Optional[datetime.datetime] = None
     # The current status for this organization invitation.
     status: Optional[OrganizationInvitationStatus] = None

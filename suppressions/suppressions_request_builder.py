@@ -38,7 +38,7 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> SuppressionsItemRequestBuilder:
         """
         Gets an item from the leadping.suppressions.item collection
-        param id: Unique identifier of the item
+        param id: The unique identifier of the suppression entry to retrieve.
         Returns: SuppressionsItemRequestBuilder
         """
         if id is None:
@@ -52,7 +52,7 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionEntryResponse]:
         """
         Creates or reactivates a Leadping suppression entry that blocks future outreach to a recipient across the selected communication channel.
-        param body: Request payload for suppression entry.
+        param body: Defines a recipient and communication channel to suppress, release, or check before Leadping sends outreach.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SuppressionEntryResponse]
         """
@@ -76,7 +76,7 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates or reactivates a Leadping suppression entry that blocks future outreach to a recipient across the selected communication channel.
-        param body: Request payload for suppression entry.
+        param body: Defines a recipient and communication channel to suppress, release, or check before Leadping sends outreach.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

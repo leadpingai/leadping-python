@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class UserResponse_currentOrganization(IdNamePair, Parsable):
     """
-    The current organization value for this user.
+    Current organization for this user.
     """
     
     @staticmethod

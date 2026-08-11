@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 @dataclass
 class EventTableRow(AdditionalDataHolder, Parsable):
     """
-    List item schema for Leadping API event timeline table row results shown in searchable tables.
+    Summarizes event timeline data in paginated and searchable results.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

@@ -25,7 +25,7 @@ class InstallationsRequestBuilder(BaseRequestBuilder):
     def by_installation_id(self,installation_id: str) -> WithInstallationItemRequestBuilder:
         """
         Gets an item from the leadping.notifications.push.installations.item collection
-        param installation_id: Unique identifier of the item
+        param installation_id: The stable mobile installation identifier to unregister.
         Returns: WithInstallationItemRequestBuilder
         """
         if installation_id is None:

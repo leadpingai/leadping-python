@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberSearchRequest(AdditionalDataHolder, Parsable):
     """
-    Request schema for the Leadping API phone number search request, including the fields clients can send.
+    Defines the fields clients can send when working with phone number search.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

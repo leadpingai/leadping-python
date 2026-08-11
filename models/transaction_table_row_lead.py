@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class TransactionTableRow_lead(IdNamePair, Parsable):
     """
-    The ID and name for this lead.
+    Identifier and display name of the related lead.
     """
     
     @staticmethod

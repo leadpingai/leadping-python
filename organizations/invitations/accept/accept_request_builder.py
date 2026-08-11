@@ -34,7 +34,7 @@ class AcceptRequestBuilder(BaseRequestBuilder):
     async def post(self,body: AcceptOrganizationInvitationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationInvitationResponse]:
         """
         Accepts an organization invitation for the signed-in user, creating membership and setting organization access context.
-        param body: Request payload for accept organization invitation.
+        param body: Defines the input used for accept organization invitation.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationInvitationResponse]
         """
@@ -57,7 +57,7 @@ class AcceptRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: AcceptOrganizationInvitationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Accepts an organization invitation for the signed-in user, creating membership and setting organization access context.
-        param body: Request payload for accept organization invitation.
+        param body: Defines the input used for accept organization invitation.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

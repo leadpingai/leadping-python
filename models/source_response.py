@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 @dataclass
 class SourceResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API lead source response returned to authenticated clients.
+    Describes lead source data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

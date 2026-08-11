@@ -75,6 +75,7 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         """
         Validates an export download token and redirects to the generated file when the current-user report is ready.
         """
+        # The short-lived download token issued for this export.
         token: Optional[str] = None
 
     

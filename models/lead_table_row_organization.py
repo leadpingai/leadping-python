@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class LeadTableRow_organization(IdNamePair, Parsable):
     """
-    The ID and name for this organization.
+    Identifier and display name of the related organization.
     """
     
     @staticmethod

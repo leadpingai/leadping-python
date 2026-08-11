@@ -78,7 +78,7 @@ class PhoneNumberItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: PhoneNumberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneNumberResponse]:
         """
         Updates phone number settings such as its optional label, assignment, messaging options, or warmup configuration.
-        param body: Request schema for the Leadping API phone number update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with phone number update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneNumberResponse]
         """
@@ -126,7 +126,7 @@ class PhoneNumberItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: PhoneNumberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates phone number settings such as its optional label, assignment, messaging options, or warmup configuration.
-        param body: Request schema for the Leadping API phone number update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with phone number update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

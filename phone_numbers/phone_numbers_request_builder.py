@@ -53,7 +53,7 @@ class PhoneNumbersRequestBuilder(BaseRequestBuilder):
     async def post(self,body: PhoneNumberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneNumberResponse]:
         """
         Purchases or creates a phone number for the current organization so it can be assigned to messaging, calls, and lead follow-up.
-        param body: Request schema for the Leadping API phone number update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with phone number update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneNumberResponse]
         """
@@ -78,7 +78,7 @@ class PhoneNumbersRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: PhoneNumberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Purchases or creates a phone number for the current organization so it can be assigned to messaging, calls, and lead follow-up.
-        param body: Request schema for the Leadping API phone number update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with phone number update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

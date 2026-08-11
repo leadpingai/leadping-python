@@ -12,7 +12,7 @@ from .organization_dunning_info import OrganizationDunningInfo
 @dataclass
 class OrganizationBillingState_dunning(OrganizationDunningInfo, Parsable):
     """
-    Gets or sets the customer-safe payment recovery state for the organization.
+    Customer-safe payment recovery state for the organization.
     """
     
     @staticmethod

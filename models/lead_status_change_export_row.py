@@ -12,18 +12,18 @@ if TYPE_CHECKING:
 @dataclass
 class LeadStatusChangeExportRow(AdditionalDataHolder, Parsable):
     """
-    API response containing lead status change export row data returned to callers.
+    Describes lead status change export row data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the appointment end at value on this lead status change export row.
+    # UTC timestamp for appointment end at on this lead status change export row.
     appointment_end_at: Optional[datetime.datetime] = None
-    # The date and time for the appointment start at value on this lead status change export row.
+    # UTC timestamp for appointment start at on this lead status change export row.
     appointment_start_at: Optional[datetime.datetime] = None
     # The assigned to user ID associated with this lead status change export row.
     assigned_to_user_id: Optional[str] = None
-    # The date and time for the callback at value on this lead status change export row.
+    # UTC timestamp for callback at on this lead status change export row.
     callback_at: Optional[datetime.datetime] = None
     # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[LeadStatusChangeExportRow_category] = None
@@ -35,7 +35,7 @@ class LeadStatusChangeExportRow(AdditionalDataHolder, Parsable):
     changed_by_automation_id: Optional[str] = None
     # Unique identifier of the Leadping user who made the change.
     changed_by_user_id: Optional[str] = None
-    # The date and time for the created at value on this lead status change export row.
+    # UTC timestamp for created at on this lead status change export row.
     created_at: Optional[datetime.datetime] = None
     # The current follow up status for this lead status change export row.
     follow_up_status: Optional[str] = None
@@ -55,7 +55,7 @@ class LeadStatusChangeExportRow(AdditionalDataHolder, Parsable):
     old_lead_status_change_outcome: Optional[str] = None
     # Old lead status change type classification for this Leadping lead status change export row.
     old_lead_status_change_type: Optional[str] = None
-    # The outcome value for this lead status change export row.
+    # Result of the interaction or workflow step represented by this exported row.
     outcome: Optional[str] = None
     # Human-readable explanation for the current lead status change export row outcome.
     reason: Optional[str] = None
@@ -63,11 +63,11 @@ class LeadStatusChangeExportRow(AdditionalDataHolder, Parsable):
     related_call_event_id: Optional[str] = None
     # The source ID associated with this lead status change export row.
     source_id: Optional[str] = None
-    # The date and time for the task due at value on this lead status change export row.
+    # UTC timestamp for task due at on this lead status change export row.
     task_due_at: Optional[datetime.datetime] = None
-    # The type classification for this lead status change export row.
+    # Category of status change represented by this exported row.
     type: Optional[str] = None
-    # The date and time for the updated at value on this lead status change export row.
+    # UTC timestamp for updated at on this lead status change export row.
     updated_at: Optional[datetime.datetime] = None
     
     @staticmethod

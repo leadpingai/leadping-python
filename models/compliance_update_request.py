@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class ComplianceUpdateRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for compliance update.
+    Defines the input used for compliance update.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The compliance value for this compliance update.
+    # Compliance for this compliance update.
     compliance: Optional[ComplianceUpdateRequest_compliance] = None
-    # The source value for this compliance update.
+    # Source for this compliance update.
     source: Optional[str] = None
     
     @staticmethod

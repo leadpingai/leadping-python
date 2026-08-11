@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationInvitationRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for organization invitation.
+    Defines the input used for organization invitation.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
     # The email address associated with this organization invitation.
     email: Optional[str] = None
-    # The role value for this organization invitation.
+    # Role for this organization invitation.
     role: Optional[OrganizationMemberRole] = None
     
     @staticmethod

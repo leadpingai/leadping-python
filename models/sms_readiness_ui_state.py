@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class SmsReadinessUiState(AdditionalDataHolder, Parsable):
     """
-    API DTO containing SMS readiness UI state data used by Leadping API contracts.
+    Describes SMS readiness UI state data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -19,7 +19,7 @@ class SmsReadinessUiState(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # The human-readable label shown for this SMS readiness UI state.
     label: Optional[SmsReadinessState] = None
-    # The tone value for this SMS readiness UI state.
+    # Tone for this SMS readiness UI state.
     tone: Optional[str] = None
     
     @staticmethod

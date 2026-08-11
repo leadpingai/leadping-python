@@ -11,24 +11,24 @@ if TYPE_CHECKING:
 @dataclass
 class SuppressionEntryAudit(AdditionalDataHolder, Parsable):
     """
-    API DTO containing ion entry audit data used by Leadping API contracts.
+    Records one auditable change to a recipient suppression entry.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actor ID associated with this ion entry audit.
+    # Identifier of the user or system actor responsible for the change.
     actor_id: Optional[str] = None
-    # The unique ID for this ion entry audit.
+    # Unique identifier for this suppression audit record.
     id: Optional[str] = None
-    # The human-readable reason explaining this ion entry audit.
+    # Human-readable reason recorded for the suppression change.
     reason: Optional[str] = None
-    # The safe metadata key-value data carried with this ion entry audit; values must be safe to expose in API responses.
+    # Non-sensitive metadata that provides additional audit context.
     safe_metadata: Optional[SuppressionEntryAudit_safeMetadata] = None
-    # The source value for this ion entry audit.
+    # System or workflow that initiated the change.
     source: Optional[str] = None
-    # The current status for this ion entry audit.
+    # Suppression status established by this change, such as active or released.
     status: Optional[str] = None
-    # The date and time for the timestamp value on this ion entry audit.
+    # UTC timestamp when the suppression change occurred.
     timestamp: Optional[datetime.datetime] = None
     
     @staticmethod

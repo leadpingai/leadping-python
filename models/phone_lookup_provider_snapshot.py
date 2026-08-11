@@ -13,15 +13,15 @@ class PhoneLookupProviderSnapshot(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The lookupType property
+    # The provider lookup product or operation that produced this snapshot.
     lookup_type: Optional[str] = None
-    # The provider property
+    # The provider that supplied the phone lookup record.
     provider: Optional[str] = None
-    # The rawRecordJson property
+    # The complete provider response serialized as JSON for lossless audit and replay.
     raw_record_json: Optional[str] = None
-    # The retrievedAt property
+    # The UTC timestamp when Leadping retrieved the provider record.
     retrieved_at: Optional[datetime.datetime] = None
-    # The schemaVersion property
+    # The Leadping schema version used to interpret the stored provider record.
     schema_version: Optional[int] = None
     
     @staticmethod

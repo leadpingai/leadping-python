@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 @dataclass
 class TransactionTableRow(AdditionalDataHolder, Parsable):
     """
-    List item schema for Leadping API billing transaction table row results shown in searchable tables.
+    Summarizes billing transaction data in paginated and searchable results.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -25,7 +25,7 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     amount: Optional[float] = None
     # Defines the supported Billable Unit values.
     billable_unit: Optional[TransactionTableRow_billableUnit] = None
-    # The billedAmount property
+    # Customer-facing amount billed for the metered usage or wallet transaction.
     billed_amount: Optional[float] = None
     # Defines the supported Usage Channel values.
     billing_channel: Optional[TransactionTableRow_billingChannel] = None
@@ -35,27 +35,27 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Unique Leadping identifier for this billing transaction table row.
     id: Optional[str] = None
-    # The ID and name for this lead.
+    # Identifier and display name of the related lead.
     lead: Optional[TransactionTableRow_lead] = None
     # Net monetary amount after fees, credits, or adjustments.
     net_amount: Optional[float] = None
-    # The ID and name for this organization.
+    # Identifier and display name of the related organization.
     organization: Optional[TransactionTableRow_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
-    # The pricingVersion property
+    # Version of the pricing rules used to calculate the billed amount.
     pricing_version: Optional[str] = None
-    # The quantity property
+    # Number of billable units measured for this transaction, when usage-based pricing applies.
     quantity: Optional[float] = None
-    # The sourceEventId property
+    # Identifier of the event that created this billing transaction, when available.
     source_event_id: Optional[str] = None
-    # The sourceEventType property
+    # Event type that created this billing transaction, when available.
     source_event_type: Optional[str] = None
     # Processing status for this wallet transaction.
     transaction_status: Optional[TransactionStatus] = None
     # Debit or credit classification for this wallet transaction.
     transaction_type: Optional[TransactionType] = None
-    # The unitPrice property
+    # Price charged per billable unit when usage-based pricing applies.
     unit_price: Optional[float] = None
     
     @staticmethod

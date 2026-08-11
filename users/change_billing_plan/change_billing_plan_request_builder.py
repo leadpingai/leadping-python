@@ -34,7 +34,7 @@ class ChangeBillingPlanRequestBuilder(BaseRequestBuilder):
     async def put(self,body: ChangeBillingPlanRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[UserResponse]:
         """
         Changes the current user's billing plan selection, updating account billing state and plan-specific capabilities.
-        param body: Request payload for change billing plan.
+        param body: Defines the input used for change billing plan.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[UserResponse]
         """
@@ -59,7 +59,7 @@ class ChangeBillingPlanRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: ChangeBillingPlanRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Changes the current user's billing plan selection, updating account billing state and plan-specific capabilities.
-        param body: Request payload for change billing plan.
+        param body: Defines the input used for change billing plan.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

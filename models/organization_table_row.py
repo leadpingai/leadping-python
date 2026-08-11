@@ -18,12 +18,12 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing organization data used by Leadping API contracts.
+    Describes organization data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The account balance value for this organization.
+    # Account balance for this organization.
     account_balance: Optional[float] = None
     # Defines the supported Customer Activation Status values.
     activation_status: Optional[OrganizationTableRow_activationStatus] = None
@@ -45,19 +45,19 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
     billing_plan: Optional[OrganizationTableRow_billingPlan] = None
     # Whether this organization is enabled.
     enabled: Optional[bool] = None
-    # The unique ID for this organization.
+    # Unique Leadping identifier for this organization.
     id: Optional[str] = None
-    # The industry value for this organization.
+    # Industry for this organization.
     industry: Optional[str] = None
     # Date and time when this Leadping organization table row was last subscription event.
     last_subscription_event_at: Optional[datetime.datetime] = None
-    # The date and time for the modified at value on this organization.
+    # UTC timestamp for modified at on this organization.
     modified_at: Optional[datetime.datetime] = None
     # The human-readable name shown for this organization.
     name: Optional[str] = None
     # Whether needs admin review applies to this organization.
     needs_admin_review: Optional[bool] = None
-    # The ID and name for this organization.
+    # Identifier and display name of the related organization.
     organization: Optional[OrganizationTableRow_organization] = None
     # Date and time when this Leadping organization table row was payment failed.
     payment_failed_at: Optional[datetime.datetime] = None

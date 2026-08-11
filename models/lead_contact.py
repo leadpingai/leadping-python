@@ -17,7 +17,7 @@ class LeadContact(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Optional profile image URL for the contact. Clients fall back to Gravatarand then initials when this value is not supplied.
+    # Optional profile image URL for the contact. Clients fall back to Gravatar and then initials when this value is not supplied.
     avatar_url: Optional[str] = None
     # Latitude and longitude coordinate for this lead contact profile.
     coordinate: Optional[LeadContact_coordinate] = None

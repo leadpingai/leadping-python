@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     """
-    API DTO containing ten dlc application draft data used by Leadping API contracts.
+    Describes ten dlc application draft data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -20,49 +20,47 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     brand_status: Optional[TenDlcRegistrationStatus] = None
     # The current provider review status for the submitted campaign.
     campaign_status: Optional[TenDlcRegistrationStatus] = None
-    # The company name value for this 10DLC application draft.
+    # Company name for this 10DLC application draft.
     company_name: Optional[str] = None
     # The compliance warnings included with this 10DLC application draft.
     compliance_warnings: Optional[list[str]] = None
-    # The contact email value for this 10DLC application draft.
+    # Contact email for this 10DLC application draft.
     contact_email: Optional[str] = None
-    # The contact name value for this 10DLC application draft.
+    # Contact name for this 10DLC application draft.
     contact_name: Optional[str] = None
-    # The contact phone value for this 10DLC application draft.
+    # Contact phone for this 10DLC application draft.
     contact_phone: Optional[str] = None
-    # The EIN value for this 10DLC application draft.
+    # EIN for this 10DLC application draft.
     ein: Optional[str] = None
-    # The expected monthly volume value for this 10DLC application draft.
+    # Expected monthly volume for this 10DLC application draft.
     expected_monthly_volume: Optional[int] = None
     # The Telnyx brand vertical for this 10DLC application draft. The JSON name is retained for backward compatibility.
     industry: Optional[str] = None
-    # The date and time for the last submitted at value on this 10DLC application draft.
+    # UTC timestamp for last submitted at on this 10DLC application draft.
     last_submitted_at: Optional[datetime.datetime] = None
-    # The lead source value for this 10DLC application draft.
-    lead_source: Optional[str] = None
     # The message examples included with this 10DLC application draft.
     message_examples: Optional[list[str]] = None
     # The missing fields included with this 10DLC application draft.
     missing_fields: Optional[list[str]] = None
-    # The opt in language value for this 10DLC application draft.
+    # Opt in language for this 10DLC application draft.
     opt_in_language: Optional[str] = None
-    # The URL associated with this 10DLC application draft.
+    # Public privacy-policy URL that explains how messaging recipient data is handled.
     privacy_policy_url: Optional[str] = None
     # The human-readable rejection reason explaining this 10DLC application draft.
     rejection_reason: Optional[str] = None
-    # The URL associated with this 10DLC application draft.
+    # Public terms-of-service URL governing the messaging program.
     terms_url: Optional[str] = None
     # Whether TrustedForm required applies to this 10DLC application draft.
     trusted_form_required: Optional[bool] = None
-    # The date and time for the updated at value on this 10DLC application draft.
+    # UTC timestamp for updated at on this 10DLC application draft.
     updated_at: Optional[datetime.datetime] = None
-    # The use case value for this 10DLC application draft.
+    # Use case for this 10DLC application draft.
     use_case: Optional[str] = None
-    # The use case description value for this 10DLC application draft.
+    # Use case description for this 10DLC application draft.
     use_case_description: Optional[str] = None
-    # The version value for this 10DLC application draft.
+    # Version for this 10DLC application draft.
     version: Optional[int] = None
-    # The URL associated with this 10DLC application draft.
+    # Public business website URL submitted to carriers during brand review.
     website_url: Optional[str] = None
     
     @staticmethod
@@ -97,7 +95,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
             "expectedMonthlyVolume": lambda n : setattr(self, 'expected_monthly_volume', n.get_int_value()),
             "industry": lambda n : setattr(self, 'industry', n.get_str_value()),
             "lastSubmittedAt": lambda n : setattr(self, 'last_submitted_at', n.get_datetime_value()),
-            "leadSource": lambda n : setattr(self, 'lead_source', n.get_str_value()),
             "messageExamples": lambda n : setattr(self, 'message_examples', n.get_collection_of_primitive_values(str)),
             "missingFields": lambda n : setattr(self, 'missing_fields', n.get_collection_of_primitive_values(str)),
             "optInLanguage": lambda n : setattr(self, 'opt_in_language', n.get_str_value()),
@@ -132,7 +129,6 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
         writer.write_int_value("expectedMonthlyVolume", self.expected_monthly_volume)
         writer.write_str_value("industry", self.industry)
         writer.write_datetime_value("lastSubmittedAt", self.last_submitted_at)
-        writer.write_str_value("leadSource", self.lead_source)
         writer.write_collection_of_primitive_values("messageExamples", self.message_examples)
         writer.write_collection_of_primitive_values("missingFields", self.missing_fields)
         writer.write_str_value("optInLanguage", self.opt_in_language)

@@ -15,27 +15,27 @@ class PushInstallationRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The appBuild property
+    # The application build number reported by the client.
     app_build: Optional[str] = None
-    # The appIdentifier property
+    # The application bundle identifier or package name.
     app_identifier: Optional[str] = None
-    # The appName property
+    # The human-readable application name reported by the client.
     app_name: Optional[str] = None
-    # The appVersion property
+    # The semantic application version reported by the client.
     app_version: Optional[str] = None
-    # The deviceModel property
+    # The device model reported by the client.
     device_model: Optional[str] = None
-    # The devicePlatform property
+    # The mobile operating-system platform reported by the device.
     device_platform: Optional[str] = None
-    # The deviceVersion property
+    # The mobile operating-system version reported by the device.
     device_version: Optional[str] = None
-    # The installationId property
+    # The stable installation identifier assigned by the mobile client.
     installation_id: Optional[str] = None
-    # The metadata property
+    # Optional client metadata stored with the push installation.
     metadata: Optional[PushInstallationRequest_metadata] = None
-    # The platform property
+    # The Azure Notification Hubs platform name, such as apns or fcmv1.
     platform: Optional[str] = None
-    # The pushChannel property
+    # The provider-issued push token or channel used to deliver notifications.
     push_channel: Optional[str] = None
     
     @staticmethod

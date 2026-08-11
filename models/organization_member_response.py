@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing organization user data returned to callers.
+    Describes organization user data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -23,7 +23,7 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     created_by_user_id: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The date and time for the last used at value on this organization user.
+    # UTC timestamp for last used at on this organization user.
     last_used_at: Optional[datetime.datetime] = None
     # The billing status for this user's organization license.
     license_billing_status: Optional[str] = None
@@ -35,17 +35,17 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The organization value for this organization user.
+    # Organization for this organization user.
     organization: Optional[IdNamePair] = None
-    # The date and time for the removed at value on this organization user.
+    # UTC timestamp for removed at on this organization user.
     removed_at: Optional[datetime.datetime] = None
     # The removed by user ID associated with this organization user.
     removed_by_user_id: Optional[str] = None
-    # The role value for this organization user.
+    # Role for this organization user.
     role: Optional[OrganizationMemberRole] = None
-    # The user value for this organization user.
+    # User for this organization user.
     user: Optional[IdNamePair] = None
-    # The user email value for this organization user.
+    # User email for this organization user.
     user_email: Optional[str] = None
     
     @staticmethod

@@ -15,7 +15,7 @@ if TYPE_CHECKING:
 @dataclass
 class SmsEventTableRow(AdditionalDataHolder, Parsable):
     """
-    List item schema for Leadping API SMS event table row results shown in searchable tables.
+    Summarizes SMS event data in paginated and searchable results.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -58,7 +58,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether automation created or triggered this SMS event table row.
     is_automated: Optional[bool] = None
-    # The ID and name for this lead.
+    # Identifier and display name of the related lead.
     lead: Optional[IdNamePair] = None
     # Media attached to this SMS/MMS event.
     media: Optional[list[MessageMediaAttachment]] = None

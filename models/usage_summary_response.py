@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 @dataclass
 class UsageSummaryResponse(AdditionalDataHolder, Parsable):
     """
-    API DTO containing usage summary response data.
+    Describes usage summary response data used by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -29,9 +29,9 @@ class UsageSummaryResponse(AdditionalDataHolder, Parsable):
     lines: Optional[list[UsageSummaryLine]] = None
     # The pending invoice count for this usage summary.
     pending_invoice_count: Optional[int] = None
-    # The date and time for the period end value on this usage summary.
+    # UTC timestamp for period end on this usage summary.
     period_end: Optional[datetime.datetime] = None
-    # The date and time for the period start value on this usage summary.
+    # UTC timestamp for period start on this usage summary.
     period_start: Optional[datetime.datetime] = None
     # The usage record count for this usage summary.
     transaction_count: Optional[int] = None

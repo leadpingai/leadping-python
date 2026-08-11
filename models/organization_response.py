@@ -24,7 +24,7 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API organization profile response returned to authenticated clients.
+    Describes organization profile data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

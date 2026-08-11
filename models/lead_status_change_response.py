@@ -17,15 +17,15 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the appointment end at value on this lead status change.
+    # UTC timestamp for appointment end at on this lead status change.
     appointment_end_at: Optional[datetime.datetime] = None
-    # The appointment notes value for this lead status change.
+    # Additional scheduling or preparation notes for the related appointment.
     appointment_notes: Optional[str] = None
-    # The date and time for the appointment start at value on this lead status change.
+    # UTC timestamp for appointment start at on this lead status change.
     appointment_start_at: Optional[datetime.datetime] = None
     # The assigned to user ID associated with this lead status change.
     assigned_to_user_id: Optional[str] = None
-    # The date and time for the callback at value on this lead status change.
+    # UTC timestamp for callback at on this lead status change.
     callback_at: Optional[datetime.datetime] = None
     # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[LeadStatusChangeResponse_category] = None
@@ -37,11 +37,11 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     changed_by_automation_id: Optional[str] = None
     # Unique identifier of the Leadping user who made the change.
     changed_by_user_id: Optional[str] = None
-    # The date and time for the created at value on this lead status change.
+    # UTC timestamp for created at on this lead status change.
     created_at: Optional[datetime.datetime] = None
     # The current follow up status for this lead status change.
     follow_up_status: Optional[str] = None
-    # The unique ID for this lead status change.
+    # Unique Leadping identifier for this lead status change.
     id: Optional[str] = None
     # Whether this lead status change is missed call follow up.
     is_missed_call_follow_up: Optional[bool] = None
@@ -59,7 +59,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     old_lead_status_change_outcome: Optional[str] = None
     # Old lead status change type classification for this Leadping lead status change.
     old_lead_status_change_type: Optional[str] = None
-    # The outcome value for this lead status change.
+    # Result of the interaction or workflow step that caused the status change.
     outcome: Optional[str] = None
     # The reason this lead status change was changed.
     reason: Optional[str] = None
@@ -67,13 +67,13 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     related_call_event_id: Optional[str] = None
     # The source ID associated with this lead status change.
     source_id: Optional[str] = None
-    # The date and time for the task due at value on this lead status change.
+    # UTC timestamp for task due at on this lead status change.
     task_due_at: Optional[datetime.datetime] = None
-    # The date and time for the timestamp value on this lead status change.
+    # UTC timestamp for timestamp on this lead status change.
     timestamp: Optional[datetime.datetime] = None
-    # The type classification for this lead status change.
+    # Category of status change recorded for the lead.
     type: Optional[str] = None
-    # The date and time for the updated at value on this lead status change.
+    # UTC timestamp for updated at on this lead status change.
     updated_at: Optional[datetime.datetime] = None
     
     @staticmethod

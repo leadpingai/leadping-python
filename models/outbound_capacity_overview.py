@@ -26,6 +26,8 @@ class OutboundCapacityOverview(AdditionalDataHolder, Parsable):
     limited_phone_numbers: Optional[int] = None
     # Collection of phone numbers included with this Leadping outbound capacity overview.
     phone_numbers: Optional[list[OutboundPhoneNumberCapacity]] = None
+    # Number of phone numbers whose SMS or calling capacity is still ramping up.
+    ramping_phone_numbers: Optional[int] = None
     # Collection of recent decisions included with this Leadping outbound capacity overview.
     recent_decisions: Optional[list[OutboundQueueItem]] = None
     # Total number of scheduled records represented by this Leadping outbound capacity overview.
@@ -63,6 +65,7 @@ class OutboundCapacityOverview(AdditionalDataHolder, Parsable):
             "healthyPhoneNumbers": lambda n : setattr(self, 'healthy_phone_numbers', n.get_int_value()),
             "limitedPhoneNumbers": lambda n : setattr(self, 'limited_phone_numbers', n.get_int_value()),
             "phoneNumbers": lambda n : setattr(self, 'phone_numbers', n.get_collection_of_object_values(OutboundPhoneNumberCapacity)),
+            "rampingPhoneNumbers": lambda n : setattr(self, 'ramping_phone_numbers', n.get_int_value()),
             "recentDecisions": lambda n : setattr(self, 'recent_decisions', n.get_collection_of_object_values(OutboundQueueItem)),
             "scheduledCount": lambda n : setattr(self, 'scheduled_count', n.get_int_value()),
             "smsCapacityRemainingToday": lambda n : setattr(self, 'sms_capacity_remaining_today', n.get_int_value()),
@@ -83,6 +86,7 @@ class OutboundCapacityOverview(AdditionalDataHolder, Parsable):
         writer.write_int_value("healthyPhoneNumbers", self.healthy_phone_numbers)
         writer.write_int_value("limitedPhoneNumbers", self.limited_phone_numbers)
         writer.write_collection_of_object_values("phoneNumbers", self.phone_numbers)
+        writer.write_int_value("rampingPhoneNumbers", self.ramping_phone_numbers)
         writer.write_collection_of_object_values("recentDecisions", self.recent_decisions)
         writer.write_int_value("scheduledCount", self.scheduled_count)
         writer.write_int_value("smsCapacityRemainingToday", self.sms_capacity_remaining_today)

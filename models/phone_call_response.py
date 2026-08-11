@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneCallResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API phone call returned to authenticated clients.
+    Describes a Leadping phone call, including participants, direction, provider state, timing, recording, and billing details.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

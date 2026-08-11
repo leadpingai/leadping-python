@@ -32,7 +32,7 @@ class CurrentRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: PushInstallationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Register or refresh the current user's mobile push installation.
+        Registers or refreshes the authenticated user's mobile push installation so Leadping can deliver account and workflow notifications to the device.
         param body: Describes a mobile push installation. Identity and Azure tags are derived by the API.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
@@ -54,7 +54,7 @@ class CurrentRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: PushInstallationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Register or refresh the current user's mobile push installation.
+        Registers or refreshes the authenticated user's mobile push installation so Leadping can deliver account and workflow notifications to the device.
         param body: Describes a mobile push installation. Identity and Azure tags are derived by the API.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

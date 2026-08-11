@@ -16,46 +16,46 @@ if TYPE_CHECKING:
 @dataclass
 class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing usage ledger data used by Leadping API contracts.
+    Describes usage ledger data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The billable seconds value for this usage ledger.
+    # Billable seconds for this usage ledger.
     billable_seconds: Optional[int] = None
-    # The billable unit value for this usage ledger.
+    # Billable unit for this usage ledger.
     billable_unit: Optional[BillableUnit] = None
-    # The channel value for this usage ledger.
+    # Channel for this usage ledger.
     channel: Optional[UsageChannel] = None
-    # The date and time for the created at value on this usage ledger.
+    # UTC timestamp for created at on this usage ledger.
     created_at: Optional[datetime.datetime] = None
     # The monetary customer charge amount for this usage ledger.
     customer_charge_amount: Optional[float] = None
     # The human-readable description of this usage ledger.
     description: Optional[str] = None
-    # The duration seconds value for this usage ledger.
+    # Duration seconds for this usage ledger.
     duration_seconds: Optional[int] = None
-    # The unique ID for this usage ledger.
+    # Unique Leadping identifier for this usage ledger.
     id: Optional[str] = None
     # Whether this usage ledger is billable.
     is_billable: Optional[bool] = None
-    # The ID and name for this lead.
+    # Identifier and display name of the related lead.
     lead: Optional[UsageLedgerTableRow_lead] = None
-    # The ID and name for this organization.
+    # Identifier and display name of the related organization.
     organization: Optional[UsageLedgerTableRow_organization] = None
     # The phone number associated with this usage ledger.
     phone_number: Optional[str] = None
     # The phone number ID associated with this usage ledger.
     phone_number_id: Optional[str] = None
-    # The quantity value for this usage ledger.
+    # Quantity for this usage ledger.
     quantity: Optional[float] = None
-    # The SMS segments value for this usage ledger.
+    # SMS segments for this usage ledger.
     sms_segments: Optional[int] = None
     # The current status for this usage ledger.
     status: Optional[UsageStatus] = None
-    # The unit price value for this usage ledger.
+    # Unit price for this usage ledger.
     unit_price: Optional[float] = None
-    # The ID and name for this user.
+    # Identifier and display name of the related user.
     user: Optional[UsageLedgerTableRow_user] = None
     
     @staticmethod

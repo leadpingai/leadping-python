@@ -57,7 +57,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
     async def post(self,body: LeadIntakeRequest, request_configuration: Optional[RequestConfiguration[IntakeRequestBuilderPostQueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Creates a source-authenticated lead from a flat intake payload, capturing contact fields, metadata, and automation-ready lead details.
-        param body: Request schema for the Leadping API lead intake request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead intake.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -93,7 +93,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: LeadIntakeRequest, request_configuration: Optional[RequestConfiguration[IntakeRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Creates a source-authenticated lead from a flat intake payload, capturing contact fields, metadata, and automation-ready lead details.
-        param body: Request schema for the Leadping API lead intake request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead intake.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

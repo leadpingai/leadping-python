@@ -11,12 +11,12 @@ if TYPE_CHECKING:
 @dataclass
 class MobileDevicePreferences(AdditionalDataHolder, Parsable):
     """
-    API DTO containing Leadping mobile preferences for a single user device.
+    Describes notification and calling preferences saved for one of the user's mobile devices.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The ID and name for this device.
+    # Identifier and display name of the related device.
     device: Optional[IdNamePair] = None
     # Whether inbound phone calls are enabled for this user device.
     inbound_phone_calls_enabled: Optional[bool] = None

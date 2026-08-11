@@ -12,7 +12,7 @@ from .ten_dlc_application_draft import TenDlcApplicationDraft
 @dataclass
 class OrganizationActivationState_tenDlcDraft(TenDlcApplicationDraft, Parsable):
     """
-    The 10DLC draft value for this organization activation state.
+    10DLC draft for this organization activation state.
     """
     
     @staticmethod

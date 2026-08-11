@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class ActivationTimelineEvent_actor(IdNamePair, Parsable):
     """
-    The ID and name for this actor.
+    Identifier and display name of the related actor.
     """
     
     @staticmethod

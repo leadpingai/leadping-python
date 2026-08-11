@@ -33,7 +33,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfLeadStatusChangeResponse]:
         """
-        Get all for current organization
+        Returns a filtered, paginated history of lead status changes for the current organization for workflow analysis, reporting, and audit review.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfLeadStatusChangeResponse]
@@ -56,7 +56,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Get all for current organization
+        Returns a filtered, paginated history of lead status changes for the current organization for workflow analysis, reporting, and audit review.
         param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

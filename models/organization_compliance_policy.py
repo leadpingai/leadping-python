@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class OrganizationCompliancePolicy(AdditionalDataHolder, Parsable):
     """
-    API DTO containing organization compliance policy data used by Leadping API contracts.
+    Describes organization compliance policy data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

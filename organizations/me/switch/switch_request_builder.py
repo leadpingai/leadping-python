@@ -34,7 +34,7 @@ class SwitchRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OrganizationSwitchRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationResponse]:
         """
         Switches the authenticated user's active organization context so subsequent lead, billing, and communication requests target that organization.
-        param body: Request schema for the Leadping API organization switch request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization switch.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationResponse]
         """
@@ -58,7 +58,7 @@ class SwitchRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OrganizationSwitchRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Switches the authenticated user's active organization context so subsequent lead, billing, and communication requests target that organization.
-        param body: Request schema for the Leadping API organization switch request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization switch.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

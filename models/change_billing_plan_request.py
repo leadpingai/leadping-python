@@ -10,12 +10,12 @@ if TYPE_CHECKING:
 @dataclass
 class ChangeBillingPlanRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for change billing plan.
+    Defines the input used for change billing plan.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The billing plan value for this billing plan.
+    # Billing plan for this billing plan.
     billing_plan: Optional[BillingPlan] = None
     # The user ID associated with this billing plan.
     user_id: Optional[str] = None

@@ -35,7 +35,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> TagsItemRequestBuilder:
         """
         Gets an item from the leadping.tags.item collection
-        param id: Unique identifier of the item
+        param id: The unique identifier of the tag to update.
         Returns: TagsItemRequestBuilder
         """
         if id is None:
@@ -69,7 +69,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: TagRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[TagResponse]:
         """
         Creates a tag for the current organization so leads can be segmented, filtered, routed, and reviewed by label.
-        param body: Request schema for the Leadping API tag request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with tag.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[TagResponse]
         """
@@ -104,7 +104,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: TagRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates a tag for the current organization so leads can be segmented, filtered, routed, and reviewed by label.
-        param body: Request schema for the Leadping API tag request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with tag.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -143,6 +143,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
                 return "includeArchived"
             return original_name
         
+        # Whether to include tags that are no longer available for new assignments.
         include_archived: Optional[bool] = None
 
     

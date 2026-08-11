@@ -12,34 +12,34 @@ if TYPE_CHECKING:
 @dataclass
 class NotificationResponse(AdditionalDataHolder, Parsable):
     """
-    API DTO containing notification data used by Leadping API contracts.
+    Describes notification data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The action button text value for this notification.
+    # Action button text for this notification.
     action_button_text: Optional[str] = None
     # The URL associated with this notification.
     action_url: Optional[str] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The details value for this notification.
+    # Optional supporting details displayed beneath the notification message.
     details: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
     # Whether this notification is read.
     is_read: Optional[bool] = None
-    # The message value for this notification.
+    # Message for this notification.
     message: Optional[str] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The priority value for this notification.
+    # Priority for this notification.
     priority: Optional[NotificationPriority] = None
     # Whether this notification should also be delivered as a device push notification.
     push_enabled: Optional[bool] = None
-    # The date and time for the read at value on this notification.
+    # UTC timestamp for read at on this notification.
     read_at: Optional[datetime.datetime] = None
     # The related entity ID associated with this notification.
     related_entity_id: Optional[str] = None

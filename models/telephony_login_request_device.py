@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class TelephonyLoginRequest_device(IdNamePair, Parsable):
     """
-    The ID and name for this device.
+    Identifier and display name of the related device.
     """
     
     @staticmethod

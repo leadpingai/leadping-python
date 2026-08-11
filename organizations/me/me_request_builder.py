@@ -60,7 +60,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OrganizationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationResponse]:
         """
         Creates an organization account for the authenticated user, assigns them as its owner, and makes it their active organization context.
-        param body: Request schema for the Leadping API organization profile request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization profile.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationResponse]
         """
@@ -84,7 +84,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     async def put(self,body: OrganizationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationResponse]:
         """
         Updates the authenticated user's current organization profile, including contact, settings, and communication configuration.
-        param body: Request schema for the Leadping API organization profile request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization profile.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationResponse]
         """
@@ -119,7 +119,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OrganizationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates an organization account for the authenticated user, assigns them as its owner, and makes it their active organization context.
-        param body: Request schema for the Leadping API organization profile request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization profile.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -134,7 +134,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: OrganizationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates the authenticated user's current organization profile, including contact, settings, and communication configuration.
-        param body: Request schema for the Leadping API organization profile request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization profile.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

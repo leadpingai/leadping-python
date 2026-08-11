@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class UsageLedgerTableRow_user(IdNamePair, Parsable):
     """
-    The ID and name for this user.
+    Identifier and display name of the related user.
     """
     
     @staticmethod

@@ -12,7 +12,7 @@ from .user_compliance import UserCompliance
 @dataclass
 class UserResponse_compliance(UserCompliance, Parsable):
     """
-    The compliance value for this user.
+    Compliance for this user.
     """
     
     @staticmethod

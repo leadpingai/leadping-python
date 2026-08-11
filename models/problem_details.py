@@ -7,6 +7,9 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
+    """
+    Standard problem-details response containing machine-readable and human-readable information about an HTTP API error.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 

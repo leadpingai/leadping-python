@@ -55,7 +55,7 @@ class OverrideRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OutgoingNumberManualOverrideRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OutgoingNumberSelectionResponse]:
         """
         Sets the outgoing phone number override for a conversation so future lead messages use the selected eligible number.
-        param body: Request schema for the Leadping API outgoing number manual override request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with outgoing number manual override.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OutgoingNumberSelectionResponse]
         """
@@ -90,7 +90,7 @@ class OverrideRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OutgoingNumberManualOverrideRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Sets the outgoing phone number override for a conversation so future lead messages use the selected eligible number.
-        param body: Request schema for the Leadping API outgoing number manual override request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with outgoing number manual override.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

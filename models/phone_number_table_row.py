@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     """
-    List item schema for Leadping API phone number table row results shown in searchable tables.
+    Summarizes phone number data in paginated and searchable results.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

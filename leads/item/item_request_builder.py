@@ -80,7 +80,7 @@ class ItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Updates lead details for the current organization, keeping contact data, status, source, and follow-up context current.
-        param body: Request schema for the Leadping API lead request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -127,7 +127,7 @@ class ItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates lead details for the current organization, keeping contact data, status, source, and follow-up context current.
-        param body: Request schema for the Leadping API lead request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

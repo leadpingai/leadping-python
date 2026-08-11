@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class UsageCounterLine(AdditionalDataHolder, Parsable):
     """
-    API DTO containing a named usage counter shown in usage summaries.
+    Describes one named usage total displayed in organization billing and activity summaries.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -20,7 +20,7 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
     sort_order: Optional[int] = None
     # The unit label for this usage counter.
     unit: Optional[str] = None
-    # The numeric value for this usage counter.
+    # Numeric for this usage counter.
     value: Optional[float] = None
     
     @staticmethod

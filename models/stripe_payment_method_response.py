@@ -8,24 +8,24 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
     """
-    API DTO containing stripe payment method data used by Leadping API contracts.
+    Describes stripe payment method data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The brand value for this Stripe payment method.
+    # Card network brand, such as Visa, Mastercard, or American Express.
     brand: Optional[str] = None
-    # The date and time for the created at value on this Stripe payment method.
+    # UTC timestamp for created at on this Stripe payment method.
     created_at: Optional[datetime.datetime] = None
-    # The exp month value for this Stripe payment method.
+    # Two-digit month when the card expires.
     exp_month: Optional[int] = None
-    # The exp year value for this Stripe payment method.
+    # Four-digit year when the card expires.
     exp_year: Optional[int] = None
-    # The unique ID for this Stripe payment method.
+    # Unique Leadping identifier for this Stripe payment method.
     id: Optional[str] = None
     # Whether this Stripe payment method is default.
     is_default: Optional[bool] = None
-    # The date and time for the last4 value on this Stripe payment method.
+    # UTC timestamp for last4 on this Stripe payment method.
     last4: Optional[str] = None
     
     @staticmethod

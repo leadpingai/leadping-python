@@ -12,24 +12,24 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
     """
-    API DTO containing organization user data used by Leadping API contracts.
+    Describes organization user data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the created at value on this organization user.
+    # UTC timestamp for created at on this organization user.
     created_at: Optional[datetime.datetime] = None
-    # The unique ID for this organization user.
+    # Unique Leadping identifier for this organization user.
     id: Optional[str] = None
     # The billing status for this user's organization license.
     license_billing_status: Optional[str] = None
     # The renewal date used for this user's license proration.
     license_renewal_date: Optional[datetime.datetime] = None
-    # The role value for this organization user.
+    # Role for this organization user.
     role: Optional[OrganizationMemberRole] = None
-    # The ID and name for this user.
+    # Identifier and display name of the related user.
     user: Optional[IdNamePair] = None
-    # The user email value for this organization user.
+    # User email for this organization user.
     user_email: Optional[str] = None
     
     @staticmethod

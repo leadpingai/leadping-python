@@ -7,22 +7,22 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for suppression entry.
+    Defines a recipient and communication channel to suppress, release, or check before Leadping sends outreach.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The channel value for this ion entry.
+    # Communication channel affected by the suppression, such as SMS, voice, email, or all channels.
     channel: Optional[str] = None
-    # The email address associated with this ion entry.
+    # Recipient email address to suppress or check.
     email: Optional[str] = None
-    # The organization ID associated with this ion entry.
+    # Organization whose suppression list should be used.
     organization_id: Optional[str] = None
-    # The phone number associated with this ion entry.
+    # Recipient phone number to suppress or check, preferably in E.164 format.
     phone_number: Optional[str] = None
-    # The human-readable reason explaining this ion entry.
+    # Human-readable reason for creating or releasing the suppression.
     reason: Optional[str] = None
-    # The recipient identifier value for this ion entry.
+    # Optional provider or customer identifier that uniquely identifies the recipient.
     recipient_identifier: Optional[str] = None
     
     @staticmethod

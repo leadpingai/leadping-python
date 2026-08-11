@@ -24,11 +24,11 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     caller_name: Optional[PhoneLookup_callerName] = None
     # Complete carrier metadata reported for this phone number.
     carrier: Optional[PhoneLookup_carrier] = None
-    # Gets or sets created at.
+    # UTC timestamp when the phone lookup record was created.
     created_at: Optional[datetime.datetime] = None
     # Fraud value returned by the provider, when available.
     fraud: Optional[str] = None
-    # Gets or sets id.
+    # Unique Leadping identifier for the saved phone lookup record.
     id: Optional[str] = None
     # Indicates whether this phone lookup result passed validation.
     is_valid: Optional[bool] = None
@@ -36,7 +36,7 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     line_type: Optional[PhoneLookup_lineType] = None
     # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneLookup_location] = None
-    # Gets or sets modified at.
+    # UTC timestamp when the phone lookup record was last updated.
     modified_at: Optional[datetime.datetime] = None
     # Provider-formatted national phone number.
     national_format: Optional[str] = None

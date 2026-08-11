@@ -41,7 +41,7 @@ class UserDataExportResponse(AdditionalDataHolder, Parsable):
     message: Optional[str] = None
     # Date and time when the user data export was requested.
     requested_at: Optional[datetime.datetime] = None
-    # File size in bytes.
+    # Size of the generated export archive in bytes, when the export is ready.
     size_bytes: Optional[int] = None
     # Date and time when the user data export started.
     started_at: Optional[datetime.datetime] = None

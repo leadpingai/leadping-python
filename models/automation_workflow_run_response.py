@@ -21,13 +21,13 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
 
     # Collection of actions included with this Leadping automation workflow run.
     actions: Optional[list[AutomationWorkflowActionResponse]] = None
-    # The ID and name for this automation.
+    # Identifier and display name of the related automation.
     automation: Optional[AutomationWorkflowRunResponse_automation] = None
     # Date and time when the automation workflow run was cancelled.
     cancelled_at: Optional[datetime.datetime] = None
     # Date and time when the automation workflow run completed.
     completed_at: Optional[datetime.datetime] = None
-    # The ID and name for this currentStep.
+    # Identifier and display name of the workflow step currently awaiting or performing work.
     current_step: Optional[AutomationWorkflowRunResponse_currentStep] = None
     # Current step order associated with this Leadping automation workflow run.
     current_step_order: Optional[int] = None
@@ -39,7 +39,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Human-readable last action summary for this Leadping automation workflow run.
     last_action_summary: Optional[str] = None
-    # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow run.
+    # Machine-readable code for the most recent workflow execution error.
     last_error_code: Optional[str] = None
     # Human-readable last error message for this Leadping automation workflow run.
     last_error_message: Optional[str] = None
@@ -57,7 +57,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # Total number of retry records represented by this Leadping automation workflow run.
     retry_count: Optional[int] = None
-    # Reason or diagnostic code that explains the current outcome for this Leadping automation workflow run.
+    # Machine-readable code explaining why the workflow run or action was skipped.
     skip_reason_code: Optional[str] = None
     # Human-readable skip reason display for this Leadping automation workflow run.
     skip_reason_display: Optional[str] = None

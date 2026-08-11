@@ -100,8 +100,10 @@ class WithOrganizationItemRequestBuilder(BaseRequestBuilder):
                 return "startAt"
             return original_name
         
+        # Optional exclusive end timestamp for event occurrence.
         end_at: Optional[datetime.datetime] = None
 
+        # Optional inclusive start timestamp for event occurrence.
         start_at: Optional[datetime.datetime] = None
 
     

@@ -7,12 +7,12 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class CreateNoteRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for create note.
+    Defines the input used for create note.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The text value for this note.
+    # Plain-text note content to add to the conversation timeline.
     text: Optional[str] = None
     
     @staticmethod

@@ -6,13 +6,14 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .phone_identity_lookup_action import PhoneIdentityLookupAction
     from .phone_identity_response_lookup import PhoneIdentityResponse_lookup
     from .phone_identity_response_provider_enrichment import PhoneIdentityResponse_providerEnrichment
 
 @dataclass
 class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for a canonical phone identity returned by the Leadping API.
+    Describes Leadping's canonical identity for a phone number, including normalization, carrier, line type, reputation, and lookup history.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -25,6 +26,8 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     last_enriched_at: Optional[datetime.datetime] = None
     # Provider lookup and enrichment data for the number.
     lookup: Optional[PhoneIdentityResponse_lookup] = None
+    # Lookup, enrichment, and reputation actions performed for this identity.
+    lookup_actions: Optional[list[PhoneIdentityLookupAction]] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
@@ -50,9 +53,11 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .phone_identity_lookup_action import PhoneIdentityLookupAction
         from .phone_identity_response_lookup import PhoneIdentityResponse_lookup
         from .phone_identity_response_provider_enrichment import PhoneIdentityResponse_providerEnrichment
 
+        from .phone_identity_lookup_action import PhoneIdentityLookupAction
         from .phone_identity_response_lookup import PhoneIdentityResponse_lookup
         from .phone_identity_response_provider_enrichment import PhoneIdentityResponse_providerEnrichment
 
@@ -61,6 +66,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastEnrichedAt": lambda n : setattr(self, 'last_enriched_at', n.get_datetime_value()),
             "lookup": lambda n : setattr(self, 'lookup', n.get_object_value(PhoneIdentityResponse_lookup)),
+            "lookupActions": lambda n : setattr(self, 'lookup_actions', n.get_collection_of_object_values(PhoneIdentityLookupAction)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
@@ -80,6 +86,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("lastEnrichedAt", self.last_enriched_at)
         writer.write_object_value("lookup", self.lookup)
+        writer.write_collection_of_object_values("lookupActions", self.lookup_actions)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)

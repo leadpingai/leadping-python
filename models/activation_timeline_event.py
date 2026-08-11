@@ -11,24 +11,24 @@ if TYPE_CHECKING:
 @dataclass
 class ActivationTimelineEvent(AdditionalDataHolder, Parsable):
     """
-    API DTO containing activation timeline event data used by Leadping API contracts.
+    Describes activation timeline event data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The ID and name for this actor.
+    # Identifier and display name of the related actor.
     actor: Optional[ActivationTimelineEvent_actor] = None
-    # The date and time for the created at value on this activation timeline event.
+    # UTC timestamp for created at on this activation timeline event.
     created_at: Optional[datetime.datetime] = None
-    # The details value for this activation timeline event.
+    # Details for this activation timeline event.
     details: Optional[str] = None
     # The human-readable failure reason explaining this activation timeline event.
     failure_reason: Optional[str] = None
-    # The unique ID for this activation timeline event.
+    # Unique Leadping identifier for this activation timeline event.
     id: Optional[str] = None
     # The current status for this activation timeline event.
     status: Optional[str] = None
-    # The title value for this activation timeline event.
+    # Title for this activation timeline event.
     title: Optional[str] = None
     # The type classification for this activation timeline event.
     type: Optional[str] = None

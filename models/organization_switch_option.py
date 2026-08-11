@@ -14,22 +14,22 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     """
-    API DTO containing organization switch option data used by Leadping API contracts.
+    Describes organization switch option data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
     # Defines the supported Customer Activation Status values.
     activation_status: Optional[OrganizationSwitchOption_activationStatus] = None
-    # The activation summary value for this organization switch option.
+    # Activation summary for this organization switch option.
     activation_summary: Optional[str] = None
     # Whether the organization has a default billing payment method.
     has_payment_method: Optional[bool] = None
-    # The unique ID for this organization switch option.
+    # Unique Leadping identifier for this organization switch option.
     id: Optional[str] = None
     # Whether this organization switch option is current.
     is_current: Optional[bool] = None
-    # The date and time for the last used at value on this organization switch option.
+    # UTC timestamp for last used at on this organization switch option.
     last_used_at: Optional[datetime.datetime] = None
     # The human-readable name shown for this organization switch option.
     name: Optional[str] = None
@@ -39,7 +39,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     organization_status: Optional[OrganizationSwitchOption_organizationStatus] = None
     # Whether ready for customer traffic applies to this organization switch option.
     ready_for_customer_traffic: Optional[bool] = None
-    # The role value for this organization switch option.
+    # Role for this organization switch option.
     role: Optional[OrganizationMemberRole] = None
     # Defines the supported 10DLC Application Status values.
     ten_dlc_status: Optional[OrganizationSwitchOption_tenDlcStatus] = None

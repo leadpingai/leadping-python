@@ -32,7 +32,7 @@ class SuppressionsItemRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionEntryResponse]:
         """
-        Get
+        Returns one suppression entry for the current organization, including its recipient, channel, reason, status, and audit timestamps.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SuppressionEntryResponse]
         """
@@ -53,7 +53,7 @@ class SuppressionsItemRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Get
+        Returns one suppression entry for the current organization, including its recipient, channel, reason, status, and audit timestamps.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

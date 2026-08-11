@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 @dataclass
 class LeadTableRow(AdditionalDataHolder, Parsable):
     """
-    List item schema for Leadping API lead table row results shown in searchable tables.
+    Summarizes lead data in paginated and searchable results.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -41,13 +41,13 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     is_archived: Optional[bool] = None
     # Last name of the lead, user, or contact represented by this lead table row.
     last_name: Optional[str] = None
-    # The ID and name for this organization.
+    # Identifier and display name of the related organization.
     organization: Optional[LeadTableRow_organization] = None
     # Phone details for the lead, user, or organization represented by this lead table row.
     phone: Optional[str] = None
     # Lead price or transaction price supplied to the Leadping API.
     price: Optional[float] = None
-    # The ID and name for this source.
+    # Identifier and display name of the related source.
     source: Optional[LeadTableRow_source] = None
     # Current lifecycle status for this lead table row in the Leadping API.
     status: Optional[str] = None

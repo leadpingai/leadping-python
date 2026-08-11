@@ -31,7 +31,7 @@ class WithInstallationItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Unregister the current user's mobile push installation.
+        Removes a mobile push installation from the authenticated user's account so Leadping no longer sends notifications to that device.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
@@ -49,7 +49,7 @@ class WithInstallationItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Unregister the current user's mobile push installation.
+        Removes a mobile push installation from the authenticated user's account so Leadping no longer sends notifications to that device.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

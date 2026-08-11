@@ -98,6 +98,7 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "archiveFilter"
             return original_name
         
+        # Optional filter selecting active, archived, or all lead conversations.
         archive_filter: Optional[str] = None
 
     

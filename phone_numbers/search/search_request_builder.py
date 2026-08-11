@@ -34,7 +34,7 @@ class SearchRequestBuilder(BaseRequestBuilder):
     async def post(self,body: PhoneNumberSearchRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneNumberSearchResponse]:
         """
         Searches available phone numbers for purchase, applying country, area, and capability filters for lead communication setup.
-        param body: Request schema for the Leadping API phone number search request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with phone number search.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneNumberSearchResponse]
         """
@@ -59,7 +59,7 @@ class SearchRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: PhoneNumberSearchRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Searches available phone numbers for purchase, applying country, area, and capability filters for lead communication setup.
-        param body: Request schema for the Leadping API phone number search request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with phone number search.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

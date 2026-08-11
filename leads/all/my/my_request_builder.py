@@ -102,12 +102,16 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "untagged"
             return original_name
         
+        # Optional filter selecting active, archived, or all leads.
         archive_filter: Optional[str] = None
 
+        # Optional tag identifiers used to filter the lead list.
         tag_ids: Optional[list[str]] = None
 
+        # Whether a lead must contain every supplied tag instead of any supplied tag.
         tag_match_all: Optional[bool] = None
 
+        # Whether to include only leads that have no tags.
         untagged: Optional[bool] = None
 
     

@@ -33,7 +33,7 @@ class InvoicesRequestBuilder(BaseRequestBuilder):
     def by_invoice_id(self,invoice_id: str) -> WithInvoiceItemRequestBuilder:
         """
         Gets an item from the leadping.paymentMethods.invoices.item collection
-        param invoice_id: Unique identifier of the item
+        param invoice_id: The Stripe invoice identifier whose PDF should be accessed.
         Returns: WithInvoiceItemRequestBuilder
         """
         if invoice_id is None:

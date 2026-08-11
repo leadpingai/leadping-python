@@ -17,15 +17,15 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the appointment end at value on this lead status change.
+    # UTC timestamp for appointment end at on this lead status change.
     appointment_end_at: Optional[datetime.datetime] = None
-    # The appointment notes value for this lead status change.
+    # Additional scheduling or preparation notes for the related appointment.
     appointment_notes: Optional[str] = None
-    # The date and time for the appointment start at value on this lead status change.
+    # UTC timestamp for appointment start at on this lead status change.
     appointment_start_at: Optional[datetime.datetime] = None
     # The assigned to user ID associated with this lead status change.
     assigned_to_user_id: Optional[str] = None
-    # The date and time for the callback at value on this lead status change.
+    # UTC timestamp for callback at on this lead status change.
     callback_at: Optional[datetime.datetime] = None
     # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[LeadStatusChangeRequest_category] = None
@@ -39,7 +39,7 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     is_missed_call_follow_up: Optional[bool] = None
     # The operator or customer notes recorded for this lead status change.
     notes: Optional[str] = None
-    # The outcome value for this lead status change.
+    # Result of the interaction or workflow step that caused the status change.
     outcome: Optional[str] = None
     # The reason this lead status change was changed.
     reason: Optional[str] = None
@@ -47,11 +47,11 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     related_call_event_id: Optional[str] = None
     # The source ID associated with this lead status change.
     source_id: Optional[str] = None
-    # The date and time for the task due at value on this lead status change.
+    # UTC timestamp for task due at on this lead status change.
     task_due_at: Optional[datetime.datetime] = None
-    # The date and time for the timestamp value on this lead status change.
+    # UTC timestamp for timestamp on this lead status change.
     timestamp: Optional[datetime.datetime] = None
-    # The type classification for this lead status change.
+    # Category of status change being recorded for the lead.
     type: Optional[str] = None
     
     @staticmethod

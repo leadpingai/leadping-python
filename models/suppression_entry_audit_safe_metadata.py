@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class SuppressionEntryAudit_safeMetadata(AdditionalDataHolder, Parsable):
     """
-    The safe metadata key-value data carried with this ion entry audit; values must be safe to expose in API responses.
+    Non-sensitive metadata that provides additional audit context.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

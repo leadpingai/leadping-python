@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 @dataclass
 class UserResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing user data returned to callers.
+    Describes user data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -27,15 +27,15 @@ class UserResponse(AdditionalDataHolder, Parsable):
     billing_plan: Optional[UserResponse_billingPlan] = None
     # Customer-safe billing state for the user's currently selected organization.
     billing_state: Optional[UserResponse_billingState] = None
-    # The compliance value for this user.
+    # Compliance for this user.
     compliance: Optional[UserResponse_compliance] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
-    # The current organization value for this user.
+    # Current organization for this user.
     current_organization: Optional[UserResponse_currentOrganization] = None
     # The email address associated with this user.
     email: Optional[str] = None
-    # The first name value for this user.
+    # First name for this user.
     first_name: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
@@ -43,7 +43,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     identities: Optional[list[UserIdentity]] = None
     # The date and time when this user last completed the Leadping sign-in flow.
     last_logged_in_at: Optional[datetime.datetime] = None
-    # The date and time for the last name value on this user.
+    # UTC timestamp for last name on this user.
     last_name: Optional[str] = None
     # The Leadping mobile device preferences for this user.
     mobile_device_preferences: Optional[list[MobileDevicePreferences]] = None
@@ -51,13 +51,13 @@ class UserResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # The display name for the entity.
     name: Optional[str] = None
-    # The notification preferences value for this user.
+    # Notification preferences for this user.
     notification_preferences: Optional[UserResponse_notificationPreferences] = None
-    # The date and time for the personal data deleted at value on this user.
+    # UTC timestamp for personal data deleted at on this user.
     personal_data_deleted_at: Optional[datetime.datetime] = None
     # The human-readable personal data deletion reason explaining this user.
     personal_data_deletion_reason: Optional[str] = None
-    # The date and time for the personal data deletion requested at value on this user.
+    # UTC timestamp for personal data deletion requested at on this user.
     personal_data_deletion_requested_at: Optional[datetime.datetime] = None
     # The current personal data deletion status for this user.
     personal_data_deletion_status: Optional[str] = None

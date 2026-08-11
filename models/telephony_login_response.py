@@ -13,13 +13,13 @@ class TelephonyLoginResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The callback token value for this telephony login.
+    # Callback token for this telephony login.
     callback_token: Optional[str] = None
-    # The date and time for the expires at value on this telephony login.
+    # UTC timestamp for expires at on this telephony login.
     expires_at: Optional[datetime.datetime] = None
-    # The password value for this telephony login.
+    # Password for this telephony login.
     password: Optional[str] = None
-    # The username value for this telephony login.
+    # Username for this telephony login.
     username: Optional[str] = None
     
     @staticmethod

@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API phone number warmup status returned to authenticated clients.
+    Describes a phone number's current warmup stage, limits, progress, and readiness for production traffic.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

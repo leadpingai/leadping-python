@@ -12,11 +12,11 @@ class UserIdentity(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Gets or sets the identity provider that issued the sign-in identity (e.g., "contoso.com" or "facebook.com").
+    # Identity provider or tenant that issued the user's sign-in identity.
     issuer: Optional[str] = None
-    # Gets or sets the unique identifier assigned to the user by the identity provider.
+    # Unique user identifier assigned by the identity provider.
     issuer_assigned_id: Optional[str] = None
-    # Gets or sets the method of sign-in used by the identity (e.g., "emailAddress", "userName", or "federated").
+    # Sign-in method represented by the identity, such as email address, username, or federated login.
     sign_in_type: Optional[str] = None
     
     @staticmethod

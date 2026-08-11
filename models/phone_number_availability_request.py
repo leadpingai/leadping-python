@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class PhoneNumberAvailabilityRequest(AdditionalDataHolder, Parsable):
     """
-    Request schema for checking phone number availability before purchase or assignment.
+    Defines the phone number and capability requirements Leadping should verify before purchase or assignment.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

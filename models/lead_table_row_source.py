@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class LeadTableRow_source(IdNamePair, Parsable):
     """
-    The ID and name for this source.
+    Identifier and display name of the related source.
     """
     
     @staticmethod

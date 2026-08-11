@@ -12,18 +12,18 @@ if TYPE_CHECKING:
 @dataclass
 class UsageSummaryLine(AdditionalDataHolder, Parsable):
     """
-    API DTO containing usage summary line data used by Leadping API contracts.
+    Describes usage summary line data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The billable unit value for this usage summary line.
+    # Billable unit for this usage summary line.
     billable_unit: Optional[BillableUnit] = None
-    # The channel value for this usage summary line.
+    # Channel for this usage summary line.
     channel: Optional[UsageChannel] = None
     # The monetary customer charge amount for this usage summary line.
     customer_charge_amount: Optional[float] = None
-    # The quantity value for this usage summary line.
+    # Quantity for this usage summary line.
     quantity: Optional[float] = None
     # The record count for this usage summary line.
     record_count: Optional[int] = None

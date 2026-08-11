@@ -70,7 +70,7 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: OrganizationInvitationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationInvitationResponse]:
         """
         Creates an invitation for the current organization so another user can join with the requested role and account access.
-        param body: Request payload for organization invitation.
+        param body: Defines the input used for organization invitation.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationInvitationResponse]
         """
@@ -105,7 +105,7 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: OrganizationInvitationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates an invitation for the current organization so another user can join with the requested role and account access.
-        param body: Request payload for organization invitation.
+        param body: Defines the input used for organization invitation.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

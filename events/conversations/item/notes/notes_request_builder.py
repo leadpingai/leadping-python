@@ -34,7 +34,7 @@ class NotesRequestBuilder(BaseRequestBuilder):
     async def post(self,body: CreateNoteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[EventTableRow]:
         """
         Creates a note event on a conversation so users can document lead context, handoffs, and follow-up details.
-        param body: Request payload for create note.
+        param body: Defines the input used for create note.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[EventTableRow]
         """
@@ -58,7 +58,7 @@ class NotesRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: CreateNoteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates a note event on a conversation so users can document lead context, handoffs, and follow-up details.
-        param body: Request payload for create note.
+        param body: Defines the input used for create note.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

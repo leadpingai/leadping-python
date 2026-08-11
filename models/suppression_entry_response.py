@@ -11,34 +11,34 @@ if TYPE_CHECKING:
 @dataclass
 class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing suppression entry data returned to callers.
+    Describes a recipient suppression that prevents outreach through one or more communication channels.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The audit included with this ion entry.
+    # Chronological audit history of suppression and release changes.
     audit: Optional[list[SuppressionEntryAudit]] = None
-    # The channel value for this ion entry.
+    # Communication channel affected by the suppression, such as SMS, voice, email, or all channels.
     channel: Optional[str] = None
-    # The unique ID for this ion entry.
+    # Unique Leadping identifier for the suppression entry.
     id: Optional[str] = None
-    # The normalized email value for this ion entry.
+    # Suppressed email address normalized for matching.
     normalized_email: Optional[str] = None
-    # The phone number associated with this ion entry.
+    # Suppressed phone number normalized to a consistent format.
     normalized_phone_number: Optional[str] = None
-    # The organization ID associated with this ion entry.
+    # Identifier of the organization that owns the suppression entry.
     organization_id: Optional[str] = None
-    # The human-readable reason explaining this ion entry.
+    # Human-readable reason the recipient was suppressed or subsequently released.
     reason: Optional[str] = None
-    # The recipient identifier value for this ion entry.
+    # Provider or customer identifier used to recognize the suppressed recipient.
     recipient_identifier: Optional[str] = None
-    # The date and time for the released at value on this ion entry.
+    # UTC timestamp when the suppression was released, or while it remains active.
     released_at: Optional[datetime.datetime] = None
-    # The source value for this ion entry.
+    # System or workflow that created the suppression.
     source: Optional[str] = None
-    # The current status for this ion entry.
+    # Current lifecycle state, such as active or released.
     status: Optional[str] = None
-    # The date and time for the suppressed at value on this ion entry.
+    # UTC timestamp when the suppression became active.
     suppressed_at: Optional[datetime.datetime] = None
     
     @staticmethod

@@ -99,8 +99,10 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "startAt"
             return original_name
         
+        # Optional exclusive end timestamp for transaction creation.
         end_at: Optional[datetime.datetime] = None
 
+        # Optional inclusive start timestamp for transaction creation.
         start_at: Optional[datetime.datetime] = None
 
     

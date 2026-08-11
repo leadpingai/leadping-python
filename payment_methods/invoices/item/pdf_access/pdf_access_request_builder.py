@@ -76,6 +76,7 @@ class PdfAccessRequestBuilder(BaseRequestBuilder):
         """
         Creates a short-lived, secure URL that lets the current organization view or download a private Stripe invoice PDF without exposing a permanent file link.
         """
+        # Whether the secure URL should download the PDF instead of displaying it inline.
         download: Optional[bool] = None
 
     

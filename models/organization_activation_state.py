@@ -22,26 +22,26 @@ if TYPE_CHECKING:
 @dataclass
 class OrganizationActivationState(AdditionalDataHolder, Parsable):
     """
-    API DTO containing organization activation state data used by Leadping API contracts.
+    Describes organization activation state data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time for the activated at value on this organization activation state.
+    # UTC timestamp for activated at on this organization activation state.
     activated_at: Optional[datetime.datetime] = None
     # The number of registrar-verified domains found by the current search.
     available_domain_count: Optional[int] = None
     # The current billing subscription status for this organization activation state.
     billing_subscription_status: Optional[ActivationSubscriptionStatus] = None
-    # The compliance notes value for this organization activation state.
+    # Compliance notes for this organization activation state.
     compliance_notes: Optional[str] = None
     # Whether controlled launch applies to this organization activation state.
     controlled_launch: Optional[bool] = None
-    # The date and time for the created at value on this organization activation state.
+    # UTC timestamp for created at on this organization activation state.
     created_at: Optional[datetime.datetime] = None
     # The current customer facing status for this organization activation state.
     customer_facing_status: Optional[str] = None
-    # The date and time for the domain approved at value on this organization activation state.
+    # UTC timestamp for domain approved at on this organization activation state.
     domain_approved_at: Optional[datetime.datetime] = None
     # The domain options included with this organization activation state.
     domain_options: Optional[list[ActivationDomainOption]] = None
@@ -57,57 +57,57 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
     domain_search_updated_at: Optional[datetime.datetime] = None
     # The events included with this organization activation state.
     events: Optional[list[ActivationTimelineEvent]] = None
-    # The date and time for the failed at value on this organization activation state.
+    # UTC timestamp for failed at on this organization activation state.
     failed_at: Optional[datetime.datetime] = None
-    # The industry value for this organization activation state.
+    # Industry for this organization activation state.
     industry: Optional[str] = None
-    # The date and time for the launch approved at value on this organization activation state.
+    # UTC timestamp for launch approved at on this organization activation state.
     launch_approved_at: Optional[datetime.datetime] = None
-    # The date and time for the launch review requested at value on this organization activation state.
+    # UTC timestamp for launch review requested at on this organization activation state.
     launch_review_requested_at: Optional[datetime.datetime] = None
     # The current launch review status for this organization activation state.
     launch_review_status: Optional[ActivationLaunchReviewStatus] = None
-    # The offer value for this organization activation state.
+    # Offer for this organization activation state.
     offer: Optional[str] = None
     # The current onboarding status for this organization activation state.
     onboarding_status: Optional[ActivationOnboardingStatus] = None
-    # The organization description value for this organization activation state.
+    # Organization description for this organization activation state.
     organization_description: Optional[str] = None
-    # The date and time for the payment method confirmed at value on this organization activation state.
+    # UTC timestamp for payment method confirmed at on this organization activation state.
     payment_method_confirmed_at: Optional[datetime.datetime] = None
     # The current payment status for this organization activation state.
     payment_status: Optional[ActivationPaymentStatus] = None
-    # The selected domain value for this organization activation state.
+    # Selected domain for this organization activation state.
     selected_domain: Optional[str] = None
-    # The service area value for this organization activation state.
+    # Service area for this organization activation state.
     service_area: Optional[str] = None
     # The current status for this organization activation state.
     status: Optional[CustomerActivationStatus] = None
-    # The date and time for the subscription active at value on this organization activation state.
+    # UTC timestamp for subscription active at on this organization activation state.
     subscription_active_at: Optional[datetime.datetime] = None
-    # The date and time for the subscription pending at value on this organization activation state.
+    # UTC timestamp for subscription pending at on this organization activation state.
     subscription_pending_at: Optional[datetime.datetime] = None
-    # The target audience value for this organization activation state.
+    # Target audience for this organization activation state.
     target_audience: Optional[str] = None
-    # The date and time for the telephony partially provisioned at value on this organization activation state.
+    # UTC timestamp for telephony partially provisioned at on this organization activation state.
     telephony_partially_provisioned_at: Optional[datetime.datetime] = None
-    # The date and time for the telephony provisioning started at value on this organization activation state.
+    # UTC timestamp for telephony provisioning started at on this organization activation state.
     telephony_provisioning_started_at: Optional[datetime.datetime] = None
-    # The date and time for the telephony ready at value on this organization activation state.
+    # UTC timestamp for telephony ready at on this organization activation state.
     telephony_ready_at: Optional[datetime.datetime] = None
     # The current telephony status for this organization activation state.
     telephony_status: Optional[ActivationTelephonyStatus] = None
     # Identifier of the first-class 10DLC application entity for this organization.
     ten_dlc_application_id: Optional[str] = None
-    # The 10DLC draft value for this organization activation state.
+    # 10DLC draft for this organization activation state.
     ten_dlc_draft: Optional[OrganizationActivationState_tenDlcDraft] = None
     # The current 10DLC status for this organization activation state.
     ten_dlc_status: Optional[TenDlcApplicationStatus] = None
-    # The date and time for the updated at value on this organization activation state.
+    # UTC timestamp for updated at on this organization activation state.
     updated_at: Optional[datetime.datetime] = None
     # The latest persisted website generation progress message.
     website_generation_result: Optional[str] = None
-    # The website needs value for this organization activation state.
+    # Website needs for this organization activation state.
     website_needs: Optional[str] = None
     # The current website status for this organization activation state.
     website_status: Optional[WebsiteLifecycleStatus] = None

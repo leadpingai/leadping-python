@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class ActivationDomainOption(AdditionalDataHolder, Parsable):
     """
-    API DTO containing activation domain option data used by Leadping API contracts.
+    Describes activation domain option data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -16,15 +16,15 @@ class ActivationDomainOption(AdditionalDataHolder, Parsable):
     availability_status: Optional[str] = None
     # The domain name associated with this activation domain option.
     domain_name: Optional[str] = None
-    # The estimated annual cost value for this activation domain option.
+    # Estimated annual cost for this activation domain option.
     estimated_annual_cost: Optional[float] = None
-    # The industry relevance value for this activation domain option.
+    # Industry relevance for this activation domain option.
     industry_relevance: Optional[str] = None
     # Whether this activation domain option is recommended.
     recommended: Optional[bool] = None
-    # The trust concerns value for this activation domain option.
+    # Trust concerns for this activation domain option.
     trust_concerns: Optional[str] = None
-    # The why it fits value for this activation domain option.
+    # Why it fits for this activation domain option.
     why_it_fits: Optional[str] = None
     
     @staticmethod

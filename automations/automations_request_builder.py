@@ -51,7 +51,7 @@ class AutomationsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: AutomationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationResponse]:
         """
         Creates an automation for current-organization leads, configuring triggers, message steps, and follow-up behavior.
-        param body: Request schema for the Leadping API automation configuration request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with automation configuration.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationResponse]
         """
@@ -75,7 +75,7 @@ class AutomationsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: AutomationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates an automation for current-organization leads, configuring triggers, message steps, and follow-up behavior.
-        param body: Request schema for the Leadping API automation configuration request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with automation configuration.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -12,7 +12,7 @@ from ....models.lead_archive_request import LeadArchiveRequest
 @dataclass
 class ArchivePostRequestBody(LeadArchiveRequest, Parsable):
     """
-    Request schema for the Leadping API lead archive request, including the fields clients can send.
+    Defines the fields clients can send when working with lead archive.
     """
     
     @staticmethod

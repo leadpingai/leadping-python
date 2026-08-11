@@ -10,16 +10,16 @@ if TYPE_CHECKING:
 @dataclass
 class LeadStatusChangeExportResponse(AdditionalDataHolder, Parsable):
     """
-    API response containing lead status change export data returned to callers.
+    Describes lead status change export data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The content type classification for this lead status change export.
+    # MIME content type of the exported document.
     content_type: Optional[str] = None
-    # The csv value for this lead status change export.
+    # Complete comma-separated values content encoded as text.
     csv: Optional[str] = None
-    # The file name value for this lead status change export.
+    # Suggested file name for the exported CSV document.
     file_name: Optional[str] = None
     # The rows included with this lead status change export.
     rows: Optional[list[LeadStatusChangeExportRow]] = None

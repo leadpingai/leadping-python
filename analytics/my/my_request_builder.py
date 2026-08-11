@@ -95,10 +95,13 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "days"
             return original_name
         
+        # Optional number of recent days to include when explicit timestamps are not supplied.
         days: Optional[int] = None
 
+        # Optional exclusive end timestamp for the analytics period.
         end_at: Optional[datetime.datetime] = None
 
+        # Optional inclusive start timestamp for the analytics period.
         start_at: Optional[datetime.datetime] = None
 
     

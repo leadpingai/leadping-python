@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class OutgoingNumberSelectionRequest(AdditionalDataHolder, Parsable):
     """
-    Request schema for the Leadping API outgoing number selection request, including the fields clients can send.
+    Defines the fields clients can send when working with outgoing number selection.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

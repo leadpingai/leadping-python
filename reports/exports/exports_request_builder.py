@@ -25,7 +25,7 @@ class ExportsRequestBuilder(BaseRequestBuilder):
     def by_export_id(self,export_id: str) -> WithExportItemRequestBuilder:
         """
         Gets an item from the leadping.reports.exports.item collection
-        param export_id: Unique identifier of the item
+        param export_id: The unique identifier of the current user's data export.
         Returns: WithExportItemRequestBuilder
         """
         if export_id is None:

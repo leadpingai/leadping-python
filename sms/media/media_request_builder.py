@@ -33,7 +33,7 @@ class MediaRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: MediaPostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[MessageMediaAttachment]:
         """
-        Uploads media for a subsequent MMS send.
+        Uploads and validates one media attachment, returning the metadata needed to include the asset in a subsequent Leadping MMS send.
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[MessageMediaAttachment]
@@ -56,7 +56,7 @@ class MediaRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: MediaPostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Uploads media for a subsequent MMS send.
+        Uploads and validates one media attachment, returning the metadata needed to include the asset in a subsequent Leadping MMS send.
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

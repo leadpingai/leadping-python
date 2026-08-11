@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API eligible outgoing phone number returned to authenticated clients.
+    Describes a Leadping phone number that is eligible to send an outbound message or place a call.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

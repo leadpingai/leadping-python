@@ -7,16 +7,16 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AcceptOrganizationInvitationRequest(AdditionalDataHolder, Parsable):
     """
-    Request payload for accept organization invitation.
+    Defines the input used for accept organization invitation.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
     # The email address associated with this organization invitation.
     email: Optional[str] = None
-    # The first name value for this organization invitation.
+    # First name for this organization invitation.
     first_name: Optional[str] = None
-    # The date and time for the last name value on this organization invitation.
+    # UTC timestamp for last name on this organization invitation.
     last_name: Optional[str] = None
     # The token supplied to authorize or complete this organization invitation.
     token: Optional[str] = None

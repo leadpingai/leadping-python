@@ -54,7 +54,7 @@ class WithUserItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: OrganizationMemberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationMemberResponse]:
         """
         Changes a user's role in the current organization, updating access to lead, automation, billing, and admin workflows.
-        param body: Request schema for the Leadping API organization user request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization user.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationMemberResponse]
         """
@@ -90,7 +90,7 @@ class WithUserItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: OrganizationMemberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Changes a user's role in the current organization, updating access to lead, automation, billing, and admin workflows.
-        param body: Request schema for the Leadping API organization user request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with organization user.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

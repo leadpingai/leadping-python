@@ -102,10 +102,13 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "category"
             return original_name
         
+        # Optional event category used to narrow the results.
         category: Optional[str] = None
 
+        # Optional exclusive end timestamp for event occurrence.
         end_at: Optional[datetime.datetime] = None
 
+        # Optional inclusive start timestamp for event occurrence.
         start_at: Optional[datetime.datetime] = None
 
     

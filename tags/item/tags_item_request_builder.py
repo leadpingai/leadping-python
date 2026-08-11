@@ -53,7 +53,7 @@ class TagsItemRequestBuilder(BaseRequestBuilder):
     async def put(self,body: TagRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[TagResponse]:
         """
         Updates a current-organization tag's name, color, or archived state so lead segmentation and filters stay consistent.
-        param body: Request schema for the Leadping API tag request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with tag.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[TagResponse]
         """
@@ -89,7 +89,7 @@ class TagsItemRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: TagRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Updates a current-organization tag's name, color, or archived state so lead segmentation and filters stay consistent.
-        param body: Request schema for the Leadping API tag request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with tag.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

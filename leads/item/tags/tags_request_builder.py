@@ -35,7 +35,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def by_tag_id(self,tag_id: str) -> WithTagItemRequestBuilder:
         """
         Gets an item from the leadping.leads.item.tags.item collection
-        param tag_id: Unique identifier of the item
+        param tag_id: The unique identifier of the organization tag to remove.
         Returns: WithTagItemRequestBuilder
         """
         if tag_id is None:
@@ -49,7 +49,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     async def post(self,body: LeadTagsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Adds one or more current-organization tags to a lead so users can segment, filter, route, and review follow-up work.
-        param body: Request schema for the Leadping API lead tag update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead tag update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -74,7 +74,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     async def put(self,body: LeadTagsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Replaces all tags on a lead with the supplied current-organization tags, keeping segmentation and routing labels in sync.
-        param body: Request schema for the Leadping API lead tag update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead tag update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
         """
@@ -99,7 +99,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: LeadTagsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Adds one or more current-organization tags to a lead so users can segment, filter, route, and review follow-up work.
-        param body: Request schema for the Leadping API lead tag update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead tag update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -114,7 +114,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: LeadTagsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Replaces all tags on a lead with the supplied current-organization tags, keeping segmentation and routing labels in sync.
-        param body: Request schema for the Leadping API lead tag update request, including the fields clients can send.
+        param body: Defines the fields clients can send when working with lead tag update.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

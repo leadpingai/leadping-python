@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 @dataclass
 class TransactionResponse(AdditionalDataHolder, Parsable):
     """
-    Response schema for the Leadping API billing transaction response returned to authenticated clients.
+    Describes billing transaction data returned by Leadping.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -25,7 +25,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     amount: Optional[float] = None
     # Defines the supported Billable Unit values.
     billable_unit: Optional[TransactionResponse_billableUnit] = None
-    # The billedAmount property
+    # Customer-facing amount billed for the transaction.
     billed_amount: Optional[float] = None
     # Defines the supported Usage Channel values.
     billing_channel: Optional[TransactionResponse_billingChannel] = None
@@ -39,7 +39,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     gateway_status: Optional[str] = None
     # The unique identifier for the entity.
     id: Optional[str] = None
-    # The ID and name for this lead.
+    # Identifier and display name of the related lead.
     lead: Optional[TransactionResponse_lead] = None
     # The date and time when the entity was last modified, if applicable.
     modified_at: Optional[datetime.datetime] = None
@@ -47,7 +47,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     net_amount: Optional[float] = None
     # Additional billing notes that explain the transaction for admins or customers.
     notes: Optional[str] = None
-    # The ID and name for this organization.
+    # Identifier and display name of the related organization.
     organization: Optional[TransactionResponse_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
