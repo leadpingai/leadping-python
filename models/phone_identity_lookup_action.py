@@ -23,6 +23,8 @@ class PhoneIdentityLookupAction(AdditionalDataHolder, Parsable):
     occurred_at: Optional[datetime.datetime] = None
     # The provider that performed the phone identity lookup.
     provider: Optional[str] = None
+    # The provider pricing version used to calculate the lookup cost.
+    provider_pricing_version: Optional[str] = None
     # Identifies the outcome of a phone identity lookup action.
     status: Optional[PhoneIdentityLookupActionStatus] = None
     # Identifies the kind of lookup action performed for a phone identity.
@@ -54,6 +56,7 @@ class PhoneIdentityLookupAction(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "occurredAt": lambda n : setattr(self, 'occurred_at', n.get_datetime_value()),
             "provider": lambda n : setattr(self, 'provider', n.get_str_value()),
+            "providerPricingVersion": lambda n : setattr(self, 'provider_pricing_version', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(PhoneIdentityLookupActionStatus)),
             "type": lambda n : setattr(self, 'type', n.get_enum_value(PhoneIdentityLookupActionType)),
         }
@@ -70,6 +73,7 @@ class PhoneIdentityLookupAction(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("occurredAt", self.occurred_at)
         writer.write_str_value("provider", self.provider)
+        writer.write_str_value("providerPricingVersion", self.provider_pricing_version)
         writer.write_enum_value("status", self.status)
         writer.write_enum_value("type", self.type)
         writer.write_additional_data_value(self.additional_data)

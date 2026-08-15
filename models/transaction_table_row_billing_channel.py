@@ -12,6 +12,7 @@ class TransactionTableRow_billingChannel(str, Enum):
     Openai = "openai",
     Domain = "domain",
     OneZerodlc = "10dlc",
+    Payment = "payment",
     Connection = "connection",
     Automation = "automation",
 

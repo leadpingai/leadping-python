@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .lead_profile import LeadProfile
     from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
     from .lead_response_phone_identity import LeadResponse_phoneIdentity
+    from .lead_response_processing_status import LeadResponse_processingStatus
     from .tag_summary import TagSummary
 
 @dataclass
@@ -37,6 +38,10 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     current_lead_status: Optional[LeadResponse_currentLeadStatus] = None
     # Demographic profile details for the lead represented by this lead response.
     customer: Optional[LeadProfile] = None
+    # UTC timestamp when this lead was soft deleted.
+    deleted_at: Optional[datetime.datetime] = None
+    # User ID of the person who soft deleted this lead.
+    deleted_by_user_id: Optional[str] = None
     # Indicates whether this lead response is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # The unique identifier for the entity.
@@ -49,6 +54,12 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Canonical phone identity and provider lookup details for this lead.
     phone_identity: Optional[LeadResponse_phoneIdentity] = None
+    # Defines the asynchronous verification and enrichment lifecycle for a lead.
+    processing_status: Optional[LeadResponse_processingStatus] = None
+    # UTC timestamp when the processing stage last changed.
+    processing_status_changed_at: Optional[datetime.datetime] = None
+    # Explanation when asynchronous lead processing is blocked or fails.
+    processing_status_reason: Optional[str] = None
     # Tags currently attached to this lead, source, or record.
     tags: Optional[list[TagSummary]] = None
     
@@ -73,6 +84,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_profile import LeadProfile
         from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
         from .lead_response_phone_identity import LeadResponse_phoneIdentity
+        from .lead_response_processing_status import LeadResponse_processingStatus
         from .tag_summary import TagSummary
 
         from .lead_contact import LeadContact
@@ -80,6 +92,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_profile import LeadProfile
         from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
         from .lead_response_phone_identity import LeadResponse_phoneIdentity
+        from .lead_response_processing_status import LeadResponse_processingStatus
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -91,12 +104,17 @@ class LeadResponse(AdditionalDataHolder, Parsable):
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(LeadResponse_currentLeadStatus)),
             "customer": lambda n : setattr(self, 'customer', n.get_object_value(LeadProfile)),
+            "deletedAt": lambda n : setattr(self, 'deleted_at', n.get_datetime_value()),
+            "deletedByUserId": lambda n : setattr(self, 'deleted_by_user_id', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "metadata": lambda n : setattr(self, 'metadata', n.get_object_value(LeadMetadata)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "phoneIdentity": lambda n : setattr(self, 'phone_identity', n.get_object_value(LeadResponse_phoneIdentity)),
+            "processingStatus": lambda n : setattr(self, 'processing_status', n.get_enum_value(LeadResponse_processingStatus)),
+            "processingStatusChangedAt": lambda n : setattr(self, 'processing_status_changed_at', n.get_datetime_value()),
+            "processingStatusReason": lambda n : setattr(self, 'processing_status_reason', n.get_str_value()),
             "tags": lambda n : setattr(self, 'tags', n.get_collection_of_object_values(TagSummary)),
         }
         return fields
@@ -117,12 +135,17 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_object_value("customer", self.customer)
+        writer.write_datetime_value("deletedAt", self.deleted_at)
+        writer.write_str_value("deletedByUserId", self.deleted_by_user_id)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_object_value("metadata", self.metadata)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("phoneIdentity", self.phone_identity)
+        writer.write_enum_value("processingStatus", self.processing_status)
+        writer.write_datetime_value("processingStatusChangedAt", self.processing_status_changed_at)
+        writer.write_str_value("processingStatusReason", self.processing_status_reason)
         writer.write_collection_of_object_values("tags", self.tags)
         writer.write_additional_data_value(self.additional_data)
     

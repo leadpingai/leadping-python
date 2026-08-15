@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
     from .lead_table_row_organization import LeadTableRow_organization
+    from .lead_table_row_processing_status import LeadTableRow_processingStatus
     from .lead_table_row_source import LeadTableRow_source
     from .tag_summary import TagSummary
 
@@ -45,6 +46,12 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     organization: Optional[LeadTableRow_organization] = None
     # Phone details for the lead, user, or organization represented by this lead table row.
     phone: Optional[str] = None
+    # Defines the asynchronous verification and enrichment lifecycle for a lead.
+    processing_status: Optional[LeadTableRow_processingStatus] = None
+    # UTC timestamp when the processing stage last changed.
+    processing_status_changed_at: Optional[datetime.datetime] = None
+    # Explanation when asynchronous lead processing is blocked or fails.
+    processing_status_reason: Optional[str] = None
     # Identifier and display name of the related source.
     source: Optional[LeadTableRow_source] = None
     # Current lifecycle status for this lead table row in the Leadping API.
@@ -74,11 +81,13 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         """
         from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
         from .lead_table_row_organization import LeadTableRow_organization
+        from .lead_table_row_processing_status import LeadTableRow_processingStatus
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
         from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
         from .lead_table_row_organization import LeadTableRow_organization
+        from .lead_table_row_processing_status import LeadTableRow_processingStatus
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
@@ -96,6 +105,9 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(LeadTableRow_organization)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
+            "processingStatus": lambda n : setattr(self, 'processing_status', n.get_enum_value(LeadTableRow_processingStatus)),
+            "processingStatusChangedAt": lambda n : setattr(self, 'processing_status_changed_at', n.get_datetime_value()),
+            "processingStatusReason": lambda n : setattr(self, 'processing_status_reason', n.get_str_value()),
             "source": lambda n : setattr(self, 'source', n.get_object_value(LeadTableRow_source)),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "statusTone": lambda n : setattr(self, 'status_tone', n.get_str_value()),
@@ -125,6 +137,9 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("lastName", self.last_name)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phone", self.phone)
+        writer.write_enum_value("processingStatus", self.processing_status)
+        writer.write_datetime_value("processingStatusChangedAt", self.processing_status_changed_at)
+        writer.write_str_value("processingStatusReason", self.processing_status_reason)
         writer.write_object_value("source", self.source)
         writer.write_str_value("status", self.status)
         writer.write_str_value("statusTone", self.status_tone)

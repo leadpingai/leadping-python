@@ -17,6 +17,8 @@ if TYPE_CHECKING:
     from ...models.automation_request import AutomationRequest
     from ...models.automation_response import AutomationResponse
     from ...models.problem_details import ProblemDetails
+    from .run.run_request_builder import RunRequestBuilder
+    from .runs.runs_request_builder import RunsRequestBuilder
 
 class AutomationsItemRequestBuilder(BaseRequestBuilder):
     """
@@ -142,6 +144,24 @@ class AutomationsItemRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return AutomationsItemRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def run(self) -> RunRequestBuilder:
+        """
+        The run property
+        """
+        from .run.run_request_builder import RunRequestBuilder
+
+        return RunRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def runs(self) -> RunsRequestBuilder:
+        """
+        The runs property
+        """
+        from .runs.runs_request_builder import RunsRequestBuilder
+
+        return RunsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class AutomationsItemRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):

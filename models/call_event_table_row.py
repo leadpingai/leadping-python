@@ -56,8 +56,12 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     to_phone_number: Optional[str] = None
     # User summary connected to this call event table row.
     user: Optional[str] = None
+    # Email address for the person or agent who initiated this call event.
+    user_email: Optional[str] = None
     # User ID associated with the person or agent who initiated this call event.
     user_id: Optional[str] = None
+    # Display name for the person or agent who initiated this call event.
+    user_name: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CallEventTableRow:
@@ -100,7 +104,9 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
             "user": lambda n : setattr(self, 'user', n.get_str_value()),
+            "userEmail": lambda n : setattr(self, 'user_email', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
+            "userName": lambda n : setattr(self, 'user_name', n.get_str_value()),
         }
         return fields
     
@@ -132,7 +138,9 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("statusReason", self.status_reason)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
         writer.write_str_value("user", self.user)
+        writer.write_str_value("userEmail", self.user_email)
         writer.write_str_value("userId", self.user_id)
+        writer.write_str_value("userName", self.user_name)
         writer.write_additional_data_value(self.additional_data)
     
 

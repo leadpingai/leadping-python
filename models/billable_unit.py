@@ -14,6 +14,8 @@ class BillableUnit(str, Enum):
     Openai_operation = "openai_operation",
     Domain_registration = "domain_registration",
     OneZerodlc_application = "10dlc_application",
+    OneZerodlc_campaign_month = "10dlc_campaign_month",
+    Payment_processing_fee = "payment_processing_fee",
     Connection_action = "connection_action",
     Automation_run = "automation_run",
 

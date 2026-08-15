@@ -78,6 +78,8 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     undeliverable_at: Optional[datetime.datetime] = None
     # User summary connected to this event detail response.
     user: Optional[EventDetailResponse_user] = None
+    # Email address for the user connected to this event detail response.
+    user_email: Optional[str] = None
     # User ID associated with the activity that created this event.
     user_id: Optional[str] = None
     
@@ -136,6 +138,7 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
             "undeliverableAt": lambda n : setattr(self, 'undeliverable_at', n.get_datetime_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(EventDetailResponse_user)),
+            "userEmail": lambda n : setattr(self, 'user_email', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
         }
         return fields
@@ -178,6 +181,7 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
         writer.write_datetime_value("undeliverableAt", self.undeliverable_at)
         writer.write_object_value("user", self.user)
+        writer.write_str_value("userEmail", self.user_email)
         writer.write_str_value("userId", self.user_id)
         writer.write_additional_data_value(self.additional_data)
     

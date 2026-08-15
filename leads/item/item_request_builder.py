@@ -39,7 +39,7 @@ class ItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> None:
         """
-        Deletes a lead from the current organization when it should no longer appear in communication, routing, or event workflows.
+        Marks a lead as deleted so it no longer appears in user-facing lead, conversation, routing, or event workflows. The stored lead,conversation, and event records are retained.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: None
         """
@@ -104,7 +104,7 @@ class ItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Deletes a lead from the current organization when it should no longer appear in communication, routing, or event workflows.
+        Marks a lead as deleted so it no longer appears in user-facing lead, conversation, routing, or event workflows. The stored lead,conversation, and event records are retained.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -34,6 +34,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # User summary for the person who created this lead source response.
     created_by_user: Optional[SourceResponse_createdByUser] = None
+    # Email used to resolve the creator's avatar.
+    created_by_user_email: Optional[str] = None
     # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
     # Default tag summaries automatically applied to leads from this source.
@@ -97,6 +99,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "createdByUser": lambda n : setattr(self, 'created_by_user', n.get_object_value(SourceResponse_createdByUser)),
+            "createdByUserEmail": lambda n : setattr(self, 'created_by_user_email', n.get_str_value()),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
             "defaultTags": lambda n : setattr(self, 'default_tags', n.get_collection_of_object_values(TagSummary)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -128,6 +131,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("createdByUser", self.created_by_user)
+        writer.write_str_value("createdByUserEmail", self.created_by_user_email)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)
         writer.write_collection_of_object_values("defaultTags", self.default_tags)
         writer.write_str_value("description", self.description)
