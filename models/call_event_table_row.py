@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .call_event_table_row_status import CallEventTableRow_status
+    from .communication_console_entry import CommunicationConsoleEntry
 
 @dataclass
 class CallEventTableRow(AdditionalDataHolder, Parsable):
@@ -22,6 +23,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     billing_status: Optional[str] = None
     # Caller ID phone number presented during the outbound call.
     caller_id: Optional[str] = None
+    # Ordered diagnostic entries recorded while Leadping processed this call.
+    console_entries: Optional[list[CommunicationConsoleEntry]] = None
     # Conversation ID that links this call event table row to the Leadping inbox thread.
     conversation_id: Optional[str] = None
     # UTC timestamp when this call event table row was created.
@@ -80,13 +83,16 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .call_event_table_row_status import CallEventTableRow_status
+        from .communication_console_entry import CommunicationConsoleEntry
 
         from .call_event_table_row_status import CallEventTableRow_status
+        from .communication_console_entry import CommunicationConsoleEntry
 
         fields: dict[str, Callable[[Any], None]] = {
             "answeredAt": lambda n : setattr(self, 'answered_at', n.get_datetime_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "callerId": lambda n : setattr(self, 'caller_id', n.get_str_value()),
+            "consoleEntries": lambda n : setattr(self, 'console_entries', n.get_collection_of_object_values(CommunicationConsoleEntry)),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
@@ -121,6 +127,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("answeredAt", self.answered_at)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_str_value("callerId", self.caller_id)
+        writer.write_collection_of_object_values("consoleEntries", self.console_entries)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("direction", self.direction)

@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .communication_console_entry import CommunicationConsoleEntry
     from .message_media_attachment import MessageMediaAttachment
     from .sms_response_selection_reason import SmsResponse_selectionReason
     from .sms_response_status import SmsResponse_status
@@ -31,6 +32,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     canceled_at: Optional[datetime.datetime] = None
     # Compliance action applied to this message, lead, or sender.
     compliance_action: Optional[str] = None
+    # Ordered diagnostic entries recorded while Leadping processed this message.
+    console_entries: Optional[list[CommunicationConsoleEntry]] = None
     # Conversation ID that links this SMS message to the Leadping inbox thread.
     conversation_id: Optional[str] = None
     # The date and time when the entity was created.
@@ -104,11 +107,13 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .communication_console_entry import CommunicationConsoleEntry
         from .message_media_attachment import MessageMediaAttachment
         from .sms_response_selection_reason import SmsResponse_selectionReason
         from .sms_response_status import SmsResponse_status
         from .sms_response_traffic_type import SmsResponse_trafficType
 
+        from .communication_console_entry import CommunicationConsoleEntry
         from .message_media_attachment import MessageMediaAttachment
         from .sms_response_selection_reason import SmsResponse_selectionReason
         from .sms_response_status import SmsResponse_status
@@ -121,6 +126,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
             "cancelReason": lambda n : setattr(self, 'cancel_reason', n.get_str_value()),
             "canceledAt": lambda n : setattr(self, 'canceled_at', n.get_datetime_value()),
             "complianceAction": lambda n : setattr(self, 'compliance_action', n.get_str_value()),
+            "consoleEntries": lambda n : setattr(self, 'console_entries', n.get_collection_of_object_values(CommunicationConsoleEntry)),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "deliveredAt": lambda n : setattr(self, 'delivered_at', n.get_datetime_value()),
@@ -166,6 +172,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("cancelReason", self.cancel_reason)
         writer.write_datetime_value("canceledAt", self.canceled_at)
         writer.write_str_value("complianceAction", self.compliance_action)
+        writer.write_collection_of_object_values("consoleEntries", self.console_entries)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_datetime_value("deliveredAt", self.delivered_at)

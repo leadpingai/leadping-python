@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .communication_console_entry import CommunicationConsoleEntry
     from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
     from .phone_call_status import PhoneCallStatus
 
@@ -25,6 +26,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     caller_id: Optional[str] = None
     # Messaging campaign identifier associated with this phone call.
     campaign_id: Optional[str] = None
+    # Ordered diagnostic entries recorded while Leadping processed this call.
+    console_entries: Optional[list[CommunicationConsoleEntry]] = None
     # Conversation ID that links this phone call to the Leadping inbox thread.
     conversation_id: Optional[str] = None
     # The date and time when the entity was created.
@@ -80,9 +83,11 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .communication_console_entry import CommunicationConsoleEntry
         from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
         from .phone_call_status import PhoneCallStatus
 
+        from .communication_console_entry import CommunicationConsoleEntry
         from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
         from .phone_call_status import PhoneCallStatus
 
@@ -91,6 +96,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "callerId": lambda n : setattr(self, 'caller_id', n.get_str_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
+            "consoleEntries": lambda n : setattr(self, 'console_entries', n.get_collection_of_object_values(CommunicationConsoleEntry)),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
@@ -125,6 +131,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_str_value("callerId", self.caller_id)
         writer.write_str_value("campaignId", self.campaign_id)
+        writer.write_collection_of_object_values("consoleEntries", self.console_entries)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("direction", self.direction)
