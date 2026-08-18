@@ -45,7 +45,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     billing_address: Optional[OrganizationResponse_billingAddress] = None
     # Name used for invoices, receipts, and payment processor billing records.
     billing_name: Optional[str] = None
-    # Defines the supported Billing Plan values.
+    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[OrganizationResponse_billingPlan] = None
     # Customer-safe billing state for this organization.
     billing_state: Optional[OrganizationResponse_billingState] = None
@@ -77,15 +77,15 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     phones: Optional[list[IdNameValue]] = None
     # Alternate organization name or DBA shown in Leadping.
     secondary_name: Optional[str] = None
-    # Defines the supported User Setup Status values.
+    # Describes a user's progress through required Leadping profile and account setup tasks.
     setup_status: Optional[OrganizationResponse_setupStatus] = None
-    # Defines the supported Organization Setup Step values.
+    # Identifies a discrete billing, telephony, compliance, or configuration stage in organization provisioning.
     setup_step: Optional[OrganizationResponse_setupStep] = None
     # Leadping website record connected to this organization.
     site: Optional[OrganizationResponse_site] = None
-    # Defines the supported Organization Status values.
+    # Describes an organization's account lifecycle and whether it can actively use Leadping services.
     status: Optional[OrganizationResponse_status] = None
-    # Defines the supported Subscription Status values.
+    # Describes an organization's billing subscription lifecycle, including trial, active, delinquent, canceled, and expired states.
     subscription_status: Optional[OrganizationResponse_subscriptionStatus] = None
     # User summary connected to this organization profile response.
     user: Optional[OrganizationResponse_user] = None

@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class AnalyticsComparison(AdditionalDataHolder, Parsable):
     """
-    Represents analytics comparison data exposed by Leadping analytics.
+    Compares a metric with the preceding period and reports its absolute and percentage change.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

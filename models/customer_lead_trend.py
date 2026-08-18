@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class CustomerLeadTrend(AdditionalDataHolder, Parsable):
     """
-    Represents customer lead trend data exposed by Leadping analytics.
+    Measures lead creation, qualification, and conversion activity within one reporting time bucket.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

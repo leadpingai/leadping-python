@@ -34,7 +34,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     async def put(self,body: LeadStatusChangeRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusChangeResponse]:
         """
         Sets the lead's current structured status and records the change for audit, automation, and reporting.
-        param body: Request model for creating or updating a lead status change.
+        param body: Defines a lead status transition or correction, including its target status, effective time, source, and explanatory context.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadStatusChangeResponse]
         """
@@ -61,7 +61,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     def to_put_request_information(self,body: LeadStatusChangeRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Sets the lead's current structured status and records the change for audit, automation, and reporting.
-        param body: Request model for creating or updating a lead status change.
+        param body: Defines a lead status transition or correction, including its target status, effective time, source, and explanatory context.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

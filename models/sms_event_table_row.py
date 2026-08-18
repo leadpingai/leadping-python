@@ -87,7 +87,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     sending_started_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping sent this message to the provider.
     sent_at: Optional[datetime.datetime] = None
-    # Defines the supported SMS Message Status values.
+    # Describes the normalized lifecycle of an SMS or MMS message from scheduling through delivery or failure.
     status: Optional[SmsEventTableRow_status] = None
     # Human-readable reason explaining the current status of this SMS event table row.
     status_reason: Optional[str] = None
@@ -95,7 +95,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     text: Optional[str] = None
     # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
-    # Defines the supported SMS Traffic Type values.
+    # Classifies messaging traffic by conversational, informational, marketing, or other compliance-relevant purpose.
     traffic_type: Optional[SmsEventTableRow_trafficType] = None
     # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None

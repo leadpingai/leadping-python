@@ -8,7 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class CustomerFailingAutomation(AdditionalDataHolder, Parsable):
     """
-    Represents customer failing automation data exposed by Leadping analytics.
+    Identifies an automation with recent execution failures and summarizes its affected leads and failure context.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

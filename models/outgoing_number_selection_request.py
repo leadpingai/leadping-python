@@ -17,7 +17,7 @@ class OutgoingNumberSelectionRequest(AdditionalDataHolder, Parsable):
 
     # Messaging campaign identifier associated with this outgoing number selection request.
     campaign_id: Optional[str] = None
-    # Defines the supported Outgoing Number Channel values.
+    # Identifies whether an outgoing phone number is eligible for voice, SMS, MMS, or another communication channel.
     channel: Optional[OutgoingNumberSelectionRequest_channel] = None
     # Conversation ID that links this outgoing number selection request to the Leadping inbox thread.
     conversation_id: Optional[str] = None

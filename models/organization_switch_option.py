@@ -19,7 +19,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Defines the supported Customer Activation Status values.
+    # Summarizes an organization's overall progress from initial Leadping onboarding through launch readiness.
     activation_status: Optional[OrganizationSwitchOption_activationStatus] = None
     # Activation summary for this organization switch option.
     activation_summary: Optional[str] = None
@@ -35,13 +35,13 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Whether needs admin review applies to this organization switch option.
     needs_admin_review: Optional[bool] = None
-    # Defines the supported Organization Status values.
+    # Describes an organization's account lifecycle and whether it can actively use Leadping services.
     organization_status: Optional[OrganizationSwitchOption_organizationStatus] = None
     # Whether ready for customer traffic applies to this organization switch option.
     ready_for_customer_traffic: Optional[bool] = None
     # Role for this organization switch option.
     role: Optional[OrganizationMemberRole] = None
-    # Defines the supported 10DLC Application Status values.
+    # Describes an organization's overall 10DLC registration lifecycle across brand and messaging campaign submission.
     ten_dlc_status: Optional[OrganizationSwitchOption_tenDlcStatus] = None
     
     @staticmethod

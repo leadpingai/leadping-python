@@ -25,7 +25,7 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
 
     # Account balance for this organization.
     account_balance: Optional[float] = None
-    # Defines the supported Customer Activation Status values.
+    # Summarizes an organization's overall progress from initial Leadping onboarding through launch readiness.
     activation_status: Optional[OrganizationTableRow_activationStatus] = None
     # The date and time this organization API key expires, or null when it has no expiration.
     api_key_expires_at: Optional[datetime.datetime] = None
@@ -41,7 +41,7 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
     api_key_preview: Optional[str] = None
     # The total number of tracked uses for this organization API key.
     api_key_total_uses: Optional[int] = None
-    # Defines the supported Billing Plan values.
+    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[OrganizationTableRow_billingPlan] = None
     # Whether this organization is enabled.
     enabled: Optional[bool] = None
@@ -63,21 +63,21 @@ class OrganizationTableRow(AdditionalDataHolder, Parsable):
     payment_failed_at: Optional[datetime.datetime] = None
     # The phone number associated with this organization.
     phone: Optional[str] = None
-    # Defines the supported Organization Setup Step values.
+    # Identifies a discrete billing, telephony, compliance, or configuration stage in organization provisioning.
     setup_step: Optional[OrganizationTableRow_setupStep] = None
-    # Defines the supported Organization Status values.
+    # Describes an organization's account lifecycle and whether it can actively use Leadping services.
     status: Optional[OrganizationTableRow_status] = None
     # Date and time when this Leadping organization table row was subscription cancel.
     subscription_cancel_at: Optional[datetime.datetime] = None
-    # Defines the supported Subscription Status values.
+    # Describes an organization's billing subscription lifecycle, including trial, active, delinquent, canceled, and expired states.
     subscription_status: Optional[OrganizationTableRow_subscriptionStatus] = None
-    # Defines the supported 10DLC Application Status values.
+    # Describes an organization's overall 10DLC registration lifecycle across brand and messaging campaign submission.
     ten_dlc_status: Optional[OrganizationTableRow_tenDlcStatus] = None
     # The user count for this organization.
     user_count: Optional[int] = None
     # The website URL associated with this organization.
     website: Optional[str] = None
-    # Defines the supported Website Lifecycle Status values.
+    # Describes an organization website's lifecycle from discovery and verification through activation, suspension, or removal.
     website_status: Optional[OrganizationTableRow_websiteStatus] = None
     
     @staticmethod

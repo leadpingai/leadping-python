@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class LeadStatusResponse(AdditionalDataHolder, Parsable):
     """
-    Represents a configurable status that can be assigned to leads.
+    Describes an organization-defined lead status used to classify pipeline progress, drive automation, and report lifecycle outcomes.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

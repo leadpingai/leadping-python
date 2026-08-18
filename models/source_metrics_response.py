@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 @dataclass
 class SourceMetricsResponse(AdditionalDataHolder, Parsable):
     """
-    Response model containing source metrics data returned by the Leadping API.
+    Aggregates lead volume, conversion, delivery, and activity metrics attributed to a Leadping source over the requested reporting period.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

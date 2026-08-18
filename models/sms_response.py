@@ -74,7 +74,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     scheduled_for: Optional[datetime.datetime] = None
     # Reason Leadping scheduled this delivery for a later time.
     scheduled_reason: Optional[str] = None
-    # Defines the supported Outgoing Number Selection Reason values.
+    # Explains why Leadping selected, rejected, or substituted an outgoing caller or messaging number.
     selection_reason: Optional[SmsResponse_selectionReason] = None
     # UTC timestamp when Leadping began sending this message.
     sending_started_at: Optional[datetime.datetime] = None
@@ -82,13 +82,13 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     sent_at: Optional[datetime.datetime] = None
     # Lead source ID used for attribution and sender selection on this SMS message.
     source_id: Optional[str] = None
-    # Defines the supported SMS Message Status values.
+    # Describes the normalized lifecycle of an SMS or MMS message from scheduling through delivery or failure.
     status: Optional[SmsResponse_status] = None
     # Human-readable reason explaining the current status of this SMS message.
     status_reason: Optional[str] = None
     # Body text for the SMS message or communication represented by this SMS message.
     text: Optional[str] = None
-    # Defines the supported SMS Traffic Type values.
+    # Classifies messaging traffic by conversational, informational, marketing, or other compliance-relevant purpose.
     traffic_type: Optional[SmsResponse_trafficType] = None
     # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None

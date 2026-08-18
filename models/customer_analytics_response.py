@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 @dataclass
 class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
     """
-    Response model containing customer analytics data returned by the Leadping API.
+    Aggregates an organization's lead performance, response speed, communication usage, automation health, and activation insights.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

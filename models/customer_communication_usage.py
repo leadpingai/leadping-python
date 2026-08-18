@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
     """
-    Represents customer communication usage data exposed by Leadping analytics.
+    Aggregates an organization's SMS, MMS, and calling activity, delivery outcomes, and billable usage over time.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

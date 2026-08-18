@@ -27,7 +27,7 @@ class OutgoingNumberSelectionResponse(AdditionalDataHolder, Parsable):
     eligible_numbers: Optional[list[EligibleOutgoingNumberResponse]] = None
     # Short label describing the health state for display in dashboards.
     health_label: Optional[str] = None
-    # Defines the supported SMS readiness health assessments.
+    # Summarizes the severity of conditions affecting an organization's ability to send compliant SMS or MMS traffic.
     health_status: Optional[OutgoingNumberSelectionResponse_healthStatus] = None
     # Warning text that explains a potential health or readiness issue.
     health_warning: Optional[str] = None
@@ -37,7 +37,7 @@ class OutgoingNumberSelectionResponse(AdditionalDataHolder, Parsable):
     phone_number_id: Optional[str] = None
     # Human-readable label for the reason code on this outgoing number selection response.
     reason_label: Optional[str] = None
-    # Defines the supported Outgoing Number Selection Reason values.
+    # Explains why Leadping selected, rejected, or substituted an outgoing caller or messaging number.
     selection_reason: Optional[OutgoingNumberSelectionResponse_selectionReason] = None
     # Human-readable setup guidance shown for this outgoing number selection response.
     setup_message: Optional[str] = None

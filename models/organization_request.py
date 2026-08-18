@@ -56,7 +56,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     phones: Optional[list[IdNameValue]] = None
     # Alternate organization name or DBA shown in Leadping.
     secondary_name: Optional[str] = None
-    # Defines the supported Organization Status values.
+    # Describes an organization's account lifecycle and whether it can actively use Leadping services.
     status: Optional[OrganizationRequest_status] = None
     # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None

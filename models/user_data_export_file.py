@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class UserDataExportFile(AdditionalDataHolder, Parsable):
     """
-    Response model containing user data export file data returned by the Leadping API.
+    Describes a file included in a user-data export, including its logical category, media type, size, and integrity metadata.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

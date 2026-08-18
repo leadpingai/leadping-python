@@ -23,11 +23,11 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
 
     # Monetary amount for this billing transaction or wallet operation.
     amount: Optional[float] = None
-    # Defines the supported Billable Unit values.
+    # Identifies the metered unit used to price Leadping usage, such as a message, call minute, lookup, or phone number.
     billable_unit: Optional[TransactionTableRow_billableUnit] = None
     # Customer-facing amount billed for the metered usage or wallet transaction.
     billed_amount: Optional[float] = None
-    # Defines the supported Usage Channel values.
+    # Identifies the messaging, calling, phone-number, lookup, or platform channel that generated billable usage.
     billing_channel: Optional[TransactionTableRow_billingChannel] = None
     # UTC timestamp when this billing transaction table row was created.
     created_at: Optional[datetime.datetime] = None

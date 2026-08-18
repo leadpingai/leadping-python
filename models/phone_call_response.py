@@ -58,7 +58,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     recording_url: Optional[str] = None
     # UTC timestamp when the call started ringing.
     ringing_at: Optional[datetime.datetime] = None
-    # Defines the supported Outgoing Number Selection Reason values.
+    # Explains why Leadping selected, rejected, or substituted an outgoing caller or messaging number.
     selection_reason: Optional[PhoneCallResponse_selectionReason] = None
     # Lead source ID used for attribution and routing on this call.
     source_id: Optional[str] = None

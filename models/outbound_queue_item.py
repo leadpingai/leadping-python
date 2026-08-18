@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 @dataclass
 class OutboundQueueItem(AdditionalDataHolder, Parsable):
     """
-    Represents outbound queue item data used by Leadping.
+    Describes a queued or recently evaluated outbound delivery request and the pacing decision that controls when it may be sent.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

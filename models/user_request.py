@@ -19,7 +19,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Defines the supported Billing Plan values.
+    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[UserRequest_billingPlan] = None
     # User compliance settings and attestations captured for Leadping account review.
     compliance: Optional[UserRequest_compliance] = None

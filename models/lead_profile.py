@@ -22,9 +22,9 @@ class LeadProfile(AdditionalDataHolder, Parsable):
     birth_date: Optional[datetime.date] = None
     # Lead credit score range or score supplied by the intake source.
     credit_score: Optional[int] = None
-    # Defines the supported Employment Type values.
+    # Classifies a lead's reported employment arrangement for qualification and demographic workflows.
     employment_type: Optional[LeadProfile_employmentType] = None
-    # Represents a gender classification used for demographic or identification purposes.
+    # Classifies a lead's self-reported gender when required by a qualification, demographic, or integration workflow.
     gender: Optional[LeadProfile_gender] = None
     # Indicates whether the lead reported bankruptcy history.
     has_bankruptcy: Optional[bool] = None
@@ -36,7 +36,7 @@ class LeadProfile(AdditionalDataHolder, Parsable):
     income: Optional[int] = None
     # Indicates whether the lead owns their home.
     is_homeowner: Optional[bool] = None
-    # Defines the supported Marital Status Type values.
+    # Classifies a lead's reported marital status when required by a qualification or integration workflow.
     marital_status: Optional[LeadProfile_maritalStatus] = None
     # Number of months the lead has lived at the current residence.
     months_at_residence: Optional[int] = None

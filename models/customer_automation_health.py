@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
     """
-    Represents customer automation health data exposed by Leadping analytics.
+    Summarizes automation coverage, execution success, failures, and workflows requiring organization attention.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

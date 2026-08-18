@@ -62,7 +62,7 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     sending_started_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping sent this message to the provider.
     sent_at: Optional[datetime.datetime] = None
-    # Defines the supported Event status values.
+    # Describes whether a Leadping event is pending, processing, completed, failed, or otherwise resolved.
     status: Optional[EventDetailResponse_status] = None
     # Human-readable reason explaining the current status of this event detail response.
     status_reason: Optional[str] = None
@@ -70,7 +70,7 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     summary: Optional[str] = None
     # Timeline category used to group events for display and filtering.
     timeline_category: Optional[str] = None
-    # Defines the supported Event timeline type values.
+    # Classifies the kind of activity displayed in a lead or conversation event timeline.
     timeline_type: Optional[EventDetailResponse_timelineType] = None
     # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None

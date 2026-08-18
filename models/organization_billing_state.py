@@ -35,7 +35,7 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
     organization_member_assigned_quantity: Optional[int] = None
     # Number of user licenses included in the organization's subscription plan.
     organization_member_quantity: Optional[int] = None
-    # Defines the supported Billing Plan values.
+    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     pending_billing_plan: Optional[OrganizationBillingState_pendingBillingPlan] = None
     # Number of phone numbers included in the organization's subscription plan.
     phone_number_quantity: Optional[int] = None

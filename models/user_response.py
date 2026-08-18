@@ -23,7 +23,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Defines the supported Billing Plan values.
+    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[UserResponse_billingPlan] = None
     # Customer-safe billing state for the user's currently selected organization.
     billing_state: Optional[UserResponse_billingState] = None
@@ -65,7 +65,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     phone: Optional[str] = None
     # The roles included with this user.
     roles: Optional[list[str]] = None
-    # Defines the supported Subscription Status values.
+    # Describes an organization's billing subscription lifecycle, including trial, active, delinquent, canceled, and expired states.
     subscription_status: Optional[UserResponse_subscriptionStatus] = None
     # IANA time zone identifier used when displaying dates and times for this user.
     time_zone_id: Optional[str] = None

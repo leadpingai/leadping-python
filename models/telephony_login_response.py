@@ -8,7 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class TelephonyLoginResponse(AdditionalDataHolder, Parsable):
     """
-    Response model for telephony login token generation.
+    Provides the short-lived access token and client configuration required to initialize an authenticated Leadping calling session.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

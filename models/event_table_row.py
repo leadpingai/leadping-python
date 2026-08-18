@@ -88,7 +88,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     scheduled_for: Optional[datetime.datetime] = None
     # Reason Leadping scheduled this delivery for a later time.
     scheduled_reason: Optional[str] = None
-    # Defines the supported Outgoing Number Selection Reason values.
+    # Explains why Leadping selected, rejected, or substituted an outgoing caller or messaging number.
     selection_reason: Optional[EventTableRow_selectionReason] = None
     # UTC timestamp when Leadping began sending this message.
     sending_started_at: Optional[datetime.datetime] = None
@@ -96,7 +96,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     sent_at: Optional[datetime.datetime] = None
     # Lead source ID used for event attribution.
     source_id: Optional[str] = None
-    # Defines the supported Event timeline status values.
+    # Provides the customer-facing outcome shown for an item in a lead or conversation timeline.
     status: Optional[EventTableRow_status] = None
     # Human-readable reason explaining the current status of this event timeline table row.
     status_reason: Optional[str] = None
@@ -108,7 +108,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     timeline_type: Optional[EventTimelineType] = None
     # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
-    # Defines the supported SMS Traffic Type values.
+    # Classifies messaging traffic by conversational, informational, marketing, or other compliance-relevant purpose.
     traffic_type: Optional[EventTableRow_trafficType] = None
     # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None

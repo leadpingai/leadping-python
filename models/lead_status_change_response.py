@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 @dataclass
 class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     """
-    Response model for lead status change data.
+    Describes an auditable lead status transition, including the previous and new status, source, actor, and effective time.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

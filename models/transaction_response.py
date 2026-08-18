@@ -23,11 +23,11 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
 
     # Monetary amount for this billing transaction or wallet operation.
     amount: Optional[float] = None
-    # Defines the supported Billable Unit values.
+    # Identifies the metered unit used to price Leadping usage, such as a message, call minute, lookup, or phone number.
     billable_unit: Optional[TransactionResponse_billableUnit] = None
     # Customer-facing amount billed for the transaction.
     billed_amount: Optional[float] = None
-    # Defines the supported Usage Channel values.
+    # Identifies the messaging, calling, phone-number, lookup, or platform channel that generated billable usage.
     billing_channel: Optional[TransactionResponse_billingChannel] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None

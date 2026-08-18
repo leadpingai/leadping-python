@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class OutboundCapacityOverview(AdditionalDataHolder, Parsable):
     """
-    Represents outbound capacity overview data used by Leadping.
+    Summarizes organization-wide SMS and voice sending capacity, phone-number health, and recent outbound pacing decisions.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

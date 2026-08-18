@@ -12,7 +12,7 @@ if TYPE_CHECKING:
 @dataclass
 class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     """
-    Request model for creating or updating a lead status change.
+    Defines a lead status transition or correction, including its target status, effective time, source, and explanatory context.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

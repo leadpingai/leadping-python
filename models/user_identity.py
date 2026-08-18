@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class UserIdentity(AdditionalDataHolder, Parsable):
     """
-    Represents a user's sign-in identity, including information about the identity provider and method of authentication.
+    Identifies an external sign-in identity linked to a Leadping user, including its provider, provider-assigned user identifier, and authentication method.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

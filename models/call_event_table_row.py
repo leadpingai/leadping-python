@@ -57,7 +57,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     organization_name: Optional[str] = None
     # URL for the call recording, when the provider makes one available.
     recording_url: Optional[str] = None
-    # Defines the supported Phone Call Status values.
+    # Describes the durable business outcome of a Leadping phone call after provider status normalization.
     status: Optional[CallEventTableRow_status] = None
     # Human-readable reason explaining the current status of this call event table row.
     status_reason: Optional[str] = None

@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class CustomerResponseMetrics(AdditionalDataHolder, Parsable):
     """
-    Represents customer response metrics data exposed by Leadping analytics.
+    Measures how quickly and consistently an organization responds to leads across supported communication channels.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

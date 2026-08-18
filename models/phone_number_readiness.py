@@ -17,17 +17,17 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Defines the supported voice call warmup stages for a Leadping-managed phone number.
+    # Identifies the current traffic-ramp stage of controlled voice warmup for a Leadping-managed phone number.
     call_stage: Optional[PhoneNumberReadiness_callStage] = None
     # Indicates whether phone number warmup is enabled in Leadping.
     enabled: Optional[bool] = None
     # Current warmup health score used to assess phone number warmup.
     health_score: Optional[int] = None
-    # Defines the supported SMS readiness health assessments.
+    # Summarizes the severity of conditions affecting an organization's ability to send compliant SMS or MMS traffic.
     health_status: Optional[PhoneNumberReadiness_healthStatus] = None
     # Warmup completion percentage, from 0 through 100.
     progress_percent: Optional[int] = None
-    # Defines the supported SMS readiness states.
+    # Describes whether an organization is configured and permitted to send SMS or MMS traffic through Leadping.
     state: Optional[PhoneNumberReadiness_state] = None
     
     @staticmethod

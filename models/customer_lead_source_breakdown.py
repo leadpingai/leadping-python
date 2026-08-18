@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class CustomerLeadSourceBreakdown(AdditionalDataHolder, Parsable):
     """
-    Represents customer lead source breakdown data exposed by Leadping analytics.
+    Attributes an organization's lead volume, qualification, and conversion outcomes to a specific acquisition source.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

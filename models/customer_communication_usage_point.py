@@ -8,7 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class CustomerCommunicationUsagePoint(AdditionalDataHolder, Parsable):
     """
-    Represents customer communication usage point data exposed by Leadping analytics.
+    Measures organization messaging and calling activity within one analytics time bucket.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

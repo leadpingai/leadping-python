@@ -10,7 +10,7 @@ if TYPE_CHECKING:
 @dataclass
 class TelephonyLoginRequest(AdditionalDataHolder, Parsable):
     """
-    Request model for telephony login token generation.
+    Identifies the Leadping user and calling context for which a short-lived telephony client token should be issued.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
