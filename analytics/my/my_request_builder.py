@@ -46,6 +46,7 @@ class MyRequestBuilder(BaseRequestBuilder):
             "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -96,7 +97,7 @@ class MyRequestBuilder(BaseRequestBuilder):
             return original_name
         
         # Optional number of recent days to include when explicit timestamps are not supplied.
-        days: Optional[str] = None
+        days: Optional[int] = None
 
         # Optional exclusive end timestamp for the analytics period.
         end_at: Optional[datetime.datetime] = None

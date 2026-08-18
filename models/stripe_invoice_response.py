@@ -13,6 +13,8 @@ class StripeInvoiceResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Total invoice amount in the invoice currency.
+    amount: Optional[float] = None
     # Date and time when the invoice was created.
     created_at: Optional[datetime.datetime] = None
     # Indicates whether a downloadable PDF is available for the invoice.
@@ -41,6 +43,7 @@ class StripeInvoiceResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "amount": lambda n : setattr(self, 'amount', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "hasPdf": lambda n : setattr(self, 'has_pdf', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -57,6 +60,7 @@ class StripeInvoiceResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("amount", self.amount)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_bool_value("hasPdf", self.has_pdf)
         writer.write_str_value("id", self.id)

@@ -29,6 +29,8 @@ class OrganizationDunningInfo(AdditionalDataHolder, Parsable):
     outbound_suspended_at: Optional[datetime.datetime] = None
     # Date and time when this Leadping organization dunning info was payment failed.
     payment_failed_at: Optional[datetime.datetime] = None
+    # Total number of retry attempt records represented by this Leadping organization dunning info.
+    retry_attempt_count: Optional[int] = None
     # Current stage for this Leadping organization dunning info.
     stage: Optional[str] = None
     
@@ -57,6 +59,7 @@ class OrganizationDunningInfo(AdditionalDataHolder, Parsable):
             "outboundRestrictedAt": lambda n : setattr(self, 'outbound_restricted_at', n.get_datetime_value()),
             "outboundSuspendedAt": lambda n : setattr(self, 'outbound_suspended_at', n.get_datetime_value()),
             "paymentFailedAt": lambda n : setattr(self, 'payment_failed_at', n.get_datetime_value()),
+            "retryAttemptCount": lambda n : setattr(self, 'retry_attempt_count', n.get_int_value()),
             "stage": lambda n : setattr(self, 'stage', n.get_str_value()),
         }
         return fields
@@ -77,6 +80,7 @@ class OrganizationDunningInfo(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("outboundRestrictedAt", self.outbound_restricted_at)
         writer.write_datetime_value("outboundSuspendedAt", self.outbound_suspended_at)
         writer.write_datetime_value("paymentFailedAt", self.payment_failed_at)
+        writer.write_int_value("retryAttemptCount", self.retry_attempt_count)
         writer.write_str_value("stage", self.stage)
         writer.write_additional_data_value(self.additional_data)
     

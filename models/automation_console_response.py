@@ -15,9 +15,9 @@ class AutomationConsoleResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The automationId property
+    # Unique identifier of the automation whose execution history is returned.
     automation_id: Optional[str] = None
-    # The runs property
+    # Recent persisted workflow runs for the automation, ordered for console display.
     runs: Optional[list[AutomationWorkflowRunResponse]] = None
     
     @staticmethod

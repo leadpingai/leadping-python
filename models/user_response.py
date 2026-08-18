@@ -63,6 +63,8 @@ class UserResponse(AdditionalDataHolder, Parsable):
     personal_data_deletion_status: Optional[str] = None
     # The phone number associated with this user.
     phone: Optional[str] = None
+    # The roles included with this user.
+    roles: Optional[list[str]] = None
     # Defines the supported Subscription Status values.
     subscription_status: Optional[UserResponse_subscriptionStatus] = None
     # IANA time zone identifier used when displaying dates and times for this user.
@@ -123,6 +125,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
             "personalDataDeletionRequestedAt": lambda n : setattr(self, 'personal_data_deletion_requested_at', n.get_datetime_value()),
             "personalDataDeletionStatus": lambda n : setattr(self, 'personal_data_deletion_status', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
+            "roles": lambda n : setattr(self, 'roles', n.get_collection_of_primitive_values(str)),
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(UserResponse_subscriptionStatus)),
             "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
         }
@@ -156,6 +159,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("personalDataDeletionRequestedAt", self.personal_data_deletion_requested_at)
         writer.write_str_value("personalDataDeletionStatus", self.personal_data_deletion_status)
         writer.write_str_value("phone", self.phone)
+        writer.write_collection_of_primitive_values("roles", self.roles)
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
         writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_additional_data_value(self.additional_data)

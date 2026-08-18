@@ -27,6 +27,8 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     last_used_at: Optional[datetime.datetime] = None
     # The billing status for this user's organization license.
     license_billing_status: Optional[str] = None
+    # The quantity on the shared organization user license item after this change.
+    license_quantity: Optional[int] = None
     # The renewal date used for this user's license proration.
     license_renewal_date: Optional[datetime.datetime] = None
     # The date and time when the entity was last modified, if applicable.
@@ -74,6 +76,7 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastUsedAt": lambda n : setattr(self, 'last_used_at', n.get_datetime_value()),
             "licenseBillingStatus": lambda n : setattr(self, 'license_billing_status', n.get_str_value()),
+            "licenseQuantity": lambda n : setattr(self, 'license_quantity', n.get_int_value()),
             "licenseRenewalDate": lambda n : setattr(self, 'license_renewal_date', n.get_datetime_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
@@ -99,6 +102,7 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("lastUsedAt", self.last_used_at)
         writer.write_str_value("licenseBillingStatus", self.license_billing_status)
+        writer.write_int_value("licenseQuantity", self.license_quantity)
         writer.write_datetime_value("licenseRenewalDate", self.license_renewal_date)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)

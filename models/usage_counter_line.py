@@ -16,8 +16,12 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
     key: Optional[str] = None
     # The human-readable label for this usage counter.
     label: Optional[str] = None
+    # The display order for this usage counter.
+    sort_order: Optional[int] = None
     # The unit label for this usage counter.
     unit: Optional[str] = None
+    # Numeric for this usage counter.
+    value: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UsageCounterLine:
@@ -38,7 +42,9 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "key": lambda n : setattr(self, 'key', n.get_str_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
+            "sortOrder": lambda n : setattr(self, 'sort_order', n.get_int_value()),
             "unit": lambda n : setattr(self, 'unit', n.get_str_value()),
+            "value": lambda n : setattr(self, 'value', n.get_float_value()),
         }
         return fields
     
@@ -52,7 +58,9 @@ class UsageCounterLine(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("key", self.key)
         writer.write_str_value("label", self.label)
+        writer.write_int_value("sortOrder", self.sort_order)
         writer.write_str_value("unit", self.unit)
+        writer.write_float_value("value", self.value)
         writer.write_additional_data_value(self.additional_data)
     
 

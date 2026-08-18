@@ -17,12 +17,16 @@ class SmsReadinessStatusResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The health score metric for this SMS warmup status.
+    health_score: Optional[int] = None
     # The current delivery-health assessment for this SMS warmup status.
     health_status: Optional[SmsReadinessHealthStatus] = None
     # The phone number associated with this SMS warmup status.
     phone_number: Optional[str] = None
     # The phone number ID associated with this SMS warmup status.
     phone_number_id: Optional[str] = None
+    # The progress percent metric for this SMS warmup status.
+    progress_percent: Optional[int] = None
     # The current state for this SMS warmup status.
     status: Optional[SmsReadinessState] = None
     # The current UI state for this SMS warmup status.
@@ -55,9 +59,11 @@ class SmsReadinessStatusResponse(AdditionalDataHolder, Parsable):
         from .sms_readiness_ui_state import SmsReadinessUiState
 
         fields: dict[str, Callable[[Any], None]] = {
+            "healthScore": lambda n : setattr(self, 'health_score', n.get_int_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(SmsReadinessHealthStatus)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
+            "progressPercent": lambda n : setattr(self, 'progress_percent', n.get_int_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(SmsReadinessState)),
             "uiState": lambda n : setattr(self, 'ui_state', n.get_object_value(SmsReadinessUiState)),
             "warmupEnabled": lambda n : setattr(self, 'warmup_enabled', n.get_bool_value()),
@@ -72,9 +78,11 @@ class SmsReadinessStatusResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_int_value("healthScore", self.health_score)
         writer.write_enum_value("healthStatus", self.health_status)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
+        writer.write_int_value("progressPercent", self.progress_percent)
         writer.write_enum_value("status", self.status)
         writer.write_object_value("uiState", self.ui_state)
         writer.write_bool_value("warmupEnabled", self.warmup_enabled)

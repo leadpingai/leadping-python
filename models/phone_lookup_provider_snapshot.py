@@ -21,6 +21,8 @@ class PhoneLookupProviderSnapshot(AdditionalDataHolder, Parsable):
     raw_record_json: Optional[str] = None
     # The UTC timestamp when Leadping retrieved the provider record.
     retrieved_at: Optional[datetime.datetime] = None
+    # The Leadping schema version used to interpret the stored provider record.
+    schema_version: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneLookupProviderSnapshot:
@@ -43,6 +45,7 @@ class PhoneLookupProviderSnapshot(AdditionalDataHolder, Parsable):
             "provider": lambda n : setattr(self, 'provider', n.get_str_value()),
             "rawRecordJson": lambda n : setattr(self, 'raw_record_json', n.get_str_value()),
             "retrievedAt": lambda n : setattr(self, 'retrieved_at', n.get_datetime_value()),
+            "schemaVersion": lambda n : setattr(self, 'schema_version', n.get_int_value()),
         }
         return fields
     
@@ -58,6 +61,7 @@ class PhoneLookupProviderSnapshot(AdditionalDataHolder, Parsable):
         writer.write_str_value("provider", self.provider)
         writer.write_str_value("rawRecordJson", self.raw_record_json)
         writer.write_datetime_value("retrievedAt", self.retrieved_at)
+        writer.write_int_value("schemaVersion", self.schema_version)
         writer.write_additional_data_value(self.additional_data)
     
 

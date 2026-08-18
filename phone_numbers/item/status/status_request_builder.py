@@ -45,6 +45,8 @@ class StatusRequestBuilder(BaseRequestBuilder):
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
             "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
             "500": ProblemDetails,
         }
         if not self.request_adapter:
@@ -102,7 +104,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
         start_date: Optional[datetime.date] = None
 
         # The window days.
-        window_days: Optional[str] = None
+        window_days: Optional[int] = None
 
     
     @dataclass

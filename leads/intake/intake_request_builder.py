@@ -47,6 +47,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
             "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -72,6 +73,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
             "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -214,7 +216,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         date_of_birth: Optional[datetime.date] = None
 
         # Direct-post price supplied by the lead source during intake.
-        direct_post_price: Optional[str] = None
+        direct_post_price: Optional[float] = None
 
         # Email address for the person represented by this lead intake request.
         email: Optional[str] = None
@@ -244,7 +246,7 @@ class IntakeRequestBuilder(BaseRequestBuilder):
         postal_code: Optional[str] = None
 
         # Lead price or transaction price supplied to the Leadping API.
-        price: Optional[str] = None
+        price: Optional[float] = None
 
         # Product or offer associated with the lead or source.
         product: Optional[str] = None

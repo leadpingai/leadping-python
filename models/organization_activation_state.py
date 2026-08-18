@@ -29,6 +29,8 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
 
     # UTC timestamp for activated at on this organization activation state.
     activated_at: Optional[datetime.datetime] = None
+    # The number of registrar-verified domains found by the current search.
+    available_domain_count: Optional[int] = None
     # The current billing subscription status for this organization activation state.
     billing_subscription_status: Optional[ActivationSubscriptionStatus] = None
     # Compliance notes for this organization activation state.
@@ -45,6 +47,8 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
     domain_options: Optional[list[ActivationDomainOption]] = None
     # The date and time the selected domain was purchased.
     domain_purchased_at: Optional[datetime.datetime] = None
+    # The current domain generation attempt.
+    domain_search_attempt: Optional[int] = None
     # Identifies the active domain search run.
     domain_search_id: Optional[str] = None
     # Defines the stages of a domain search.
@@ -154,6 +158,7 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "activatedAt": lambda n : setattr(self, 'activated_at', n.get_datetime_value()),
+            "availableDomainCount": lambda n : setattr(self, 'available_domain_count', n.get_int_value()),
             "billingSubscriptionStatus": lambda n : setattr(self, 'billing_subscription_status', n.get_enum_value(ActivationSubscriptionStatus)),
             "complianceNotes": lambda n : setattr(self, 'compliance_notes', n.get_str_value()),
             "controlledLaunch": lambda n : setattr(self, 'controlled_launch', n.get_bool_value()),
@@ -162,6 +167,7 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
             "domainApprovedAt": lambda n : setattr(self, 'domain_approved_at', n.get_datetime_value()),
             "domainOptions": lambda n : setattr(self, 'domain_options', n.get_collection_of_object_values(ActivationDomainOption)),
             "domainPurchasedAt": lambda n : setattr(self, 'domain_purchased_at', n.get_datetime_value()),
+            "domainSearchAttempt": lambda n : setattr(self, 'domain_search_attempt', n.get_int_value()),
             "domainSearchId": lambda n : setattr(self, 'domain_search_id', n.get_str_value()),
             "domainSearchStage": lambda n : setattr(self, 'domain_search_stage', n.get_enum_value(OrganizationActivationState_domainSearchStage)),
             "domainSearchUpdatedAt": lambda n : setattr(self, 'domain_search_updated_at', n.get_datetime_value()),
@@ -206,6 +212,7 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("activatedAt", self.activated_at)
+        writer.write_int_value("availableDomainCount", self.available_domain_count)
         writer.write_enum_value("billingSubscriptionStatus", self.billing_subscription_status)
         writer.write_str_value("complianceNotes", self.compliance_notes)
         writer.write_bool_value("controlledLaunch", self.controlled_launch)
@@ -214,6 +221,7 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("domainApprovedAt", self.domain_approved_at)
         writer.write_collection_of_object_values("domainOptions", self.domain_options)
         writer.write_datetime_value("domainPurchasedAt", self.domain_purchased_at)
+        writer.write_int_value("domainSearchAttempt", self.domain_search_attempt)
         writer.write_str_value("domainSearchId", self.domain_search_id)
         writer.write_enum_value("domainSearchStage", self.domain_search_stage)
         writer.write_datetime_value("domainSearchUpdatedAt", self.domain_search_updated_at)

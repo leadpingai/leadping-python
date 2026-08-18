@@ -23,6 +23,8 @@ class SourceMetricsResponse(AdditionalDataHolder, Parsable):
     points: Optional[list[AnalyticsTrendPointOfint]] = None
     # Range associated with this Leadping source metrics.
     range: Optional[AnalyticsDateRange] = None
+    # Total number of leads records represented by this Leadping source metrics.
+    total_leads: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> SourceMetricsResponse:
@@ -50,6 +52,7 @@ class SourceMetricsResponse(AdditionalDataHolder, Parsable):
             "generatedAt": lambda n : setattr(self, 'generated_at', n.get_datetime_value()),
             "points": lambda n : setattr(self, 'points', n.get_collection_of_object_values(AnalyticsTrendPointOfint)),
             "range": lambda n : setattr(self, 'range', n.get_object_value(AnalyticsDateRange)),
+            "totalLeads": lambda n : setattr(self, 'total_leads', n.get_int_value()),
         }
         return fields
     
@@ -64,6 +67,7 @@ class SourceMetricsResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("generatedAt", self.generated_at)
         writer.write_collection_of_object_values("points", self.points)
         writer.write_object_value("range", self.range)
+        writer.write_int_value("totalLeads", self.total_leads)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -26,6 +26,8 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     city: Optional[str] = None
     # Lead date of birth supplied by intake sources and normalized into the lead profile.
     date_of_birth: Optional[datetime.date] = None
+    # Direct-post price supplied by the lead source during intake.
+    direct_post_price: Optional[float] = None
     # Email address for the person represented by this lead intake request.
     email: Optional[str] = None
     # External system identifier used to reconcile this lead intake request across integrations.
@@ -44,6 +46,8 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     phone_type: Optional[str] = None
     # Postal code for the lead or organization address.
     postal_code: Optional[str] = None
+    # Lead price or transaction price supplied to the Leadping API.
+    price: Optional[float] = None
     # Product or offer associated with the lead or source.
     product: Optional[str] = None
     # Referring page or traffic source that sent the lead into Leadping.
@@ -105,6 +109,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
             "birthDate": lambda n : setattr(self, 'birth_date', n.get_date_value()),
             "city": lambda n : setattr(self, 'city', n.get_str_value()),
             "dateOfBirth": lambda n : setattr(self, 'date_of_birth', n.get_date_value()),
+            "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
@@ -114,6 +119,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "phoneType": lambda n : setattr(self, 'phone_type', n.get_str_value()),
             "postalCode": lambda n : setattr(self, 'postal_code', n.get_str_value()),
+            "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "product": lambda n : setattr(self, 'product', n.get_str_value()),
             "referrer": lambda n : setattr(self, 'referrer', n.get_str_value()),
             "sellerLeadId": lambda n : setattr(self, 'seller_lead_id', n.get_str_value()),
@@ -147,6 +153,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         writer.write_date_value("birthDate", self.birth_date)
         writer.write_str_value("city", self.city)
         writer.write_date_value("dateOfBirth", self.date_of_birth)
+        writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("email", self.email)
         writer.write_str_value("externalId", self.external_id)
         writer.write_str_value("firstName", self.first_name)
@@ -156,6 +163,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("phone", self.phone)
         writer.write_str_value("phoneType", self.phone_type)
         writer.write_str_value("postalCode", self.postal_code)
+        writer.write_float_value("price", self.price)
         writer.write_str_value("product", self.product)
         writer.write_str_value("referrer", self.referrer)
         writer.write_str_value("sellerLeadId", self.seller_lead_id)

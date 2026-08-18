@@ -12,6 +12,10 @@ class CustomerLeadSourceBreakdown(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Number of leads represented by this Leadping customer lead source breakdown.
+    leads: Optional[int] = None
+    # Percent expressed as a percentage.
+    percent: Optional[float] = None
     # Source classification for this Leadping customer lead source breakdown.
     source: Optional[str] = None
     
@@ -32,6 +36,8 @@ class CustomerLeadSourceBreakdown(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "leads": lambda n : setattr(self, 'leads', n.get_int_value()),
+            "percent": lambda n : setattr(self, 'percent', n.get_float_value()),
             "source": lambda n : setattr(self, 'source', n.get_str_value()),
         }
         return fields
@@ -44,6 +50,8 @@ class CustomerLeadSourceBreakdown(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_int_value("leads", self.leads)
+        writer.write_float_value("percent", self.percent)
         writer.write_str_value("source", self.source)
         writer.write_additional_data_value(self.additional_data)
     

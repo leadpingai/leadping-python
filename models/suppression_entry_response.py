@@ -32,7 +32,7 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     reason: Optional[str] = None
     # Provider or customer identifier used to recognize the suppressed recipient.
     recipient_identifier: Optional[str] = None
-    # UTC timestamp when the suppression was released, or while it remains active.
+    # UTC timestamp when the suppression was released, or null while it remains active.
     released_at: Optional[datetime.datetime] = None
     # System or workflow that created the suppression.
     source: Optional[str] = None

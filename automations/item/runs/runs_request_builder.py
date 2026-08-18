@@ -34,7 +34,7 @@ class RunsRequestBuilder(BaseRequestBuilder):
     def by_run_id(self,run_id: str) -> WithRunItemRequestBuilder:
         """
         Gets an item from the leadping.automations.item.runs.item collection
-        param run_id: Unique identifier of the item
+        param run_id: The unique identifier of the persisted automation run.
         Returns: WithRunItemRequestBuilder
         """
         if run_id is None:
@@ -47,7 +47,7 @@ class RunsRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationConsoleResponse]:
         """
-        Gets recent persisted execution runs for an automation console.
+        Returns recent execution history for the specified automation in the current organization, including run state and console details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationConsoleResponse]
         """
@@ -58,6 +58,8 @@ class RunsRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -67,7 +69,7 @@ class RunsRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Gets recent persisted execution runs for an automation console.
+        Returns recent execution history for the specified automation in the current organization, including run state and console details.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

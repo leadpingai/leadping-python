@@ -12,6 +12,10 @@ class Coordinate(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Latitude of the geographic coordinate in decimal degrees, from -90 through 90.
+    latitude: Optional[float] = None
+    # Longitude of the geographic coordinate in decimal degrees, from -180 through 180.
+    longitude: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> Coordinate:
@@ -30,6 +34,8 @@ class Coordinate(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "latitude": lambda n : setattr(self, 'latitude', n.get_float_value()),
+            "longitude": lambda n : setattr(self, 'longitude', n.get_float_value()),
         }
         return fields
     
@@ -41,6 +47,8 @@ class Coordinate(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("latitude", self.latitude)
+        writer.write_float_value("longitude", self.longitude)
         writer.write_additional_data_value(self.additional_data)
     
 

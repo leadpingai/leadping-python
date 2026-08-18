@@ -32,6 +32,8 @@ class OrganizationInvitationTableRow(AdditionalDataHolder, Parsable):
     license_activated_at: Optional[datetime.datetime] = None
     # The billing status for the paid license created by this invitation.
     license_billing_status: Optional[str] = None
+    # The quantity on the shared organization user license subscription item after this change.
+    license_quantity: Optional[int] = None
     # The date and time this invitation's paid license was released.
     license_released_at: Optional[datetime.datetime] = None
     # The renewal date used for proration of this license.
@@ -83,6 +85,7 @@ class OrganizationInvitationTableRow(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "licenseActivatedAt": lambda n : setattr(self, 'license_activated_at', n.get_datetime_value()),
             "licenseBillingStatus": lambda n : setattr(self, 'license_billing_status', n.get_str_value()),
+            "licenseQuantity": lambda n : setattr(self, 'license_quantity', n.get_int_value()),
             "licenseReleasedAt": lambda n : setattr(self, 'license_released_at', n.get_datetime_value()),
             "licenseRenewalDate": lambda n : setattr(self, 'license_renewal_date', n.get_datetime_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(IdNamePair)),
@@ -110,6 +113,7 @@ class OrganizationInvitationTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_datetime_value("licenseActivatedAt", self.license_activated_at)
         writer.write_str_value("licenseBillingStatus", self.license_billing_status)
+        writer.write_int_value("licenseQuantity", self.license_quantity)
         writer.write_datetime_value("licenseReleasedAt", self.license_released_at)
         writer.write_datetime_value("licenseRenewalDate", self.license_renewal_date)
         writer.write_object_value("organization", self.organization)

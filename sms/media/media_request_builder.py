@@ -6,6 +6,7 @@ from kiota_abstractions.base_request_configuration import RequestConfiguration
 from kiota_abstractions.default_query_parameters import QueryParameters
 from kiota_abstractions.get_path_parameters import get_path_parameters
 from kiota_abstractions.method import Method
+from kiota_abstractions.multipart_body import MultipartBody
 from kiota_abstractions.request_adapter import RequestAdapter
 from kiota_abstractions.request_information import RequestInformation
 from kiota_abstractions.request_option import RequestOption
@@ -16,7 +17,6 @@ from warnings import warn
 if TYPE_CHECKING:
     from ...models.message_media_attachment import MessageMediaAttachment
     from ...models.problem_details import ProblemDetails
-    from .media_post_request_body import MediaPostRequestBody
 
 class MediaRequestBuilder(BaseRequestBuilder):
     """
@@ -31,7 +31,7 @@ class MediaRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/sms/media", path_parameters)
     
-    async def post(self,body: MediaPostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[MessageMediaAttachment]:
+    async def post(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[MessageMediaAttachment]:
         """
         Uploads and validates one media attachment, returning the metadata needed to include the asset in a subsequent Leadping MMS send.
         param body: The request body
@@ -47,6 +47,9 @@ class MediaRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
+            "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -54,7 +57,7 @@ class MediaRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, MessageMediaAttachment, error_mapping)
     
-    def to_post_request_information(self,body: MediaPostRequestBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Uploads and validates one media attachment, returning the metadata needed to include the asset in a subsequent Leadping MMS send.
         param body: The request body
@@ -66,7 +69,7 @@ class MediaRequestBuilder(BaseRequestBuilder):
         request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "text/plain;q=0.9")
-        request_info.set_content_from_parsable(self.request_adapter, "application/x-www-form-urlencoded", body)
+        request_info.set_content_from_parsable(self.request_adapter, "multipart/form-data", body)
         return request_info
     
     def with_url(self,raw_url: str) -> MediaRequestBuilder:

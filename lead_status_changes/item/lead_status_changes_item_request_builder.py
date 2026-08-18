@@ -44,7 +44,9 @@ class LeadStatusChangesItemRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -63,7 +65,9 @@ class LeadStatusChangesItemRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -88,7 +92,9 @@ class LeadStatusChangesItemRequestBuilder(BaseRequestBuilder):
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -104,7 +110,7 @@ class LeadStatusChangesItemRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.DELETE, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/json")
+        request_info.headers.try_add("Accept", "application/json, application/problem+json")
         return request_info
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:

@@ -32,7 +32,7 @@ class WithRunItemRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationConsoleResponse]:
         """
-        Gets one persisted automation execution run for its console.
+        Returns the specified persisted execution run for an automation in the current organization, including its current console state.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationConsoleResponse]
         """
@@ -43,7 +43,9 @@ class WithRunItemRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -53,7 +55,7 @@ class WithRunItemRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Gets one persisted automation execution run for its console.
+        Returns the specified persisted execution run for an automation in the current organization, including its current console state.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -32,7 +32,7 @@ class RunRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationRunRecord]:
         """
-        Runs an automation through its Manual trigger.
+        Starts the specified automation through its manual trigger and returns the newly created execution record.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationRunRecord]
         """
@@ -43,7 +43,9 @@ class RunRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
+            "401": ProblemDetails,
             "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -53,7 +55,7 @@ class RunRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Runs an automation through its Manual trigger.
+        Starts the specified automation through its manual trigger and returns the newly created execution record.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -16,7 +16,6 @@ from warnings import warn
 if TYPE_CHECKING:
     from ...models.event_table_row import EventTableRow
     from ...models.problem_details import ProblemDetails
-    from .detail.detail_request_builder import DetailRequestBuilder
 
 class WithEventItemRequestBuilder(BaseRequestBuilder):
     """
@@ -44,7 +43,9 @@ class WithEventItemRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -72,15 +73,6 @@ class WithEventItemRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return WithEventItemRequestBuilder(self.request_adapter, raw_url)
-    
-    @property
-    def detail(self) -> DetailRequestBuilder:
-        """
-        The detail property
-        """
-        from .detail.detail_request_builder import DetailRequestBuilder
-
-        return DetailRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class WithEventItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):

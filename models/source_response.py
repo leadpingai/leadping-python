@@ -30,6 +30,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     api_key_preview: Optional[str] = None
     # Indicates whether the organization or sender passed compliance review.
     compliance_approved: Optional[bool] = None
+    # Configured cost charged when this source creates a billable lead.
+    cost_per_lead: Optional[float] = None
     # The date and time when the entity was created.
     created_at: Optional[datetime.datetime] = None
     # User summary for the person who created this lead source response.
@@ -97,6 +99,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             "apiKey": lambda n : setattr(self, 'api_key', n.get_str_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
+            "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "createdByUser": lambda n : setattr(self, 'created_by_user', n.get_object_value(SourceResponse_createdByUser)),
             "createdByUserEmail": lambda n : setattr(self, 'created_by_user_email', n.get_str_value()),
@@ -129,6 +132,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("apiKey", self.api_key)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
+        writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("createdByUser", self.created_by_user)
         writer.write_str_value("createdByUserEmail", self.created_by_user_email)

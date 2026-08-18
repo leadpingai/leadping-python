@@ -19,6 +19,10 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Indicates whether this phone number can currently place outbound calls.
+    calls_possible: Optional[int] = None
+    # Indicates whether this phone number can currently send SMS messages.
+    messages_possible: Optional[int] = None
     # E.164 phone number exposed by this phone number warmup status.
     number: Optional[str] = None
     # Recent SMS opt-out metrics used to evaluate sender health and compliance risk.
@@ -61,6 +65,8 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
         from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
 
         fields: dict[str, Callable[[Any], None]] = {
+            "callsPossible": lambda n : setattr(self, 'calls_possible', n.get_int_value()),
+            "messagesPossible": lambda n : setattr(self, 'messages_possible', n.get_int_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "optOutMetrics": lambda n : setattr(self, 'opt_out_metrics', n.get_object_value(PhoneNumberOptOutMetricsResponse)),
             "outboundCapacity": lambda n : setattr(self, 'outbound_capacity', n.get_object_value(PhoneNumberStatusResponse_outboundCapacity)),
@@ -78,6 +84,8 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_int_value("callsPossible", self.calls_possible)
+        writer.write_int_value("messagesPossible", self.messages_possible)
         writer.write_str_value("number", self.number)
         writer.write_object_value("optOutMetrics", self.opt_out_metrics)
         writer.write_object_value("outboundCapacity", self.outbound_capacity)

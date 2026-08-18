@@ -20,6 +20,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Monetary amount billed for this Leadping communication or transaction.
+    billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
     # UTC timestamp when Leadping blocked this communication.
@@ -66,6 +68,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     queued_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping received this inbound event or message.
     received_at: Optional[datetime.datetime] = None
+    # Number of retry attempts already made for this SMS message.
+    retry_count: Optional[int] = None
     # UTC timestamp when Leadping is scheduled to send this SMS message.
     scheduled_for: Optional[datetime.datetime] = None
     # Reason Leadping scheduled this delivery for a later time.
@@ -120,6 +124,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         from .sms_response_traffic_type import SmsResponse_trafficType
 
         fields: dict[str, Callable[[Any], None]] = {
+            "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
@@ -143,6 +148,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
+            "retryCount": lambda n : setattr(self, 'retry_count', n.get_int_value()),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
             "scheduledReason": lambda n : setattr(self, 'scheduled_reason', n.get_str_value()),
             "selectionReason": lambda n : setattr(self, 'selection_reason', n.get_enum_value(SmsResponse_selectionReason)),
@@ -166,6 +172,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("campaignId", self.campaign_id)
@@ -189,6 +196,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("receivedAt", self.received_at)
+        writer.write_int_value("retryCount", self.retry_count)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)
         writer.write_str_value("scheduledReason", self.scheduled_reason)
         writer.write_enum_value("selectionReason", self.selection_reason)

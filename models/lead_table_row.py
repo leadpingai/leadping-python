@@ -46,6 +46,8 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     organization: Optional[LeadTableRow_organization] = None
     # Phone details for the lead, user, or organization represented by this lead table row.
     phone: Optional[str] = None
+    # Lead price or transaction price supplied to the Leadping API.
+    price: Optional[float] = None
     # Defines the asynchronous verification and enrichment lifecycle for a lead.
     processing_status: Optional[LeadTableRow_processingStatus] = None
     # UTC timestamp when the processing stage last changed.
@@ -105,6 +107,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(LeadTableRow_organization)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
+            "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "processingStatus": lambda n : setattr(self, 'processing_status', n.get_enum_value(LeadTableRow_processingStatus)),
             "processingStatusChangedAt": lambda n : setattr(self, 'processing_status_changed_at', n.get_datetime_value()),
             "processingStatusReason": lambda n : setattr(self, 'processing_status_reason', n.get_str_value()),
@@ -137,6 +140,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("lastName", self.last_name)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phone", self.phone)
+        writer.write_float_value("price", self.price)
         writer.write_enum_value("processingStatus", self.processing_status)
         writer.write_datetime_value("processingStatusChangedAt", self.processing_status_changed_at)
         writer.write_str_value("processingStatusReason", self.processing_status_reason)

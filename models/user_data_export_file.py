@@ -18,6 +18,8 @@ class UserDataExportFile(AdditionalDataHolder, Parsable):
     content_type: Optional[str] = None
     # Human-readable file name associated with this Leadping user data export file.
     file_name: Optional[str] = None
+    # Total number of row records represented by this Leadping user data export file.
+    row_count: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UserDataExportFile:
@@ -39,6 +41,7 @@ class UserDataExportFile(AdditionalDataHolder, Parsable):
             "category": lambda n : setattr(self, 'category', n.get_str_value()),
             "contentType": lambda n : setattr(self, 'content_type', n.get_str_value()),
             "fileName": lambda n : setattr(self, 'file_name', n.get_str_value()),
+            "rowCount": lambda n : setattr(self, 'row_count', n.get_int_value()),
         }
         return fields
     
@@ -53,6 +56,7 @@ class UserDataExportFile(AdditionalDataHolder, Parsable):
         writer.write_str_value("category", self.category)
         writer.write_str_value("contentType", self.content_type)
         writer.write_str_value("fileName", self.file_name)
+        writer.write_int_value("rowCount", self.row_count)
         writer.write_additional_data_value(self.additional_data)
     
 

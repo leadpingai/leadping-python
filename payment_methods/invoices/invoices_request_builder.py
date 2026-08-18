@@ -14,6 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
+    from ...models.problem_details import ProblemDetails
     from ...models.stripe_invoice_response import StripeInvoiceResponse
     from .item.with_invoice_item_request_builder import WithInvoiceItemRequestBuilder
 
@@ -53,11 +54,17 @@ class InvoicesRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
+        from ...models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+            "429": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ...models.stripe_invoice_response import StripeInvoiceResponse
 
-        return await self.request_adapter.send_collection_async(request_info, StripeInvoiceResponse, None)
+        return await self.request_adapter.send_collection_async(request_info, StripeInvoiceResponse, error_mapping)
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

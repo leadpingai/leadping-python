@@ -20,6 +20,8 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
     comparison: Optional[AnalyticsComparison] = None
     # Collection of points included with this Leadping customer lead trend.
     points: Optional[list[AnalyticsTrendPointOfint]] = None
+    # Total number of total records represented by this Leadping customer lead trend.
+    total: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CustomerLeadTrend:
@@ -46,6 +48,7 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "comparison": lambda n : setattr(self, 'comparison', n.get_object_value(AnalyticsComparison)),
             "points": lambda n : setattr(self, 'points', n.get_collection_of_object_values(AnalyticsTrendPointOfint)),
+            "total": lambda n : setattr(self, 'total', n.get_int_value()),
         }
         return fields
     
@@ -59,6 +62,7 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_object_value("comparison", self.comparison)
         writer.write_collection_of_object_values("points", self.points)
+        writer.write_int_value("total", self.total)
         writer.write_additional_data_value(self.additional_data)
     
 

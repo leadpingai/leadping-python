@@ -19,6 +19,8 @@ class AutomationAction(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether this automation action is active and allowed to run.
     is_enabled: Optional[bool] = None
+    # Sort order used to evaluate or display this automation action.
+    order: Optional[int] = None
     # Key-value settings that configure how this automation action behaves.
     settings: Optional[AutomationAction_settings] = None
     # Type classification used to route and interpret this automation action in the Leadping API.
@@ -47,6 +49,7 @@ class AutomationAction(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isEnabled": lambda n : setattr(self, 'is_enabled', n.get_bool_value()),
+            "order": lambda n : setattr(self, 'order', n.get_int_value()),
             "settings": lambda n : setattr(self, 'settings', n.get_object_value(AutomationAction_settings)),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
         }
@@ -62,6 +65,7 @@ class AutomationAction(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isEnabled", self.is_enabled)
+        writer.write_int_value("order", self.order)
         writer.write_object_value("settings", self.settings)
         writer.write_str_value("type", self.type)
         writer.write_additional_data_value(self.additional_data)

@@ -13,15 +13,15 @@ class CommunicationConsoleEntry(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The id property
+    # Unique identifier of this diagnostic console entry.
     id: Optional[str] = None
-    # The message property
+    # User-safe diagnostic message describing what occurred at this stage.
     message: Optional[str] = None
-    # The occurredAt property
+    # UTC timestamp when this communication-processing event occurred.
     occurred_at: Optional[datetime.datetime] = None
-    # The stage property
+    # Communication-processing stage that produced the entry, such as validation, routing, or provider delivery.
     stage: Optional[str] = None
-    # The status property
+    # Outcome or state recorded for this processing stage.
     status: Optional[str] = None
     
     @staticmethod

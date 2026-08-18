@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from .all.all_request_builder import AllRequestBuilder
     from .calls.calls_request_builder import CallsRequestBuilder
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
+    from .detail.detail_request_builder import DetailRequestBuilder
     from .item.with_event_item_request_builder import WithEventItemRequestBuilder
     from .leads.leads_request_builder import LeadsRequestBuilder
     from .organizations.organizations_request_builder import OrganizationsRequestBuilder
@@ -67,6 +68,15 @@ class EventsRequestBuilder(BaseRequestBuilder):
         from .conversations.conversations_request_builder import ConversationsRequestBuilder
 
         return ConversationsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def detail(self) -> DetailRequestBuilder:
+        """
+        The detail property
+        """
+        from .detail.detail_request_builder import DetailRequestBuilder
+
+        return DetailRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def leads(self) -> LeadsRequestBuilder:

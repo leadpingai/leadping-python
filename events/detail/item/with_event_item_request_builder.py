@@ -17,18 +17,18 @@ if TYPE_CHECKING:
     from ....models.event_detail_response import EventDetailResponse
     from ....models.problem_details import ProblemDetails
 
-class DetailRequestBuilder(BaseRequestBuilder):
+class WithEventItemRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /events/{eventId}/detail
+    Builds and executes requests for operations under /events/detail/{eventId}
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new DetailRequestBuilder and sets the default values.
+        Instantiates a new WithEventItemRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/events/{eventId}/detail", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/events/detail/{eventId}", path_parameters)
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[EventDetailResponse]:
         """
@@ -43,7 +43,9 @@ class DetailRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -62,18 +64,18 @@ class DetailRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def with_url(self,raw_url: str) -> DetailRequestBuilder:
+    def with_url(self,raw_url: str) -> WithEventItemRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: DetailRequestBuilder
+        Returns: WithEventItemRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return DetailRequestBuilder(self.request_adapter, raw_url)
+        return WithEventItemRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class DetailRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class WithEventItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

@@ -15,8 +15,26 @@ class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Number of calls answered during the reporting period.
+    answered_calls: Optional[int] = None
+    # Total connected call duration, in minutes, during the reporting period.
+    call_minutes: Optional[float] = None
+    # Number of outbound calls placed during the reporting period.
+    calls_placed: Optional[int] = None
+    # Number of inbound calls received during the reporting period.
+    calls_received: Optional[int] = None
+    # Number of SMS messages that failed or were blocked during the reporting period.
+    failed_or_blocked_sms: Optional[int] = None
+    # Number of calls missed during the reporting period.
+    missed_calls: Optional[int] = None
+    # Number of SMS messages received during the reporting period.
+    sms_received: Optional[int] = None
+    # Number of SMS messages sent during the reporting period.
+    sms_sent: Optional[int] = None
     # Collection of trend included with this Leadping customer communication usage.
     trend: Optional[list[CustomerCommunicationUsagePoint]] = None
+    # Usage spend represented by this Leadping customer communication usage.
+    usage_spend: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CustomerCommunicationUsage:
@@ -39,7 +57,16 @@ class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
         from .customer_communication_usage_point import CustomerCommunicationUsagePoint
 
         fields: dict[str, Callable[[Any], None]] = {
+            "answeredCalls": lambda n : setattr(self, 'answered_calls', n.get_int_value()),
+            "callMinutes": lambda n : setattr(self, 'call_minutes', n.get_float_value()),
+            "callsPlaced": lambda n : setattr(self, 'calls_placed', n.get_int_value()),
+            "callsReceived": lambda n : setattr(self, 'calls_received', n.get_int_value()),
+            "failedOrBlockedSms": lambda n : setattr(self, 'failed_or_blocked_sms', n.get_int_value()),
+            "missedCalls": lambda n : setattr(self, 'missed_calls', n.get_int_value()),
+            "smsReceived": lambda n : setattr(self, 'sms_received', n.get_int_value()),
+            "smsSent": lambda n : setattr(self, 'sms_sent', n.get_int_value()),
             "trend": lambda n : setattr(self, 'trend', n.get_collection_of_object_values(CustomerCommunicationUsagePoint)),
+            "usageSpend": lambda n : setattr(self, 'usage_spend', n.get_float_value()),
         }
         return fields
     
@@ -51,7 +78,16 @@ class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_int_value("answeredCalls", self.answered_calls)
+        writer.write_float_value("callMinutes", self.call_minutes)
+        writer.write_int_value("callsPlaced", self.calls_placed)
+        writer.write_int_value("callsReceived", self.calls_received)
+        writer.write_int_value("failedOrBlockedSms", self.failed_or_blocked_sms)
+        writer.write_int_value("missedCalls", self.missed_calls)
+        writer.write_int_value("smsReceived", self.sms_received)
+        writer.write_int_value("smsSent", self.sms_sent)
         writer.write_collection_of_object_values("trend", self.trend)
+        writer.write_float_value("usageSpend", self.usage_spend)
         writer.write_additional_data_value(self.additional_data)
     
 

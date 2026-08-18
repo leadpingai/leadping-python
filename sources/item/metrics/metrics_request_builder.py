@@ -44,7 +44,9 @@ class MetricsRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "404": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -95,7 +97,7 @@ class MetricsRequestBuilder(BaseRequestBuilder):
             return original_name
         
         # Optional rolling day count when explicit dates are not provided.
-        days: Optional[str] = None
+        days: Optional[int] = None
 
         # Optional end date/time for the metric range.
         end_at: Optional[datetime.datetime] = None

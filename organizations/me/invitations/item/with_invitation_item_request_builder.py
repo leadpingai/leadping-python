@@ -44,6 +44,8 @@ class WithInvitationItemRequestBuilder(BaseRequestBuilder):
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
             "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
@@ -57,7 +59,7 @@ class WithInvitationItemRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.DELETE, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/json, text/plain;q=0.9")
+        request_info.headers.try_add("Accept", "application/json, application/problem+json, text/plain;q=0.9")
         return request_info
     
     def with_url(self,raw_url: str) -> WithInvitationItemRequestBuilder:

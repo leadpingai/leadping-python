@@ -16,6 +16,7 @@ from warnings import warn
 if TYPE_CHECKING:
     from ...models.lead_status_request import LeadStatusRequest
     from ...models.lead_status_response import LeadStatusResponse
+    from ...models.problem_details import ProblemDetails
 
 class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
     """
@@ -39,9 +40,16 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
         request_info = self.to_delete_request_information(
             request_configuration
         )
+        from ...models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_primitive_async(request_info, "bool", None)
+        return await self.request_adapter.send_primitive_async(request_info, "bool", error_mapping)
     
     async def put(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusResponse]:
         """
@@ -55,11 +63,18 @@ class LeadStatusesItemRequestBuilder(BaseRequestBuilder):
         request_info = self.to_put_request_information(
             body, request_configuration
         )
+        from ...models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ...models.lead_status_response import LeadStatusResponse
 
-        return await self.request_adapter.send_async(request_info, LeadStatusResponse, None)
+        return await self.request_adapter.send_async(request_info, LeadStatusResponse, error_mapping)
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

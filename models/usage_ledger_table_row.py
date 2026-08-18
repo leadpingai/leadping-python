@@ -21,14 +21,20 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Billable seconds for this usage ledger.
+    billable_seconds: Optional[int] = None
     # Billable unit for this usage ledger.
     billable_unit: Optional[BillableUnit] = None
     # Channel for this usage ledger.
     channel: Optional[UsageChannel] = None
     # UTC timestamp for created at on this usage ledger.
     created_at: Optional[datetime.datetime] = None
+    # The monetary customer charge amount for this usage ledger.
+    customer_charge_amount: Optional[float] = None
     # The human-readable description of this usage ledger.
     description: Optional[str] = None
+    # Duration seconds for this usage ledger.
+    duration_seconds: Optional[int] = None
     # Unique Leadping identifier for this usage ledger.
     id: Optional[str] = None
     # Whether this usage ledger is billable.
@@ -41,8 +47,14 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     phone_number: Optional[str] = None
     # The phone number ID associated with this usage ledger.
     phone_number_id: Optional[str] = None
+    # Quantity for this usage ledger.
+    quantity: Optional[float] = None
+    # SMS segments for this usage ledger.
+    sms_segments: Optional[int] = None
     # The current status for this usage ledger.
     status: Optional[UsageStatus] = None
+    # Unit price for this usage ledger.
+    unit_price: Optional[float] = None
     # Identifier and display name of the related user.
     user: Optional[UsageLedgerTableRow_user] = None
     
@@ -77,17 +89,23 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         from .usage_status import UsageStatus
 
         fields: dict[str, Callable[[Any], None]] = {
+            "billableSeconds": lambda n : setattr(self, 'billable_seconds', n.get_int_value()),
             "billableUnit": lambda n : setattr(self, 'billable_unit', n.get_enum_value(BillableUnit)),
             "channel": lambda n : setattr(self, 'channel', n.get_enum_value(UsageChannel)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "customerChargeAmount": lambda n : setattr(self, 'customer_charge_amount', n.get_float_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
+            "durationSeconds": lambda n : setattr(self, 'duration_seconds', n.get_int_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isBillable": lambda n : setattr(self, 'is_billable', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(UsageLedgerTableRow_lead)),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(UsageLedgerTableRow_organization)),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
+            "quantity": lambda n : setattr(self, 'quantity', n.get_float_value()),
+            "smsSegments": lambda n : setattr(self, 'sms_segments', n.get_int_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(UsageStatus)),
+            "unitPrice": lambda n : setattr(self, 'unit_price', n.get_float_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(UsageLedgerTableRow_user)),
         }
         return fields
@@ -100,17 +118,23 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_int_value("billableSeconds", self.billable_seconds)
         writer.write_enum_value("billableUnit", self.billable_unit)
         writer.write_enum_value("channel", self.channel)
         writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_float_value("customerChargeAmount", self.customer_charge_amount)
         writer.write_str_value("description", self.description)
+        writer.write_int_value("durationSeconds", self.duration_seconds)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isBillable", self.is_billable)
         writer.write_object_value("lead", self.lead)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
+        writer.write_float_value("quantity", self.quantity)
+        writer.write_int_value("smsSegments", self.sms_segments)
         writer.write_enum_value("status", self.status)
+        writer.write_float_value("unitPrice", self.unit_price)
         writer.write_object_value("user", self.user)
         writer.write_additional_data_value(self.additional_data)
     

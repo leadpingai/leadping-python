@@ -21,6 +21,8 @@ class LeadStatusRequest(AdditionalDataHolder, Parsable):
     color: Optional[str] = None
     # Display name for the lead status.
     name: Optional[str] = None
+    # Relative display order for the lead status.
+    sort_order: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> LeadStatusRequest:
@@ -46,6 +48,7 @@ class LeadStatusRequest(AdditionalDataHolder, Parsable):
             "category": lambda n : setattr(self, 'category', n.get_enum_value(LeadStatusRequest_category)),
             "color": lambda n : setattr(self, 'color', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "sortOrder": lambda n : setattr(self, 'sort_order', n.get_int_value()),
         }
         return fields
     
@@ -60,6 +63,7 @@ class LeadStatusRequest(AdditionalDataHolder, Parsable):
         writer.write_enum_value("category", self.category)
         writer.write_str_value("color", self.color)
         writer.write_str_value("name", self.name)
+        writer.write_int_value("sortOrder", self.sort_order)
         writer.write_additional_data_value(self.additional_data)
     
 

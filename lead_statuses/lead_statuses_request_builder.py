@@ -16,6 +16,7 @@ from warnings import warn
 if TYPE_CHECKING:
     from ..models.lead_status_request import LeadStatusRequest
     from ..models.lead_status_response import LeadStatusResponse
+    from ..models.problem_details import ProblemDetails
     from .item.lead_statuses_item_request_builder import LeadStatusesItemRequestBuilder
 
 class LeadStatusesRequestBuilder(BaseRequestBuilder):
@@ -54,11 +55,18 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
         request_info = self.to_get_request_information(
             request_configuration
         )
+        from ..models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ..models.lead_status_response import LeadStatusResponse
 
-        return await self.request_adapter.send_collection_async(request_info, LeadStatusResponse, None)
+        return await self.request_adapter.send_collection_async(request_info, LeadStatusResponse, error_mapping)
     
     async def post(self,body: LeadStatusRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusResponse]:
         """
@@ -72,11 +80,18 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
         request_info = self.to_post_request_information(
             body, request_configuration
         )
+        from ..models.problem_details import ProblemDetails
+
+        error_mapping: dict[str, type[ParsableFactory]] = {
+            "401": ProblemDetails,
+            "403": ProblemDetails,
+            "429": ProblemDetails,
+        }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         from ..models.lead_status_response import LeadStatusResponse
 
-        return await self.request_adapter.send_async(request_info, LeadStatusResponse, None)
+        return await self.request_adapter.send_async(request_info, LeadStatusResponse, error_mapping)
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
