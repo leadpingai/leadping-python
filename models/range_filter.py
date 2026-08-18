@@ -7,12 +7,12 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class RangeFilter(AdditionalDataHolder, Parsable):
     """
-    A generic object for handling range filtering during querying
+    Selects records by applying inclusive or exclusive lower and upper bounds to a named comparable field.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The field to filter by.
+    # Serializable field name to evaluate; supported names are determined by the queried resource.
     field: Optional[str] = None
     
     @staticmethod

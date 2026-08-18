@@ -16,7 +16,7 @@ class TagRequest(AdditionalDataHolder, Parsable):
     color: Optional[str] = None
     # Human-readable description that explains this tag request to API users.
     description: Optional[str] = None
-    # The unique identifier for the entity, when updating an existing entity.
+    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
     id: Optional[str] = None
     # Display name for this tag request in the Leadping API.
     name: Optional[str] = None

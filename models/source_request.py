@@ -28,7 +28,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Indicates whether this lead source request is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity, when updating an existing entity.
+    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
     id: Optional[str] = None
     # Human-readable display name for the resource, subject to the API's maximum name length.
     name: Optional[str] = None

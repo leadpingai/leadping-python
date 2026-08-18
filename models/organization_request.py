@@ -44,7 +44,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     ein_document: Optional[OrganizationRequest_einDocument] = None
     # Indicates whether this organization profile request is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity, when updating an existing entity.
+    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
     id: Optional[str] = None
     # Indicates whether the organization serves customers younger than 90, for compliance and underwriting context.
     is_younger_than90: Optional[bool] = None

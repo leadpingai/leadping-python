@@ -29,7 +29,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
     email: Optional[str] = None
     # First name of the lead, user, or contact represented by this user profile request.
     first_name: Optional[str] = None
-    # The unique identifier for the entity, when updating an existing entity.
+    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
     id: Optional[str] = None
     # Last name of the lead, user, or contact represented by this user profile request.
     last_name: Optional[str] = None

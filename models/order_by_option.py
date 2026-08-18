@@ -15,7 +15,7 @@ class OrderByOption(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # An enumerator for sort direction during querying
+    # Identifies whether query results are ordered from lower to higher values or from higher to lower values.
     direction: Optional[OrderByOption_direction] = None
     # Serializable field name used for sorting; supported names are determined by the queried resource.
     field: Optional[str] = None

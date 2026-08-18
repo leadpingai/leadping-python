@@ -23,7 +23,7 @@ class LeadRequest(AdditionalDataHolder, Parsable):
     customer: Optional[LeadProfile] = None
     # Indicates whether this lead request is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity, when updating an existing entity.
+    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
     id: Optional[str] = None
     # Structured metadata used for attribution, integrations, and reporting on this lead request.
     metadata: Optional[LeadMetadata] = None
