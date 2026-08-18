@@ -32,7 +32,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/leads{?sourceKey*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/leads", path_parameters)
     
     def by_id(self,id: str) -> ItemRequestBuilder:
         """
@@ -48,7 +48,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
         url_tpl_params["%2Did"] = id
         return ItemRequestBuilder(self.request_adapter, url_tpl_params)
     
-    async def post(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[LeadsRequestBuilderPostQueryParameters]] = None) -> Optional[LeadResponse]:
+    async def post(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
         Creates a source-authenticated lead captured outside Leadping, starting follow-up, routing, and automation from structured lead data.
         param body: Defines the fields clients can send when working with lead.
@@ -75,7 +75,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
 
         return await self.request_adapter.send_async(request_info, LeadResponse, error_mapping)
     
-    def to_post_request_information(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[LeadsRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,body: LeadRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Creates a source-authenticated lead captured outside Leadping, starting follow-up, routing, and automation from structured lead data.
         param body: Defines the fields clients can send when working with lead.
@@ -119,28 +119,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
         return IntakeRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
-    class LeadsRequestBuilderPostQueryParameters():
-        """
-        Creates a source-authenticated lead captured outside Leadping, starting follow-up, routing, and automation from structured lead data.
-        """
-        def get_query_parameter(self,original_name: str) -> str:
-            """
-            Maps the query parameters names to their encoded names for the URI template parsing.
-            param original_name: The original query parameter name in the class.
-            Returns: str
-            """
-            if original_name is None:
-                raise TypeError("original_name cannot be null.")
-            if original_name == "source_key":
-                return "sourceKey"
-            return original_name
-        
-        # The Leadping source key supplied as a query string parameter, or omitted when supplied as Authorization: Bearer lp_src_...
-        source_key: Optional[str] = None
-
-    
-    @dataclass
-    class LeadsRequestBuilderPostRequestConfiguration(RequestConfiguration[LeadsRequestBuilderPostQueryParameters]):
+    class LeadsRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """
