@@ -30,7 +30,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # The display name for the entity.
+    # Human-readable display name for the resource, subject to the API's maximum name length.
     name: Optional[str] = None
     # Indicates whether Leadping should issue a new API key for this source.
     regenerate_api_key: Optional[bool] = None

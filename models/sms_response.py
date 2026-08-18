@@ -38,7 +38,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     console_entries: Optional[list[CommunicationConsoleEntry]] = None
     # Conversation ID that links this SMS message to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # UTC timestamp when the provider confirmed delivery.
     delivered_at: Optional[datetime.datetime] = None
@@ -52,13 +52,13 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     from_phone_number: Optional[str] = None
     # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Lead ID associated with the SMS conversation or outreach attempt.
     lead_id: Optional[str] = None
     # Media attached to this message. A non-empty collection identifies an MMS message.
     media: Optional[list[MessageMediaAttachment]] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping will retry this SMS message.
     next_retry_at: Optional[datetime.datetime] = None

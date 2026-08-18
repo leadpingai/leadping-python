@@ -35,7 +35,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
     last_name: Optional[str] = None
     # Mobile notification preferences configured for the user.
     mobile_device_preferences: Optional[list[MobileDevicePreferences]] = None
-    # The display name for the entity.
+    # Human-readable display name for the resource, subject to the API's maximum name length.
     name: Optional[str] = None
     # Notification preferences configured for the user.
     notification_preferences: Optional[UserRequest_notificationPreferences] = None

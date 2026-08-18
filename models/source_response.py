@@ -32,7 +32,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     compliance_approved: Optional[bool] = None
     # Configured cost charged when this source creates a billable lead.
     cost_per_lead: Optional[float] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # User summary for the person who created this lead source response.
     created_by_user: Optional[SourceResponse_createdByUser] = None
@@ -48,15 +48,15 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # UTC timestamp when this source first delivered a lead to Leadping.
     first_lead_received_at: Optional[datetime.datetime] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # UTC timestamp when this source most recently delivered a lead to Leadping.
     last_lead_received_at: Optional[datetime.datetime] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # User summary for the person who last modified this lead source response.
     modified_by_user: Optional[SourceResponse_modifiedByUser] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # Organization summary connected to this lead source response.
     organization: Optional[SourceResponse_organization] = None

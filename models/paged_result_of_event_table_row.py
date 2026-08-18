@@ -10,18 +10,18 @@ if TYPE_CHECKING:
 @dataclass
 class PagedResultOfEventTableRow(AdditionalDataHolder, Parsable):
     """
-    A generic container for paginated results returned to the client.
+    Returns one page of query results together with page-size, optional total-count, and opaque continuation-cursor metadata.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Opaque storage continuation token. ‑ `null` → the current page was the last page.
+    # Opaque cursor for requesting the next page, or null when no additional page is available; clients must not parse or modify it.
     continuation_token: Optional[str] = None
-    # The subset of items returned for the current page.
+    # Items included in the current page, in the order determined by the query.
     items: Optional[list[EventTableRow]] = None
-    # The number of items returned per page in the response. This may reflect the client's requested page size, or a server-defined default or limit.
+    # Effective page-size limit used for this response, which may differ from the requested size because of server defaults or limits.
     page_size: Optional[int] = None
-    # The total number of items that match the query across all pages. May be null if the count is not computed or not applicable (e.g., in continuation-based pagination).
+    # Total number of records matching the query across all pages, or null when counting was not requested or computed.
     total_count: Optional[int] = None
     
     @staticmethod

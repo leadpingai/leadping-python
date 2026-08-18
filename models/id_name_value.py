@@ -7,16 +7,16 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class IdNameValue(AdditionalDataHolder, Parsable):
     """
-    A minimal Record type with an Id (string), Name (string), nullable Value (string?) and maximum JSON compatibility
+    Extends an identifier-and-name resource reference with an optional string value used for display or selection metadata.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The unique identifier.
+    # Stable unique identifier of the referenced resource.
     id: Optional[str] = None
-    # The display name.
+    # Human-readable display name of the referenced resource.
     name: Optional[str] = None
-    # The optional value associated with the identifier and name.
+    # Optional machine-readable or display value associated with the referenced resource.
     value: Optional[str] = None
     
     @staticmethod

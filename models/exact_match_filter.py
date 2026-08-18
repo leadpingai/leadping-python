@@ -7,7 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class ExactMatchFilter(AdditionalDataHolder, Parsable):
     """
-    A generic object for handling exact match filtering during querying
+    Selects records whose named field equals a supplied scalar value.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

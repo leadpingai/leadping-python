@@ -17,11 +17,11 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # The created by user ID associated with this organization user.
     created_by_user_id: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # UTC timestamp for last used at on this organization user.
     last_used_at: Optional[datetime.datetime] = None
@@ -31,9 +31,9 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     license_quantity: Optional[int] = None
     # The renewal date used for this user's license proration.
     license_renewal_date: Optional[datetime.datetime] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # Organization for this organization user.
     organization: Optional[IdNamePair] = None

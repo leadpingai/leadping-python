@@ -18,17 +18,17 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Indicates whether this phone number is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Indicates whether Leadping provisions and manages this phone number.
     leadping_owned: Optional[bool] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number.
     number: Optional[str] = None

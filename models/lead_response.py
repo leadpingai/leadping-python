@@ -32,7 +32,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     archived_by_user_id: Optional[str] = None
     # Contact details for the lead or customer represented by this lead response.
     contact: Optional[LeadContact] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Current lead status change summary that describes the lead outcome.
     current_lead_status: Optional[LeadResponse_currentLeadStatus] = None
@@ -44,13 +44,13 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     deleted_by_user_id: Optional[str] = None
     # Indicates whether this lead response is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Indicates whether the lead has been archived in Leadping.
     is_archived: Optional[bool] = None
     # Structured metadata used for attribution, integrations, and reporting on this lead response.
     metadata: Optional[LeadMetadata] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Canonical phone identity and provider lookup details for this lead.
     phone_identity: Optional[LeadResponse_phoneIdentity] = None

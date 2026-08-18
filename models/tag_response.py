@@ -17,17 +17,17 @@ class TagResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # Hex color used to display this tag or status in Leadping clients.
     color: Optional[str] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # User ID of the person who created this tag response.
     created_by_user_id: Optional[str] = None
     # Human-readable description that explains this tag response to API users.
     description: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Indicates whether this lead or record is archived.
     is_archived: Optional[bool] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Display name for this tag response in the Leadping API.
     name: Optional[str] = None

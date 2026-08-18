@@ -29,7 +29,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     billed_amount: Optional[float] = None
     # Identifies the messaging, calling, phone-number, lookup, or platform channel that generated billable usage.
     billing_channel: Optional[TransactionResponse_billingChannel] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction response to API users.
     description: Optional[str] = None
@@ -37,11 +37,11 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     gateway_fee_amount: Optional[float] = None
     # Payment gateway status returned for this transaction.
     gateway_status: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Identifier and display name of the related lead.
     lead: Optional[TransactionResponse_lead] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Net monetary amount after fees, credits, or adjustments.
     net_amount: Optional[float] = None

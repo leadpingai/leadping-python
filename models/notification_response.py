@@ -21,19 +21,19 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
     action_button_text: Optional[str] = None
     # The URL associated with this notification.
     action_url: Optional[str] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Optional supporting details displayed beneath the notification message.
     details: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Whether this notification is read.
     is_read: Optional[bool] = None
     # Message for this notification.
     message: Optional[str] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # Priority for this notification.
     priority: Optional[NotificationPriority] = None

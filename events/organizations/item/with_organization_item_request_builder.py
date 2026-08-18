@@ -35,7 +35,7 @@ class WithOrganizationItemRequestBuilder(BaseRequestBuilder):
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[WithOrganizationItemRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfEventTableRow]:
         """
         Lists event records for an organization with paging and filters so admins can review lead communication and automation events.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfEventTableRow]
         """
@@ -61,7 +61,7 @@ class WithOrganizationItemRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[WithOrganizationItemRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Lists event records for an organization with paging and filters so admins can review lead communication and automation events.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

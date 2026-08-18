@@ -29,7 +29,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     billing_state: Optional[UserResponse_billingState] = None
     # Compliance for this user.
     compliance: Optional[UserResponse_compliance] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Current organization for this user.
     current_organization: Optional[UserResponse_currentOrganization] = None
@@ -37,7 +37,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     email: Optional[str] = None
     # First name for this user.
     first_name: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # The identities included with this user.
     identities: Optional[list[UserIdentity]] = None
@@ -47,9 +47,9 @@ class UserResponse(AdditionalDataHolder, Parsable):
     last_name: Optional[str] = None
     # The Leadping mobile device preferences for this user.
     mobile_device_preferences: Optional[list[MobileDevicePreferences]] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # Notification preferences for this user.
     notification_preferences: Optional[UserResponse_notificationPreferences] = None

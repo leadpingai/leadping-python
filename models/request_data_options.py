@@ -12,26 +12,26 @@ if TYPE_CHECKING:
 @dataclass
 class RequestDataOptions(AdditionalDataHolder, Parsable):
     """
-    Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+    Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Opaque Cosmos DB continuation token. ‑ null on the **first** request. ‑ Client must echo back the NextToken it received from the previous page.
+    # Opaque cursor returned by the previous paged response; omit it when requesting the first page and do not parse or modify it.
     continuation_token: Optional[str] = None
-    # Key-value exact match filters (e.g., Status = Active).
+    # Exact-match conditions that require each named field to equal its supplied value.
     filters: Optional[list[ExactMatchFilter]] = None
-    # Whether to include the total count in the response (for pagination).
+    # Whether the response should include the total number of matching records; counting may increase query cost or latency.
     include_count: Optional[bool] = None
-    # List of sort instructions, in priority order.
+    # Sort instructions applied in priority order, with the first entry acting as the primary sort.
     order_by: Optional[list[OrderByOption]] = None
-    # Maximum items to return in one page
+    # Maximum number of items requested for one page; the server may enforce a lower maximum or apply a default.
     page_size: Optional[int] = None
-    # Advanced range-based filters (e.g., Price > 50 and Price <= 200).
+    # Range conditions that constrain comparable fields with inclusive or exclusive lower and upper bounds.
     range_filters: Optional[list[RangeFilter]] = None
-    # The search term to filter results (applied to SearchFields).
+    # Free-text search term applied to the configured SearchFields.
     search: Optional[str] = None
-    # The list of fields to apply the Search term to (must be string properties).
+    # Serializable string field names searched for Search; supported names are determined by the queried resource.
     search_fields: Optional[list[str]] = None
     
     @staticmethod

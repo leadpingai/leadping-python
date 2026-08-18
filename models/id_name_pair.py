@@ -7,14 +7,14 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class IdNamePair(AdditionalDataHolder, Parsable):
     """
-    A minimal Record type with an Id (string), Name (string), and maximum JSON compatibility. The reason for this type (over something like KeyValuePair, dictionary) is because of JSON serialization support.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The unique identifier.
+    # Stable unique identifier of the referenced resource.
     id: Optional[str] = None
-    # The display name.
+    # Human-readable display name of the referenced resource.
     name: Optional[str] = None
     
     @staticmethod

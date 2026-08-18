@@ -16,7 +16,7 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # The display name for the entity.
+    # Human-readable display name for the resource, subject to the API's maximum name length.
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number update request.
     number: Optional[str] = None

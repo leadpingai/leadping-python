@@ -35,7 +35,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfTransactionTableRow]:
         """
         Lists current-user transactions with paging, sorting, and filters for wallet events, billing history, and reconciliation.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfTransactionTableRow]
         """
@@ -60,7 +60,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Lists current-user transactions with paging, sorting, and filters for wallet events, billing history, and reconciliation.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

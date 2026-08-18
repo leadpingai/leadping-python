@@ -34,7 +34,7 @@ class OrganizationRequestBuilder(BaseRequestBuilder):
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfPhoneNumberTableRow]:
         """
         Lists phone numbers visible to the current organization with paging, sorting, and filters for messaging, calling, and warmup management.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfPhoneNumberTableRow]
         """
@@ -60,7 +60,7 @@ class OrganizationRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
         Lists phone numbers visible to the current organization with paging, sorting, and filters for messaging, calling, and warmup management.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

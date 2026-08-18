@@ -25,7 +25,7 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     balance: Optional[float] = None
     # UTC timestamp when Leadping last calculated the wallet balance.
     balance_calculated_at: Optional[datetime.datetime] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Defines the lifecycle state for a wallet credit lot.
     credit_status: Optional[WalletResponse_creditStatus] = None
@@ -35,11 +35,11 @@ class WalletResponse(AdditionalDataHolder, Parsable):
     expired_credit_amount: Optional[float] = None
     # UTC timestamp when the wallet credit expires.
     expires_at: Optional[datetime.datetime] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # UTC timestamp when the next wallet credit amount expires.
     next_credit_expiration_at: Optional[datetime.datetime] = None

@@ -7,28 +7,28 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class StreetAddress(AdditionalDataHolder, Parsable):
     """
-    A minimal, serializable record type for physical mailing addresses, with support for international formats and compatibility with common APIs.
+    Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Optional additional notes or delivery instructions.
+    # Additional address context or delivery instructions that do not fit the structured fields.
     additional_info: Optional[str] = None
-    # The city, town, or locality.
+    # City, town, village, or other postal locality.
     city: Optional[str] = None
-    # The ISO 3166-1 alpha-2 country code (e.g., "US", "GB", "CA").
+    # Two-letter ISO 3166-1 alpha-2 country code, such as US, GB, or CA.
     country: Optional[str] = None
-    # The primary address line (e.g., street address, P.O. box, company name).
+    # Primary delivery line, such as a street address, post-office box, or company name.
     line1: Optional[str] = None
-    # The secondary address line (e.g., apartment, suite, unit, or building).
+    # Secondary delivery line, such as an apartment, suite, unit, floor, or building.
     line2: Optional[str] = None
-    # The postal or ZIP code.
+    # Postal routing code, such as a ZIP code or postcode, formatted according to the destination country.
     postal_code: Optional[str] = None
-    # The province or territory, if distinct from state in your use case (optional, use with care).
+    # Province or territory when represented separately from State by the source or destination system.
     province: Optional[str] = None
-    # The broader region, district, or administrative area (e.g., prefecture or county).
+    # Region, district, county, prefecture, or other administrative area not represented by state or province.
     region: Optional[str] = None
-    # The state, province, or equivalent administrative region. Commonly used in countries like the US, Canada, and Australia.
+    # State or equivalent first-level administrative subdivision when that label is used by the country.
     state: Optional[str] = None
     
     @staticmethod

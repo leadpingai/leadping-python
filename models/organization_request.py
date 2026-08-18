@@ -48,7 +48,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether the organization serves customers younger than 90, for compliance and underwriting context.
     is_younger_than90: Optional[bool] = None
-    # The display name for the entity.
+    # Human-readable display name for the resource, subject to the API's maximum name length.
     name: Optional[str] = None
     # Phone details for the lead, user, or organization represented by this organization profile request.
     phone: Optional[str] = None

@@ -53,7 +53,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     billing_tax_id: Optional[str] = None
     # Compliance policy configuration for the organization.
     compliance_policy: Optional[OrganizationResponse_compliancePolicy] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this organization profile response to API users.
     description: Optional[str] = None
@@ -65,11 +65,11 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     ein_document: Optional[OrganizationResponse_einDocument] = None
     # Indicates whether this organization profile response is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # Phone details for the lead, user, or organization represented by this organization profile response.
     phone: Optional[str] = None

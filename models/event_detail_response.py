@@ -24,7 +24,7 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     canceled_at: Optional[datetime.datetime] = None
     # Conversation ID that links this event detail response to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # UTC timestamp when the provider confirmed delivery.
     delivered_at: Optional[datetime.datetime] = None
@@ -42,11 +42,11 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     from_phone_number: Optional[str] = None
     # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Lead ID associated with this event detail record.
     lead_id: Optional[str] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None

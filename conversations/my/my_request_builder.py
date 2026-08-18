@@ -34,7 +34,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfConversationResponse]:
         """
         Lists the current user's lead conversations with paging and sorting for inbox views, recent follow-up, and communication history.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfConversationResponse]
         """
@@ -61,7 +61,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Lists the current user's lead conversations with paging and sorting for inbox views, recent follow-up, and communication history.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

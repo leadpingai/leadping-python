@@ -30,7 +30,7 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # The unique identifier for the entity, when updating an existing entity.
     id: Optional[str] = None
-    # The display name for the entity.
+    # Human-readable display name for the resource, subject to the API's maximum name length.
     name: Optional[str] = None
     # Scope that limits where this automation configuration request applies in Leadping.
     scope: Optional[str] = None

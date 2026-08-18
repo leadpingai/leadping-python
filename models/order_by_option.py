@@ -10,14 +10,14 @@ if TYPE_CHECKING:
 @dataclass
 class OrderByOption(AdditionalDataHolder, Parsable):
     """
-    An object for ordering during querying
+    Defines one field and direction used to order an API query result set.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
     # An enumerator for sort direction during querying
     direction: Optional[OrderByOption_direction] = None
-    # The field to sort by.
+    # Serializable field name used for sorting; supported names are determined by the queried resource.
     field: Optional[str] = None
     
     @staticmethod

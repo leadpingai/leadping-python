@@ -18,9 +18,9 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # The most recent time lookup data was enriched.
     last_enriched_at: Optional[datetime.datetime] = None
@@ -28,9 +28,9 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     lookup: Optional[PhoneIdentityResponse_lookup] = None
     # Lookup, enrichment, and reputation actions performed for this identity.
     lookup_actions: Optional[list[PhoneIdentityLookupAction]] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # The canonical E.164 phone number.
     number: Optional[str] = None

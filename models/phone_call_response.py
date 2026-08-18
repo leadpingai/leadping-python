@@ -32,7 +32,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     console_entries: Optional[list[CommunicationConsoleEntry]] = None
     # Conversation ID that links this phone call to the Leadping inbox thread.
     conversation_id: Optional[str] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Communication direction for this phone call, such as inbound or outbound.
     direction: Optional[str] = None
@@ -44,11 +44,11 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     from_phone_number: Optional[str] = None
     # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Lead ID associated with the call conversation or outreach attempt.
     lead_id: Optional[str] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Phone number used by this phone call for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None

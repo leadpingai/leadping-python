@@ -35,7 +35,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MeRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfNotificationTableRow]:
         """
         Lists current-user notifications with paging, sorting, and filters for operational alerts, announcements, and follow-up updates.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PagedResultOfNotificationTableRow]
         """
@@ -61,7 +61,7 @@ class MeRequestBuilder(BaseRequestBuilder):
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MeRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
         Lists current-user notifications with paging, sorting, and filters for operational alerts, announcements, and follow-up updates.
-        param body: Options for flexible, efficient, and explicit querying in Cosmos DB or similar repositories.
+        param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

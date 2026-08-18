@@ -28,7 +28,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     condition_groups: Optional[list[AutomationConditionGroup]] = None
     # Directed connections between nodes in this automation graph.
     connections: Optional[list[AutomationConnection]] = None
-    # The date and time when the entity was created.
+    # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # User ID of the person who created this automation configuration response.
     created_by_user_id: Optional[str] = None
@@ -36,7 +36,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Indicates whether this automation configuration response is active and available in the Leadping API.
     enabled: Optional[bool] = None
-    # The unique identifier for the entity.
+    # Stable unique identifier of the resource.
     id: Optional[str] = None
     # Indicates whether Leadping manages this automation configuration response automatically instead of a user.
     is_system_managed: Optional[bool] = None
@@ -46,9 +46,9 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     last_run_status: Optional[str] = None
     # Management level that controls whether Leadping or the organization owns this automation setting.
     management_level: Optional[str] = None
-    # The date and time when the entity was last modified, if applicable.
+    # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # The display name for the entity.
+    # Human-readable display name of the resource.
     name: Optional[str] = None
     # Organization summary connected to this automation configuration response.
     organization: Optional[AutomationResponse_organization] = None
