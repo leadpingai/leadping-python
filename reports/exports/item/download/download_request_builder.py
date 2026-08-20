@@ -27,7 +27,7 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/reports/exports/{exportId}/download{?token*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/reports/exports/{exportId}/download?token={token}", path_parameters)
     
     async def get(self,request_configuration: Optional[RequestConfiguration[DownloadRequestBuilderGetQueryParameters]] = None) -> None:
         """
@@ -57,7 +57,7 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/json, text/plain;q=0.9")
+        request_info.headers.try_add("Accept", "application/problem+json")
         return request_info
     
     def with_url(self,raw_url: str) -> DownloadRequestBuilder:

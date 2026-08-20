@@ -26,7 +26,7 @@ class SmsRequestBuilder(BaseRequestBuilder):
     def by_sms_event_id(self,sms_event_id: str) -> WithSmsEventItemRequestBuilder:
         """
         Gets an item from the leadping.sms.item collection
-        param sms_event_id: The sms event identifier.
+        param sms_event_id: The SMS event identifier.
         Returns: WithSmsEventItemRequestBuilder
         """
         if sms_event_id is None:

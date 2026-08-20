@@ -35,7 +35,7 @@ class TagsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> TagsItemRequestBuilder:
         """
         Gets an item from the leadping.tags.item collection
-        param id: The unique identifier of the tag to update.
+        param id: Unique identifier of the item
         Returns: TagsItemRequestBuilder
         """
         if id is None:

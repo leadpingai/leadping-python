@@ -16,8 +16,6 @@ class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
     channel: Optional[str] = None
     # Recipient email address to suppress or check.
     email: Optional[str] = None
-    # Organization whose suppression list should be used.
-    organization_id: Optional[str] = None
     # Recipient phone number to suppress or check, preferably in E.164 format.
     phone_number: Optional[str] = None
     # Human-readable reason for creating or releasing the suppression.
@@ -44,7 +42,6 @@ class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "channel": lambda n : setattr(self, 'channel', n.get_str_value()),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
-            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
             "recipientIdentifier": lambda n : setattr(self, 'recipient_identifier', n.get_str_value()),
@@ -61,7 +58,6 @@ class SuppressionEntryRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("channel", self.channel)
         writer.write_str_value("email", self.email)
-        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("reason", self.reason)
         writer.write_str_value("recipientIdentifier", self.recipient_identifier)

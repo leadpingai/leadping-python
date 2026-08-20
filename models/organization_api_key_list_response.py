@@ -5,48 +5,48 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .organization_table_row import OrganizationTableRow
+    from .organization_api_key_preview_response import OrganizationApiKeyPreviewResponse
 
 @dataclass
-class PagedResultOfOrganizationTableRow(AdditionalDataHolder, Parsable):
+class OrganizationApiKeyListResponse(AdditionalDataHolder, Parsable):
     """
-    Returns one page of query results together with page-size, optional total-count, and opaque continuation-cursor metadata.
+    A page of safe organization API-key previews.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Opaque cursor for requesting the next page, or null when no additional page is available; clients must not parse or modify it.
+    # Opaque token for retrieving the next page, or null when this is the last page.
     continuation_token: Optional[str] = None
-    # Items included in the current page, in the order determined by the query.
-    items: Optional[list[OrganizationTableRow]] = None
-    # Effective page-size limit used for this response, which may differ from the requested size because of server defaults or limits.
+    # Safe API-key previews in the current page.
+    items: Optional[list[OrganizationApiKeyPreviewResponse]] = None
+    # Number of API keys in the current page.
     page_size: Optional[int] = None
-    # Total number of records matching the query across all pages, or null when counting was not requested or computed.
+    # Total number of API keys matching the request.
     total_count: Optional[int] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> PagedResultOfOrganizationTableRow:
+    def create_from_discriminator_value(parse_node: ParseNode) -> OrganizationApiKeyListResponse:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: PagedResultOfOrganizationTableRow
+        Returns: OrganizationApiKeyListResponse
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return PagedResultOfOrganizationTableRow()
+        return OrganizationApiKeyListResponse()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .organization_table_row import OrganizationTableRow
+        from .organization_api_key_preview_response import OrganizationApiKeyPreviewResponse
 
-        from .organization_table_row import OrganizationTableRow
+        from .organization_api_key_preview_response import OrganizationApiKeyPreviewResponse
 
         fields: dict[str, Callable[[Any], None]] = {
             "continuationToken": lambda n : setattr(self, 'continuation_token', n.get_str_value()),
-            "items": lambda n : setattr(self, 'items', n.get_collection_of_object_values(OrganizationTableRow)),
+            "items": lambda n : setattr(self, 'items', n.get_collection_of_object_values(OrganizationApiKeyPreviewResponse)),
             "pageSize": lambda n : setattr(self, 'page_size', n.get_int_value()),
             "totalCount": lambda n : setattr(self, 'total_count', n.get_int_value()),
         }

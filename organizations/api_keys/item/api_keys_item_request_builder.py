@@ -14,34 +14,35 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ...models.problem_details import ProblemDetails
-    from ...models.source_request import SourceRequest
-    from ...models.source_response import SourceResponse
-    from .metrics.metrics_request_builder import MetricsRequestBuilder
+    from ....models.organization_api_key_issue_response import OrganizationApiKeyIssueResponse
+    from ....models.organization_api_key_preview_response import OrganizationApiKeyPreviewResponse
+    from ....models.organization_api_key_request import OrganizationApiKeyRequest
+    from ....models.organization_api_key_revoke_response import OrganizationApiKeyRevokeResponse
+    from ....models.problem_details import ProblemDetails
 
-class SourcesItemRequestBuilder(BaseRequestBuilder):
+class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /sources/{id}
+    Builds and executes requests for operations under /organizations/api-keys/{id}
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new SourcesItemRequestBuilder and sets the default values.
+        Instantiates a new ApiKeysItemRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/sources/{id}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/organizations/api-keys/{id}", path_parameters)
     
-    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> None:
+    async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyRevokeResponse]:
         """
-        Deletes a lead source from the current organization so it can no longer accept or route newly captured leads.
+        Confirmation that identifies the revoked key.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: None
+        Returns: Optional[OrganizationApiKeyRevokeResponse]
         """
         request_info = self.to_delete_request_information(
             request_configuration
         )
-        from ...models.problem_details import ProblemDetails
+        from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
@@ -51,18 +52,20 @@ class SourcesItemRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_no_response_content_async(request_info, error_mapping)
+        from ....models.organization_api_key_revoke_response import OrganizationApiKeyRevokeResponse
+
+        return await self.request_adapter.send_async(request_info, OrganizationApiKeyRevokeResponse, error_mapping)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
+    async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyPreviewResponse]:
         """
-        Returns one lead source for the current organization, including intake settings, credentials metadata, and routing context.
+        Returns the API key row with a safe token preview.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[SourceResponse]
+        Returns: Optional[OrganizationApiKeyPreviewResponse]
         """
         request_info = self.to_get_request_information(
             request_configuration
         )
-        from ...models.problem_details import ProblemDetails
+        from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
@@ -72,50 +75,50 @@ class SourcesItemRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ...models.source_response import SourceResponse
+        from ....models.organization_api_key_preview_response import OrganizationApiKeyPreviewResponse
 
-        return await self.request_adapter.send_async(request_info, SourceResponse, error_mapping)
+        return await self.request_adapter.send_async(request_info, OrganizationApiKeyPreviewResponse, error_mapping)
     
-    async def put(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
+    async def post(self,body: OrganizationApiKeyRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyIssueResponse]:
         """
-        Updates a lead source for the current organization, changing intake settings, credentials, routing context, or active status.
-        param body: Defines the fields clients can send when working with lead source.
+        The one-time API token and safe key detail row.
+        param body: Defines the display name and access configuration for a new Leadping organization API key.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[SourceResponse]
+        Returns: Optional[OrganizationApiKeyIssueResponse]
         """
         if body is None:
             raise TypeError("body cannot be null.")
-        request_info = self.to_put_request_information(
+        request_info = self.to_post_request_information(
             body, request_configuration
         )
-        from ...models.problem_details import ProblemDetails
+        from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
+            "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
-            "404": ProblemDetails,
             "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ...models.source_response import SourceResponse
+        from ....models.organization_api_key_issue_response import OrganizationApiKeyIssueResponse
 
-        return await self.request_adapter.send_async(request_info, SourceResponse, error_mapping)
+        return await self.request_adapter.send_async(request_info, OrganizationApiKeyIssueResponse, error_mapping)
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Deletes a lead source from the current organization so it can no longer accept or route newly captured leads.
+        Confirmation that identifies the revoked key.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
         request_info = RequestInformation(Method.DELETE, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/problem+json")
+        request_info.headers.try_add("Accept", "application/json")
         return request_info
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns one lead source for the current organization, including intake settings, credentials metadata, and routing context.
+        Returns the API key row with a safe token preview.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -124,56 +127,47 @@ class SourcesItemRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def to_put_request_information(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,body: OrganizationApiKeyRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates a lead source for the current organization, changing intake settings, credentials, routing context, or active status.
-        param body: Defines the fields clients can send when working with lead source.
+        The one-time API token and safe key detail row.
+        param body: Defines the display name and access configuration for a new Leadping organization API key.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
         if body is None:
             raise TypeError("body cannot be null.")
-        request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
+        request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "application/json")
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     
-    def with_url(self,raw_url: str) -> SourcesItemRequestBuilder:
+    def with_url(self,raw_url: str) -> ApiKeysItemRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: SourcesItemRequestBuilder
+        Returns: ApiKeysItemRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return SourcesItemRequestBuilder(self.request_adapter, raw_url)
-    
-    @property
-    def metrics(self) -> MetricsRequestBuilder:
-        """
-        The metrics property
-        """
-        from .metrics.metrics_request_builder import MetricsRequestBuilder
-
-        return MetricsRequestBuilder(self.request_adapter, self.path_parameters)
+        return ApiKeysItemRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class SourcesItemRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class ApiKeysItemRequestBuilderDeleteRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """
         warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
     
     @dataclass
-    class SourcesItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class ApiKeysItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """
         warn("This class is deprecated. Please use the generic RequestConfiguration class generated by the generator.", DeprecationWarning)
     
     @dataclass
-    class SourcesItemRequestBuilderPutRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class ApiKeysItemRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

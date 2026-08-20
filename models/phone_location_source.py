@@ -12,7 +12,7 @@ class PhoneLocationSource(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The resolution method, such as telnyx-city-state, coordinates, phone-number, or state-default.
+    # The resolution method, such as Telnyx-city-state, coordinates, phone-number, or state-default.
     method: Optional[str] = None
     # The city, state, coordinates, phone number, or representative ZIP used by the method.
     query: Optional[str] = None

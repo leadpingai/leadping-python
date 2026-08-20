@@ -35,7 +35,7 @@ class PaymentMethodsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> PaymentMethodsItemRequestBuilder:
         """
         Gets an item from the leadping.paymentMethods.item collection
-        param id: The ID of the payment method to retrieve.
+        param id: Unique identifier of the item
         Returns: PaymentMethodsItemRequestBuilder
         """
         if id is None:

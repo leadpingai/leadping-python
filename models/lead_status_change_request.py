@@ -7,7 +7,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .lead_status_change_request_category import LeadStatusChangeRequest_category
-    from .lead_status_change_request_change_source import LeadStatusChangeRequest_changeSource
 
 @dataclass
 class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
@@ -23,34 +22,20 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     appointment_notes: Optional[str] = None
     # UTC timestamp for appointment start at on this lead status change.
     appointment_start_at: Optional[datetime.datetime] = None
-    # The assigned to user ID associated with this lead status change.
-    assigned_to_user_id: Optional[str] = None
     # UTC timestamp for callback at on this lead status change.
     callback_at: Optional[datetime.datetime] = None
     # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[LeadStatusChangeRequest_category] = None
-    # Known sources that can change a lead's current lead status change.
-    change_source: Optional[LeadStatusChangeRequest_changeSource] = None
-    # The automation that changed this lead status change, when applicable.
-    changed_by_automation_id: Optional[str] = None
     # The current follow up status for this lead status change.
     follow_up_status: Optional[str] = None
-    # Whether this lead status change is missed call follow up.
-    is_missed_call_follow_up: Optional[bool] = None
     # The operator or customer notes recorded for this lead status change.
     notes: Optional[str] = None
     # Result of the interaction or workflow step that caused the status change.
     outcome: Optional[str] = None
     # The reason this lead status change was changed.
     reason: Optional[str] = None
-    # The related call event ID associated with this lead status change.
-    related_call_event_id: Optional[str] = None
-    # The source ID associated with this lead status change.
-    source_id: Optional[str] = None
     # UTC timestamp for task due at on this lead status change.
     task_due_at: Optional[datetime.datetime] = None
-    # UTC timestamp for timestamp on this lead status change.
-    timestamp: Optional[datetime.datetime] = None
     # Category of status change being recorded for the lead.
     type: Optional[str] = None
     
@@ -71,29 +56,20 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .lead_status_change_request_category import LeadStatusChangeRequest_category
-        from .lead_status_change_request_change_source import LeadStatusChangeRequest_changeSource
 
         from .lead_status_change_request_category import LeadStatusChangeRequest_category
-        from .lead_status_change_request_change_source import LeadStatusChangeRequest_changeSource
 
         fields: dict[str, Callable[[Any], None]] = {
             "appointmentEndAt": lambda n : setattr(self, 'appointment_end_at', n.get_datetime_value()),
             "appointmentNotes": lambda n : setattr(self, 'appointment_notes', n.get_str_value()),
             "appointmentStartAt": lambda n : setattr(self, 'appointment_start_at', n.get_datetime_value()),
-            "assignedToUserId": lambda n : setattr(self, 'assigned_to_user_id', n.get_str_value()),
             "callbackAt": lambda n : setattr(self, 'callback_at', n.get_datetime_value()),
             "category": lambda n : setattr(self, 'category', n.get_enum_value(LeadStatusChangeRequest_category)),
-            "changeSource": lambda n : setattr(self, 'change_source', n.get_enum_value(LeadStatusChangeRequest_changeSource)),
-            "changedByAutomationId": lambda n : setattr(self, 'changed_by_automation_id', n.get_str_value()),
             "followUpStatus": lambda n : setattr(self, 'follow_up_status', n.get_str_value()),
-            "isMissedCallFollowUp": lambda n : setattr(self, 'is_missed_call_follow_up', n.get_bool_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "outcome": lambda n : setattr(self, 'outcome', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
-            "relatedCallEventId": lambda n : setattr(self, 'related_call_event_id', n.get_str_value()),
-            "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "taskDueAt": lambda n : setattr(self, 'task_due_at', n.get_datetime_value()),
-            "timestamp": lambda n : setattr(self, 'timestamp', n.get_datetime_value()),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
         }
         return fields
@@ -109,20 +85,13 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("appointmentEndAt", self.appointment_end_at)
         writer.write_str_value("appointmentNotes", self.appointment_notes)
         writer.write_datetime_value("appointmentStartAt", self.appointment_start_at)
-        writer.write_str_value("assignedToUserId", self.assigned_to_user_id)
         writer.write_datetime_value("callbackAt", self.callback_at)
         writer.write_enum_value("category", self.category)
-        writer.write_enum_value("changeSource", self.change_source)
-        writer.write_str_value("changedByAutomationId", self.changed_by_automation_id)
         writer.write_str_value("followUpStatus", self.follow_up_status)
-        writer.write_bool_value("isMissedCallFollowUp", self.is_missed_call_follow_up)
         writer.write_str_value("notes", self.notes)
         writer.write_str_value("outcome", self.outcome)
         writer.write_str_value("reason", self.reason)
-        writer.write_str_value("relatedCallEventId", self.related_call_event_id)
-        writer.write_str_value("sourceId", self.source_id)
         writer.write_datetime_value("taskDueAt", self.task_due_at)
-        writer.write_datetime_value("timestamp", self.timestamp)
         writer.write_str_value("type", self.type)
         writer.write_additional_data_value(self.additional_data)
     

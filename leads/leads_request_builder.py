@@ -37,7 +37,7 @@ class LeadsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> ItemRequestBuilder:
         """
         Gets an item from the leadping.leads.item collection
-        param id: The ID of the lead to retrieve.
+        param id: Unique identifier of the item
         Returns: ItemRequestBuilder
         """
         if id is None:

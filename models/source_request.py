@@ -16,24 +16,14 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # Source API key used to authenticate inbound lead delivery to Leadping.
-    api_key: Optional[str] = None
-    # Configured cost charged when this source creates a billable lead.
-    cost_per_lead: Optional[float] = None
     # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
     # Tag names automatically assigned to leads created by this source.
     default_tag_names: Optional[list[str]] = None
     # Human-readable description that explains this lead source request to API users.
     description: Optional[str] = None
-    # Indicates whether this lead source request is active and available in the Leadping API.
-    enabled: Optional[bool] = None
-    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
-    id: Optional[str] = None
-    # Human-readable display name for the resource, subject to the API's maximum name length.
+    # Human-readable source name.
     name: Optional[str] = None
-    # Indicates whether Leadping should issue a new API key for this source.
-    regenerate_api_key: Optional[bool] = None
     # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     
@@ -56,15 +46,10 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
-            "apiKey": lambda n : setattr(self, 'api_key', n.get_str_value()),
-            "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
             "defaultTagNames": lambda n : setattr(self, 'default_tag_names', n.get_collection_of_primitive_values(str)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
-            "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
-            "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
-            "regenerateApiKey": lambda n : setattr(self, 'regenerate_api_key', n.get_bool_value()),
             "requiresTrustedForm": lambda n : setattr(self, 'requires_trusted_form', n.get_bool_value()),
         }
         return fields
@@ -79,15 +64,10 @@ class SourceRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
-        writer.write_str_value("apiKey", self.api_key)
-        writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)
         writer.write_collection_of_primitive_values("defaultTagNames", self.default_tag_names)
         writer.write_str_value("description", self.description)
-        writer.write_bool_value("enabled", self.enabled)
-        writer.write_str_value("id", self.id)
         writer.write_str_value("name", self.name)
-        writer.write_bool_value("regenerateApiKey", self.regenerate_api_key)
         writer.write_bool_value("requiresTrustedForm", self.requires_trusted_form)
         writer.write_additional_data_value(self.additional_data)
     

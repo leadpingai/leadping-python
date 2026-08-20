@@ -12,16 +12,10 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Indicates whether this phone number update request is active and available in the Leadping API.
-    enabled: Optional[bool] = None
-    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
-    id: Optional[str] = None
-    # Human-readable display name for the resource, subject to the API's maximum name length.
+    # Human-readable label for the phone number.
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number update request.
     number: Optional[str] = None
-    # Organization ID that owns the phone number being created or updated.
-    organization_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberRequest:
@@ -40,11 +34,8 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
-            "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
-            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
         }
         return fields
     
@@ -56,11 +47,8 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_bool_value("enabled", self.enabled)
-        writer.write_str_value("id", self.id)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
-        writer.write_str_value("organizationId", self.organization_id)
         writer.write_additional_data_value(self.additional_data)
     
 

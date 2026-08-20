@@ -17,8 +17,6 @@ class ChangeBillingPlanRequest(AdditionalDataHolder, Parsable):
 
     # Billing plan for this billing plan.
     billing_plan: Optional[BillingPlan] = None
-    # The user ID associated with this billing plan.
-    user_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> ChangeBillingPlanRequest:
@@ -42,7 +40,6 @@ class ChangeBillingPlanRequest(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(BillingPlan)),
-            "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
         }
         return fields
     
@@ -55,7 +52,6 @@ class ChangeBillingPlanRequest(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_enum_value("billingPlan", self.billing_plan)
-        writer.write_str_value("userId", self.user_id)
         writer.write_additional_data_value(self.additional_data)
     
 

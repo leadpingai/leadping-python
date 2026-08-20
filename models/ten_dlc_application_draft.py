@@ -11,7 +11,7 @@ if TYPE_CHECKING:
 @dataclass
 class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     """
-    Describes ten dlc application draft data used in Leadping API requests and responses.
+    Describes 10DLC application draft data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

@@ -25,7 +25,7 @@ class TransactionsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> TransactionsItemRequestBuilder:
         """
         Gets an item from the leadping.transactions.item collection
-        param id: The ID of the transaction to retrieve.
+        param id: Unique identifier of the item
         Returns: TransactionsItemRequestBuilder
         """
         if id is None:

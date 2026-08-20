@@ -86,7 +86,7 @@ class WithUserItemRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.DELETE, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/json, application/problem+json, text/plain;q=0.9")
+        request_info.headers.try_add("Accept", "application/problem+json")
         return request_info
     
     def to_put_request_information(self,body: OrganizationMemberRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:

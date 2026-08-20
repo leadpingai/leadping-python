@@ -36,7 +36,7 @@ class SourcesRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> SourcesItemRequestBuilder:
         """
         Gets an item from the leadping.sources.item collection
-        param id: The ID of the source to update.
+        param id: Unique identifier of the item
         Returns: SourcesItemRequestBuilder
         """
         if id is None:

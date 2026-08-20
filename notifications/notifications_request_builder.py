@@ -29,7 +29,7 @@ class NotificationsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> NotificationsItemRequestBuilder:
         """
         Gets an item from the leadping.notifications.item collection
-        param id: The notification ID.
+        param id: Unique identifier of the item
         Returns: NotificationsItemRequestBuilder
         """
         if id is None:

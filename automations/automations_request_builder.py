@@ -37,7 +37,7 @@ class AutomationsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> AutomationsItemRequestBuilder:
         """
         Gets an item from the leadping.automations.item collection
-        param id: The ID of the automation.
+        param id: Unique identifier of the item
         Returns: AutomationsItemRequestBuilder
         """
         if id is None:

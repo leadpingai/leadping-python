@@ -8,7 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 @dataclass
 class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
     """
-    Describes stripe payment method data used in Leadping API requests and responses.
+    Describes Stripe payment method data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)

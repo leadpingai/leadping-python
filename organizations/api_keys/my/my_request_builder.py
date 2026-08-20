@@ -14,7 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ....models.paged_result_of_organization_table_row import PagedResultOfOrganizationTableRow
+    from ....models.organization_api_key_list_response import OrganizationApiKeyListResponse
     from ....models.problem_details import ProblemDetails
     from ....models.request_data_options import RequestDataOptions
 
@@ -31,12 +31,12 @@ class MyRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/organizations/api-keys/my", path_parameters)
     
-    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PagedResultOfOrganizationTableRow]:
+    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyListResponse]:
         """
         Retrieves a paged list of API keys owned by the caller's current Leadping organization, with support for filtering, sorting, and pagination.
         param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[PagedResultOfOrganizationTableRow]
+        Returns: Optional[OrganizationApiKeyListResponse]
         """
         if body is None:
             raise TypeError("body cannot be null.")
@@ -53,9 +53,9 @@ class MyRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ....models.paged_result_of_organization_table_row import PagedResultOfOrganizationTableRow
+        from ....models.organization_api_key_list_response import OrganizationApiKeyListResponse
 
-        return await self.request_adapter.send_async(request_info, PagedResultOfOrganizationTableRow, error_mapping)
+        return await self.request_adapter.send_async(request_info, OrganizationApiKeyListResponse, error_mapping)
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

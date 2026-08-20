@@ -1,36 +1,33 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
-class AcceptOrganizationInvitationRequest(AdditionalDataHolder, Parsable):
+class OrganizationApiKeyRevokeResponse(AdditionalDataHolder, Parsable):
     """
-    Defines the input used for accept organization invitation.
+    Confirms that an organization API key was revoked.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The email address associated with this organization invitation.
-    email: Optional[str] = None
-    # First name for this organization invitation.
-    first_name: Optional[str] = None
-    # UTC timestamp for last name on this organization invitation.
-    last_name: Optional[str] = None
-    # The token supplied to authorize or complete this organization invitation.
-    token: Optional[str] = None
+    # Unique identifier of the revoked API key.
+    id: Optional[str] = None
+    # Date and time when the API key was revoked.
+    revoked_at: Optional[datetime.datetime] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> AcceptOrganizationInvitationRequest:
+    def create_from_discriminator_value(parse_node: ParseNode) -> OrganizationApiKeyRevokeResponse:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: AcceptOrganizationInvitationRequest
+        Returns: OrganizationApiKeyRevokeResponse
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return AcceptOrganizationInvitationRequest()
+        return OrganizationApiKeyRevokeResponse()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
@@ -38,10 +35,8 @@ class AcceptOrganizationInvitationRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "email": lambda n : setattr(self, 'email', n.get_str_value()),
-            "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
-            "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
-            "token": lambda n : setattr(self, 'token', n.get_str_value()),
+            "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "revokedAt": lambda n : setattr(self, 'revoked_at', n.get_datetime_value()),
         }
         return fields
     
@@ -53,10 +48,8 @@ class AcceptOrganizationInvitationRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_str_value("email", self.email)
-        writer.write_str_value("firstName", self.first_name)
-        writer.write_str_value("lastName", self.last_name)
-        writer.write_str_value("token", self.token)
+        writer.write_str_value("id", self.id)
+        writer.write_datetime_value("revokedAt", self.revoked_at)
         writer.write_additional_data_value(self.additional_data)
     
 

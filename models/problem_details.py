@@ -5,6 +5,9 @@ from kiota_abstractions.api_error import APIError
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .problem_details_errors import ProblemDetails_errors
+
 @dataclass
 class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
     """
@@ -15,12 +18,16 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
 
     # Human-readable explanation specific to this occurrence of the problem.
     detail: Optional[str] = None
+    # Validation errors keyed by the JSON request field name. Present for request validation failures.
+    errors: Optional[ProblemDetails_errors] = None
     # URI reference that identifies this specific occurrence of the problem.
     instance: Optional[str] = None
     # HTTP status code returned for the problem.
     status: Optional[int] = None
     # Short, human-readable summary of the problem.
     title: Optional[str] = None
+    # Request trace identifier used to correlate this problem with Leadping diagnostics.
+    trace_id: Optional[str] = None
     # URI reference that identifies the problem type.
     type: Optional[str] = None
     
@@ -40,11 +47,17 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .problem_details_errors import ProblemDetails_errors
+
+        from .problem_details_errors import ProblemDetails_errors
+
         fields: dict[str, Callable[[Any], None]] = {
             "detail": lambda n : setattr(self, 'detail', n.get_str_value()),
+            "errors": lambda n : setattr(self, 'errors', n.get_object_value(ProblemDetails_errors)),
             "instance": lambda n : setattr(self, 'instance', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_int_value()),
             "title": lambda n : setattr(self, 'title', n.get_str_value()),
+            "traceId": lambda n : setattr(self, 'trace_id', n.get_str_value()),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
         }
         return fields
@@ -58,9 +71,11 @@ class ProblemDetails(APIError, AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("detail", self.detail)
+        writer.write_object_value("errors", self.errors)
         writer.write_str_value("instance", self.instance)
         writer.write_int_value("status", self.status)
         writer.write_str_value("title", self.title)
+        writer.write_str_value("traceId", self.trace_id)
         writer.write_str_value("type", self.type)
         writer.write_additional_data_value(self.additional_data)
     

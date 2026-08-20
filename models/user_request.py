@@ -5,10 +5,6 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .mobile_device_preferences import MobileDevicePreferences
-    from .user_request_billing_plan import UserRequest_billingPlan
-    from .user_request_compliance import UserRequest_compliance
-    from .user_request_current_organization import UserRequest_currentOrganization
     from .user_request_notification_preferences import UserRequest_notificationPreferences
 
 @dataclass
@@ -19,23 +15,11 @@ class UserRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
-    billing_plan: Optional[UserRequest_billingPlan] = None
-    # User compliance settings and attestations captured for Leadping account review.
-    compliance: Optional[UserRequest_compliance] = None
-    # Organization currently selected for the user session or profile.
-    current_organization: Optional[UserRequest_currentOrganization] = None
-    # Email address for the person represented by this user profile request.
-    email: Optional[str] = None
     # First name of the lead, user, or contact represented by this user profile request.
     first_name: Optional[str] = None
-    # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
-    id: Optional[str] = None
     # Last name of the lead, user, or contact represented by this user profile request.
     last_name: Optional[str] = None
-    # Mobile notification preferences configured for the user.
-    mobile_device_preferences: Optional[list[MobileDevicePreferences]] = None
-    # Human-readable display name for the resource, subject to the API's maximum name length.
+    # Display name for the user.
     name: Optional[str] = None
     # Notification preferences configured for the user.
     notification_preferences: Optional[UserRequest_notificationPreferences] = None
@@ -60,27 +44,13 @@ class UserRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .mobile_device_preferences import MobileDevicePreferences
-        from .user_request_billing_plan import UserRequest_billingPlan
-        from .user_request_compliance import UserRequest_compliance
-        from .user_request_current_organization import UserRequest_currentOrganization
         from .user_request_notification_preferences import UserRequest_notificationPreferences
 
-        from .mobile_device_preferences import MobileDevicePreferences
-        from .user_request_billing_plan import UserRequest_billingPlan
-        from .user_request_compliance import UserRequest_compliance
-        from .user_request_current_organization import UserRequest_currentOrganization
         from .user_request_notification_preferences import UserRequest_notificationPreferences
 
         fields: dict[str, Callable[[Any], None]] = {
-            "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(UserRequest_billingPlan)),
-            "compliance": lambda n : setattr(self, 'compliance', n.get_object_value(UserRequest_compliance)),
-            "currentOrganization": lambda n : setattr(self, 'current_organization', n.get_object_value(UserRequest_currentOrganization)),
-            "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
-            "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
-            "mobileDevicePreferences": lambda n : setattr(self, 'mobile_device_preferences', n.get_collection_of_object_values(MobileDevicePreferences)),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "notificationPreferences": lambda n : setattr(self, 'notification_preferences', n.get_object_value(UserRequest_notificationPreferences)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
@@ -96,14 +66,8 @@ class UserRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_enum_value("billingPlan", self.billing_plan)
-        writer.write_object_value("compliance", self.compliance)
-        writer.write_object_value("currentOrganization", self.current_organization)
-        writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)
-        writer.write_str_value("id", self.id)
         writer.write_str_value("lastName", self.last_name)
-        writer.write_collection_of_object_values("mobileDevicePreferences", self.mobile_device_preferences)
         writer.write_str_value("name", self.name)
         writer.write_object_value("notificationPreferences", self.notification_preferences)
         writer.write_str_value("phone", self.phone)
