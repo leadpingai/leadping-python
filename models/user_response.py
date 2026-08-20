@@ -43,7 +43,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     identities: Optional[list[UserIdentity]] = None
     # The date and time when this user last completed the Leadping sign-in flow.
     last_logged_in_at: Optional[datetime.datetime] = None
-    # UTC timestamp for last name on this user.
+    # Last name of the Leadping user.
     last_name: Optional[str] = None
     # The Leadping mobile device preferences for this user.
     mobile_device_preferences: Optional[list[MobileDevicePreferences]] = None

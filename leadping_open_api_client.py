@@ -15,6 +15,7 @@ from kiota_serialization_text.text_serialization_writer_factory import TextSeria
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .a2a.a2a_request_builder import A2aRequestBuilder
     from .analytics.analytics_request_builder import AnalyticsRequestBuilder
     from .automations.automations_request_builder import AutomationsRequestBuilder
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
@@ -39,6 +40,7 @@ if TYPE_CHECKING:
     from .usage.usage_request_builder import UsageRequestBuilder
     from .users.users_request_builder import UsersRequestBuilder
     from .wallets.wallets_request_builder import WalletsRequestBuilder
+    from .well_known.well_known_request_builder import WellKnownRequestBuilder
 
 class LeadpingOpenApiClient(BaseRequestBuilder):
     """
@@ -63,6 +65,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         if not self.request_adapter.base_url:
             self.request_adapter.base_url = "https://api.leadping.ai"
         self.path_parameters["base_url"] = self.request_adapter.base_url
+    
+    @property
+    def a2a(self) -> A2aRequestBuilder:
+        """
+        The a2a property
+        """
+        from .a2a.a2a_request_builder import A2aRequestBuilder
+
+        return A2aRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def analytics(self) -> AnalyticsRequestBuilder:
@@ -279,5 +290,14 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .wallets.wallets_request_builder import WalletsRequestBuilder
 
         return WalletsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def well_known(self) -> WellKnownRequestBuilder:
+        """
+        The wellKnown property
+        """
+        from .well_known.well_known_request_builder import WellKnownRequestBuilder
+
+        return WellKnownRequestBuilder(self.request_adapter, self.path_parameters)
     
 

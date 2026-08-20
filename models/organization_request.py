@@ -21,7 +21,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Employer Identification Number used for organization and 10DLC verification.
     ein: Optional[str] = None
-    # Indicates whether the organization serves customers younger than 90, for compliance and underwriting context.
+    # Whether the organization was formed less than 90 days ago.
     is_younger_than90: Optional[bool] = None
     # Primary organization name.
     name: Optional[str] = None

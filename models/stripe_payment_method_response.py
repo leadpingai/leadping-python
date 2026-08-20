@@ -25,7 +25,7 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this Stripe payment method is default.
     is_default: Optional[bool] = None
-    # UTC timestamp for last4 on this Stripe payment method.
+    # Last four digits of the payment card number.
     last4: Optional[str] = None
     
     @staticmethod
