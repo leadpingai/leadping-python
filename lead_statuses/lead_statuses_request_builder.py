@@ -35,7 +35,7 @@ class LeadStatusesRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> LeadStatusesItemRequestBuilder:
         """
         Gets an item from the leadping.leadStatuses.item collection
-        param id: Unique identifier of the item
+        param id: The unique identifier of the lead status to update.
         Returns: LeadStatusesItemRequestBuilder
         """
         if id is None:

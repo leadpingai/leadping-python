@@ -25,7 +25,7 @@ class WalletsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> WalletsItemRequestBuilder:
         """
         Gets an item from the leadping.wallets.item collection
-        param id: Unique identifier of the item
+        param id: The ID of the wallet to retrieve.
         Returns: WalletsItemRequestBuilder
         """
         if id is None:

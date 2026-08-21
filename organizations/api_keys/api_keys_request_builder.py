@@ -25,7 +25,7 @@ class ApiKeysRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> ApiKeysItemRequestBuilder:
         """
         Gets an item from the leadping.organizations.apiKeys.item collection
-        param id: Unique identifier of the item
+        param id: The API key ID.
         Returns: ApiKeysItemRequestBuilder
         """
         if id is None:
