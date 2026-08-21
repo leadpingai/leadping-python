@@ -15,6 +15,7 @@ from warnings import warn
 
 if TYPE_CHECKING:
     from .....models.problem_details import ProblemDetails
+    from .....models.user_data_export_download_response import UserDataExportDownloadResponse
 
 class DownloadRequestBuilder(BaseRequestBuilder):
     """
@@ -27,13 +28,13 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/reports/exports/{exportId}/download?token={token}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/reports/exports/{exportId}/download?token={token}{&redirect*}", path_parameters)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration[DownloadRequestBuilderGetQueryParameters]] = None) -> None:
+    async def get(self,request_configuration: Optional[RequestConfiguration[DownloadRequestBuilderGetQueryParameters]] = None) -> Optional[UserDataExportDownloadResponse]:
         """
         Validates an export download token and redirects to the generated file when the current-user report is ready.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: None
+        Returns: Optional[UserDataExportDownloadResponse]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -47,7 +48,9 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_no_response_content_async(request_info, error_mapping)
+        from .....models.user_data_export_download_response import UserDataExportDownloadResponse
+
+        return await self.request_adapter.send_async(request_info, UserDataExportDownloadResponse, error_mapping)
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[DownloadRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
@@ -57,7 +60,7 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/problem+json")
+        request_info.headers.try_add("Accept", "text/plain;q=0.9")
         return request_info
     
     def with_url(self,raw_url: str) -> DownloadRequestBuilder:
@@ -75,6 +78,9 @@ class DownloadRequestBuilder(BaseRequestBuilder):
         """
         Validates an export download token and redirects to the generated file when the current-user report is ready.
         """
+        # Whether to redirect to the temporary file URL. Set to false to return the URL as JSON.
+        redirect: Optional[bool] = None
+
         # The short-lived download token issued for this export.
         token: Optional[str] = None
 
