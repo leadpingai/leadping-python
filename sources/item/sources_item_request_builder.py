@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from ...models.source_request import SourceRequest
     from ...models.source_response import SourceResponse
+    from .credentials.credentials_request_builder import CredentialsRequestBuilder
     from .metrics.metrics_request_builder import MetricsRequestBuilder
 
 class SourcesItemRequestBuilder(BaseRequestBuilder):
@@ -148,6 +149,15 @@ class SourcesItemRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return SourcesItemRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def credentials(self) -> CredentialsRequestBuilder:
+        """
+        The credentials property
+        """
+        from .credentials.credentials_request_builder import CredentialsRequestBuilder
+
+        return CredentialsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def metrics(self) -> MetricsRequestBuilder:

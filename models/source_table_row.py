@@ -24,12 +24,12 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
-    # Source API key used to authenticate inbound lead delivery to Leadping. Unlike an organization API key, this value remains available to authorized source users.
-    api_key: Optional[str] = None
     # UTC timestamp when the source API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
     # Masked preview of the source API key for compact display.
     api_key_preview: Optional[str] = None
+    # UTC timestamp when the source credential was most recently rotated.
+    api_key_rotated_at: Optional[datetime.datetime] = None
     # Total number of authenticated requests made with this source API key.
     api_key_total_uses: Optional[int] = None
     # Indicates whether the organization or sender passed compliance review.
@@ -100,9 +100,9 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
-            "apiKey": lambda n : setattr(self, 'api_key', n.get_str_value()),
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
+            "apiKeyRotatedAt": lambda n : setattr(self, 'api_key_rotated_at', n.get_datetime_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
@@ -135,9 +135,9 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
-        writer.write_str_value("apiKey", self.api_key)
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
+        writer.write_datetime_value("apiKeyRotatedAt", self.api_key_rotated_at)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)

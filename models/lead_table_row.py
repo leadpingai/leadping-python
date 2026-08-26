@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .lead_table_row_assigned_to import LeadTableRow_assignedTo
     from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
     from .lead_table_row_organization import LeadTableRow_organization
     from .lead_table_row_processing_status import LeadTableRow_processingStatus
@@ -26,6 +27,12 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
+    # Identifier and display name of the assigned organization member.
+    assigned_to: Optional[LeadTableRow_assignedTo] = None
+    # Leadping user currently responsible for this lead, or null when unassigned.
+    assigned_to_user_id: Optional[str] = None
+    # Optional profile image URL explicitly associated with the lead.
+    avatar_url: Optional[str] = None
     # UTC timestamp when this lead table row was created.
     created_at: Optional[datetime.datetime] = None
     # Current lead status change summary that describes the lead outcome.
@@ -46,6 +53,8 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     organization: Optional[LeadTableRow_organization] = None
     # Phone details for the lead, user, or organization represented by this lead table row.
     phone: Optional[str] = None
+    # Identifier of the canonical phone identity associated with this lead's phone number.
+    phone_identity_id: Optional[str] = None
     # Lead price or transaction price supplied to the Leadping API.
     price: Optional[float] = None
     # Defines the asynchronous verification and enrichment lifecycle for a lead.
@@ -81,12 +90,14 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .lead_table_row_assigned_to import LeadTableRow_assignedTo
         from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
         from .lead_table_row_organization import LeadTableRow_organization
         from .lead_table_row_processing_status import LeadTableRow_processingStatus
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
+        from .lead_table_row_assigned_to import LeadTableRow_assignedTo
         from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
         from .lead_table_row_organization import LeadTableRow_organization
         from .lead_table_row_processing_status import LeadTableRow_processingStatus
@@ -97,6 +108,9 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
             "archivedByUserId": lambda n : setattr(self, 'archived_by_user_id', n.get_str_value()),
+            "assignedTo": lambda n : setattr(self, 'assigned_to', n.get_object_value(LeadTableRow_assignedTo)),
+            "assignedToUserId": lambda n : setattr(self, 'assigned_to_user_id', n.get_str_value()),
+            "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(LeadTableRow_currentLeadStatus)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
@@ -107,6 +121,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(LeadTableRow_organization)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
+            "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "processingStatus": lambda n : setattr(self, 'processing_status', n.get_enum_value(LeadTableRow_processingStatus)),
             "processingStatusChangedAt": lambda n : setattr(self, 'processing_status_changed_at', n.get_datetime_value()),
@@ -130,6 +145,9 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
         writer.write_str_value("archivedByUserId", self.archived_by_user_id)
+        writer.write_object_value("assignedTo", self.assigned_to)
+        writer.write_str_value("assignedToUserId", self.assigned_to_user_id)
+        writer.write_str_value("avatarUrl", self.avatar_url)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_str_value("email", self.email)
@@ -140,6 +158,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("lastName", self.last_name)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phone", self.phone)
+        writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_float_value("price", self.price)
         writer.write_enum_value("processingStatus", self.processing_status)
         writer.write_datetime_value("processingStatusChangedAt", self.processing_status_changed_at)

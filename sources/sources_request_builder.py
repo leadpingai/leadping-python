@@ -15,8 +15,8 @@ from warnings import warn
 
 if TYPE_CHECKING:
     from ..models.problem_details import ProblemDetails
+    from ..models.source_credential_issue_response import SourceCredentialIssueResponse
     from ..models.source_request import SourceRequest
-    from ..models.source_response import SourceResponse
     from .all.all_request_builder import AllRequestBuilder
     from .item.sources_item_request_builder import SourcesItemRequestBuilder
 
@@ -47,12 +47,12 @@ class SourcesRequestBuilder(BaseRequestBuilder):
         url_tpl_params["id"] = id
         return SourcesItemRequestBuilder(self.request_adapter, url_tpl_params)
     
-    async def post(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceResponse]:
+    async def post(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SourceCredentialIssueResponse]:
         """
         Creates a lead source for the current organization, storing intake credentials and routing context for captured external leads.
         param body: Defines the fields clients can send when working with lead source.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[SourceResponse]
+        Returns: Optional[SourceCredentialIssueResponse]
         """
         if body is None:
             raise TypeError("body cannot be null.")
@@ -69,9 +69,9 @@ class SourcesRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ..models.source_response import SourceResponse
+        from ..models.source_credential_issue_response import SourceCredentialIssueResponse
 
-        return await self.request_adapter.send_async(request_info, SourceResponse, error_mapping)
+        return await self.request_adapter.send_async(request_info, SourceCredentialIssueResponse, error_mapping)
     
     def to_post_request_information(self,body: SourceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """

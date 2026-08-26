@@ -17,6 +17,8 @@ class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
 
     # Number of calls answered during the reporting period.
     answered_calls: Optional[int] = None
+    # Number of calls that failed or were blocked during the reporting period.
+    call_errors: Optional[int] = None
     # Total connected call duration, in minutes, during the reporting period.
     call_minutes: Optional[float] = None
     # Number of outbound calls placed during the reporting period.
@@ -58,6 +60,7 @@ class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "answeredCalls": lambda n : setattr(self, 'answered_calls', n.get_int_value()),
+            "callErrors": lambda n : setattr(self, 'call_errors', n.get_int_value()),
             "callMinutes": lambda n : setattr(self, 'call_minutes', n.get_float_value()),
             "callsPlaced": lambda n : setattr(self, 'calls_placed', n.get_int_value()),
             "callsReceived": lambda n : setattr(self, 'calls_received', n.get_int_value()),
@@ -79,6 +82,7 @@ class CustomerCommunicationUsage(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_int_value("answeredCalls", self.answered_calls)
+        writer.write_int_value("callErrors", self.call_errors)
         writer.write_float_value("callMinutes", self.call_minutes)
         writer.write_int_value("callsPlaced", self.calls_placed)
         writer.write_int_value("callsReceived", self.calls_received)

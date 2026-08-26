@@ -33,7 +33,7 @@ class ReleaseRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SuppressionEntryResponse]:
         """
-        Releases an active Leadping suppression entry so a recipient can be contacted again, returning the updated suppression record when available.
+        The result reflects the effective compliance state after normalization, organization scoping, and suppression-history checks.
         param body: Defines a recipient and communication channel to suppress, release, or check before Leadping sends outreach.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SuppressionEntryResponse]
@@ -59,7 +59,7 @@ class ReleaseRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: SuppressionEntryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Releases an active Leadping suppression entry so a recipient can be contacted again, returning the updated suppression record when available.
+        The result reflects the effective compliance state after normalization, organization scoping, and suppression-history checks.
         param body: Defines a recipient and communication channel to suppress, release, or check before Leadping sends outreach.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

@@ -33,7 +33,7 @@ class LoginRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: TelephonyLoginRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[TelephonyLoginResponse]:
         """
-        Generates a Leadping WebRTC login token so authenticated agents can connect to telephony services and place or receive browser-based calls.
+        The issued client configuration is scoped to the authenticated user and contains only the short-lived credentials required by the calling client.
         param body: Identifies the Leadping user and calling context for which a short-lived telephony client token should be issued.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[TelephonyLoginResponse]
@@ -59,7 +59,7 @@ class LoginRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: TelephonyLoginRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Generates a Leadping WebRTC login token so authenticated agents can connect to telephony services and place or receive browser-based calls.
+        The issued client configuration is scoped to the authenticated user and contains only the short-lived credentials required by the calling client.
         param body: Identifies the Leadping user and calling context for which a short-lived telephony client token should be issued.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

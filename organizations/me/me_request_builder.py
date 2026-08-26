@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from .invitations.invitations_request_builder import InvitationsRequestBuilder
     from .members.members_request_builder import MembersRequestBuilder
+    from .membership.membership_request_builder import MembershipRequestBuilder
     from .one_zerodlc.one_zerodlc_request_builder import OneZerodlcRequestBuilder
     from .options.options_request_builder import OptionsRequestBuilder
     from .switch.switch_request_builder import SwitchRequestBuilder
@@ -176,6 +177,15 @@ class MeRequestBuilder(BaseRequestBuilder):
         from .members.members_request_builder import MembersRequestBuilder
 
         return MembersRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def membership(self) -> MembershipRequestBuilder:
+        """
+        The membership property
+        """
+        from .membership.membership_request_builder import MembershipRequestBuilder
+
+        return MembershipRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def one_zerodlc(self) -> OneZerodlcRequestBuilder:

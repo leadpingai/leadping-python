@@ -32,7 +32,7 @@ class CancelRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SmsResponse]:
         """
-        Cancels a scheduled SMS event before delivery, preserving the event record while preventing the queued message from being sent.
+        Cancels a scheduled SMS event before delivery, preserving the event record while preventing the queued message from being sent.The cancellation window remains open only while the SMS status is Scheduled and closes when delivery begins.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SmsResponse]
         """
@@ -56,7 +56,7 @@ class CancelRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Cancels a scheduled SMS event before delivery, preserving the event record while preventing the queued message from being sent.
+        Cancels a scheduled SMS event before delivery, preserving the event record while preventing the queued message from being sent.The cancellation window remains open only while the SMS status is Scheduled and closes when delivery begins.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

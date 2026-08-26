@@ -9,6 +9,7 @@ if TYPE_CHECKING:
     from .lead_contact import LeadContact
     from .lead_metadata import LeadMetadata
     from .lead_profile import LeadProfile
+    from .lead_response_assigned_to import LeadResponse_assignedTo
     from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
     from .lead_response_phone_identity import LeadResponse_phoneIdentity
     from .lead_response_processing_status import LeadResponse_processingStatus
@@ -30,6 +31,10 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
+    # Identifier and display name of the active organization member assigned to this lead.
+    assigned_to: Optional[LeadResponse_assignedTo] = None
+    # Leadping user currently responsible for this lead, or null when it is in the unassigned queue.
+    assigned_to_user_id: Optional[str] = None
     # Contact details for the lead or customer represented by this lead response.
     contact: Optional[LeadContact] = None
     # UTC timestamp when the resource was created.
@@ -82,6 +87,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
+        from .lead_response_assigned_to import LeadResponse_assignedTo
         from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
         from .lead_response_phone_identity import LeadResponse_phoneIdentity
         from .lead_response_processing_status import LeadResponse_processingStatus
@@ -90,6 +96,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         from .lead_contact import LeadContact
         from .lead_metadata import LeadMetadata
         from .lead_profile import LeadProfile
+        from .lead_response_assigned_to import LeadResponse_assignedTo
         from .lead_response_current_lead_status import LeadResponse_currentLeadStatus
         from .lead_response_phone_identity import LeadResponse_phoneIdentity
         from .lead_response_processing_status import LeadResponse_processingStatus
@@ -100,6 +107,8 @@ class LeadResponse(AdditionalDataHolder, Parsable):
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
             "archivedByUserId": lambda n : setattr(self, 'archived_by_user_id', n.get_str_value()),
+            "assignedTo": lambda n : setattr(self, 'assigned_to', n.get_object_value(LeadResponse_assignedTo)),
+            "assignedToUserId": lambda n : setattr(self, 'assigned_to_user_id', n.get_str_value()),
             "contact": lambda n : setattr(self, 'contact', n.get_object_value(LeadContact)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(LeadResponse_currentLeadStatus)),
@@ -131,6 +140,8 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
         writer.write_str_value("archivedByUserId", self.archived_by_user_id)
+        writer.write_object_value("assignedTo", self.assigned_to)
+        writer.write_str_value("assignedToUserId", self.assigned_to_user_id)
         writer.write_object_value("contact", self.contact)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_object_value("currentLeadStatus", self.current_lead_status)

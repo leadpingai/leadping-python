@@ -32,7 +32,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneCallResponse]:
         """
-        Retrieves the latest status for a Leadping phone call by call ID, including provider state and call details for tracking progress.
+        The call operation validates ownership and current provider state before returning the updated Leadping call representation.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneCallResponse]
         """
@@ -55,7 +55,7 @@ class StatusRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Retrieves the latest status for a Leadping phone call by call ID, including provider state and call details for tracking progress.
+        The call operation validates ownership and current provider state before returning the updated Leadping call representation.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

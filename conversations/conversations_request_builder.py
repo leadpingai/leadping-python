@@ -6,6 +6,7 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .item.conversations_item_request_builder import ConversationsItemRequestBuilder
     from .lead.lead_request_builder import LeadRequestBuilder
     from .my.my_request_builder import MyRequestBuilder
 
@@ -21,6 +22,20 @@ class ConversationsRequestBuilder(BaseRequestBuilder):
         Returns: None
         """
         super().__init__(request_adapter, "{+baseurl}/conversations", path_parameters)
+    
+    def by_id(self,id: str) -> ConversationsItemRequestBuilder:
+        """
+        Gets an item from the leadping.conversations.item collection
+        param id: The ID of the conversation to mark as read.
+        Returns: ConversationsItemRequestBuilder
+        """
+        if id is None:
+            raise TypeError("id cannot be null.")
+        from .item.conversations_item_request_builder import ConversationsItemRequestBuilder
+
+        url_tpl_params = get_path_parameters(self.path_parameters)
+        url_tpl_params["id"] = id
+        return ConversationsItemRequestBuilder(self.request_adapter, url_tpl_params)
     
     @property
     def lead(self) -> LeadRequestBuilder:

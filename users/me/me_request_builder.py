@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from ...models.user_request import UserRequest
     from ...models.user_response import UserResponse
+    from .notification_preferences.notification_preferences_request_builder import NotificationPreferencesRequestBuilder
     from .paymentmethod.paymentmethod_request_builder import PaymentmethodRequestBuilder
 
 class MeRequestBuilder(BaseRequestBuilder):
@@ -114,6 +115,15 @@ class MeRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return MeRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def notification_preferences(self) -> NotificationPreferencesRequestBuilder:
+        """
+        The notificationPreferences property
+        """
+        from .notification_preferences.notification_preferences_request_builder import NotificationPreferencesRequestBuilder
+
+        return NotificationPreferencesRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def paymentmethod(self) -> PaymentmethodRequestBuilder:

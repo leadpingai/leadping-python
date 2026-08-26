@@ -35,6 +35,8 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
     processing_attempts: Optional[int] = None
     # UTC timestamp when this automation action run record was scheduled.
     scheduled_at: Optional[datetime.datetime] = None
+    # Connection selected by a control-flow action such as a weighted random split.
+    selected_connection_id: Optional[str] = None
     # UTC timestamp when processing started for this automation action run record.
     started_at: Optional[datetime.datetime] = None
     # Current lifecycle status for this automation action run record in the Leadping API.
@@ -68,6 +70,7 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
             "order": lambda n : setattr(self, 'order', n.get_int_value()),
             "processingAttempts": lambda n : setattr(self, 'processing_attempts', n.get_int_value()),
             "scheduledAt": lambda n : setattr(self, 'scheduled_at', n.get_datetime_value()),
+            "selectedConnectionId": lambda n : setattr(self, 'selected_connection_id', n.get_str_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
         }
@@ -92,6 +95,7 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
         writer.write_int_value("order", self.order)
         writer.write_int_value("processingAttempts", self.processing_attempts)
         writer.write_datetime_value("scheduledAt", self.scheduled_at)
+        writer.write_str_value("selectedConnectionId", self.selected_connection_id)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_str_value("status", self.status)
         writer.write_additional_data_value(self.additional_data)

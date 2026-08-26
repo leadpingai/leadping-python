@@ -33,7 +33,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyListResponse]:
         """
-        Retrieves a paged list of API keys owned by the caller's current Leadping organization, with support for filtering, sorting, and pagination.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationApiKeyListResponse]
@@ -59,7 +59,7 @@ class MyRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Retrieves a paged list of API keys owned by the caller's current Leadping organization, with support for filtering, sorting, and pagination.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

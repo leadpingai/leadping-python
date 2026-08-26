@@ -6,6 +6,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .customer_automation_health_last_failure import CustomerAutomationHealth_lastFailure
+    from .customer_automation_health_point import CustomerAutomationHealthPoint
     from .customer_failing_automation import CustomerFailingAutomation
 
 @dataclass
@@ -30,6 +31,8 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
     last_failure: Optional[CustomerAutomationHealth_lastFailure] = None
     # Total number of success records represented by this Leadping customer automation health.
     success_count: Optional[int] = None
+    # Automation execution activity over the reporting period.
+    trend: Optional[list[CustomerAutomationHealthPoint]] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CustomerAutomationHealth:
@@ -48,9 +51,11 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .customer_automation_health_last_failure import CustomerAutomationHealth_lastFailure
+        from .customer_automation_health_point import CustomerAutomationHealthPoint
         from .customer_failing_automation import CustomerFailingAutomation
 
         from .customer_automation_health_last_failure import CustomerAutomationHealth_lastFailure
+        from .customer_automation_health_point import CustomerAutomationHealthPoint
         from .customer_failing_automation import CustomerFailingAutomation
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -61,6 +66,7 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
             "failureCount": lambda n : setattr(self, 'failure_count', n.get_int_value()),
             "lastFailure": lambda n : setattr(self, 'last_failure', n.get_object_value(CustomerAutomationHealth_lastFailure)),
             "successCount": lambda n : setattr(self, 'success_count', n.get_int_value()),
+            "trend": lambda n : setattr(self, 'trend', n.get_collection_of_object_values(CustomerAutomationHealthPoint)),
         }
         return fields
     
@@ -79,6 +85,7 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
         writer.write_int_value("failureCount", self.failure_count)
         writer.write_object_value("lastFailure", self.last_failure)
         writer.write_int_value("successCount", self.success_count)
+        writer.write_collection_of_object_values("trend", self.trend)
         writer.write_additional_data_value(self.additional_data)
     
 

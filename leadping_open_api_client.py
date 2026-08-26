@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from .a2a.a2a_request_builder import A2aRequestBuilder
     from .analytics.analytics_request_builder import AnalyticsRequestBuilder
     from .automations.automations_request_builder import AutomationsRequestBuilder
+    from .blog.blog_request_builder import BlogRequestBuilder
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
     from .events.events_request_builder import EventsRequestBuilder
     from .feedback.feedback_request_builder import FeedbackRequestBuilder
@@ -92,6 +93,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .automations.automations_request_builder import AutomationsRequestBuilder
 
         return AutomationsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def blog(self) -> BlogRequestBuilder:
+        """
+        The blog property
+        """
+        from .blog.blog_request_builder import BlogRequestBuilder
+
+        return BlogRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def conversations(self) -> ConversationsRequestBuilder:

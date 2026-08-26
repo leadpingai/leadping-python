@@ -18,6 +18,8 @@ class AutomationConnection(AdditionalDataHolder, Parsable):
     source_node_id: Optional[str] = None
     # Graph node identifier where the connection ends.
     target_node_id: Optional[str] = None
+    # Percentage chance assigned to this connection when it leaves a weighted random split. Ignored for connections from other node types.
+    weight: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> AutomationConnection:
@@ -39,6 +41,7 @@ class AutomationConnection(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "sourceNodeId": lambda n : setattr(self, 'source_node_id', n.get_str_value()),
             "targetNodeId": lambda n : setattr(self, 'target_node_id', n.get_str_value()),
+            "weight": lambda n : setattr(self, 'weight', n.get_int_value()),
         }
         return fields
     
@@ -53,6 +56,7 @@ class AutomationConnection(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_str_value("sourceNodeId", self.source_node_id)
         writer.write_str_value("targetNodeId", self.target_node_id)
+        writer.write_int_value("weight", self.weight)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from ...models.lead_response import LeadResponse
     from ...models.problem_details import ProblemDetails
     from .archive.archive_request_builder import ArchiveRequestBuilder
+    from .assignment.assignment_request_builder import AssignmentRequestBuilder
     from .status.status_request_builder import StatusRequestBuilder
     from .status_history.status_history_request_builder import StatusHistoryRequestBuilder
     from .tags.tags_request_builder import TagsRequestBuilder
@@ -163,6 +164,15 @@ class ItemRequestBuilder(BaseRequestBuilder):
         from .archive.archive_request_builder import ArchiveRequestBuilder
 
         return ArchiveRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def assignment(self) -> AssignmentRequestBuilder:
+        """
+        The assignment property
+        """
+        from .assignment.assignment_request_builder import AssignmentRequestBuilder
+
+        return AssignmentRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def status(self) -> StatusRequestBuilder:

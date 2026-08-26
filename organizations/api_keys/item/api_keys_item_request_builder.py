@@ -35,7 +35,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyRevokeResponse]:
         """
-        Confirmation that identifies the revoked key.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationApiKeyRevokeResponse]
         """
@@ -58,7 +58,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyPreviewResponse]:
         """
-        Returns the API key row with a safe token preview.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationApiKeyPreviewResponse]
         """
@@ -81,7 +81,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: OrganizationApiKeyRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyIssueResponse]:
         """
-        The one-time API token and safe key detail row.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param body: Defines the display name and access configuration for a new Leadping organization API key.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationApiKeyIssueResponse]
@@ -107,7 +107,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Confirmation that identifies the revoked key.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -118,7 +118,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the API key row with a safe token preview.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -129,7 +129,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: OrganizationApiKeyRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        The one-time API token and safe key detail row.
+        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param body: Defines the display name and access configuration for a new Leadping organization API key.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
