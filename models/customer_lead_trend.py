@@ -18,10 +18,14 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
 
     # Date and time when this Leadping customer lead trend was comparison.
     comparison: Optional[AnalyticsComparison] = None
+    # Lead intake errors grouped into the same reporting buckets as Points.
+    error_points: Optional[list[AnalyticsTrendPointOfint]] = None
     # Collection of points included with this Leadping customer lead trend.
     points: Optional[list[AnalyticsTrendPointOfint]] = None
     # Total number of total records represented by this Leadping customer lead trend.
     total: Optional[int] = None
+    # Total number of lead submissions rejected during intake.
+    total_errors: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CustomerLeadTrend:
@@ -47,8 +51,10 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "comparison": lambda n : setattr(self, 'comparison', n.get_object_value(AnalyticsComparison)),
+            "errorPoints": lambda n : setattr(self, 'error_points', n.get_collection_of_object_values(AnalyticsTrendPointOfint)),
             "points": lambda n : setattr(self, 'points', n.get_collection_of_object_values(AnalyticsTrendPointOfint)),
             "total": lambda n : setattr(self, 'total', n.get_int_value()),
+            "totalErrors": lambda n : setattr(self, 'total_errors', n.get_int_value()),
         }
         return fields
     
@@ -61,8 +67,10 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_object_value("comparison", self.comparison)
+        writer.write_collection_of_object_values("errorPoints", self.error_points)
         writer.write_collection_of_object_values("points", self.points)
         writer.write_int_value("total", self.total)
+        writer.write_int_value("totalErrors", self.total_errors)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -11,7 +11,6 @@ if TYPE_CHECKING:
     from .automation_connection import AutomationConnection
     from .automation_response_organization import AutomationResponse_organization
     from .automation_response_user import AutomationResponse_user
-    from .automation_run_record import AutomationRunRecord
     from .automation_trigger import AutomationTrigger
 
 @dataclass
@@ -54,8 +53,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     organization: Optional[AutomationResponse_organization] = None
     # Organization ID that owns this automation.
     organization_id: Optional[str] = None
-    # Recent automation runs returned for history and troubleshooting.
-    recent_runs: Optional[list[AutomationRunRecord]] = None
     # Scope that limits where this automation configuration response applies in Leadping.
     scope: Optional[str] = None
     # Automation triggers that can start this workflow.
@@ -88,7 +85,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         from .automation_connection import AutomationConnection
         from .automation_response_organization import AutomationResponse_organization
         from .automation_response_user import AutomationResponse_user
-        from .automation_run_record import AutomationRunRecord
         from .automation_trigger import AutomationTrigger
 
         from .automation_action import AutomationAction
@@ -96,7 +92,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         from .automation_connection import AutomationConnection
         from .automation_response_organization import AutomationResponse_organization
         from .automation_response_user import AutomationResponse_user
-        from .automation_run_record import AutomationRunRecord
         from .automation_trigger import AutomationTrigger
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -116,7 +111,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(AutomationResponse_organization)),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
-            "recentRuns": lambda n : setattr(self, 'recent_runs', n.get_collection_of_object_values(AutomationRunRecord)),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
             "user": lambda n : setattr(self, 'user', n.get_object_value(AutomationResponse_user)),
@@ -149,7 +143,6 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("name", self.name)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("organizationId", self.organization_id)
-        writer.write_collection_of_object_values("recentRuns", self.recent_runs)
         writer.write_str_value("scope", self.scope)
         writer.write_collection_of_object_values("triggers", self.triggers)
         writer.write_object_value("user", self.user)

@@ -7,34 +7,37 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
 class BlogArticleResponse(AdditionalDataHolder, Parsable):
+    """
+    Represents a blog article response.
+    """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The authorName property
+    # Gets or sets the author name.
     author_name: Optional[str] = None
-    # The category property
+    # Gets or sets the category.
     category: Optional[str] = None
-    # The content property
+    # Gets or sets the content.
     content: Optional[str] = None
-    # The coverImageUrl property
+    # Gets or sets the cover image URL.
     cover_image_url: Optional[str] = None
-    # The createdAt property
+    # Gets or sets the created at.
     created_at: Optional[datetime.datetime] = None
-    # The excerpt property
+    # Gets or sets the excerpt.
     excerpt: Optional[str] = None
-    # The id property
+    # Gets or sets the ID.
     id: Optional[str] = None
-    # The isFeatured property
+    # Gets or sets the is featured.
     is_featured: Optional[bool] = None
-    # The isPublished property
+    # Gets or sets the is published.
     is_published: Optional[bool] = None
-    # The modifiedAt property
+    # Gets or sets the modified at.
     modified_at: Optional[datetime.datetime] = None
-    # The publishedAt property
+    # Gets or sets the published at.
     published_at: Optional[datetime.datetime] = None
-    # The slug property
+    # Gets or sets the slug.
     slug: Optional[str] = None
-    # The title property
+    # Gets or sets the title.
     title: Optional[str] = None
     
     @staticmethod
