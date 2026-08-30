@@ -1,7 +1,7 @@
 from enum import Enum
 
 class OrganizationInvitationStatus(str, Enum):
-    AwaitingWorkOSConfirmation = "Awaiting WorkOS confirmation",
+    AwaitingConfirmation = "Awaiting confirmation",
     Pending = "Pending",
     Accepted = "Accepted",
     Expired = "Expired",

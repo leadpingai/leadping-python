@@ -24,7 +24,7 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     caller_name: Optional[PhoneLookup_callerName] = None
     # Complete carrier metadata reported for this phone number.
     carrier: Optional[PhoneLookup_carrier] = None
-    # UTC timestamp when the resource was created.
+    # Timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Fraud value returned by the provider, when available.
     fraud: Optional[str] = None
@@ -36,7 +36,7 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     line_type: Optional[PhoneLookup_lineType] = None
     # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[PhoneLookup_location] = None
-    # UTC timestamp when the resource was last modified, or null when it has not been updated.
+    # Timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Provider-formatted national phone number.
     national_format: Optional[str] = None
