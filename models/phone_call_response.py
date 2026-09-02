@@ -13,7 +13,7 @@ if TYPE_CHECKING:
 @dataclass
 class PhoneCallResponse(AdditionalDataHolder, Parsable):
     """
-    Describes a Leadping phone call, including participants, direction, provider state, timing, recording, and billing details.
+    Describes a Leadping phone call, including participants, direction, provider state, timing, voicemail, and billing details.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
@@ -54,8 +54,6 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     phone_number: Optional[str] = None
     # UTC timestamp when Leadping queued this phone call for processing.
     queued_at: Optional[datetime.datetime] = None
-    # URL for the call recording, when the provider makes one available.
-    recording_url: Optional[str] = None
     # UTC timestamp when the call started ringing.
     ringing_at: Optional[datetime.datetime] = None
     # Explains why Leadping selected, rejected, or substituted an outgoing caller or messaging number.
@@ -68,6 +66,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     status_reason: Optional[str] = None
     # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None
+    # URL for voicemail audio, when the call resulted in a voicemail.
+    voicemail_url: Optional[str] = None
     # Indicates whether a user manually overrode Leadping's automatic number selection for this phone call.
     was_manually_overridden: Optional[bool] = None
     
@@ -114,13 +114,13 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
-            "recordingUrl": lambda n : setattr(self, 'recording_url', n.get_str_value()),
             "ringingAt": lambda n : setattr(self, 'ringing_at', n.get_datetime_value()),
             "selectionReason": lambda n : setattr(self, 'selection_reason', n.get_enum_value(PhoneCallResponse_selectionReason)),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(PhoneCallStatus)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
+            "voicemailUrl": lambda n : setattr(self, 'voicemail_url', n.get_str_value()),
             "wasManuallyOverridden": lambda n : setattr(self, 'was_manually_overridden', n.get_bool_value()),
         }
         return fields
@@ -151,13 +151,13 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_datetime_value("queuedAt", self.queued_at)
-        writer.write_str_value("recordingUrl", self.recording_url)
         writer.write_datetime_value("ringingAt", self.ringing_at)
         writer.write_enum_value("selectionReason", self.selection_reason)
         writer.write_str_value("sourceId", self.source_id)
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
+        writer.write_str_value("voicemailUrl", self.voicemail_url)
         writer.write_bool_value("wasManuallyOverridden", self.was_manually_overridden)
         writer.write_additional_data_value(self.additional_data)
     

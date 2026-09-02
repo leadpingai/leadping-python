@@ -55,8 +55,6 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # Display name for the organization associated with this call event.
     organization_name: Optional[str] = None
-    # URL for the call recording, when the provider makes one available.
-    recording_url: Optional[str] = None
     # Describes the durable business outcome of a Leadping phone call after provider status normalization.
     status: Optional[CallEventTableRow_status] = None
     # Human-readable reason explaining the current status of this call event table row.
@@ -71,6 +69,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     user_id: Optional[str] = None
     # Display name for the person or agent who initiated this call event.
     user_name: Optional[str] = None
+    # URL for voicemail audio, when the call resulted in a voicemail.
+    voicemail_url: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> CallEventTableRow:
@@ -114,7 +114,6 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "organizationName": lambda n : setattr(self, 'organization_name', n.get_str_value()),
-            "recordingUrl": lambda n : setattr(self, 'recording_url', n.get_str_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(CallEventTableRow_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
@@ -122,6 +121,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "userEmail": lambda n : setattr(self, 'user_email', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
             "userName": lambda n : setattr(self, 'user_name', n.get_str_value()),
+            "voicemailUrl": lambda n : setattr(self, 'voicemail_url', n.get_str_value()),
         }
         return fields
     
@@ -152,7 +152,6 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("organization", self.organization)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("organizationName", self.organization_name)
-        writer.write_str_value("recordingUrl", self.recording_url)
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
@@ -160,6 +159,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("userEmail", self.user_email)
         writer.write_str_value("userId", self.user_id)
         writer.write_str_value("userName", self.user_name)
+        writer.write_str_value("voicemailUrl", self.voicemail_url)
         writer.write_additional_data_value(self.additional_data)
     
 
