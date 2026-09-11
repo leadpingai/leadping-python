@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .automation_action_run_record import AutomationActionRunRecord
+    from .automation_run_record_condition_results import AutomationRunRecord_conditionResults
 
 @dataclass
 class AutomationRunRecord(AdditionalDataHolder, Parsable):
@@ -22,6 +23,8 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
     automation_id: Optional[str] = None
     # UTC timestamp when processing completed for this automation run record.
     completed_at: Optional[datetime.datetime] = None
+    # Results of condition nodes already visited by this run, preserved across waits and retries.
+    condition_results: Optional[AutomationRunRecord_conditionResults] = None
     # Execution mode used for automation preview or live workflow processing.
     execution_mode: Optional[str] = None
     # Machine-readable failure code for troubleshooting this automation run record.
@@ -42,6 +45,8 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
     started_at: Optional[datetime.datetime] = None
     # Current lifecycle status for this automation run record in the Leadping API.
     status: Optional[str] = None
+    # Identifier of the trigger node selected when this run was queued.
+    trigger_id: Optional[str] = None
     # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
     
@@ -62,13 +67,16 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .automation_action_run_record import AutomationActionRunRecord
+        from .automation_run_record_condition_results import AutomationRunRecord_conditionResults
 
         from .automation_action_run_record import AutomationActionRunRecord
+        from .automation_run_record_condition_results import AutomationRunRecord_conditionResults
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationActionRunRecord)),
             "automationId": lambda n : setattr(self, 'automation_id', n.get_str_value()),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
+            "conditionResults": lambda n : setattr(self, 'condition_results', n.get_object_value(AutomationRunRecord_conditionResults)),
             "executionMode": lambda n : setattr(self, 'execution_mode', n.get_str_value()),
             "failureCode": lambda n : setattr(self, 'failure_code', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -79,6 +87,7 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
             "skippedReason": lambda n : setattr(self, 'skipped_reason', n.get_str_value()),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
+            "triggerId": lambda n : setattr(self, 'trigger_id', n.get_str_value()),
             "triggerType": lambda n : setattr(self, 'trigger_type', n.get_str_value()),
         }
         return fields
@@ -94,6 +103,7 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("actions", self.actions)
         writer.write_str_value("automationId", self.automation_id)
         writer.write_datetime_value("completedAt", self.completed_at)
+        writer.write_object_value("conditionResults", self.condition_results)
         writer.write_str_value("executionMode", self.execution_mode)
         writer.write_str_value("failureCode", self.failure_code)
         writer.write_str_value("id", self.id)
@@ -104,6 +114,7 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
         writer.write_str_value("skippedReason", self.skipped_reason)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_str_value("status", self.status)
+        writer.write_str_value("triggerId", self.trigger_id)
         writer.write_str_value("triggerType", self.trigger_type)
         writer.write_additional_data_value(self.additional_data)
     
