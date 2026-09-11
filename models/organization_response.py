@@ -31,9 +31,9 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
 
     # Current wallet balance available to the organization.
     account_balance: Optional[float] = None
-    # Organization activation state covering site, billing, compliance, and telephony readiness.
+    # Describes organization activation state data used in Leadping API requests and responses.
     activation: Optional[OrganizationResponse_activation] = None
-    # Postal address for the organization, lead, or contact represented by this organization profile response.
+    # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     address: Optional[OrganizationResponse_address] = None
     # Wallet refill amount charged when automatic refill is triggered.
     auto_refill_amount: Optional[float] = None
@@ -41,17 +41,17 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     auto_refill_enabled: Optional[bool] = None
     # Wallet balance threshold that triggers automatic refill.
     auto_refill_trigger: Optional[float] = None
-    # Postal address used for invoices, receipts, and payment processor billing records.
+    # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     billing_address: Optional[OrganizationResponse_billingAddress] = None
     # Name used for invoices, receipts, and payment processor billing records.
     billing_name: Optional[str] = None
     # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[OrganizationResponse_billingPlan] = None
-    # Customer-safe billing state for this organization.
+    # Customer-safe billing state for a Leadping organization.
     billing_state: Optional[OrganizationResponse_billingState] = None
     # Tax identifier printed on billing documents. This may differ from the organization verification EIN.
     billing_tax_id: Optional[str] = None
-    # Compliance policy configuration for the organization.
+    # Describes organization compliance policy data used in Leadping API requests and responses.
     compliance_policy: Optional[OrganizationResponse_compliancePolicy] = None
     # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
@@ -61,7 +61,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     domain: Optional[str] = None
     # Employer Identification Number used for organization and 10DLC verification.
     ein: Optional[str] = None
-    # Uploaded EIN document reference used for organization verification.
+    # Extends an identifier-and-name resource reference with an optional string value used for display or selection metadata.
     ein_document: Optional[OrganizationResponse_einDocument] = None
     # Indicates whether this organization profile response is active and available in the Leadping API.
     enabled: Optional[bool] = None
@@ -81,13 +81,13 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     setup_status: Optional[OrganizationResponse_setupStatus] = None
     # Identifies a discrete billing, telephony, compliance, or configuration stage in organization provisioning.
     setup_step: Optional[OrganizationResponse_setupStep] = None
-    # Leadping website record connected to this organization.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     site: Optional[OrganizationResponse_site] = None
     # Describes an organization's account lifecycle and whether it can actively use Leadping services.
     status: Optional[OrganizationResponse_status] = None
     # Describes an organization's billing subscription lifecycle, including trial, active, delinquent, canceled, and expired states.
     subscription_status: Optional[OrganizationResponse_subscriptionStatus] = None
-    # User summary connected to this organization profile response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[OrganizationResponse_user] = None
     # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None

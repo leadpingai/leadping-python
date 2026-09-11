@@ -35,15 +35,15 @@ class OrganizationMemberResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
-    # Organization for this organization user.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[IdNamePair] = None
     # UTC timestamp for removed at on this organization user.
     removed_at: Optional[datetime.datetime] = None
     # The removed by user ID associated with this organization user.
     removed_by_user_id: Optional[str] = None
-    # Role for this organization user.
+    # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
-    # User for this organization user.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[IdNamePair] = None
     # User email for this organization user.
     user_email: Optional[str] = None

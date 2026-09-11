@@ -26,7 +26,7 @@ class AutomationPreviewResponse(AdditionalDataHolder, Parsable):
     sample_payload: Optional[AutomationPreviewResponse_samplePayload] = None
     # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
-    # Validation result returned for the automation configuration.
+    # Result schema for the Leadping API automation validation result returned by lookup and validation endpoints.
     validation: Optional[AutomationValidationResult] = None
     # Warnings returned for this automation preview response that do not necessarily block processing.
     warnings: Optional[list[str]] = None

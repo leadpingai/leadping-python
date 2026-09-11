@@ -19,7 +19,7 @@ class OutboundQueueItem(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Channel classification for this Leadping outbound queue item.
+    # Defines outbound delivery channels protected by delivery control.
     channel: Optional[OutboundDeliveryChannel] = None
     # Unique Leadping identifier for the outbound queue item.
     id: Optional[str] = None
@@ -31,9 +31,9 @@ class OutboundQueueItem(AdditionalDataHolder, Parsable):
     reason_code: Optional[OutboundQueueItem_reasonCode] = None
     # Date and time when this Leadping outbound queue item was scheduled send.
     scheduled_send_at: Optional[datetime.datetime] = None
-    # Source classification for this Leadping outbound queue item.
+    # Defines the source that requested outbound delivery.
     source: Optional[OutboundDeliverySource] = None
-    # Current status for this Leadping outbound queue item.
+    # Defines durable outbound delivery request statuses.
     status: Optional[OutboundDeliveryStatus] = None
     
     @staticmethod

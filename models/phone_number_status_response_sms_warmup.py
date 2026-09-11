@@ -12,7 +12,7 @@ from .sms_readiness_status_response import SmsReadinessStatusResponse
 @dataclass
 class PhoneNumberStatusResponse_smsWarmup(SmsReadinessStatusResponse, Parsable):
     """
-    SMS warmup status for this phone number.
+    Describes SMS warmup status data returned by Leadping.
     """
     
     @staticmethod

@@ -12,7 +12,7 @@ from .user_compliance import UserCompliance
 @dataclass
 class UserResponse_compliance(UserCompliance, Parsable):
     """
-    Compliance for this user.
+    Describes user compliance data used in Leadping API requests and responses.
     """
     
     @staticmethod

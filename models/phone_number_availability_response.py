@@ -19,7 +19,7 @@ class PhoneNumberAvailabilityResponse(AdditionalDataHolder, Parsable):
     currency: Optional[str] = None
     # Indicates whether this phone number is available for purchase or assignment.
     is_available: Optional[bool] = None
-    # Geographic location metadata for the phone number, lead, or lookup result.
+    # Public Leadping API schema for phone number location data.
     location: Optional[PhoneNumberAvailabilityResponse_location] = None
     # Phone number used by this phone number availability result for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None

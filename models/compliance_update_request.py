@@ -15,7 +15,7 @@ class ComplianceUpdateRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Compliance for this compliance update.
+    # Describes user compliance data used in Leadping API requests and responses.
     compliance: Optional[ComplianceUpdateRequest_compliance] = None
     # Source for this compliance update.
     source: Optional[str] = None

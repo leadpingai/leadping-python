@@ -12,7 +12,7 @@ from .customer_failing_automation import CustomerFailingAutomation
 @dataclass
 class CustomerAutomationHealth_lastFailure(CustomerFailingAutomation, Parsable):
     """
-    Last failure associated with this Leadping customer automation health.
+    Identifies an automation with recent execution failures and summarizes its affected leads and failure context.
     """
     
     @staticmethod

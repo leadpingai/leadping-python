@@ -23,9 +23,9 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
 
     # Billable seconds for this usage ledger.
     billable_seconds: Optional[int] = None
-    # Billable unit for this usage ledger.
+    # Identifies the metered unit used to price Leadping usage, such as a message, call minute, lookup, or phone number.
     billable_unit: Optional[BillableUnit] = None
-    # Channel for this usage ledger.
+    # Identifies the messaging, calling, phone-number, lookup, or platform channel that generated billable usage.
     channel: Optional[UsageChannel] = None
     # UTC timestamp for created at on this usage ledger.
     created_at: Optional[datetime.datetime] = None
@@ -39,9 +39,9 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this usage ledger is billable.
     is_billable: Optional[bool] = None
-    # Identifier and display name of the related lead.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[UsageLedgerTableRow_lead] = None
-    # Identifier and display name of the related organization.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[UsageLedgerTableRow_organization] = None
     # The phone number associated with this usage ledger.
     phone_number: Optional[str] = None
@@ -51,11 +51,11 @@ class UsageLedgerTableRow(AdditionalDataHolder, Parsable):
     quantity: Optional[float] = None
     # SMS segments for this usage ledger.
     sms_segments: Optional[int] = None
-    # The current status for this usage ledger.
+    # Describes whether a metered usage record is pending, rated, billed, reconciled, excluded, or failed.
     status: Optional[UsageStatus] = None
     # Unit price for this usage ledger.
     unit_price: Optional[float] = None
-    # Identifier and display name of the related user.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[UsageLedgerTableRow_user] = None
     
     @staticmethod

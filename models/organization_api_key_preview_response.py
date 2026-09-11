@@ -34,7 +34,7 @@ class OrganizationApiKeyPreviewResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Human-readable name of the API key.
     name: Optional[str] = None
-    # Organization that owns the API key.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[IdNamePair] = None
     # Permission slugs granted to the API key.
     permissions: Optional[list[str]] = None

@@ -39,7 +39,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     organization_status: Optional[OrganizationSwitchOption_organizationStatus] = None
     # Whether ready for customer traffic applies to this organization switch option.
     ready_for_customer_traffic: Optional[bool] = None
-    # Role for this organization switch option.
+    # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
     # Describes an organization's overall 10DLC registration lifecycle across brand and messaging campaign submission.
     ten_dlc_status: Optional[OrganizationSwitchOption_tenDlcStatus] = None

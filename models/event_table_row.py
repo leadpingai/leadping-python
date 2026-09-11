@@ -104,7 +104,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     summary: Optional[str] = None
     # Timeline category used to group events for display and filtering.
     timeline_category: Optional[str] = None
-    # Timeline type used to render this event in Leadping activity feeds.
+    # Classifies the kind of activity displayed in a lead or conversation event timeline.
     timeline_type: Optional[EventTimelineType] = None
     # Recipient phone number used for this communication.
     to_phone_number: Optional[str] = None

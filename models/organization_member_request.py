@@ -17,7 +17,7 @@ class OrganizationMemberRequest(AdditionalDataHolder, Parsable):
 
     # Email address for the person represented by this organization user request.
     email: Optional[str] = None
-    # Organization role assigned to the user.
+    # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
     # User ID to add, update, or remove from the organization.
     user_id: Optional[str] = None

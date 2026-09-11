@@ -21,9 +21,9 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
     canonical_city: Optional[str] = None
     # Canonical state or territory abbreviation resolved by Leadping.
     canonical_state: Optional[str] = None
-    # Latitude and longitude coordinate for this phone number location.
+    # Latitude and longitude coordinate for this lead contact profile.
     coordinate: Optional[PhoneNumberLocation_coordinate] = None
-    # Describes how the coordinate was resolved.
+    # Describes how a phone location value was resolved.
     coordinate_source: Optional[PhoneNumberLocation_coordinateSource] = None
     # Country code for the phone number or location represented by this phone number location.
     country_code: Optional[str] = None
@@ -33,7 +33,7 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
     state: Optional[str] = None
     # IANA or Windows time zone identifier used for local scheduling and reporting.
     time_zone_id: Optional[str] = None
-    # Describes how the time zone was resolved.
+    # Describes how a phone location value was resolved.
     time_zone_source: Optional[PhoneNumberLocation_timeZoneSource] = None
     
     @staticmethod

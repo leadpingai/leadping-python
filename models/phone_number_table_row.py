@@ -39,7 +39,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     type: Optional[str] = None
     # Indicates whether voice calling is ready for this organization or phone number.
     voice_ready: Optional[bool] = None
-    # Warmup state for this phone number.
+    # Messaging and calling warmup for a Leadping phone number.
     warmup: Optional[PhoneNumberReadiness] = None
     
     @staticmethod

@@ -12,7 +12,7 @@ from .street_address import StreetAddress
 @dataclass
 class LeadContact_streetAddress(StreetAddress, Parsable):
     """
-    Postal street address for the lead contact profile.
+    Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     """
     
     @staticmethod

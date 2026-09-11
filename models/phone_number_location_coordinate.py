@@ -12,7 +12,7 @@ from .coordinate import Coordinate
 @dataclass
 class PhoneNumberLocation_coordinate(Coordinate, Parsable):
     """
-    Latitude and longitude coordinate for this phone number location.
+    Latitude and longitude coordinate for this lead contact profile.
     """
     
     @staticmethod

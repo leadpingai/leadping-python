@@ -16,6 +16,8 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number update request.
     number: Optional[str] = None
+    # Opts this number into the optional $2 monthly number health add-on. Defaults to on on creation; omitted updates preserve the current selection.
+    number_health_enabled: Optional[bool] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberRequest:
@@ -36,6 +38,7 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
+            "numberHealthEnabled": lambda n : setattr(self, 'number_health_enabled', n.get_bool_value()),
         }
         return fields
     
@@ -49,6 +52,7 @@ class PhoneNumberRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
+        writer.write_bool_value("numberHealthEnabled", self.number_health_enabled)
         writer.write_additional_data_value(self.additional_data)
     
 

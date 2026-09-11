@@ -24,25 +24,25 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Activation health associated with this Leadping customer analytics.
+    # Summarizes an organization's progress and blockers across onboarding, billing, telephony, compliance, and launch readiness.
     activation_health: Optional[CustomerActivationHealth] = None
-    # Automation health associated with this Leadping customer analytics.
+    # Summarizes automation coverage, execution success, failures, and workflows requiring organization attention.
     automation_health: Optional[CustomerAutomationHealth] = None
-    # Communication usage associated with this Leadping customer analytics.
+    # Aggregates an organization's SMS, MMS, and calling activity, delivery outcomes, and billable usage over time.
     communication_usage: Optional[CustomerCommunicationUsage] = None
     # Date and time when this Leadping customer analytics was generated.
     generated_at: Optional[datetime.datetime] = None
     # Collection of lead sources included with this Leadping customer analytics.
     lead_sources: Optional[list[CustomerLeadSourceBreakdown]] = None
-    # Lead trend associated with this Leadping customer analytics.
+    # Measures lead creation, qualification, and conversion activity within one reporting time bucket.
     lead_trend: Optional[CustomerLeadTrend] = None
     # Date and time when this Leadping customer analytics was needs attention.
     needs_attention: Optional[list[CustomerNeedsAttentionItem]] = None
-    # Range associated with this Leadping customer analytics.
+    # Defines the inclusive reporting window and comparison window used to calculate Leadping analytics.
     range: Optional[AnalyticsDateRange] = None
-    # Response metrics associated with this Leadping customer analytics.
+    # Measures how quickly and consistently an organization responds to leads across supported communication channels.
     response_metrics: Optional[CustomerResponseMetrics] = None
-    # Human-readable summary for this Leadping customer analytics.
+    # Summarizes an organization's primary lead, response, communication, and conversion KPIs for the selected period.
     summary: Optional[CustomerAnalyticsSummary] = None
     
     @staticmethod

@@ -12,7 +12,7 @@ from .organization_compliance_policy import OrganizationCompliancePolicy
 @dataclass
 class OrganizationResponse_compliancePolicy(OrganizationCompliancePolicy, Parsable):
     """
-    Compliance policy configuration for the organization.
+    Describes organization compliance policy data used in Leadping API requests and responses.
     """
     
     @staticmethod

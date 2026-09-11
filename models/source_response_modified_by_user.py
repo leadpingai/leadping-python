@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class SourceResponse_modifiedByUser(IdNamePair, Parsable):
     """
-    User summary for the person who last modified this lead source response.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

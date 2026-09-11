@@ -33,9 +33,9 @@ class FeedbackResponse(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # Application route where this feedback item response originated or should direct the user.
     route: Optional[str] = None
-    # Current lifecycle status for this feedback item response in the Leadping API.
+    # Defines admin triage statuses for durable product feedback.
     status: Optional[FeedbackStatus] = None
-    # Type classification used to route and interpret this feedback item response in the Leadping API.
+    # Defines the type of product feedback submitted from inside Leadping.
     type: Optional[FeedbackType] = None
     # User ID for the person who submitted the feedback.
     user_id: Optional[str] = None

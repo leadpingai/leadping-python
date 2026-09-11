@@ -27,9 +27,9 @@ class PhoneIdentityLookupAction(AdditionalDataHolder, Parsable):
     provider_cost_amount: Optional[float] = None
     # The provider pricing version used to calculate the lookup cost.
     provider_pricing_version: Optional[str] = None
-    # The processing outcome reported for the phone identity lookup.
+    # Identifies the outcome of a phone identity lookup action.
     status: Optional[PhoneIdentityLookupActionStatus] = None
-    # The category of enrichment, validation, or reputation lookup that was performed.
+    # Identifies the kind of lookup action performed for a phone identity.
     type: Optional[PhoneIdentityLookupActionType] = None
     
     @staticmethod

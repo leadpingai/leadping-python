@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class SourceTableRow_user(IdNamePair, Parsable):
     """
-    User summary connected to this lead source table row.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

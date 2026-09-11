@@ -25,13 +25,13 @@ class UserResponse(AdditionalDataHolder, Parsable):
 
     # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[UserResponse_billingPlan] = None
-    # Customer-safe billing state for the user's currently selected organization.
+    # Customer-safe billing state for a Leadping organization.
     billing_state: Optional[UserResponse_billingState] = None
-    # Compliance for this user.
+    # Describes user compliance data used in Leadping API requests and responses.
     compliance: Optional[UserResponse_compliance] = None
     # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
-    # Current organization for this user.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     current_organization: Optional[UserResponse_currentOrganization] = None
     # The email address associated with this user.
     email: Optional[str] = None
@@ -51,7 +51,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
-    # Notification preferences for this user.
+    # Describes user notification preferences data used in Leadping API requests and responses.
     notification_preferences: Optional[UserResponse_notificationPreferences] = None
     # UTC timestamp for personal data deleted at on this user.
     personal_data_deleted_at: Optional[datetime.datetime] = None

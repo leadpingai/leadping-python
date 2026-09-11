@@ -27,7 +27,7 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
     failing_automations: Optional[list[CustomerFailingAutomation]] = None
     # Total number of failure records represented by this Leadping customer automation health.
     failure_count: Optional[int] = None
-    # Last failure associated with this Leadping customer automation health.
+    # Identifies an automation with recent execution failures and summarizes its affected leads and failure context.
     last_failure: Optional[CustomerAutomationHealth_lastFailure] = None
     # Total number of success records represented by this Leadping customer automation health.
     success_count: Optional[int] = None

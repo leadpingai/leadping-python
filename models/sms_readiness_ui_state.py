@@ -17,7 +17,7 @@ class SmsReadinessUiState(AdditionalDataHolder, Parsable):
 
     # The human-readable description of this SMS readiness UI state.
     description: Optional[str] = None
-    # The human-readable label shown for this SMS readiness UI state.
+    # Describes whether an organization is configured and permitted to send SMS or MMS traffic through Leadping.
     label: Optional[SmsReadinessState] = None
     # Tone for this SMS readiness UI state.
     tone: Optional[str] = None

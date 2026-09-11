@@ -20,9 +20,9 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Caller-name data returned by the provider.
+    # Caller-name data returned by the phone lookup provider.
     caller_name: Optional[PhoneLookup_callerName] = None
-    # Complete carrier metadata reported for this phone number.
+    # Complete carrier metadata returned by a phone number lookup provider.
     carrier: Optional[PhoneLookup_carrier] = None
     # Timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
@@ -34,7 +34,7 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     is_valid: Optional[bool] = None
     # Classifies the access technology or service type associated with a telephone number.
     line_type: Optional[PhoneLookup_lineType] = None
-    # Geographic location metadata for the phone number, lead, or lookup result.
+    # Public Leadping API schema for phone number location data.
     location: Optional[PhoneLookup_location] = None
     # Timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
@@ -42,7 +42,7 @@ class PhoneLookup(AdditionalDataHolder, Parsable):
     national_format: Optional[str] = None
     # E.164 phone number exposed by this phone lookup result.
     number: Optional[str] = None
-    # Complete portability data returned by Telnyx.
+    # Number-portability and routing data returned by Telnyx.
     portability: Optional[PhoneLookup_portability] = None
     # Provider record discriminator.
     record_type: Optional[str] = None

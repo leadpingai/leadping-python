@@ -38,7 +38,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     phone_number_id: Optional[str] = None
     # Human-readable label for the reason code on this eligible outgoing phone number.
     reason_label: Optional[str] = None
-    # Reason Leadping selected this outbound sender number.
+    # Explains why Leadping selected, rejected, or substituted an outgoing caller or messaging number.
     selection_reason: Optional[OutgoingNumberSelectionReason] = None
     # Lead source ID used to determine this phone number's outbound eligibility.
     source_id: Optional[str] = None

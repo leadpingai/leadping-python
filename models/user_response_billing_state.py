@@ -12,7 +12,7 @@ from .organization_billing_state import OrganizationBillingState
 @dataclass
 class UserResponse_billingState(OrganizationBillingState, Parsable):
     """
-    Customer-safe billing state for the user's currently selected organization.
+    Customer-safe billing state for a Leadping organization.
     """
     
     @staticmethod

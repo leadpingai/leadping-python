@@ -14,7 +14,7 @@ class LeadArchiveRequest(AdditionalDataHolder, Parsable):
 
     # Optional archive note that gives additional context for why the lead was archived.
     note: Optional[str] = None
-    # Human-readable reason supplied for this request or result.
+    # Defines why a lead was removed from the active working pipeline.
     reason: Optional[int] = None
     
     @staticmethod

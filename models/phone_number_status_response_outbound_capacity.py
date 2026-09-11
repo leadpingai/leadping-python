@@ -12,7 +12,7 @@ from .outbound_phone_number_capacity import OutboundPhoneNumberCapacity
 @dataclass
 class PhoneNumberStatusResponse_outboundCapacity(OutboundPhoneNumberCapacity, Parsable):
     """
-    Current outbound SMS and voice capacity for this phone number.
+    Reports the sending capacity, current load, and availability of a phone number considered for outbound delivery.
     """
     
     @staticmethod

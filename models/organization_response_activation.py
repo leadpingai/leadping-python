@@ -12,7 +12,7 @@ from .organization_activation_state import OrganizationActivationState
 @dataclass
 class OrganizationResponse_activation(OrganizationActivationState, Parsable):
     """
-    Organization activation state covering site, billing, compliance, and telephony readiness.
+    Describes organization activation state data used in Leadping API requests and responses.
     """
     
     @staticmethod

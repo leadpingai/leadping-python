@@ -45,7 +45,7 @@ class UserDataExportResponse(AdditionalDataHolder, Parsable):
     size_bytes: Optional[int] = None
     # Date and time when the user data export started.
     started_at: Optional[datetime.datetime] = None
-    # Current status for this Leadping user data export.
+    # Identifies the preparation, availability, failure, expiration, or deletion stage of a Leadping user-data export.
     status: Optional[UserDataExportStatuses] = None
     
     @staticmethod

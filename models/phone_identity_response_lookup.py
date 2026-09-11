@@ -12,7 +12,7 @@ from .phone_lookup import PhoneLookup
 @dataclass
 class PhoneIdentityResponse_lookup(PhoneLookup, Parsable):
     """
-    Provider lookup and enrichment data for the number.
+    Public Leadping API schema for phone lookup result data.
     """
     
     @staticmethod

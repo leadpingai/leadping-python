@@ -13,17 +13,17 @@ class CustomerAutomationHealthPoint(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Gets or sets the end at.
+    # The endAt property
     end_at: Optional[datetime.datetime] = None
-    # Gets or sets the executions.
+    # The executions property
     executions: Optional[int] = None
-    # Gets or sets the failure count.
+    # The failureCount property
     failure_count: Optional[int] = None
-    # Gets or sets the label.
+    # The label property
     label: Optional[str] = None
-    # Gets or sets the start at.
+    # The startAt property
     start_at: Optional[datetime.datetime] = None
-    # Gets or sets the success count.
+    # The successCount property
     success_count: Optional[int] = None
     
     @staticmethod

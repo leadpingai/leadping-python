@@ -12,7 +12,7 @@ from .street_address import StreetAddress
 @dataclass
 class OrganizationRequest_address(StreetAddress, Parsable):
     """
-    Postal address for the organization, lead, or contact represented by this organization profile request.
+    Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     """
     
     @staticmethod

@@ -12,7 +12,7 @@ from .user_notification_preferences import UserNotificationPreferences
 @dataclass
 class UserResponse_notificationPreferences(UserNotificationPreferences, Parsable):
     """
-    Notification preferences for this user.
+    Describes user notification preferences data used in Leadping API requests and responses.
     """
     
     @staticmethod

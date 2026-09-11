@@ -24,7 +24,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # The most recent time lookup data was enriched.
     last_enriched_at: Optional[datetime.datetime] = None
-    # Provider lookup and enrichment data for the number.
+    # Public Leadping API schema for phone lookup result data.
     lookup: Optional[PhoneIdentityResponse_lookup] = None
     # Lookup, enrichment, and reputation actions performed for this identity.
     lookup_actions: Optional[list[PhoneIdentityLookupAction]] = None
@@ -34,7 +34,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # The canonical E.164 phone number.
     number: Optional[str] = None
-    # Lossless provider response retained for administrative diagnostics.
+    # Lossless provider snapshot retained with a phone identity for replay, audits, and fields added by providers later.
     provider_enrichment: Optional[PhoneIdentityResponse_providerEnrichment] = None
     
     @staticmethod

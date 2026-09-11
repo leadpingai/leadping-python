@@ -21,7 +21,7 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
     billing_plan_change_effective_at: Optional[datetime.datetime] = None
     # UTC timestamp when the active subscription is scheduled to cancel.
     cancel_at: Optional[datetime.datetime] = None
-    # Customer-safe payment recovery state for the organization.
+    # Dunning state recorded after a failed recurring payment.
     dunning: Optional[OrganizationBillingState_dunning] = None
     # Indicates whether the organization has a saved default payment method.
     has_payment_method: Optional[bool] = None

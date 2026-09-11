@@ -13,7 +13,7 @@ class AnalyticsDateRange(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Bucket size associated with this Leadping analytics date range.
+    # Selects the time interval used to aggregate points in a Leadping analytics trend series.
     bucket_size: Optional[int] = None
     # Date and time when this Leadping analytics date range was end.
     end_at: Optional[datetime.datetime] = None

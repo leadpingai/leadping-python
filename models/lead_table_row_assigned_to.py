@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class LeadTableRow_assignedTo(IdNamePair, Parsable):
     """
-    Identifier and display name of the assigned organization member.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

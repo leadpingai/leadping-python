@@ -27,7 +27,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
-    # Identifier and display name of the assigned organization member.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     assigned_to: Optional[LeadTableRow_assignedTo] = None
     # Leadping user currently responsible for this lead, or null when unassigned.
     assigned_to_user_id: Optional[str] = None
@@ -35,7 +35,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     avatar_url: Optional[str] = None
     # UTC timestamp when this lead table row was created.
     created_at: Optional[datetime.datetime] = None
-    # Current lead status change summary that describes the lead outcome.
+    # Summary schema for Leadping API current lead status change summary data used in dashboards and reports.
     current_lead_status: Optional[LeadTableRow_currentLeadStatus] = None
     # Email address for the person represented by this lead table row.
     email: Optional[str] = None
@@ -49,7 +49,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     is_archived: Optional[bool] = None
     # Last name of the lead, user, or contact represented by this lead table row.
     last_name: Optional[str] = None
-    # Identifier and display name of the related organization.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[LeadTableRow_organization] = None
     # Phone details for the lead, user, or organization represented by this lead table row.
     phone: Optional[str] = None
@@ -63,7 +63,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     processing_status_changed_at: Optional[datetime.datetime] = None
     # Explanation when asynchronous lead processing is blocked or fails.
     processing_status_reason: Optional[str] = None
-    # Identifier and display name of the related source.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     source: Optional[LeadTableRow_source] = None
     # Current lifecycle status for this lead table row in the Leadping API.
     status: Optional[str] = None

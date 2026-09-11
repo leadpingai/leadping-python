@@ -15,7 +15,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Postal address for the organization, lead, or contact represented by this organization profile request.
+    # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     address: Optional[OrganizationRequest_address] = None
     # Human-readable description that explains this organization profile request to API users.
     description: Optional[str] = None

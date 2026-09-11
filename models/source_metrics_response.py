@@ -23,7 +23,7 @@ class SourceMetricsResponse(AdditionalDataHolder, Parsable):
     generated_at: Optional[datetime.datetime] = None
     # Collection of points included with this Leadping source metrics.
     points: Optional[list[AnalyticsTrendPointOfint]] = None
-    # Range associated with this Leadping source metrics.
+    # Defines the inclusive reporting window and comparison window used to calculate Leadping analytics.
     range: Optional[AnalyticsDateRange] = None
     # Total number of lead intake errors represented by this Leadping source metrics.
     total_errors: Optional[int] = None

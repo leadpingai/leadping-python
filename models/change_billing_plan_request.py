@@ -15,7 +15,7 @@ class ChangeBillingPlanRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Billing plan for this billing plan.
+    # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[BillingPlan] = None
     
     @staticmethod

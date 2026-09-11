@@ -21,7 +21,7 @@ class UserRequest(AdditionalDataHolder, Parsable):
     last_name: Optional[str] = None
     # Display name for the user.
     name: Optional[str] = None
-    # Notification preferences configured for the user.
+    # Describes user notification preferences data used in Leadping API requests and responses.
     notification_preferences: Optional[UserRequest_notificationPreferences] = None
     # Phone details for the lead, user, or organization represented by this user profile request.
     phone: Optional[str] = None

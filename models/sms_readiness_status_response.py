@@ -19,7 +19,7 @@ class SmsReadinessStatusResponse(AdditionalDataHolder, Parsable):
 
     # The health score metric for this SMS warmup status.
     health_score: Optional[int] = None
-    # The current delivery-health assessment for this SMS warmup status.
+    # Summarizes the severity of conditions affecting an organization's ability to send compliant SMS or MMS traffic.
     health_status: Optional[SmsReadinessHealthStatus] = None
     # The phone number associated with this SMS warmup status.
     phone_number: Optional[str] = None
@@ -27,9 +27,9 @@ class SmsReadinessStatusResponse(AdditionalDataHolder, Parsable):
     phone_number_id: Optional[str] = None
     # The progress percent metric for this SMS warmup status.
     progress_percent: Optional[int] = None
-    # The current state for this SMS warmup status.
+    # Describes whether an organization is configured and permitted to send SMS or MMS traffic through Leadping.
     status: Optional[SmsReadinessState] = None
-    # The current UI state for this SMS warmup status.
+    # Describes SMS readiness UI state data used in Leadping API requests and responses.
     ui_state: Optional[SmsReadinessUiState] = None
     # Whether warmup is enabled for this SMS warmup status.
     warmup_enabled: Optional[bool] = None

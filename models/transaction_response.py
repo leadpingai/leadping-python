@@ -39,7 +39,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     gateway_status: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # Identifier and display name of the related lead.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[TransactionResponse_lead] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
@@ -47,15 +47,15 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     net_amount: Optional[float] = None
     # Additional billing notes that explain the transaction for admins or customers.
     notes: Optional[str] = None
-    # Identifier and display name of the related organization.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[TransactionResponse_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
     # Leadping platform fee amount included in the transaction.
     platform_fee_amount: Optional[float] = None
-    # Processing status for this wallet transaction.
+    # Describes the processing and settlement lifecycle of a Leadping wallet or billing transaction.
     transaction_status: Optional[TransactionStatus] = None
-    # Debit or credit classification for this wallet transaction.
+    # Classifies a wallet transaction as a debit, credit, refund, adjustment, deposit, or other balance movement.
     transaction_type: Optional[TransactionType] = None
     
     @staticmethod

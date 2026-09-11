@@ -50,7 +50,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     payment_failed_sms_enabled: Optional[bool] = None
     # Whether the user has consented to receive Leadping account notification SMS messages.
     sms_consent_opted_in: Optional[bool] = None
-    # The TrustedForm certificate captured for the user's most recent SMS opt-in.
+    # Describes trusted form certificate data used in Leadping API requests and responses.
     sms_consent_trusted_form_certificate: Optional[UserNotificationPreferences_smsConsentTrustedFormCertificate] = None
     # When the user's Leadping notification SMS consent was last changed.
     sms_consent_updated_at: Optional[datetime.datetime] = None

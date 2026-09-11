@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class AutomationResponse_organization(IdNamePair, Parsable):
     """
-    Organization summary connected to this automation configuration response.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

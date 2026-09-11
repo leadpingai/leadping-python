@@ -16,6 +16,8 @@ class MessageMediaAttachment(AdditionalDataHolder, Parsable):
     content_type: Optional[str] = None
     # Original file name of the media attachment, when available.
     file_name: Optional[str] = None
+    # The durable Media record containing this attachment's scanned bytes.
+    media_id: Optional[str] = None
     # SHA-256 digest of the media content, when available.
     sha256: Optional[str] = None
     # Size of the media attachment in bytes.
@@ -42,6 +44,7 @@ class MessageMediaAttachment(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "contentType": lambda n : setattr(self, 'content_type', n.get_str_value()),
             "fileName": lambda n : setattr(self, 'file_name', n.get_str_value()),
+            "mediaId": lambda n : setattr(self, 'media_id', n.get_str_value()),
             "sha256": lambda n : setattr(self, 'sha256', n.get_str_value()),
             "size": lambda n : setattr(self, 'size', n.get_int_value()),
             "url": lambda n : setattr(self, 'url', n.get_str_value()),
@@ -58,6 +61,7 @@ class MessageMediaAttachment(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("contentType", self.content_type)
         writer.write_str_value("fileName", self.file_name)
+        writer.write_str_value("mediaId", self.media_id)
         writer.write_str_value("sha256", self.sha256)
         writer.write_int_value("size", self.size)
         writer.write_str_value("url", self.url)

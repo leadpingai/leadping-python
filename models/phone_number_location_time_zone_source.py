@@ -12,7 +12,7 @@ from .phone_location_source import PhoneLocationSource
 @dataclass
 class PhoneNumberLocation_timeZoneSource(PhoneLocationSource, Parsable):
     """
-    Describes how the time zone was resolved.
+    Describes how a phone location value was resolved.
     """
     
     @staticmethod

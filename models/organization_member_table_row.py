@@ -25,9 +25,9 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
     license_billing_status: Optional[str] = None
     # The renewal date used for this user's license proration.
     license_renewal_date: Optional[datetime.datetime] = None
-    # Role for this organization user.
+    # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
-    # Identifier and display name of the related user.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[IdNamePair] = None
     # User email for this organization user.
     user_email: Optional[str] = None

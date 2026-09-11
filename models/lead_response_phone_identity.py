@@ -12,7 +12,7 @@ from .phone_identity_response import PhoneIdentityResponse
 @dataclass
 class LeadResponse_phoneIdentity(PhoneIdentityResponse, Parsable):
     """
-    Canonical phone identity and provider lookup details for this lead.
+    Describes Leadping's canonical identity for a phone number, including normalization, carrier, line type, reputation, and lookup history.
     """
     
     @staticmethod

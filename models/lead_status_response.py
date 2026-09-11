@@ -16,7 +16,7 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # LeadStatusChange category represented by the lead status.
+    # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[LeadStatusCategory] = None
     # Display color assigned to the lead status.
     color: Optional[str] = None

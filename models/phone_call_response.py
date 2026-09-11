@@ -60,7 +60,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     selection_reason: Optional[PhoneCallResponse_selectionReason] = None
     # Lead source ID used for attribution and routing on this call.
     source_id: Optional[str] = None
-    # Current lifecycle status for this phone call in the Leadping API.
+    # Describes the durable business outcome of a Leadping phone call after provider status normalization.
     status: Optional[PhoneCallStatus] = None
     # Human-readable reason explaining the current status of this phone call.
     status_reason: Optional[str] = None

@@ -13,31 +13,43 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Gets or sets the author name.
+    # The authorName property
     author_name: Optional[str] = None
-    # Gets or sets the category.
+    # The category property
     category: Optional[str] = None
-    # Gets or sets the content.
+    # The content property
     content: Optional[str] = None
-    # Gets or sets the cover image URL.
+    # The contentUpdatedAt property
+    content_updated_at: Optional[datetime.datetime] = None
+    # The coverImageAlt property
+    cover_image_alt: Optional[str] = None
+    # The coverImageUrl property
     cover_image_url: Optional[str] = None
-    # Gets or sets the created at.
+    # The createdAt property
     created_at: Optional[datetime.datetime] = None
-    # Gets or sets the excerpt.
+    # The excerpt property
     excerpt: Optional[str] = None
-    # Gets or sets the ID.
+    # The id property
     id: Optional[str] = None
-    # Gets or sets the is featured.
+    # The latest background image processing failure, when present.
+    image_processing_error: Optional[str] = None
+    # Whether saved image references are awaiting Engine processing.
+    images_processing: Optional[bool] = None
+    # The isFeatured property
     is_featured: Optional[bool] = None
-    # Gets or sets the is published.
+    # The isPublished property
     is_published: Optional[bool] = None
-    # Gets or sets the modified at.
+    # The metaDescription property
+    meta_description: Optional[str] = None
+    # The modifiedAt property
     modified_at: Optional[datetime.datetime] = None
-    # Gets or sets the published at.
+    # The publishedAt property
     published_at: Optional[datetime.datetime] = None
-    # Gets or sets the slug.
+    # The seoTitle property
+    seo_title: Optional[str] = None
+    # The slug property
     slug: Optional[str] = None
-    # Gets or sets the title.
+    # The title property
     title: Optional[str] = None
     
     @staticmethod
@@ -60,14 +72,20 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
             "authorName": lambda n : setattr(self, 'author_name', n.get_str_value()),
             "category": lambda n : setattr(self, 'category', n.get_str_value()),
             "content": lambda n : setattr(self, 'content', n.get_str_value()),
+            "contentUpdatedAt": lambda n : setattr(self, 'content_updated_at', n.get_datetime_value()),
+            "coverImageAlt": lambda n : setattr(self, 'cover_image_alt', n.get_str_value()),
             "coverImageUrl": lambda n : setattr(self, 'cover_image_url', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "excerpt": lambda n : setattr(self, 'excerpt', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "imageProcessingError": lambda n : setattr(self, 'image_processing_error', n.get_str_value()),
+            "imagesProcessing": lambda n : setattr(self, 'images_processing', n.get_bool_value()),
             "isFeatured": lambda n : setattr(self, 'is_featured', n.get_bool_value()),
             "isPublished": lambda n : setattr(self, 'is_published', n.get_bool_value()),
+            "metaDescription": lambda n : setattr(self, 'meta_description', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "publishedAt": lambda n : setattr(self, 'published_at', n.get_datetime_value()),
+            "seoTitle": lambda n : setattr(self, 'seo_title', n.get_str_value()),
             "slug": lambda n : setattr(self, 'slug', n.get_str_value()),
             "title": lambda n : setattr(self, 'title', n.get_str_value()),
         }
@@ -84,14 +102,20 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("authorName", self.author_name)
         writer.write_str_value("category", self.category)
         writer.write_str_value("content", self.content)
+        writer.write_datetime_value("contentUpdatedAt", self.content_updated_at)
+        writer.write_str_value("coverImageAlt", self.cover_image_alt)
         writer.write_str_value("coverImageUrl", self.cover_image_url)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("excerpt", self.excerpt)
         writer.write_str_value("id", self.id)
+        writer.write_str_value("imageProcessingError", self.image_processing_error)
+        writer.write_bool_value("imagesProcessing", self.images_processing)
         writer.write_bool_value("isFeatured", self.is_featured)
         writer.write_bool_value("isPublished", self.is_published)
+        writer.write_str_value("metaDescription", self.meta_description)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_datetime_value("publishedAt", self.published_at)
+        writer.write_str_value("seoTitle", self.seo_title)
         writer.write_str_value("slug", self.slug)
         writer.write_str_value("title", self.title)
         writer.write_additional_data_value(self.additional_data)

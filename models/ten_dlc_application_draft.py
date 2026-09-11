@@ -16,9 +16,9 @@ class TenDlcApplicationDraft(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The current provider review status for the submitted brand.
+    # Defines the provider lifecycle for an individual 10DLC brand or campaign.
     brand_status: Optional[TenDlcRegistrationStatus] = None
-    # The current provider review status for the submitted campaign.
+    # Defines the provider lifecycle for an individual 10DLC brand or campaign.
     campaign_status: Optional[TenDlcRegistrationStatus] = None
     # Company name for this 10DLC application draft.
     company_name: Optional[str] = None

@@ -16,7 +16,7 @@ class OrganizationApiKeyIssueResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # API key associated with this Leadping organization API key issue.
+    # Safe identifying and usage metadata for an organization API key. This model never contains the secret credential.
     api_key: Optional[OrganizationApiKeyPreviewResponse] = None
     # Date and time when the organization API key issue expires.
     expires_at: Optional[datetime.datetime] = None

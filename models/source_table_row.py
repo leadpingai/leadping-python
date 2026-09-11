@@ -38,7 +38,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     cost_per_lead: Optional[float] = None
     # UTC timestamp when this lead source table row was created.
     created_at: Optional[datetime.datetime] = None
-    # User summary for the person who created this lead source table row.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     created_by_user: Optional[SourceTableRow_createdByUser] = None
     # Tag IDs automatically assigned to leads created by this source.
     default_tag_ids: Optional[list[str]] = None
@@ -56,17 +56,17 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     last_lead_received_at: Optional[datetime.datetime] = None
     # UTC timestamp when this lead source table row was last modified.
     modified_at: Optional[datetime.datetime] = None
-    # User summary for the person who last modified this lead source table row.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     modified_by_user: Optional[SourceTableRow_modifiedByUser] = None
     # Display name for this lead source table row in the Leadping API.
     name: Optional[str] = None
-    # Organization summary connected to this lead source table row.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[SourceTableRow_organization] = None
     # Organization ID that owns this lead source.
     organization_id: Optional[str] = None
     # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
-    # User summary connected to this lead source table row.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[SourceTableRow_user] = None
     
     @staticmethod

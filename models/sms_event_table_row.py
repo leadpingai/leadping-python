@@ -61,7 +61,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether automation created or triggered this SMS event table row.
     is_automated: Optional[bool] = None
-    # Identifier and display name of the related lead.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[IdNamePair] = None
     # Media attached to this SMS/MMS event.
     media: Optional[list[MessageMediaAttachment]] = None

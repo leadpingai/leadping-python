@@ -76,7 +76,7 @@ class EventDetailResponse(AdditionalDataHolder, Parsable):
     to_phone_number: Optional[str] = None
     # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None
-    # User summary connected to this event detail response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[EventDetailResponse_user] = None
     # Email address for the user connected to this event detail response.
     user_email: Optional[str] = None

@@ -27,9 +27,9 @@ class LeadContact(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Last name of the lead, user, or contact represented by this lead contact profile.
     last_name: Optional[str] = None
-    # Phone details for the lead, user, or organization represented by this lead contact profile.
+    # Public Leadping API schema for lead phone number data.
     phone: Optional[LeadContact_phone] = None
-    # Postal street address for the lead contact profile.
+    # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     street_address: Optional[LeadContact_streetAddress] = None
     # IANA or Windows time zone identifier used for local scheduling and reporting.
     time_zone_id: Optional[str] = None

@@ -12,7 +12,7 @@ from .current_lead_status_summary import CurrentLeadStatusSummary
 @dataclass
 class LeadTableRow_currentLeadStatus(CurrentLeadStatusSummary, Parsable):
     """
-    Current lead status change summary that describes the lead outcome.
+    Summary schema for Leadping API current lead status change summary data used in dashboards and reports.
     """
     
     @staticmethod

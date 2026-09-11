@@ -12,7 +12,7 @@ from .trusted_form_certificate import TrustedFormCertificate
 @dataclass
 class UserNotificationPreferences_smsConsentTrustedFormCertificate(TrustedFormCertificate, Parsable):
     """
-    The TrustedForm certificate captured for the user's most recent SMS opt-in.
+    Describes trusted form certificate data used in Leadping API requests and responses.
     """
     
     @staticmethod

@@ -17,7 +17,7 @@ class OutgoingNumberManualOverrideRequest(AdditionalDataHolder, Parsable):
 
     # Sender phone number ID used for this outbound SMS or call.
     from_phone_number_id: Optional[str] = None
-    # Selected outgoing number and selection rationale returned by Leadping.
+    # Defines the fields clients can send when working with outgoing number selection.
     selection: Optional[OutgoingNumberSelectionRequest] = None
     
     @staticmethod

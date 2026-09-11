@@ -43,7 +43,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Display name for this automation table row in the Leadping API.
     name: Optional[str] = None
-    # Organization summary connected to this automation table row.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[AutomationTableRow_organization] = None
     # Organization ID that owns this automation.
     organization_id: Optional[str] = None
@@ -55,7 +55,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     trigger_summary: Optional[str] = None
     # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None
-    # User summary connected to this automation table row.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[AutomationTableRow_user] = None
     # Visibility level that controls who can see this automation table row.
     visibility: Optional[str] = None

@@ -17,7 +17,7 @@ class OrganizationInvitationRequest(AdditionalDataHolder, Parsable):
 
     # The email address associated with this organization invitation.
     email: Optional[str] = None
-    # Role for this organization invitation.
+    # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
     
     @staticmethod

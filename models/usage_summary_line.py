@@ -17,9 +17,9 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Billable unit for this usage summary line.
+    # Identifies the metered unit used to price Leadping usage, such as a message, call minute, lookup, or phone number.
     billable_unit: Optional[BillableUnit] = None
-    # Channel for this usage summary line.
+    # Identifies the messaging, calling, phone-number, lookup, or platform channel that generated billable usage.
     channel: Optional[UsageChannel] = None
     # The monetary customer charge amount for this usage summary line.
     customer_charge_amount: Optional[float] = None
@@ -27,7 +27,7 @@ class UsageSummaryLine(AdditionalDataHolder, Parsable):
     quantity: Optional[float] = None
     # The record count for this usage summary line.
     record_count: Optional[int] = None
-    # The current status for this usage summary line.
+    # Describes whether a metered usage record is pending, rated, billed, reconciled, excluded, or failed.
     status: Optional[UsageStatus] = None
     
     @staticmethod

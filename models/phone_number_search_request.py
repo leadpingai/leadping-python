@@ -15,7 +15,7 @@ class PhoneNumberSearchRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Geographic location metadata for the phone number, lead, or lookup result.
+    # Public Leadping API schema for phone number location data.
     location: Optional[PhoneNumberSearchRequest_location] = None
     # Phone number used by this phone number search request for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None

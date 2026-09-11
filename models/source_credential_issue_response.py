@@ -17,7 +17,7 @@ class SourceCredentialIssueResponse(AdditionalDataHolder, Parsable):
 
     # Newly issued source credential. Leadping does not retain this plaintext value.
     secret: Optional[str] = None
-    # Source metadata safe for later retrieval.
+    # Describes lead source data returned by Leadping.
     source: Optional[SourceResponse] = None
     
     @staticmethod

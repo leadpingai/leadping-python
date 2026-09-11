@@ -16,7 +16,7 @@ class CustomerLeadTrend(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Date and time when this Leadping customer lead trend was comparison.
+    # Compares a metric with the preceding period and reports its absolute and percentage change.
     comparison: Optional[AnalyticsComparison] = None
     # Lead intake errors grouped into the same reporting buckets as Points.
     error_points: Optional[list[AnalyticsTrendPointOfint]] = None

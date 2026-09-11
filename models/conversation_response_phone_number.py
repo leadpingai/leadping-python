@@ -12,7 +12,7 @@ from .id_name_value import IdNameValue
 @dataclass
 class ConversationResponse_phoneNumber(IdNameValue, Parsable):
     """
-    Phone number used by this conversation response for calls, SMS, lookup, or routing.
+    Extends an identifier-and-name resource reference with an optional string value used for display or selection metadata.
     """
     
     @staticmethod

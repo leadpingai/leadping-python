@@ -31,7 +31,7 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
     activated_at: Optional[datetime.datetime] = None
     # The number of registrar-verified domains found by the current search.
     available_domain_count: Optional[int] = None
-    # The current billing subscription status for this organization activation state.
+    # Describes whether an organization's subscription is ready, blocked, or still incomplete during activation.
     billing_subscription_status: Optional[ActivationSubscriptionStatus] = None
     # Compliance notes for this organization activation state.
     compliance_notes: Optional[str] = None
@@ -65,23 +65,23 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
     launch_approved_at: Optional[datetime.datetime] = None
     # UTC timestamp for launch review requested at on this organization activation state.
     launch_review_requested_at: Optional[datetime.datetime] = None
-    # The current launch review status for this organization activation state.
+    # Describes the administrative review decision that determines whether an organization can launch Leadping workflows.
     launch_review_status: Optional[ActivationLaunchReviewStatus] = None
     # Offer for this organization activation state.
     offer: Optional[str] = None
-    # The current onboarding status for this organization activation state.
+    # Describes completion and blocking state for an organization's core Leadping onboarding requirements.
     onboarding_status: Optional[ActivationOnboardingStatus] = None
     # Organization description for this organization activation state.
     organization_description: Optional[str] = None
     # UTC timestamp for payment method confirmed at on this organization activation state.
     payment_method_confirmed_at: Optional[datetime.datetime] = None
-    # The current payment status for this organization activation state.
+    # Describes whether valid funding and payment prerequisites are satisfied during organization activation.
     payment_status: Optional[ActivationPaymentStatus] = None
     # Selected domain for this organization activation state.
     selected_domain: Optional[str] = None
     # Service area for this organization activation state.
     service_area: Optional[str] = None
-    # The current status for this organization activation state.
+    # Summarizes an organization's overall progress from initial Leadping onboarding through launch readiness.
     status: Optional[CustomerActivationStatus] = None
     # UTC timestamp for subscription active at on this organization activation state.
     subscription_active_at: Optional[datetime.datetime] = None
@@ -95,13 +95,13 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
     telephony_provisioning_started_at: Optional[datetime.datetime] = None
     # UTC timestamp for telephony ready at on this organization activation state.
     telephony_ready_at: Optional[datetime.datetime] = None
-    # The current telephony status for this organization activation state.
+    # Describes whether phone numbers, calling, messaging, and provider resources are ready for organization launch.
     telephony_status: Optional[ActivationTelephonyStatus] = None
     # Identifier of the first-class 10DLC application entity for this organization.
     ten_dlc_application_id: Optional[str] = None
-    # 10DLC draft for this organization activation state.
+    # Describes 10DLC application draft data used in Leadping API requests and responses.
     ten_dlc_draft: Optional[OrganizationActivationState_tenDlcDraft] = None
-    # The current 10DLC status for this organization activation state.
+    # Describes an organization's overall 10DLC registration lifecycle across brand and messaging campaign submission.
     ten_dlc_status: Optional[TenDlcApplicationStatus] = None
     # UTC timestamp for updated at on this organization activation state.
     updated_at: Optional[datetime.datetime] = None
@@ -109,7 +109,7 @@ class OrganizationActivationState(AdditionalDataHolder, Parsable):
     website_generation_result: Optional[str] = None
     # Website needs for this organization activation state.
     website_needs: Optional[str] = None
-    # The current website status for this organization activation state.
+    # Describes an organization website's lifecycle from discovery and verification through activation, suspension, or removal.
     website_status: Optional[WebsiteLifecycleStatus] = None
     # The URL associated with this organization activation state.
     website_url: Optional[str] = None

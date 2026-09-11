@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class UserResponse_currentOrganization(IdNamePair, Parsable):
     """
-    Current organization for this user.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

@@ -12,7 +12,7 @@ from .phone_lookup_carrier import PhoneLookupCarrier
 @dataclass
 class PhoneLookup_carrier(PhoneLookupCarrier, Parsable):
     """
-    Complete carrier metadata reported for this phone number.
+    Complete carrier metadata returned by a phone number lookup provider.
     """
     
     @staticmethod

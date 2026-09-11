@@ -27,7 +27,7 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
     calls_received: Optional[int] = None
     # Number of leads represented by this Leadping customer analytics summary.
     leads: Optional[int] = None
-    # Date and time when this Leadping customer analytics summary was leads comparison.
+    # Compares a metric with the preceding period and reports its absolute and percentage change.
     leads_comparison: Optional[AnalyticsComparison] = None
     # Median response minutes measured in minutes.
     median_response_minutes: Optional[float] = None

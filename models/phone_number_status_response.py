@@ -25,15 +25,15 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
     messages_possible: Optional[int] = None
     # E.164 phone number exposed by this phone number warmup status.
     number: Optional[str] = None
-    # Recent SMS opt-out metrics used to evaluate sender health and compliance risk.
+    # Describes phone number opt-out metrics data returned by Leadping.
     opt_out_metrics: Optional[PhoneNumberOptOutMetricsResponse] = None
-    # Current outbound SMS and voice capacity for this phone number.
+    # Reports the sending capacity, current load, and availability of a phone number considered for outbound delivery.
     outbound_capacity: Optional[PhoneNumberStatusResponse_outboundCapacity] = None
     # Recent workflow events returned for timeline and troubleshooting.
     recent_events: Optional[list[PhoneNumberMessagingEventResponse]] = None
-    # SMS warmup status for this phone number.
+    # Describes SMS warmup status data returned by Leadping.
     sms_warmup: Optional[PhoneNumberStatusResponse_smsWarmup] = None
-    # Phone number traffic metrics for recent SMS and call activity.
+    # Describes phone number traffic metrics data returned by Leadping.
     traffic_metrics: Optional[PhoneNumberTrafficMetricsResponse] = None
     
     @staticmethod

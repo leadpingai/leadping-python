@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class AutomationWorkflowRunResponse_currentStep(IdNamePair, Parsable):
     """
-    Identifier and display name of the workflow step currently awaiting or performing work.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

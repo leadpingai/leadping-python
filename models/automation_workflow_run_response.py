@@ -21,13 +21,13 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
 
     # Collection of actions included with this Leadping automation workflow run.
     actions: Optional[list[AutomationWorkflowActionResponse]] = None
-    # Identifier and display name of the related automation.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     automation: Optional[AutomationWorkflowRunResponse_automation] = None
     # Date and time when the automation workflow run was cancelled.
     cancelled_at: Optional[datetime.datetime] = None
     # Date and time when the automation workflow run completed.
     completed_at: Optional[datetime.datetime] = None
-    # Identifier and display name of the workflow step currently awaiting or performing work.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     current_step: Optional[AutomationWorkflowRunResponse_currentStep] = None
     # Current step order associated with this Leadping automation workflow run.
     current_step_order: Optional[int] = None

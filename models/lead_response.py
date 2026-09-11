@@ -31,17 +31,17 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # User ID of the person who archived this record.
     archived_by_user_id: Optional[str] = None
-    # Identifier and display name of the active organization member assigned to this lead.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     assigned_to: Optional[LeadResponse_assignedTo] = None
     # Leadping user currently responsible for this lead, or null when it is in the unassigned queue.
     assigned_to_user_id: Optional[str] = None
-    # Contact details for the lead or customer represented by this lead response.
+    # Public Leadping API schema for lead contact profile data.
     contact: Optional[LeadContact] = None
     # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
-    # Current lead status change summary that describes the lead outcome.
+    # Summary schema for Leadping API current lead status change summary data used in dashboards and reports.
     current_lead_status: Optional[LeadResponse_currentLeadStatus] = None
-    # Demographic profile details for the lead represented by this lead response.
+    # Public Leadping API schema for lead demographic profile data.
     customer: Optional[LeadProfile] = None
     # UTC timestamp when this lead was soft deleted.
     deleted_at: Optional[datetime.datetime] = None
@@ -53,11 +53,11 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether the lead has been archived in Leadping.
     is_archived: Optional[bool] = None
-    # Structured metadata used for attribution, integrations, and reporting on this lead response.
+    # Public Leadping API schema for lead attribution metadata data.
     metadata: Optional[LeadMetadata] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # Canonical phone identity and provider lookup details for this lead.
+    # Describes Leadping's canonical identity for a phone number, including normalization, carrier, line type, reputation, and lookup history.
     phone_identity: Optional[LeadResponse_phoneIdentity] = None
     # Defines the asynchronous verification and enrichment lifecycle for a lead.
     processing_status: Optional[LeadResponse_processingStatus] = None

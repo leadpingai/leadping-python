@@ -17,15 +17,15 @@ class LeadRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Contact details for the lead or customer represented by this lead request.
+    # Public Leadping API schema for lead contact profile data.
     contact: Optional[LeadContact] = None
-    # Demographic profile details for the lead represented by this lead request.
+    # Public Leadping API schema for lead demographic profile data.
     customer: Optional[LeadProfile] = None
     # Indicates whether this lead request is active and available in the Leadping API.
     enabled: Optional[bool] = None
     # Stable unique identifier of an existing resource to update; omit it when the API assigns an identifier during creation.
     id: Optional[str] = None
-    # Structured metadata used for attribution, integrations, and reporting on this lead request.
+    # Public Leadping API schema for lead attribution metadata data.
     metadata: Optional[LeadMetadata] = None
     # Tag IDs assigned to or filtered against this lead.
     tag_ids: Optional[list[str]] = None

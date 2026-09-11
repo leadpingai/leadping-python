@@ -12,7 +12,7 @@ from .street_address import StreetAddress
 @dataclass
 class OrganizationResponse_billingAddress(StreetAddress, Parsable):
     """
-    Postal address used for invoices, receipts, and payment processor billing records.
+    Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     """
     
     @staticmethod

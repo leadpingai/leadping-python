@@ -16,7 +16,7 @@ class ActivationTimelineEvent(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Identifier and display name of the related actor.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     actor: Optional[ActivationTimelineEvent_actor] = None
     # UTC timestamp for created at on this activation timeline event.
     created_at: Optional[datetime.datetime] = None

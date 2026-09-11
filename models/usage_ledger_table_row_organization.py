@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class UsageLedgerTableRow_organization(IdNamePair, Parsable):
     """
-    Identifier and display name of the related organization.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

@@ -12,7 +12,7 @@ from .id_name_pair import IdNamePair
 @dataclass
 class OrganizationResponse_site(IdNamePair, Parsable):
     """
-    Leadping website record connected to this organization.
+    Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     """
     
     @staticmethod

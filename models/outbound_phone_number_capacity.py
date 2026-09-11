@@ -20,7 +20,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     capacity_available: Optional[bool] = None
     # Human-readable reason for the current phone-number health state.
     health_reason: Optional[str] = None
-    # Current health status for this Leadping outbound phone number capacity.
+    # Defines phone-number outbound health states used by pacing.
     health_status: Optional[PhoneNumberOutboundHealthStatus] = None
     # Phone number associated with this Leadping outbound phone number capacity.
     phone_number: Optional[str] = None

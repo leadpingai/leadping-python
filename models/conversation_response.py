@@ -26,7 +26,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # Optional profile image URL explicitly associated with the lead.
     avatar_url: Optional[str] = None
-    # Current lead status change summary that describes the lead outcome.
+    # Summary schema for Leadping API current lead status change summary data used in dashboards and reports.
     current_lead_status: Optional[ConversationResponse_currentLeadStatus] = None
     # Email address used to resolve the lead's avatar when available.
     email: Optional[str] = None
@@ -54,7 +54,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     next_step: Optional[str] = None
     # Phone number ID manually chosen to override automatic outbound selection.
     outbound_phone_number_override_id: Optional[str] = None
-    # Phone number used by this conversation response for calls, SMS, lookup, or routing.
+    # Extends an identifier-and-name resource reference with an optional string value used for display or selection metadata.
     phone_number: Optional[ConversationResponse_phoneNumber] = None
     # Defines the customer-facing operational status for an inbox conversation.
     status: Optional[ConversationResponse_status] = None

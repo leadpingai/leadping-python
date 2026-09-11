@@ -38,19 +38,19 @@ class OrganizationInvitationTableRow(AdditionalDataHolder, Parsable):
     license_released_at: Optional[datetime.datetime] = None
     # The renewal date used for proration of this license.
     license_renewal_date: Optional[datetime.datetime] = None
-    # Identifier and display name of the related organization.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[IdNamePair] = None
     # UTC timestamp for resent at on this organization invitation.
     resent_at: Optional[datetime.datetime] = None
     # UTC timestamp for revoked at on this organization invitation.
     revoked_at: Optional[datetime.datetime] = None
-    # Role for this organization invitation.
+    # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
     # The human-readable send failure reason explaining this organization invitation.
     send_failure_reason: Optional[str] = None
     # UTC timestamp for sent at on this organization invitation.
     sent_at: Optional[datetime.datetime] = None
-    # The current status for this organization invitation.
+    # Describes the lifecycle of an organization membership invitation from issuance through acceptance, expiration, or revocation.
     status: Optional[OrganizationInvitationStatus] = None
     
     @staticmethod

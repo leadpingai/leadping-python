@@ -32,13 +32,15 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number.
     number: Optional[str] = None
-    # Organization summary connected to this phone number.
+    # Opts this number into the optional $2 monthly number health add-on. Defaults to on; customers can opt out.
+    number_health_enabled: Optional[bool] = None
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[PhoneNumberResponse_organization] = None
     # Identifier of the canonical phone identity for this number.
     phone_identity_id: Optional[str] = None
-    # Routing metadata that connects this phone number to teams, campaigns, and sources.
+    # Public Leadping API schema for phone number routing metadata data.
     routing: Optional[PhoneNumberRoutingMetadata] = None
-    # SMS and call warmup for this phone number.
+    # Messaging and calling warmup for a Leadping phone number.
     warmup: Optional[PhoneNumberReadiness] = None
     
     @staticmethod
@@ -73,6 +75,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
+            "numberHealthEnabled": lambda n : setattr(self, 'number_health_enabled', n.get_bool_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(PhoneNumberResponse_organization)),
             "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "routing": lambda n : setattr(self, 'routing', n.get_object_value(PhoneNumberRoutingMetadata)),
@@ -95,6 +98,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
+        writer.write_bool_value("numberHealthEnabled", self.number_health_enabled)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_object_value("routing", self.routing)

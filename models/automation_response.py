@@ -49,7 +49,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
-    # Organization summary connected to this automation configuration response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[AutomationResponse_organization] = None
     # Organization ID that owns this automation.
     organization_id: Optional[str] = None
@@ -57,7 +57,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     scope: Optional[str] = None
     # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
-    # User summary connected to this automation configuration response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[AutomationResponse_user] = None
     # Version number for this automation configuration response schema or saved configuration.
     version: Optional[int] = None

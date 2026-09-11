@@ -15,7 +15,7 @@ class AutomationPreviewRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Automation configuration to evaluate without executing live actions.
+    # Public Leadping API schema for automation request snapshot data.
     automation: Optional[AutomationRequestSnapshot] = None
     # Automation trigger type that starts the workflow.
     trigger_type: Optional[str] = None

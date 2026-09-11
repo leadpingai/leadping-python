@@ -12,7 +12,7 @@ from .ten_dlc_application_draft import TenDlcApplicationDraft
 @dataclass
 class OrganizationActivationState_tenDlcDraft(TenDlcApplicationDraft, Parsable):
     """
-    10DLC draft for this organization activation state.
+    Describes 10DLC application draft data used in Leadping API requests and responses.
     """
     
     @staticmethod

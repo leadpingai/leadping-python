@@ -12,7 +12,7 @@ from .phone_number_location import PhoneNumberLocation
 @dataclass
 class PhoneNumberSearchRequest_location(PhoneNumberLocation, Parsable):
     """
-    Geographic location metadata for the phone number, lead, or lookup result.
+    Public Leadping API schema for phone number location data.
     """
     
     @staticmethod

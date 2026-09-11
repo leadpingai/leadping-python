@@ -12,7 +12,7 @@ from .id_name_value import IdNameValue
 @dataclass
 class OrganizationResponse_einDocument(IdNameValue, Parsable):
     """
-    Uploaded EIN document reference used for organization verification.
+    Extends an identifier-and-name resource reference with an optional string value used for display or selection metadata.
     """
     
     @staticmethod

@@ -16,7 +16,7 @@ class MobileDevicePreferences(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Identifier and display name of the related device.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     device: Optional[IdNamePair] = None
     # Whether inbound phone calls are enabled for this user device.
     inbound_phone_calls_enabled: Optional[bool] = None

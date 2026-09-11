@@ -35,7 +35,7 @@ class NotificationTableRow(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
-    # Priority for this notification.
+    # Ranks the urgency and presentation importance of a Leadping user notification.
     priority: Optional[NotificationPriority] = None
     # UTC timestamp for read at on this notification.
     read_at: Optional[datetime.datetime] = None
@@ -43,7 +43,7 @@ class NotificationTableRow(AdditionalDataHolder, Parsable):
     related_entity_id: Optional[str] = None
     # The related entity type classification for this notification.
     related_entity_type: Optional[str] = None
-    # The type classification for this notification.
+    # Identifies the Leadping workflow or account event communicated by a user notification.
     type: Optional[NotificationType] = None
     
     @staticmethod

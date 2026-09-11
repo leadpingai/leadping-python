@@ -34,7 +34,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     cost_per_lead: Optional[float] = None
     # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
-    # User summary for the person who created this lead source response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     created_by_user: Optional[SourceResponse_createdByUser] = None
     # Email used to resolve the creator's avatar.
     created_by_user_email: Optional[str] = None
@@ -54,15 +54,15 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     last_lead_received_at: Optional[datetime.datetime] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # User summary for the person who last modified this lead source response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     modified_by_user: Optional[SourceResponse_modifiedByUser] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
-    # Organization summary connected to this lead source response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[SourceResponse_organization] = None
     # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
-    # User summary connected to this lead source response.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[SourceResponse_user] = None
     
     @staticmethod

@@ -35,11 +35,11 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Unique Leadping identifier for this billing transaction table row.
     id: Optional[str] = None
-    # Identifier and display name of the related lead.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[TransactionTableRow_lead] = None
     # Net monetary amount after fees, credits, or adjustments.
     net_amount: Optional[float] = None
-    # Identifier and display name of the related organization.
+    # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[TransactionTableRow_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
@@ -51,9 +51,9 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     source_event_id: Optional[str] = None
     # Event type that created this billing transaction, when available.
     source_event_type: Optional[str] = None
-    # Processing status for this wallet transaction.
+    # Describes the processing and settlement lifecycle of a Leadping wallet or billing transaction.
     transaction_status: Optional[TransactionStatus] = None
-    # Debit or credit classification for this wallet transaction.
+    # Classifies a wallet transaction as a debit, credit, refund, adjustment, deposit, or other balance movement.
     transaction_type: Optional[TransactionType] = None
     # Price charged per billable unit when usage-based pricing applies.
     unit_price: Optional[float] = None
