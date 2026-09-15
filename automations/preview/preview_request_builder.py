@@ -33,7 +33,7 @@ class PreviewRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AutomationPreviewRequest, request_configuration: Optional[RequestConfiguration[PreviewRequestBuilderPostQueryParameters]] = None) -> Optional[AutomationPreviewResponse]:
         """
-        Previews automation execution for a sample lead, showing matched steps and messages without creating follow-up events.Set `validate_only` to return configuration validation without evaluating conditions or actions and without writing a test audit event.
+        Preview matched automation steps and messages for a sample lead without creating follow-up events, or use validate_only to check the automation configuration.
         param body: Defines the fields clients can send when working with automation preview.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationPreviewResponse]
@@ -59,7 +59,7 @@ class PreviewRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AutomationPreviewRequest, request_configuration: Optional[RequestConfiguration[PreviewRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
-        Previews automation execution for a sample lead, showing matched steps and messages without creating follow-up events.Set `validate_only` to return configuration validation without evaluating conditions or actions and without writing a test audit event.
+        Preview matched automation steps and messages for a sample lead without creating follow-up events, or use validate_only to check the automation configuration.
         param body: Defines the fields clients can send when working with automation preview.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
@@ -85,7 +85,7 @@ class PreviewRequestBuilder(BaseRequestBuilder):
     @dataclass
     class PreviewRequestBuilderPostQueryParameters():
         """
-        Previews automation execution for a sample lead, showing matched steps and messages without creating follow-up events.Set `validate_only` to return configuration validation without evaluating conditions or actions and without writing a test audit event.
+        Preview matched automation steps and messages for a sample lead without creating follow-up events, or use validate_only to check the automation configuration.
         """
         # When true, validates the automation without evaluating actions or writing an audit event.
         validate_only: Optional[bool] = None

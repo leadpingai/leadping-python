@@ -31,7 +31,7 @@ class A2aRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
         """
-        Accepts authenticated A2A JSON-RPC requests for Leadping's supported agent operations.
+        Send authenticated A2A JSON-RPC requests to Leadping through the API to access supported agent operations and integrate them into your agent workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
         """
@@ -51,7 +51,7 @@ class A2aRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Accepts authenticated A2A JSON-RPC requests for Leadping's supported agent operations.
+        Send authenticated A2A JSON-RPC requests to Leadping through the API to access supported agent operations and integrate them into your agent workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

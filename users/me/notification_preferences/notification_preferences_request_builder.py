@@ -33,7 +33,7 @@ class NotificationPreferencesRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: UserNotificationPreferences, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[UserResponse]:
         """
-        Replaces the notification channel and delivery preferences stored for the authenticated user.
+        Update notification channel and delivery preferences for the authenticated Leadping user through the API without submitting unrelated user profile fields.
         param body: Describes user notification preferences data used in Leadping API requests and responses.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[UserResponse]
@@ -58,7 +58,7 @@ class NotificationPreferencesRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: UserNotificationPreferences, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Replaces the notification channel and delivery preferences stored for the authenticated user.
+        Update notification channel and delivery preferences for the authenticated Leadping user through the API without submitting unrelated user profile fields.
         param body: Describes user notification preferences data used in Leadping API requests and responses.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

@@ -47,7 +47,7 @@ class BlogRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[BlogArticleResponse]]:
         """
-        Returns the Leadping blog articles currently available to public readers.
+        Retrieve the list of published Leadping blog articles through the public API. This endpoint returns articles available to readers without authentication.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[BlogArticleResponse]]
         """
@@ -67,7 +67,7 @@ class BlogRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the Leadping blog articles currently available to public readers.
+        Retrieve the list of published Leadping blog articles through the public API. This endpoint returns articles available to readers without authentication.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
