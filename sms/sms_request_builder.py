@@ -6,9 +6,9 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .files.files_request_builder import FilesRequestBuilder
     from .item.with_sms_event_item_request_builder import WithSmsEventItemRequestBuilder
     from .send.send_request_builder import SendRequestBuilder
-    from .uploads.uploads_request_builder import UploadsRequestBuilder
 
 class SmsRequestBuilder(BaseRequestBuilder):
     """
@@ -38,6 +38,15 @@ class SmsRequestBuilder(BaseRequestBuilder):
         return WithSmsEventItemRequestBuilder(self.request_adapter, url_tpl_params)
     
     @property
+    def files(self) -> FilesRequestBuilder:
+        """
+        The files property
+        """
+        from .files.files_request_builder import FilesRequestBuilder
+
+        return FilesRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
     def send(self) -> SendRequestBuilder:
         """
         The send property
@@ -45,14 +54,5 @@ class SmsRequestBuilder(BaseRequestBuilder):
         from .send.send_request_builder import SendRequestBuilder
 
         return SendRequestBuilder(self.request_adapter, self.path_parameters)
-    
-    @property
-    def uploads(self) -> UploadsRequestBuilder:
-        """
-        The uploads property
-        """
-        from .uploads.uploads_request_builder import UploadsRequestBuilder
-
-        return UploadsRequestBuilder(self.request_adapter, self.path_parameters)
     
 
