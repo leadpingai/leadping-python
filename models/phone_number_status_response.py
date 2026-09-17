@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .phone_number_messaging_event_response import PhoneNumberMessagingEventResponse
     from .phone_number_opt_out_metrics_response import PhoneNumberOptOutMetricsResponse
+    from .phone_number_status_response_location import PhoneNumberStatusResponse_location
     from .phone_number_status_response_outbound_capacity import PhoneNumberStatusResponse_outboundCapacity
     from .phone_number_status_response_sms_warmup import PhoneNumberStatusResponse_smsWarmup
     from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
@@ -21,6 +22,8 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
 
     # Indicates whether this phone number can currently place outbound calls.
     calls_possible: Optional[int] = None
+    # Public Leadping API schema for phone number location data.
+    location: Optional[PhoneNumberStatusResponse_location] = None
     # Indicates whether this phone number can currently send SMS messages.
     messages_possible: Optional[int] = None
     # E.164 phone number exposed by this phone number warmup status.
@@ -54,18 +57,21 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
         """
         from .phone_number_messaging_event_response import PhoneNumberMessagingEventResponse
         from .phone_number_opt_out_metrics_response import PhoneNumberOptOutMetricsResponse
+        from .phone_number_status_response_location import PhoneNumberStatusResponse_location
         from .phone_number_status_response_outbound_capacity import PhoneNumberStatusResponse_outboundCapacity
         from .phone_number_status_response_sms_warmup import PhoneNumberStatusResponse_smsWarmup
         from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
 
         from .phone_number_messaging_event_response import PhoneNumberMessagingEventResponse
         from .phone_number_opt_out_metrics_response import PhoneNumberOptOutMetricsResponse
+        from .phone_number_status_response_location import PhoneNumberStatusResponse_location
         from .phone_number_status_response_outbound_capacity import PhoneNumberStatusResponse_outboundCapacity
         from .phone_number_status_response_sms_warmup import PhoneNumberStatusResponse_smsWarmup
         from .phone_number_traffic_metrics_response import PhoneNumberTrafficMetricsResponse
 
         fields: dict[str, Callable[[Any], None]] = {
             "callsPossible": lambda n : setattr(self, 'calls_possible', n.get_int_value()),
+            "location": lambda n : setattr(self, 'location', n.get_object_value(PhoneNumberStatusResponse_location)),
             "messagesPossible": lambda n : setattr(self, 'messages_possible', n.get_int_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "optOutMetrics": lambda n : setattr(self, 'opt_out_metrics', n.get_object_value(PhoneNumberOptOutMetricsResponse)),
@@ -85,6 +91,7 @@ class PhoneNumberStatusResponse(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_int_value("callsPossible", self.calls_possible)
+        writer.write_object_value("location", self.location)
         writer.write_int_value("messagesPossible", self.messages_possible)
         writer.write_str_value("number", self.number)
         writer.write_object_value("optOutMetrics", self.opt_out_metrics)

@@ -51,6 +51,8 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     slug: Optional[str] = None
     # The title property
     title: Optional[str] = None
+    # The unpublishedAt property
+    unpublished_at: Optional[datetime.datetime] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> BlogArticleResponse:
@@ -88,6 +90,7 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
             "seoTitle": lambda n : setattr(self, 'seo_title', n.get_str_value()),
             "slug": lambda n : setattr(self, 'slug', n.get_str_value()),
             "title": lambda n : setattr(self, 'title', n.get_str_value()),
+            "unpublishedAt": lambda n : setattr(self, 'unpublished_at', n.get_datetime_value()),
         }
         return fields
     
@@ -118,6 +121,7 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("seoTitle", self.seo_title)
         writer.write_str_value("slug", self.slug)
         writer.write_str_value("title", self.title)
+        writer.write_datetime_value("unpublishedAt", self.unpublished_at)
         writer.write_additional_data_value(self.additional_data)
     
 
