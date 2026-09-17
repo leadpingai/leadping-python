@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .automation_action_run_record_sms_delivery import AutomationActionRunRecord_smsDelivery
+
 @dataclass
 class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
     """
@@ -37,6 +40,8 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
     scheduled_at: Optional[datetime.datetime] = None
     # Connection selected by a control-flow action such as a weighted random split.
     selected_connection_id: Optional[str] = None
+    # Delivery outcome of the persisted SMS. Workflow steps advance on command acceptance, without waiting for delivery.
+    sms_delivery: Optional[AutomationActionRunRecord_smsDelivery] = None
     # UTC timestamp when processing started for this automation action run record.
     started_at: Optional[datetime.datetime] = None
     # Current lifecycle status for this automation action run record in the Leadping API.
@@ -58,6 +63,10 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .automation_action_run_record_sms_delivery import AutomationActionRunRecord_smsDelivery
+
+        from .automation_action_run_record_sms_delivery import AutomationActionRunRecord_smsDelivery
+
         fields: dict[str, Callable[[Any], None]] = {
             "actionId": lambda n : setattr(self, 'action_id', n.get_str_value()),
             "actionType": lambda n : setattr(self, 'action_type', n.get_str_value()),
@@ -71,6 +80,7 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
             "processingAttempts": lambda n : setattr(self, 'processing_attempts', n.get_int_value()),
             "scheduledAt": lambda n : setattr(self, 'scheduled_at', n.get_datetime_value()),
             "selectedConnectionId": lambda n : setattr(self, 'selected_connection_id', n.get_str_value()),
+            "smsDelivery": lambda n : setattr(self, 'sms_delivery', n.get_object_value(AutomationActionRunRecord_smsDelivery)),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
         }
@@ -96,6 +106,7 @@ class AutomationActionRunRecord(AdditionalDataHolder, Parsable):
         writer.write_int_value("processingAttempts", self.processing_attempts)
         writer.write_datetime_value("scheduledAt", self.scheduled_at)
         writer.write_str_value("selectedConnectionId", self.selected_connection_id)
+        writer.write_object_value("smsDelivery", self.sms_delivery)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_str_value("status", self.status)
         writer.write_additional_data_value(self.additional_data)

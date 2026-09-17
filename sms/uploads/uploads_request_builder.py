@@ -18,18 +18,18 @@ if TYPE_CHECKING:
     from ...models.message_media_attachment import MessageMediaAttachment
     from ...models.problem_details import ProblemDetails
 
-class MediaRequestBuilder(BaseRequestBuilder):
+class UploadsRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /sms/media
+    Builds and executes requests for operations under /sms/uploads
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new MediaRequestBuilder and sets the default values.
+        Instantiates a new UploadsRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/sms/media", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/sms/uploads", path_parameters)
     
     async def post(self,body: MultipartBody, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[MessageMediaAttachment]:
         """
@@ -72,18 +72,18 @@ class MediaRequestBuilder(BaseRequestBuilder):
         request_info.set_content_from_parsable(self.request_adapter, "multipart/form-data", body)
         return request_info
     
-    def with_url(self,raw_url: str) -> MediaRequestBuilder:
+    def with_url(self,raw_url: str) -> UploadsRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: MediaRequestBuilder
+        Returns: UploadsRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return MediaRequestBuilder(self.request_adapter, raw_url)
+        return UploadsRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class MediaRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class UploadsRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

@@ -25,13 +25,21 @@ class CustomerCommunicationUsagePoint(AdditionalDataHolder, Parsable):
     calls_received: Optional[int] = None
     # Date and time when this Leadping customer communication usage point was end.
     end_at: Optional[datetime.datetime] = None
+    # Manual provider-accepted SMS messages; automated messages are excluded.
+    human_responses: Optional[int] = None
     # Human-readable label for this Leadping customer communication usage point.
     label: Optional[str] = None
+    # Received prospect messages excluding consent and help commands.
+    prospect_replies: Optional[int] = None
+    # Messages whose send execution started; queued and scheduled messages are excluded.
+    sms_attempted: Optional[int] = None
+    # Messages confirmed delivered, counted at delivery time.
+    sms_delivered: Optional[int] = None
     # Number of SMS messages that failed or were blocked in this time bucket.
     sms_errors: Optional[int] = None
     # Number of SMS messages received during the reporting period.
     sms_received: Optional[int] = None
-    # Number of SMS messages sent during the reporting period.
+    # Provider-accepted outbound messages, counted at acceptance time (SmsSent is the compatibility field name).
     sms_sent: Optional[int] = None
     # Spend represented by this Leadping customer communication usage point.
     spend: Optional[float] = None
@@ -61,7 +69,11 @@ class CustomerCommunicationUsagePoint(AdditionalDataHolder, Parsable):
             "callsPlaced": lambda n : setattr(self, 'calls_placed', n.get_int_value()),
             "callsReceived": lambda n : setattr(self, 'calls_received', n.get_int_value()),
             "endAt": lambda n : setattr(self, 'end_at', n.get_datetime_value()),
+            "humanResponses": lambda n : setattr(self, 'human_responses', n.get_int_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
+            "prospectReplies": lambda n : setattr(self, 'prospect_replies', n.get_int_value()),
+            "smsAttempted": lambda n : setattr(self, 'sms_attempted', n.get_int_value()),
+            "smsDelivered": lambda n : setattr(self, 'sms_delivered', n.get_int_value()),
             "smsErrors": lambda n : setattr(self, 'sms_errors', n.get_int_value()),
             "smsReceived": lambda n : setattr(self, 'sms_received', n.get_int_value()),
             "smsSent": lambda n : setattr(self, 'sms_sent', n.get_int_value()),
@@ -84,7 +96,11 @@ class CustomerCommunicationUsagePoint(AdditionalDataHolder, Parsable):
         writer.write_int_value("callsPlaced", self.calls_placed)
         writer.write_int_value("callsReceived", self.calls_received)
         writer.write_datetime_value("endAt", self.end_at)
+        writer.write_int_value("humanResponses", self.human_responses)
         writer.write_str_value("label", self.label)
+        writer.write_int_value("prospectReplies", self.prospect_replies)
+        writer.write_int_value("smsAttempted", self.sms_attempted)
+        writer.write_int_value("smsDelivered", self.sms_delivered)
         writer.write_int_value("smsErrors", self.sms_errors)
         writer.write_int_value("smsReceived", self.sms_received)
         writer.write_int_value("smsSent", self.sms_sent)

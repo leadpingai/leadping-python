@@ -15,80 +15,66 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ...models.customer_analytics_response import CustomerAnalyticsResponse
-    from ...models.problem_details import ProblemDetails
-    from .export.export_request_builder import ExportRequestBuilder
+    from ....models.problem_details import ProblemDetails
 
-class MyRequestBuilder(BaseRequestBuilder):
+class ExportRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /analytics/my
+    Builds and executes requests for operations under /analytics/my/export
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new MyRequestBuilder and sets the default values.
+        Instantiates a new ExportRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/analytics/my{?days*,endAt*,startAt*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/analytics/my/export{?days*,endAt*,startAt*}", path_parameters)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration[MyRequestBuilderGetQueryParameters]] = None) -> Optional[CustomerAnalyticsResponse]:
+    async def get(self,request_configuration: Optional[RequestConfiguration[ExportRequestBuilderGetQueryParameters]] = None) -> Optional[bytes]:
         """
-        Returns current-organization analytics for lead communication, including event volume, response metrics, and date-range filtering.
+        Downloads the current organization's analytics as a CSV file, using the same cohort, timestamps, and metric definitions as the analytics charts.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[CustomerAnalyticsResponse]
+        Returns: bytes
         """
         request_info = self.to_get_request_information(
             request_configuration
         )
-        from ...models.problem_details import ProblemDetails
+        from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
-            "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
             "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ...models.customer_analytics_response import CustomerAnalyticsResponse
-
-        return await self.request_adapter.send_async(request_info, CustomerAnalyticsResponse, error_mapping)
+        return await self.request_adapter.send_primitive_async(request_info, "bytes", error_mapping)
     
-    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[MyRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
+    def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[ExportRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Returns current-organization analytics for lead communication, including event volume, response metrics, and date-range filtering.
+        Downloads the current organization's analytics as a CSV file, using the same cohort, timestamps, and metric definitions as the analytics charts.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
         request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/json")
+        request_info.headers.try_add("Accept", "text/csv, application/problem+json")
         return request_info
     
-    def with_url(self,raw_url: str) -> MyRequestBuilder:
+    def with_url(self,raw_url: str) -> ExportRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: MyRequestBuilder
+        Returns: ExportRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return MyRequestBuilder(self.request_adapter, raw_url)
-    
-    @property
-    def export(self) -> ExportRequestBuilder:
-        """
-        The export property
-        """
-        from .export.export_request_builder import ExportRequestBuilder
-
-        return ExportRequestBuilder(self.request_adapter, self.path_parameters)
+        return ExportRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class MyRequestBuilderGetQueryParameters():
+    class ExportRequestBuilderGetQueryParameters():
         """
-        Returns current-organization analytics for lead communication, including event volume, response metrics, and date-range filtering.
+        Downloads the current organization's analytics as a CSV file, using the same cohort, timestamps, and metric definitions as the analytics charts.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """
@@ -106,10 +92,10 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "days"
             return original_name
         
-        # Optional number of recent days to include when explicit timestamps are not supplied.
+        # Optional number of days before endAt to include when startAt is not supplied. Defaults to 30 and is limited to 1 through 365.
         days: Optional[int] = None
 
-        # Optional exclusive end timestamp for the analytics period.
+        # Optional exclusive end timestamp for the analytics period. Defaults to the current UTC time.
         end_at: Optional[datetime.datetime] = None
 
         # Optional inclusive start timestamp for the analytics period.
@@ -117,7 +103,7 @@ class MyRequestBuilder(BaseRequestBuilder):
 
     
     @dataclass
-    class MyRequestBuilderGetRequestConfiguration(RequestConfiguration[MyRequestBuilderGetQueryParameters]):
+    class ExportRequestBuilderGetRequestConfiguration(RequestConfiguration[ExportRequestBuilderGetQueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

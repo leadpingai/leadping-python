@@ -22,6 +22,12 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     channel: Optional[str] = None
     # Unique Leadping identifier for the suppression entry.
     id: Optional[str] = None
+    # The associated lead's profile image URL, when available.
+    lead_avatar_url: Optional[str] = None
+    # The associated lead's email address, used for Gravatar fallback.
+    lead_email: Optional[str] = None
+    # Display name of the associated lead, when available.
+    lead_name: Optional[str] = None
     # Suppressed email address normalized for matching.
     normalized_email: Optional[str] = None
     # Suppressed phone number normalized to a consistent format.
@@ -65,6 +71,9 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
             "audit": lambda n : setattr(self, 'audit', n.get_collection_of_object_values(SuppressionEntryAudit)),
             "channel": lambda n : setattr(self, 'channel', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "leadAvatarUrl": lambda n : setattr(self, 'lead_avatar_url', n.get_str_value()),
+            "leadEmail": lambda n : setattr(self, 'lead_email', n.get_str_value()),
+            "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
             "normalizedEmail": lambda n : setattr(self, 'normalized_email', n.get_str_value()),
             "normalizedPhoneNumber": lambda n : setattr(self, 'normalized_phone_number', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
@@ -88,6 +97,9 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("audit", self.audit)
         writer.write_str_value("channel", self.channel)
         writer.write_str_value("id", self.id)
+        writer.write_str_value("leadAvatarUrl", self.lead_avatar_url)
+        writer.write_str_value("leadEmail", self.lead_email)
+        writer.write_str_value("leadName", self.lead_name)
         writer.write_str_value("normalizedEmail", self.normalized_email)
         writer.write_str_value("normalizedPhoneNumber", self.normalized_phone_number)
         writer.write_str_value("organizationId", self.organization_id)

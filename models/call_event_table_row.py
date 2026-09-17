@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .call_event_table_row_outbound_source import CallEventTableRow_outboundSource
     from .call_event_table_row_status import CallEventTableRow_status
     from .communication_console_entry import CommunicationConsoleEntry
 
@@ -55,6 +56,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # Display name for the organization associated with this call event.
     organization_name: Optional[str] = None
+    # Defines the source that requested outbound delivery.
+    outbound_source: Optional[CallEventTableRow_outboundSource] = None
     # Describes the durable business outcome of a Leadping phone call after provider status normalization.
     status: Optional[CallEventTableRow_status] = None
     # Human-readable reason explaining the current status of this call event table row.
@@ -88,9 +91,11 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .call_event_table_row_outbound_source import CallEventTableRow_outboundSource
         from .call_event_table_row_status import CallEventTableRow_status
         from .communication_console_entry import CommunicationConsoleEntry
 
+        from .call_event_table_row_outbound_source import CallEventTableRow_outboundSource
         from .call_event_table_row_status import CallEventTableRow_status
         from .communication_console_entry import CommunicationConsoleEntry
 
@@ -114,6 +119,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "organizationName": lambda n : setattr(self, 'organization_name', n.get_str_value()),
+            "outboundSource": lambda n : setattr(self, 'outbound_source', n.get_enum_value(CallEventTableRow_outboundSource)),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(CallEventTableRow_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
@@ -152,6 +158,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("organization", self.organization)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("organizationName", self.organization_name)
+        writer.write_enum_value("outboundSource", self.outbound_source)
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)

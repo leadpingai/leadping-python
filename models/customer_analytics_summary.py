@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
@@ -25,6 +26,8 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
     calls_placed: Optional[int] = None
     # Number of inbound calls received during the reporting period.
     calls_received: Optional[int] = None
+    # Manual provider-accepted SMS messages; automated messages are excluded.
+    human_responses: Optional[int] = None
     # Number of leads represented by this Leadping customer analytics summary.
     leads: Optional[int] = None
     # Compares a metric with the preceding period and reports its absolute and percentage change.
@@ -35,11 +38,29 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
     missed_calls: Optional[int] = None
     # Number of missed leads represented by this Leadping customer analytics summary.
     missed_leads: Optional[int] = None
-    # Responded within five minutes percent expressed as a percentage.
+    # Responses observed through this instant; min(report end plus five minutes, generation time).
+    observed_through: Optional[datetime.datetime] = None
+    # Timely human responses divided by all mature eligible leads, including unanswered leads.
+    overall_five_minute_sla_percent: Optional[float] = None
+    # Received prospect messages excluding consent and help commands.
+    prospect_replies: Optional[int] = None
+    # Conditional percentage: human responses within five minutes divided by responded leads only; not overall coverage.
     responded_within_five_minutes_percent: Optional[float] = None
+    # Non-deleted leads created in the cohort with a full five-minute observation window.
+    sla_eligible_leads: Optional[int] = None
+    # Cohort leads younger than five minutes at ObservedThrough; excluded from SLA denominator.
+    sla_pending_leads: Optional[int] = None
+    # Mature eligible leads with a human response within exactly five minutes.
+    sla_timely_leads: Optional[int] = None
+    # Mature eligible leads without a human response by ObservedThrough.
+    sla_unresponded_leads: Optional[int] = None
+    # Messages whose send execution started; queued and scheduled messages are excluded.
+    sms_attempted: Optional[int] = None
+    # Messages confirmed delivered, counted at delivery time.
+    sms_delivered: Optional[int] = None
     # Number of SMS messages received during the reporting period.
     sms_received: Optional[int] = None
-    # Number of SMS messages sent during the reporting period.
+    # Provider-accepted outbound messages, counted at acceptance time (SmsSent is the compatibility field name).
     sms_sent: Optional[int] = None
     # Number of unread messages represented by this Leadping customer analytics summary.
     unread_messages: Optional[int] = None
@@ -76,12 +97,22 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
             "callMinutes": lambda n : setattr(self, 'call_minutes', n.get_float_value()),
             "callsPlaced": lambda n : setattr(self, 'calls_placed', n.get_int_value()),
             "callsReceived": lambda n : setattr(self, 'calls_received', n.get_int_value()),
+            "humanResponses": lambda n : setattr(self, 'human_responses', n.get_int_value()),
             "leads": lambda n : setattr(self, 'leads', n.get_int_value()),
             "leadsComparison": lambda n : setattr(self, 'leads_comparison', n.get_object_value(AnalyticsComparison)),
             "medianResponseMinutes": lambda n : setattr(self, 'median_response_minutes', n.get_float_value()),
             "missedCalls": lambda n : setattr(self, 'missed_calls', n.get_int_value()),
             "missedLeads": lambda n : setattr(self, 'missed_leads', n.get_int_value()),
+            "observedThrough": lambda n : setattr(self, 'observed_through', n.get_datetime_value()),
+            "overallFiveMinuteSlaPercent": lambda n : setattr(self, 'overall_five_minute_sla_percent', n.get_float_value()),
+            "prospectReplies": lambda n : setattr(self, 'prospect_replies', n.get_int_value()),
             "respondedWithinFiveMinutesPercent": lambda n : setattr(self, 'responded_within_five_minutes_percent', n.get_float_value()),
+            "slaEligibleLeads": lambda n : setattr(self, 'sla_eligible_leads', n.get_int_value()),
+            "slaPendingLeads": lambda n : setattr(self, 'sla_pending_leads', n.get_int_value()),
+            "slaTimelyLeads": lambda n : setattr(self, 'sla_timely_leads', n.get_int_value()),
+            "slaUnrespondedLeads": lambda n : setattr(self, 'sla_unresponded_leads', n.get_int_value()),
+            "smsAttempted": lambda n : setattr(self, 'sms_attempted', n.get_int_value()),
+            "smsDelivered": lambda n : setattr(self, 'sms_delivered', n.get_int_value()),
             "smsReceived": lambda n : setattr(self, 'sms_received', n.get_int_value()),
             "smsSent": lambda n : setattr(self, 'sms_sent', n.get_int_value()),
             "unreadMessages": lambda n : setattr(self, 'unread_messages', n.get_int_value()),
@@ -104,12 +135,22 @@ class CustomerAnalyticsSummary(AdditionalDataHolder, Parsable):
         writer.write_float_value("callMinutes", self.call_minutes)
         writer.write_int_value("callsPlaced", self.calls_placed)
         writer.write_int_value("callsReceived", self.calls_received)
+        writer.write_int_value("humanResponses", self.human_responses)
         writer.write_int_value("leads", self.leads)
         writer.write_object_value("leadsComparison", self.leads_comparison)
         writer.write_float_value("medianResponseMinutes", self.median_response_minutes)
         writer.write_int_value("missedCalls", self.missed_calls)
         writer.write_int_value("missedLeads", self.missed_leads)
+        writer.write_datetime_value("observedThrough", self.observed_through)
+        writer.write_float_value("overallFiveMinuteSlaPercent", self.overall_five_minute_sla_percent)
+        writer.write_int_value("prospectReplies", self.prospect_replies)
         writer.write_float_value("respondedWithinFiveMinutesPercent", self.responded_within_five_minutes_percent)
+        writer.write_int_value("slaEligibleLeads", self.sla_eligible_leads)
+        writer.write_int_value("slaPendingLeads", self.sla_pending_leads)
+        writer.write_int_value("slaTimelyLeads", self.sla_timely_leads)
+        writer.write_int_value("slaUnrespondedLeads", self.sla_unresponded_leads)
+        writer.write_int_value("smsAttempted", self.sms_attempted)
+        writer.write_int_value("smsDelivered", self.sms_delivered)
         writer.write_int_value("smsReceived", self.sms_received)
         writer.write_int_value("smsSent", self.sms_sent)
         writer.write_int_value("unreadMessages", self.unread_messages)

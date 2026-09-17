@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .automation_workflow_action_response_sms_delivery import AutomationWorkflowActionResponse_smsDelivery
+
 @dataclass
 class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
     """
@@ -35,6 +38,8 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
     scheduled_at: Optional[datetime.datetime] = None
     # Date and time when the workflow action was skipped.
     skipped_at: Optional[datetime.datetime] = None
+    # Delivery outcome of the persisted SMS. Workflow steps advance on command acceptance, without waiting for delivery.
+    sms_delivery: Optional[AutomationWorkflowActionResponse_smsDelivery] = None
     # Date and time when the automation workflow action started.
     started_at: Optional[datetime.datetime] = None
     # Current status for this Leadping automation workflow action.
@@ -66,6 +71,10 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .automation_workflow_action_response_sms_delivery import AutomationWorkflowActionResponse_smsDelivery
+
+        from .automation_workflow_action_response_sms_delivery import AutomationWorkflowActionResponse_smsDelivery
+
         fields: dict[str, Callable[[Any], None]] = {
             "actionType": lambda n : setattr(self, 'action_type', n.get_str_value()),
             "actionTypeDisplay": lambda n : setattr(self, 'action_type_display', n.get_str_value()),
@@ -78,6 +87,7 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
             "safeReason": lambda n : setattr(self, 'safe_reason', n.get_str_value()),
             "scheduledAt": lambda n : setattr(self, 'scheduled_at', n.get_datetime_value()),
             "skippedAt": lambda n : setattr(self, 'skipped_at', n.get_datetime_value()),
+            "smsDelivery": lambda n : setattr(self, 'sms_delivery', n.get_object_value(AutomationWorkflowActionResponse_smsDelivery)),
             "startedAt": lambda n : setattr(self, 'started_at', n.get_datetime_value()),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "statusDisplay": lambda n : setattr(self, 'status_display', n.get_str_value()),
@@ -107,6 +117,7 @@ class AutomationWorkflowActionResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("safeReason", self.safe_reason)
         writer.write_datetime_value("scheduledAt", self.scheduled_at)
         writer.write_datetime_value("skippedAt", self.skipped_at)
+        writer.write_object_value("smsDelivery", self.sms_delivery)
         writer.write_datetime_value("startedAt", self.started_at)
         writer.write_str_value("status", self.status)
         writer.write_str_value("statusDisplay", self.status_display)
