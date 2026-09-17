@@ -40,6 +40,10 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     phone_identity_id: Optional[str] = None
     # Public Leadping API schema for phone number routing metadata data.
     routing: Optional[PhoneNumberRoutingMetadata] = None
+    # Whether provider, routing, and health checks allow SMS.
+    sms_ready: Optional[bool] = None
+    # Whether provider, routing, and health checks allow calls.
+    voice_ready: Optional[bool] = None
     # Messaging and calling warmup for a Leadping phone number.
     warmup: Optional[PhoneNumberReadiness] = None
     
@@ -79,6 +83,8 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(PhoneNumberResponse_organization)),
             "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "routing": lambda n : setattr(self, 'routing', n.get_object_value(PhoneNumberRoutingMetadata)),
+            "smsReady": lambda n : setattr(self, 'sms_ready', n.get_bool_value()),
+            "voiceReady": lambda n : setattr(self, 'voice_ready', n.get_bool_value()),
             "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberReadiness)),
         }
         return fields
@@ -102,6 +108,8 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_object_value("routing", self.routing)
+        writer.write_bool_value("smsReady", self.sms_ready)
+        writer.write_bool_value("voiceReady", self.voice_ready)
         writer.write_object_value("warmup", self.warmup)
         writer.write_additional_data_value(self.additional_data)
     

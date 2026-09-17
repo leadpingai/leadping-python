@@ -6,6 +6,8 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .outbound_phone_number_capacity_sms_ramp_direction import OutboundPhoneNumberCapacity_smsRampDirection
+    from .outbound_phone_number_capacity_voice_ramp_direction import OutboundPhoneNumberCapacity_voiceRampDirection
     from .phone_number_outbound_health_status import PhoneNumberOutboundHealthStatus
 
 @dataclass
@@ -40,6 +42,8 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     sms_limit_today: Optional[int] = None
     # The next time SMS capacity becomes available in the rolling minute window.
     sms_minutely_resets_at: Optional[datetime.datetime] = None
+    # Indicates whether a phone number's channel capacity is increasing, decreasing, or stable.
+    sms_ramp_direction: Optional[OutboundPhoneNumberCapacity_smsRampDirection] = None
     # Indicates whether SMS limits for this phone number are still ramping up.
     sms_ramping: Optional[bool] = None
     # SMS remaining this hour for the applicable messaging or voice capacity window.
@@ -66,6 +70,8 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     voice_limit_today: Optional[int] = None
     # The next time voice capacity becomes available in the rolling minute window.
     voice_minutely_resets_at: Optional[datetime.datetime] = None
+    # Indicates whether a phone number's channel capacity is increasing, decreasing, or stable.
+    voice_ramp_direction: Optional[OutboundPhoneNumberCapacity_voiceRampDirection] = None
     # Indicates whether call limits for this phone number are still ramping up.
     voice_ramping: Optional[bool] = None
     # Voice remaining this hour for the applicable messaging or voice capacity window.
@@ -97,8 +103,12 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .outbound_phone_number_capacity_sms_ramp_direction import OutboundPhoneNumberCapacity_smsRampDirection
+        from .outbound_phone_number_capacity_voice_ramp_direction import OutboundPhoneNumberCapacity_voiceRampDirection
         from .phone_number_outbound_health_status import PhoneNumberOutboundHealthStatus
 
+        from .outbound_phone_number_capacity_sms_ramp_direction import OutboundPhoneNumberCapacity_smsRampDirection
+        from .outbound_phone_number_capacity_voice_ramp_direction import OutboundPhoneNumberCapacity_voiceRampDirection
         from .phone_number_outbound_health_status import PhoneNumberOutboundHealthStatus
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -114,6 +124,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
             "smsLimitThisMinute": lambda n : setattr(self, 'sms_limit_this_minute', n.get_int_value()),
             "smsLimitToday": lambda n : setattr(self, 'sms_limit_today', n.get_int_value()),
             "smsMinutelyResetsAt": lambda n : setattr(self, 'sms_minutely_resets_at', n.get_datetime_value()),
+            "smsRampDirection": lambda n : setattr(self, 'sms_ramp_direction', n.get_enum_value(OutboundPhoneNumberCapacity_smsRampDirection)),
             "smsRamping": lambda n : setattr(self, 'sms_ramping', n.get_bool_value()),
             "smsRemainingThisHour": lambda n : setattr(self, 'sms_remaining_this_hour', n.get_int_value()),
             "smsRemainingThisMinute": lambda n : setattr(self, 'sms_remaining_this_minute', n.get_int_value()),
@@ -127,6 +138,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
             "voiceLimitThisMinute": lambda n : setattr(self, 'voice_limit_this_minute', n.get_int_value()),
             "voiceLimitToday": lambda n : setattr(self, 'voice_limit_today', n.get_int_value()),
             "voiceMinutelyResetsAt": lambda n : setattr(self, 'voice_minutely_resets_at', n.get_datetime_value()),
+            "voiceRampDirection": lambda n : setattr(self, 'voice_ramp_direction', n.get_enum_value(OutboundPhoneNumberCapacity_voiceRampDirection)),
             "voiceRamping": lambda n : setattr(self, 'voice_ramping', n.get_bool_value()),
             "voiceRemainingThisHour": lambda n : setattr(self, 'voice_remaining_this_hour', n.get_int_value()),
             "voiceRemainingThisMinute": lambda n : setattr(self, 'voice_remaining_this_minute', n.get_int_value()),
@@ -157,6 +169,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         writer.write_int_value("smsLimitThisMinute", self.sms_limit_this_minute)
         writer.write_int_value("smsLimitToday", self.sms_limit_today)
         writer.write_datetime_value("smsMinutelyResetsAt", self.sms_minutely_resets_at)
+        writer.write_enum_value("smsRampDirection", self.sms_ramp_direction)
         writer.write_bool_value("smsRamping", self.sms_ramping)
         writer.write_int_value("smsRemainingThisHour", self.sms_remaining_this_hour)
         writer.write_int_value("smsRemainingThisMinute", self.sms_remaining_this_minute)
@@ -170,6 +183,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         writer.write_int_value("voiceLimitThisMinute", self.voice_limit_this_minute)
         writer.write_int_value("voiceLimitToday", self.voice_limit_today)
         writer.write_datetime_value("voiceMinutelyResetsAt", self.voice_minutely_resets_at)
+        writer.write_enum_value("voiceRampDirection", self.voice_ramp_direction)
         writer.write_bool_value("voiceRamping", self.voice_ramping)
         writer.write_int_value("voiceRemainingThisHour", self.voice_remaining_this_hour)
         writer.write_int_value("voiceRemainingThisMinute", self.voice_remaining_this_minute)
