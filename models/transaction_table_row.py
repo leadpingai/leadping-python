@@ -35,6 +35,8 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Unique Leadping identifier for this billing transaction table row.
     id: Optional[str] = None
+    # Indicates sample activity for app review that must not count toward real financial totals.
+    is_demo: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[TransactionTableRow_lead] = None
     # Net monetary amount after fees, credits, or adjustments.
@@ -96,6 +98,7 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionTableRow_lead)),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(TransactionTableRow_organization)),
@@ -125,6 +128,7 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_object_value("lead", self.lead)
         writer.write_float_value("netAmount", self.net_amount)
         writer.write_object_value("organization", self.organization)
