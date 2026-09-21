@@ -23,8 +23,12 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     content_updated_at: Optional[datetime.datetime] = None
     # The coverImageAlt property
     cover_image_alt: Optional[str] = None
+    # The processed cover image height in pixels, when known.
+    cover_image_height: Optional[int] = None
     # The coverImageUrl property
     cover_image_url: Optional[str] = None
+    # The processed cover image width in pixels, when known.
+    cover_image_width: Optional[int] = None
     # The createdAt property
     created_at: Optional[datetime.datetime] = None
     # The excerpt property
@@ -78,7 +82,9 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
             "content": lambda n : setattr(self, 'content', n.get_str_value()),
             "contentUpdatedAt": lambda n : setattr(self, 'content_updated_at', n.get_datetime_value()),
             "coverImageAlt": lambda n : setattr(self, 'cover_image_alt', n.get_str_value()),
+            "coverImageHeight": lambda n : setattr(self, 'cover_image_height', n.get_int_value()),
             "coverImageUrl": lambda n : setattr(self, 'cover_image_url', n.get_str_value()),
+            "coverImageWidth": lambda n : setattr(self, 'cover_image_width', n.get_int_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "excerpt": lambda n : setattr(self, 'excerpt', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
@@ -110,7 +116,9 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("content", self.content)
         writer.write_datetime_value("contentUpdatedAt", self.content_updated_at)
         writer.write_str_value("coverImageAlt", self.cover_image_alt)
+        writer.write_int_value("coverImageHeight", self.cover_image_height)
         writer.write_str_value("coverImageUrl", self.cover_image_url)
+        writer.write_int_value("coverImageWidth", self.cover_image_width)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("excerpt", self.excerpt)
         writer.write_str_value("id", self.id)
