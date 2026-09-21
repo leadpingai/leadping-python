@@ -39,6 +39,8 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     is_featured: Optional[bool] = None
     # The isPublished property
     is_published: Optional[bool] = None
+    # The lastPublishedAt property
+    last_published_at: Optional[datetime.datetime] = None
     # The metaDescription property
     meta_description: Optional[str] = None
     # The modifiedAt property
@@ -84,6 +86,7 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
             "imagesProcessing": lambda n : setattr(self, 'images_processing', n.get_bool_value()),
             "isFeatured": lambda n : setattr(self, 'is_featured', n.get_bool_value()),
             "isPublished": lambda n : setattr(self, 'is_published', n.get_bool_value()),
+            "lastPublishedAt": lambda n : setattr(self, 'last_published_at', n.get_datetime_value()),
             "metaDescription": lambda n : setattr(self, 'meta_description', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "publishedAt": lambda n : setattr(self, 'published_at', n.get_datetime_value()),
@@ -115,6 +118,7 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("imagesProcessing", self.images_processing)
         writer.write_bool_value("isFeatured", self.is_featured)
         writer.write_bool_value("isPublished", self.is_published)
+        writer.write_datetime_value("lastPublishedAt", self.last_published_at)
         writer.write_str_value("metaDescription", self.meta_description)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_datetime_value("publishedAt", self.published_at)
