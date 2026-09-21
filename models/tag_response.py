@@ -27,6 +27,8 @@ class TagResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether this lead or record is archived.
     is_archived: Optional[bool] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Display name for this tag response in the Leadping API.
@@ -60,6 +62,7 @@ class TagResponse(AdditionalDataHolder, Parsable):
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "normalizedName": lambda n : setattr(self, 'normalized_name', n.get_str_value()),
@@ -82,6 +85,7 @@ class TagResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("description", self.description)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("normalizedName", self.normalized_name)

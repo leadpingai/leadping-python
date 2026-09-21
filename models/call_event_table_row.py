@@ -46,6 +46,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Unique Leadping identifier for this call event table row.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Lead ID associated with this call event.
     lead_id: Optional[str] = None
     # Display name for the lead associated with this call event.
@@ -114,6 +116,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
@@ -153,6 +156,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("leadName", self.lead_name)
         writer.write_str_value("organization", self.organization)

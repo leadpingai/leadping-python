@@ -46,6 +46,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Lead ID associated with the call conversation or outreach attempt.
     lead_id: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
@@ -110,6 +112,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
@@ -147,6 +150,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("phoneNumber", self.phone_number)

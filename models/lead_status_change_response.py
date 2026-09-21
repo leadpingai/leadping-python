@@ -43,6 +43,8 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     follow_up_status: Optional[str] = None
     # Unique Leadping identifier for this lead status change.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Whether this lead status change is missed call follow up.
     is_missed_call_follow_up: Optional[bool] = None
     # The lead's profile image URL, when available.
@@ -116,6 +118,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "followUpStatus": lambda n : setattr(self, 'follow_up_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isMissedCallFollowUp": lambda n : setattr(self, 'is_missed_call_follow_up', n.get_bool_value()),
             "leadAvatarUrl": lambda n : setattr(self, 'lead_avatar_url', n.get_str_value()),
             "leadEmail": lambda n : setattr(self, 'lead_email', n.get_str_value()),
@@ -158,6 +161,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("followUpStatus", self.follow_up_status)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isMissedCallFollowUp", self.is_missed_call_follow_up)
         writer.write_str_value("leadAvatarUrl", self.lead_avatar_url)
         writer.write_str_value("leadEmail", self.lead_email)

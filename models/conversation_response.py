@@ -36,6 +36,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether the Leadping conversation has been archived.
     is_archived: Optional[bool] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Indicates whether the current user has unread activity in the conversation.
     is_unread: Optional[bool] = None
     # UTC timestamp when the most recent conversation event occurred.
@@ -95,6 +97,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isUnread": lambda n : setattr(self, 'is_unread', n.get_bool_value()),
             "lastEventAt": lambda n : setattr(self, 'last_event_at', n.get_datetime_value()),
             "lastEventIsInternalNote": lambda n : setattr(self, 'last_event_is_internal_note', n.get_bool_value()),
@@ -127,6 +130,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isUnread", self.is_unread)
         writer.write_datetime_value("lastEventAt", self.last_event_at)
         writer.write_bool_value("lastEventIsInternalNote", self.last_event_is_internal_note)

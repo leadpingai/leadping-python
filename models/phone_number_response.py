@@ -24,6 +24,8 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Indicates whether Leadping provisions and manages this phone number.
     leadping_owned: Optional[bool] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
@@ -75,6 +77,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadpingOwned": lambda n : setattr(self, 'leadping_owned', n.get_bool_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
@@ -100,6 +103,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("leadpingOwned", self.leadping_owned)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)

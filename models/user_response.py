@@ -41,6 +41,8 @@ class UserResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # The identities included with this user.
     identities: Optional[list[UserIdentity]] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # The date and time when this user last completed the Leadping sign-in flow.
     last_logged_in_at: Optional[datetime.datetime] = None
     # Last name of the Leadping user.
@@ -114,6 +116,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "identities": lambda n : setattr(self, 'identities', n.get_collection_of_object_values(UserIdentity)),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastLoggedInAt": lambda n : setattr(self, 'last_logged_in_at', n.get_datetime_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "mobileDevicePreferences": lambda n : setattr(self, 'mobile_device_preferences', n.get_collection_of_object_values(MobileDevicePreferences)),
@@ -148,6 +151,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
         writer.write_collection_of_object_values("identities", self.identities)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("lastLoggedInAt", self.last_logged_in_at)
         writer.write_str_value("lastName", self.last_name)
         writer.write_collection_of_object_values("mobileDevicePreferences", self.mobile_device_preferences)

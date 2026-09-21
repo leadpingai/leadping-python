@@ -50,6 +50,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     first_lead_received_at: Optional[datetime.datetime] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # UTC timestamp when this source most recently delivered a lead to Leadping.
     last_lead_received_at: Optional[datetime.datetime] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
@@ -109,6 +111,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "firstLeadReceivedAt": lambda n : setattr(self, 'first_lead_received_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastLeadReceivedAt": lambda n : setattr(self, 'last_lead_received_at', n.get_datetime_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "modifiedByUser": lambda n : setattr(self, 'modified_by_user', n.get_object_value(SourceResponse_modifiedByUser)),
@@ -142,6 +145,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_datetime_value("firstLeadReceivedAt", self.first_lead_received_at)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("lastLeadReceivedAt", self.last_lead_received_at)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("modifiedByUser", self.modified_by_user)

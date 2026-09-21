@@ -37,6 +37,8 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     failed_at: Optional[datetime.datetime] = None
     # Unique Leadping identifier for the automation workflow run.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Human-readable last action summary for this Leadping automation workflow run.
     last_action_summary: Optional[str] = None
     # Machine-readable code for the most recent workflow execution error.
@@ -110,6 +112,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
             "events": lambda n : setattr(self, 'events', n.get_collection_of_object_values(AutomationWorkflowEventResponse)),
             "failedAt": lambda n : setattr(self, 'failed_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastActionSummary": lambda n : setattr(self, 'last_action_summary', n.get_str_value()),
             "lastErrorCode": lambda n : setattr(self, 'last_error_code', n.get_str_value()),
             "lastErrorMessage": lambda n : setattr(self, 'last_error_message', n.get_str_value()),
@@ -148,6 +151,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("events", self.events)
         writer.write_datetime_value("failedAt", self.failed_at)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("lastActionSummary", self.last_action_summary)
         writer.write_str_value("lastErrorCode", self.last_error_code)
         writer.write_str_value("lastErrorMessage", self.last_error_message)

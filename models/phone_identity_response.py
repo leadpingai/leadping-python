@@ -22,6 +22,8 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # The most recent time lookup data was enriched.
     last_enriched_at: Optional[datetime.datetime] = None
     # Public Leadping API schema for phone lookup result data.
@@ -64,6 +66,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastEnrichedAt": lambda n : setattr(self, 'last_enriched_at', n.get_datetime_value()),
             "lookup": lambda n : setattr(self, 'lookup', n.get_object_value(PhoneIdentityResponse_lookup)),
             "lookupActions": lambda n : setattr(self, 'lookup_actions', n.get_collection_of_object_values(PhoneIdentityLookupAction)),
@@ -84,6 +87,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("lastEnrichedAt", self.last_enriched_at)
         writer.write_object_value("lookup", self.lookup)
         writer.write_collection_of_object_values("lookupActions", self.lookup_actions)

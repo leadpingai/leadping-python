@@ -67,6 +67,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
@@ -160,6 +162,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
             "einDocument": lambda n : setattr(self, 'ein_document', n.get_object_value(OrganizationResponse_einDocument)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
@@ -203,6 +206,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("einDocument", self.ein_document)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("phone", self.phone)

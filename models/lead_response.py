@@ -53,6 +53,8 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether the lead has been archived in Leadping.
     is_archived: Optional[bool] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Public Leadping API schema for lead attribution metadata data.
     metadata: Optional[LeadMetadata] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
@@ -118,6 +120,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "metadata": lambda n : setattr(self, 'metadata', n.get_object_value(LeadMetadata)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "phoneIdentity": lambda n : setattr(self, 'phone_identity', n.get_object_value(LeadResponse_phoneIdentity)),
@@ -151,6 +154,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_object_value("metadata", self.metadata)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("phoneIdentity", self.phone_identity)

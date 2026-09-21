@@ -27,6 +27,8 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
     details: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Whether this notification is read.
     is_read: Optional[bool] = None
     # Message for this notification.
@@ -78,6 +80,7 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "details": lambda n : setattr(self, 'details', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isRead": lambda n : setattr(self, 'is_read', n.get_bool_value()),
             "message": lambda n : setattr(self, 'message', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
@@ -105,6 +108,7 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("details", self.details)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isRead", self.is_read)
         writer.write_str_value("message", self.message)
         writer.write_datetime_value("modifiedAt", self.modified_at)

@@ -23,6 +23,8 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
     from_phone_number: Optional[str] = None
     # Unique Leadping identifier for this phone number messaging event.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Indicates whether the recipient has opted out of further SMS communication.
     is_opt_out: Optional[bool] = None
     # Short display label for this phone number messaging event, formatted for charts, filters, or list views.
@@ -54,6 +56,7 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
             "eventType": lambda n : setattr(self, 'event_type', n.get_str_value()),
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isOptOut": lambda n : setattr(self, 'is_opt_out', n.get_bool_value()),
             "label": lambda n : setattr(self, 'label', n.get_str_value()),
             "textPreview": lambda n : setattr(self, 'text_preview', n.get_str_value()),
@@ -74,6 +77,7 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("eventType", self.event_type)
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isOptOut", self.is_opt_out)
         writer.write_str_value("label", self.label)
         writer.write_str_value("textPreview", self.text_preview)

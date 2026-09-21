@@ -68,6 +68,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Unique Leadping identifier for this event timeline table row.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Lead ID associated with this timeline event.
     lead_id: Optional[str] = None
     # Media attached to an MMS timeline event.
@@ -170,6 +172,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
@@ -229,6 +232,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_collection_of_object_values("media", self.media)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)

@@ -31,6 +31,8 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     health_summary: Optional[str] = None
     # Unique Leadping identifier for this automation table row.
     id: Optional[str] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Indicates whether Leadping manages this automation table row automatically instead of a user.
     is_system_managed: Optional[bool] = None
     # UTC timestamp when this automation last ran.
@@ -90,6 +92,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "healthSummary": lambda n : setattr(self, 'health_summary', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isSystemManaged": lambda n : setattr(self, 'is_system_managed', n.get_bool_value()),
             "lastRunAt": lambda n : setattr(self, 'last_run_at', n.get_datetime_value()),
             "lastRunStatus": lambda n : setattr(self, 'last_run_status', n.get_str_value()),
@@ -122,6 +125,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("healthSummary", self.health_summary)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isSystemManaged", self.is_system_managed)
         writer.write_datetime_value("lastRunAt", self.last_run_at)
         writer.write_str_value("lastRunStatus", self.last_run_status)

@@ -47,6 +47,8 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this lead is archived.
     is_archived: Optional[bool] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # Last name of the lead, user, or contact represented by this lead table row.
     last_name: Optional[str] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
@@ -118,6 +120,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(LeadTableRow_organization)),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
@@ -155,6 +158,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("lastName", self.last_name)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("phone", self.phone)
