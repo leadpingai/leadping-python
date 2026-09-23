@@ -7,7 +7,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .mobile_device_preferences import MobileDevicePreferences
-    from .user_identity import UserIdentity
     from .user_response_billing_plan import UserResponse_billingPlan
     from .user_response_billing_state import UserResponse_billingState
     from .user_response_compliance import UserResponse_compliance
@@ -39,8 +38,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The identities included with this user.
-    identities: Optional[list[UserIdentity]] = None
     # The isDemo property
     is_demo: Optional[bool] = None
     # The date and time when this user last completed the Leadping sign-in flow.
@@ -89,7 +86,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .mobile_device_preferences import MobileDevicePreferences
-        from .user_identity import UserIdentity
         from .user_response_billing_plan import UserResponse_billingPlan
         from .user_response_billing_state import UserResponse_billingState
         from .user_response_compliance import UserResponse_compliance
@@ -98,7 +94,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
         from .mobile_device_preferences import MobileDevicePreferences
-        from .user_identity import UserIdentity
         from .user_response_billing_plan import UserResponse_billingPlan
         from .user_response_billing_state import UserResponse_billingState
         from .user_response_compliance import UserResponse_compliance
@@ -115,7 +110,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
-            "identities": lambda n : setattr(self, 'identities', n.get_collection_of_object_values(UserIdentity)),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastLoggedInAt": lambda n : setattr(self, 'last_logged_in_at', n.get_datetime_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
@@ -150,7 +144,6 @@ class UserResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("email", self.email)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
-        writer.write_collection_of_object_values("identities", self.identities)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("lastLoggedInAt", self.last_logged_in_at)
         writer.write_str_value("lastName", self.last_name)
