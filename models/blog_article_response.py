@@ -51,6 +51,8 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # The publishedAt property
     published_at: Optional[datetime.datetime] = None
+    # The renderedHtml property
+    rendered_html: Optional[str] = None
     # The seoTitle property
     seo_title: Optional[str] = None
     # The slug property
@@ -96,6 +98,7 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
             "metaDescription": lambda n : setattr(self, 'meta_description', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "publishedAt": lambda n : setattr(self, 'published_at', n.get_datetime_value()),
+            "renderedHtml": lambda n : setattr(self, 'rendered_html', n.get_str_value()),
             "seoTitle": lambda n : setattr(self, 'seo_title', n.get_str_value()),
             "slug": lambda n : setattr(self, 'slug', n.get_str_value()),
             "title": lambda n : setattr(self, 'title', n.get_str_value()),
@@ -130,6 +133,7 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("metaDescription", self.meta_description)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_datetime_value("publishedAt", self.published_at)
+        writer.write_str_value("renderedHtml", self.rendered_html)
         writer.write_str_value("seoTitle", self.seo_title)
         writer.write_str_value("slug", self.slug)
         writer.write_str_value("title", self.title)
