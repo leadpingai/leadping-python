@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .blog_social_post import BlogSocialPost
+
 @dataclass
 class BlogArticleResponse(AdditionalDataHolder, Parsable):
     """
@@ -55,8 +58,18 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     rendered_html: Optional[str] = None
     # The seoTitle property
     seo_title: Optional[str] = None
+    # Whether to create a Facebook post after publication.
+    share_on_facebook: Optional[bool] = None
+    # Whether to create a Instagram post after publication.
+    share_on_instagram: Optional[bool] = None
+    # Whether to create a LinkedIn post after publication.
+    share_on_linked_in: Optional[bool] = None
+    # Whether to create a X post after publication.
+    share_on_x: Optional[bool] = None
     # The slug property
     slug: Optional[str] = None
+    # The socialPosts property
+    social_posts: Optional[list[BlogSocialPost]] = None
     # The title property
     title: Optional[str] = None
     # The unpublishedAt property
@@ -78,6 +91,10 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .blog_social_post import BlogSocialPost
+
+        from .blog_social_post import BlogSocialPost
+
         fields: dict[str, Callable[[Any], None]] = {
             "authorName": lambda n : setattr(self, 'author_name', n.get_str_value()),
             "category": lambda n : setattr(self, 'category', n.get_str_value()),
@@ -100,7 +117,12 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
             "publishedAt": lambda n : setattr(self, 'published_at', n.get_datetime_value()),
             "renderedHtml": lambda n : setattr(self, 'rendered_html', n.get_str_value()),
             "seoTitle": lambda n : setattr(self, 'seo_title', n.get_str_value()),
+            "shareOnFacebook": lambda n : setattr(self, 'share_on_facebook', n.get_bool_value()),
+            "shareOnInstagram": lambda n : setattr(self, 'share_on_instagram', n.get_bool_value()),
+            "shareOnLinkedIn": lambda n : setattr(self, 'share_on_linked_in', n.get_bool_value()),
+            "shareOnX": lambda n : setattr(self, 'share_on_x', n.get_bool_value()),
             "slug": lambda n : setattr(self, 'slug', n.get_str_value()),
+            "socialPosts": lambda n : setattr(self, 'social_posts', n.get_collection_of_object_values(BlogSocialPost)),
             "title": lambda n : setattr(self, 'title', n.get_str_value()),
             "unpublishedAt": lambda n : setattr(self, 'unpublished_at', n.get_datetime_value()),
         }
@@ -135,7 +157,12 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("publishedAt", self.published_at)
         writer.write_str_value("renderedHtml", self.rendered_html)
         writer.write_str_value("seoTitle", self.seo_title)
+        writer.write_bool_value("shareOnFacebook", self.share_on_facebook)
+        writer.write_bool_value("shareOnInstagram", self.share_on_instagram)
+        writer.write_bool_value("shareOnLinkedIn", self.share_on_linked_in)
+        writer.write_bool_value("shareOnX", self.share_on_x)
         writer.write_str_value("slug", self.slug)
+        writer.write_collection_of_object_values("socialPosts", self.social_posts)
         writer.write_str_value("title", self.title)
         writer.write_datetime_value("unpublishedAt", self.unpublished_at)
         writer.write_additional_data_value(self.additional_data)
