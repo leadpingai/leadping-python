@@ -66,7 +66,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     source_metadata: Optional[LeadMetadata_sourceMetadata] = None
     # Affiliate or publisher sub ID captured for lead attribution.
     sub_id: Optional[str] = None
-    # UTC timestamp when Leadping last successfully validated the TrustedForm certificate URL.
+    # UTC timestamp when Leadping last successfully checked the TrustedForm certificate URL availability.
     trusted_form_checked_at: Optional[datetime.datetime] = None
     # TrustedForm certificate URL used as proof of consumer consent.
     trusted_form_url: Optional[str] = None
