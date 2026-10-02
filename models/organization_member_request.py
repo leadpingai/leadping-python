@@ -5,6 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .organization_member_request_state_eligibility import OrganizationMemberRequest_stateEligibility
     from .organization_member_role import OrganizationMemberRole
 
 @dataclass
@@ -19,6 +20,8 @@ class OrganizationMemberRequest(AdditionalDataHolder, Parsable):
     email: Optional[str] = None
     # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
+    # Defines the states an organization member can work; this is not verification of professional licensing.
+    state_eligibility: Optional[OrganizationMemberRequest_stateEligibility] = None
     # User ID to add, update, or remove from the organization.
     user_id: Optional[str] = None
     
@@ -38,13 +41,16 @@ class OrganizationMemberRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .organization_member_request_state_eligibility import OrganizationMemberRequest_stateEligibility
         from .organization_member_role import OrganizationMemberRole
 
+        from .organization_member_request_state_eligibility import OrganizationMemberRequest_stateEligibility
         from .organization_member_role import OrganizationMemberRole
 
         fields: dict[str, Callable[[Any], None]] = {
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
             "role": lambda n : setattr(self, 'role', n.get_enum_value(OrganizationMemberRole)),
+            "stateEligibility": lambda n : setattr(self, 'state_eligibility', n.get_object_value(OrganizationMemberRequest_stateEligibility)),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
         }
         return fields
@@ -59,6 +65,7 @@ class OrganizationMemberRequest(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("email", self.email)
         writer.write_enum_value("role", self.role)
+        writer.write_object_value("stateEligibility", self.state_eligibility)
         writer.write_str_value("userId", self.user_id)
         writer.write_additional_data_value(self.additional_data)
     

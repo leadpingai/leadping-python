@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .id_name_pair import IdNamePair
     from .organization_member_role import OrganizationMemberRole
+    from .organization_member_state_eligibility import OrganizationMemberStateEligibility
 
 @dataclass
 class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
@@ -27,6 +28,8 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
     license_renewal_date: Optional[datetime.datetime] = None
     # Identifies an organization member's access level and permission scope within Leadping.
     role: Optional[OrganizationMemberRole] = None
+    # Defines the states an organization member can work; this is not verification of professional licensing.
+    state_eligibility: Optional[OrganizationMemberStateEligibility] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[IdNamePair] = None
     # User email for this organization user.
@@ -50,9 +53,11 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
         """
         from .id_name_pair import IdNamePair
         from .organization_member_role import OrganizationMemberRole
+        from .organization_member_state_eligibility import OrganizationMemberStateEligibility
 
         from .id_name_pair import IdNamePair
         from .organization_member_role import OrganizationMemberRole
+        from .organization_member_state_eligibility import OrganizationMemberStateEligibility
 
         fields: dict[str, Callable[[Any], None]] = {
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -60,6 +65,7 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
             "licenseBillingStatus": lambda n : setattr(self, 'license_billing_status', n.get_str_value()),
             "licenseRenewalDate": lambda n : setattr(self, 'license_renewal_date', n.get_datetime_value()),
             "role": lambda n : setattr(self, 'role', n.get_enum_value(OrganizationMemberRole)),
+            "stateEligibility": lambda n : setattr(self, 'state_eligibility', n.get_object_value(OrganizationMemberStateEligibility)),
             "user": lambda n : setattr(self, 'user', n.get_object_value(IdNamePair)),
             "userEmail": lambda n : setattr(self, 'user_email', n.get_str_value()),
         }
@@ -78,6 +84,7 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("licenseBillingStatus", self.license_billing_status)
         writer.write_datetime_value("licenseRenewalDate", self.license_renewal_date)
         writer.write_enum_value("role", self.role)
+        writer.write_object_value("stateEligibility", self.state_eligibility)
         writer.write_object_value("user", self.user)
         writer.write_str_value("userEmail", self.user_email)
         writer.write_additional_data_value(self.additional_data)

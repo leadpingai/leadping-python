@@ -25,10 +25,14 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     is_younger_than90: Optional[bool] = None
     # Primary organization name.
     name: Optional[str] = None
+    # Main service or offer described during organization setup.
+    offer: Optional[str] = None
     # Phone details for the lead, user, or organization represented by this organization profile request.
     phone: Optional[str] = None
     # Alternate organization name or DBA shown in Leadping.
     secondary_name: Optional[str] = None
+    # Intended audience described during organization setup.
+    target_audience: Optional[str] = None
     # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None
     # Organization website URL used for compliance, brand review, and lead attribution.
@@ -60,8 +64,10 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
             "ein": lambda n : setattr(self, 'ein', n.get_str_value()),
             "isYoungerThan90": lambda n : setattr(self, 'is_younger_than90', n.get_bool_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "offer": lambda n : setattr(self, 'offer', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "secondaryName": lambda n : setattr(self, 'secondary_name', n.get_str_value()),
+            "targetAudience": lambda n : setattr(self, 'target_audience', n.get_str_value()),
             "vertical": lambda n : setattr(self, 'vertical', n.get_str_value()),
             "website": lambda n : setattr(self, 'website', n.get_str_value()),
         }
@@ -80,8 +86,10 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("ein", self.ein)
         writer.write_bool_value("isYoungerThan90", self.is_younger_than90)
         writer.write_str_value("name", self.name)
+        writer.write_str_value("offer", self.offer)
         writer.write_str_value("phone", self.phone)
         writer.write_str_value("secondaryName", self.secondary_name)
+        writer.write_str_value("targetAudience", self.target_audience)
         writer.write_str_value("vertical", self.vertical)
         writer.write_str_value("website", self.website)
         writer.write_additional_data_value(self.additional_data)

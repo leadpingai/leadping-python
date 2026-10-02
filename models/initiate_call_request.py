@@ -24,6 +24,8 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
     outbound_idempotency_key: Optional[str] = None
     # Lead source ID used for call attribution and sender selection.
     source_id: Optional[str] = None
+    # Connect the authenticated user's browser phone to the server-controlled destination call.
+    use_browser_phone: Optional[bool] = None
     # Indicates whether a user manually overrode Leadping's automatic number selection for this phone call initiation request.
     was_manually_overridden: Optional[bool] = None
     
@@ -50,6 +52,7 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "outboundIdempotencyKey": lambda n : setattr(self, 'outbound_idempotency_key', n.get_str_value()),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
+            "useBrowserPhone": lambda n : setattr(self, 'use_browser_phone', n.get_bool_value()),
             "wasManuallyOverridden": lambda n : setattr(self, 'was_manually_overridden', n.get_bool_value()),
         }
         return fields
@@ -68,6 +71,7 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("outboundIdempotencyKey", self.outbound_idempotency_key)
         writer.write_str_value("sourceId", self.source_id)
+        writer.write_bool_value("useBrowserPhone", self.use_browser_phone)
         writer.write_bool_value("wasManuallyOverridden", self.was_manually_overridden)
         writer.write_additional_data_value(self.additional_data)
     
