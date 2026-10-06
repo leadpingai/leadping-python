@@ -36,6 +36,10 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     is_imported: Optional[bool] = None
     # Landing page URL where the lead submitted their information.
     landing_page: Optional[str] = None
+    # Standalone Leadping Consent certificate identifier, accepted as an alternative to TrustedForm.
+    leadping_consent_certificate_id: Optional[str] = None
+    # Server-issued timestamp for successful Leadping Consent evidence and recipient validation.
+    leadping_consent_checked_at: Optional[datetime.datetime] = None
     # Organization ID that owns this lead's attribution metadata.
     organization_id: Optional[str] = None
     # System or workflow that created this event.
@@ -118,6 +122,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "ipAddress": lambda n : setattr(self, 'ip_address', n.get_str_value()),
             "isImported": lambda n : setattr(self, 'is_imported', n.get_bool_value()),
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
+            "leadpingConsentCertificateId": lambda n : setattr(self, 'leadping_consent_certificate_id', n.get_str_value()),
+            "leadpingConsentCheckedAt": lambda n : setattr(self, 'leadping_consent_checked_at', n.get_datetime_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "origin": lambda n : setattr(self, 'origin', n.get_str_value()),
             "price": lambda n : setattr(self, 'price', n.get_float_value()),
@@ -164,6 +170,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("ipAddress", self.ip_address)
         writer.write_bool_value("isImported", self.is_imported)
         writer.write_str_value("landingPage", self.landing_page)
+        writer.write_str_value("leadpingConsentCertificateId", self.leadping_consent_certificate_id)
+        writer.write_datetime_value("leadpingConsentCheckedAt", self.leadping_consent_checked_at)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("origin", self.origin)
         writer.write_float_value("price", self.price)

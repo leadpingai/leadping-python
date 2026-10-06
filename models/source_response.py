@@ -62,7 +62,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[SourceResponse_organization] = None
-    # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
+    # Indicates whether leads from this source must include a TrustedForm or Leadping Consent certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[SourceResponse_user] = None

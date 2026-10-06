@@ -6,7 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .user_notification_preferences_sms_consent_trusted_form_certificate import UserNotificationPreferences_smsConsentTrustedFormCertificate
+    from .user_notification_preferences_sms_consent_certificate import UserNotificationPreferences_smsConsentCertificate
 
 @dataclass
 class UserNotificationPreferences(AdditionalDataHolder, Parsable):
@@ -48,10 +48,10 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     payment_failed_enabled: Optional[bool] = None
     # Indicates whether payment failed SMS functionality is enabled for this Leadping user notification preferences.
     payment_failed_sms_enabled: Optional[bool] = None
+    # Describes Leadping Consent certificate data used in Leadping API requests and responses.
+    sms_consent_certificate: Optional[UserNotificationPreferences_smsConsentCertificate] = None
     # Whether the user has consented to receive Leadping account notification SMS messages.
     sms_consent_opted_in: Optional[bool] = None
-    # Describes trusted form certificate data used in Leadping API requests and responses.
-    sms_consent_trusted_form_certificate: Optional[UserNotificationPreferences_smsConsentTrustedFormCertificate] = None
     # When the user's Leadping notification SMS consent was last changed.
     sms_consent_updated_at: Optional[datetime.datetime] = None
     # Indicates whether subscription renewing email functionality is enabled for this Leadping user notification preferences.
@@ -87,9 +87,9 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .user_notification_preferences_sms_consent_trusted_form_certificate import UserNotificationPreferences_smsConsentTrustedFormCertificate
+        from .user_notification_preferences_sms_consent_certificate import UserNotificationPreferences_smsConsentCertificate
 
-        from .user_notification_preferences_sms_consent_trusted_form_certificate import UserNotificationPreferences_smsConsentTrustedFormCertificate
+        from .user_notification_preferences_sms_consent_certificate import UserNotificationPreferences_smsConsentCertificate
 
         fields: dict[str, Callable[[Any], None]] = {
             "automationFailedEmailEnabled": lambda n : setattr(self, 'automation_failed_email_enabled', n.get_bool_value()),
@@ -108,8 +108,8 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
             "newLeadSmsEnabled": lambda n : setattr(self, 'new_lead_sms_enabled', n.get_bool_value()),
             "paymentFailedEnabled": lambda n : setattr(self, 'payment_failed_enabled', n.get_bool_value()),
             "paymentFailedSmsEnabled": lambda n : setattr(self, 'payment_failed_sms_enabled', n.get_bool_value()),
+            "smsConsentCertificate": lambda n : setattr(self, 'sms_consent_certificate', n.get_object_value(UserNotificationPreferences_smsConsentCertificate)),
             "smsConsentOptedIn": lambda n : setattr(self, 'sms_consent_opted_in', n.get_bool_value()),
-            "smsConsentTrustedFormCertificate": lambda n : setattr(self, 'sms_consent_trusted_form_certificate', n.get_object_value(UserNotificationPreferences_smsConsentTrustedFormCertificate)),
             "smsConsentUpdatedAt": lambda n : setattr(self, 'sms_consent_updated_at', n.get_datetime_value()),
             "subscriptionRenewingEmailEnabled": lambda n : setattr(self, 'subscription_renewing_email_enabled', n.get_bool_value()),
             "subscriptionRenewingEnabled": lambda n : setattr(self, 'subscription_renewing_enabled', n.get_bool_value()),
@@ -146,8 +146,8 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         writer.write_bool_value("newLeadSmsEnabled", self.new_lead_sms_enabled)
         writer.write_bool_value("paymentFailedEnabled", self.payment_failed_enabled)
         writer.write_bool_value("paymentFailedSmsEnabled", self.payment_failed_sms_enabled)
+        writer.write_object_value("smsConsentCertificate", self.sms_consent_certificate)
         writer.write_bool_value("smsConsentOptedIn", self.sms_consent_opted_in)
-        writer.write_object_value("smsConsentTrustedFormCertificate", self.sms_consent_trusted_form_certificate)
         writer.write_datetime_value("smsConsentUpdatedAt", self.sms_consent_updated_at)
         writer.write_bool_value("subscriptionRenewingEmailEnabled", self.subscription_renewing_email_enabled)
         writer.write_bool_value("subscriptionRenewingEnabled", self.subscription_renewing_enabled)

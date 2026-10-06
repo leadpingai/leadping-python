@@ -24,7 +24,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Human-readable source name.
     name: Optional[str] = None
-    # Indicates whether leads from this source must include a TrustedForm certificate for consent proof.
+    # Indicates whether leads from this source must include a TrustedForm or Leadping Consent certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     
     @staticmethod

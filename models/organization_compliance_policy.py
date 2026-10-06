@@ -26,7 +26,7 @@ class OrganizationCompliancePolicy(AdditionalDataHolder, Parsable):
     require_product: Optional[bool] = None
     # Whether this organization compliance policy requires source compliance approval.
     require_source_compliance_approval: Optional[bool] = None
-    # Whether this organization compliance policy requires TrustedForm for automations.
+    # Whether this organization compliance policy requires TrustedForm or Leadping Consent evidence for automations.
     require_trusted_form_for_automations: Optional[bool] = None
     
     @staticmethod

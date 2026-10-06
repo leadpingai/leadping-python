@@ -6,32 +6,30 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 @dataclass
-class TrustedFormCertificate(AdditionalDataHolder, Parsable):
+class LeadpingConsentCertificate(AdditionalDataHolder, Parsable):
     """
-    Describes trusted form certificate data used in Leadping API requests and responses.
+    Describes Leadping Consent certificate data used in Leadping API requests and responses.
     """
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # UTC timestamp for created at on this TrustedForm certificate.
+    # UTC timestamp for created at on this Leadping Consent certificate.
     created_at: Optional[datetime.datetime] = None
-    # Unique Leadping identifier for this TrustedForm certificate.
+    # Unique Leadping identifier for this Leadping Consent certificate.
     id: Optional[str] = None
-    # Source for this TrustedForm certificate.
+    # Source for this Leadping Consent certificate.
     source: Optional[str] = None
-    # The URL associated with this TrustedForm certificate.
-    url: Optional[str] = None
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> TrustedFormCertificate:
+    def create_from_discriminator_value(parse_node: ParseNode) -> LeadpingConsentCertificate:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: TrustedFormCertificate
+        Returns: LeadpingConsentCertificate
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return TrustedFormCertificate()
+        return LeadpingConsentCertificate()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
@@ -42,7 +40,6 @@ class TrustedFormCertificate(AdditionalDataHolder, Parsable):
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "source": lambda n : setattr(self, 'source', n.get_str_value()),
-            "url": lambda n : setattr(self, 'url', n.get_str_value()),
         }
         return fields
     
@@ -57,7 +54,6 @@ class TrustedFormCertificate(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("id", self.id)
         writer.write_str_value("source", self.source)
-        writer.write_str_value("url", self.url)
         writer.write_additional_data_value(self.additional_data)
     
 

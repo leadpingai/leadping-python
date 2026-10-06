@@ -5,35 +5,35 @@ from kiota_abstractions.serialization import Parsable, ParseNode, SerializationW
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .trusted_form_certificate import TrustedFormCertificate
+    from .leadping_consent_certificate import LeadpingConsentCertificate
 
-from .trusted_form_certificate import TrustedFormCertificate
+from .leadping_consent_certificate import LeadpingConsentCertificate
 
 @dataclass
-class UserNotificationPreferences_smsConsentTrustedFormCertificate(TrustedFormCertificate, Parsable):
+class UserNotificationPreferences_smsConsentCertificate(LeadpingConsentCertificate, Parsable):
     """
-    Describes trusted form certificate data used in Leadping API requests and responses.
+    Describes Leadping Consent certificate data used in Leadping API requests and responses.
     """
     
     @staticmethod
-    def create_from_discriminator_value(parse_node: ParseNode) -> UserNotificationPreferences_smsConsentTrustedFormCertificate:
+    def create_from_discriminator_value(parse_node: ParseNode) -> UserNotificationPreferences_smsConsentCertificate:
         """
         Creates a new instance of the appropriate class based on discriminator value
         param parse_node: The parse node to use to read the discriminator value and create the object
-        Returns: UserNotificationPreferences_smsConsentTrustedFormCertificate
+        Returns: UserNotificationPreferences_smsConsentCertificate
         """
         if parse_node is None:
             raise TypeError("parse_node cannot be null.")
-        return UserNotificationPreferences_smsConsentTrustedFormCertificate()
+        return UserNotificationPreferences_smsConsentCertificate()
     
     def get_field_deserializers(self,) -> dict[str, Callable[[ParseNode], None]]:
         """
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .trusted_form_certificate import TrustedFormCertificate
+        from .leadping_consent_certificate import LeadpingConsentCertificate
 
-        from .trusted_form_certificate import TrustedFormCertificate
+        from .leadping_consent_certificate import LeadpingConsentCertificate
 
         fields: dict[str, Callable[[Any], None]] = {
         }

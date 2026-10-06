@@ -5,7 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
-    from .trusted_form_certificate import TrustedFormCertificate
+    from .leadping_consent_certificate import LeadpingConsentCertificate
 
 @dataclass
 class UserCompliance(AdditionalDataHolder, Parsable):
@@ -25,8 +25,8 @@ class UserCompliance(AdditionalDataHolder, Parsable):
     accepted_terms: Optional[bool] = None
     # Whether the user accepted subscription for this user compliance.
     accepted_to_subscription: Optional[bool] = None
-    # The TrustedForm certificates included with this user compliance.
-    trusted_form_certificates: Optional[list[TrustedFormCertificate]] = None
+    # The Leadping Consent certificates included with this user compliance.
+    consent_certificates: Optional[list[LeadpingConsentCertificate]] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UserCompliance:
@@ -44,9 +44,9 @@ class UserCompliance(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
-        from .trusted_form_certificate import TrustedFormCertificate
+        from .leadping_consent_certificate import LeadpingConsentCertificate
 
-        from .trusted_form_certificate import TrustedFormCertificate
+        from .leadping_consent_certificate import LeadpingConsentCertificate
 
         fields: dict[str, Callable[[Any], None]] = {
             "acceptedBaa": lambda n : setattr(self, 'accepted_baa', n.get_bool_value()),
@@ -54,7 +54,7 @@ class UserCompliance(AdditionalDataHolder, Parsable):
             "acceptedSms": lambda n : setattr(self, 'accepted_sms', n.get_bool_value()),
             "acceptedTerms": lambda n : setattr(self, 'accepted_terms', n.get_bool_value()),
             "acceptedToSubscription": lambda n : setattr(self, 'accepted_to_subscription', n.get_bool_value()),
-            "trustedFormCertificates": lambda n : setattr(self, 'trusted_form_certificates', n.get_collection_of_object_values(TrustedFormCertificate)),
+            "consentCertificates": lambda n : setattr(self, 'consent_certificates', n.get_collection_of_object_values(LeadpingConsentCertificate)),
         }
         return fields
     
@@ -71,7 +71,7 @@ class UserCompliance(AdditionalDataHolder, Parsable):
         writer.write_bool_value("acceptedSms", self.accepted_sms)
         writer.write_bool_value("acceptedTerms", self.accepted_terms)
         writer.write_bool_value("acceptedToSubscription", self.accepted_to_subscription)
-        writer.write_collection_of_object_values("trustedFormCertificates", self.trusted_form_certificates)
+        writer.write_collection_of_object_values("consentCertificates", self.consent_certificates)
         writer.write_additional_data_value(self.additional_data)
     
 
