@@ -30,6 +30,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     external_id: Optional[str] = None
     # Bulk import batch ID that created or updated this lead.
     import_batch_id: Optional[str] = None
+    # Stable source operation key. Reuse for retries, and change for a new submission.
+    intake_idempotency_key: Optional[str] = None
     # IP address captured with the request for audit and compliance review.
     ip_address: Optional[str] = None
     # Indicates whether this lead was imported rather than captured through a live source.
@@ -119,6 +121,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
             "importBatchId": lambda n : setattr(self, 'import_batch_id', n.get_str_value()),
+            "intakeIdempotencyKey": lambda n : setattr(self, 'intake_idempotency_key', n.get_str_value()),
             "ipAddress": lambda n : setattr(self, 'ip_address', n.get_str_value()),
             "isImported": lambda n : setattr(self, 'is_imported', n.get_bool_value()),
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
@@ -167,6 +170,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("externalId", self.external_id)
         writer.write_str_value("importBatchId", self.import_batch_id)
+        writer.write_str_value("intakeIdempotencyKey", self.intake_idempotency_key)
         writer.write_str_value("ipAddress", self.ip_address)
         writer.write_bool_value("isImported", self.is_imported)
         writer.write_str_value("landingPage", self.landing_page)

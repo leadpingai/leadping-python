@@ -36,6 +36,8 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Lead gender supplied by intake sources and normalized when possible.
     gender: Optional[str] = None
+    # Stable delivery key reused when retrying the same lead submission to this source.
+    idempotency_key: Optional[str] = None
     # Landing page URL where the lead submitted their information.
     landing_page: Optional[str] = None
     # Last name of the lead, user, or contact represented by this lead intake request.
@@ -114,6 +116,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "gender": lambda n : setattr(self, 'gender', n.get_str_value()),
+            "idempotencyKey": lambda n : setattr(self, 'idempotency_key', n.get_str_value()),
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
@@ -158,6 +161,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("externalId", self.external_id)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("gender", self.gender)
+        writer.write_str_value("idempotencyKey", self.idempotency_key)
         writer.write_str_value("landingPage", self.landing_page)
         writer.write_str_value("lastName", self.last_name)
         writer.write_str_value("phone", self.phone)
