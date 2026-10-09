@@ -57,6 +57,8 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # Scope that limits where this automation configuration response applies in Leadping.
     scope: Optional[str] = None
+    # Time zone used by workflow time and day conditions in preview and runtime. Defaults to UTC.
+    time_zone_id: Optional[str] = None
     # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
@@ -115,6 +117,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(AutomationResponse_organization)),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
             "user": lambda n : setattr(self, 'user', n.get_object_value(AutomationResponse_user)),
             "version": lambda n : setattr(self, 'version', n.get_int_value()),
@@ -148,6 +151,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("scope", self.scope)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_collection_of_object_values("triggers", self.triggers)
         writer.write_object_value("user", self.user)
         writer.write_int_value("version", self.version)

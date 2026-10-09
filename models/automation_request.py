@@ -34,6 +34,8 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Scope that limits where this automation configuration request applies in Leadping.
     scope: Optional[str] = None
+    # Time zone used by workflow time and day conditions in preview and runtime. Defaults to UTC.
+    time_zone_id: Optional[str] = None
     # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
     # Version number for this automation configuration request schema or saved configuration.
@@ -76,6 +78,7 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
             "version": lambda n : setattr(self, 'version', n.get_int_value()),
             "visibility": lambda n : setattr(self, 'visibility', n.get_str_value()),
@@ -98,6 +101,7 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_str_value("name", self.name)
         writer.write_str_value("scope", self.scope)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_collection_of_object_values("triggers", self.triggers)
         writer.write_int_value("version", self.version)
         writer.write_str_value("visibility", self.visibility)

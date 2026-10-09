@@ -42,6 +42,8 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
     organization_id: Optional[str] = None
     # Scope that limits where this automation request snapshot applies in Leadping.
     scope: Optional[str] = None
+    # Time zone used by workflow time and day conditions in preview and runtime. Defaults to UTC.
+    time_zone_id: Optional[str] = None
     # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
     # Visibility level that controls who can see this automation request snapshot.
@@ -86,6 +88,7 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "scope": lambda n : setattr(self, 'scope', n.get_str_value()),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
             "triggers": lambda n : setattr(self, 'triggers', n.get_collection_of_object_values(AutomationTrigger)),
             "visibility": lambda n : setattr(self, 'visibility', n.get_str_value()),
         }
@@ -111,6 +114,7 @@ class AutomationRequestSnapshot(AdditionalDataHolder, Parsable):
         writer.write_str_value("name", self.name)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("scope", self.scope)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_collection_of_object_values("triggers", self.triggers)
         writer.write_str_value("visibility", self.visibility)
         writer.write_additional_data_value(self.additional_data)
