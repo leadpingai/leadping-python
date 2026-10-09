@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .automation_action_run_record import AutomationActionRunRecord
+    from .automation_run_record_automation_lineage import AutomationRunRecord_automationLineage
     from .automation_run_record_condition_results import AutomationRunRecord_conditionResults
 
 @dataclass
@@ -21,6 +22,8 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
     actions: Optional[list[AutomationActionRunRecord]] = None
     # Automation ID connected to this workflow, run, or event.
     automation_id: Optional[str] = None
+    # Persisted origin of an automation run and the events produced by its actions.
+    automation_lineage: Optional[AutomationRunRecord_automationLineage] = None
     # UTC timestamp when processing completed for this automation run record.
     completed_at: Optional[datetime.datetime] = None
     # Results of condition nodes already visited by this run, preserved across waits and retries.
@@ -67,14 +70,17 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .automation_action_run_record import AutomationActionRunRecord
+        from .automation_run_record_automation_lineage import AutomationRunRecord_automationLineage
         from .automation_run_record_condition_results import AutomationRunRecord_conditionResults
 
         from .automation_action_run_record import AutomationActionRunRecord
+        from .automation_run_record_automation_lineage import AutomationRunRecord_automationLineage
         from .automation_run_record_condition_results import AutomationRunRecord_conditionResults
 
         fields: dict[str, Callable[[Any], None]] = {
             "actions": lambda n : setattr(self, 'actions', n.get_collection_of_object_values(AutomationActionRunRecord)),
             "automationId": lambda n : setattr(self, 'automation_id', n.get_str_value()),
+            "automationLineage": lambda n : setattr(self, 'automation_lineage', n.get_object_value(AutomationRunRecord_automationLineage)),
             "completedAt": lambda n : setattr(self, 'completed_at', n.get_datetime_value()),
             "conditionResults": lambda n : setattr(self, 'condition_results', n.get_object_value(AutomationRunRecord_conditionResults)),
             "executionMode": lambda n : setattr(self, 'execution_mode', n.get_str_value()),
@@ -102,6 +108,7 @@ class AutomationRunRecord(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_collection_of_object_values("actions", self.actions)
         writer.write_str_value("automationId", self.automation_id)
+        writer.write_object_value("automationLineage", self.automation_lineage)
         writer.write_datetime_value("completedAt", self.completed_at)
         writer.write_object_value("conditionResults", self.condition_results)
         writer.write_str_value("executionMode", self.execution_mode)
