@@ -30,6 +30,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     current_lead_status: Optional[ConversationResponse_currentLeadStatus] = None
     # Email address used to resolve the lead's avatar when available.
     email: Optional[str] = None
+    # Monotonic event boundary. Mark-read requests must send the version the reader observed.
+    event_version: Optional[int] = None
     # First name of the lead, user, or contact represented by this conversation response.
     first_name: Optional[str] = None
     # Unique Leadping identifier for this conversation response.
@@ -94,6 +96,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
             "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(ConversationResponse_currentLeadStatus)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
+            "eventVersion": lambda n : setattr(self, 'event_version', n.get_int_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
@@ -127,6 +130,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("avatarUrl", self.avatar_url)
         writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_str_value("email", self.email)
+        writer.write_int_value("eventVersion", self.event_version)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)

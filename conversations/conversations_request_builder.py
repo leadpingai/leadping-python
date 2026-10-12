@@ -26,7 +26,7 @@ class ConversationsRequestBuilder(BaseRequestBuilder):
     def by_id(self,id: str) -> ConversationsItemRequestBuilder:
         """
         Gets an item from the leadping.conversations.item collection
-        param id: The ID of the conversation to mark as read.
+        param id: The ID of the conversation to retrieve.
         Returns: ConversationsItemRequestBuilder
         """
         if id is None:

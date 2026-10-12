@@ -39,6 +39,8 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     changed_by_user_id: Optional[str] = None
     # UTC timestamp for created at on this lead status change.
     created_at: Optional[datetime.datetime] = None
+    # When this follow-up was completed; email/call activity alone does not complete it.
+    follow_up_completed_at: Optional[datetime.datetime] = None
     # The current follow up status for this lead status change.
     follow_up_status: Optional[str] = None
     # Unique Leadping identifier for this lead status change.
@@ -71,6 +73,8 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     reason: Optional[str] = None
     # The related call event ID associated with this lead status change.
     related_call_event_id: Optional[str] = None
+    # Monotonic revision of the lead's current status and scheduling state.
+    revision: Optional[int] = None
     # The source ID associated with this lead status change.
     source_id: Optional[str] = None
     # UTC timestamp for task due at on this lead status change.
@@ -116,6 +120,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
             "changedByAutomationId": lambda n : setattr(self, 'changed_by_automation_id', n.get_str_value()),
             "changedByUserId": lambda n : setattr(self, 'changed_by_user_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "followUpCompletedAt": lambda n : setattr(self, 'follow_up_completed_at', n.get_datetime_value()),
             "followUpStatus": lambda n : setattr(self, 'follow_up_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
@@ -132,6 +137,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
             "outcome": lambda n : setattr(self, 'outcome', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
             "relatedCallEventId": lambda n : setattr(self, 'related_call_event_id', n.get_str_value()),
+            "revision": lambda n : setattr(self, 'revision', n.get_int_value()),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "taskDueAt": lambda n : setattr(self, 'task_due_at', n.get_datetime_value()),
             "timestamp": lambda n : setattr(self, 'timestamp', n.get_datetime_value()),
@@ -159,6 +165,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("changedByAutomationId", self.changed_by_automation_id)
         writer.write_str_value("changedByUserId", self.changed_by_user_id)
         writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_datetime_value("followUpCompletedAt", self.follow_up_completed_at)
         writer.write_str_value("followUpStatus", self.follow_up_status)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
@@ -175,6 +182,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("outcome", self.outcome)
         writer.write_str_value("reason", self.reason)
         writer.write_str_value("relatedCallEventId", self.related_call_event_id)
+        writer.write_int_value("revision", self.revision)
         writer.write_str_value("sourceId", self.source_id)
         writer.write_datetime_value("taskDueAt", self.task_due_at)
         writer.write_datetime_value("timestamp", self.timestamp)

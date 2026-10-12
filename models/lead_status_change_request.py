@@ -26,6 +26,12 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     callback_at: Optional[datetime.datetime] = None
     # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[LeadStatusChangeRequest_category] = None
+    # Whether the scheduled follow-up is explicitly complete.
+    complete_follow_up: Optional[bool] = None
+    # Optional optimistic concurrency guard for the status currently displayed by the client.
+    expected_current_status_id: Optional[str] = None
+    # Optional revision guard, including when the lead has no persisted status history yet.
+    expected_revision: Optional[int] = None
     # The current follow up status for this lead status change.
     follow_up_status: Optional[str] = None
     # The operator or customer notes recorded for this lead status change.
@@ -65,6 +71,9 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
             "appointmentStartAt": lambda n : setattr(self, 'appointment_start_at', n.get_datetime_value()),
             "callbackAt": lambda n : setattr(self, 'callback_at', n.get_datetime_value()),
             "category": lambda n : setattr(self, 'category', n.get_enum_value(LeadStatusChangeRequest_category)),
+            "completeFollowUp": lambda n : setattr(self, 'complete_follow_up', n.get_bool_value()),
+            "expectedCurrentStatusId": lambda n : setattr(self, 'expected_current_status_id', n.get_str_value()),
+            "expectedRevision": lambda n : setattr(self, 'expected_revision', n.get_int_value()),
             "followUpStatus": lambda n : setattr(self, 'follow_up_status', n.get_str_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "outcome": lambda n : setattr(self, 'outcome', n.get_str_value()),
@@ -87,6 +96,9 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("appointmentStartAt", self.appointment_start_at)
         writer.write_datetime_value("callbackAt", self.callback_at)
         writer.write_enum_value("category", self.category)
+        writer.write_bool_value("completeFollowUp", self.complete_follow_up)
+        writer.write_str_value("expectedCurrentStatusId", self.expected_current_status_id)
+        writer.write_int_value("expectedRevision", self.expected_revision)
         writer.write_str_value("followUpStatus", self.follow_up_status)
         writer.write_str_value("notes", self.notes)
         writer.write_str_value("outcome", self.outcome)

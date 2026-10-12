@@ -116,6 +116,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     traffic_type: Optional[EventTableRow_trafficType] = None
     # UTC timestamp when the provider marked the message undeliverable.
     undeliverable_at: Optional[datetime.datetime] = None
+    # Playable recording URL for voicemail events.
+    voicemail_url: Optional[str] = None
     # Indicates whether a user manually overrode Leadping's automatic number selection for this event timeline table row.
     was_manually_overridden: Optional[bool] = None
     
@@ -196,6 +198,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
             "trafficType": lambda n : setattr(self, 'traffic_type', n.get_enum_value(EventTableRow_trafficType)),
             "undeliverableAt": lambda n : setattr(self, 'undeliverable_at', n.get_datetime_value()),
+            "voicemailUrl": lambda n : setattr(self, 'voicemail_url', n.get_str_value()),
             "wasManuallyOverridden": lambda n : setattr(self, 'was_manually_overridden', n.get_bool_value()),
         }
         return fields
@@ -256,6 +259,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
         writer.write_enum_value("trafficType", self.traffic_type)
         writer.write_datetime_value("undeliverableAt", self.undeliverable_at)
+        writer.write_str_value("voicemailUrl", self.voicemail_url)
         writer.write_bool_value("wasManuallyOverridden", self.was_manually_overridden)
         writer.write_additional_data_value(self.additional_data)
     

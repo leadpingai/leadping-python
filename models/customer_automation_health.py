@@ -5,6 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .analytics_coverage import AnalyticsCoverage
     from .customer_automation_health_last_failure import CustomerAutomationHealth_lastFailure
     from .customer_automation_health_point import CustomerAutomationHealthPoint
     from .customer_failing_automation import CustomerFailingAutomation
@@ -19,6 +20,8 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
 
     # Total number of automation records represented by this Leadping customer automation health.
     automation_count: Optional[int] = None
+    # States whether missing historical evidence can make reported counts incomplete.
+    coverage: Optional[AnalyticsCoverage] = None
     # Total number of enabled records represented by this Leadping customer automation health.
     enabled_count: Optional[int] = None
     # Number of executions represented by this Leadping customer automation health.
@@ -50,16 +53,19 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .analytics_coverage import AnalyticsCoverage
         from .customer_automation_health_last_failure import CustomerAutomationHealth_lastFailure
         from .customer_automation_health_point import CustomerAutomationHealthPoint
         from .customer_failing_automation import CustomerFailingAutomation
 
+        from .analytics_coverage import AnalyticsCoverage
         from .customer_automation_health_last_failure import CustomerAutomationHealth_lastFailure
         from .customer_automation_health_point import CustomerAutomationHealthPoint
         from .customer_failing_automation import CustomerFailingAutomation
 
         fields: dict[str, Callable[[Any], None]] = {
             "automationCount": lambda n : setattr(self, 'automation_count', n.get_int_value()),
+            "coverage": lambda n : setattr(self, 'coverage', n.get_object_value(AnalyticsCoverage)),
             "enabledCount": lambda n : setattr(self, 'enabled_count', n.get_int_value()),
             "executions": lambda n : setattr(self, 'executions', n.get_int_value()),
             "failingAutomations": lambda n : setattr(self, 'failing_automations', n.get_collection_of_object_values(CustomerFailingAutomation)),
@@ -79,6 +85,7 @@ class CustomerAutomationHealth(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_int_value("automationCount", self.automation_count)
+        writer.write_object_value("coverage", self.coverage)
         writer.write_int_value("enabledCount", self.enabled_count)
         writer.write_int_value("executions", self.executions)
         writer.write_collection_of_object_values("failingAutomations", self.failing_automations)

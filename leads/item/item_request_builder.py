@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from .archive.archive_request_builder import ArchiveRequestBuilder
     from .assignment.assignment_request_builder import AssignmentRequestBuilder
+    from .follow_up.follow_up_request_builder import FollowUpRequestBuilder
     from .status.status_request_builder import StatusRequestBuilder
     from .status_history.status_history_request_builder import StatusHistoryRequestBuilder
     from .tags.tags_request_builder import TagsRequestBuilder
@@ -173,6 +174,15 @@ class ItemRequestBuilder(BaseRequestBuilder):
         from .assignment.assignment_request_builder import AssignmentRequestBuilder
 
         return AssignmentRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def follow_up(self) -> FollowUpRequestBuilder:
+        """
+        The followUp property
+        """
+        from .follow_up.follow_up_request_builder import FollowUpRequestBuilder
+
+        return FollowUpRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def status(self) -> StatusRequestBuilder:

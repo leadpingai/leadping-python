@@ -27,11 +27,11 @@ class MarkReadRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/{id}/mark-read", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/{id}/mark-read?eventVersion={eventVersion}", path_parameters)
     
-    async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
+    async def post(self,request_configuration: Optional[RequestConfiguration[MarkReadRequestBuilderPostQueryParameters]] = None) -> Optional[bool]:
         """
-        Updates the conversation's read state for the current user's inbox and returns whether the conversation was found.
+        Clears unread state only at the observed event version. Returns false if the conversation changed or is inaccessible.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
@@ -43,16 +43,15 @@ class MarkReadRequestBuilder(BaseRequestBuilder):
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
             "403": ProblemDetails,
-            "404": ProblemDetails,
             "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         return await self.request_adapter.send_primitive_async(request_info, "bool", error_mapping)
     
-    def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[MarkReadRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
-        Updates the conversation's read state for the current user's inbox and returns whether the conversation was found.
+        Clears unread state only at the observed event version. Returns false if the conversation changed or is inaccessible.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -72,7 +71,28 @@ class MarkReadRequestBuilder(BaseRequestBuilder):
         return MarkReadRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class MarkReadRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class MarkReadRequestBuilderPostQueryParameters():
+        """
+        Clears unread state only at the observed event version. Returns false if the conversation changed or is inaccessible.
+        """
+        def get_query_parameter(self,original_name: str) -> str:
+            """
+            Maps the query parameters names to their encoded names for the URI template parsing.
+            param original_name: The original query parameter name in the class.
+            Returns: str
+            """
+            if original_name is None:
+                raise TypeError("original_name cannot be null.")
+            if original_name == "event_version":
+                return "eventVersion"
+            return original_name
+        
+        # The event version observed by the reader.
+        event_version: Optional[int] = None
+
+    
+    @dataclass
+    class MarkReadRequestBuilderPostRequestConfiguration(RequestConfiguration[MarkReadRequestBuilderPostQueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

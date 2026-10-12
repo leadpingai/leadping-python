@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from ..models.lead_response import LeadResponse
     from ..models.problem_details import ProblemDetails
     from .all.all_request_builder import AllRequestBuilder
+    from .follow_ups.follow_ups_request_builder import FollowUpsRequestBuilder
     from .intake.intake_request_builder import IntakeRequestBuilder
     from .item.item_request_builder import ItemRequestBuilder
 
@@ -108,6 +109,15 @@ class LeadsRequestBuilder(BaseRequestBuilder):
         from .all.all_request_builder import AllRequestBuilder
 
         return AllRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def follow_ups(self) -> FollowUpsRequestBuilder:
+        """
+        The followUps property
+        """
+        from .follow_ups.follow_ups_request_builder import FollowUpsRequestBuilder
+
+        return FollowUpsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def intake(self) -> IntakeRequestBuilder:

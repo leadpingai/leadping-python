@@ -14,7 +14,7 @@ class Phone(AdditionalDataHolder, Parsable):
 
     # E.164 phone number exposed by this lead phone number.
     number: Optional[str] = None
-    # Identifier of the canonical phone identity stored by Leadping.
+    # Server-derived identifier of the canonical phone identity. Client-supplied linkage is ignored when creating or updating a lead.
     phone_identity_id: Optional[str] = None
     # Type classification used to route and interpret this lead phone number in the Leadping API.
     type: Optional[str] = None

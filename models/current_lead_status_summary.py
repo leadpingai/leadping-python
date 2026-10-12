@@ -27,10 +27,16 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
     changed_by_user_id: Optional[str] = None
     # Human-readable display name shown for this current lead status change summary.
     display_name: Optional[str] = None
+    # When this follow-up was completed; email/call activity alone does not complete it.
+    follow_up_completed_at: Optional[datetime.datetime] = None
+    # The earliest callback or task time for the current status.
+    follow_up_due_at: Optional[datetime.datetime] = None
     # Unique Leadping identifier for this current lead status change summary.
     id: Optional[str] = None
     # Current lead status change outcome assigned to the lead.
     outcome: Optional[str] = None
+    # Monotonic revision of the lead's current status and scheduling state.
+    revision: Optional[int] = None
     # Known sources that can change a lead's current lead status change.
     source: Optional[CurrentLeadStatusSummary_source] = None
     
@@ -62,8 +68,11 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
             "changedByAutomationId": lambda n : setattr(self, 'changed_by_automation_id', n.get_str_value()),
             "changedByUserId": lambda n : setattr(self, 'changed_by_user_id', n.get_str_value()),
             "displayName": lambda n : setattr(self, 'display_name', n.get_str_value()),
+            "followUpCompletedAt": lambda n : setattr(self, 'follow_up_completed_at', n.get_datetime_value()),
+            "followUpDueAt": lambda n : setattr(self, 'follow_up_due_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "outcome": lambda n : setattr(self, 'outcome', n.get_str_value()),
+            "revision": lambda n : setattr(self, 'revision', n.get_int_value()),
             "source": lambda n : setattr(self, 'source', n.get_enum_value(CurrentLeadStatusSummary_source)),
         }
         return fields
@@ -81,8 +90,11 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
         writer.write_str_value("changedByAutomationId", self.changed_by_automation_id)
         writer.write_str_value("changedByUserId", self.changed_by_user_id)
         writer.write_str_value("displayName", self.display_name)
+        writer.write_datetime_value("followUpCompletedAt", self.follow_up_completed_at)
+        writer.write_datetime_value("followUpDueAt", self.follow_up_due_at)
         writer.write_str_value("id", self.id)
         writer.write_str_value("outcome", self.outcome)
+        writer.write_int_value("revision", self.revision)
         writer.write_enum_value("source", self.source)
         writer.write_additional_data_value(self.additional_data)
     

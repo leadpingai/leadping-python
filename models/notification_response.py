@@ -21,6 +21,8 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
     action_button_text: Optional[str] = None
     # The URL associated with this notification.
     action_url: Optional[str] = None
+    # The mobile conversation destination.
+    conversation_id: Optional[str] = None
     # UTC timestamp when the resource was created.
     created_at: Optional[datetime.datetime] = None
     # Optional supporting details displayed beneath the notification message.
@@ -31,12 +33,16 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
     is_demo: Optional[bool] = None
     # Whether this notification is read.
     is_read: Optional[bool] = None
+    # The lead used to resolve the conversation.
+    lead_id: Optional[str] = None
     # Message for this notification.
     message: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
+    # The organization selected before opening this notification.
+    organization_id: Optional[str] = None
     # Ranks the urgency and presentation importance of a Leadping user notification.
     priority: Optional[NotificationPriority] = None
     # Whether this notification should also be delivered as a device push notification.
@@ -77,14 +83,17 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actionButtonText": lambda n : setattr(self, 'action_button_text', n.get_str_value()),
             "actionUrl": lambda n : setattr(self, 'action_url', n.get_str_value()),
+            "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "details": lambda n : setattr(self, 'details', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isRead": lambda n : setattr(self, 'is_read', n.get_bool_value()),
+            "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "message": lambda n : setattr(self, 'message', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "priority": lambda n : setattr(self, 'priority', n.get_enum_value(NotificationPriority)),
             "pushEnabled": lambda n : setattr(self, 'push_enabled', n.get_bool_value()),
             "readAt": lambda n : setattr(self, 'read_at', n.get_datetime_value()),
@@ -105,14 +114,17 @@ class NotificationResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actionButtonText", self.action_button_text)
         writer.write_str_value("actionUrl", self.action_url)
+        writer.write_str_value("conversationId", self.conversation_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("details", self.details)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isRead", self.is_read)
+        writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("message", self.message)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_enum_value("priority", self.priority)
         writer.write_bool_value("pushEnabled", self.push_enabled)
         writer.write_datetime_value("readAt", self.read_at)

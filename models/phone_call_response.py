@@ -52,6 +52,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     lead_id: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
+    # The organization context required to handle this call on a mobile device.
+    organization_id: Optional[str] = None
     # Phone number used by this phone call for calls, SMS, lookup, or routing.
     phone_number: Optional[str] = None
     # UTC timestamp when Leadping queued this phone call for processing.
@@ -115,6 +117,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "ringingAt": lambda n : setattr(self, 'ringing_at', n.get_datetime_value()),
@@ -153,6 +156,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("ringingAt", self.ringing_at)
