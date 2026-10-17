@@ -14,72 +14,85 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from .....models.problem_details import ProblemDetails
-    from .....models.push_installation_request import PushInstallationRequest
+    from ....models.problem_details import ProblemDetails
 
-class CurrentRequestBuilder(BaseRequestBuilder):
+class MarkHandledRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /notifications/push/installations/current
+    Builds and executes requests for operations under /conversations/{id}/mark-handled
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new CurrentRequestBuilder and sets the default values.
+        Instantiates a new MarkHandledRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/notifications/push/installations/current", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/{id}/mark-handled?replyVersion={replyVersion}", path_parameters)
     
-    async def put(self,body: PushInstallationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
+    async def post(self,request_configuration: Optional[RequestConfiguration[MarkHandledRequestBuilderPostQueryParameters]] = None) -> Optional[bool]:
         """
-        Registers or refreshes the authenticated user's mobile push installation so Leadping can deliver account and workflow notifications to the device.
-        param body: Describes a mobile push installation. Identity and Azure tags are derived by the API.
+        Clears the reply requirement only at the observed reply version. Returns false if the reply version changed or the conversation is inaccessible.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
-        if body is None:
-            raise TypeError("body cannot be null.")
-        request_info = self.to_put_request_information(
-            body, request_configuration
+        request_info = self.to_post_request_information(
+            request_configuration
         )
-        from .....models.problem_details import ProblemDetails
+        from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
-            "400": ProblemDetails,
             "401": ProblemDetails,
+            "403": ProblemDetails,
             "429": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
         return await self.request_adapter.send_primitive_async(request_info, "bool", error_mapping)
     
-    def to_put_request_information(self,body: PushInstallationRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
+    def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[MarkHandledRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
-        Registers or refreshes the authenticated user's mobile push installation so Leadping can deliver account and workflow notifications to the device.
-        param body: Describes a mobile push installation. Identity and Azure tags are derived by the API.
+        Clears the reply requirement only at the observed reply version. Returns false if the reply version changed or the conversation is inaccessible.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
-        if body is None:
-            raise TypeError("body cannot be null.")
-        request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
+        request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
         request_info.headers.try_add("Accept", "text/plain;q=0.9")
-        request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     
-    def with_url(self,raw_url: str) -> CurrentRequestBuilder:
+    def with_url(self,raw_url: str) -> MarkHandledRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: CurrentRequestBuilder
+        Returns: MarkHandledRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return CurrentRequestBuilder(self.request_adapter, raw_url)
+        return MarkHandledRequestBuilder(self.request_adapter, raw_url)
     
     @dataclass
-    class CurrentRequestBuilderPutRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class MarkHandledRequestBuilderPostQueryParameters():
+        """
+        Clears the reply requirement only at the observed reply version. Returns false if the reply version changed or the conversation is inaccessible.
+        """
+        def get_query_parameter(self,original_name: str) -> str:
+            """
+            Maps the query parameters names to their encoded names for the URI template parsing.
+            param original_name: The original query parameter name in the class.
+            Returns: str
+            """
+            if original_name is None:
+                raise TypeError("original_name cannot be null.")
+            if original_name == "reply_version":
+                return "replyVersion"
+            return original_name
+        
+        # The customer reply version observed by the caller. Must be non-negative.
+        reply_version: Optional[int] = None
+
+    
+    @dataclass
+    class MarkHandledRequestBuilderPostRequestConfiguration(RequestConfiguration[MarkHandledRequestBuilderPostQueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

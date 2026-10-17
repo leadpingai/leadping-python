@@ -16,6 +16,7 @@ from warnings import warn
 if TYPE_CHECKING:
     from ...models.conversation_response import ConversationResponse
     from ...models.problem_details import ProblemDetails
+    from .mark_handled.mark_handled_request_builder import MarkHandledRequestBuilder
     from .mark_read.mark_read_request_builder import MarkReadRequestBuilder
     from .outbound_readiness.outbound_readiness_request_builder import OutboundReadinessRequestBuilder
 
@@ -75,6 +76,15 @@ class ConversationsItemRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return ConversationsItemRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def mark_handled(self) -> MarkHandledRequestBuilder:
+        """
+        The markHandled property
+        """
+        from .mark_handled.mark_handled_request_builder import MarkHandledRequestBuilder
+
+        return MarkHandledRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def mark_read(self) -> MarkReadRequestBuilder:
