@@ -29,6 +29,8 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this organization switch option is current.
     is_current: Optional[bool] = None
+    # The isDemo property
+    is_demo: Optional[bool] = None
     # UTC timestamp for last used at on this organization switch option.
     last_used_at: Optional[datetime.datetime] = None
     # The human-readable name shown for this organization switch option.
@@ -76,6 +78,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
             "hasPaymentMethod": lambda n : setattr(self, 'has_payment_method', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isCurrent": lambda n : setattr(self, 'is_current', n.get_bool_value()),
+            "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastUsedAt": lambda n : setattr(self, 'last_used_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "needsAdminReview": lambda n : setattr(self, 'needs_admin_review', n.get_bool_value()),
@@ -99,6 +102,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
         writer.write_bool_value("hasPaymentMethod", self.has_payment_method)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isCurrent", self.is_current)
+        writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("lastUsedAt", self.last_used_at)
         writer.write_str_value("name", self.name)
         writer.write_bool_value("needsAdminReview", self.needs_admin_review)

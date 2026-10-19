@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .lead_intake_request_consent_certificate_type import LeadIntakeRequest_consentCertificateType
     from .lead_intake_request_source_metadata import LeadIntakeRequest_sourceMetadata
 
 @dataclass
@@ -24,6 +25,10 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     birth_date: Optional[datetime.date] = None
     # City for the lead or organization postal address.
     city: Optional[str] = None
+    # The provider responsible for a lead's consent certificate.
+    consent_certificate_type: Optional[LeadIntakeRequest_consentCertificateType] = None
+    # Certificate URL used as proof of consumer consent.
+    consent_certificate_url: Optional[str] = None
     # Lead date of birth supplied by intake sources and normalized into the lead profile.
     date_of_birth: Optional[datetime.date] = None
     # Direct-post price supplied by the lead source during intake.
@@ -68,8 +73,6 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     tag_ids: Optional[list[str]] = None
     # Tag names assigned to this lead when matching existing tags by name.
     tag_names: Optional[list[str]] = None
-    # TrustedForm certificate URL used as proof of consumer consent.
-    trusted_form_url: Optional[str] = None
     # UTM campaign parameter captured for lead attribution reporting.
     utm_campaign: Optional[str] = None
     # UTM content parameter captured for lead attribution reporting.
@@ -101,8 +104,10 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .lead_intake_request_consent_certificate_type import LeadIntakeRequest_consentCertificateType
         from .lead_intake_request_source_metadata import LeadIntakeRequest_sourceMetadata
 
+        from .lead_intake_request_consent_certificate_type import LeadIntakeRequest_consentCertificateType
         from .lead_intake_request_source_metadata import LeadIntakeRequest_sourceMetadata
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -110,6 +115,8 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
             "address2": lambda n : setattr(self, 'address2', n.get_str_value()),
             "birthDate": lambda n : setattr(self, 'birth_date', n.get_date_value()),
             "city": lambda n : setattr(self, 'city', n.get_str_value()),
+            "consentCertificateType": lambda n : setattr(self, 'consent_certificate_type', n.get_enum_value(LeadIntakeRequest_consentCertificateType)),
+            "consentCertificateUrl": lambda n : setattr(self, 'consent_certificate_url', n.get_str_value()),
             "dateOfBirth": lambda n : setattr(self, 'date_of_birth', n.get_date_value()),
             "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
@@ -132,7 +139,6 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
             "subId": lambda n : setattr(self, 'sub_id', n.get_str_value()),
             "tagIds": lambda n : setattr(self, 'tag_ids', n.get_collection_of_primitive_values(str)),
             "tagNames": lambda n : setattr(self, 'tag_names', n.get_collection_of_primitive_values(str)),
-            "trustedFormUrl": lambda n : setattr(self, 'trusted_form_url', n.get_str_value()),
             "utmCampaign": lambda n : setattr(self, 'utm_campaign', n.get_str_value()),
             "utmContent": lambda n : setattr(self, 'utm_content', n.get_str_value()),
             "utmMedium": lambda n : setattr(self, 'utm_medium', n.get_str_value()),
@@ -155,6 +161,8 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("address2", self.address2)
         writer.write_date_value("birthDate", self.birth_date)
         writer.write_str_value("city", self.city)
+        writer.write_enum_value("consentCertificateType", self.consent_certificate_type)
+        writer.write_str_value("consentCertificateUrl", self.consent_certificate_url)
         writer.write_date_value("dateOfBirth", self.date_of_birth)
         writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("email", self.email)
@@ -177,7 +185,6 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("subId", self.sub_id)
         writer.write_collection_of_primitive_values("tagIds", self.tag_ids)
         writer.write_collection_of_primitive_values("tagNames", self.tag_names)
-        writer.write_str_value("trustedFormUrl", self.trusted_form_url)
         writer.write_str_value("utmCampaign", self.utm_campaign)
         writer.write_str_value("utmContent", self.utm_content)
         writer.write_str_value("utmMedium", self.utm_medium)

@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
     from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
 @dataclass
@@ -22,6 +23,10 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     compliance_blocked_reason: Optional[str] = None
     # Compliance status used to decide whether Leadping can send messages.
     compliance_status: Optional[str] = None
+    # The provider responsible for a lead's consent certificate.
+    consent_certificate_type: Optional[LeadMetadata_consentCertificateType] = None
+    # Certificate URL used as proof of consumer consent.
+    consent_certificate_url: Optional[str] = None
     # UTC timestamp when this lead attribution metadata was created.
     created_at: Optional[datetime.datetime] = None
     # Direct-post price supplied by the lead source during intake.
@@ -38,8 +43,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     is_imported: Optional[bool] = None
     # Landing page URL where the lead submitted their information.
     landing_page: Optional[str] = None
-    # Standalone Leadping Consent certificate identifier, accepted as an alternative to TrustedForm.
-    leadping_consent_certificate_id: Optional[str] = None
     # Server-issued timestamp for successful Leadping Consent evidence and recipient validation.
     leadping_consent_checked_at: Optional[datetime.datetime] = None
     # Organization ID that owns this lead's attribution metadata.
@@ -74,8 +77,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     sub_id: Optional[str] = None
     # UTC timestamp when Leadping last successfully checked the TrustedForm certificate URL availability.
     trusted_form_checked_at: Optional[datetime.datetime] = None
-    # TrustedForm certificate URL used as proof of consumer consent.
-    trusted_form_url: Optional[str] = None
     # Browser or client user agent captured when this lead attribution metadata was submitted.
     user_agent: Optional[str] = None
     # User ID associated with this lead's attribution metadata.
@@ -109,14 +110,18 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
         from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
+        from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
         from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
         fields: dict[str, Callable[[Any], None]] = {
             "assignedPhoneNumberId": lambda n : setattr(self, 'assigned_phone_number_id', n.get_str_value()),
             "complianceBlockedReason": lambda n : setattr(self, 'compliance_blocked_reason', n.get_str_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
+            "consentCertificateType": lambda n : setattr(self, 'consent_certificate_type', n.get_enum_value(LeadMetadata_consentCertificateType)),
+            "consentCertificateUrl": lambda n : setattr(self, 'consent_certificate_url', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
@@ -125,7 +130,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "ipAddress": lambda n : setattr(self, 'ip_address', n.get_str_value()),
             "isImported": lambda n : setattr(self, 'is_imported', n.get_bool_value()),
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
-            "leadpingConsentCertificateId": lambda n : setattr(self, 'leadping_consent_certificate_id', n.get_str_value()),
             "leadpingConsentCheckedAt": lambda n : setattr(self, 'leadping_consent_checked_at', n.get_datetime_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "origin": lambda n : setattr(self, 'origin', n.get_str_value()),
@@ -143,7 +147,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "sourceMetadata": lambda n : setattr(self, 'source_metadata', n.get_object_value(LeadMetadata_sourceMetadata)),
             "subId": lambda n : setattr(self, 'sub_id', n.get_str_value()),
             "trustedFormCheckedAt": lambda n : setattr(self, 'trusted_form_checked_at', n.get_datetime_value()),
-            "trustedFormUrl": lambda n : setattr(self, 'trusted_form_url', n.get_str_value()),
             "userAgent": lambda n : setattr(self, 'user_agent', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
             "utmCampaign": lambda n : setattr(self, 'utm_campaign', n.get_str_value()),
@@ -166,6 +169,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("assignedPhoneNumberId", self.assigned_phone_number_id)
         writer.write_str_value("complianceBlockedReason", self.compliance_blocked_reason)
         writer.write_str_value("complianceStatus", self.compliance_status)
+        writer.write_enum_value("consentCertificateType", self.consent_certificate_type)
+        writer.write_str_value("consentCertificateUrl", self.consent_certificate_url)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("externalId", self.external_id)
@@ -174,7 +179,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("ipAddress", self.ip_address)
         writer.write_bool_value("isImported", self.is_imported)
         writer.write_str_value("landingPage", self.landing_page)
-        writer.write_str_value("leadpingConsentCertificateId", self.leadping_consent_certificate_id)
         writer.write_datetime_value("leadpingConsentCheckedAt", self.leadping_consent_checked_at)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("origin", self.origin)
@@ -192,7 +196,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_object_value("sourceMetadata", self.source_metadata)
         writer.write_str_value("subId", self.sub_id)
         writer.write_datetime_value("trustedFormCheckedAt", self.trusted_form_checked_at)
-        writer.write_str_value("trustedFormUrl", self.trusted_form_url)
         writer.write_str_value("userAgent", self.user_agent)
         writer.write_str_value("userId", self.user_id)
         writer.write_str_value("utmCampaign", self.utm_campaign)

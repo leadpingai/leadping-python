@@ -21,6 +21,8 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # The isDemo property
     is_demo: Optional[bool] = None
+    # City and state from the stored phone identity.
+    location: Optional[str] = None
     # Optional display label for this phone number table row in the Leadping API.
     name: Optional[str] = None
     # E.164 phone number exposed by this phone number table row.
@@ -68,6 +70,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
+            "location": lambda n : setattr(self, 'location', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
@@ -93,6 +96,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
+        writer.write_str_value("location", self.location)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
         writer.write_str_value("organization", self.organization)
