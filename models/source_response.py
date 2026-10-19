@@ -20,14 +20,14 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Product allowlist used to accept or route leads from this source.
-    allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
     # Masked preview of the source API key for compact display.
     api_key_preview: Optional[str] = None
     # UTC timestamp when the source credential was most recently rotated.
     api_key_rotated_at: Optional[datetime.datetime] = None
+    # Whether to look up lead phone numbers during intake. When disabled, lookup is required before calling or texting.
+    automatic_phone_lookup: Optional[bool] = None
     # Indicates whether the organization or sender passed compliance review.
     compliance_approved: Optional[bool] = None
     # Configured cost charged when this source creates a billable lead.
@@ -96,10 +96,10 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
-            "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyRotatedAt": lambda n : setattr(self, 'api_key_rotated_at', n.get_datetime_value()),
+            "automaticPhoneLookup": lambda n : setattr(self, 'automatic_phone_lookup', n.get_bool_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -130,10 +130,10 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_datetime_value("apiKeyRotatedAt", self.api_key_rotated_at)
+        writer.write_bool_value("automaticPhoneLookup", self.automatic_phone_lookup)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_datetime_value("createdAt", self.created_at)

@@ -20,8 +20,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # Product allowlist used to accept or route leads from this source.
-    allowed_products: Optional[list[str]] = None
     # State or region allowlist used to accept leads from this source.
     allowed_states: Optional[list[str]] = None
     # UTC timestamp when the source API key was last used.
@@ -32,6 +30,8 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     api_key_rotated_at: Optional[datetime.datetime] = None
     # Total number of authenticated requests made with this source API key.
     api_key_total_uses: Optional[int] = None
+    # Whether lead phone numbers are looked up automatically during intake.
+    automatic_phone_lookup: Optional[bool] = None
     # Indicates whether the organization or sender passed compliance review.
     compliance_approved: Optional[bool] = None
     # Configured cost charged when this source creates a billable lead.
@@ -100,12 +100,12 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
-            "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyRotatedAt": lambda n : setattr(self, 'api_key_rotated_at', n.get_datetime_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
+            "automaticPhoneLookup": lambda n : setattr(self, 'automatic_phone_lookup', n.get_bool_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -136,12 +136,12 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_datetime_value("apiKeyRotatedAt", self.api_key_rotated_at)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
+        writer.write_bool_value("automaticPhoneLookup", self.automatic_phone_lookup)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)
         writer.write_datetime_value("createdAt", self.created_at)

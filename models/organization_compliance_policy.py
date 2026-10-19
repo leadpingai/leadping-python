@@ -12,8 +12,6 @@ class OrganizationCompliancePolicy(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The allowed products included with this organization compliance policy.
-    allowed_products: Optional[list[str]] = None
     # The allowed states included with this organization compliance policy.
     allowed_states: Optional[list[str]] = None
     # Whether this organization compliance policy is enabled.
@@ -46,7 +44,6 @@ class OrganizationCompliancePolicy(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "allowedProducts": lambda n : setattr(self, 'allowed_products', n.get_collection_of_primitive_values(str)),
             "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "requireAgentLicenseState": lambda n : setattr(self, 'require_agent_license_state', n.get_bool_value()),
@@ -65,7 +62,6 @@ class OrganizationCompliancePolicy(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_collection_of_primitive_values("allowedProducts", self.allowed_products)
         writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_bool_value("enabled", self.enabled)
         writer.write_bool_value("requireAgentLicenseState", self.require_agent_license_state)
