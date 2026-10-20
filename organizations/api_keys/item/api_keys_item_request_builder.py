@@ -35,7 +35,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OrganizationApiKeyRevokeResponse]:
         """
-        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
+        Deletes the organization-owned API key without deleting the organization.The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OrganizationApiKeyRevokeResponse]
         """
@@ -107,7 +107,7 @@ class ApiKeysItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
+        Deletes the organization-owned API key without deleting the organization.The operation enforces organization ownership or platform-admin authorization and returns state suitable for membership, billing, and support workflows.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

@@ -33,7 +33,7 @@ class AssignmentRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: LeadAssignmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadResponse]:
         """
-        Updates ownership of the specified lead after validating that the selected assignee is an active member of the current organization.
+        Assigns the lead to an active member of the current organization, or returns it to the unassigned queue.
         param body: Assigns an organization lead to an active organization member. A null user ID returns the lead to the unassigned queue.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[LeadResponse]
@@ -60,7 +60,7 @@ class AssignmentRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: LeadAssignmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates ownership of the specified lead after validating that the selected assignee is an active member of the current organization.
+        Assigns the lead to an active member of the current organization, or returns it to the unassigned queue.
         param body: Assigns an organization lead to an active organization member. A null user ID returns the lead to the unassigned queue.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

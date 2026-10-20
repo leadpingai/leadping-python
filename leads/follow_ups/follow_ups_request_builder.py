@@ -31,7 +31,7 @@ class FollowUpsRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[FollowUpsRequestBuilderGetQueryParameters]] = None) -> Optional[bytes]:
         """
-        Returns a paginated list of current incomplete follow-ups accessible to the current user, with the option to include upcoming follow-ups.
+        Returns a paginated list of current incomplete follow-ups with lead assignment and organization access enforced, with the option to include upcoming follow-ups.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
         """
@@ -51,7 +51,7 @@ class FollowUpsRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[FollowUpsRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Returns a paginated list of current incomplete follow-ups accessible to the current user, with the option to include upcoming follow-ups.
+        Returns a paginated list of current incomplete follow-ups with lead assignment and organization access enforced, with the option to include upcoming follow-ups.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -73,7 +73,7 @@ class FollowUpsRequestBuilder(BaseRequestBuilder):
     @dataclass
     class FollowUpsRequestBuilderGetQueryParameters():
         """
-        Returns a paginated list of current incomplete follow-ups accessible to the current user, with the option to include upcoming follow-ups.
+        Returns a paginated list of current incomplete follow-ups with lead assignment and organization access enforced, with the option to include upcoming follow-ups.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """
