@@ -12,8 +12,6 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # State or region allowlist used to accept leads from this source.
-    allowed_states: Optional[list[str]] = None
     # Whether to look up lead phone numbers during intake. When disabled, lookup is required before calling or texting.
     automatic_phone_lookup: Optional[bool] = None
     # Tag IDs automatically assigned to leads created by this source.
@@ -44,7 +42,6 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
-            "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "automaticPhoneLookup": lambda n : setattr(self, 'automatic_phone_lookup', n.get_bool_value()),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
             "defaultTagNames": lambda n : setattr(self, 'default_tag_names', n.get_collection_of_primitive_values(str)),
@@ -62,7 +59,6 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_bool_value("automaticPhoneLookup", self.automatic_phone_lookup)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)
         writer.write_collection_of_primitive_values("defaultTagNames", self.default_tag_names)

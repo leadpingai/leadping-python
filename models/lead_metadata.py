@@ -19,6 +19,12 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
 
     # Phone number ID assigned to the lead, organization, or source.
     assigned_phone_number_id: Optional[str] = None
+    # Source-reported IP address of the original visitor.
+    capture_ip_address: Optional[str] = None
+    # Source-reported user agent of the original visitor.
+    capture_user_agent: Optional[str] = None
+    # Timestamp when the source originally captured the inquiry.
+    captured_at: Optional[datetime.datetime] = None
     # Reason Leadping blocked this operation for compliance.
     compliance_blocked_reason: Optional[str] = None
     # Compliance status used to decide whether Leadping can send messages.
@@ -29,7 +35,9 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     consent_certificate_url: Optional[str] = None
     # UTC timestamp when this lead attribution metadata was created.
     created_at: Optional[datetime.datetime] = None
-    # Direct-post price supplied by the lead source during intake.
+    # ISO 4217 currency code for the lead acquisition price.
+    currency: Optional[str] = None
+    # Alias for price. When both are supplied, their amounts must agree.
     direct_post_price: Optional[float] = None
     # External system identifier used to reconcile this lead attribution metadata across integrations.
     external_id: Optional[str] = None
@@ -118,11 +126,15 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "assignedPhoneNumberId": lambda n : setattr(self, 'assigned_phone_number_id', n.get_str_value()),
+            "captureIpAddress": lambda n : setattr(self, 'capture_ip_address', n.get_str_value()),
+            "captureUserAgent": lambda n : setattr(self, 'capture_user_agent', n.get_str_value()),
+            "capturedAt": lambda n : setattr(self, 'captured_at', n.get_datetime_value()),
             "complianceBlockedReason": lambda n : setattr(self, 'compliance_blocked_reason', n.get_str_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
             "consentCertificateType": lambda n : setattr(self, 'consent_certificate_type', n.get_enum_value(LeadMetadata_consentCertificateType)),
             "consentCertificateUrl": lambda n : setattr(self, 'consent_certificate_url', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "currency": lambda n : setattr(self, 'currency', n.get_str_value()),
             "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
             "externalId": lambda n : setattr(self, 'external_id', n.get_str_value()),
             "importBatchId": lambda n : setattr(self, 'import_batch_id', n.get_str_value()),
@@ -167,11 +179,15 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("assignedPhoneNumberId", self.assigned_phone_number_id)
+        writer.write_str_value("captureIpAddress", self.capture_ip_address)
+        writer.write_str_value("captureUserAgent", self.capture_user_agent)
+        writer.write_datetime_value("capturedAt", self.captured_at)
         writer.write_str_value("complianceBlockedReason", self.compliance_blocked_reason)
         writer.write_str_value("complianceStatus", self.compliance_status)
         writer.write_enum_value("consentCertificateType", self.consent_certificate_type)
         writer.write_str_value("consentCertificateUrl", self.consent_certificate_url)
         writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_str_value("currency", self.currency)
         writer.write_float_value("directPostPrice", self.direct_post_price)
         writer.write_str_value("externalId", self.external_id)
         writer.write_str_value("importBatchId", self.import_batch_id)

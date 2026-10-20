@@ -20,8 +20,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # State or region allowlist used to accept leads from this source.
-    allowed_states: Optional[list[str]] = None
     # UTC timestamp when the source API key was last used.
     api_key_last_used_at: Optional[datetime.datetime] = None
     # Masked preview of the source API key for compact display.
@@ -100,7 +98,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
-            "allowedStates": lambda n : setattr(self, 'allowed_states', n.get_collection_of_primitive_values(str)),
             "apiKeyLastUsedAt": lambda n : setattr(self, 'api_key_last_used_at', n.get_datetime_value()),
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyRotatedAt": lambda n : setattr(self, 'api_key_rotated_at', n.get_datetime_value()),
@@ -136,7 +133,6 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
-        writer.write_collection_of_primitive_values("allowedStates", self.allowed_states)
         writer.write_datetime_value("apiKeyLastUsedAt", self.api_key_last_used_at)
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_datetime_value("apiKeyRotatedAt", self.api_key_rotated_at)

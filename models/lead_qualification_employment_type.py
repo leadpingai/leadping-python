@@ -1,6 +1,6 @@
 from enum import Enum
 
-class LeadProfile_employmentType(str, Enum):
+class LeadQualification_employmentType(str, Enum):
     Employed = "Employed",
     PartTime = "PartTime",
     SelfEmployed = "SelfEmployed",

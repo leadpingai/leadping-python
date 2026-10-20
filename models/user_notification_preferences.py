@@ -48,6 +48,14 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     payment_failed_enabled: Optional[bool] = None
     # Indicates whether payment failed SMS functionality is enabled for this Leadping user notification preferences.
     payment_failed_sms_enabled: Optional[bool] = None
+    # Whether push and automation alerts wait until the user's daily quiet hours end.
+    quiet_hours_enabled: Optional[bool] = None
+    # The exclusive local end of daily quiet hours.
+    quiet_hours_end: Optional[datetime.time] = None
+    # The inclusive local start of daily quiet hours.
+    quiet_hours_start: Optional[datetime.time] = None
+    # The time zone used for quiet hours, including daylight saving changes.
+    quiet_hours_time_zone_id: Optional[str] = None
     # Describes Leadping Consent certificate data used in Leadping API requests and responses.
     sms_consent_certificate: Optional[UserNotificationPreferences_smsConsentCertificate] = None
     # Whether the user has consented to receive Leadping account notification SMS messages.
@@ -108,6 +116,10 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
             "newLeadSmsEnabled": lambda n : setattr(self, 'new_lead_sms_enabled', n.get_bool_value()),
             "paymentFailedEnabled": lambda n : setattr(self, 'payment_failed_enabled', n.get_bool_value()),
             "paymentFailedSmsEnabled": lambda n : setattr(self, 'payment_failed_sms_enabled', n.get_bool_value()),
+            "quietHoursEnabled": lambda n : setattr(self, 'quiet_hours_enabled', n.get_bool_value()),
+            "quietHoursEnd": lambda n : setattr(self, 'quiet_hours_end', n.get_time_value()),
+            "quietHoursStart": lambda n : setattr(self, 'quiet_hours_start', n.get_time_value()),
+            "quietHoursTimeZoneId": lambda n : setattr(self, 'quiet_hours_time_zone_id', n.get_str_value()),
             "smsConsentCertificate": lambda n : setattr(self, 'sms_consent_certificate', n.get_object_value(UserNotificationPreferences_smsConsentCertificate)),
             "smsConsentOptedIn": lambda n : setattr(self, 'sms_consent_opted_in', n.get_bool_value()),
             "smsConsentUpdatedAt": lambda n : setattr(self, 'sms_consent_updated_at', n.get_datetime_value()),
@@ -146,6 +158,10 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         writer.write_bool_value("newLeadSmsEnabled", self.new_lead_sms_enabled)
         writer.write_bool_value("paymentFailedEnabled", self.payment_failed_enabled)
         writer.write_bool_value("paymentFailedSmsEnabled", self.payment_failed_sms_enabled)
+        writer.write_bool_value("quietHoursEnabled", self.quiet_hours_enabled)
+        writer.write_time_value("quietHoursEnd", self.quiet_hours_end)
+        writer.write_time_value("quietHoursStart", self.quiet_hours_start)
+        writer.write_str_value("quietHoursTimeZoneId", self.quiet_hours_time_zone_id)
         writer.write_object_value("smsConsentCertificate", self.sms_consent_certificate)
         writer.write_bool_value("smsConsentOptedIn", self.sms_consent_opted_in)
         writer.write_datetime_value("smsConsentUpdatedAt", self.sms_consent_updated_at)
