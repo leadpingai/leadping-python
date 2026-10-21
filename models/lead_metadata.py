@@ -90,6 +90,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     sub_id: Optional[str] = None
     # UTC timestamp when Leadping last successfully checked the TrustedForm certificate URL availability.
     trusted_form_checked_at: Optional[datetime.datetime] = None
+    # Server-issued timestamp when TrustedForm returned HTTP 400 or the certificate was already used by the organization; the evidence remains unverified.
+    trusted_form_rejected_at: Optional[datetime.datetime] = None
     # Browser or client user agent captured when this lead attribution metadata was submitted.
     user_agent: Optional[str] = None
     # User ID associated with this lead's attribution metadata.
@@ -168,6 +170,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "sourceMetadata": lambda n : setattr(self, 'source_metadata', n.get_object_value(LeadMetadata_sourceMetadata)),
             "subId": lambda n : setattr(self, 'sub_id', n.get_str_value()),
             "trustedFormCheckedAt": lambda n : setattr(self, 'trusted_form_checked_at', n.get_datetime_value()),
+            "trustedFormRejectedAt": lambda n : setattr(self, 'trusted_form_rejected_at', n.get_datetime_value()),
             "userAgent": lambda n : setattr(self, 'user_agent', n.get_str_value()),
             "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
             "utmCampaign": lambda n : setattr(self, 'utm_campaign', n.get_str_value()),
@@ -223,6 +226,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_object_value("sourceMetadata", self.source_metadata)
         writer.write_str_value("subId", self.sub_id)
         writer.write_datetime_value("trustedFormCheckedAt", self.trusted_form_checked_at)
+        writer.write_datetime_value("trustedFormRejectedAt", self.trusted_form_rejected_at)
         writer.write_str_value("userAgent", self.user_agent)
         writer.write_str_value("userId", self.user_id)
         writer.write_str_value("utmCampaign", self.utm_campaign)
