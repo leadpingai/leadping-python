@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .consent_verification_status import ConsentVerificationStatus
     from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
     from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
@@ -29,10 +30,14 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     compliance_blocked_reason: Optional[str] = None
     # Compliance status used to decide whether Leadping can send messages.
     compliance_status: Optional[str] = None
+    # User attestation of SMS consent from another source; does not establish independent verification.
+    consent_attested: Optional[bool] = None
     # The provider responsible for a lead's consent certificate.
     consent_certificate_type: Optional[LeadMetadata_consentCertificateType] = None
     # Certificate URL used as proof of consumer consent.
     consent_certificate_url: Optional[str] = None
+    # Leadping's assessment of the supporting consent evidence.
+    consent_verification_status: Optional[ConsentVerificationStatus] = None
     # UTC timestamp when this lead attribution metadata was created.
     created_at: Optional[datetime.datetime] = None
     # ISO 4217 currency code for the lead acquisition price.
@@ -118,9 +123,11 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .consent_verification_status import ConsentVerificationStatus
         from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
         from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
+        from .consent_verification_status import ConsentVerificationStatus
         from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
         from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
@@ -131,8 +138,10 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "capturedAt": lambda n : setattr(self, 'captured_at', n.get_datetime_value()),
             "complianceBlockedReason": lambda n : setattr(self, 'compliance_blocked_reason', n.get_str_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
+            "consentAttested": lambda n : setattr(self, 'consent_attested', n.get_bool_value()),
             "consentCertificateType": lambda n : setattr(self, 'consent_certificate_type', n.get_enum_value(LeadMetadata_consentCertificateType)),
             "consentCertificateUrl": lambda n : setattr(self, 'consent_certificate_url', n.get_str_value()),
+            "consentVerificationStatus": lambda n : setattr(self, 'consent_verification_status', n.get_enum_value(ConsentVerificationStatus)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "currency": lambda n : setattr(self, 'currency', n.get_str_value()),
             "directPostPrice": lambda n : setattr(self, 'direct_post_price', n.get_float_value()),
@@ -184,8 +193,10 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("capturedAt", self.captured_at)
         writer.write_str_value("complianceBlockedReason", self.compliance_blocked_reason)
         writer.write_str_value("complianceStatus", self.compliance_status)
+        writer.write_bool_value("consentAttested", self.consent_attested)
         writer.write_enum_value("consentCertificateType", self.consent_certificate_type)
         writer.write_str_value("consentCertificateUrl", self.consent_certificate_url)
+        writer.write_enum_value("consentVerificationStatus", self.consent_verification_status)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("currency", self.currency)
         writer.write_float_value("directPostPrice", self.direct_post_price)

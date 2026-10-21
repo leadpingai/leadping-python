@@ -39,6 +39,8 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     city: Optional[str] = None
     # Business represented by a lead contact.
     company: Optional[LeadIntakeRequest_company] = None
+    # Explicitly attests to SMS consent when consentCertificateType is Other. Allows manual texts only.
+    consent_attested: Optional[bool] = None
     # The provider responsible for a lead's consent certificate.
     consent_certificate_type: Optional[LeadIntakeRequest_consentCertificateType] = None
     # Certificate URL used as proof of consumer consent.
@@ -163,6 +165,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
             "capturedAt": lambda n : setattr(self, 'captured_at', n.get_datetime_value()),
             "city": lambda n : setattr(self, 'city', n.get_str_value()),
             "company": lambda n : setattr(self, 'company', n.get_object_value(LeadIntakeRequest_company)),
+            "consentAttested": lambda n : setattr(self, 'consent_attested', n.get_bool_value()),
             "consentCertificateType": lambda n : setattr(self, 'consent_certificate_type', n.get_enum_value(LeadIntakeRequest_consentCertificateType)),
             "consentCertificateUrl": lambda n : setattr(self, 'consent_certificate_url', n.get_str_value()),
             "contactPreferences": lambda n : setattr(self, 'contact_preferences', n.get_object_value(LeadIntakeRequest_contactPreferences)),
@@ -222,6 +225,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("capturedAt", self.captured_at)
         writer.write_str_value("city", self.city)
         writer.write_object_value("company", self.company)
+        writer.write_bool_value("consentAttested", self.consent_attested)
         writer.write_enum_value("consentCertificateType", self.consent_certificate_type)
         writer.write_str_value("consentCertificateUrl", self.consent_certificate_url)
         writer.write_object_value("contactPreferences", self.contact_preferences)
