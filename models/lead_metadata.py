@@ -94,8 +94,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     trusted_form_rejected_at: Optional[datetime.datetime] = None
     # Browser or client user agent captured when this lead attribution metadata was submitted.
     user_agent: Optional[str] = None
-    # User ID associated with this lead's attribution metadata.
-    user_id: Optional[str] = None
     # UTM campaign parameter captured for lead attribution reporting.
     utm_campaign: Optional[str] = None
     # UTM content parameter captured for lead attribution reporting.
@@ -172,7 +170,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "trustedFormCheckedAt": lambda n : setattr(self, 'trusted_form_checked_at', n.get_datetime_value()),
             "trustedFormRejectedAt": lambda n : setattr(self, 'trusted_form_rejected_at', n.get_datetime_value()),
             "userAgent": lambda n : setattr(self, 'user_agent', n.get_str_value()),
-            "userId": lambda n : setattr(self, 'user_id', n.get_str_value()),
             "utmCampaign": lambda n : setattr(self, 'utm_campaign', n.get_str_value()),
             "utmContent": lambda n : setattr(self, 'utm_content', n.get_str_value()),
             "utmMedium": lambda n : setattr(self, 'utm_medium', n.get_str_value()),
@@ -228,7 +225,6 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("trustedFormCheckedAt", self.trusted_form_checked_at)
         writer.write_datetime_value("trustedFormRejectedAt", self.trusted_form_rejected_at)
         writer.write_str_value("userAgent", self.user_agent)
-        writer.write_str_value("userId", self.user_id)
         writer.write_str_value("utmCampaign", self.utm_campaign)
         writer.write_str_value("utmContent", self.utm_content)
         writer.write_str_value("utmMedium", self.utm_medium)

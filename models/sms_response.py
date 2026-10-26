@@ -64,6 +64,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     modified_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping will retry this SMS message.
     next_retry_at: Optional[datetime.datetime] = None
+    # The organization receiving this message status update.
+    organization_id: Optional[str] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
     # UTC timestamp when Leadping queued this SMS message for processing.
@@ -148,6 +150,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
             "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
+            "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
@@ -197,6 +200,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("media", self.media)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
+        writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("receivedAt", self.received_at)

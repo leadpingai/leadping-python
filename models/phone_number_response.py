@@ -6,6 +6,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .phone_number_ownership import PhoneNumberOwnership
     from .phone_number_readiness import PhoneNumberReadiness
     from .phone_number_response_organization import PhoneNumberResponse_organization
     from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
@@ -26,8 +27,6 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # The isDemo property
     is_demo: Optional[bool] = None
-    # Indicates whether Leadping provisions and manages this phone number.
-    leadping_owned: Optional[bool] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
@@ -38,6 +37,8 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     number_health_enabled: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[PhoneNumberResponse_organization] = None
+    # Identifies whose traffic a phone number serves, independently of provider control.
+    ownership: Optional[PhoneNumberOwnership] = None
     # Identifier of the canonical phone identity for this number.
     phone_identity_id: Optional[str] = None
     # Public Leadping API schema for phone number routing metadata data.
@@ -65,10 +66,12 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .phone_number_ownership import PhoneNumberOwnership
         from .phone_number_readiness import PhoneNumberReadiness
         from .phone_number_response_organization import PhoneNumberResponse_organization
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
 
+        from .phone_number_ownership import PhoneNumberOwnership
         from .phone_number_readiness import PhoneNumberReadiness
         from .phone_number_response_organization import PhoneNumberResponse_organization
         from .phone_number_routing_metadata import PhoneNumberRoutingMetadata
@@ -78,12 +81,12 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
-            "leadpingOwned": lambda n : setattr(self, 'leadping_owned', n.get_bool_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "numberHealthEnabled": lambda n : setattr(self, 'number_health_enabled', n.get_bool_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(PhoneNumberResponse_organization)),
+            "ownership": lambda n : setattr(self, 'ownership', n.get_enum_value(PhoneNumberOwnership)),
             "phoneIdentityId": lambda n : setattr(self, 'phone_identity_id', n.get_str_value()),
             "routing": lambda n : setattr(self, 'routing', n.get_object_value(PhoneNumberRoutingMetadata)),
             "smsReady": lambda n : setattr(self, 'sms_ready', n.get_bool_value()),
@@ -104,12 +107,12 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
-        writer.write_bool_value("leadpingOwned", self.leadping_owned)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
         writer.write_bool_value("numberHealthEnabled", self.number_health_enabled)
         writer.write_object_value("organization", self.organization)
+        writer.write_enum_value("ownership", self.ownership)
         writer.write_str_value("phoneIdentityId", self.phone_identity_id)
         writer.write_object_value("routing", self.routing)
         writer.write_bool_value("smsReady", self.sms_ready)

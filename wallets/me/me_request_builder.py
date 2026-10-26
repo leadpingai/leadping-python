@@ -16,6 +16,7 @@ from warnings import warn
 if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from ...models.wallet_response import WalletResponse
+    from .spend_limits.spend_limits_request_builder import SpendLimitsRequestBuilder
 
 class MeRequestBuilder(BaseRequestBuilder):
     """
@@ -74,6 +75,15 @@ class MeRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return MeRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def spend_limits(self) -> SpendLimitsRequestBuilder:
+        """
+        The spendLimits property
+        """
+        from .spend_limits.spend_limits_request_builder import SpendLimitsRequestBuilder
+
+        return SpendLimitsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class MeRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):

@@ -24,6 +24,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     actor_display_name: Optional[str] = None
     # Email address for the person who created this event timeline table row.
     actor_email: Optional[str] = None
+    # The lead who performed this action.
+    actor_lead_id: Optional[str] = None
     # User ID for the person or system that created this event timeline table row.
     actor_user_id: Optional[str] = None
     # Automation run ID opened from this automation event.
@@ -152,6 +154,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
             "actorEmail": lambda n : setattr(self, 'actor_email', n.get_str_value()),
+            "actorLeadId": lambda n : setattr(self, 'actor_lead_id', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
             "automationRunId": lambda n : setattr(self, 'automation_run_id', n.get_str_value()),
             "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
@@ -213,6 +216,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actorDisplayName", self.actor_display_name)
         writer.write_str_value("actorEmail", self.actor_email)
+        writer.write_str_value("actorLeadId", self.actor_lead_id)
         writer.write_str_value("actorUserId", self.actor_user_id)
         writer.write_str_value("automationRunId", self.automation_run_id)
         writer.write_float_value("billableAmount", self.billable_amount)

@@ -5,6 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .phone_number_ownership import PhoneNumberOwnership
     from .phone_number_readiness import PhoneNumberReadiness
 
 @dataclass
@@ -31,8 +32,8 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     organization: Optional[str] = None
     # Unique Leadping organization identifier connected to this phone number table row.
     organization_id: Optional[str] = None
-    # Ownership classification for this phone number, such as Leadping-owned or customer-owned.
-    ownership: Optional[str] = None
+    # Identifies whose traffic a phone number serves, independently of provider control.
+    ownership: Optional[PhoneNumberOwnership] = None
     # Human-readable routing summary for this phone number.
     routing_summary: Optional[str] = None
     # Indicates whether SMS messaging is ready for this organization or phone number.
@@ -62,8 +63,10 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .phone_number_ownership import PhoneNumberOwnership
         from .phone_number_readiness import PhoneNumberReadiness
 
+        from .phone_number_ownership import PhoneNumberOwnership
         from .phone_number_readiness import PhoneNumberReadiness
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -75,7 +78,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
-            "ownership": lambda n : setattr(self, 'ownership', n.get_str_value()),
+            "ownership": lambda n : setattr(self, 'ownership', n.get_enum_value(PhoneNumberOwnership)),
             "routingSummary": lambda n : setattr(self, 'routing_summary', n.get_str_value()),
             "smsReady": lambda n : setattr(self, 'sms_ready', n.get_bool_value()),
             "tenDlcCampaignStatus": lambda n : setattr(self, 'ten_dlc_campaign_status', n.get_str_value()),
@@ -101,7 +104,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("number", self.number)
         writer.write_str_value("organization", self.organization)
         writer.write_str_value("organizationId", self.organization_id)
-        writer.write_str_value("ownership", self.ownership)
+        writer.write_enum_value("ownership", self.ownership)
         writer.write_str_value("routingSummary", self.routing_summary)
         writer.write_bool_value("smsReady", self.sms_ready)
         writer.write_str_value("tenDlcCampaignStatus", self.ten_dlc_campaign_status)

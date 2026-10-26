@@ -48,7 +48,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     payment_failed_enabled: Optional[bool] = None
     # Indicates whether payment failed SMS functionality is enabled for this Leadping user notification preferences.
     payment_failed_sms_enabled: Optional[bool] = None
-    # Whether push and automation alerts wait until the user's daily quiet hours end.
+    # Whether push, SMS, and automation alerts wait until the user's daily quiet hours end.
     quiet_hours_enabled: Optional[bool] = None
     # The exclusive local end of daily quiet hours.
     quiet_hours_end: Optional[datetime.time] = None
