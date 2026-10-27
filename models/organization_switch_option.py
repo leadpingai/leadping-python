@@ -45,6 +45,8 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     role: Optional[OrganizationMemberRole] = None
     # Describes an organization's overall 10DLC registration lifecycle across brand and messaging campaign submission.
     ten_dlc_status: Optional[OrganizationSwitchOption_tenDlcStatus] = None
+    # Default timezone for organization reporting and display when a user has no personal preference.
+    time_zone_id: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> OrganizationSwitchOption:
@@ -86,6 +88,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
             "readyForCustomerTraffic": lambda n : setattr(self, 'ready_for_customer_traffic', n.get_bool_value()),
             "role": lambda n : setattr(self, 'role', n.get_enum_value(OrganizationMemberRole)),
             "tenDlcStatus": lambda n : setattr(self, 'ten_dlc_status', n.get_enum_value(OrganizationSwitchOption_tenDlcStatus)),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
         }
         return fields
     
@@ -110,6 +113,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
         writer.write_bool_value("readyForCustomerTraffic", self.ready_for_customer_traffic)
         writer.write_enum_value("role", self.role)
         writer.write_enum_value("tenDlcStatus", self.ten_dlc_status)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -12,6 +12,8 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Whether to validate consent certificates during intake. Skipped validation leaves consent unverified.
+    automatic_consent_validation: Optional[bool] = None
     # Whether to look up lead phone numbers during intake. When disabled, lookup is required before calling or texting.
     automatic_phone_lookup: Optional[bool] = None
     # Maximum new leads accepted per UTC day. Null means unlimited; zero pauses intake.
@@ -44,6 +46,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "automaticConsentValidation": lambda n : setattr(self, 'automatic_consent_validation', n.get_bool_value()),
             "automaticPhoneLookup": lambda n : setattr(self, 'automatic_phone_lookup', n.get_bool_value()),
             "dailyLeadLimit": lambda n : setattr(self, 'daily_lead_limit', n.get_int_value()),
             "defaultTagIds": lambda n : setattr(self, 'default_tag_ids', n.get_collection_of_primitive_values(str)),
@@ -62,6 +65,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_bool_value("automaticConsentValidation", self.automatic_consent_validation)
         writer.write_bool_value("automaticPhoneLookup", self.automatic_phone_lookup)
         writer.write_int_value("dailyLeadLimit", self.daily_lead_limit)
         writer.write_collection_of_primitive_values("defaultTagIds", self.default_tag_ids)

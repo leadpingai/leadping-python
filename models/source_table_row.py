@@ -28,6 +28,8 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     api_key_rotated_at: Optional[datetime.datetime] = None
     # Total number of authenticated requests made with this source API key.
     api_key_total_uses: Optional[int] = None
+    # Whether to validate consent certificates during intake. Skipped validation leaves consent unverified.
+    automatic_consent_validation: Optional[bool] = None
     # Whether lead phone numbers are looked up automatically during intake.
     automatic_phone_lookup: Optional[bool] = None
     # Indicates whether the organization or sender passed compliance review.
@@ -102,6 +104,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyRotatedAt": lambda n : setattr(self, 'api_key_rotated_at', n.get_datetime_value()),
             "apiKeyTotalUses": lambda n : setattr(self, 'api_key_total_uses', n.get_int_value()),
+            "automaticConsentValidation": lambda n : setattr(self, 'automatic_consent_validation', n.get_bool_value()),
             "automaticPhoneLookup": lambda n : setattr(self, 'automatic_phone_lookup', n.get_bool_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
@@ -137,6 +140,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_datetime_value("apiKeyRotatedAt", self.api_key_rotated_at)
         writer.write_int_value("apiKeyTotalUses", self.api_key_total_uses)
+        writer.write_bool_value("automaticConsentValidation", self.automatic_consent_validation)
         writer.write_bool_value("automaticPhoneLookup", self.automatic_phone_lookup)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)

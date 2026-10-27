@@ -24,6 +24,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     api_key_preview: Optional[str] = None
     # UTC timestamp when the source credential was most recently rotated.
     api_key_rotated_at: Optional[datetime.datetime] = None
+    # Whether to validate consent certificates during intake. Skipped validation leaves consent unverified.
+    automatic_consent_validation: Optional[bool] = None
     # Whether to look up lead phone numbers during intake. When disabled, lookup is required before calling or texting.
     automatic_phone_lookup: Optional[bool] = None
     # Indicates whether the organization or sender passed compliance review.
@@ -98,6 +100,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "apiKeyPreview": lambda n : setattr(self, 'api_key_preview', n.get_str_value()),
             "apiKeyRotatedAt": lambda n : setattr(self, 'api_key_rotated_at', n.get_datetime_value()),
+            "automaticConsentValidation": lambda n : setattr(self, 'automatic_consent_validation', n.get_bool_value()),
             "automaticPhoneLookup": lambda n : setattr(self, 'automatic_phone_lookup', n.get_bool_value()),
             "complianceApproved": lambda n : setattr(self, 'compliance_approved', n.get_bool_value()),
             "costPerLead": lambda n : setattr(self, 'cost_per_lead', n.get_float_value()),
@@ -132,6 +135,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("apiKeyPreview", self.api_key_preview)
         writer.write_datetime_value("apiKeyRotatedAt", self.api_key_rotated_at)
+        writer.write_bool_value("automaticConsentValidation", self.automatic_consent_validation)
         writer.write_bool_value("automaticPhoneLookup", self.automatic_phone_lookup)
         writer.write_bool_value("complianceApproved", self.compliance_approved)
         writer.write_float_value("costPerLead", self.cost_per_lead)

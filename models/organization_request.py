@@ -33,6 +33,8 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     secondary_name: Optional[str] = None
     # Intended audience described during organization setup.
     target_audience: Optional[str] = None
+    # Default timezone for organization reporting and display when a user has no personal preference.
+    time_zone_id: Optional[str] = None
     # Industry vertical used for lead routing, compliance review, and reporting.
     vertical: Optional[str] = None
     # Organization website URL used for compliance, brand review, and lead attribution.
@@ -68,6 +70,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
             "secondaryName": lambda n : setattr(self, 'secondary_name', n.get_str_value()),
             "targetAudience": lambda n : setattr(self, 'target_audience', n.get_str_value()),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
             "vertical": lambda n : setattr(self, 'vertical', n.get_str_value()),
             "website": lambda n : setattr(self, 'website', n.get_str_value()),
         }
@@ -90,6 +93,7 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("phone", self.phone)
         writer.write_str_value("secondaryName", self.secondary_name)
         writer.write_str_value("targetAudience", self.target_audience)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_str_value("vertical", self.vertical)
         writer.write_str_value("website", self.website)
         writer.write_additional_data_value(self.additional_data)

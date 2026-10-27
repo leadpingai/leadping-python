@@ -36,6 +36,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     consent_certificate_type: Optional[LeadMetadata_consentCertificateType] = None
     # Certificate URL used as proof of consumer consent.
     consent_certificate_url: Optional[str] = None
+    # Server-issued time at which the source policy skipped certificate validation for this consent snapshot.
+    consent_validation_skipped_at: Optional[datetime.datetime] = None
     # Leadping's assessment of the supporting consent evidence.
     consent_verification_status: Optional[ConsentVerificationStatus] = None
     # UTC timestamp when this lead attribution metadata was created.
@@ -141,6 +143,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "consentAttested": lambda n : setattr(self, 'consent_attested', n.get_bool_value()),
             "consentCertificateType": lambda n : setattr(self, 'consent_certificate_type', n.get_enum_value(LeadMetadata_consentCertificateType)),
             "consentCertificateUrl": lambda n : setattr(self, 'consent_certificate_url', n.get_str_value()),
+            "consentValidationSkippedAt": lambda n : setattr(self, 'consent_validation_skipped_at', n.get_datetime_value()),
             "consentVerificationStatus": lambda n : setattr(self, 'consent_verification_status', n.get_enum_value(ConsentVerificationStatus)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "currency": lambda n : setattr(self, 'currency', n.get_str_value()),
@@ -196,6 +199,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_bool_value("consentAttested", self.consent_attested)
         writer.write_enum_value("consentCertificateType", self.consent_certificate_type)
         writer.write_str_value("consentCertificateUrl", self.consent_certificate_url)
+        writer.write_datetime_value("consentValidationSkippedAt", self.consent_validation_skipped_at)
         writer.write_enum_value("consentVerificationStatus", self.consent_verification_status)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("currency", self.currency)

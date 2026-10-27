@@ -89,6 +89,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     status: Optional[OrganizationResponse_status] = None
     # Describes an organization's billing subscription lifecycle, including trial, active, delinquent, canceled, and expired states.
     subscription_status: Optional[OrganizationResponse_subscriptionStatus] = None
+    # Default timezone for organization reporting and display when a user has no personal preference.
+    time_zone_id: Optional[str] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     user: Optional[OrganizationResponse_user] = None
     # Industry vertical used for lead routing, compliance review, and reporting.
@@ -173,6 +175,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
             "site": lambda n : setattr(self, 'site', n.get_object_value(OrganizationResponse_site)),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(OrganizationResponse_status)),
             "subscriptionStatus": lambda n : setattr(self, 'subscription_status', n.get_enum_value(OrganizationResponse_subscriptionStatus)),
+            "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(OrganizationResponse_user)),
             "vertical": lambda n : setattr(self, 'vertical', n.get_str_value()),
             "website": lambda n : setattr(self, 'website', n.get_str_value()),
@@ -217,6 +220,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("site", self.site)
         writer.write_enum_value("status", self.status)
         writer.write_enum_value("subscriptionStatus", self.subscription_status)
+        writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_object_value("user", self.user)
         writer.write_str_value("vertical", self.vertical)
         writer.write_str_value("website", self.website)
