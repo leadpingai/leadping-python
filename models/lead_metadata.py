@@ -62,6 +62,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     leadping_consent_checked_at: Optional[datetime.datetime] = None
     # Organization ID that owns this lead's attribution metadata.
     organization_id: Optional[str] = None
+    # Organization name captured at intake for searching lead attribution.
+    organization_name: Optional[str] = None
     # System or workflow that created this event.
     origin: Optional[str] = None
     # Lead price or transaction price supplied to the Leadping API.
@@ -88,6 +90,8 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     sms_opted_out: Optional[bool] = None
     # Source-provided key-value metadata retained for lead attribution and integration troubleshooting.
     source_metadata: Optional[LeadMetadata_sourceMetadata] = None
+    # Source name captured at intake for searching lead attribution.
+    source_name: Optional[str] = None
     # Affiliate or publisher sub ID captured for lead attribution.
     sub_id: Optional[str] = None
     # UTC timestamp when Leadping last successfully checked the TrustedForm certificate URL availability.
@@ -156,6 +160,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "landingPage": lambda n : setattr(self, 'landing_page', n.get_str_value()),
             "leadpingConsentCheckedAt": lambda n : setattr(self, 'leadping_consent_checked_at', n.get_datetime_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
+            "organizationName": lambda n : setattr(self, 'organization_name', n.get_str_value()),
             "origin": lambda n : setattr(self, 'origin', n.get_str_value()),
             "price": lambda n : setattr(self, 'price', n.get_float_value()),
             "product": lambda n : setattr(self, 'product', n.get_str_value()),
@@ -169,6 +174,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "smsOptOutAt": lambda n : setattr(self, 'sms_opt_out_at', n.get_datetime_value()),
             "smsOptedOut": lambda n : setattr(self, 'sms_opted_out', n.get_bool_value()),
             "sourceMetadata": lambda n : setattr(self, 'source_metadata', n.get_object_value(LeadMetadata_sourceMetadata)),
+            "sourceName": lambda n : setattr(self, 'source_name', n.get_str_value()),
             "subId": lambda n : setattr(self, 'sub_id', n.get_str_value()),
             "trustedFormCheckedAt": lambda n : setattr(self, 'trusted_form_checked_at', n.get_datetime_value()),
             "trustedFormRejectedAt": lambda n : setattr(self, 'trusted_form_rejected_at', n.get_datetime_value()),
@@ -212,6 +218,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("landingPage", self.landing_page)
         writer.write_datetime_value("leadpingConsentCheckedAt", self.leadping_consent_checked_at)
         writer.write_str_value("organizationId", self.organization_id)
+        writer.write_str_value("organizationName", self.organization_name)
         writer.write_str_value("origin", self.origin)
         writer.write_float_value("price", self.price)
         writer.write_str_value("product", self.product)
@@ -225,6 +232,7 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("smsOptOutAt", self.sms_opt_out_at)
         writer.write_bool_value("smsOptedOut", self.sms_opted_out)
         writer.write_object_value("sourceMetadata", self.source_metadata)
+        writer.write_str_value("sourceName", self.source_name)
         writer.write_str_value("subId", self.sub_id)
         writer.write_datetime_value("trustedFormCheckedAt", self.trusted_form_checked_at)
         writer.write_datetime_value("trustedFormRejectedAt", self.trusted_form_rejected_at)

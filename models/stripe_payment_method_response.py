@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .billing_payment_method_type import BillingPaymentMethodType
+
 @dataclass
 class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
     """
@@ -27,6 +30,10 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
     is_default: Optional[bool] = None
     # Last four digits of the payment card number.
     last4: Optional[str] = None
+    # Reusable payment types supported for immediate billing payments.
+    type: Optional[BillingPaymentMethodType] = None
+    # The wallet name when supplied by a digital wallet.
+    wallet_name: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> StripePaymentMethodResponse:
@@ -44,6 +51,10 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .billing_payment_method_type import BillingPaymentMethodType
+
+        from .billing_payment_method_type import BillingPaymentMethodType
+
         fields: dict[str, Callable[[Any], None]] = {
             "brand": lambda n : setattr(self, 'brand', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -52,6 +63,8 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDefault": lambda n : setattr(self, 'is_default', n.get_bool_value()),
             "last4": lambda n : setattr(self, 'last4', n.get_str_value()),
+            "type": lambda n : setattr(self, 'type', n.get_enum_value(BillingPaymentMethodType)),
+            "walletName": lambda n : setattr(self, 'wallet_name', n.get_str_value()),
         }
         return fields
     
@@ -70,6 +83,8 @@ class StripePaymentMethodResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDefault", self.is_default)
         writer.write_str_value("last4", self.last4)
+        writer.write_enum_value("type", self.type)
+        writer.write_str_value("walletName", self.wallet_name)
         writer.write_additional_data_value(self.additional_data)
     
 

@@ -34,6 +34,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     conversation_id: Optional[str] = None
     # UTC timestamp when this call event table row was created.
     created_at: Optional[datetime.datetime] = None
+    # Stored description of the call event.
+    description: Optional[str] = None
     # Communication direction for this call event table row, such as inbound or outbound.
     direction: Optional[str] = None
     # Call duration or processing duration represented by this call event table row.
@@ -110,6 +112,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
             "consoleEntries": lambda n : setattr(self, 'console_entries', n.get_collection_of_object_values(CommunicationConsoleEntry)),
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
+            "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
             "duration": lambda n : setattr(self, 'duration', n.get_int_value()),
             "endedAt": lambda n : setattr(self, 'ended_at', n.get_datetime_value()),
@@ -150,6 +153,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_collection_of_object_values("consoleEntries", self.console_entries)
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_datetime_value("createdAt", self.created_at)
+        writer.write_str_value("description", self.description)
         writer.write_str_value("direction", self.direction)
         writer.write_int_value("duration", self.duration)
         writer.write_datetime_value("endedAt", self.ended_at)

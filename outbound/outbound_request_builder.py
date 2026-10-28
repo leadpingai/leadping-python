@@ -6,6 +6,7 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .item.with_phone_number_item_request_builder import WithPhoneNumberItemRequestBuilder
     from .overview.overview_request_builder import OverviewRequestBuilder
 
 class OutboundRequestBuilder(BaseRequestBuilder):
@@ -20,6 +21,20 @@ class OutboundRequestBuilder(BaseRequestBuilder):
         Returns: None
         """
         super().__init__(request_adapter, "{+baseurl}/outbound", path_parameters)
+    
+    def by_phone_number_id(self,phone_number_id: str) -> WithPhoneNumberItemRequestBuilder:
+        """
+        Gets an item from the leadping.outbound.item collection
+        param phone_number_id: The ID of the phone number whose outbound capacity should be retrieved.
+        Returns: WithPhoneNumberItemRequestBuilder
+        """
+        if phone_number_id is None:
+            raise TypeError("phone_number_id cannot be null.")
+        from .item.with_phone_number_item_request_builder import WithPhoneNumberItemRequestBuilder
+
+        url_tpl_params = get_path_parameters(self.path_parameters)
+        url_tpl_params["phoneNumberId"] = phone_number_id
+        return WithPhoneNumberItemRequestBuilder(self.request_adapter, url_tpl_params)
     
     @property
     def overview(self) -> OverviewRequestBuilder:

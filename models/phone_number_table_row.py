@@ -7,6 +7,8 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .phone_number_ownership import PhoneNumberOwnership
     from .phone_number_readiness import PhoneNumberReadiness
+    from .phone_number_table_row_sms_ramp_direction import PhoneNumberTableRow_smsRampDirection
+    from .phone_number_table_row_voice_ramp_direction import PhoneNumberTableRow_voiceRampDirection
 
 @dataclass
 class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
@@ -36,12 +38,16 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     ownership: Optional[PhoneNumberOwnership] = None
     # Human-readable routing summary for this phone number.
     routing_summary: Optional[str] = None
+    # Indicates whether a phone number's channel capacity is increasing, decreasing, or stable.
+    sms_ramp_direction: Optional[PhoneNumberTableRow_smsRampDirection] = None
     # Indicates whether SMS messaging is ready for this organization or phone number.
     sms_ready: Optional[bool] = None
     # 10DLC campaign status associated with this sender or SMS event.
     ten_dlc_campaign_status: Optional[str] = None
     # Type classification used to route and interpret this phone number table row in the Leadping API.
     type: Optional[str] = None
+    # Indicates whether a phone number's channel capacity is increasing, decreasing, or stable.
+    voice_ramp_direction: Optional[PhoneNumberTableRow_voiceRampDirection] = None
     # Indicates whether voice calling is ready for this organization or phone number.
     voice_ready: Optional[bool] = None
     # Messaging and calling warmup for a Leadping phone number.
@@ -65,9 +71,13 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         """
         from .phone_number_ownership import PhoneNumberOwnership
         from .phone_number_readiness import PhoneNumberReadiness
+        from .phone_number_table_row_sms_ramp_direction import PhoneNumberTableRow_smsRampDirection
+        from .phone_number_table_row_voice_ramp_direction import PhoneNumberTableRow_voiceRampDirection
 
         from .phone_number_ownership import PhoneNumberOwnership
         from .phone_number_readiness import PhoneNumberReadiness
+        from .phone_number_table_row_sms_ramp_direction import PhoneNumberTableRow_smsRampDirection
+        from .phone_number_table_row_voice_ramp_direction import PhoneNumberTableRow_voiceRampDirection
 
         fields: dict[str, Callable[[Any], None]] = {
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
@@ -80,9 +90,11 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "ownership": lambda n : setattr(self, 'ownership', n.get_enum_value(PhoneNumberOwnership)),
             "routingSummary": lambda n : setattr(self, 'routing_summary', n.get_str_value()),
+            "smsRampDirection": lambda n : setattr(self, 'sms_ramp_direction', n.get_enum_value(PhoneNumberTableRow_smsRampDirection)),
             "smsReady": lambda n : setattr(self, 'sms_ready', n.get_bool_value()),
             "tenDlcCampaignStatus": lambda n : setattr(self, 'ten_dlc_campaign_status', n.get_str_value()),
             "type": lambda n : setattr(self, 'type', n.get_str_value()),
+            "voiceRampDirection": lambda n : setattr(self, 'voice_ramp_direction', n.get_enum_value(PhoneNumberTableRow_voiceRampDirection)),
             "voiceReady": lambda n : setattr(self, 'voice_ready', n.get_bool_value()),
             "warmup": lambda n : setattr(self, 'warmup', n.get_object_value(PhoneNumberReadiness)),
         }
@@ -106,9 +118,11 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_enum_value("ownership", self.ownership)
         writer.write_str_value("routingSummary", self.routing_summary)
+        writer.write_enum_value("smsRampDirection", self.sms_ramp_direction)
         writer.write_bool_value("smsReady", self.sms_ready)
         writer.write_str_value("tenDlcCampaignStatus", self.ten_dlc_campaign_status)
         writer.write_str_value("type", self.type)
+        writer.write_enum_value("voiceRampDirection", self.voice_ramp_direction)
         writer.write_bool_value("voiceReady", self.voice_ready)
         writer.write_object_value("warmup", self.warmup)
         writer.write_additional_data_value(self.additional_data)

@@ -20,6 +20,7 @@ if TYPE_CHECKING:
     from .archive.archive_request_builder import ArchiveRequestBuilder
     from .assignment.assignment_request_builder import AssignmentRequestBuilder
     from .follow_up.follow_up_request_builder import FollowUpRequestBuilder
+    from .phone_lookup.phone_lookup_request_builder import PhoneLookupRequestBuilder
     from .status.status_request_builder import StatusRequestBuilder
     from .status_history.status_history_request_builder import StatusHistoryRequestBuilder
     from .tags.tags_request_builder import TagsRequestBuilder
@@ -183,6 +184,15 @@ class ItemRequestBuilder(BaseRequestBuilder):
         from .follow_up.follow_up_request_builder import FollowUpRequestBuilder
 
         return FollowUpRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def phone_lookup(self) -> PhoneLookupRequestBuilder:
+        """
+        The phoneLookup property
+        """
+        from .phone_lookup.phone_lookup_request_builder import PhoneLookupRequestBuilder
+
+        return PhoneLookupRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def status(self) -> StatusRequestBuilder:
