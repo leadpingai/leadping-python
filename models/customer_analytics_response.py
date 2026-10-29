@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .customer_analytics_summary import CustomerAnalyticsSummary
     from .customer_automation_health import CustomerAutomationHealth
     from .customer_communication_usage import CustomerCommunicationUsage
+    from .customer_lead_outcomes import CustomerLeadOutcomes
     from .customer_lead_source_breakdown import CustomerLeadSourceBreakdown
     from .customer_lead_trend import CustomerLeadTrend
     from .customer_needs_attention_item import CustomerNeedsAttentionItem
@@ -32,6 +33,8 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
     communication_usage: Optional[CustomerCommunicationUsage] = None
     # Date and time when this Leadping customer analytics was generated.
     generated_at: Optional[datetime.datetime] = None
+    # Current outcomes for non-deleted, non-demo leads created in the selected period.
+    lead_outcomes: Optional[CustomerLeadOutcomes] = None
     # Collection of lead sources included with this Leadping customer analytics.
     lead_sources: Optional[list[CustomerLeadSourceBreakdown]] = None
     # Measures lead creation, qualification, and conversion activity within one reporting time bucket.
@@ -66,6 +69,7 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
         from .customer_analytics_summary import CustomerAnalyticsSummary
         from .customer_automation_health import CustomerAutomationHealth
         from .customer_communication_usage import CustomerCommunicationUsage
+        from .customer_lead_outcomes import CustomerLeadOutcomes
         from .customer_lead_source_breakdown import CustomerLeadSourceBreakdown
         from .customer_lead_trend import CustomerLeadTrend
         from .customer_needs_attention_item import CustomerNeedsAttentionItem
@@ -76,6 +80,7 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
         from .customer_analytics_summary import CustomerAnalyticsSummary
         from .customer_automation_health import CustomerAutomationHealth
         from .customer_communication_usage import CustomerCommunicationUsage
+        from .customer_lead_outcomes import CustomerLeadOutcomes
         from .customer_lead_source_breakdown import CustomerLeadSourceBreakdown
         from .customer_lead_trend import CustomerLeadTrend
         from .customer_needs_attention_item import CustomerNeedsAttentionItem
@@ -86,6 +91,7 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
             "automationHealth": lambda n : setattr(self, 'automation_health', n.get_object_value(CustomerAutomationHealth)),
             "communicationUsage": lambda n : setattr(self, 'communication_usage', n.get_object_value(CustomerCommunicationUsage)),
             "generatedAt": lambda n : setattr(self, 'generated_at', n.get_datetime_value()),
+            "leadOutcomes": lambda n : setattr(self, 'lead_outcomes', n.get_object_value(CustomerLeadOutcomes)),
             "leadSources": lambda n : setattr(self, 'lead_sources', n.get_collection_of_object_values(CustomerLeadSourceBreakdown)),
             "leadTrend": lambda n : setattr(self, 'lead_trend', n.get_object_value(CustomerLeadTrend)),
             "needsAttention": lambda n : setattr(self, 'needs_attention', n.get_collection_of_object_values(CustomerNeedsAttentionItem)),
@@ -107,6 +113,7 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("automationHealth", self.automation_health)
         writer.write_object_value("communicationUsage", self.communication_usage)
         writer.write_datetime_value("generatedAt", self.generated_at)
+        writer.write_object_value("leadOutcomes", self.lead_outcomes)
         writer.write_collection_of_object_values("leadSources", self.lead_sources)
         writer.write_object_value("leadTrend", self.lead_trend)
         writer.write_collection_of_object_values("needsAttention", self.needs_attention)

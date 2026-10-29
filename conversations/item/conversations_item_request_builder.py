@@ -18,6 +18,7 @@ if TYPE_CHECKING:
     from ...models.problem_details import ProblemDetails
     from .mark_handled.mark_handled_request_builder import MarkHandledRequestBuilder
     from .mark_read.mark_read_request_builder import MarkReadRequestBuilder
+    from .mark_reply_needed.mark_reply_needed_request_builder import MarkReplyNeededRequestBuilder
     from .outbound_readiness.outbound_readiness_request_builder import OutboundReadinessRequestBuilder
 
 class ConversationsItemRequestBuilder(BaseRequestBuilder):
@@ -94,6 +95,15 @@ class ConversationsItemRequestBuilder(BaseRequestBuilder):
         from .mark_read.mark_read_request_builder import MarkReadRequestBuilder
 
         return MarkReadRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def mark_reply_needed(self) -> MarkReplyNeededRequestBuilder:
+        """
+        The markReplyNeeded property
+        """
+        from .mark_reply_needed.mark_reply_needed_request_builder import MarkReplyNeededRequestBuilder
+
+        return MarkReplyNeededRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def outbound_readiness(self) -> OutboundReadinessRequestBuilder:
