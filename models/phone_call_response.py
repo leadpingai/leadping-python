@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .communication_console_entry import CommunicationConsoleEntry
+    from .phone_call_response_browser_call_approval import PhoneCallResponse_browserCallApproval
     from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
     from .phone_call_status import PhoneCallStatus
 
@@ -24,6 +25,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     billable_amount: Optional[float] = None
     # Billing state for this communication, charge, or transaction.
     billing_status: Optional[str] = None
+    # Server-approved parameters for one outbound browser call.
+    browser_call_approval: Optional[PhoneCallResponse_browserCallApproval] = None
     # Caller ID phone number presented during the outbound call.
     caller_id: Optional[str] = None
     # Messaging campaign identifier associated with this phone call.
@@ -92,10 +95,12 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .communication_console_entry import CommunicationConsoleEntry
+        from .phone_call_response_browser_call_approval import PhoneCallResponse_browserCallApproval
         from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
         from .phone_call_status import PhoneCallStatus
 
         from .communication_console_entry import CommunicationConsoleEntry
+        from .phone_call_response_browser_call_approval import PhoneCallResponse_browserCallApproval
         from .phone_call_response_selection_reason import PhoneCallResponse_selectionReason
         from .phone_call_status import PhoneCallStatus
 
@@ -103,6 +108,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "answeredAt": lambda n : setattr(self, 'answered_at', n.get_datetime_value()),
             "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
+            "browserCallApproval": lambda n : setattr(self, 'browser_call_approval', n.get_object_value(PhoneCallResponse_browserCallApproval)),
             "callerId": lambda n : setattr(self, 'caller_id', n.get_str_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
             "consoleEntries": lambda n : setattr(self, 'console_entries', n.get_collection_of_object_values(CommunicationConsoleEntry)),
@@ -142,6 +148,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("answeredAt", self.answered_at)
         writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
+        writer.write_object_value("browserCallApproval", self.browser_call_approval)
         writer.write_str_value("callerId", self.caller_id)
         writer.write_str_value("campaignId", self.campaign_id)
         writer.write_collection_of_object_values("consoleEntries", self.console_entries)

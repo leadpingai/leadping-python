@@ -39,7 +39,7 @@ class LeadIntakeRequest(AdditionalDataHolder, Parsable):
     city: Optional[str] = None
     # Business represented by a lead contact.
     company: Optional[LeadIntakeRequest_company] = None
-    # Explicitly attests to SMS consent when consentCertificateType is Other. Allows manual texts only.
+    # Explicitly attests to SMS consent when consentCertificateType is Other. Allows manual calls and texts only.
     consent_attested: Optional[bool] = None
     # The provider responsible for a lead's consent certificate.
     consent_certificate_type: Optional[LeadIntakeRequest_consentCertificateType] = None

@@ -20,11 +20,13 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Lead ID associated with the outbound call request.
     lead_id: Optional[str] = None
+    # Approve a call for the Portal to originate through WebRTC instead of dialing from the server.
+    originate_from_browser: Optional[bool] = None
     # Idempotency key used to prevent duplicate outbound delivery.
     outbound_idempotency_key: Optional[str] = None
     # Lead source ID used for call attribution and sender selection.
     source_id: Optional[str] = None
-    # Connect the authenticated user's browser phone to the server-controlled destination call.
+    # Connect the authenticated user's phone to a server-controlled destination call.
     use_browser_phone: Optional[bool] = None
     # Indicates whether a user manually overrode Leadping's automatic number selection for this phone call initiation request.
     was_manually_overridden: Optional[bool] = None
@@ -50,6 +52,7 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
             "conversationId": lambda n : setattr(self, 'conversation_id', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
+            "originateFromBrowser": lambda n : setattr(self, 'originate_from_browser', n.get_bool_value()),
             "outboundIdempotencyKey": lambda n : setattr(self, 'outbound_idempotency_key', n.get_str_value()),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "useBrowserPhone": lambda n : setattr(self, 'use_browser_phone', n.get_bool_value()),
@@ -69,6 +72,7 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("conversationId", self.conversation_id)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("leadId", self.lead_id)
+        writer.write_bool_value("originateFromBrowser", self.originate_from_browser)
         writer.write_str_value("outboundIdempotencyKey", self.outbound_idempotency_key)
         writer.write_str_value("sourceId", self.source_id)
         writer.write_bool_value("useBrowserPhone", self.use_browser_phone)

@@ -33,6 +33,8 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     is_demo: Optional[bool] = None
     # UTC timestamp for last used at on this organization switch option.
     last_used_at: Optional[datetime.datetime] = None
+    # Number of active members in this organization, excluding pending invitations.
+    member_count: Optional[int] = None
     # The human-readable name shown for this organization switch option.
     name: Optional[str] = None
     # Whether needs admin review applies to this organization switch option.
@@ -82,6 +84,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
             "isCurrent": lambda n : setattr(self, 'is_current', n.get_bool_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lastUsedAt": lambda n : setattr(self, 'last_used_at', n.get_datetime_value()),
+            "memberCount": lambda n : setattr(self, 'member_count', n.get_int_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "needsAdminReview": lambda n : setattr(self, 'needs_admin_review', n.get_bool_value()),
             "organizationStatus": lambda n : setattr(self, 'organization_status', n.get_enum_value(OrganizationSwitchOption_organizationStatus)),
@@ -107,6 +110,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isCurrent", self.is_current)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_datetime_value("lastUsedAt", self.last_used_at)
+        writer.write_int_value("memberCount", self.member_count)
         writer.write_str_value("name", self.name)
         writer.write_bool_value("needsAdminReview", self.needs_admin_review)
         writer.write_enum_value("organizationStatus", self.organization_status)

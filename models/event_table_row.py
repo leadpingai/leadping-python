@@ -56,6 +56,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Communication direction for this event timeline table row, such as inbound or outbound.
     direction: Optional[str] = None
+    # Confirmed call talk time in seconds, when available.
+    duration_seconds: Optional[int] = None
     # Machine-readable error code returned while processing this event timeline table row.
     error_code: Optional[str] = None
     # High-level category used to group this Leadping event.
@@ -170,6 +172,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "deliveredAt": lambda n : setattr(self, 'delivered_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "direction": lambda n : setattr(self, 'direction', n.get_str_value()),
+            "durationSeconds": lambda n : setattr(self, 'duration_seconds', n.get_int_value()),
             "errorCode": lambda n : setattr(self, 'error_code', n.get_str_value()),
             "eventCategory": lambda n : setattr(self, 'event_category', n.get_str_value()),
             "eventType": lambda n : setattr(self, 'event_type', n.get_str_value()),
@@ -232,6 +235,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("deliveredAt", self.delivered_at)
         writer.write_str_value("description", self.description)
         writer.write_str_value("direction", self.direction)
+        writer.write_int_value("durationSeconds", self.duration_seconds)
         writer.write_str_value("errorCode", self.error_code)
         writer.write_str_value("eventCategory", self.event_category)
         writer.write_str_value("eventType", self.event_type)
