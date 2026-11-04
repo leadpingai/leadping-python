@@ -27,6 +27,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     billing_status: Optional[str] = None
     # Server-approved parameters for one outbound browser call.
     browser_call_approval: Optional[PhoneCallResponse_browserCallApproval] = None
+    # Provider session identity used to correlate device invitations and server lifecycle events.
+    call_session_id: Optional[str] = None
     # Caller ID phone number presented during the outbound call.
     caller_id: Optional[str] = None
     # Messaging campaign identifier associated with this phone call.
@@ -53,6 +55,8 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
     is_demo: Optional[bool] = None
     # Lead ID associated with the call conversation or outreach attempt.
     lead_id: Optional[str] = None
+    # The matched lead's display name, when the caller belongs to a known lead.
+    lead_name: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # The organization context required to handle this call on a mobile device.
@@ -109,6 +113,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "browserCallApproval": lambda n : setattr(self, 'browser_call_approval', n.get_object_value(PhoneCallResponse_browserCallApproval)),
+            "callSessionId": lambda n : setattr(self, 'call_session_id', n.get_str_value()),
             "callerId": lambda n : setattr(self, 'caller_id', n.get_str_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
             "consoleEntries": lambda n : setattr(self, 'console_entries', n.get_collection_of_object_values(CommunicationConsoleEntry)),
@@ -122,6 +127,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
+            "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
@@ -149,6 +155,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_object_value("browserCallApproval", self.browser_call_approval)
+        writer.write_str_value("callSessionId", self.call_session_id)
         writer.write_str_value("callerId", self.caller_id)
         writer.write_str_value("campaignId", self.campaign_id)
         writer.write_collection_of_object_values("consoleEntries", self.console_entries)
@@ -162,6 +169,7 @@ class PhoneCallResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("leadId", self.lead_id)
+        writer.write_str_value("leadName", self.lead_name)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_str_value("phoneNumber", self.phone_number)

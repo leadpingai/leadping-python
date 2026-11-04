@@ -17,6 +17,8 @@ class TelephonyLoginRequest(AdditionalDataHolder, Parsable):
 
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     device: Optional[TelephonyLoginRequest_device] = None
+    # Includes credentials for receiving calls to the authenticated organization.
+    include_incoming: Optional[bool] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> TelephonyLoginRequest:
@@ -40,6 +42,7 @@ class TelephonyLoginRequest(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "device": lambda n : setattr(self, 'device', n.get_object_value(TelephonyLoginRequest_device)),
+            "includeIncoming": lambda n : setattr(self, 'include_incoming', n.get_bool_value()),
         }
         return fields
     
@@ -52,6 +55,7 @@ class TelephonyLoginRequest(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_object_value("device", self.device)
+        writer.write_bool_value("includeIncoming", self.include_incoming)
         writer.write_additional_data_value(self.additional_data)
     
 

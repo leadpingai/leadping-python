@@ -17,6 +17,10 @@ class TelephonyLoginResponse(AdditionalDataHolder, Parsable):
     callback_token: Optional[str] = None
     # UTC timestamp for expires at on this telephony login.
     expires_at: Optional[datetime.datetime] = None
+    # Password for the organization's incoming SIP connection, when requested and configured.
+    incoming_password: Optional[str] = None
+    # Username for the organization's incoming SIP connection, when requested and configured.
+    incoming_username: Optional[str] = None
     # Password for this telephony login.
     password: Optional[str] = None
     # Username for this telephony login.
@@ -41,6 +45,8 @@ class TelephonyLoginResponse(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "callbackToken": lambda n : setattr(self, 'callback_token', n.get_str_value()),
             "expiresAt": lambda n : setattr(self, 'expires_at', n.get_datetime_value()),
+            "incomingPassword": lambda n : setattr(self, 'incoming_password', n.get_str_value()),
+            "incomingUsername": lambda n : setattr(self, 'incoming_username', n.get_str_value()),
             "password": lambda n : setattr(self, 'password', n.get_str_value()),
             "username": lambda n : setattr(self, 'username', n.get_str_value()),
         }
@@ -56,6 +62,8 @@ class TelephonyLoginResponse(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_str_value("callbackToken", self.callback_token)
         writer.write_datetime_value("expiresAt", self.expires_at)
+        writer.write_str_value("incomingPassword", self.incoming_password)
+        writer.write_str_value("incomingUsername", self.incoming_username)
         writer.write_str_value("password", self.password)
         writer.write_str_value("username", self.username)
         writer.write_additional_data_value(self.additional_data)

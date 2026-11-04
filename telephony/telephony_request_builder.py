@@ -6,6 +6,8 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .availability.availability_request_builder import AvailabilityRequestBuilder
+    from .incoming_caller.incoming_caller_request_builder import IncomingCallerRequestBuilder
     from .login.login_request_builder import LoginRequestBuilder
 
 class TelephonyRequestBuilder(BaseRequestBuilder):
@@ -20,6 +22,24 @@ class TelephonyRequestBuilder(BaseRequestBuilder):
         Returns: None
         """
         super().__init__(request_adapter, "{+baseurl}/telephony", path_parameters)
+    
+    @property
+    def availability(self) -> AvailabilityRequestBuilder:
+        """
+        The availability property
+        """
+        from .availability.availability_request_builder import AvailabilityRequestBuilder
+
+        return AvailabilityRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def incoming_caller(self) -> IncomingCallerRequestBuilder:
+        """
+        The incomingCaller property
+        """
+        from .incoming_caller.incoming_caller_request_builder import IncomingCallerRequestBuilder
+
+        return IncomingCallerRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def login(self) -> LoginRequestBuilder:
