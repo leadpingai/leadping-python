@@ -7,6 +7,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
     from .mobile_device_preferences import MobileDevicePreferences
+    from .user_response_admin_demo_preferences import UserResponse_adminDemoPreferences
     from .user_response_billing_plan import UserResponse_billingPlan
     from .user_response_billing_state import UserResponse_billingState
     from .user_response_compliance import UserResponse_compliance
@@ -22,6 +23,8 @@ class UserResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Controls demo presentation for an individual platform admin.
+    admin_demo_preferences: Optional[UserResponse_adminDemoPreferences] = None
     # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
     billing_plan: Optional[UserResponse_billingPlan] = None
     # Customer-safe billing state for a Leadping organization.
@@ -86,6 +89,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         from .mobile_device_preferences import MobileDevicePreferences
+        from .user_response_admin_demo_preferences import UserResponse_adminDemoPreferences
         from .user_response_billing_plan import UserResponse_billingPlan
         from .user_response_billing_state import UserResponse_billingState
         from .user_response_compliance import UserResponse_compliance
@@ -94,6 +98,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
         from .mobile_device_preferences import MobileDevicePreferences
+        from .user_response_admin_demo_preferences import UserResponse_adminDemoPreferences
         from .user_response_billing_plan import UserResponse_billingPlan
         from .user_response_billing_state import UserResponse_billingState
         from .user_response_compliance import UserResponse_compliance
@@ -102,6 +107,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         from .user_response_subscription_status import UserResponse_subscriptionStatus
 
         fields: dict[str, Callable[[Any], None]] = {
+            "adminDemoPreferences": lambda n : setattr(self, 'admin_demo_preferences', n.get_object_value(UserResponse_adminDemoPreferences)),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(UserResponse_billingPlan)),
             "billingState": lambda n : setattr(self, 'billing_state', n.get_object_value(UserResponse_billingState)),
             "compliance": lambda n : setattr(self, 'compliance', n.get_object_value(UserResponse_compliance)),
@@ -136,6 +142,7 @@ class UserResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_object_value("adminDemoPreferences", self.admin_demo_preferences)
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_object_value("billingState", self.billing_state)
         writer.write_object_value("compliance", self.compliance)
