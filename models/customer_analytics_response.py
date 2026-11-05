@@ -33,6 +33,8 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
     communication_usage: Optional[CustomerCommunicationUsage] = None
     # Date and time when this Leadping customer analytics was generated.
     generated_at: Optional[datetime.datetime] = None
+    # Whether the report includes demo data, subject to the current display preference.
+    includes_demo_data: Optional[bool] = None
     # Current outcomes for non-deleted, non-demo leads created in the selected period.
     lead_outcomes: Optional[CustomerLeadOutcomes] = None
     # Collection of lead sources included with this Leadping customer analytics.
@@ -91,6 +93,7 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
             "automationHealth": lambda n : setattr(self, 'automation_health', n.get_object_value(CustomerAutomationHealth)),
             "communicationUsage": lambda n : setattr(self, 'communication_usage', n.get_object_value(CustomerCommunicationUsage)),
             "generatedAt": lambda n : setattr(self, 'generated_at', n.get_datetime_value()),
+            "includesDemoData": lambda n : setattr(self, 'includes_demo_data', n.get_bool_value()),
             "leadOutcomes": lambda n : setattr(self, 'lead_outcomes', n.get_object_value(CustomerLeadOutcomes)),
             "leadSources": lambda n : setattr(self, 'lead_sources', n.get_collection_of_object_values(CustomerLeadSourceBreakdown)),
             "leadTrend": lambda n : setattr(self, 'lead_trend', n.get_object_value(CustomerLeadTrend)),
@@ -113,6 +116,7 @@ class CustomerAnalyticsResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("automationHealth", self.automation_health)
         writer.write_object_value("communicationUsage", self.communication_usage)
         writer.write_datetime_value("generatedAt", self.generated_at)
+        writer.write_bool_value("includesDemoData", self.includes_demo_data)
         writer.write_object_value("leadOutcomes", self.lead_outcomes)
         writer.write_collection_of_object_values("leadSources", self.lead_sources)
         writer.write_object_value("leadTrend", self.lead_trend)
