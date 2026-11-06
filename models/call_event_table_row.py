@@ -18,6 +18,10 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The recorded display name of the actor who performed this action.
+    actor_display_name: Optional[str] = None
+    # The user who performed this action.
+    actor_user_id: Optional[str] = None
     # UTC timestamp when the call was answered.
     answered_at: Optional[datetime.datetime] = None
     # Monetary amount billed for this Leadping communication or transaction.
@@ -104,6 +108,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         from .communication_console_entry import CommunicationConsoleEntry
 
         fields: dict[str, Callable[[Any], None]] = {
+            "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
+            "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
             "answeredAt": lambda n : setattr(self, 'answered_at', n.get_datetime_value()),
             "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billableSeconds": lambda n : setattr(self, 'billable_seconds', n.get_int_value()),
@@ -145,6 +151,8 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("actorDisplayName", self.actor_display_name)
+        writer.write_str_value("actorUserId", self.actor_user_id)
         writer.write_datetime_value("answeredAt", self.answered_at)
         writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_int_value("billableSeconds", self.billable_seconds)
