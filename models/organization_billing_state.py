@@ -31,6 +31,8 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
     last_payment_method_event_at: Optional[datetime.datetime] = None
     # UTC timestamp when Leadping last processed a subscription event for the organization.
     last_subscription_event_at: Optional[datetime.datetime] = None
+    # Number of billable phone numbers with Number Health enabled.
+    number_health_quantity: Optional[int] = None
     # Number of user licenses currently assigned to organization members.
     organization_member_assigned_quantity: Optional[int] = None
     # Number of user licenses included in the organization's subscription plan.
@@ -74,6 +76,7 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
             "hasStripeCustomer": lambda n : setattr(self, 'has_stripe_customer', n.get_bool_value()),
             "lastPaymentMethodEventAt": lambda n : setattr(self, 'last_payment_method_event_at', n.get_datetime_value()),
             "lastSubscriptionEventAt": lambda n : setattr(self, 'last_subscription_event_at', n.get_datetime_value()),
+            "numberHealthQuantity": lambda n : setattr(self, 'number_health_quantity', n.get_int_value()),
             "organizationMemberAssignedQuantity": lambda n : setattr(self, 'organization_member_assigned_quantity', n.get_int_value()),
             "organizationMemberQuantity": lambda n : setattr(self, 'organization_member_quantity', n.get_int_value()),
             "pendingBillingPlan": lambda n : setattr(self, 'pending_billing_plan', n.get_enum_value(OrganizationBillingState_pendingBillingPlan)),
@@ -98,6 +101,7 @@ class OrganizationBillingState(AdditionalDataHolder, Parsable):
         writer.write_bool_value("hasStripeCustomer", self.has_stripe_customer)
         writer.write_datetime_value("lastPaymentMethodEventAt", self.last_payment_method_event_at)
         writer.write_datetime_value("lastSubscriptionEventAt", self.last_subscription_event_at)
+        writer.write_int_value("numberHealthQuantity", self.number_health_quantity)
         writer.write_int_value("organizationMemberAssignedQuantity", self.organization_member_assigned_quantity)
         writer.write_int_value("organizationMemberQuantity", self.organization_member_quantity)
         writer.write_enum_value("pendingBillingPlan", self.pending_billing_plan)

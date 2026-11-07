@@ -43,6 +43,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     auto_refill_trigger: Optional[float] = None
     # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     billing_address: Optional[OrganizationResponse_billingAddress] = None
+    # Stored billing contact email for the organization.
+    billing_contact_email: Optional[str] = None
     # Name used for invoices, receipts, and payment processor billing records.
     billing_name: Optional[str] = None
     # Identifies the Leadping subscription plan that determines organization features, allowances, and billing behavior.
@@ -152,6 +154,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
             "autoRefillTrigger": lambda n : setattr(self, 'auto_refill_trigger', n.get_float_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(OrganizationResponse_billingAddress)),
+            "billingContactEmail": lambda n : setattr(self, 'billing_contact_email', n.get_str_value()),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
             "billingPlan": lambda n : setattr(self, 'billing_plan', n.get_enum_value(OrganizationResponse_billingPlan)),
             "billingState": lambda n : setattr(self, 'billing_state', n.get_object_value(OrganizationResponse_billingState)),
@@ -197,6 +200,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
         writer.write_float_value("autoRefillTrigger", self.auto_refill_trigger)
         writer.write_object_value("billingAddress", self.billing_address)
+        writer.write_str_value("billingContactEmail", self.billing_contact_email)
         writer.write_str_value("billingName", self.billing_name)
         writer.write_enum_value("billingPlan", self.billing_plan)
         writer.write_object_value("billingState", self.billing_state)
