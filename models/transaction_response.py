@@ -41,6 +41,8 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates sample activity for app review that must not count toward real financial totals.
     is_demo: Optional[bool] = None
+    # Indicates a temporary credit hold, not a settled charge.
+    is_usage_reservation: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[TransactionResponse_lead] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
@@ -101,6 +103,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "gatewayStatus": lambda n : setattr(self, 'gateway_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
+            "isUsageReservation": lambda n : setattr(self, 'is_usage_reservation', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionResponse_lead)),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
@@ -131,6 +134,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("gatewayStatus", self.gateway_status)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
+        writer.write_bool_value("isUsageReservation", self.is_usage_reservation)
         writer.write_object_value("lead", self.lead)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_float_value("netAmount", self.net_amount)
