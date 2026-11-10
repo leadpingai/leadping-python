@@ -1,6 +1,7 @@
 from enum import Enum
 
 class PhoneCallResponse_selectionReason(str, Enum):
+    NearestLocation = "NearestLocation",
     StickyConversation = "StickyConversation",
     LeadAssigned = "LeadAssigned",
     CampaignOrSource = "CampaignOrSource",

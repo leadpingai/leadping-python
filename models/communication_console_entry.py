@@ -13,6 +13,8 @@ class CommunicationConsoleEntry(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Restricts this diagnostic entry to platform administrators.
+    admin_only: Optional[bool] = None
     # Unique identifier of this diagnostic console entry.
     id: Optional[str] = None
     # User-safe diagnostic message describing what occurred at this stage.
@@ -41,6 +43,7 @@ class CommunicationConsoleEntry(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "adminOnly": lambda n : setattr(self, 'admin_only', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "message": lambda n : setattr(self, 'message', n.get_str_value()),
             "occurredAt": lambda n : setattr(self, 'occurred_at', n.get_datetime_value()),
@@ -57,6 +60,7 @@ class CommunicationConsoleEntry(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_bool_value("adminOnly", self.admin_only)
         writer.write_str_value("id", self.id)
         writer.write_str_value("message", self.message)
         writer.write_datetime_value("occurredAt", self.occurred_at)

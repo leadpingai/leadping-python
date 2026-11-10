@@ -27,6 +27,8 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
     coordinate_source: Optional[PhoneNumberLocation_coordinateSource] = None
     # Country code for the phone number or location represented by this phone number location.
     country_code: Optional[str] = None
+    # Whether the coordinates represent an approximate phone-number region rather than a resolved city.
+    is_coordinate_approximate: Optional[bool] = None
     # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[str] = None
     # State, province, or region for the lead or organization postal address.
@@ -66,6 +68,7 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
             "coordinate": lambda n : setattr(self, 'coordinate', n.get_object_value(PhoneNumberLocation_coordinate)),
             "coordinateSource": lambda n : setattr(self, 'coordinate_source', n.get_object_value(PhoneNumberLocation_coordinateSource)),
             "countryCode": lambda n : setattr(self, 'country_code', n.get_str_value()),
+            "isCoordinateApproximate": lambda n : setattr(self, 'is_coordinate_approximate', n.get_bool_value()),
             "location": lambda n : setattr(self, 'location', n.get_str_value()),
             "state": lambda n : setattr(self, 'state', n.get_str_value()),
             "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
@@ -86,6 +89,7 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
         writer.write_object_value("coordinate", self.coordinate)
         writer.write_object_value("coordinateSource", self.coordinate_source)
         writer.write_str_value("countryCode", self.country_code)
+        writer.write_bool_value("isCoordinateApproximate", self.is_coordinate_approximate)
         writer.write_str_value("location", self.location)
         writer.write_str_value("state", self.state)
         writer.write_str_value("timeZoneId", self.time_zone_id)
