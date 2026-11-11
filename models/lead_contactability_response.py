@@ -12,10 +12,14 @@ class LeadContactabilityResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Customer-safe explanation when calling is unavailable.
+    call_blocked_reason: Optional[str] = None
     # Whether the lead can currently be called after evaluating applicable contact hours, suppression, and consent rules.
     can_call: Optional[bool] = None
     # Whether the lead can currently be texted after evaluating applicable contact hours, suppression, and consent rules.
     can_text: Optional[bool] = None
+    # Customer-safe explanation when texting is unavailable.
+    text_blocked_reason: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> LeadContactabilityResponse:
@@ -34,8 +38,10 @@ class LeadContactabilityResponse(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "callBlockedReason": lambda n : setattr(self, 'call_blocked_reason', n.get_str_value()),
             "canCall": lambda n : setattr(self, 'can_call', n.get_bool_value()),
             "canText": lambda n : setattr(self, 'can_text', n.get_bool_value()),
+            "textBlockedReason": lambda n : setattr(self, 'text_blocked_reason', n.get_str_value()),
         }
         return fields
     
@@ -47,8 +53,10 @@ class LeadContactabilityResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("callBlockedReason", self.call_blocked_reason)
         writer.write_bool_value("canCall", self.can_call)
         writer.write_bool_value("canText", self.can_text)
+        writer.write_str_value("textBlockedReason", self.text_blocked_reason)
         writer.write_additional_data_value(self.additional_data)
     
 
