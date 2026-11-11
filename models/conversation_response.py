@@ -26,7 +26,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # Optional profile image URL explicitly associated with the lead.
     avatar_url: Optional[str] = None
-    # Stored compliance status of the associated lead; not a live call-readiness guarantee.
+    # Consent verification status of the associated lead; not a live call-readiness guarantee.
     compliance_status: Optional[str] = None
     # Summary schema for Leadping API current lead status change summary data used in dashboards and reports.
     current_lead_status: Optional[ConversationResponse_currentLeadStatus] = None
