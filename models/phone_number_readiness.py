@@ -8,6 +8,7 @@ if TYPE_CHECKING:
     from .phone_number_readiness_call_stage import PhoneNumberReadiness_callStage
     from .phone_number_readiness_health_status import PhoneNumberReadiness_healthStatus
     from .phone_number_readiness_state import PhoneNumberReadiness_state
+    from .phone_number_readiness_traffic_health import PhoneNumberReadiness_trafficHealth
 
 @dataclass
 class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
@@ -29,6 +30,8 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
     progress_percent: Optional[int] = None
     # Describes whether an organization is configured and permitted to send SMS or MMS traffic through Leadping.
     state: Optional[PhoneNumberReadiness_state] = None
+    # Hourly local reputation-risk estimate using 24-hour, seven-day, and thirty-day traffic evidence.
+    traffic_health: Optional[PhoneNumberReadiness_trafficHealth] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneNumberReadiness:
@@ -49,10 +52,12 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
         from .phone_number_readiness_call_stage import PhoneNumberReadiness_callStage
         from .phone_number_readiness_health_status import PhoneNumberReadiness_healthStatus
         from .phone_number_readiness_state import PhoneNumberReadiness_state
+        from .phone_number_readiness_traffic_health import PhoneNumberReadiness_trafficHealth
 
         from .phone_number_readiness_call_stage import PhoneNumberReadiness_callStage
         from .phone_number_readiness_health_status import PhoneNumberReadiness_healthStatus
         from .phone_number_readiness_state import PhoneNumberReadiness_state
+        from .phone_number_readiness_traffic_health import PhoneNumberReadiness_trafficHealth
 
         fields: dict[str, Callable[[Any], None]] = {
             "callStage": lambda n : setattr(self, 'call_stage', n.get_enum_value(PhoneNumberReadiness_callStage)),
@@ -61,6 +66,7 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberReadiness_healthStatus)),
             "progressPercent": lambda n : setattr(self, 'progress_percent', n.get_int_value()),
             "state": lambda n : setattr(self, 'state', n.get_enum_value(PhoneNumberReadiness_state)),
+            "trafficHealth": lambda n : setattr(self, 'traffic_health', n.get_object_value(PhoneNumberReadiness_trafficHealth)),
         }
         return fields
     
@@ -78,6 +84,7 @@ class PhoneNumberReadiness(AdditionalDataHolder, Parsable):
         writer.write_enum_value("healthStatus", self.health_status)
         writer.write_int_value("progressPercent", self.progress_percent)
         writer.write_enum_value("state", self.state)
+        writer.write_object_value("trafficHealth", self.traffic_health)
         writer.write_additional_data_value(self.additional_data)
     
 

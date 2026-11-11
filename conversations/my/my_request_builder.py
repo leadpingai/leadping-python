@@ -29,7 +29,7 @@ class MyRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/my{?archiveFilter*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/my{?archiveFilter*,contactable*}", path_parameters)
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfConversationResponse]:
         """
@@ -98,10 +98,15 @@ class MyRequestBuilder(BaseRequestBuilder):
                 raise TypeError("original_name cannot be null.")
             if original_name == "archive_filter":
                 return "archiveFilter"
+            if original_name == "contactable":
+                return "contactable"
             return original_name
         
         # Optional filter selecting active, archived, or all lead conversations.
         archive_filter: Optional[str] = None
+
+        # Whether to include only conversations with contactable leads.
+        contactable: Optional[bool] = None
 
     
     @dataclass
