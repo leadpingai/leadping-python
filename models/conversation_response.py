@@ -26,6 +26,10 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # Optional profile image URL explicitly associated with the lead.
     avatar_url: Optional[str] = None
+    # Current manual voice eligibility, including contact hours. Populated on individual conversation reads. Sender readiness and billing are checked when calling; null means eligibility has not been evaluated.
+    can_call_now: Optional[bool] = None
+    # Current manual SMS eligibility, including contact hours. Populated on individual conversation reads. Sender readiness and billing are checked when sending; null means eligibility has not been evaluated.
+    can_text_now: Optional[bool] = None
     # Consent verification status of the associated lead; not a live call-readiness guarantee.
     compliance_status: Optional[str] = None
     # Summary schema for Leadping API current lead status change summary data used in dashboards and reports.
@@ -104,6 +108,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
             "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
+            "canCallNow": lambda n : setattr(self, 'can_call_now', n.get_bool_value()),
+            "canTextNow": lambda n : setattr(self, 'can_text_now', n.get_bool_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
             "currentLeadStatus": lambda n : setattr(self, 'current_lead_status', n.get_object_value(ConversationResponse_currentLeadStatus)),
             "email": lambda n : setattr(self, 'email', n.get_str_value()),
@@ -143,6 +149,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
         writer.write_str_value("avatarUrl", self.avatar_url)
+        writer.write_bool_value("canCallNow", self.can_call_now)
+        writer.write_bool_value("canTextNow", self.can_text_now)
         writer.write_str_value("complianceStatus", self.compliance_status)
         writer.write_object_value("currentLeadStatus", self.current_lead_status)
         writer.write_str_value("email", self.email)
