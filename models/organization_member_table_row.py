@@ -22,6 +22,8 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # Unique Leadping identifier for this organization user.
     id: Optional[str] = None
+    # UTC timestamp of the user's most recent activity in Leadping.
+    last_active_at: Optional[datetime.datetime] = None
     # The billing status for this user's organization license.
     license_billing_status: Optional[str] = None
     # The renewal date used for this user's license proration.
@@ -62,6 +64,7 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
         fields: dict[str, Callable[[Any], None]] = {
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "lastActiveAt": lambda n : setattr(self, 'last_active_at', n.get_datetime_value()),
             "licenseBillingStatus": lambda n : setattr(self, 'license_billing_status', n.get_str_value()),
             "licenseRenewalDate": lambda n : setattr(self, 'license_renewal_date', n.get_datetime_value()),
             "role": lambda n : setattr(self, 'role', n.get_enum_value(OrganizationMemberRole)),
@@ -81,6 +84,7 @@ class OrganizationMemberTableRow(AdditionalDataHolder, Parsable):
             raise TypeError("writer cannot be null.")
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("id", self.id)
+        writer.write_datetime_value("lastActiveAt", self.last_active_at)
         writer.write_str_value("licenseBillingStatus", self.license_billing_status)
         writer.write_datetime_value("licenseRenewalDate", self.license_renewal_date)
         writer.write_enum_value("role", self.role)
