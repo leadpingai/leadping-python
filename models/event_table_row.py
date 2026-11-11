@@ -11,6 +11,7 @@ if TYPE_CHECKING:
     from .event_table_row_traffic_type import EventTableRow_trafficType
     from .event_timeline_type import EventTimelineType
     from .message_media_attachment import MessageMediaAttachment
+    from .tag_summary import TagSummary
 
 @dataclass
 class EventTableRow(AdditionalDataHolder, Parsable):
@@ -110,6 +111,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     status_reason: Optional[str] = None
     # Short human-readable summary of this event timeline table row for lists, timelines, and notifications.
     summary: Optional[str] = None
+    # Tags affected by this event, including their display colors.
+    tags: Optional[list[TagSummary]] = None
     # Timeline category used to group events for display and filtering.
     timeline_category: Optional[str] = None
     # Classifies the kind of activity displayed in a lead or conversation event timeline.
@@ -146,12 +149,14 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         from .event_table_row_traffic_type import EventTableRow_trafficType
         from .event_timeline_type import EventTimelineType
         from .message_media_attachment import MessageMediaAttachment
+        from .tag_summary import TagSummary
 
         from .event_table_row_selection_reason import EventTableRow_selectionReason
         from .event_table_row_status import EventTableRow_status
         from .event_table_row_traffic_type import EventTableRow_trafficType
         from .event_timeline_type import EventTimelineType
         from .message_media_attachment import MessageMediaAttachment
+        from .tag_summary import TagSummary
 
         fields: dict[str, Callable[[Any], None]] = {
             "actorDisplayName": lambda n : setattr(self, 'actor_display_name', n.get_str_value()),
@@ -199,6 +204,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "status": lambda n : setattr(self, 'status', n.get_enum_value(EventTableRow_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
             "summary": lambda n : setattr(self, 'summary', n.get_str_value()),
+            "tags": lambda n : setattr(self, 'tags', n.get_collection_of_object_values(TagSummary)),
             "timelineCategory": lambda n : setattr(self, 'timeline_category', n.get_str_value()),
             "timelineType": lambda n : setattr(self, 'timeline_type', n.get_enum_value(EventTimelineType)),
             "toPhoneNumber": lambda n : setattr(self, 'to_phone_number', n.get_str_value()),
@@ -262,6 +268,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)
         writer.write_str_value("summary", self.summary)
+        writer.write_collection_of_object_values("tags", self.tags)
         writer.write_str_value("timelineCategory", self.timeline_category)
         writer.write_enum_value("timelineType", self.timeline_type)
         writer.write_str_value("toPhoneNumber", self.to_phone_number)
