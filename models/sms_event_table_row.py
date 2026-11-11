@@ -63,7 +63,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether automation created or triggered this SMS event table row.
     is_automated: Optional[bool] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[IdNamePair] = None

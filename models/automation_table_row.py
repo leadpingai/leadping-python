@@ -31,7 +31,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     health_summary: Optional[str] = None
     # Unique Leadping identifier for this automation table row.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Indicates whether Leadping manages this automation table row automatically instead of a user.
     is_system_managed: Optional[bool] = None

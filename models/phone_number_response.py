@@ -25,7 +25,7 @@ class PhoneNumberResponse(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None

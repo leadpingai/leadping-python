@@ -45,7 +45,9 @@ class RunRequestBuilder(BaseRequestBuilder):
             "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "404": ProblemDetails,
             "429": ProblemDetails,
+            "500": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 

@@ -47,7 +47,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this lead is archived.
     is_archived: Optional[bool] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Last name of the lead, user, or contact represented by this lead table row.
     last_name: Optional[str] = None

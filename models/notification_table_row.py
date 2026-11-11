@@ -27,7 +27,7 @@ class NotificationTableRow(AdditionalDataHolder, Parsable):
     details: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Whether this notification is read.
     is_read: Optional[bool] = None

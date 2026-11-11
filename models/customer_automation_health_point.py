@@ -13,17 +13,17 @@ class CustomerAutomationHealthPoint(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The endAt property
+    # Exclusive UTC end of the analytics bucket.
     end_at: Optional[datetime.datetime] = None
-    # The executions property
+    # Number of automation executions in the bucket.
     executions: Optional[int] = None
-    # The failureCount property
+    # Number of failed automation executions in the bucket.
     failure_count: Optional[int] = None
-    # The label property
+    # Display label identifying the analytics bucket.
     label: Optional[str] = None
-    # The startAt property
+    # Inclusive UTC start of the analytics bucket.
     start_at: Optional[datetime.datetime] = None
-    # The successCount property
+    # Number of successful automation executions in the bucket.
     success_count: Optional[int] = None
     
     @staticmethod

@@ -12,7 +12,7 @@ class LeadAssignmentRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The assignedToUserId property
+    # Identifier of the active organization member to assign. Null returns the lead to the unassigned queue.
     assigned_to_user_id: Optional[str] = None
     
     @staticmethod

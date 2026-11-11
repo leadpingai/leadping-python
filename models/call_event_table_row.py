@@ -52,7 +52,7 @@ class CallEventTableRow(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Unique Leadping identifier for this call event table row.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Lead ID associated with this call event.
     lead_id: Optional[str] = None

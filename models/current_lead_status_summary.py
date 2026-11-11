@@ -33,6 +33,8 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
     follow_up_due_at: Optional[datetime.datetime] = None
     # Unique Leadping identifier for this current lead status change summary.
     id: Optional[str] = None
+    # Configured organization status ID, independent of its display name and history entry ID.
+    lead_status_id: Optional[str] = None
     # Current lead status change outcome assigned to the lead.
     outcome: Optional[str] = None
     # Monotonic revision of the lead's current status and scheduling state.
@@ -71,6 +73,7 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
             "followUpCompletedAt": lambda n : setattr(self, 'follow_up_completed_at', n.get_datetime_value()),
             "followUpDueAt": lambda n : setattr(self, 'follow_up_due_at', n.get_datetime_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "leadStatusId": lambda n : setattr(self, 'lead_status_id', n.get_str_value()),
             "outcome": lambda n : setattr(self, 'outcome', n.get_str_value()),
             "revision": lambda n : setattr(self, 'revision', n.get_int_value()),
             "source": lambda n : setattr(self, 'source', n.get_enum_value(CurrentLeadStatusSummary_source)),
@@ -93,6 +96,7 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("followUpCompletedAt", self.follow_up_completed_at)
         writer.write_datetime_value("followUpDueAt", self.follow_up_due_at)
         writer.write_str_value("id", self.id)
+        writer.write_str_value("leadStatusId", self.lead_status_id)
         writer.write_str_value("outcome", self.outcome)
         writer.write_int_value("revision", self.revision)
         writer.write_enum_value("source", self.source)

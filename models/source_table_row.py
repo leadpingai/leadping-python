@@ -52,7 +52,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     first_lead_received_at: Optional[datetime.datetime] = None
     # Unique Leadping identifier for this lead source table row.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # UTC timestamp when this source most recently delivered a lead to Leadping.
     last_lead_received_at: Optional[datetime.datetime] = None

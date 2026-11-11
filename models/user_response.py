@@ -41,9 +41,9 @@ class UserResponse(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
-    # The lastActiveAt property
+    # UTC timestamp of the user's most recently recorded activity, when available.
     last_active_at: Optional[datetime.datetime] = None
     # The date and time when this user last completed the Leadping sign-in flow.
     last_logged_in_at: Optional[datetime.datetime] = None

@@ -52,7 +52,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     first_lead_received_at: Optional[datetime.datetime] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # UTC timestamp when this source most recently delivered a lead to Leadping.
     last_lead_received_at: Optional[datetime.datetime] = None

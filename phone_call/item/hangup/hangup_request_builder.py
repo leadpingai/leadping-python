@@ -47,6 +47,7 @@ class HangupRequestBuilder(BaseRequestBuilder):
             "403": ProblemDetails,
             "404": ProblemDetails,
             "429": ProblemDetails,
+            "500": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 

@@ -13,19 +13,19 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The dailyLimit property
+    # Daily usage budget in USD. Null means no daily limit; zero stops new paid usage.
     daily_limit: Optional[float] = None
-    # The dailyResetsAt property
+    # UTC timestamp when the next calendar day begins and daily spending resets.
     daily_resets_at: Optional[datetime.datetime] = None
-    # The dailySpent property
+    # Settled usage spending in USD for the current UTC calendar day.
     daily_spent: Optional[float] = None
-    # The monthlyLimit property
+    # Monthly usage budget in USD. Null means no monthly limit; zero stops new paid usage.
     monthly_limit: Optional[float] = None
-    # The monthlyResetsAt property
+    # UTC timestamp when the next calendar month begins and monthly spending resets.
     monthly_resets_at: Optional[datetime.datetime] = None
-    # The monthlySpent property
+    # Settled usage spending in USD for the current UTC calendar month.
     monthly_spent: Optional[float] = None
-    # The reserved property
+    # Pending usage reservations in USD.
     reserved: Optional[float] = None
     
     @staticmethod

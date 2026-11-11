@@ -15,6 +15,7 @@ from warnings import warn
 
 if TYPE_CHECKING:
     from ....models.lead_follow_up_update_request import LeadFollowUpUpdateRequest
+    from ....models.lead_status_change_response import LeadStatusChangeResponse
     from ....models.problem_details import ProblemDetails
 
 class FollowUpRequestBuilder(BaseRequestBuilder):
@@ -30,12 +31,12 @@ class FollowUpRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/leads/{%2Did}/follow-up", path_parameters)
     
-    async def put(self,body: LeadFollowUpUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
+    async def put(self,body: LeadFollowUpUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[LeadStatusChangeResponse]:
         """
         Completes or reschedules a lead's follow-up using the version observed by the client. Returns a conflict if the follow-up has changed.
         param body: Completes or reschedules exactly the follow-up version the operator viewed.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: bytes
+        Returns: Optional[LeadStatusChangeResponse]
         """
         if body is None:
             raise TypeError("body cannot be null.")
@@ -45,13 +46,20 @@ class FollowUpRequestBuilder(BaseRequestBuilder):
         from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
+            "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "404": ProblemDetails,
+            "409": ProblemDetails,
+            "415": ProblemDetails,
             "429": ProblemDetails,
+            "500": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_primitive_async(request_info, "bytes", error_mapping)
+        from ....models.lead_status_change_response import LeadStatusChangeResponse
+
+        return await self.request_adapter.send_async(request_info, LeadStatusChangeResponse, error_mapping)
     
     def to_put_request_information(self,body: LeadFollowUpUpdateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
@@ -64,7 +72,7 @@ class FollowUpRequestBuilder(BaseRequestBuilder):
             raise TypeError("body cannot be null.")
         request_info = RequestInformation(Method.PUT, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/problem+json")
+        request_info.headers.try_add("Accept", "text/plain;q=0.9")
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     

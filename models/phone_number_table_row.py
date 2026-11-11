@@ -20,7 +20,7 @@ class PhoneNumberTableRow(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # Unique Leadping identifier for this phone number table row.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # City and state from the stored phone identity.
     location: Optional[str] = None

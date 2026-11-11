@@ -13,15 +13,15 @@ class BrowserCallApproval(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The callerNumber property
+    # Approved caller ID phone number for this outbound call.
     caller_number: Optional[str] = None
-    # The clientState property
+    # Opaque server-issued state to pass unchanged when initiating the approved call.
     client_state: Optional[str] = None
-    # The destinationNumber property
+    # Approved destination phone number for this outbound call.
     destination_number: Optional[str] = None
-    # The expiresAt property
+    # UTC timestamp after which this call approval is no longer valid.
     expires_at: Optional[datetime.datetime] = None
-    # The maximumDurationSeconds property
+    # Maximum permitted duration of the call, in seconds.
     maximum_duration_seconds: Optional[int] = None
     
     @staticmethod

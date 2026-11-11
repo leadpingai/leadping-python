@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ....models.paged_result_of_conversation_response import PagedResultOfConversationResponse
     from ....models.problem_details import ProblemDetails
     from ....models.request_data_options import RequestDataOptions
+    from .contactability.contactability_request_builder import ContactabilityRequestBuilder
 
 class WithLeadItemRequestBuilder(BaseRequestBuilder):
     """
@@ -49,6 +50,8 @@ class WithLeadItemRequestBuilder(BaseRequestBuilder):
             "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "404": ProblemDetails,
+            "415": ProblemDetails,
             "429": ProblemDetails,
             "500": ProblemDetails,
         }
@@ -82,6 +85,15 @@ class WithLeadItemRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return WithLeadItemRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def contactability(self) -> ContactabilityRequestBuilder:
+        """
+        The contactability property
+        """
+        from .contactability.contactability_request_builder import ContactabilityRequestBuilder
+
+        return ContactabilityRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class WithLeadItemRequestBuilderPostRequestConfiguration(RequestConfiguration[QueryParameters]):

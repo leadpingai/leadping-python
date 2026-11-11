@@ -14,6 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
+    from ...models.incoming_caller_response import IncomingCallerResponse
     from ...models.problem_details import ProblemDetails
 
 class IncomingCallerRequestBuilder(BaseRequestBuilder):
@@ -29,11 +30,11 @@ class IncomingCallerRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/telephony/incoming-caller{?phoneNumber*}", path_parameters)
     
-    async def get(self,request_configuration: Optional[RequestConfiguration[IncomingCallerRequestBuilderGetQueryParameters]] = None) -> Optional[bytes]:
+    async def get(self,request_configuration: Optional[RequestConfiguration[IncomingCallerRequestBuilderGetQueryParameters]] = None) -> Optional[IncomingCallerResponse]:
         """
         Finds a lead in the current organization by the caller's normalized primary phone number. Returns an empty lead identity when no matching lead exists.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: bytes
+        Returns: Optional[IncomingCallerResponse]
         """
         request_info = self.to_get_request_information(
             request_configuration
@@ -41,13 +42,18 @@ class IncomingCallerRequestBuilder(BaseRequestBuilder):
         from ...models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
+            "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "404": ProblemDetails,
             "429": ProblemDetails,
+            "500": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_primitive_async(request_info, "bytes", error_mapping)
+        from ...models.incoming_caller_response import IncomingCallerResponse
+
+        return await self.request_adapter.send_async(request_info, IncomingCallerResponse, error_mapping)
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[IncomingCallerRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
@@ -57,7 +63,7 @@ class IncomingCallerRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/problem+json")
+        request_info.headers.try_add("Accept", "text/plain;q=0.9")
         return request_info
     
     def with_url(self,raw_url: str) -> IncomingCallerRequestBuilder:

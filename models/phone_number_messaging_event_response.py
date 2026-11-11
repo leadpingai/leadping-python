@@ -23,7 +23,7 @@ class PhoneNumberMessagingEventResponse(AdditionalDataHolder, Parsable):
     from_phone_number: Optional[str] = None
     # Unique Leadping identifier for this phone number messaging event.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Indicates whether the recipient has opted out of further SMS communication.
     is_opt_out: Optional[bool] = None

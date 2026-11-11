@@ -44,7 +44,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether the Leadping conversation has been archived.
     is_archived: Optional[bool] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Indicates whether the current user has unread activity in the conversation.
     is_unread: Optional[bool] = None

@@ -64,7 +64,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     inquiry: Optional[LeadResponse_inquiry] = None
     # Indicates whether the lead has been archived in Leadping.
     is_archived: Optional[bool] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Public Leadping API schema for lead attribution metadata data.
     metadata: Optional[LeadMetadata] = None

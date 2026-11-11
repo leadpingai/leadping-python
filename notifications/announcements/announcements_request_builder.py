@@ -48,6 +48,9 @@ class AnnouncementsRequestBuilder(BaseRequestBuilder):
         error_mapping: dict[str, type[ParsableFactory]] = {
             "400": ProblemDetails,
             "401": ProblemDetails,
+            "403": ProblemDetails,
+            "404": ProblemDetails,
+            "415": ProblemDetails,
             "429": ProblemDetails,
             "500": ProblemDetails,
         }

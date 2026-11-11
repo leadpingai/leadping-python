@@ -17,6 +17,10 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
 
     # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     address: Optional[OrganizationRequest_address] = None
+    # Automatically advances new leads after a confirmed outbound call attempt. Enabled by default.
+    automatically_mark_leads_called: Optional[bool] = None
+    # Destination status for outbound call attempts. Null uses the built-in Called status.
+    called_lead_status_id: Optional[str] = None
     # Human-readable description that explains this organization profile request to API users.
     description: Optional[str] = None
     # Employer Identification Number used for organization and 10DLC verification.
@@ -62,6 +66,8 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "address": lambda n : setattr(self, 'address', n.get_object_value(OrganizationRequest_address)),
+            "automaticallyMarkLeadsCalled": lambda n : setattr(self, 'automatically_mark_leads_called', n.get_bool_value()),
+            "calledLeadStatusId": lambda n : setattr(self, 'called_lead_status_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "ein": lambda n : setattr(self, 'ein', n.get_str_value()),
             "isYoungerThan90": lambda n : setattr(self, 'is_younger_than90', n.get_bool_value()),
@@ -85,6 +91,8 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_object_value("address", self.address)
+        writer.write_bool_value("automaticallyMarkLeadsCalled", self.automatically_mark_leads_called)
+        writer.write_str_value("calledLeadStatusId", self.called_lead_status_id)
         writer.write_str_value("description", self.description)
         writer.write_str_value("ein", self.ein)
         writer.write_bool_value("isYoungerThan90", self.is_younger_than90)

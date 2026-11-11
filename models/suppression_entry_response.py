@@ -22,7 +22,7 @@ class SuppressionEntryResponse(AdditionalDataHolder, Parsable):
     channel: Optional[str] = None
     # Unique Leadping identifier for the suppression entry.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # The associated lead's profile image URL, when available.
     lead_avatar_url: Optional[str] = None

@@ -16,13 +16,13 @@ class BlogSocialPost(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The attemptedAt property
+    # UTC timestamp of the publication attempt, or null if no attempt has been recorded.
     attempted_at: Optional[datetime.datetime] = None
-    # The error property
+    # Details of the publication failure, when present.
     error: Optional[str] = None
-    # The platform property
+    # Social platform supported for publishing a blog article.
     platform: Optional[BlogSocialPlatform] = None
-    # The postId property
+    # Identifier assigned to the published post by the social platform, when available.
     post_id: Optional[str] = None
     
     @staticmethod

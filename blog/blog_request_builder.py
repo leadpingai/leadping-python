@@ -58,6 +58,7 @@ class BlogRequestBuilder(BaseRequestBuilder):
 
         error_mapping: dict[str, type[ParsableFactory]] = {
             "429": ProblemDetails,
+            "500": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 

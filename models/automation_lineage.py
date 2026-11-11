@@ -12,15 +12,15 @@ class AutomationLineage(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The actionId property
+    # Identifier of the action that produced the event, when applicable.
     action_id: Optional[str] = None
     # Automation IDs in execution order, including the run that produced this event.
     automation_ids: Optional[list[str]] = None
-    # The rootEventId property
+    # Identifier of the original event that started the automation chain.
     root_event_id: Optional[str] = None
-    # The runId property
+    # Identifier of the automation run that produced the event.
     run_id: Optional[str] = None
-    # The triggerEventId property
+    # Identifier of the event that directly triggered this run.
     trigger_event_id: Optional[str] = None
     
     @staticmethod

@@ -27,7 +27,7 @@ class TagResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether this lead or record is archived.
     is_archived: Optional[bool] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None

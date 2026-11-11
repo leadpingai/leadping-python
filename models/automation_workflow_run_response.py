@@ -37,7 +37,7 @@ class AutomationWorkflowRunResponse(AdditionalDataHolder, Parsable):
     failed_at: Optional[datetime.datetime] = None
     # Unique Leadping identifier for the automation workflow run.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Human-readable last action summary for this Leadping automation workflow run.
     last_action_summary: Optional[str] = None

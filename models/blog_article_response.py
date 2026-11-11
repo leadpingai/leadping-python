@@ -16,47 +16,47 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The authorName property
+    # Public display name of the article author, when provided.
     author_name: Optional[str] = None
-    # The category property
+    # Editorial category assigned to the article, when present.
     category: Optional[str] = None
-    # The content property
+    # Saved article body before server-side rendering.
     content: Optional[str] = None
-    # The contentUpdatedAt property
+    # UTC timestamp of the most recent editorial content update.
     content_updated_at: Optional[datetime.datetime] = None
-    # The coverImageAlt property
+    # Alternative text describing the cover image.
     cover_image_alt: Optional[str] = None
     # The processed cover image height in pixels, when known.
     cover_image_height: Optional[int] = None
-    # The coverImageUrl property
+    # URL of the article's cover image, when available.
     cover_image_url: Optional[str] = None
     # The processed cover image width in pixels, when known.
     cover_image_width: Optional[int] = None
-    # The createdAt property
+    # UTC timestamp when the article was created.
     created_at: Optional[datetime.datetime] = None
-    # The excerpt property
+    # Short plain-language preview of the article.
     excerpt: Optional[str] = None
-    # The id property
+    # Unique Leadping identifier of the blog article.
     id: Optional[str] = None
     # The latest background image processing failure, when present.
     image_processing_error: Optional[str] = None
     # Whether saved image references are awaiting Engine processing.
     images_processing: Optional[bool] = None
-    # The isFeatured property
+    # Whether the article is selected for featured placement.
     is_featured: Optional[bool] = None
-    # The isPublished property
+    # Whether the article is currently published and available to public readers.
     is_published: Optional[bool] = None
-    # The lastPublishedAt property
+    # UTC timestamp when the article last changed from unpublished to published.
     last_published_at: Optional[datetime.datetime] = None
-    # The metaDescription property
+    # Optional article description used in search-engine metadata.
     meta_description: Optional[str] = None
-    # The modifiedAt property
+    # UTC timestamp when the article was last modified.
     modified_at: Optional[datetime.datetime] = None
-    # The publishedAt property
+    # UTC publication timestamp shown for the article, when set.
     published_at: Optional[datetime.datetime] = None
-    # The renderedHtml property
+    # Server-rendered and sanitized HTML for displaying the article.
     rendered_html: Optional[str] = None
-    # The seoTitle property
+    # Optional title used in search-engine metadata.
     seo_title: Optional[str] = None
     # Whether to create a Facebook post after publication.
     share_on_facebook: Optional[bool] = None
@@ -66,13 +66,13 @@ class BlogArticleResponse(AdditionalDataHolder, Parsable):
     share_on_linked_in: Optional[bool] = None
     # Whether to create a X post after publication.
     share_on_x: Optional[bool] = None
-    # The slug property
+    # URL slug used to retrieve the published article.
     slug: Optional[str] = None
-    # The socialPosts property
+    # Publication attempts and provider post identifiers for each social platform.
     social_posts: Optional[list[BlogSocialPost]] = None
-    # The title property
+    # Public title of the article.
     title: Optional[str] = None
-    # The unpublishedAt property
+    # UTC timestamp when the article last changed from published to unpublished.
     unpublished_at: Optional[datetime.datetime] = None
     
     @staticmethod

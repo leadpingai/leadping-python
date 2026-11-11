@@ -12,9 +12,9 @@ class SpendLimitsRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The dailyLimit property
+    # Daily usage budget in USD for the UTC calendar day. Null removes the limit; zero stops new paid usage.
     daily_limit: Optional[float] = None
-    # The monthlyLimit property
+    # Monthly usage budget in USD for the UTC calendar month. Null removes the limit; zero stops new paid usage.
     monthly_limit: Optional[float] = None
     
     @staticmethod

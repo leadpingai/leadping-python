@@ -54,7 +54,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Lead ID associated with the SMS conversation or outreach attempt.
     lead_id: Optional[str] = None

@@ -45,7 +45,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     follow_up_status: Optional[str] = None
     # Unique Leadping identifier for this lead status change.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Whether this lead status change is missed call follow up.
     is_missed_call_follow_up: Optional[bool] = None
@@ -57,6 +57,8 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
     lead_id: Optional[str] = None
     # The display name of the lead associated with this lead status change.
     lead_name: Optional[str] = None
+    # Configured organization status ID, independent of its display name and history entry ID.
+    lead_status_id: Optional[str] = None
     # Unique identifier of the new lead status change associated with this Leadping lead status change.
     new_lead_status_change_id: Optional[str] = None
     # The operator or customer notes recorded for this lead status change.
@@ -129,6 +131,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
             "leadEmail": lambda n : setattr(self, 'lead_email', n.get_str_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "leadName": lambda n : setattr(self, 'lead_name', n.get_str_value()),
+            "leadStatusId": lambda n : setattr(self, 'lead_status_id', n.get_str_value()),
             "newLeadStatusChangeId": lambda n : setattr(self, 'new_lead_status_change_id', n.get_str_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "oldLeadStatusChangeId": lambda n : setattr(self, 'old_lead_status_change_id', n.get_str_value()),
@@ -174,6 +177,7 @@ class LeadStatusChangeResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("leadEmail", self.lead_email)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("leadName", self.lead_name)
+        writer.write_str_value("leadStatusId", self.lead_status_id)
         writer.write_str_value("newLeadStatusChangeId", self.new_lead_status_change_id)
         writer.write_str_value("notes", self.notes)
         writer.write_str_value("oldLeadStatusChangeId", self.old_lead_status_change_id)

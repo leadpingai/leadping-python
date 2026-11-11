@@ -24,6 +24,10 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether the lead status has been archived.
     is_archived: Optional[bool] = None
+    # Whether this is the default destination for outbound call attempts.
+    is_default_called_status: Optional[bool] = None
+    # Whether this is the built-in initial status for new leads.
+    is_initial_status: Optional[bool] = None
     # Date and time when the lead status was last modified.
     modified_at: Optional[datetime.datetime] = None
     # Display name of the lead status.
@@ -58,6 +62,8 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
             "color": lambda n : setattr(self, 'color', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
+            "isDefaultCalledStatus": lambda n : setattr(self, 'is_default_called_status', n.get_bool_value()),
+            "isInitialStatus": lambda n : setattr(self, 'is_initial_status', n.get_bool_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
@@ -77,6 +83,8 @@ class LeadStatusResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("color", self.color)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isArchived", self.is_archived)
+        writer.write_bool_value("isDefaultCalledStatus", self.is_default_called_status)
+        writer.write_bool_value("isInitialStatus", self.is_initial_status)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("organizationId", self.organization_id)

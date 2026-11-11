@@ -13,11 +13,11 @@ class AnalyticsCoverage(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The completeFrom property
+    # Earliest UTC timestamp from which evidence is complete, or null when no complete range is known.
     complete_from: Optional[datetime.datetime] = None
-    # The detail property
+    # Explanation of the available evidence and any gaps in coverage.
     detail: Optional[str] = None
-    # The isPartial property
+    # Whether missing historical evidence may make the reported metrics incomplete.
     is_partial: Optional[bool] = None
     
     @staticmethod

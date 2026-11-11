@@ -22,7 +22,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # The most recent time lookup data was enriched.
     last_enriched_at: Optional[datetime.datetime] = None

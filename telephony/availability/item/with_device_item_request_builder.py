@@ -29,11 +29,11 @@ class WithDeviceItemRequestBuilder(BaseRequestBuilder):
         """
         super().__init__(request_adapter, "{+baseurl}/telephony/availability/{deviceId}{?busy*}", path_parameters)
     
-    async def post(self,request_configuration: Optional[RequestConfiguration[WithDeviceItemRequestBuilderPostQueryParameters]] = None) -> Optional[bytes]:
+    async def post(self,request_configuration: Optional[RequestConfiguration[WithDeviceItemRequestBuilderPostQueryParameters]] = None) -> Optional[bool]:
         """
         Updates the busy state of a calling device for the authenticated user and returns whether the update succeeded.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: bytes
+        Returns: Optional[bool]
         """
         request_info = self.to_post_request_information(
             request_configuration
@@ -41,13 +41,16 @@ class WithDeviceItemRequestBuilder(BaseRequestBuilder):
         from ....models.problem_details import ProblemDetails
 
         error_mapping: dict[str, type[ParsableFactory]] = {
+            "400": ProblemDetails,
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "404": ProblemDetails,
             "429": ProblemDetails,
+            "500": ProblemDetails,
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        return await self.request_adapter.send_primitive_async(request_info, "bytes", error_mapping)
+        return await self.request_adapter.send_primitive_async(request_info, "bool", error_mapping)
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[WithDeviceItemRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
@@ -57,7 +60,7 @@ class WithDeviceItemRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "application/problem+json")
+        request_info.headers.try_add("Accept", "text/plain;q=0.9")
         return request_info
     
     def with_url(self,raw_url: str) -> WithDeviceItemRequestBuilder:

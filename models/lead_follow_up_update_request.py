@@ -15,9 +15,9 @@ class LeadFollowUpUpdateRequest(AdditionalDataHolder, Parsable):
 
     # The new time, or null to complete the follow-up.
     due_at: Optional[datetime.datetime] = None
-    # The expectedRevision property
+    # Revision observed by the client; a mismatch causes a conflict instead of overwriting a newer follow-up.
     expected_revision: Optional[int] = None
-    # The expectedStatusId property
+    # Identifier of the current status observed by the client; a mismatch causes a conflict.
     expected_status_id: Optional[str] = None
     
     @staticmethod

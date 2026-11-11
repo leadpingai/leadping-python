@@ -29,7 +29,7 @@ class OrganizationSwitchOption(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this organization switch option is current.
     is_current: Optional[bool] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # UTC timestamp for last used at on this organization switch option.
     last_used_at: Optional[datetime.datetime] = None

@@ -37,7 +37,7 @@ class AutomationResponse(AdditionalDataHolder, Parsable):
     enabled: Optional[bool] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
-    # The isDemo property
+    # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Indicates whether Leadping manages this automation configuration response automatically instead of a user.
     is_system_managed: Optional[bool] = None

@@ -34,6 +34,8 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
     expected_revision: Optional[int] = None
     # The current follow up status for this lead status change.
     follow_up_status: Optional[str] = None
+    # Configured organization status ID, independent of its display name and history entry ID.
+    lead_status_id: Optional[str] = None
     # The operator or customer notes recorded for this lead status change.
     notes: Optional[str] = None
     # Result of the interaction or workflow step that caused the status change.
@@ -75,6 +77,7 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
             "expectedCurrentStatusId": lambda n : setattr(self, 'expected_current_status_id', n.get_str_value()),
             "expectedRevision": lambda n : setattr(self, 'expected_revision', n.get_int_value()),
             "followUpStatus": lambda n : setattr(self, 'follow_up_status', n.get_str_value()),
+            "leadStatusId": lambda n : setattr(self, 'lead_status_id', n.get_str_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "outcome": lambda n : setattr(self, 'outcome', n.get_str_value()),
             "reason": lambda n : setattr(self, 'reason', n.get_str_value()),
@@ -100,6 +103,7 @@ class LeadStatusChangeRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("expectedCurrentStatusId", self.expected_current_status_id)
         writer.write_int_value("expectedRevision", self.expected_revision)
         writer.write_str_value("followUpStatus", self.follow_up_status)
+        writer.write_str_value("leadStatusId", self.lead_status_id)
         writer.write_str_value("notes", self.notes)
         writer.write_str_value("outcome", self.outcome)
         writer.write_str_value("reason", self.reason)
