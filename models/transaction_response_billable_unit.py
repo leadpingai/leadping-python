@@ -7,6 +7,7 @@ class TransactionResponse_billableUnit(str, Enum):
     Mms_message = "mms_message",
     Email_message = "email_message",
     Voice_minute = "voice_minute",
+    Call_attempt = "call_attempt",
     Phone_number_month = "phone_number_month",
     Warmup_sms_segment = "warmup_sms_segment",
     Warmup_voice_minute = "warmup_voice_minute",
