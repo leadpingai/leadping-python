@@ -1,6 +1,7 @@
 from enum import Enum
 
 class NotificationType(str, Enum):
+    Appointment = "Appointment",
     General = "General",
     Lead = "Lead",
     Call = "Call",

@@ -9,6 +9,7 @@ class EventDetailResponse_timelineType(str, Enum):
     Note = "Note",
     LeadStatusChange = "LeadStatusChange",
     LeadCreated = "LeadCreated",
+    Appointment = "Appointment",
     LeadUpdated = "LeadUpdated",
     Notification = "Notification",
     Payment = "Payment",

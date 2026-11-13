@@ -17,6 +17,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .a2a.a2a_request_builder import A2aRequestBuilder
     from .analytics.analytics_request_builder import AnalyticsRequestBuilder
+    from .appointments.appointments_request_builder import AppointmentsRequestBuilder
     from .automations.automations_request_builder import AutomationsRequestBuilder
     from .blog.blog_request_builder import BlogRequestBuilder
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
@@ -84,6 +85,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .analytics.analytics_request_builder import AnalyticsRequestBuilder
 
         return AnalyticsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def appointments(self) -> AppointmentsRequestBuilder:
+        """
+        The appointments property
+        """
+        from .appointments.appointments_request_builder import AppointmentsRequestBuilder
+
+        return AppointmentsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def automations(self) -> AutomationsRequestBuilder:

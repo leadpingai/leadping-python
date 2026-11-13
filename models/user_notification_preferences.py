@@ -16,6 +16,14 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Email the assigned agent when a callback is due.
+    appointment_reminder_email_enabled: Optional[bool] = None
+    # Send push notifications for due callback appointments.
+    appointment_reminder_enabled: Optional[bool] = None
+    # Show callback reminder dialogs in the Portal.
+    appointment_reminder_in_app_enabled: Optional[bool] = None
+    # Text the assigned agent when a callback is due, subject to SMS consent.
+    appointment_reminder_sms_enabled: Optional[bool] = None
     # Indicates whether automation failed email functionality is enabled for this Leadping user notification preferences.
     automation_failed_email_enabled: Optional[bool] = None
     # Whether automation failed notifications are enabled for this user notification preferences.
@@ -48,10 +56,12 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     payment_failed_enabled: Optional[bool] = None
     # Indicates whether payment failed SMS functionality is enabled for this Leadping user notification preferences.
     payment_failed_sms_enabled: Optional[bool] = None
-    # Whether push, SMS, and automation alerts wait until the user's daily quiet hours end.
+    # Whether notification delivery respects the user's daily quiet hours.
     quiet_hours_enabled: Optional[bool] = None
     # The exclusive local end of daily quiet hours.
     quiet_hours_end: Optional[datetime.time] = None
+    # Queue notifications until quiet hours end; when false, skip their external delivery.
+    quiet_hours_queue_enabled: Optional[bool] = None
     # The inclusive local start of daily quiet hours.
     quiet_hours_start: Optional[datetime.time] = None
     # The time zone used for quiet hours, including daylight saving changes.
@@ -100,6 +110,10 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         from .user_notification_preferences_sms_consent_certificate import UserNotificationPreferences_smsConsentCertificate
 
         fields: dict[str, Callable[[Any], None]] = {
+            "appointmentReminderEmailEnabled": lambda n : setattr(self, 'appointment_reminder_email_enabled', n.get_bool_value()),
+            "appointmentReminderEnabled": lambda n : setattr(self, 'appointment_reminder_enabled', n.get_bool_value()),
+            "appointmentReminderInAppEnabled": lambda n : setattr(self, 'appointment_reminder_in_app_enabled', n.get_bool_value()),
+            "appointmentReminderSmsEnabled": lambda n : setattr(self, 'appointment_reminder_sms_enabled', n.get_bool_value()),
             "automationFailedEmailEnabled": lambda n : setattr(self, 'automation_failed_email_enabled', n.get_bool_value()),
             "automationFailedEnabled": lambda n : setattr(self, 'automation_failed_enabled', n.get_bool_value()),
             "automationFailedSmsEnabled": lambda n : setattr(self, 'automation_failed_sms_enabled', n.get_bool_value()),
@@ -118,6 +132,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
             "paymentFailedSmsEnabled": lambda n : setattr(self, 'payment_failed_sms_enabled', n.get_bool_value()),
             "quietHoursEnabled": lambda n : setattr(self, 'quiet_hours_enabled', n.get_bool_value()),
             "quietHoursEnd": lambda n : setattr(self, 'quiet_hours_end', n.get_time_value()),
+            "quietHoursQueueEnabled": lambda n : setattr(self, 'quiet_hours_queue_enabled', n.get_bool_value()),
             "quietHoursStart": lambda n : setattr(self, 'quiet_hours_start', n.get_time_value()),
             "quietHoursTimeZoneId": lambda n : setattr(self, 'quiet_hours_time_zone_id', n.get_str_value()),
             "smsConsentCertificate": lambda n : setattr(self, 'sms_consent_certificate', n.get_object_value(UserNotificationPreferences_smsConsentCertificate)),
@@ -142,6 +157,10 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_bool_value("appointmentReminderEmailEnabled", self.appointment_reminder_email_enabled)
+        writer.write_bool_value("appointmentReminderEnabled", self.appointment_reminder_enabled)
+        writer.write_bool_value("appointmentReminderInAppEnabled", self.appointment_reminder_in_app_enabled)
+        writer.write_bool_value("appointmentReminderSmsEnabled", self.appointment_reminder_sms_enabled)
         writer.write_bool_value("automationFailedEmailEnabled", self.automation_failed_email_enabled)
         writer.write_bool_value("automationFailedEnabled", self.automation_failed_enabled)
         writer.write_bool_value("automationFailedSmsEnabled", self.automation_failed_sms_enabled)
@@ -160,6 +179,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         writer.write_bool_value("paymentFailedSmsEnabled", self.payment_failed_sms_enabled)
         writer.write_bool_value("quietHoursEnabled", self.quiet_hours_enabled)
         writer.write_time_value("quietHoursEnd", self.quiet_hours_end)
+        writer.write_bool_value("quietHoursQueueEnabled", self.quiet_hours_queue_enabled)
         writer.write_time_value("quietHoursStart", self.quiet_hours_start)
         writer.write_str_value("quietHoursTimeZoneId", self.quiet_hours_time_zone_id)
         writer.write_object_value("smsConsentCertificate", self.sms_consent_certificate)
