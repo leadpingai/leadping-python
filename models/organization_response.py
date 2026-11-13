@@ -41,6 +41,10 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     auto_refill_enabled: Optional[bool] = None
     # Wallet balance threshold that triggers automatic refill.
     auto_refill_trigger: Optional[float] = None
+    # Restores the previous status after the last upcoming appointment completes or becomes overdue.
+    automatically_clear_appointment_set: Optional[bool] = None
+    # Sets the lead to Appointment set when an appointment is created.
+    automatically_mark_appointment_set: Optional[bool] = None
     # Automatically advances new leads after a confirmed outbound call attempt. Enabled by default.
     automatically_mark_leads_called: Optional[bool] = None
     # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
@@ -157,6 +161,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
             "autoRefillAmount": lambda n : setattr(self, 'auto_refill_amount', n.get_float_value()),
             "autoRefillEnabled": lambda n : setattr(self, 'auto_refill_enabled', n.get_bool_value()),
             "autoRefillTrigger": lambda n : setattr(self, 'auto_refill_trigger', n.get_float_value()),
+            "automaticallyClearAppointmentSet": lambda n : setattr(self, 'automatically_clear_appointment_set', n.get_bool_value()),
+            "automaticallyMarkAppointmentSet": lambda n : setattr(self, 'automatically_mark_appointment_set', n.get_bool_value()),
             "automaticallyMarkLeadsCalled": lambda n : setattr(self, 'automatically_mark_leads_called', n.get_bool_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(OrganizationResponse_billingAddress)),
             "billingContactEmail": lambda n : setattr(self, 'billing_contact_email', n.get_str_value()),
@@ -205,6 +211,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         writer.write_float_value("autoRefillAmount", self.auto_refill_amount)
         writer.write_bool_value("autoRefillEnabled", self.auto_refill_enabled)
         writer.write_float_value("autoRefillTrigger", self.auto_refill_trigger)
+        writer.write_bool_value("automaticallyClearAppointmentSet", self.automatically_clear_appointment_set)
+        writer.write_bool_value("automaticallyMarkAppointmentSet", self.automatically_mark_appointment_set)
         writer.write_bool_value("automaticallyMarkLeadsCalled", self.automatically_mark_leads_called)
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingContactEmail", self.billing_contact_email)
