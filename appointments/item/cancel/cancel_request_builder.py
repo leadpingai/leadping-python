@@ -48,6 +48,7 @@ class CancelRequestBuilder(BaseRequestBuilder):
         error_mapping: dict[str, type[ParsableFactory]] = {
             "401": ProblemDetails,
             "403": ProblemDetails,
+            "409": ProblemDetails,
             "429": ProblemDetails,
         }
         if not self.request_adapter:
@@ -67,7 +68,7 @@ class CancelRequestBuilder(BaseRequestBuilder):
             raise TypeError("body cannot be null.")
         request_info = RequestInformation(Method.POST, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "text/plain;q=0.9")
+        request_info.headers.try_add("Accept", "application/json")
         request_info.set_content_from_parsable(self.request_adapter, "application/json", body)
         return request_info
     

@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from .....models.create_note_request import CreateNoteRequest
     from .....models.event_table_row import EventTableRow
     from .....models.problem_details import ProblemDetails
+    from .item.with_event_item_request_builder import WithEventItemRequestBuilder
 
 class NotesRequestBuilder(BaseRequestBuilder):
     """
@@ -30,6 +31,20 @@ class NotesRequestBuilder(BaseRequestBuilder):
         Returns: None
         """
         super().__init__(request_adapter, "{+baseurl}/events/conversations/{conversationId}/notes", path_parameters)
+    
+    def by_event_id(self,event_id: str) -> WithEventItemRequestBuilder:
+        """
+        Gets an item from the leadping.events.conversations.item.notes.item collection
+        param event_id: The note event identifier.
+        Returns: WithEventItemRequestBuilder
+        """
+        if event_id is None:
+            raise TypeError("event_id cannot be null.")
+        from .item.with_event_item_request_builder import WithEventItemRequestBuilder
+
+        url_tpl_params = get_path_parameters(self.path_parameters)
+        url_tpl_params["eventId"] = event_id
+        return WithEventItemRequestBuilder(self.request_adapter, url_tpl_params)
     
     async def post(self,body: CreateNoteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[EventTableRow]:
         """

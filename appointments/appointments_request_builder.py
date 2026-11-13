@@ -101,7 +101,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
         """
         request_info = RequestInformation(Method.GET, self.url_template, self.path_parameters)
         request_info.configure(request_configuration)
-        request_info.headers.try_add("Accept", "text/plain;q=0.9")
+        request_info.headers.try_add("Accept", "application/json")
         return request_info
     
     def to_post_request_information(self,body: AppointmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:

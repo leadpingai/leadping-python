@@ -39,6 +39,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     blocked_at: Optional[datetime.datetime] = None
     # Messaging campaign identifier associated with this event timeline table row.
     campaign_id: Optional[str] = None
+    # Whether the current user authored this editable note.
+    can_edit_note: Optional[bool] = None
     # Reason this delivery, run, or request was canceled.
     cancel_reason: Optional[str] = None
     # UTC timestamp when this delivery or workflow was canceled.
@@ -81,6 +83,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     media: Optional[list[MessageMediaAttachment]] = None
     # UTC timestamp when Leadping will retry this event timeline table row.
     next_retry_at: Optional[datetime.datetime] = None
+    # Whether the note has been edited.
+    note_edited: Optional[bool] = None
     # Phone number ID selected for outbound delivery.
     outbound_phone_number_id: Optional[str] = None
     # UTC timestamp when Leadping queued this event timeline table row for processing.
@@ -168,6 +172,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
             "blockedAt": lambda n : setattr(self, 'blocked_at', n.get_datetime_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
+            "canEditNote": lambda n : setattr(self, 'can_edit_note', n.get_bool_value()),
             "cancelReason": lambda n : setattr(self, 'cancel_reason', n.get_str_value()),
             "canceledAt": lambda n : setattr(self, 'canceled_at', n.get_datetime_value()),
             "complianceAction": lambda n : setattr(self, 'compliance_action', n.get_str_value()),
@@ -189,6 +194,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "nextRetryAt": lambda n : setattr(self, 'next_retry_at', n.get_datetime_value()),
+            "noteEdited": lambda n : setattr(self, 'note_edited', n.get_bool_value()),
             "outboundPhoneNumberId": lambda n : setattr(self, 'outbound_phone_number_id', n.get_str_value()),
             "queuedAt": lambda n : setattr(self, 'queued_at', n.get_datetime_value()),
             "receivedAt": lambda n : setattr(self, 'received_at', n.get_datetime_value()),
@@ -232,6 +238,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("billingStatus", self.billing_status)
         writer.write_datetime_value("blockedAt", self.blocked_at)
         writer.write_str_value("campaignId", self.campaign_id)
+        writer.write_bool_value("canEditNote", self.can_edit_note)
         writer.write_str_value("cancelReason", self.cancel_reason)
         writer.write_datetime_value("canceledAt", self.canceled_at)
         writer.write_str_value("complianceAction", self.compliance_action)
@@ -253,6 +260,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("leadId", self.lead_id)
         writer.write_collection_of_object_values("media", self.media)
         writer.write_datetime_value("nextRetryAt", self.next_retry_at)
+        writer.write_bool_value("noteEdited", self.note_edited)
         writer.write_str_value("outboundPhoneNumberId", self.outbound_phone_number_id)
         writer.write_datetime_value("queuedAt", self.queued_at)
         writer.write_datetime_value("receivedAt", self.received_at)
