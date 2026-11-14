@@ -1,6 +1,7 @@
 from enum import Enum
 
 class OrganizationInvitationStatus(str, Enum):
+    Declined = "Declined",
     AwaitingConfirmation = "Awaiting confirmation",
     Pending = "Pending",
     Accepted = "Accepted",

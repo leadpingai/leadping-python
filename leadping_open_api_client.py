@@ -23,6 +23,7 @@ if TYPE_CHECKING:
     from .conversations.conversations_request_builder import ConversationsRequestBuilder
     from .events.events_request_builder import EventsRequestBuilder
     from .feedback.feedback_request_builder import FeedbackRequestBuilder
+    from .invitations.invitations_request_builder import InvitationsRequestBuilder
     from .leads.leads_request_builder import LeadsRequestBuilder
     from .lead_statuses.lead_statuses_request_builder import LeadStatusesRequestBuilder
     from .lead_status_changes.lead_status_changes_request_builder import LeadStatusChangesRequestBuilder
@@ -139,6 +140,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .feedback.feedback_request_builder import FeedbackRequestBuilder
 
         return FeedbackRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def invitations(self) -> InvitationsRequestBuilder:
+        """
+        The invitations property
+        """
+        from .invitations.invitations_request_builder import InvitationsRequestBuilder
+
+        return InvitationsRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def lead_status_changes(self) -> LeadStatusChangesRequestBuilder:
