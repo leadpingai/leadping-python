@@ -42,6 +42,8 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     selection_reason: Optional[OutgoingNumberSelectionReason] = None
     # Lead source ID used to determine this phone number's outbound eligibility.
     source_id: Optional[str] = None
+    # Geographic state or region associated with the phone number.
+    state: Optional[str] = None
     # Organization ID used to determine this phone number's outbound eligibility.
     team_id: Optional[str] = None
     
@@ -81,6 +83,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
             "reasonLabel": lambda n : setattr(self, 'reason_label', n.get_str_value()),
             "selectionReason": lambda n : setattr(self, 'selection_reason', n.get_enum_value(OutgoingNumberSelectionReason)),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
+            "state": lambda n : setattr(self, 'state', n.get_str_value()),
             "teamId": lambda n : setattr(self, 'team_id', n.get_str_value()),
         }
         return fields
@@ -106,6 +109,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("reasonLabel", self.reason_label)
         writer.write_enum_value("selectionReason", self.selection_reason)
         writer.write_str_value("sourceId", self.source_id)
+        writer.write_str_value("state", self.state)
         writer.write_str_value("teamId", self.team_id)
         writer.write_additional_data_value(self.additional_data)
     
