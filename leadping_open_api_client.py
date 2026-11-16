@@ -27,6 +27,7 @@ if TYPE_CHECKING:
     from .leads.leads_request_builder import LeadsRequestBuilder
     from .lead_statuses.lead_statuses_request_builder import LeadStatusesRequestBuilder
     from .lead_status_changes.lead_status_changes_request_builder import LeadStatusChangesRequestBuilder
+    from .message_templates.message_templates_request_builder import MessageTemplatesRequestBuilder
     from .notifications.notifications_request_builder import NotificationsRequestBuilder
     from .organizations.organizations_request_builder import OrganizationsRequestBuilder
     from .outbound.outbound_request_builder import OutboundRequestBuilder
@@ -176,6 +177,15 @@ class LeadpingOpenApiClient(BaseRequestBuilder):
         from .leads.leads_request_builder import LeadsRequestBuilder
 
         return LeadsRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def message_templates(self) -> MessageTemplatesRequestBuilder:
+        """
+        The messageTemplates property
+        """
+        from .message_templates.message_templates_request_builder import MessageTemplatesRequestBuilder
+
+        return MessageTemplatesRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def notifications(self) -> NotificationsRequestBuilder:
