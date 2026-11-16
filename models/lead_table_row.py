@@ -10,6 +10,7 @@ if TYPE_CHECKING:
     from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
     from .lead_table_row_organization import LeadTableRow_organization
     from .lead_table_row_processing_status import LeadTableRow_processingStatus
+    from .lead_table_row_sentiment import LeadTableRow_sentiment
     from .lead_table_row_source import LeadTableRow_source
     from .tag_summary import TagSummary
 
@@ -65,6 +66,8 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
     processing_status_changed_at: Optional[datetime.datetime] = None
     # Explanation when asynchronous lead processing is blocked or fails.
     processing_status_reason: Optional[str] = None
+    # Interest expressed in the lead's first inbound text reply, independent of contact consent.
+    sentiment: Optional[LeadTableRow_sentiment] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     source: Optional[LeadTableRow_source] = None
     # Current lifecycle status for this lead table row in the Leadping API.
@@ -96,6 +99,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
         from .lead_table_row_organization import LeadTableRow_organization
         from .lead_table_row_processing_status import LeadTableRow_processingStatus
+        from .lead_table_row_sentiment import LeadTableRow_sentiment
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
@@ -103,6 +107,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         from .lead_table_row_current_lead_status import LeadTableRow_currentLeadStatus
         from .lead_table_row_organization import LeadTableRow_organization
         from .lead_table_row_processing_status import LeadTableRow_processingStatus
+        from .lead_table_row_sentiment import LeadTableRow_sentiment
         from .lead_table_row_source import LeadTableRow_source
         from .tag_summary import TagSummary
 
@@ -129,6 +134,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
             "processingStatus": lambda n : setattr(self, 'processing_status', n.get_enum_value(LeadTableRow_processingStatus)),
             "processingStatusChangedAt": lambda n : setattr(self, 'processing_status_changed_at', n.get_datetime_value()),
             "processingStatusReason": lambda n : setattr(self, 'processing_status_reason', n.get_str_value()),
+            "sentiment": lambda n : setattr(self, 'sentiment', n.get_enum_value(LeadTableRow_sentiment)),
             "source": lambda n : setattr(self, 'source', n.get_object_value(LeadTableRow_source)),
             "status": lambda n : setattr(self, 'status', n.get_str_value()),
             "statusTone": lambda n : setattr(self, 'status_tone', n.get_str_value()),
@@ -167,6 +173,7 @@ class LeadTableRow(AdditionalDataHolder, Parsable):
         writer.write_enum_value("processingStatus", self.processing_status)
         writer.write_datetime_value("processingStatusChangedAt", self.processing_status_changed_at)
         writer.write_str_value("processingStatusReason", self.processing_status_reason)
+        writer.write_enum_value("sentiment", self.sentiment)
         writer.write_object_value("source", self.source)
         writer.write_str_value("status", self.status)
         writer.write_str_value("statusTone", self.status_tone)

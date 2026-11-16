@@ -56,6 +56,12 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     payment_failed_enabled: Optional[bool] = None
     # Indicates whether payment failed SMS functionality is enabled for this Leadping user notification preferences.
     payment_failed_sms_enabled: Optional[bool] = None
+    # Email alerts when a lead's first text reply has positive sentiment.
+    positive_sentiment_email_enabled: Optional[bool] = None
+    # Send push alerts when a lead's first text reply has positive sentiment.
+    positive_sentiment_enabled: Optional[bool] = None
+    # Text alerts for positive first replies, subject to notification SMS consent.
+    positive_sentiment_sms_enabled: Optional[bool] = None
     # Whether notification delivery respects the user's daily quiet hours.
     quiet_hours_enabled: Optional[bool] = None
     # The exclusive local end of daily quiet hours.
@@ -130,6 +136,9 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
             "newLeadSmsEnabled": lambda n : setattr(self, 'new_lead_sms_enabled', n.get_bool_value()),
             "paymentFailedEnabled": lambda n : setattr(self, 'payment_failed_enabled', n.get_bool_value()),
             "paymentFailedSmsEnabled": lambda n : setattr(self, 'payment_failed_sms_enabled', n.get_bool_value()),
+            "positiveSentimentEmailEnabled": lambda n : setattr(self, 'positive_sentiment_email_enabled', n.get_bool_value()),
+            "positiveSentimentEnabled": lambda n : setattr(self, 'positive_sentiment_enabled', n.get_bool_value()),
+            "positiveSentimentSmsEnabled": lambda n : setattr(self, 'positive_sentiment_sms_enabled', n.get_bool_value()),
             "quietHoursEnabled": lambda n : setattr(self, 'quiet_hours_enabled', n.get_bool_value()),
             "quietHoursEnd": lambda n : setattr(self, 'quiet_hours_end', n.get_time_value()),
             "quietHoursQueueEnabled": lambda n : setattr(self, 'quiet_hours_queue_enabled', n.get_bool_value()),
@@ -177,6 +186,9 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         writer.write_bool_value("newLeadSmsEnabled", self.new_lead_sms_enabled)
         writer.write_bool_value("paymentFailedEnabled", self.payment_failed_enabled)
         writer.write_bool_value("paymentFailedSmsEnabled", self.payment_failed_sms_enabled)
+        writer.write_bool_value("positiveSentimentEmailEnabled", self.positive_sentiment_email_enabled)
+        writer.write_bool_value("positiveSentimentEnabled", self.positive_sentiment_enabled)
+        writer.write_bool_value("positiveSentimentSmsEnabled", self.positive_sentiment_sms_enabled)
         writer.write_bool_value("quietHoursEnabled", self.quiet_hours_enabled)
         writer.write_time_value("quietHoursEnd", self.quiet_hours_end)
         writer.write_bool_value("quietHoursQueueEnabled", self.quiet_hours_queue_enabled)

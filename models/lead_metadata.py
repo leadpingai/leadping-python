@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .consent_verification_status import ConsentVerificationStatus
     from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
+    from .lead_metadata_sentiment import LeadMetadata_sentiment
     from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
 @dataclass
@@ -76,6 +77,12 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
     referrer: Optional[str] = None
     # Seller-provided lead identifier used to deduplicate and reconcile lead delivery.
     seller_lead_id: Optional[str] = None
+    # Interest expressed in the lead's first inbound text reply, independent of contact consent.
+    sentiment: Optional[LeadMetadata_sentiment] = None
+    # Completion time, including a first reply that has no positive or negative sentiment.
+    sentiment_analyzed_at: Optional[datetime.datetime] = None
+    # First inbound SMS selected for sentiment analysis. Later replies cannot replace it.
+    sentiment_message_id: Optional[str] = None
     # Phone number where SMS consent was captured or evaluated.
     sms_consent_phone_number: Optional[str] = None
     # Current SMS consent status recorded for this lead.
@@ -131,10 +138,12 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         """
         from .consent_verification_status import ConsentVerificationStatus
         from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
+        from .lead_metadata_sentiment import LeadMetadata_sentiment
         from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
         from .consent_verification_status import ConsentVerificationStatus
         from .lead_metadata_consent_certificate_type import LeadMetadata_consentCertificateType
+        from .lead_metadata_sentiment import LeadMetadata_sentiment
         from .lead_metadata_source_metadata import LeadMetadata_sourceMetadata
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -167,6 +176,9 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
             "pubId": lambda n : setattr(self, 'pub_id', n.get_str_value()),
             "referrer": lambda n : setattr(self, 'referrer', n.get_str_value()),
             "sellerLeadId": lambda n : setattr(self, 'seller_lead_id', n.get_str_value()),
+            "sentiment": lambda n : setattr(self, 'sentiment', n.get_enum_value(LeadMetadata_sentiment)),
+            "sentimentAnalyzedAt": lambda n : setattr(self, 'sentiment_analyzed_at', n.get_datetime_value()),
+            "sentimentMessageId": lambda n : setattr(self, 'sentiment_message_id', n.get_str_value()),
             "smsConsentPhoneNumber": lambda n : setattr(self, 'sms_consent_phone_number', n.get_str_value()),
             "smsConsentStatus": lambda n : setattr(self, 'sms_consent_status', n.get_str_value()),
             "smsHelpRequestedAt": lambda n : setattr(self, 'sms_help_requested_at', n.get_datetime_value()),
@@ -225,6 +237,9 @@ class LeadMetadata(AdditionalDataHolder, Parsable):
         writer.write_str_value("pubId", self.pub_id)
         writer.write_str_value("referrer", self.referrer)
         writer.write_str_value("sellerLeadId", self.seller_lead_id)
+        writer.write_enum_value("sentiment", self.sentiment)
+        writer.write_datetime_value("sentimentAnalyzedAt", self.sentiment_analyzed_at)
+        writer.write_str_value("sentimentMessageId", self.sentiment_message_id)
         writer.write_str_value("smsConsentPhoneNumber", self.sms_consent_phone_number)
         writer.write_str_value("smsConsentStatus", self.sms_consent_status)
         writer.write_datetime_value("smsHelpRequestedAt", self.sms_help_requested_at)
