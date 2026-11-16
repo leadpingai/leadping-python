@@ -16,10 +16,16 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Explains why outbound calls are unavailable for this sender.
+    call_unavailable_reason: Optional[str] = None
     # Messaging campaign identifier associated with this eligible outgoing phone number.
     campaign_id: Optional[str] = None
+    # Whether this sender is ready for outbound calls.
+    can_call: Optional[bool] = None
     # Indicates whether Leadping can send outbound messages using this eligible outgoing phone number.
     can_send: Optional[bool] = None
+    # Whether this sender is ready for outbound texts.
+    can_text: Optional[bool] = None
     # Human-readable phone number shown in Leadping UI and API responses.
     display_number: Optional[str] = None
     # Short label describing the health state for display in dashboards.
@@ -46,6 +52,8 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
     state: Optional[str] = None
     # Organization ID used to determine this phone number's outbound eligibility.
     team_id: Optional[str] = None
+    # Explains why outbound texts are unavailable for this sender.
+    text_unavailable_reason: Optional[str] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> EligibleOutgoingNumberResponse:
@@ -70,8 +78,11 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
         from .outgoing_number_selection_reason import OutgoingNumberSelectionReason
 
         fields: dict[str, Callable[[Any], None]] = {
+            "callUnavailableReason": lambda n : setattr(self, 'call_unavailable_reason', n.get_str_value()),
             "campaignId": lambda n : setattr(self, 'campaign_id', n.get_str_value()),
+            "canCall": lambda n : setattr(self, 'can_call', n.get_bool_value()),
             "canSend": lambda n : setattr(self, 'can_send', n.get_bool_value()),
+            "canText": lambda n : setattr(self, 'can_text', n.get_bool_value()),
             "displayNumber": lambda n : setattr(self, 'display_number', n.get_str_value()),
             "healthLabel": lambda n : setattr(self, 'health_label', n.get_str_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(EligibleOutgoingNumberResponse_healthStatus)),
@@ -85,6 +96,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
             "state": lambda n : setattr(self, 'state', n.get_str_value()),
             "teamId": lambda n : setattr(self, 'team_id', n.get_str_value()),
+            "textUnavailableReason": lambda n : setattr(self, 'text_unavailable_reason', n.get_str_value()),
         }
         return fields
     
@@ -96,8 +108,11 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("callUnavailableReason", self.call_unavailable_reason)
         writer.write_str_value("campaignId", self.campaign_id)
+        writer.write_bool_value("canCall", self.can_call)
         writer.write_bool_value("canSend", self.can_send)
+        writer.write_bool_value("canText", self.can_text)
         writer.write_str_value("displayNumber", self.display_number)
         writer.write_str_value("healthLabel", self.health_label)
         writer.write_enum_value("healthStatus", self.health_status)
@@ -111,6 +126,7 @@ class EligibleOutgoingNumberResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("sourceId", self.source_id)
         writer.write_str_value("state", self.state)
         writer.write_str_value("teamId", self.team_id)
+        writer.write_str_value("textUnavailableReason", self.text_unavailable_reason)
         writer.write_additional_data_value(self.additional_data)
     
 
