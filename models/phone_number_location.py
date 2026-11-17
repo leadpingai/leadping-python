@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
@@ -31,6 +32,8 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
     is_coordinate_approximate: Optional[bool] = None
     # Geographic location metadata for the phone number, lead, or lookup result.
     location: Optional[str] = None
+    # When local geography resolution completed, including when no geographic match exists. Prevents repeated resolution until an explicit rebuild or new carrier lookup.
+    resolved_at: Optional[datetime.datetime] = None
     # State, province, or region for the lead or organization postal address.
     state: Optional[str] = None
     # IANA or Windows time zone identifier used for local scheduling and reporting.
@@ -70,6 +73,7 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
             "countryCode": lambda n : setattr(self, 'country_code', n.get_str_value()),
             "isCoordinateApproximate": lambda n : setattr(self, 'is_coordinate_approximate', n.get_bool_value()),
             "location": lambda n : setattr(self, 'location', n.get_str_value()),
+            "resolvedAt": lambda n : setattr(self, 'resolved_at', n.get_datetime_value()),
             "state": lambda n : setattr(self, 'state', n.get_str_value()),
             "timeZoneId": lambda n : setattr(self, 'time_zone_id', n.get_str_value()),
             "timeZoneSource": lambda n : setattr(self, 'time_zone_source', n.get_object_value(PhoneNumberLocation_timeZoneSource)),
@@ -91,6 +95,7 @@ class PhoneNumberLocation(AdditionalDataHolder, Parsable):
         writer.write_str_value("countryCode", self.country_code)
         writer.write_bool_value("isCoordinateApproximate", self.is_coordinate_approximate)
         writer.write_str_value("location", self.location)
+        writer.write_datetime_value("resolvedAt", self.resolved_at)
         writer.write_str_value("state", self.state)
         writer.write_str_value("timeZoneId", self.time_zone_id)
         writer.write_object_value("timeZoneSource", self.time_zone_source)
