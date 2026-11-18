@@ -15,7 +15,7 @@ class TelephonyLoginResponse(AdditionalDataHolder, Parsable):
 
     # Callback token for this telephony login.
     callback_token: Optional[str] = None
-    # UTC timestamp for expires at on this telephony login.
+    # UTC deadline for refreshing this authorized phone login.
     expires_at: Optional[datetime.datetime] = None
     # Password for the organization's incoming SIP connection, when requested and configured.
     incoming_password: Optional[str] = None

@@ -22,7 +22,7 @@ class InitiateCallRequest(AdditionalDataHolder, Parsable):
     lead_id: Optional[str] = None
     # Approve a call for the Portal to originate through WebRTC instead of dialing from the server.
     originate_from_browser: Optional[bool] = None
-    # Idempotency key used to prevent duplicate outbound delivery.
+    # Reuse this key with the same call inputs when retrying an attempt. A replay returns the existing call without issuing another dial approval.
     outbound_idempotency_key: Optional[str] = None
     # Lead source ID used for call attribution and sender selection.
     source_id: Optional[str] = None

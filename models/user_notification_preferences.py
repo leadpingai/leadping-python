@@ -16,6 +16,8 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The accountSmsAlertsEnabled property
+    account_sms_alerts_enabled: Optional[bool] = None
     # Email the assigned agent when a callback is due.
     appointment_reminder_email_enabled: Optional[bool] = None
     # Send push notifications for due callback appointments.
@@ -116,6 +118,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         from .user_notification_preferences_sms_consent_certificate import UserNotificationPreferences_smsConsentCertificate
 
         fields: dict[str, Callable[[Any], None]] = {
+            "accountSmsAlertsEnabled": lambda n : setattr(self, 'account_sms_alerts_enabled', n.get_bool_value()),
             "appointmentReminderEmailEnabled": lambda n : setattr(self, 'appointment_reminder_email_enabled', n.get_bool_value()),
             "appointmentReminderEnabled": lambda n : setattr(self, 'appointment_reminder_enabled', n.get_bool_value()),
             "appointmentReminderInAppEnabled": lambda n : setattr(self, 'appointment_reminder_in_app_enabled', n.get_bool_value()),
@@ -166,6 +169,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_bool_value("accountSmsAlertsEnabled", self.account_sms_alerts_enabled)
         writer.write_bool_value("appointmentReminderEmailEnabled", self.appointment_reminder_email_enabled)
         writer.write_bool_value("appointmentReminderEnabled", self.appointment_reminder_enabled)
         writer.write_bool_value("appointmentReminderInAppEnabled", self.appointment_reminder_in_app_enabled)
