@@ -34,7 +34,7 @@ class AutomationRequest(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # Scope that limits where this automation configuration request applies in Leadping.
     scope: Optional[str] = None
-    # Time zone used by workflow time and day conditions in preview and runtime. Defaults to UTC.
+    # Time zone used by workflow time and day conditions in preview and runtime. New workflows default to the organization�s time zone.
     time_zone_id: Optional[str] = None
     # Automation triggers that can start this workflow.
     triggers: Optional[list[AutomationTrigger]] = None
