@@ -15,6 +15,8 @@ class AppointmentRequest(AdditionalDataHolder, Parsable):
 
     # The assignedToUserId property
     assigned_to_user_id: Optional[str] = None
+    # The endAt property
+    end_at: Optional[datetime.datetime] = None
     # The expectedRevision property
     expected_revision: Optional[int] = None
     # The leadId property
@@ -46,6 +48,7 @@ class AppointmentRequest(AdditionalDataHolder, Parsable):
         """
         fields: dict[str, Callable[[Any], None]] = {
             "assignedToUserId": lambda n : setattr(self, 'assigned_to_user_id', n.get_str_value()),
+            "endAt": lambda n : setattr(self, 'end_at', n.get_datetime_value()),
             "expectedRevision": lambda n : setattr(self, 'expected_revision', n.get_int_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
@@ -64,6 +67,7 @@ class AppointmentRequest(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("assignedToUserId", self.assigned_to_user_id)
+        writer.write_datetime_value("endAt", self.end_at)
         writer.write_int_value("expectedRevision", self.expected_revision)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("notes", self.notes)

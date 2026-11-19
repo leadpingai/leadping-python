@@ -21,6 +21,8 @@ class AppointmentActivity(AdditionalDataHolder, Parsable):
     assigned_to_name: Optional[str] = None
     # The at property
     at: Optional[datetime.datetime] = None
+    # The endAt property
+    end_at: Optional[datetime.datetime] = None
     # The notes property
     notes: Optional[str] = None
     # The reminderAt property
@@ -55,6 +57,7 @@ class AppointmentActivity(AdditionalDataHolder, Parsable):
             "actorName": lambda n : setattr(self, 'actor_name', n.get_str_value()),
             "assignedToName": lambda n : setattr(self, 'assigned_to_name', n.get_str_value()),
             "at": lambda n : setattr(self, 'at', n.get_datetime_value()),
+            "endAt": lambda n : setattr(self, 'end_at', n.get_datetime_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "reminderAt": lambda n : setattr(self, 'reminder_at', n.get_datetime_value()),
             "revision": lambda n : setattr(self, 'revision', n.get_int_value()),
@@ -76,6 +79,7 @@ class AppointmentActivity(AdditionalDataHolder, Parsable):
         writer.write_str_value("actorName", self.actor_name)
         writer.write_str_value("assignedToName", self.assigned_to_name)
         writer.write_datetime_value("at", self.at)
+        writer.write_datetime_value("endAt", self.end_at)
         writer.write_str_value("notes", self.notes)
         writer.write_datetime_value("reminderAt", self.reminder_at)
         writer.write_int_value("revision", self.revision)

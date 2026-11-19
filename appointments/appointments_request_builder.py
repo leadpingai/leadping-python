@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ..models.appointment_request import AppointmentRequest
     from ..models.appointment_response import AppointmentResponse
     from ..models.problem_details import ProblemDetails
+    from .booked_times.booked_times_request_builder import BookedTimesRequestBuilder
     from .item.appointments_item_request_builder import AppointmentsItemRequestBuilder
 
 class AppointmentsRequestBuilder(BaseRequestBuilder):
@@ -128,6 +129,15 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return AppointmentsRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def booked_times(self) -> BookedTimesRequestBuilder:
+        """
+        The bookedTimes property
+        """
+        from .booked_times.booked_times_request_builder import BookedTimesRequestBuilder
+
+        return BookedTimesRequestBuilder(self.request_adapter, self.path_parameters)
     
     @dataclass
     class AppointmentsRequestBuilderGetQueryParameters():

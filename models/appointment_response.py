@@ -24,6 +24,8 @@ class AppointmentResponse(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # The dismissedAt property
     dismissed_at: Optional[datetime.datetime] = None
+    # The endAt property
+    end_at: Optional[datetime.datetime] = None
     # The history property
     history: Optional[list[AppointmentActivity]] = None
     # The id property
@@ -88,6 +90,7 @@ class AppointmentResponse(AdditionalDataHolder, Parsable):
             "assignedToUserId": lambda n : setattr(self, 'assigned_to_user_id', n.get_str_value()),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "dismissedAt": lambda n : setattr(self, 'dismissed_at', n.get_datetime_value()),
+            "endAt": lambda n : setattr(self, 'end_at', n.get_datetime_value()),
             "history": lambda n : setattr(self, 'history', n.get_collection_of_object_values(AppointmentActivity)),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
@@ -122,6 +125,7 @@ class AppointmentResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("assignedToUserId", self.assigned_to_user_id)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_datetime_value("dismissedAt", self.dismissed_at)
+        writer.write_datetime_value("endAt", self.end_at)
         writer.write_collection_of_object_values("history", self.history)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
