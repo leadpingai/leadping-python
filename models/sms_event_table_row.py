@@ -70,6 +70,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     is_demo: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[IdNamePair] = None
+    # The leadAvatarUrl property
+    lead_avatar_url: Optional[str] = None
     # Media attached to this SMS/MMS event.
     media: Optional[list[MessageMediaAttachment]] = None
     # Organization summary connected to this SMS event table row.
@@ -168,6 +170,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(IdNamePair)),
+            "leadAvatarUrl": lambda n : setattr(self, 'lead_avatar_url', n.get_str_value()),
             "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
             "organization": lambda n : setattr(self, 'organization', n.get_str_value()),
             "organizationName": lambda n : setattr(self, 'organization_name', n.get_str_value()),
@@ -223,6 +226,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isAutomated", self.is_automated)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_object_value("lead", self.lead)
+        writer.write_str_value("leadAvatarUrl", self.lead_avatar_url)
         writer.write_collection_of_object_values("media", self.media)
         writer.write_str_value("organization", self.organization)
         writer.write_str_value("organizationName", self.organization_name)
