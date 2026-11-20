@@ -24,6 +24,8 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
     health_reason: Optional[str] = None
     # Defines phone-number outbound health states used by pacing.
     health_status: Optional[PhoneNumberOutboundHealthStatus] = None
+    # Next time an active reservation starts or expires and may change the reported usage.
+    next_reservation_change_at: Optional[datetime.datetime] = None
     # Phone number associated with this Leadping outbound phone number capacity.
     phone_number: Optional[str] = None
     # Unique identifier of the phone number associated with this Leadping outbound phone number capacity.
@@ -115,6 +117,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
             "capacityAvailable": lambda n : setattr(self, 'capacity_available', n.get_bool_value()),
             "healthReason": lambda n : setattr(self, 'health_reason', n.get_str_value()),
             "healthStatus": lambda n : setattr(self, 'health_status', n.get_enum_value(PhoneNumberOutboundHealthStatus)),
+            "nextReservationChangeAt": lambda n : setattr(self, 'next_reservation_change_at', n.get_datetime_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
             "phoneNumberId": lambda n : setattr(self, 'phone_number_id', n.get_str_value()),
             "smsApproved": lambda n : setattr(self, 'sms_approved', n.get_bool_value()),
@@ -160,6 +163,7 @@ class OutboundPhoneNumberCapacity(AdditionalDataHolder, Parsable):
         writer.write_bool_value("capacityAvailable", self.capacity_available)
         writer.write_str_value("healthReason", self.health_reason)
         writer.write_enum_value("healthStatus", self.health_status)
+        writer.write_datetime_value("nextReservationChangeAt", self.next_reservation_change_at)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_str_value("phoneNumberId", self.phone_number_id)
         writer.write_bool_value("smsApproved", self.sms_approved)

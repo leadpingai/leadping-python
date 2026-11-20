@@ -168,7 +168,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
         # Whether to return only due, undismissed reminders assigned to the current agent.
         due_only: Optional[bool] = None
 
-        # Whether to include completed and cancelled appointments. Ignored when dueOnly is true.
+        # Whether to include completed, cancelled, and archived appointments. Ignored when dueOnly is true.
         include_closed: Optional[bool] = None
 
         # An optional lead identifier to filter appointments.
