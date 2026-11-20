@@ -29,6 +29,8 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     actor_lead_id: Optional[str] = None
     # User ID for the person or system that created this event timeline table row.
     actor_user_id: Optional[str] = None
+    # Name of the automation when it started.
+    automation_name: Optional[str] = None
     # Automation run ID opened from this automation event.
     automation_run_id: Optional[str] = None
     # Monetary amount billed for this Leadping communication or transaction.
@@ -167,6 +169,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
             "actorEmail": lambda n : setattr(self, 'actor_email', n.get_str_value()),
             "actorLeadId": lambda n : setattr(self, 'actor_lead_id', n.get_str_value()),
             "actorUserId": lambda n : setattr(self, 'actor_user_id', n.get_str_value()),
+            "automationName": lambda n : setattr(self, 'automation_name', n.get_str_value()),
             "automationRunId": lambda n : setattr(self, 'automation_run_id', n.get_str_value()),
             "billableAmount": lambda n : setattr(self, 'billable_amount', n.get_float_value()),
             "billingStatus": lambda n : setattr(self, 'billing_status', n.get_str_value()),
@@ -233,6 +236,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("actorEmail", self.actor_email)
         writer.write_str_value("actorLeadId", self.actor_lead_id)
         writer.write_str_value("actorUserId", self.actor_user_id)
+        writer.write_str_value("automationName", self.automation_name)
         writer.write_str_value("automationRunId", self.automation_run_id)
         writer.write_float_value("billableAmount", self.billable_amount)
         writer.write_str_value("billingStatus", self.billing_status)
