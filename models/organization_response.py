@@ -47,6 +47,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     automatically_mark_appointment_set: Optional[bool] = None
     # Automatically advances new leads after a confirmed outbound call attempt. Enabled by default.
     automatically_mark_leads_called: Optional[bool] = None
+    # Automatically advances new leads when an outbound message is delivered.
+    automatically_mark_leads_messaged: Optional[bool] = None
     # Describes a physical or mailing address using international locality, administrative-area, postal-code, and country fields.
     billing_address: Optional[OrganizationResponse_billingAddress] = None
     # Stored billing contact email for the organization.
@@ -79,6 +81,8 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
+    # Destination status for delivered outbound messages.
+    messaged_lead_status_id: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Human-readable display name of the resource.
@@ -164,6 +168,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
             "automaticallyClearAppointmentSet": lambda n : setattr(self, 'automatically_clear_appointment_set', n.get_bool_value()),
             "automaticallyMarkAppointmentSet": lambda n : setattr(self, 'automatically_mark_appointment_set', n.get_bool_value()),
             "automaticallyMarkLeadsCalled": lambda n : setattr(self, 'automatically_mark_leads_called', n.get_bool_value()),
+            "automaticallyMarkLeadsMessaged": lambda n : setattr(self, 'automatically_mark_leads_messaged', n.get_bool_value()),
             "billingAddress": lambda n : setattr(self, 'billing_address', n.get_object_value(OrganizationResponse_billingAddress)),
             "billingContactEmail": lambda n : setattr(self, 'billing_contact_email', n.get_str_value()),
             "billingName": lambda n : setattr(self, 'billing_name', n.get_str_value()),
@@ -180,6 +185,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
+            "messagedLeadStatusId": lambda n : setattr(self, 'messaged_lead_status_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
@@ -214,6 +220,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("automaticallyClearAppointmentSet", self.automatically_clear_appointment_set)
         writer.write_bool_value("automaticallyMarkAppointmentSet", self.automatically_mark_appointment_set)
         writer.write_bool_value("automaticallyMarkLeadsCalled", self.automatically_mark_leads_called)
+        writer.write_bool_value("automaticallyMarkLeadsMessaged", self.automatically_mark_leads_messaged)
         writer.write_object_value("billingAddress", self.billing_address)
         writer.write_str_value("billingContactEmail", self.billing_contact_email)
         writer.write_str_value("billingName", self.billing_name)
@@ -230,6 +237,7 @@ class OrganizationResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("enabled", self.enabled)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
+        writer.write_str_value("messagedLeadStatusId", self.messaged_lead_status_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("phone", self.phone)

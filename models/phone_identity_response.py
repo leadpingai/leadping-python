@@ -38,6 +38,8 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     number: Optional[str] = None
     # Lossless provider snapshot retained with a phone identity for replay, audits, and fields added by providers later.
     provider_enrichment: Optional[PhoneIdentityResponse_providerEnrichment] = None
+    # Whether Telnyx rejected SMS routing to this destination with error 40001.
+    sms_not_routable: Optional[bool] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> PhoneIdentityResponse:
@@ -74,6 +76,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
             "providerEnrichment": lambda n : setattr(self, 'provider_enrichment', n.get_object_value(PhoneIdentityResponse_providerEnrichment)),
+            "smsNotRoutable": lambda n : setattr(self, 'sms_not_routable', n.get_bool_value()),
         }
         return fields
     
@@ -95,6 +98,7 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
         writer.write_object_value("providerEnrichment", self.provider_enrichment)
+        writer.write_bool_value("smsNotRoutable", self.sms_not_routable)
         writer.write_additional_data_value(self.additional_data)
     
 

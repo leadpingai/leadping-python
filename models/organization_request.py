@@ -23,6 +23,8 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     automatically_mark_appointment_set: Optional[bool] = None
     # Automatically advances new leads after a confirmed outbound call attempt. Enabled by default.
     automatically_mark_leads_called: Optional[bool] = None
+    # Automatically advances new leads when an outbound message is delivered.
+    automatically_mark_leads_messaged: Optional[bool] = None
     # Destination status for outbound call attempts. Null uses the built-in Called status.
     called_lead_status_id: Optional[str] = None
     # Human-readable description that explains this organization profile request to API users.
@@ -31,6 +33,8 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
     ein: Optional[str] = None
     # Whether the organization was formed less than 90 days ago.
     is_younger_than90: Optional[bool] = None
+    # Destination status for delivered outbound messages.
+    messaged_lead_status_id: Optional[str] = None
     # Primary organization name.
     name: Optional[str] = None
     # Main service or offer described during organization setup.
@@ -73,10 +77,12 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
             "automaticallyClearAppointmentSet": lambda n : setattr(self, 'automatically_clear_appointment_set', n.get_bool_value()),
             "automaticallyMarkAppointmentSet": lambda n : setattr(self, 'automatically_mark_appointment_set', n.get_bool_value()),
             "automaticallyMarkLeadsCalled": lambda n : setattr(self, 'automatically_mark_leads_called', n.get_bool_value()),
+            "automaticallyMarkLeadsMessaged": lambda n : setattr(self, 'automatically_mark_leads_messaged', n.get_bool_value()),
             "calledLeadStatusId": lambda n : setattr(self, 'called_lead_status_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "ein": lambda n : setattr(self, 'ein', n.get_str_value()),
             "isYoungerThan90": lambda n : setattr(self, 'is_younger_than90', n.get_bool_value()),
+            "messagedLeadStatusId": lambda n : setattr(self, 'messaged_lead_status_id', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "offer": lambda n : setattr(self, 'offer', n.get_str_value()),
             "phone": lambda n : setattr(self, 'phone', n.get_str_value()),
@@ -100,10 +106,12 @@ class OrganizationRequest(AdditionalDataHolder, Parsable):
         writer.write_bool_value("automaticallyClearAppointmentSet", self.automatically_clear_appointment_set)
         writer.write_bool_value("automaticallyMarkAppointmentSet", self.automatically_mark_appointment_set)
         writer.write_bool_value("automaticallyMarkLeadsCalled", self.automatically_mark_leads_called)
+        writer.write_bool_value("automaticallyMarkLeadsMessaged", self.automatically_mark_leads_messaged)
         writer.write_str_value("calledLeadStatusId", self.called_lead_status_id)
         writer.write_str_value("description", self.description)
         writer.write_str_value("ein", self.ein)
         writer.write_bool_value("isYoungerThan90", self.is_younger_than90)
+        writer.write_str_value("messagedLeadStatusId", self.messaged_lead_status_id)
         writer.write_str_value("name", self.name)
         writer.write_str_value("offer", self.offer)
         writer.write_str_value("phone", self.phone)
