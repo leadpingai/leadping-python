@@ -60,6 +60,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     last_name: Optional[str] = None
     # Most recent message preview shown for the conversation.
     last_snippet: Optional[str] = None
+    # Timestamp of the conversation activity shown in LastSnippet.
+    last_snippet_at: Optional[datetime.datetime] = None
     # Lead ID associated with this inbox conversation.
     lead_id: Optional[str] = None
     # Lead's phone number used for conversation matching and outreach.
@@ -125,6 +127,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "lastInboundSnippet": lambda n : setattr(self, 'last_inbound_snippet', n.get_str_value()),
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "lastSnippet": lambda n : setattr(self, 'last_snippet', n.get_str_value()),
+            "lastSnippetAt": lambda n : setattr(self, 'last_snippet_at', n.get_datetime_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "leadPhoneNumber": lambda n : setattr(self, 'lead_phone_number', n.get_str_value()),
             "needsReply": lambda n : setattr(self, 'needs_reply', n.get_bool_value()),
@@ -166,6 +169,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("lastInboundSnippet", self.last_inbound_snippet)
         writer.write_str_value("lastName", self.last_name)
         writer.write_str_value("lastSnippet", self.last_snippet)
+        writer.write_datetime_value("lastSnippetAt", self.last_snippet_at)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("leadPhoneNumber", self.lead_phone_number)
         writer.write_bool_value("needsReply", self.needs_reply)
