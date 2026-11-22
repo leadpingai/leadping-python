@@ -20,19 +20,20 @@ if TYPE_CHECKING:
     from .mark_read.mark_read_request_builder import MarkReadRequestBuilder
     from .mark_reply_needed.mark_reply_needed_request_builder import MarkReplyNeededRequestBuilder
     from .outbound_readiness.outbound_readiness_request_builder import OutboundReadinessRequestBuilder
+    from .retry.retry_request_builder import RetryRequestBuilder
 
-class ConversationsItemRequestBuilder(BaseRequestBuilder):
+class ConversationItemRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /conversations/{id}
+    Builds and executes requests for operations under /conversations/{conversation-id}
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
-        Instantiates a new ConversationsItemRequestBuilder and sets the default values.
+        Instantiates a new ConversationItemRequestBuilder and sets the default values.
         param path_parameters: The raw url or the url-template parameters for the request.
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/{id}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/{conversation%2Did}", path_parameters)
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[ConversationResponse]:
         """
@@ -70,15 +71,15 @@ class ConversationsItemRequestBuilder(BaseRequestBuilder):
         request_info.headers.try_add("Accept", "application/json")
         return request_info
     
-    def with_url(self,raw_url: str) -> ConversationsItemRequestBuilder:
+    def with_url(self,raw_url: str) -> ConversationItemRequestBuilder:
         """
         Returns a request builder with the provided arbitrary URL. Using this method means any other path or query parameters are ignored.
         param raw_url: The raw URL to use for the request builder.
-        Returns: ConversationsItemRequestBuilder
+        Returns: ConversationItemRequestBuilder
         """
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
-        return ConversationsItemRequestBuilder(self.request_adapter, raw_url)
+        return ConversationItemRequestBuilder(self.request_adapter, raw_url)
     
     @property
     def mark_handled(self) -> MarkHandledRequestBuilder:
@@ -116,8 +117,17 @@ class ConversationsItemRequestBuilder(BaseRequestBuilder):
 
         return OutboundReadinessRequestBuilder(self.request_adapter, self.path_parameters)
     
+    @property
+    def retry(self) -> RetryRequestBuilder:
+        """
+        The retry property
+        """
+        from .retry.retry_request_builder import RetryRequestBuilder
+
+        return RetryRequestBuilder(self.request_adapter, self.path_parameters)
+    
     @dataclass
-    class ConversationsItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
+    class ConversationItemRequestBuilderGetRequestConfiguration(RequestConfiguration[QueryParameters]):
         """
         Configuration for the request such as headers, query parameters, and middleware options.
         """

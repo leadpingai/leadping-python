@@ -14,7 +14,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 from warnings import warn
 
 if TYPE_CHECKING:
-    from ...models.paged_result_of_conversation_response import PagedResultOfConversationResponse
+    from ...models.conversation_page import ConversationPage
     from ...models.problem_details import ProblemDetails
     from ...models.request_data_options import RequestDataOptions
 
@@ -29,14 +29,14 @@ class MyRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/my{?archiveFilter*,contactable*,textingAvailable*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/my{?archiveFilter*,contactable*,priority*,textingAvailable*}", path_parameters)
     
-    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> Optional[PagedResultOfConversationResponse]:
+    async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> Optional[ConversationPage]:
         """
         Lists the current user's lead conversations with paging and sorting for inbox views, recent follow-up, and communication history.
         param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
-        Returns: Optional[PagedResultOfConversationResponse]
+        Returns: Optional[ConversationPage]
         """
         if body is None:
             raise TypeError("body cannot be null.")
@@ -56,9 +56,9 @@ class MyRequestBuilder(BaseRequestBuilder):
         }
         if not self.request_adapter:
             raise Exception("Http core is null") 
-        from ...models.paged_result_of_conversation_response import PagedResultOfConversationResponse
+        from ...models.conversation_page import ConversationPage
 
-        return await self.request_adapter.send_async(request_info, PagedResultOfConversationResponse, error_mapping)
+        return await self.request_adapter.send_async(request_info, ConversationPage, error_mapping)
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[MyRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
@@ -104,6 +104,8 @@ class MyRequestBuilder(BaseRequestBuilder):
                 return "textingAvailable"
             if original_name == "contactable":
                 return "contactable"
+            if original_name == "priority":
+                return "priority"
             return original_name
         
         # Optional filter selecting active, archived, or all lead conversations.
@@ -111,6 +113,9 @@ class MyRequestBuilder(BaseRequestBuilder):
 
         # Whether to include only conversations where calling is available.
         contactable: Optional[bool] = None
+
+        # Orders the full filtered inbox by the next action before paging.
+        priority: Optional[bool] = None
 
         # Whether to include only conversations where texting is available.
         texting_available: Optional[bool] = None

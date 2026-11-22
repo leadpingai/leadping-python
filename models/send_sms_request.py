@@ -23,6 +23,8 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
     media_urls: Optional[list[str]] = None
     # Idempotency key used to prevent duplicate outbound delivery.
     outbound_idempotency_key: Optional[str] = None
+    # Version of the incoming conversation reply displayed to the agent when composing this response.
+    reply_version: Optional[int] = None
     # UTC timestamp when Leadping should send the SMS message.
     scheduled_for: Optional[datetime.datetime] = None
     # Existing SMS event ID to reuse or update when retrying a send request.
@@ -56,6 +58,7 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "mediaUrls": lambda n : setattr(self, 'media_urls', n.get_collection_of_primitive_values(str)),
             "outboundIdempotencyKey": lambda n : setattr(self, 'outbound_idempotency_key', n.get_str_value()),
+            "replyVersion": lambda n : setattr(self, 'reply_version', n.get_int_value()),
             "scheduledFor": lambda n : setattr(self, 'scheduled_for', n.get_datetime_value()),
             "smsEventId": lambda n : setattr(self, 'sms_event_id', n.get_str_value()),
             "sourceId": lambda n : setattr(self, 'source_id', n.get_str_value()),
@@ -77,6 +80,7 @@ class SendSmsRequest(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_collection_of_primitive_values("mediaUrls", self.media_urls)
         writer.write_str_value("outboundIdempotencyKey", self.outbound_idempotency_key)
+        writer.write_int_value("replyVersion", self.reply_version)
         writer.write_datetime_value("scheduledFor", self.scheduled_for)
         writer.write_str_value("smsEventId", self.sms_event_id)
         writer.write_str_value("sourceId", self.source_id)

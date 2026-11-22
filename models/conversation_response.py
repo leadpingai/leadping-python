@@ -26,6 +26,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archived_at: Optional[datetime.datetime] = None
     # Optional profile image URL explicitly associated with the lead.
     avatar_url: Optional[str] = None
+    # Rep-selected time for the next call attempt.
+    call_retry_at: Optional[datetime.datetime] = None
     # Current manual voice eligibility, including contact hours. Populated on individual conversation reads. Sender readiness and billing are checked when calling; null means eligibility has not been evaluated.
     can_call_now: Optional[bool] = None
     # Current manual SMS eligibility, including contact hours. Populated on individual conversation reads. Sender readiness and billing are checked when sending; null means eligibility has not been evaluated.
@@ -42,6 +44,10 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Unique Leadping identifier for this conversation response.
     id: Optional[str] = None
+    # The next action for a conversation, in inbox priority order.
+    inbox_action: Optional[int] = None
+    # Customer reply time, due time, or request time explaining the action.
+    inbox_action_at: Optional[datetime.datetime] = None
     # Indicates whether the Leadping conversation has been archived.
     is_archived: Optional[bool] = None
     # Whether this record belongs to demo data.
@@ -110,6 +116,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
             "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
+            "callRetryAt": lambda n : setattr(self, 'call_retry_at', n.get_datetime_value()),
             "canCallNow": lambda n : setattr(self, 'can_call_now', n.get_bool_value()),
             "canTextNow": lambda n : setattr(self, 'can_text_now', n.get_bool_value()),
             "complianceStatus": lambda n : setattr(self, 'compliance_status', n.get_str_value()),
@@ -118,6 +125,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "eventVersion": lambda n : setattr(self, 'event_version', n.get_int_value()),
             "firstName": lambda n : setattr(self, 'first_name', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "inboxAction": lambda n : setattr(self, 'inbox_action', n.get_int_value()),
+            "inboxActionAt": lambda n : setattr(self, 'inbox_action_at', n.get_datetime_value()),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isUnread": lambda n : setattr(self, 'is_unread', n.get_bool_value()),
@@ -152,6 +161,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
         writer.write_str_value("avatarUrl", self.avatar_url)
+        writer.write_datetime_value("callRetryAt", self.call_retry_at)
         writer.write_bool_value("canCallNow", self.can_call_now)
         writer.write_bool_value("canTextNow", self.can_text_now)
         writer.write_str_value("complianceStatus", self.compliance_status)
@@ -160,6 +170,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_int_value("eventVersion", self.event_version)
         writer.write_str_value("firstName", self.first_name)
         writer.write_str_value("id", self.id)
+        writer.write_int_value("inboxAction", self.inbox_action)
+        writer.write_datetime_value("inboxActionAt", self.inbox_action_at)
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isUnread", self.is_unread)

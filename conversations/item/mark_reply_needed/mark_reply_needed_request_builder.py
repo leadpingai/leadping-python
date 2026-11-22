@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 class MarkReplyNeededRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /conversations/{id}/mark-reply-needed
+    Builds and executes requests for operations under /conversations/{conversation-id}/mark-reply-needed
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -27,7 +27,7 @@ class MarkReplyNeededRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/{id}/mark-reply-needed?replyVersion={replyVersion}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/{conversation%2Did}/mark-reply-needed?replyVersion={replyVersion}", path_parameters)
     
     async def post(self,request_configuration: Optional[RequestConfiguration[MarkReplyNeededRequestBuilderPostQueryParameters]] = None) -> Optional[bool]:
         """

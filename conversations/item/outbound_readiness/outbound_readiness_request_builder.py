@@ -19,7 +19,7 @@ if TYPE_CHECKING:
 
 class OutboundReadinessRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /conversations/{id}/outbound-readiness
+    Builds and executes requests for operations under /conversations/{conversation-id}/outbound-readiness
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -28,7 +28,7 @@ class OutboundReadinessRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/{id}/outbound-readiness{?voice*}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/{conversation%2Did}/outbound-readiness{?voice*}", path_parameters)
     
     async def get(self,request_configuration: Optional[RequestConfiguration[OutboundReadinessRequestBuilderGetQueryParameters]] = None) -> Optional[OutgoingNumberSelectionResponse]:
         """

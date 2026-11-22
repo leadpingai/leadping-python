@@ -8,6 +8,7 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .initiate.initiate_request_builder import InitiateRequestBuilder
     from .item.with_call_item_request_builder import WithCallItemRequestBuilder
+    from .next.next_request_builder import NextRequestBuilder
 
 class PhoneCallRequestBuilder(BaseRequestBuilder):
     """
@@ -44,5 +45,14 @@ class PhoneCallRequestBuilder(BaseRequestBuilder):
         from .initiate.initiate_request_builder import InitiateRequestBuilder
 
         return InitiateRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def next(self) -> NextRequestBuilder:
+        """
+        The next property
+        """
+        from .next.next_request_builder import NextRequestBuilder
+
+        return NextRequestBuilder(self.request_adapter, self.path_parameters)
     
 

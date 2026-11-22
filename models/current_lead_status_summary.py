@@ -17,6 +17,8 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The promised callback time, independent of a general follow-up task.
+    callback_at: Optional[datetime.datetime] = None
     # Controlled lead status change categories used for reporting, automation, and analytics.
     category: Optional[CurrentLeadStatusSummary_category] = None
     # UTC timestamp when the lead status change last changed.
@@ -65,6 +67,7 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
         from .current_lead_status_summary_source import CurrentLeadStatusSummary_source
 
         fields: dict[str, Callable[[Any], None]] = {
+            "callbackAt": lambda n : setattr(self, 'callback_at', n.get_datetime_value()),
             "category": lambda n : setattr(self, 'category', n.get_enum_value(CurrentLeadStatusSummary_category)),
             "changedAt": lambda n : setattr(self, 'changed_at', n.get_datetime_value()),
             "changedByAutomationId": lambda n : setattr(self, 'changed_by_automation_id', n.get_str_value()),
@@ -88,6 +91,7 @@ class CurrentLeadStatusSummary(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_datetime_value("callbackAt", self.callback_at)
         writer.write_enum_value("category", self.category)
         writer.write_datetime_value("changedAt", self.changed_at)
         writer.write_str_value("changedByAutomationId", self.changed_by_automation_id)

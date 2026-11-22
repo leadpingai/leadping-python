@@ -18,7 +18,7 @@ if TYPE_CHECKING:
 
 class MarkReadRequestBuilder(BaseRequestBuilder):
     """
-    Builds and executes requests for operations under /conversations/{id}/mark-read
+    Builds and executes requests for operations under /conversations/{conversation-id}/mark-read
     """
     def __init__(self,request_adapter: RequestAdapter, path_parameters: Union[str, dict[str, Any]]) -> None:
         """
@@ -27,7 +27,7 @@ class MarkReadRequestBuilder(BaseRequestBuilder):
         param request_adapter: The request adapter to use to execute the requests.
         Returns: None
         """
-        super().__init__(request_adapter, "{+baseurl}/conversations/{id}/mark-read?eventVersion={eventVersion}", path_parameters)
+        super().__init__(request_adapter, "{+baseurl}/conversations/{conversation%2Did}/mark-read?eventVersion={eventVersion}", path_parameters)
     
     async def post(self,request_configuration: Optional[RequestConfiguration[MarkReadRequestBuilderPostQueryParameters]] = None) -> Optional[bool]:
         """
