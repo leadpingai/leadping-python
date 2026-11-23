@@ -6,6 +6,7 @@ from kiota_abstractions.request_adapter import RequestAdapter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .dial.dial_request_builder import DialRequestBuilder
     from .initiate.initiate_request_builder import InitiateRequestBuilder
     from .item.with_call_item_request_builder import WithCallItemRequestBuilder
     from .next.next_request_builder import NextRequestBuilder
@@ -36,6 +37,15 @@ class PhoneCallRequestBuilder(BaseRequestBuilder):
         url_tpl_params = get_path_parameters(self.path_parameters)
         url_tpl_params["callId"] = call_id
         return WithCallItemRequestBuilder(self.request_adapter, url_tpl_params)
+    
+    @property
+    def dial(self) -> DialRequestBuilder:
+        """
+        The dial property
+        """
+        from .dial.dial_request_builder import DialRequestBuilder
+
+        return DialRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def initiate(self) -> InitiateRequestBuilder:

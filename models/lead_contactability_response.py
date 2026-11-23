@@ -1,4 +1,5 @@
 from __future__ import annotations
+import datetime
 from collections.abc import Callable
 from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
@@ -18,6 +19,8 @@ class LeadContactabilityResponse(AdditionalDataHolder, Parsable):
     can_call: Optional[bool] = None
     # Whether the lead can currently be texted after evaluating applicable contact hours, suppression, and consent rules.
     can_text: Optional[bool] = None
+    # Next opening or closing of a contact window that can change this result.
+    next_window_change_at: Optional[datetime.datetime] = None
     # Whether the stored phone lookup rules out texting this recipient.
     sms_line_restricted: Optional[bool] = None
     # Customer-safe explanation when texting is unavailable.
@@ -43,6 +46,7 @@ class LeadContactabilityResponse(AdditionalDataHolder, Parsable):
             "callBlockedReason": lambda n : setattr(self, 'call_blocked_reason', n.get_str_value()),
             "canCall": lambda n : setattr(self, 'can_call', n.get_bool_value()),
             "canText": lambda n : setattr(self, 'can_text', n.get_bool_value()),
+            "nextWindowChangeAt": lambda n : setattr(self, 'next_window_change_at', n.get_datetime_value()),
             "smsLineRestricted": lambda n : setattr(self, 'sms_line_restricted', n.get_bool_value()),
             "textBlockedReason": lambda n : setattr(self, 'text_blocked_reason', n.get_str_value()),
         }
@@ -59,6 +63,7 @@ class LeadContactabilityResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("callBlockedReason", self.call_blocked_reason)
         writer.write_bool_value("canCall", self.can_call)
         writer.write_bool_value("canText", self.can_text)
+        writer.write_datetime_value("nextWindowChangeAt", self.next_window_change_at)
         writer.write_bool_value("smsLineRestricted", self.sms_line_restricted)
         writer.write_str_value("textBlockedReason", self.text_blocked_reason)
         writer.write_additional_data_value(self.additional_data)
