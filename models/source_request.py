@@ -26,6 +26,8 @@ class SourceRequest(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Human-readable source name.
     name: Optional[str] = None
+    # Whether to normalize capitalization in incoming lead names and cities.
+    normalize_incoming_data: Optional[bool] = None
     # Indicates whether leads from this source must include a TrustedForm or Leadping Consent certificate for consent proof.
     requires_trusted_form: Optional[bool] = None
     
@@ -53,6 +55,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
             "defaultTagNames": lambda n : setattr(self, 'default_tag_names', n.get_collection_of_primitive_values(str)),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "normalizeIncomingData": lambda n : setattr(self, 'normalize_incoming_data', n.get_bool_value()),
             "requiresTrustedForm": lambda n : setattr(self, 'requires_trusted_form', n.get_bool_value()),
         }
         return fields
@@ -72,6 +75,7 @@ class SourceRequest(AdditionalDataHolder, Parsable):
         writer.write_collection_of_primitive_values("defaultTagNames", self.default_tag_names)
         writer.write_str_value("description", self.description)
         writer.write_str_value("name", self.name)
+        writer.write_bool_value("normalizeIncomingData", self.normalize_incoming_data)
         writer.write_bool_value("requiresTrustedForm", self.requires_trusted_form)
         writer.write_additional_data_value(self.additional_data)
     

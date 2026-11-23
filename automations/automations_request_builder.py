@@ -19,6 +19,7 @@ if TYPE_CHECKING:
     from ..models.problem_details import ProblemDetails
     from .all.all_request_builder import AllRequestBuilder
     from .item.automations_item_request_builder import AutomationsItemRequestBuilder
+    from .lead_audience.lead_audience_request_builder import LeadAudienceRequestBuilder
     from .preview.preview_request_builder import PreviewRequestBuilder
 
 class AutomationsRequestBuilder(BaseRequestBuilder):
@@ -110,6 +111,15 @@ class AutomationsRequestBuilder(BaseRequestBuilder):
         from .all.all_request_builder import AllRequestBuilder
 
         return AllRequestBuilder(self.request_adapter, self.path_parameters)
+    
+    @property
+    def lead_audience(self) -> LeadAudienceRequestBuilder:
+        """
+        The leadAudience property
+        """
+        from .lead_audience.lead_audience_request_builder import LeadAudienceRequestBuilder
+
+        return LeadAudienceRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def preview(self) -> PreviewRequestBuilder:

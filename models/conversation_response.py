@@ -24,6 +24,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     archive_reason: Optional[int] = None
     # UTC timestamp when this record was archived.
     archived_at: Optional[datetime.datetime] = None
+    # The lead assignee used for inbox audience selection.
+    assigned_to_user_id: Optional[str] = None
     # Optional profile image URL explicitly associated with the lead.
     avatar_url: Optional[str] = None
     # Rep-selected time for the next call attempt.
@@ -68,6 +70,10 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     last_snippet: Optional[str] = None
     # Timestamp of the conversation activity shown in LastSnippet.
     last_snippet_at: Optional[datetime.datetime] = None
+    # When the associated lead was created.
+    lead_created_at: Optional[datetime.datetime] = None
+    # Whether the associated lead is enabled for selection.
+    lead_enabled: Optional[bool] = None
     # Lead ID associated with this inbox conversation.
     lead_id: Optional[str] = None
     # Lead's phone number used for conversation matching and outreach.
@@ -115,6 +121,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "activeOutboundPhoneNumberId": lambda n : setattr(self, 'active_outbound_phone_number_id', n.get_str_value()),
             "archiveReason": lambda n : setattr(self, 'archive_reason', n.get_int_value()),
             "archivedAt": lambda n : setattr(self, 'archived_at', n.get_datetime_value()),
+            "assignedToUserId": lambda n : setattr(self, 'assigned_to_user_id', n.get_str_value()),
             "avatarUrl": lambda n : setattr(self, 'avatar_url', n.get_str_value()),
             "callRetryAt": lambda n : setattr(self, 'call_retry_at', n.get_datetime_value()),
             "canCallNow": lambda n : setattr(self, 'can_call_now', n.get_bool_value()),
@@ -137,6 +144,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "lastName": lambda n : setattr(self, 'last_name', n.get_str_value()),
             "lastSnippet": lambda n : setattr(self, 'last_snippet', n.get_str_value()),
             "lastSnippetAt": lambda n : setattr(self, 'last_snippet_at', n.get_datetime_value()),
+            "leadCreatedAt": lambda n : setattr(self, 'lead_created_at', n.get_datetime_value()),
+            "leadEnabled": lambda n : setattr(self, 'lead_enabled', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "leadPhoneNumber": lambda n : setattr(self, 'lead_phone_number', n.get_str_value()),
             "needsReply": lambda n : setattr(self, 'needs_reply', n.get_bool_value()),
@@ -160,6 +169,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("activeOutboundPhoneNumberId", self.active_outbound_phone_number_id)
         writer.write_int_value("archiveReason", self.archive_reason)
         writer.write_datetime_value("archivedAt", self.archived_at)
+        writer.write_str_value("assignedToUserId", self.assigned_to_user_id)
         writer.write_str_value("avatarUrl", self.avatar_url)
         writer.write_datetime_value("callRetryAt", self.call_retry_at)
         writer.write_bool_value("canCallNow", self.can_call_now)
@@ -182,6 +192,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("lastName", self.last_name)
         writer.write_str_value("lastSnippet", self.last_snippet)
         writer.write_datetime_value("lastSnippetAt", self.last_snippet_at)
+        writer.write_datetime_value("leadCreatedAt", self.lead_created_at)
+        writer.write_bool_value("leadEnabled", self.lead_enabled)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_str_value("leadPhoneNumber", self.lead_phone_number)
         writer.write_bool_value("needsReply", self.needs_reply)

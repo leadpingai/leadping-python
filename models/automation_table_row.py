@@ -19,6 +19,8 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
 
     # Human-readable summary of the automation action outcome.
     action_summary: Optional[str] = None
+    # Whether the current user can start this automation for a selected inbox lead.
+    can_run_for_lead: Optional[bool] = None
     # Human-readable summary of the automation condition evaluation.
     condition_summary: Optional[str] = None
     # User ID of the person who created this automation table row.
@@ -86,6 +88,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
 
         fields: dict[str, Callable[[Any], None]] = {
             "actionSummary": lambda n : setattr(self, 'action_summary', n.get_str_value()),
+            "canRunForLead": lambda n : setattr(self, 'can_run_for_lead', n.get_bool_value()),
             "conditionSummary": lambda n : setattr(self, 'condition_summary', n.get_str_value()),
             "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
@@ -119,6 +122,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         if writer is None:
             raise TypeError("writer cannot be null.")
         writer.write_str_value("actionSummary", self.action_summary)
+        writer.write_bool_value("canRunForLead", self.can_run_for_lead)
         writer.write_str_value("conditionSummary", self.condition_summary)
         writer.write_str_value("createdByUserId", self.created_by_user_id)
         writer.write_str_value("description", self.description)

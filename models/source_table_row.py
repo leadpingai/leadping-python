@@ -62,6 +62,8 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
     modified_by_user: Optional[SourceTableRow_modifiedByUser] = None
     # Display name for this lead source table row in the Leadping API.
     name: Optional[str] = None
+    # Whether to normalize capitalization in incoming lead names and cities.
+    normalize_incoming_data: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[SourceTableRow_organization] = None
     # Organization ID that owns this lead source.
@@ -121,6 +123,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "modifiedByUser": lambda n : setattr(self, 'modified_by_user', n.get_object_value(SourceTableRow_modifiedByUser)),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "normalizeIncomingData": lambda n : setattr(self, 'normalize_incoming_data', n.get_bool_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(SourceTableRow_organization)),
             "organizationId": lambda n : setattr(self, 'organization_id', n.get_str_value()),
             "requiresTrustedForm": lambda n : setattr(self, 'requires_trusted_form', n.get_bool_value()),
@@ -157,6 +160,7 @@ class SourceTableRow(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("modifiedByUser", self.modified_by_user)
         writer.write_str_value("name", self.name)
+        writer.write_bool_value("normalizeIncomingData", self.normalize_incoming_data)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("organizationId", self.organization_id)
         writer.write_bool_value("requiresTrustedForm", self.requires_trusted_form)

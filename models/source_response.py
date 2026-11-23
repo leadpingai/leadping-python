@@ -62,6 +62,8 @@ class SourceResponse(AdditionalDataHolder, Parsable):
     modified_by_user: Optional[SourceResponse_modifiedByUser] = None
     # Human-readable display name of the resource.
     name: Optional[str] = None
+    # Whether to normalize capitalization in incoming lead names and cities.
+    normalize_incoming_data: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[SourceResponse_organization] = None
     # Indicates whether leads from this source must include a TrustedForm or Leadping Consent certificate for consent proof.
@@ -119,6 +121,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "modifiedByUser": lambda n : setattr(self, 'modified_by_user', n.get_object_value(SourceResponse_modifiedByUser)),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
+            "normalizeIncomingData": lambda n : setattr(self, 'normalize_incoming_data', n.get_bool_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(SourceResponse_organization)),
             "requiresTrustedForm": lambda n : setattr(self, 'requires_trusted_form', n.get_bool_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(SourceResponse_user)),
@@ -154,6 +157,7 @@ class SourceResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_object_value("modifiedByUser", self.modified_by_user)
         writer.write_str_value("name", self.name)
+        writer.write_bool_value("normalizeIncomingData", self.normalize_incoming_data)
         writer.write_object_value("organization", self.organization)
         writer.write_bool_value("requiresTrustedForm", self.requires_trusted_form)
         writer.write_object_value("user", self.user)
