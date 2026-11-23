@@ -58,6 +58,8 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     deleted_by_user_id: Optional[str] = None
     # Whether the lead is enabled.
     enabled: Optional[bool] = None
+    # Whether the source covers SMS consent for the current recipient.
+    has_source_sms_consent: Optional[bool] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
     # The service or purchase requested by a lead.
@@ -145,6 +147,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
             "deletedAt": lambda n : setattr(self, 'deleted_at', n.get_datetime_value()),
             "deletedByUserId": lambda n : setattr(self, 'deleted_by_user_id', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
+            "hasSourceSmsConsent": lambda n : setattr(self, 'has_source_sms_consent', n.get_bool_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "inquiry": lambda n : setattr(self, 'inquiry', n.get_object_value(LeadResponse_inquiry)),
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
@@ -184,6 +187,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("deletedAt", self.deleted_at)
         writer.write_str_value("deletedByUserId", self.deleted_by_user_id)
         writer.write_bool_value("enabled", self.enabled)
+        writer.write_bool_value("hasSourceSmsConsent", self.has_source_sms_consent)
         writer.write_str_value("id", self.id)
         writer.write_object_value("inquiry", self.inquiry)
         writer.write_bool_value("isArchived", self.is_archived)
