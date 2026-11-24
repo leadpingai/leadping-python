@@ -12,6 +12,8 @@ class ManualDialRequest(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # The outgoing number selected in the dialer.
+    from_phone_number_id: Optional[str] = None
     # The destination phone number.
     phone_number: Optional[str] = None
     
@@ -32,6 +34,7 @@ class ManualDialRequest(AdditionalDataHolder, Parsable):
         Returns: dict[str, Callable[[ParseNode], None]]
         """
         fields: dict[str, Callable[[Any], None]] = {
+            "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_str_value()),
         }
         return fields
@@ -44,6 +47,7 @@ class ManualDialRequest(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("phoneNumber", self.phone_number)
         writer.write_additional_data_value(self.additional_data)
     
