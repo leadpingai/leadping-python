@@ -33,7 +33,7 @@ class DismissRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Dismisses the reminder without completing the appointment, using the expected revision.
+        Dismiss a callback reminder in Leadping while leaving the appointment open. Include the expected revision to apply the change to the reminder you reviewed.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
@@ -59,7 +59,7 @@ class DismissRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Dismisses the reminder without completing the appointment, using the expected revision.
+        Dismiss a callback reminder in Leadping while leaving the appointment open. Include the expected revision to apply the change to the reminder you reviewed.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

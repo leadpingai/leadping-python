@@ -32,7 +32,7 @@ class LeadAudienceRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationLeadAudience]:
         """
-        Counts the active leads selectable by the current user across the organization.
+        Check how many active leads the signed-in user can select across the organization before queuing a bulk automation run in Leadping.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationLeadAudience]
         """
@@ -54,7 +54,7 @@ class LeadAudienceRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Counts the active leads selectable by the current user across the organization.
+        Check how many active leads the signed-in user can select across the organization before queuing a bulk automation run in Leadping.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

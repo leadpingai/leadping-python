@@ -33,7 +33,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: ManualDialRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[PhoneCallResponse]:
         """
-        Calls a number with the browser phone. For a new number, the caller confirms permission for manual voice contact and a lead is created.
+        Place a call with the Leadping browser phone. For a new number, confirm permission for manual voice contact so Leadping can create the lead.
         param body: Requests a manual browser call to a number entered by the agent.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[PhoneCallResponse]
@@ -58,7 +58,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: ManualDialRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Calls a number with the browser phone. For a new number, the caller confirms permission for manual voice contact and a lead is created.
+        Place a call with the Leadping browser phone. For a new number, confirm permission for manual voice contact so Leadping can create the lead.
         param body: Requests a manual browser call to a number entered by the agent.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

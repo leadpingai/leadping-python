@@ -33,7 +33,7 @@ class WithEventItemRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: CreateNoteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[EventTableRow]:
         """
-        The event table row.
+        Edit an internal note you authored in Leadping. Submit the revised note text and use the returned event row to display the updated entry in the timeline.
         param body: Defines the input used for create note.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[EventTableRow]
@@ -60,7 +60,7 @@ class WithEventItemRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: CreateNoteRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        The event table row.
+        Edit an internal note you authored in Leadping. Submit the revised note text and use the returned event row to display the updated entry in the timeline.
         param body: Defines the input used for create note.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

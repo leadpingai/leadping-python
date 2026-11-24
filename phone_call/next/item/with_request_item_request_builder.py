@@ -32,7 +32,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[WithRequestItemRequestBuilderPostQueryParameters]] = None) -> Optional[bytes]:
         """
-        Starts the next eligible call in the rep's filtered inbox.
+        Start the next eligible call from a rep’s Leadping inbox. Supply the inbox filters so the next call comes from the leads in the rep’s current view.
         param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
@@ -55,7 +55,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: RequestDataOptions, request_configuration: Optional[RequestConfiguration[WithRequestItemRequestBuilderPostQueryParameters]] = None) -> RequestInformation:
         """
-        Starts the next eligible call in the rep's filtered inbox.
+        Start the next eligible call from a rep’s Leadping inbox. Supply the inbox filters so the next call comes from the leads in the rep’s current view.
         param body: Defines cursor pagination, sorting, search, exact-match filters, and range filters for a structured API query.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
@@ -81,7 +81,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     @dataclass
     class WithRequestItemRequestBuilderPostQueryParameters():
         """
-        Starts the next eligible call in the rep's filtered inbox.
+        Start the next eligible call from a rep’s Leadping inbox. Supply the inbox filters so the next call comes from the leads in the rep’s current view.
         """
         texting: Optional[bool] = None
 

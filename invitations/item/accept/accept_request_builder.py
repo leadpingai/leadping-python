@@ -31,7 +31,7 @@ class AcceptRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
         """
-        Accept
+        Accept a pending organization invitation in Leadping. Sign in as the invited recipient and submit the invitation ID to join the organization.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
         """
@@ -51,7 +51,7 @@ class AcceptRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Accept
+        Accept a pending organization invitation in Leadping. Sign in as the invited recipient and submit the invitation ID to join the organization.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

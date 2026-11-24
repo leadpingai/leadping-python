@@ -32,7 +32,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AutomationRunRecord]:
         """
-        Queues a manual automation run for a lead. Reuse the request ID when retrying the same run.
+        Queue a manual automation for a specific lead in Leadping. Reuse the same request ID if you retry so the retry refers to the original run.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AutomationRunRecord]
         """
@@ -54,7 +54,7 @@ class WithRequestItemRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Queues a manual automation run for a lead. Reuse the request ID when retrying the same run.
+        Queue a manual automation for a specific lead in Leadping. Reuse the same request ID if you retry so the retry refers to the original run.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

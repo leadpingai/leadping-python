@@ -32,7 +32,7 @@ class RunForAudienceRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AutomationAudienceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Queues a bulk run for the authorized lead audience.
+        Queue a Leadping automation for a group of leads in one request. The bulk run uses the lead audience the current user is authorized to select.
         param body: Runs an automation for a server-resolved audience, omitting leads the user unchecked.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
@@ -55,7 +55,7 @@ class RunForAudienceRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AutomationAudienceRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Queues a bulk run for the authorized lead audience.
+        Queue a Leadping automation for a group of leads in one request. The bulk run uses the lead audience the current user is authorized to select.
         param body: Runs an automation for a server-resolved audience, omitting leads the user unchecked.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

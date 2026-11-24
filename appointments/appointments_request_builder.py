@@ -49,7 +49,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[AppointmentsRequestBuilderGetQueryParameters]] = None) -> Optional[list[AppointmentResponse]]:
         """
-        Returns appointments visible to the current user, with optional lead, reminder, and status filters.
+        List callback appointments the signed-in user can access in Leadping. Filter by lead, reminder, or appointment status to narrow the results.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[AppointmentResponse]]
         """
@@ -71,7 +71,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AppointmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Schedules a callback appointment for a lead and configures its assigned agent and reminder.
+        Schedule a callback for a lead through the Leadping API. Set the appointment time, assign the agent responsible for the call, and configure its reminder.
         param body: Creates or reschedules an agent's callback appointment.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
@@ -96,7 +96,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[AppointmentsRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Returns appointments visible to the current user, with optional lead, reminder, and status filters.
+        List callback appointments the signed-in user can access in Leadping. Filter by lead, reminder, or appointment status to narrow the results.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -107,7 +107,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AppointmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Schedules a callback appointment for a lead and configures its assigned agent and reminder.
+        Schedule a callback for a lead through the Leadping API. Set the appointment time, assign the agent responsible for the call, and configure its reminder.
         param body: Creates or reschedules an agent's callback appointment.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
@@ -142,7 +142,7 @@ class AppointmentsRequestBuilder(BaseRequestBuilder):
     @dataclass
     class AppointmentsRequestBuilderGetQueryParameters():
         """
-        Returns appointments visible to the current user, with optional lead, reminder, and status filters.
+        List callback appointments the signed-in user can access in Leadping. Filter by lead, reminder, or appointment status to narrow the results.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """

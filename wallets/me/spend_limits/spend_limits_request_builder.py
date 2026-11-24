@@ -57,7 +57,7 @@ class SpendLimitsRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: SpendLimitsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[SpendLimitsResponse]:
         """
-        Sets the current organization's daily and monthly usage limits in USD and returns the updated limits and UTC progress.A null limit removes that budget; a zero limit stops new paid usage.
+        Set daily and monthly usage budgets in USD for your Leadping organization. Use null to remove a limit or zero to stop new paid usage.
         param body: Organization usage budgets in USD. Null removes a limit; zero stops new paid usage.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[SpendLimitsResponse]
@@ -97,7 +97,7 @@ class SpendLimitsRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: SpendLimitsRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Sets the current organization's daily and monthly usage limits in USD and returns the updated limits and UTC progress.A null limit removes that budget; a zero limit stops new paid usage.
+        Set daily and monthly usage budgets in USD for your Leadping organization. Use null to remove a limit or zero to stop new paid usage.
         param body: Organization usage budgets in USD. Null removes a limit; zero stops new paid usage.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

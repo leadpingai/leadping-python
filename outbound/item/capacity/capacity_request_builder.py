@@ -32,7 +32,7 @@ class CapacityRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[OutboundPhoneNumberCapacity]:
         """
-        Returns the phone number's outbound sending capacity based on current provider and Leadping state, including throttling and delivery eligibility.The phone number must belong to the current organization.
+        Check outbound sending capacity for a phone number in your Leadping organization, including current throttling and eligibility for delivery.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[OutboundPhoneNumberCapacity]
         """
@@ -57,7 +57,7 @@ class CapacityRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns the phone number's outbound sending capacity based on current provider and Leadping state, including throttling and delivery eligibility.The phone number must belong to the current organization.
+        Check outbound sending capacity for a phone number in your Leadping organization, including current throttling and eligibility for delivery.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

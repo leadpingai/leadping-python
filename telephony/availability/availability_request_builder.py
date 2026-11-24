@@ -46,7 +46,7 @@ class AvailabilityRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Returns whether the authenticated user can currently receive an incoming call.
+        Check whether the signed-in Leadping user can receive an incoming call right now. Use the result to show their current availability in a calling workflow.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
@@ -68,7 +68,7 @@ class AvailabilityRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns whether the authenticated user can currently receive an incoming call.
+        Check whether the signed-in Leadping user can receive an incoming call right now. Use the result to show their current availability in a calling workflow.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

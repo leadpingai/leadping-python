@@ -33,7 +33,7 @@ class SnoozeRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Defers the reminder for ten minutes without moving the appointment, using the expected revision.
+        Delay a Leadping appointment reminder by ten minutes while keeping the callback time unchanged. Send the expected revision to detect conflicting updates.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
@@ -59,7 +59,7 @@ class SnoozeRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Defers the reminder for ten minutes without moving the appointment, using the expected revision.
+        Delay a Leadping appointment reminder by ten minutes while keeping the callback time unchanged. Send the expected revision to detect conflicting updates.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

@@ -33,7 +33,7 @@ class CancelRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Cancels an appointment and invalidates unsent reminders using the expected revision.
+        Cancel a Leadping callback appointment and invalidate reminders that have yet to be sent. Include the expected revision to detect concurrent changes.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
@@ -59,7 +59,7 @@ class CancelRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Cancels an appointment and invalidates unsent reminders using the expected revision.
+        Cancel a Leadping callback appointment and invalidate reminders that have yet to be sent. Include the expected revision to detect concurrent changes.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

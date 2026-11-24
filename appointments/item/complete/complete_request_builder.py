@@ -33,7 +33,7 @@ class CompleteRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Marks an appointment as completed using the expected revision to detect concurrent changes.
+        Mark a callback appointment as completed in Leadping. Supply the expected revision so the API can detect another user’s changes before recording completion.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
@@ -59,7 +59,7 @@ class CompleteRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: AppointmentActionRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Marks an appointment as completed using the expected revision to detect concurrent changes.
+        Mark a callback appointment as completed in Leadping. Supply the expected revision so the API can detect another user’s changes before recording completion.
         param body: Protects appointment actions against concurrent edits.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

@@ -48,7 +48,7 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[InvitationsRequestBuilderGetQueryParameters]] = None) -> Optional[list[OrganizationInvitationTableRow]]:
         """
-        Get
+        List open, unexpired organization invitations for the signed-in recipient’s verified email address, or use an invitation token to look up one invite.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[OrganizationInvitationTableRow]]
         """
@@ -70,7 +70,7 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[InvitationsRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Get
+        List open, unexpired organization invitations for the signed-in recipient’s verified email address, or use an invitation token to look up one invite.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -101,7 +101,7 @@ class InvitationsRequestBuilder(BaseRequestBuilder):
     @dataclass
     class InvitationsRequestBuilderGetQueryParameters():
         """
-        Get
+        List open, unexpired organization invitations for the signed-in recipient’s verified email address, or use an invitation token to look up one invite.
         """
         token: Optional[str] = None
 

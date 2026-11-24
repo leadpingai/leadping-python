@@ -32,7 +32,7 @@ class DeclineRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: OrganizationInvitationTokenRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
         """
-        Decline with token
+        Decline a Leadping organization invitation without signing in. Submit the token from the invitation link to identify the invite you want to decline.
         param body: Supplies the secret invitation token from the recipient’s email link.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
@@ -53,7 +53,7 @@ class DeclineRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: OrganizationInvitationTokenRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Decline with token
+        Decline a Leadping organization invitation without signing in. Submit the token from the invitation link to identify the invite you want to decline.
         param body: Supplies the secret invitation token from the recipient’s email link.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

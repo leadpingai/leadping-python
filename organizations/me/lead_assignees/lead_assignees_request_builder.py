@@ -32,7 +32,7 @@ class LeadAssigneesRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[IdNamePair]]:
         """
-        Returns distinct users in the current organization, ordered by name, for selecting lead assignees.
+        Retrieve active users in the current Leadping organization for a lead assignee filter. Each user appears once, and results are ordered by name.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[IdNamePair]]
         """
@@ -56,7 +56,7 @@ class LeadAssigneesRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns distinct users in the current organization, ordered by name, for selecting lead assignees.
+        Retrieve active users in the current Leadping organization for a lead assignee filter. Each user appears once, and results are ordered by name.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """

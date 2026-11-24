@@ -48,7 +48,7 @@ class MessageTemplatesRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[list[MessageTemplate]]:
         """
-        Lists organization templates, including disabled templates.
+        Retrieve your organization’s Leadping message templates in one request. The list includes enabled templates as well as templates that are currently disabled.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[list[MessageTemplate]]
         """
@@ -70,7 +70,7 @@ class MessageTemplatesRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: MessageTemplateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[MessageTemplate]:
         """
-        Creates a disabled organization template.
+        Create a reusable message template for your Leadping organization. New templates start disabled, so you can review the message before enabling it.
         param body: The editable fields of an organization message template.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[MessageTemplate]
@@ -95,7 +95,7 @@ class MessageTemplatesRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Lists organization templates, including disabled templates.
+        Retrieve your organization’s Leadping message templates in one request. The list includes enabled templates as well as templates that are currently disabled.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -106,7 +106,7 @@ class MessageTemplatesRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: MessageTemplateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Creates a disabled organization template.
+        Create a reusable message template for your Leadping organization. New templates start disabled, so you can review the message before enabling it.
         param body: The editable fields of an organization message template.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

@@ -37,7 +37,7 @@ class AppointmentsItemRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Returns an appointment and its history, subject to lead and organization access.
+        Retrieve a callback appointment and its history by ID in Leadping. The signed-in user must have access to the associated lead and organization.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
         """
@@ -59,7 +59,7 @@ class AppointmentsItemRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: AppointmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[AppointmentResponse]:
         """
-        Updates an appointment using the expected revision to detect concurrent changes.
+        Edit an existing callback appointment in Leadping. Include the revision you last retrieved so the API can detect changes made since you viewed it.
         param body: Creates or reschedules an agent's callback appointment.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[AppointmentResponse]
@@ -84,7 +84,7 @@ class AppointmentsItemRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Returns an appointment and its history, subject to lead and organization access.
+        Retrieve a callback appointment and its history by ID in Leadping. The signed-in user must have access to the associated lead and organization.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -95,7 +95,7 @@ class AppointmentsItemRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: AppointmentRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates an appointment using the expected revision to detect concurrent changes.
+        Edit an existing callback appointment in Leadping. Include the revision you last retrieved so the API can detect changes made since you viewed it.
         param body: Creates or reschedules an agent's callback appointment.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

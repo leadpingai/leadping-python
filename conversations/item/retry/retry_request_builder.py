@@ -32,7 +32,7 @@ class RetryRequestBuilder(BaseRequestBuilder):
     
     async def post(self,body: CallRetryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
         """
-        Updates the next manual call attempt if the observed retry time is still current.
+        Set the next manual call time for a Leadping conversation. The update applies only if the retry time still matches the one you last saw.
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
@@ -55,7 +55,7 @@ class RetryRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,body: CallRetryRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates the next manual call attempt if the observed retry time is still current.
+        Set the next manual call time for a Leadping conversation. The update applies only if the retry time still matches the one you last saw.
         param body: The request body
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

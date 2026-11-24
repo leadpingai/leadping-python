@@ -33,7 +33,7 @@ class MessageTemplatesItemRequestBuilder(BaseRequestBuilder):
     
     async def delete(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bool]:
         """
-        Permanently deletes an organization template.
+        Permanently remove a message template from your Leadping organization by ID. To keep the template for later use, disable it with the update endpoint.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[bool]
         """
@@ -53,7 +53,7 @@ class MessageTemplatesItemRequestBuilder(BaseRequestBuilder):
     
     async def put(self,body: MessageTemplateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[MessageTemplate]:
         """
-        Updates an organization template's name, message, and enabled state.
+        Update a Leadping message template by ID. Change its name or message text, or enable or disable the template for use in your organization.
         param body: The editable fields of an organization message template.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: Optional[MessageTemplate]
@@ -78,7 +78,7 @@ class MessageTemplatesItemRequestBuilder(BaseRequestBuilder):
     
     def to_delete_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Permanently deletes an organization template.
+        Permanently remove a message template from your Leadping organization by ID. To keep the template for later use, disable it with the update endpoint.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -89,7 +89,7 @@ class MessageTemplatesItemRequestBuilder(BaseRequestBuilder):
     
     def to_put_request_information(self,body: MessageTemplateRequest, request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Updates an organization template's name, message, and enabled state.
+        Update a Leadping message template by ID. Change its name or message text, or enable or disable the template for use in your organization.
         param body: The editable fields of an organization message template.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation

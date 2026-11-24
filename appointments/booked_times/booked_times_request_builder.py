@@ -31,7 +31,7 @@ class BookedTimesRequestBuilder(BaseRequestBuilder):
     
     async def get(self,request_configuration: Optional[RequestConfiguration[BookedTimesRequestBuilderGetQueryParameters]] = None) -> Optional[bytes]:
         """
-        Gets occupied appointment times for a lead's selected assignee.
+        Look up appointment times already booked for a lead’s selected assignee in Leadping before choosing a time for a new or rescheduled callback.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
         """
@@ -51,7 +51,7 @@ class BookedTimesRequestBuilder(BaseRequestBuilder):
     
     def to_get_request_information(self,request_configuration: Optional[RequestConfiguration[BookedTimesRequestBuilderGetQueryParameters]] = None) -> RequestInformation:
         """
-        Gets occupied appointment times for a lead's selected assignee.
+        Look up appointment times already booked for a lead’s selected assignee in Leadping before choosing a time for a new or rescheduled callback.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
@@ -73,7 +73,7 @@ class BookedTimesRequestBuilder(BaseRequestBuilder):
     @dataclass
     class BookedTimesRequestBuilderGetQueryParameters():
         """
-        Gets occupied appointment times for a lead's selected assignee.
+        Look up appointment times already booked for a lead’s selected assignee in Leadping before choosing a time for a new or rescheduled callback.
         """
         def get_query_parameter(self,original_name: str) -> str:
             """

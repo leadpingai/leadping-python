@@ -31,7 +31,7 @@ class DeclineRequestBuilder(BaseRequestBuilder):
     
     async def post(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> Optional[bytes]:
         """
-        Decline
+        Decline a pending Leadping organization invitation by ID while signed in as the recipient. Use this endpoint to turn down the invitation to join.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: bytes
         """
@@ -51,7 +51,7 @@ class DeclineRequestBuilder(BaseRequestBuilder):
     
     def to_post_request_information(self,request_configuration: Optional[RequestConfiguration[QueryParameters]] = None) -> RequestInformation:
         """
-        Decline
+        Decline a pending Leadping organization invitation by ID while signed in as the recipient. Use this endpoint to turn down the invitation to join.
         param request_configuration: Configuration for the request such as headers, query parameters, and middleware options.
         Returns: RequestInformation
         """
