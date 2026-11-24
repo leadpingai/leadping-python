@@ -46,7 +46,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     first_name: Optional[str] = None
     # Unique Leadping identifier for this conversation response.
     id: Optional[str] = None
-    # The next action for a conversation, in inbox priority order.
+    # The reason a conversation appears in the priority inbox.
     inbox_action: Optional[int] = None
     # Customer reply time, due time, or request time explaining the action.
     inbox_action_at: Optional[datetime.datetime] = None
@@ -56,6 +56,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     is_demo: Optional[bool] = None
     # Indicates whether the current user has unread activity in the conversation.
     is_unread: Optional[bool] = None
+    # The lastAgentReplyAt property
+    last_agent_reply_at: Optional[datetime.datetime] = None
     # UTC timestamp when the most recent conversation event occurred.
     last_event_at: Optional[datetime.datetime] = None
     # Indicates that the most recent conversation activity is an internal note.
@@ -86,6 +88,10 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
     outbound_phone_number_override_id: Optional[str] = None
     # Extends an identifier-and-name resource reference with an optional string value used for display or selection metadata.
     phone_number: Optional[ConversationResponse_phoneNumber] = None
+    # The priorityLabel property
+    priority_label: Optional[str] = None
+    # The priorityPreview property
+    priority_preview: Optional[str] = None
     # Monotonic inbound reply boundary used when marking a conversation handled.
     reply_version: Optional[int] = None
     # Defines the customer-facing operational status for an inbox conversation.
@@ -137,6 +143,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "isArchived": lambda n : setattr(self, 'is_archived', n.get_bool_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isUnread": lambda n : setattr(self, 'is_unread', n.get_bool_value()),
+            "lastAgentReplyAt": lambda n : setattr(self, 'last_agent_reply_at', n.get_datetime_value()),
             "lastEventAt": lambda n : setattr(self, 'last_event_at', n.get_datetime_value()),
             "lastEventIsInternalNote": lambda n : setattr(self, 'last_event_is_internal_note', n.get_bool_value()),
             "lastInboundAt": lambda n : setattr(self, 'last_inbound_at', n.get_datetime_value()),
@@ -152,6 +159,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
             "nextStep": lambda n : setattr(self, 'next_step', n.get_str_value()),
             "outboundPhoneNumberOverrideId": lambda n : setattr(self, 'outbound_phone_number_override_id', n.get_str_value()),
             "phoneNumber": lambda n : setattr(self, 'phone_number', n.get_object_value(ConversationResponse_phoneNumber)),
+            "priorityLabel": lambda n : setattr(self, 'priority_label', n.get_str_value()),
+            "priorityPreview": lambda n : setattr(self, 'priority_preview', n.get_str_value()),
             "replyVersion": lambda n : setattr(self, 'reply_version', n.get_int_value()),
             "status": lambda n : setattr(self, 'status', n.get_enum_value(ConversationResponse_status)),
             "statusReason": lambda n : setattr(self, 'status_reason', n.get_str_value()),
@@ -185,6 +194,7 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isArchived", self.is_archived)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isUnread", self.is_unread)
+        writer.write_datetime_value("lastAgentReplyAt", self.last_agent_reply_at)
         writer.write_datetime_value("lastEventAt", self.last_event_at)
         writer.write_bool_value("lastEventIsInternalNote", self.last_event_is_internal_note)
         writer.write_datetime_value("lastInboundAt", self.last_inbound_at)
@@ -200,6 +210,8 @@ class ConversationResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("nextStep", self.next_step)
         writer.write_str_value("outboundPhoneNumberOverrideId", self.outbound_phone_number_override_id)
         writer.write_object_value("phoneNumber", self.phone_number)
+        writer.write_str_value("priorityLabel", self.priority_label)
+        writer.write_str_value("priorityPreview", self.priority_preview)
         writer.write_int_value("replyVersion", self.reply_version)
         writer.write_enum_value("status", self.status)
         writer.write_str_value("statusReason", self.status_reason)

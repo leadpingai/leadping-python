@@ -5,6 +5,7 @@ from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, Par
 from typing import Any, Optional, TYPE_CHECKING, Union
 
 if TYPE_CHECKING:
+    from .conversation_page_selected_conversation import ConversationPage_selectedConversation
     from .conversation_response import ConversationResponse
 
 @dataclass
@@ -25,6 +26,8 @@ class ConversationPage(AdditionalDataHolder, Parsable):
     page_size: Optional[int] = None
     # Time remaining until a scheduled action or contact window could change this page, measured on the server.
     refresh_after: Optional[str] = None
+    # Describes conversation data returned by Leadping.
+    selected_conversation: Optional[ConversationPage_selectedConversation] = None
     # The totalCount property
     total_count: Optional[int] = None
     
@@ -44,8 +47,10 @@ class ConversationPage(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .conversation_page_selected_conversation import ConversationPage_selectedConversation
         from .conversation_response import ConversationResponse
 
+        from .conversation_page_selected_conversation import ConversationPage_selectedConversation
         from .conversation_response import ConversationResponse
 
         fields: dict[str, Callable[[Any], None]] = {
@@ -54,6 +59,7 @@ class ConversationPage(AdditionalDataHolder, Parsable):
             "needsReplyCount": lambda n : setattr(self, 'needs_reply_count', n.get_int_value()),
             "pageSize": lambda n : setattr(self, 'page_size', n.get_int_value()),
             "refreshAfter": lambda n : setattr(self, 'refresh_after', n.get_str_value()),
+            "selectedConversation": lambda n : setattr(self, 'selected_conversation', n.get_object_value(ConversationPage_selectedConversation)),
             "totalCount": lambda n : setattr(self, 'total_count', n.get_int_value()),
         }
         return fields
@@ -71,6 +77,7 @@ class ConversationPage(AdditionalDataHolder, Parsable):
         writer.write_int_value("needsReplyCount", self.needs_reply_count)
         writer.write_int_value("pageSize", self.page_size)
         writer.write_str_value("refreshAfter", self.refresh_after)
+        writer.write_object_value("selectedConversation", self.selected_conversation)
         writer.write_int_value("totalCount", self.total_count)
         writer.write_additional_data_value(self.additional_data)
     

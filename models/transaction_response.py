@@ -45,6 +45,8 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     is_usage_reservation: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[TransactionResponse_lead] = None
+    # Identifier of the message associated with an SMS or MMS usage entry.
+    message_event_id: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
     # Net monetary amount after fees, credits, or adjustments.
@@ -105,6 +107,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isUsageReservation": lambda n : setattr(self, 'is_usage_reservation', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionResponse_lead)),
+            "messageEventId": lambda n : setattr(self, 'message_event_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
@@ -136,6 +139,7 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isUsageReservation", self.is_usage_reservation)
         writer.write_object_value("lead", self.lead)
+        writer.write_str_value("messageEventId", self.message_event_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("notes", self.notes)
