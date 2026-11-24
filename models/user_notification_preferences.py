@@ -96,6 +96,8 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     unread_sms_sms_enabled: Optional[bool] = None
     # Whether usage limit hit notifications are enabled for this user notification preferences.
     usage_limit_hit_enabled: Optional[bool] = None
+    # Text organization admins when their prepaid wallet runs out of funds.
+    wallet_depleted_sms_enabled: Optional[bool] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> UserNotificationPreferences:
@@ -158,6 +160,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
             "unreadSmsEnabled": lambda n : setattr(self, 'unread_sms_enabled', n.get_bool_value()),
             "unreadSmsSmsEnabled": lambda n : setattr(self, 'unread_sms_sms_enabled', n.get_bool_value()),
             "usageLimitHitEnabled": lambda n : setattr(self, 'usage_limit_hit_enabled', n.get_bool_value()),
+            "walletDepletedSmsEnabled": lambda n : setattr(self, 'wallet_depleted_sms_enabled', n.get_bool_value()),
         }
         return fields
     
@@ -209,6 +212,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         writer.write_bool_value("unreadSmsEnabled", self.unread_sms_enabled)
         writer.write_bool_value("unreadSmsSmsEnabled", self.unread_sms_sms_enabled)
         writer.write_bool_value("usageLimitHitEnabled", self.usage_limit_hit_enabled)
+        writer.write_bool_value("walletDepletedSmsEnabled", self.wallet_depleted_sms_enabled)
         writer.write_additional_data_value(self.additional_data)
     
 
