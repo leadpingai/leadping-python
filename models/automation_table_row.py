@@ -29,6 +29,8 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     description: Optional[str] = None
     # Indicates whether this automation table row is active and available in the Leadping API.
     enabled: Optional[bool] = None
+    # Distinct leads with an unfinished workflow in this automation.
+    enrolled_lead_count: Optional[int] = None
     # Human-readable health summary for this automation table row.
     health_summary: Optional[str] = None
     # Unique Leadping identifier for this automation table row.
@@ -63,6 +65,8 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
     user: Optional[AutomationTableRow_user] = None
     # Visibility level that controls who can see this automation table row.
     visibility: Optional[str] = None
+    # Enrolled leads with at least one waiting or scheduled workflow.
+    waiting_lead_count: Optional[int] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> AutomationTableRow:
@@ -93,6 +97,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
             "createdByUserId": lambda n : setattr(self, 'created_by_user_id', n.get_str_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
             "enabled": lambda n : setattr(self, 'enabled', n.get_bool_value()),
+            "enrolledLeadCount": lambda n : setattr(self, 'enrolled_lead_count', n.get_int_value()),
             "healthSummary": lambda n : setattr(self, 'health_summary', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
@@ -110,6 +115,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
             "triggerType": lambda n : setattr(self, 'trigger_type', n.get_str_value()),
             "user": lambda n : setattr(self, 'user', n.get_object_value(AutomationTableRow_user)),
             "visibility": lambda n : setattr(self, 'visibility', n.get_str_value()),
+            "waitingLeadCount": lambda n : setattr(self, 'waiting_lead_count', n.get_int_value()),
         }
         return fields
     
@@ -127,6 +133,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("createdByUserId", self.created_by_user_id)
         writer.write_str_value("description", self.description)
         writer.write_bool_value("enabled", self.enabled)
+        writer.write_int_value("enrolledLeadCount", self.enrolled_lead_count)
         writer.write_str_value("healthSummary", self.health_summary)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
@@ -144,6 +151,7 @@ class AutomationTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("triggerType", self.trigger_type)
         writer.write_object_value("user", self.user)
         writer.write_str_value("visibility", self.visibility)
+        writer.write_int_value("waitingLeadCount", self.waiting_lead_count)
         writer.write_additional_data_value(self.additional_data)
     
 
