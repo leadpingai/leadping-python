@@ -58,7 +58,7 @@ class LeadResponse(AdditionalDataHolder, Parsable):
     deleted_by_user_id: Optional[str] = None
     # Whether the lead is enabled.
     enabled: Optional[bool] = None
-    # Whether the source covers SMS consent for the current recipient.
+    # Whether the source provides consent for manual quote calls and manual or automated quote texts to this recipient.
     has_source_sms_consent: Optional[bool] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
