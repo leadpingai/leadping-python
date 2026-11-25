@@ -12,7 +12,7 @@ class PhoneNumberTrafficHealth(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
-    # The lower evaluated channel score, or null when neither channel has sufficient evidence.
+    # Rounded average of the evaluated SMS and voice scores, or null when neither channel has sufficient evidence.
     score: Optional[int] = None
     
     @staticmethod

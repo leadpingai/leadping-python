@@ -17,6 +17,7 @@ if TYPE_CHECKING:
     from ..models.problem_details import ProblemDetails
     from ..models.suppression_entry_request import SuppressionEntryRequest
     from ..models.suppression_entry_response import SuppressionEntryResponse
+    from .admin.admin_request_builder import AdminRequestBuilder
     from .all.all_request_builder import AllRequestBuilder
     from .check.check_request_builder import CheckRequestBuilder
     from .item.suppressions_item_request_builder import SuppressionsItemRequestBuilder
@@ -102,6 +103,15 @@ class SuppressionsRequestBuilder(BaseRequestBuilder):
         if raw_url is None:
             raise TypeError("raw_url cannot be null.")
         return SuppressionsRequestBuilder(self.request_adapter, raw_url)
+    
+    @property
+    def admin(self) -> AdminRequestBuilder:
+        """
+        The admin property
+        """
+        from .admin.admin_request_builder import AdminRequestBuilder
+
+        return AdminRequestBuilder(self.request_adapter, self.path_parameters)
     
     @property
     def all(self) -> AllRequestBuilder:
