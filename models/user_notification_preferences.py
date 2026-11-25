@@ -36,6 +36,8 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
     billing_email_enabled: Optional[bool] = None
     # Whether billing SMS is enabled for this user notification preferences.
     billing_sms_enabled: Optional[bool] = None
+    # Play a sound in the Portal when an incoming text message arrives.
+    incoming_message_sound_enabled: Optional[bool] = None
     # Indicates whether low wallet balance email functionality is enabled for this Leadping user notification preferences.
     low_wallet_balance_email_enabled: Optional[bool] = None
     # Whether low wallet balance notifications are enabled for this user notification preferences.
@@ -130,6 +132,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
             "automationFailedSmsEnabled": lambda n : setattr(self, 'automation_failed_sms_enabled', n.get_bool_value()),
             "billingEmailEnabled": lambda n : setattr(self, 'billing_email_enabled', n.get_bool_value()),
             "billingSmsEnabled": lambda n : setattr(self, 'billing_sms_enabled', n.get_bool_value()),
+            "incomingMessageSoundEnabled": lambda n : setattr(self, 'incoming_message_sound_enabled', n.get_bool_value()),
             "lowWalletBalanceEmailEnabled": lambda n : setattr(self, 'low_wallet_balance_email_enabled', n.get_bool_value()),
             "lowWalletBalanceEnabled": lambda n : setattr(self, 'low_wallet_balance_enabled', n.get_bool_value()),
             "lowWalletBalanceSmsEnabled": lambda n : setattr(self, 'low_wallet_balance_sms_enabled', n.get_bool_value()),
@@ -182,6 +185,7 @@ class UserNotificationPreferences(AdditionalDataHolder, Parsable):
         writer.write_bool_value("automationFailedSmsEnabled", self.automation_failed_sms_enabled)
         writer.write_bool_value("billingEmailEnabled", self.billing_email_enabled)
         writer.write_bool_value("billingSmsEnabled", self.billing_sms_enabled)
+        writer.write_bool_value("incomingMessageSoundEnabled", self.incoming_message_sound_enabled)
         writer.write_bool_value("lowWalletBalanceEmailEnabled", self.low_wallet_balance_email_enabled)
         writer.write_bool_value("lowWalletBalanceEnabled", self.low_wallet_balance_enabled)
         writer.write_bool_value("lowWalletBalanceSmsEnabled", self.low_wallet_balance_sms_enabled)

@@ -29,7 +29,7 @@ class EventTableRow(AdditionalDataHolder, Parsable):
     actor_lead_id: Optional[str] = None
     # User ID for the person or system that created this event timeline table row.
     actor_user_id: Optional[str] = None
-    # Name of the automation when it started.
+    # Name of the automation associated with this event.
     automation_name: Optional[str] = None
     # Automation run ID opened from this automation event.
     automation_run_id: Optional[str] = None
