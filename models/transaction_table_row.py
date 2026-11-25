@@ -41,8 +41,6 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
     is_usage_reservation: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     lead: Optional[TransactionTableRow_lead] = None
-    # Net monetary amount after fees, credits, or adjustments.
-    net_amount: Optional[float] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[TransactionTableRow_organization] = None
     # Masked or human-readable payment method shown for this transaction.
@@ -103,7 +101,6 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "isUsageReservation": lambda n : setattr(self, 'is_usage_reservation', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionTableRow_lead)),
-            "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(TransactionTableRow_organization)),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
             "pricingVersion": lambda n : setattr(self, 'pricing_version', n.get_str_value()),
@@ -134,7 +131,6 @@ class TransactionTableRow(AdditionalDataHolder, Parsable):
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_bool_value("isUsageReservation", self.is_usage_reservation)
         writer.write_object_value("lead", self.lead)
-        writer.write_float_value("netAmount", self.net_amount)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
         writer.write_str_value("pricingVersion", self.pricing_version)

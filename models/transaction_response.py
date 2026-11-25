@@ -33,8 +33,6 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     created_at: Optional[datetime.datetime] = None
     # Human-readable description that explains this billing transaction response to API users.
     description: Optional[str] = None
-    # Payment gateway fee amount charged for the wallet transaction.
-    gateway_fee_amount: Optional[float] = None
     # Payment gateway status returned for this transaction.
     gateway_status: Optional[str] = None
     # Stable unique identifier of the resource.
@@ -49,16 +47,12 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
     message_event_id: Optional[str] = None
     # UTC timestamp when the resource was last modified, or null when it has not been updated.
     modified_at: Optional[datetime.datetime] = None
-    # Net monetary amount after fees, credits, or adjustments.
-    net_amount: Optional[float] = None
     # Additional billing notes that explain the transaction for admins or customers.
     notes: Optional[str] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
     organization: Optional[TransactionResponse_organization] = None
     # Masked or human-readable payment method shown for this transaction.
     payment_method_display: Optional[str] = None
-    # Leadping platform fee amount included in the transaction.
-    platform_fee_amount: Optional[float] = None
     # Describes the processing and settlement lifecycle of a Leadping wallet or billing transaction.
     transaction_status: Optional[TransactionStatus] = None
     # Classifies a wallet transaction as a debit, credit, refund, adjustment, deposit, or other balance movement.
@@ -101,7 +95,6 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "billingChannel": lambda n : setattr(self, 'billing_channel', n.get_enum_value(TransactionResponse_billingChannel)),
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
             "description": lambda n : setattr(self, 'description', n.get_str_value()),
-            "gatewayFeeAmount": lambda n : setattr(self, 'gateway_fee_amount', n.get_float_value()),
             "gatewayStatus": lambda n : setattr(self, 'gateway_status', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
@@ -109,11 +102,9 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(TransactionResponse_lead)),
             "messageEventId": lambda n : setattr(self, 'message_event_id', n.get_str_value()),
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
-            "netAmount": lambda n : setattr(self, 'net_amount', n.get_float_value()),
             "notes": lambda n : setattr(self, 'notes', n.get_str_value()),
             "organization": lambda n : setattr(self, 'organization', n.get_object_value(TransactionResponse_organization)),
             "paymentMethodDisplay": lambda n : setattr(self, 'payment_method_display', n.get_str_value()),
-            "platformFeeAmount": lambda n : setattr(self, 'platform_fee_amount', n.get_float_value()),
             "transactionStatus": lambda n : setattr(self, 'transaction_status', n.get_enum_value(TransactionStatus)),
             "transactionType": lambda n : setattr(self, 'transaction_type', n.get_enum_value(TransactionType)),
         }
@@ -133,7 +124,6 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_enum_value("billingChannel", self.billing_channel)
         writer.write_datetime_value("createdAt", self.created_at)
         writer.write_str_value("description", self.description)
-        writer.write_float_value("gatewayFeeAmount", self.gateway_fee_amount)
         writer.write_str_value("gatewayStatus", self.gateway_status)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isDemo", self.is_demo)
@@ -141,11 +131,9 @@ class TransactionResponse(AdditionalDataHolder, Parsable):
         writer.write_object_value("lead", self.lead)
         writer.write_str_value("messageEventId", self.message_event_id)
         writer.write_datetime_value("modifiedAt", self.modified_at)
-        writer.write_float_value("netAmount", self.net_amount)
         writer.write_str_value("notes", self.notes)
         writer.write_object_value("organization", self.organization)
         writer.write_str_value("paymentMethodDisplay", self.payment_method_display)
-        writer.write_float_value("platformFeeAmount", self.platform_fee_amount)
         writer.write_enum_value("transactionStatus", self.transaction_status)
         writer.write_enum_value("transactionType", self.transaction_type)
         writer.write_additional_data_value(self.additional_data)

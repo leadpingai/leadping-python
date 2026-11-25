@@ -8,7 +8,6 @@ from typing import Any, Optional, TYPE_CHECKING, Union
 if TYPE_CHECKING:
     from .phone_identity_lookup_action import PhoneIdentityLookupAction
     from .phone_identity_response_lookup import PhoneIdentityResponse_lookup
-    from .phone_identity_response_provider_enrichment import PhoneIdentityResponse_providerEnrichment
 
 @dataclass
 class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
@@ -36,8 +35,6 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
     name: Optional[str] = None
     # The canonical E.164 phone number.
     number: Optional[str] = None
-    # Lossless provider snapshot retained with a phone identity for replay, audits, and fields added by providers later.
-    provider_enrichment: Optional[PhoneIdentityResponse_providerEnrichment] = None
     # Whether Telnyx rejected SMS routing to this destination with error 40001.
     sms_not_routable: Optional[bool] = None
     
@@ -59,11 +56,9 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
         """
         from .phone_identity_lookup_action import PhoneIdentityLookupAction
         from .phone_identity_response_lookup import PhoneIdentityResponse_lookup
-        from .phone_identity_response_provider_enrichment import PhoneIdentityResponse_providerEnrichment
 
         from .phone_identity_lookup_action import PhoneIdentityLookupAction
         from .phone_identity_response_lookup import PhoneIdentityResponse_lookup
-        from .phone_identity_response_provider_enrichment import PhoneIdentityResponse_providerEnrichment
 
         fields: dict[str, Callable[[Any], None]] = {
             "createdAt": lambda n : setattr(self, 'created_at', n.get_datetime_value()),
@@ -75,7 +70,6 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
             "modifiedAt": lambda n : setattr(self, 'modified_at', n.get_datetime_value()),
             "name": lambda n : setattr(self, 'name', n.get_str_value()),
             "number": lambda n : setattr(self, 'number', n.get_str_value()),
-            "providerEnrichment": lambda n : setattr(self, 'provider_enrichment', n.get_object_value(PhoneIdentityResponse_providerEnrichment)),
             "smsNotRoutable": lambda n : setattr(self, 'sms_not_routable', n.get_bool_value()),
         }
         return fields
@@ -97,7 +91,6 @@ class PhoneIdentityResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("modifiedAt", self.modified_at)
         writer.write_str_value("name", self.name)
         writer.write_str_value("number", self.number)
-        writer.write_object_value("providerEnrichment", self.provider_enrichment)
         writer.write_bool_value("smsNotRoutable", self.sms_not_routable)
         writer.write_additional_data_value(self.additional_data)
     
