@@ -66,6 +66,8 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
     id: Optional[str] = None
     # Indicates whether automation created or triggered this SMS event table row.
     is_automated: Optional[bool] = None
+    # Whether the scheduled send is waiting for spending capacity to reset.
+    is_budget_delayed: Optional[bool] = None
     # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Provides a compact API reference to another resource using its stable identifier and human-readable display name.
@@ -168,6 +170,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
             "isAutomated": lambda n : setattr(self, 'is_automated', n.get_bool_value()),
+            "isBudgetDelayed": lambda n : setattr(self, 'is_budget_delayed', n.get_bool_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "lead": lambda n : setattr(self, 'lead', n.get_object_value(IdNamePair)),
             "leadAvatarUrl": lambda n : setattr(self, 'lead_avatar_url', n.get_str_value()),
@@ -224,6 +227,7 @@ class SmsEventTableRow(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
         writer.write_bool_value("isAutomated", self.is_automated)
+        writer.write_bool_value("isBudgetDelayed", self.is_budget_delayed)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_object_value("lead", self.lead)
         writer.write_str_value("leadAvatarUrl", self.lead_avatar_url)

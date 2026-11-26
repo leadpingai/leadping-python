@@ -5,6 +5,9 @@ from dataclasses import dataclass, field
 from kiota_abstractions.serialization import AdditionalDataHolder, Parsable, ParseNode, SerializationWriter
 from typing import Any, Optional, TYPE_CHECKING, Union
 
+if TYPE_CHECKING:
+    from .spend_period import SpendPeriod
+
 @dataclass
 class SpendLimitsResponse(AdditionalDataHolder, Parsable):
     """
@@ -13,6 +16,12 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
     # Stores additional data not described in the OpenAPI description found when deserializing. Can be used for serialization as well.
     additional_data: dict[str, Any] = field(default_factory=dict)
 
+    # Optional calling budget in USD.
+    calling_limit: Optional[float] = None
+    # Calendar period for an organization channel budget, in UTC.
+    calling_period: Optional[SpendPeriod] = None
+    # Settled calling charges this period plus pending calling reservations.
+    calling_used: Optional[float] = None
     # Daily usage budget in USD. Null means no daily limit; zero stops new paid usage.
     daily_limit: Optional[float] = None
     # UTC timestamp when the next calendar day begins and daily spending resets.
@@ -27,6 +36,12 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
     monthly_spent: Optional[float] = None
     # Pending usage reservations in USD.
     reserved: Optional[float] = None
+    # Optional texting budget in USD.
+    texting_limit: Optional[float] = None
+    # Calendar period for an organization channel budget, in UTC.
+    texting_period: Optional[SpendPeriod] = None
+    # Settled texting charges this period plus pending texting reservations.
+    texting_used: Optional[float] = None
     
     @staticmethod
     def create_from_discriminator_value(parse_node: ParseNode) -> SpendLimitsResponse:
@@ -44,7 +59,14 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
         The deserialization information for the current model
         Returns: dict[str, Callable[[ParseNode], None]]
         """
+        from .spend_period import SpendPeriod
+
+        from .spend_period import SpendPeriod
+
         fields: dict[str, Callable[[Any], None]] = {
+            "callingLimit": lambda n : setattr(self, 'calling_limit', n.get_float_value()),
+            "callingPeriod": lambda n : setattr(self, 'calling_period', n.get_enum_value(SpendPeriod)),
+            "callingUsed": lambda n : setattr(self, 'calling_used', n.get_float_value()),
             "dailyLimit": lambda n : setattr(self, 'daily_limit', n.get_float_value()),
             "dailyResetsAt": lambda n : setattr(self, 'daily_resets_at', n.get_datetime_value()),
             "dailySpent": lambda n : setattr(self, 'daily_spent', n.get_float_value()),
@@ -52,6 +74,9 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
             "monthlyResetsAt": lambda n : setattr(self, 'monthly_resets_at', n.get_datetime_value()),
             "monthlySpent": lambda n : setattr(self, 'monthly_spent', n.get_float_value()),
             "reserved": lambda n : setattr(self, 'reserved', n.get_float_value()),
+            "textingLimit": lambda n : setattr(self, 'texting_limit', n.get_float_value()),
+            "textingPeriod": lambda n : setattr(self, 'texting_period', n.get_enum_value(SpendPeriod)),
+            "textingUsed": lambda n : setattr(self, 'texting_used', n.get_float_value()),
         }
         return fields
     
@@ -63,6 +88,9 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
         """
         if writer is None:
             raise TypeError("writer cannot be null.")
+        writer.write_float_value("callingLimit", self.calling_limit)
+        writer.write_enum_value("callingPeriod", self.calling_period)
+        writer.write_float_value("callingUsed", self.calling_used)
         writer.write_float_value("dailyLimit", self.daily_limit)
         writer.write_datetime_value("dailyResetsAt", self.daily_resets_at)
         writer.write_float_value("dailySpent", self.daily_spent)
@@ -70,6 +98,9 @@ class SpendLimitsResponse(AdditionalDataHolder, Parsable):
         writer.write_datetime_value("monthlyResetsAt", self.monthly_resets_at)
         writer.write_float_value("monthlySpent", self.monthly_spent)
         writer.write_float_value("reserved", self.reserved)
+        writer.write_float_value("textingLimit", self.texting_limit)
+        writer.write_enum_value("textingPeriod", self.texting_period)
+        writer.write_float_value("textingUsed", self.texting_used)
         writer.write_additional_data_value(self.additional_data)
     
 

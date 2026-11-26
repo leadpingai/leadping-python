@@ -54,6 +54,8 @@ class SmsResponse(AdditionalDataHolder, Parsable):
     from_phone_number_id: Optional[str] = None
     # Stable unique identifier of the resource.
     id: Optional[str] = None
+    # Whether the scheduled send is waiting for spending capacity to reset.
+    is_budget_delayed: Optional[bool] = None
     # Whether this record belongs to demo data.
     is_demo: Optional[bool] = None
     # Lead ID associated with the SMS conversation or outreach attempt.
@@ -145,6 +147,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
             "fromPhoneNumber": lambda n : setattr(self, 'from_phone_number', n.get_str_value()),
             "fromPhoneNumberId": lambda n : setattr(self, 'from_phone_number_id', n.get_str_value()),
             "id": lambda n : setattr(self, 'id', n.get_str_value()),
+            "isBudgetDelayed": lambda n : setattr(self, 'is_budget_delayed', n.get_bool_value()),
             "isDemo": lambda n : setattr(self, 'is_demo', n.get_bool_value()),
             "leadId": lambda n : setattr(self, 'lead_id', n.get_str_value()),
             "media": lambda n : setattr(self, 'media', n.get_collection_of_object_values(MessageMediaAttachment)),
@@ -195,6 +198,7 @@ class SmsResponse(AdditionalDataHolder, Parsable):
         writer.write_str_value("fromPhoneNumber", self.from_phone_number)
         writer.write_str_value("fromPhoneNumberId", self.from_phone_number_id)
         writer.write_str_value("id", self.id)
+        writer.write_bool_value("isBudgetDelayed", self.is_budget_delayed)
         writer.write_bool_value("isDemo", self.is_demo)
         writer.write_str_value("leadId", self.lead_id)
         writer.write_collection_of_object_values("media", self.media)
